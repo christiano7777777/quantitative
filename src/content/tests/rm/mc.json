@@ -1,0 +1,1794 @@
+[
+ {
+  "id": "rm-1.1",
+  "lecture": 1,
+  "stem": "Which statement makes a good research hypothesis for a trading signal?",
+  "correct": [
+   "A falsifiable claim with an economic rationale, stated before seeing results.",
+   "A prediction data could contradict, motivated by a mechanism."
+  ],
+  "distractors": [
+   {
+    "text": "A claim that the signal \"works\", with no stated horizon, universe or metric.",
+    "misconception": "is too vague to be falsified"
+   },
+   {
+    "text": "A pattern found by trying many signals, then described as if it had been expected.",
+    "misconception": "presents a data-mined result as a hypothesis"
+   },
+   {
+    "text": "Any statement that has a positive in-sample Sharpe ratio.",
+    "misconception": "confuses a result with a hypothesis"
+   },
+   {
+    "text": "A statement that cannot be wrong, so that every outcome supports it.",
+    "misconception": "describes an unfalsifiable claim"
+   },
+   {
+    "text": "A claim whose test is chosen after seeing which test gives the lowest p-value.",
+    "misconception": "allows the test to depend on the outcome"
+   }
+  ],
+  "explanation": "A testable hypothesis names the signal, the horizon, the universe and the performance measure in advance, so that a null result is possible and informative."
+ },
+ {
+  "id": "rm-1.2",
+  "lecture": 1,
+  "stem": "Why does effect size matter in addition to statistical significance?",
+  "correct": [
+   "A tiny effect can be significant yet untradeable.",
+   "Significance is not size."
+  ],
+  "distractors": [
+   {
+    "text": "A significant result always implies a large economic effect.",
+    "misconception": "confuses significance with magnitude"
+   },
+   {
+    "text": "Effect size depends on the sample size only.",
+    "misconception": "confuses the effect with the precision of its estimate"
+   },
+   {
+    "text": "Effect size is irrelevant once the $p$-value is below 5%.",
+    "misconception": "ignores economic relevance"
+   },
+   {
+    "text": "A large effect is always significant in small samples.",
+    "misconception": "ignores noise in small samples"
+   },
+   {
+    "text": "Effect sizes cannot be compared across studies.",
+    "misconception": "denies standardised measures"
+   }
+  ],
+  "explanation": "A signal with a correlation of 0.01 to returns may be significant over many stocks and years but earns less than its trading cost."
+ },
+ {
+  "id": "rm-1.3",
+  "lecture": 1,
+  "stem": "What is the value of reporting null (negative) results?",
+  "correct": [
+   "They show what fails and counter publication bias.",
+   "An honest count of trials shows how likely luck is."
+  ],
+  "distractors": [
+   {
+    "text": "They have no value, since only profitable strategies matter.",
+    "misconception": "ignores the information in failures"
+   },
+   {
+    "text": "They show that the research design was flawed.",
+    "misconception": "treats a null result as a mistake"
+   },
+   {
+    "text": "They should be hidden to avoid confusing readers.",
+    "misconception": "encourages selective reporting"
+   },
+   {
+    "text": "They are needed only for academic journals and never in industry.",
+    "misconception": "restricts the value wrongly"
+   },
+   {
+    "text": "They are equivalent to proving the effect is exactly zero.",
+    "misconception": "confuses absence of evidence with evidence of absence"
+   }
+  ],
+  "explanation": "If only successes are published, the literature overstates effects. A null result with a tight interval also bounds how large any true effect could be."
+ },
+ {
+  "id": "rm-1.4",
+  "lecture": 1,
+  "stem": "What does pre-specifying the analysis plan accomplish?",
+  "correct": [
+   "It limits picking tests after seeing data.",
+   "It makes $p$-values interpretable."
+  ],
+  "distractors": [
+   {
+    "text": "It guarantees that the hypothesis is true.",
+    "misconception": "confuses a procedure with truth"
+   },
+   {
+    "text": "It makes the results independent of the sample.",
+    "misconception": "overstates what a plan can do"
+   },
+   {
+    "text": "It removes the need for out-of-sample testing.",
+    "misconception": "confuses design with validation"
+   },
+   {
+    "text": "It increases the statistical power of every test.",
+    "misconception": "confuses the plan with power"
+   },
+   {
+    "text": "It is useful only when the sample is small.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "Forking paths (many defensible analyses) inflate the chance of finding something. A written plan counts them."
+ },
+ {
+  "id": "rm-1.5",
+  "lecture": 1,
+  "stem": "What does an effect size such as Cohen's $d$ measure?",
+  "correct": [
+   "The mean gap in pooled standard deviations.",
+   "Separation of means in standard deviations."
+  ],
+  "distractors": [
+   {
+    "text": "The probability that the null hypothesis is true.",
+    "misconception": "confuses it with a posterior probability"
+   },
+   {
+    "text": "The difference between group means in raw units.",
+    "misconception": "forgets the standardisation"
+   },
+   {
+    "text": "The $p$-value divided by the sample size.",
+    "misconception": "gives an unrelated quantity"
+   },
+   {
+    "text": "The variance of the difference in means.",
+    "misconception": "confuses the effect with its precision"
+   },
+   {
+    "text": "The number of observations needed for significance.",
+    "misconception": "confuses it with a sample size"
+   }
+  ],
+  "explanation": "$d=(\\bar x_1-\\bar x_0)/s_p$. Values near 0.2, 0.5 and 0.8 are conventionally called small, medium and large."
+ },
+ {
+  "id": "rm-2.1",
+  "lecture": 2,
+  "stem": "What is look-ahead bias in a backtest?",
+  "correct": [
+   "Using information not yet available.",
+   "Signals using later revised data."
+  ],
+  "distractors": [
+   {
+    "text": "Using a longer sample than the benchmark does.",
+    "misconception": "confuses it with sample length"
+   },
+   {
+    "text": "Trading too frequently.",
+    "misconception": "confuses it with turnover"
+   },
+   {
+    "text": "Ignoring transaction costs.",
+    "misconception": "confuses it with cost bias"
+   },
+   {
+    "text": "Using only the most recent data.",
+    "misconception": "confuses it with recency"
+   },
+   {
+    "text": "Forecasting several periods ahead.",
+    "misconception": "confuses it with the forecast horizon"
+   }
+  ],
+  "explanation": "Examples: using restated fundamentals, quarterly earnings before the announcement date, or the close price to trade at that same close."
+ },
+ {
+  "id": "rm-2.2",
+  "lecture": 2,
+  "stem": "What is survivorship bias in a universe of stocks or funds?",
+  "correct": [
+   "Using only entities that still exist, which overstates performance.",
+   "Dead names are missing, so past returns look better."
+  ],
+  "distractors": [
+   {
+    "text": "Counting the best performers twice.",
+    "misconception": "confuses it with double counting"
+   },
+   {
+    "text": "Selecting the survivors of a market crash on purpose to test robustness.",
+    "misconception": "describes stress testing, not a bias"
+   },
+   {
+    "text": "Excluding all new listings.",
+    "misconception": "describes a different filter"
+   },
+   {
+    "text": "Ignoring dividends.",
+    "misconception": "confuses with a return calculation issue"
+   },
+   {
+    "text": "Overstating the number of securities.",
+    "misconception": "confuses it with counting errors"
+   }
+  ],
+  "explanation": "Funds and stocks that fail drop out of current databases; point-in-time constituent lists, including delisted names, avoid this."
+ },
+ {
+  "id": "rm-2.3",
+  "lecture": 2,
+  "stem": "What is point-in-time data?",
+  "correct": [
+   "Data recorded as it was known at each date.",
+   "What was available then, unrevised."
+  ],
+  "distractors": [
+   {
+    "text": "Data sampled at one single time per day.",
+    "misconception": "confuses it with sampling frequency"
+   },
+   {
+    "text": "Data adjusted for splits and dividends.",
+    "misconception": "describes adjusted prices"
+   },
+   {
+    "text": "Data that includes the final revised figures.",
+    "misconception": "describes the opposite"
+   },
+   {
+    "text": "Data that covers only one point in time.",
+    "misconception": "misreads the name"
+   },
+   {
+    "text": "Data that is time-stamped by the broker.",
+    "misconception": "confuses it with timestamps"
+   }
+  ],
+  "explanation": "Economic series and company fundamentals are revised; using the final version in a backtest leaks future information."
+ },
+ {
+  "id": "rm-2.4",
+  "lecture": 2,
+  "stem": "Which of these is an example of leakage from preprocessing?",
+  "correct": [
+   "Standardising with the mean and deviation of the whole sample, test period included.",
+   "Normalising before the train-test split."
+  ],
+  "distractors": [
+   {
+    "text": "Fitting the scaler on the training set only and applying it to the test set.",
+    "misconception": "describes the correct procedure"
+   },
+   {
+    "text": "Using a rolling window of past data to scale each day.",
+    "misconception": "describes a legitimate approach"
+   },
+   {
+    "text": "Dropping observations with missing values before the split, in the training data only.",
+    "misconception": "describes a legitimate approach"
+   },
+   {
+    "text": "Using only lagged features.",
+    "misconception": "describes a legitimate approach"
+   },
+   {
+    "text": "Keeping the test set separate until the end.",
+    "misconception": "describes the correct practice"
+   }
+  ],
+  "explanation": "Any statistic computed with test-period data passes information from the test set into training; fit transformations inside each training window."
+ },
+ {
+  "id": "rm-2.5",
+  "lecture": 2,
+  "stem": "How can a signal built from end-of-day prices be tested without look-ahead?",
+  "correct": [
+   "Trade on the next available price after the signal is known.",
+   "Lag the signal at least one period."
+  ],
+  "distractors": [
+   {
+    "text": "Trade at the same closing price used to compute the signal.",
+    "misconception": "assumes an impossible execution"
+   },
+   {
+    "text": "Use the next day's price to compute the signal.",
+    "misconception": "uses future data"
+   },
+   {
+    "text": "Use the high of the day as the execution price.",
+    "misconception": "assumes the best fill"
+   },
+   {
+    "text": "Average the signal over the day, including after-close prices.",
+    "misconception": "uses information not available"
+   },
+   {
+    "text": "No lag is needed if the signal is simple.",
+    "misconception": "ignores timing"
+   }
+  ],
+  "explanation": "A signal computed at the close cannot be traded at that close unless the data arrive earlier; at least a one-period delay is standard."
+ },
+ {
+  "id": "rm-3.1",
+  "lecture": 3,
+  "stem": "How should a data set of daily returns be split for training and testing a prediction model?",
+  "correct": [
+   "Chronologically: train on earlier data, test on later data.",
+   "By time order, test after training."
+  ],
+  "distractors": [
+   {
+    "text": "Randomly, so that training and test sets have the same distribution.",
+    "misconception": "ignores time dependence and look-ahead"
+   },
+   {
+    "text": "With the test set placed before the training set.",
+    "misconception": "reverses the time order"
+   },
+   {
+    "text": "By stock, putting some stocks in training and others in test, whatever the dates.",
+    "misconception": "ignores cross-sectional correlation"
+   },
+   {
+    "text": "With the same observations in both sets.",
+    "misconception": "destroys the purpose of a test set"
+   },
+   {
+    "text": "By sorting the observations by return before splitting.",
+    "misconception": "lets the outcome decide the split"
+   }
+  ],
+  "explanation": "Random splits let the model train on data after the test period and exploit autocorrelation and regime shifts."
+ },
+ {
+  "id": "rm-3.2",
+  "lecture": 3,
+  "stem": "What is walk-forward validation?",
+  "correct": [
+   "Repeatedly refit on a window and test on the period after it.",
+   "Roll the train-test boundary forward and average the results."
+  ],
+  "distractors": [
+   {
+    "text": "Fitting once on the full sample and testing on the same data.",
+    "misconception": "describes in-sample testing"
+   },
+   {
+    "text": "Randomly choosing windows from the sample.",
+    "misconception": "ignores time order"
+   },
+   {
+    "text": "Always using the first half of the data for training.",
+    "misconception": "describes a single fixed split"
+   },
+   {
+    "text": "Testing on the period before the training window.",
+    "misconception": "reverses time"
+   },
+   {
+    "text": "Testing a strategy forward in time using the parameters found on the whole sample.",
+    "misconception": "smuggles in look-ahead"
+   }
+  ],
+  "explanation": "Each fold respects time order. A rolling window forgets old data and adapts to change; an expanding window uses all history."
+ },
+ {
+  "id": "rm-3.3",
+  "lecture": 3,
+  "stem": "Why are purging and an embargo used when labels span multiple periods?",
+  "correct": [
+   "Overlapping labels near the split would leak into training.",
+   "Neighbours become dependent."
+  ],
+  "distractors": [
+   {
+    "text": "They increase the training set size.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "They are needed only when labels are one period long.",
+    "misconception": "misidentifies the condition"
+   },
+   {
+    "text": "They remove outliers from the test set.",
+    "misconception": "confuses it with outlier removal"
+   },
+   {
+    "text": "They make the test set random.",
+    "misconception": "contradicts the time ordering"
+   },
+   {
+    "text": "They are required only for deep learning models.",
+    "misconception": "restricts the issue to one model class"
+   }
+  ],
+  "explanation": "A 5-day return label at the last training date overlaps the first test days; purging removes it and the embargo adds a gap after the test fold."
+ },
+ {
+  "id": "rm-3.4",
+  "lecture": 3,
+  "stem": "How often should a final test set be used for model selection?",
+  "correct": [
+   "Not for selection; use it once to report the chosen model.",
+   "Repeated use turns it into a validation set."
+  ],
+  "distractors": [
+   {
+    "text": "As many times as needed until the performance is acceptable.",
+    "misconception": "describes data snooping"
+   },
+   {
+    "text": "Every time a new model is tried.",
+    "misconception": "turns the test set into a validation set"
+   },
+   {
+    "text": "Only if the validation performance is poor.",
+    "misconception": "makes the use depend on the results"
+   },
+   {
+    "text": "It should be re-used to tune hyperparameters.",
+    "misconception": "confuses the roles"
+   },
+   {
+    "text": "It is not needed if cross-validation is used.",
+    "misconception": "ignores selection bias in the CV estimate"
+   }
+  ],
+  "explanation": "Each look at the test set and each model change after it uses up some of its independence. Hold out a final period, untouched, until the end."
+ },
+ {
+  "id": "rm-3.5",
+  "lecture": 3,
+  "stem": "What is the difference between an expanding and a rolling training window?",
+  "correct": [
+   "Expanding keeps all past data; rolling keeps a fixed length.",
+   "Rolling adapts faster; expanding uses more data."
+  ],
+  "distractors": [
+   {
+    "text": "A rolling window uses all the history, and an expanding one has a fixed length.",
+    "misconception": "swaps the two"
+   },
+   {
+    "text": "Both use the same data at every step.",
+    "misconception": "ignores the difference"
+   },
+   {
+    "text": "An expanding window uses future data.",
+    "misconception": "confuses it with look-ahead"
+   },
+   {
+    "text": "A rolling window needs no refitting.",
+    "misconception": "confuses it with a static model"
+   },
+   {
+    "text": "An expanding window is only for monthly data.",
+    "misconception": "invents a restriction"
+   }
+  ],
+  "explanation": "Choose by how stationary the relationship is: a rolling window suits drifting relationships, an expanding window suits stable ones."
+ },
+ {
+  "id": "rm-4.1",
+  "lecture": 4,
+  "stem": "What is data snooping (data dredging)?",
+  "correct": [
+   "Trying many specifications and reporting the best.",
+   "Searching until one looks significant."
+  ],
+  "distractors": [
+   {
+    "text": "Using confidential data without permission.",
+    "misconception": "confuses it with a legal issue"
+   },
+   {
+    "text": "Testing a single pre-specified hypothesis.",
+    "misconception": "describes good practice"
+   },
+   {
+    "text": "Using data from several sources.",
+    "misconception": "confuses it with data integration"
+   },
+   {
+    "text": "Checking the data for errors.",
+    "misconception": "confuses it with data cleaning"
+   },
+   {
+    "text": "Reporting results with confidence intervals.",
+    "misconception": "describes good practice"
+   }
+  ],
+  "explanation": "Among $N$ independent null signals, the chance that at least one passes a 5% test is $1-0.95^N$, about 64% for $N=20$."
+ },
+ {
+  "id": "rm-4.2",
+  "lecture": 4,
+  "stem": "What does the Bonferroni correction do when $N$ hypotheses are tested?",
+  "correct": [
+   "It tests each at level $\\alpha/N$.",
+   "It divides the level by the number of tests."
+  ],
+  "distractors": [
+   {
+    "text": "It multiplies the significance level by $N$.",
+    "misconception": "inflates the level instead of reducing it"
+   },
+   {
+    "text": "It controls the false discovery rate only.",
+    "misconception": "confuses it with a different method"
+   },
+   {
+    "text": "It removes the need to state how many tests were run.",
+    "misconception": "ignores that $N$ is required"
+   },
+   {
+    "text": "It makes tests more powerful.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It applies only when tests are positively correlated.",
+    "misconception": "invents a restriction"
+   }
+  ],
+  "explanation": "The union bound gives $P(\\text{any false rejection})\\le N\\cdot\\alpha/N=\\alpha$. It is conservative when tests are correlated."
+ },
+ {
+  "id": "rm-4.3",
+  "lecture": 4,
+  "stem": "What does the deflated Sharpe ratio take into account?",
+  "correct": [
+   "How many strategies were tried.",
+   "The best of $N$ trials versus luck alone."
+  ],
+  "distractors": [
+   {
+    "text": "Only the transaction costs of the strategy.",
+    "misconception": "confuses it with net-of-cost Sharpe"
+   },
+   {
+    "text": "The inflation rate over the sample.",
+    "misconception": "confuses it with a real return"
+   },
+   {
+    "text": "The leverage used by the strategy.",
+    "misconception": "confuses with scaling"
+   },
+   {
+    "text": "Only the length of the sample.",
+    "misconception": "ignores the number of trials"
+   },
+   {
+    "text": "The correlation with the market index.",
+    "misconception": "confuses it with beta adjustment"
+   }
+  ],
+  "explanation": "With $N$ independent null trials the expected best $t$ is about $\\sqrt{2\\ln N}$, so a Sharpe ratio must beat this threshold to be credible."
+ },
+ {
+  "id": "rm-4.4",
+  "lecture": 4,
+  "stem": "What happens to the expected best Sharpe ratio among $N$ unskilled strategies as $N$ increases?",
+  "correct": [
+   "It rises, roughly like $\\sqrt{2\\ln N}$, with no skill at all.",
+   "Luck gives a higher maximum."
+  ],
+  "distractors": [
+   {
+    "text": "It stays at zero, since the mean Sharpe ratio is zero.",
+    "misconception": "confuses the mean with the maximum"
+   },
+   {
+    "text": "It falls, because more strategies average out the noise.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It is independent of $N$.",
+    "misconception": "ignores the selection effect"
+   },
+   {
+    "text": "It converges to the average Sharpe ratio.",
+    "misconception": "confuses the max with the mean"
+   },
+   {
+    "text": "It becomes negative.",
+    "misconception": "reverses the sign"
+   }
+  ],
+  "explanation": "The maximum of $N$ independent standard normals is at most about $\\sqrt{2\\ln N}$ in expectation; the average stays zero."
+ },
+ {
+  "id": "rm-4.5",
+  "lecture": 4,
+  "stem": "Which practice reduces the problem of multiple testing in strategy research?",
+  "correct": [
+   "Record every trial and correct for the number tried.",
+   "Count all variants."
+  ],
+  "distractors": [
+   {
+    "text": "Report only the best specification.",
+    "misconception": "is the cause of the problem"
+   },
+   {
+    "text": "Use a lower threshold for strategies that look good.",
+    "misconception": "reverses the correction"
+   },
+   {
+    "text": "Test on the same data until the Sharpe ratio exceeds one.",
+    "misconception": "describes data snooping"
+   },
+   {
+    "text": "Ignore the number of trials since only the final model matters.",
+    "misconception": "ignores selection"
+   },
+   {
+    "text": "Choose the parameters that work best in the backtest.",
+    "misconception": "is the problem itself"
+   }
+  ],
+  "explanation": "Harvey, Liu and Zhu argue for $t$ statistics above 3 for new factors, reflecting hundreds of implicit tests."
+ },
+ {
+  "id": "rm-5.1",
+  "lecture": 5,
+  "stem": "Why can a backtest without transaction costs be misleading?",
+  "correct": [
+   "Costs grow with turnover and can erase a gross profit.",
+   "High turnover eats the gross return."
+  ],
+  "distractors": [
+   {
+    "text": "Costs only matter for small portfolios.",
+    "misconception": "ignores that costs scale with trading"
+   },
+   {
+    "text": "Costs are always smaller than the gross return.",
+    "misconception": "assumes the conclusion"
+   },
+   {
+    "text": "They only affect the volatility of returns.",
+    "misconception": "confuses cost with risk"
+   },
+   {
+    "text": "Costs make returns higher in rising markets.",
+    "misconception": "invents a relation"
+   },
+   {
+    "text": "Costs are the same for every strategy.",
+    "misconception": "ignores turnover differences"
+   }
+  ],
+  "explanation": "Net return $=$ gross return $-$ cost per trade $\\times$ turnover. A daily signal with 1 bp of edge per trade cannot survive 2 bp costs."
+ },
+ {
+  "id": "rm-5.2",
+  "lecture": 5,
+  "stem": "What is slippage?",
+  "correct": [
+   "Assumed price versus the price obtained.",
+   "Trading at worse prices than expected."
+  ],
+  "distractors": [
+   {
+    "text": "The fee charged by the broker.",
+    "misconception": "confuses it with commission"
+   },
+   {
+    "text": "The decline in a strategy's alpha over time.",
+    "misconception": "describes alpha decay"
+   },
+   {
+    "text": "The tracking error versus the benchmark.",
+    "misconception": "confuses it with tracking error"
+   },
+   {
+    "text": "The loss from a delayed settlement.",
+    "misconception": "confuses it with settlement risk"
+   },
+   {
+    "text": "The interest charged on borrowing.",
+    "misconception": "confuses it with financing cost"
+   }
+  ],
+  "explanation": "Slippage depends on order size, liquidity and speed; it rises with trade size, as market impact does."
+ },
+ {
+  "id": "rm-5.3",
+  "lecture": 5,
+  "stem": "What does the capacity of a strategy mean?",
+  "correct": [
+   "Capital it can deploy before costs erode returns.",
+   "The size where costs cancel the edge."
+  ],
+  "distractors": [
+   {
+    "text": "The number of securities in its universe.",
+    "misconception": "confuses capacity with breadth"
+   },
+   {
+    "text": "The maximum leverage allowed by the broker.",
+    "misconception": "confuses with a financing limit"
+   },
+   {
+    "text": "The length of time the strategy can run.",
+    "misconception": "confuses with longevity"
+   },
+   {
+    "text": "The maximum drawdown allowed.",
+    "misconception": "confuses with a risk limit"
+   },
+   {
+    "text": "The Sharpe ratio at zero assets.",
+    "misconception": "invents a definition"
+   }
+  ],
+  "explanation": "Capacity is limited by liquidity: trading more than a small fraction of daily volume moves prices against the strategy."
+ },
+ {
+  "id": "rm-5.4",
+  "lecture": 5,
+  "stem": "How should fills be modelled in a realistic backtest?",
+  "correct": [
+   "Use achievable prices after the signal, with spread, impact and volume limits.",
+   "Impact rising with size."
+  ],
+  "distractors": [
+   {
+    "text": "Assume every order fills at the mid price without delay.",
+    "misconception": "ignores spread and delay"
+   },
+   {
+    "text": "Assume every order fills at the best price of the day.",
+    "misconception": "is a look-ahead assumption"
+   },
+   {
+    "text": "Assume infinite liquidity at the last price.",
+    "misconception": "ignores market impact"
+   },
+   {
+    "text": "Assume orders always fill in full, whatever the size.",
+    "misconception": "ignores capacity"
+   },
+   {
+    "text": "Ignore the bid-ask spread for liquid stocks.",
+    "misconception": "underestimates costs"
+   }
+  ],
+  "explanation": "Even liquid large-cap stocks have a spread, and impact grows with the square root of size relative to volume."
+ },
+ {
+  "id": "rm-5.5",
+  "lecture": 5,
+  "stem": "Net of costs, a strategy has a smaller Sharpe ratio when which of these is larger?",
+  "correct": [
+   "Its turnover or the cost per unit traded.",
+   "The amount traded each period."
+  ],
+  "distractors": [
+   {
+    "text": "Its average gross return.",
+    "misconception": "increases net return"
+   },
+   {
+    "text": "Its holding period.",
+    "misconception": "lowers the cost"
+   },
+   {
+    "text": "The cost is fixed and does not depend on turnover.",
+    "misconception": "ignores turnover"
+   },
+   {
+    "text": "Its number of positions, whatever the turnover.",
+    "misconception": "confuses breadth with turnover"
+   },
+   {
+    "text": "The leverage, which always removes the costs.",
+    "misconception": "invents an effect"
+   }
+  ],
+  "explanation": "Net return is gross return minus cost times turnover. A longer holding period lowers turnover and so lowers total costs."
+ },
+ {
+  "id": "rm-6.1",
+  "lecture": 6,
+  "stem": "How is the annualised Sharpe ratio computed from daily returns?",
+  "correct": [
+   "Mean daily excess return over its standard deviation, times $\\sqrt{252}$.",
+   "$\\sqrt{252}\\,(\\bar r-r_f)/s$ for roughly uncorrelated returns."
+  ],
+  "distractors": [
+   {
+    "text": "The mean daily return times 252 divided by the daily standard deviation.",
+    "misconception": "scales the numerator and not the ratio consistently"
+   },
+   {
+    "text": "The mean daily return divided by the variance.",
+    "misconception": "uses variance in place of standard deviation"
+   },
+   {
+    "text": "The daily standard deviation divided by the mean return.",
+    "misconception": "inverts the ratio"
+   },
+   {
+    "text": "The sum of daily returns divided by 252.",
+    "misconception": "gives an average return"
+   },
+   {
+    "text": "The mean daily return divided by $\\sqrt{252}$.",
+    "misconception": "scales the wrong way"
+   }
+  ],
+  "explanation": "The mean scales with $T$ and the standard deviation with $\\sqrt T$, so the ratio scales with $\\sqrt T$, provided returns are serially uncorrelated."
+ },
+ {
+  "id": "rm-6.2",
+  "lecture": 6,
+  "stem": "What is the maximum drawdown?",
+  "correct": [
+   "The largest peak-to-trough fall in wealth.",
+   "The worst fall from a prior high."
+  ],
+  "distractors": [
+   {
+    "text": "The largest one-day loss.",
+    "misconception": "confuses it with the worst return"
+   },
+   {
+    "text": "The standard deviation of returns.",
+    "misconception": "confuses it with volatility"
+   },
+   {
+    "text": "The average of all negative returns.",
+    "misconception": "confuses it with downside mean"
+   },
+   {
+    "text": "The final loss over the sample.",
+    "misconception": "confuses it with total return"
+   },
+   {
+    "text": "The largest gain divided by the largest loss.",
+    "misconception": "confuses it with a ratio"
+   }
+  ],
+  "explanation": "Drawdown measures the pain of holding through a losing spell; a strategy with a high Sharpe ratio can still have a deep drawdown."
+ },
+ {
+  "id": "rm-6.3",
+  "lecture": 6,
+  "stem": "What is the information ratio of a portfolio relative to a benchmark?",
+  "correct": [
+   "Mean active return divided by tracking error.",
+   "The Sharpe ratio of portfolio minus benchmark."
+  ],
+  "distractors": [
+   {
+    "text": "The mean portfolio return divided by its volatility.",
+    "misconception": "gives the Sharpe ratio"
+   },
+   {
+    "text": "The portfolio return minus the risk-free rate.",
+    "misconception": "gives excess return"
+   },
+   {
+    "text": "The beta of the portfolio to the benchmark.",
+    "misconception": "confuses it with beta"
+   },
+   {
+    "text": "The tracking error divided by the mean active return.",
+    "misconception": "inverts the ratio"
+   },
+   {
+    "text": "The alpha divided by the market volatility.",
+    "misconception": "mixes the quantities"
+   }
+  ],
+  "explanation": "$IR=\\bar r_{active}/\\sigma_{active}$. A skilled manager has a positive $IR$ with a small tracking error."
+ },
+ {
+  "id": "rm-6.4",
+  "lecture": 6,
+  "stem": "Which is a limitation of the Sharpe ratio?",
+  "correct": [
+   "It treats up and down moves alike, ignoring skewness and tails.",
+   "Selling insurance can raise it."
+  ],
+  "distractors": [
+   {
+    "text": "It cannot be computed for strategies with negative returns.",
+    "misconception": "believes it is undefined"
+   },
+   {
+    "text": "It depends on the leverage of the strategy.",
+    "misconception": "ignores that leverage scales mean and volatility together"
+   },
+   {
+    "text": "It uses the maximum drawdown in its denominator.",
+    "misconception": "confuses it with the Calmar ratio"
+   },
+   {
+    "text": "It cannot be annualised.",
+    "misconception": "ignores the scaling"
+   },
+   {
+    "text": "It is higher for strategies with higher volatility, whatever the mean.",
+    "misconception": "reverses the dependence"
+   }
+  ],
+  "explanation": "The Sharpe ratio is unchanged by leverage, but it can be manipulated by short-volatility strategies that earn small steady returns before large losses."
+ },
+ {
+  "id": "rm-6.5",
+  "lecture": 6,
+  "stem": "What does the Sortino ratio change compared with the Sharpe ratio?",
+  "correct": [
+   "It divides by downside deviation below a target.",
+   "Upside volatility is not penalised."
+  ],
+  "distractors": [
+   {
+    "text": "It divides by the maximum drawdown.",
+    "misconception": "describes the Calmar ratio"
+   },
+   {
+    "text": "It uses the variance in place of the standard deviation.",
+    "misconception": "confuses the risk measure"
+   },
+   {
+    "text": "It penalises upside volatility more than downside volatility.",
+    "misconception": "reverses the idea"
+   },
+   {
+    "text": "It requires the strategy to be market neutral.",
+    "misconception": "invents a condition"
+   },
+   {
+    "text": "It uses the median in place of the mean.",
+    "misconception": "invents a change"
+   }
+  ],
+  "explanation": "Downside deviation $=\\sqrt{E[\\min(r-\\tau,0)^2]}$. For symmetric returns, the Sortino and Sharpe ratios rank strategies similarly."
+ },
+ {
+  "id": "rm-6.6",
+  "lecture": 6,
+  "stem": "When does multiplying a monthly Sharpe ratio by $\\sqrt{12}$ misstate the annual Sharpe ratio?",
+  "correct": [
+   "When returns are positively autocorrelated.",
+   "The rule assumes uncorrelated returns."
+  ],
+  "distractors": [
+   {
+    "text": "When the Sharpe ratio is negative.",
+    "misconception": "restricts the rule wrongly"
+   },
+   {
+    "text": "When the monthly Sharpe ratio is above 0.5.",
+    "misconception": "invents a threshold"
+   },
+   {
+    "text": "Whenever returns are normal.",
+    "misconception": "normality does not matter for the scaling"
+   },
+   {
+    "text": "Never, since the square-root rule is exact.",
+    "misconception": "ignores the assumption"
+   },
+   {
+    "text": "When the strategy has no leverage.",
+    "misconception": "confuses it with leverage"
+   }
+  ],
+  "explanation": "With first-order autocorrelation $\\rho>0$ the annual variance exceeds $12\\sigma^2$, so the true annual Sharpe ratio is smaller than $\\sqrt{12}\\times$ the monthly one."
+ },
+ {
+  "id": "rm-7.1",
+  "lecture": 7,
+  "stem": "How does the $t$ statistic of a mean return relate to the Sharpe ratio and the sample length?",
+  "correct": [
+   "$t\\approx SR\\sqrt{T}$, with $T$ in years.",
+   "A longer sample is more significant."
+  ],
+  "distractors": [
+   {
+    "text": "$t\\approx SR/\\sqrt T$.",
+    "misconception": "inverts the dependence on sample length"
+   },
+   {
+    "text": "$t\\approx SR\\cdot T$.",
+    "misconception": "omits the square root"
+   },
+   {
+    "text": "$t$ does not depend on the sample length.",
+    "misconception": "ignores the dependence"
+   },
+   {
+    "text": "$t\\approx\\sqrt{SR}\\cdot T$.",
+    "misconception": "mixes the powers"
+   },
+   {
+    "text": "$t$ is the Sharpe ratio times the number of trades.",
+    "misconception": "uses a wrong count"
+   }
+  ],
+  "explanation": "A Sharpe ratio of 1 needs about 4 years for $t=2$; a Sharpe ratio of 0.5 needs 16 years."
+ },
+ {
+  "id": "rm-7.2",
+  "lecture": 7,
+  "stem": "Why is a block bootstrap used to build confidence intervals for a performance statistic?",
+  "correct": [
+   "Blocks keep serial dependence that an i.i.d. bootstrap destroys.",
+   "Autocorrelation stays within blocks."
+  ],
+  "distractors": [
+   {
+    "text": "Block resampling removes outliers.",
+    "misconception": "confuses it with trimming"
+   },
+   {
+    "text": "It makes the returns independent.",
+    "misconception": "is the opposite of the purpose"
+   },
+   {
+    "text": "It guarantees a normal distribution of the statistic.",
+    "misconception": "overstates the method"
+   },
+   {
+    "text": "It increases the sample size.",
+    "misconception": "confuses resampling with new data"
+   },
+   {
+    "text": "It is needed only for monthly data.",
+    "misconception": "invents a restriction"
+   }
+  ],
+  "explanation": "With volatility clustering or autocorrelation an i.i.d. bootstrap gives intervals that are too narrow; block length is a tuning choice."
+ },
+ {
+  "id": "rm-7.3",
+  "lecture": 7,
+  "stem": "What does a $95\\%$ confidence interval for a Sharpe ratio tell you?",
+  "correct": [
+   "Values for the true ratio consistent with the data.",
+   "The estimation uncertainty around it."
+  ],
+  "distractors": [
+   {
+    "text": "The range in which 95% of future monthly returns will fall.",
+    "misconception": "confuses with a prediction interval"
+   },
+   {
+    "text": "That the strategy will earn within this range next year.",
+    "misconception": "confuses with a forecast"
+   },
+   {
+    "text": "The probability that the strategy is profitable.",
+    "misconception": "confuses with a probability of profit"
+   },
+   {
+    "text": "The range of Sharpe ratios across the strategies tried.",
+    "misconception": "confuses with the dispersion of trials"
+   },
+   {
+    "text": "That the true Sharpe ratio is certainly positive.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "The standard error of an annual Sharpe ratio is about $\\sqrt{(1+SR^2/2)/T}$, so for $T=3$ years, one Sharpe unit of uncertainty is common."
+ },
+ {
+  "id": "rm-7.4",
+  "lecture": 7,
+  "stem": "Which statement about statistical versus practical significance is correct?",
+  "correct": [
+   "A significant edge can be trivial; a large one can be luck.",
+   "A small $p$-value is not a large effect."
+  ],
+  "distractors": [
+   {
+    "text": "Significance and economic importance are the same thing.",
+    "misconception": "conflates the two"
+   },
+   {
+    "text": "A $p$-value above 5% proves there is no edge.",
+    "misconception": "confuses absence of evidence with evidence of absence"
+   },
+   {
+    "text": "Economic importance is judged only by the $p$-value.",
+    "misconception": "ignores the effect size"
+   },
+   {
+    "text": "Significance depends only on the effect size, not on the sample size.",
+    "misconception": "ignores precision"
+   },
+   {
+    "text": "Practical significance needs a larger sample.",
+    "misconception": "confuses the concepts"
+   }
+  ],
+  "explanation": "Report the estimate, an interval, and net-of-cost economics together. A significant $t$ on a $0.1$ bp edge is not tradable."
+ },
+ {
+  "id": "rm-7.5",
+  "lecture": 7,
+  "stem": "Why can positive autocorrelation of returns inflate the apparent significance of a Sharpe ratio?",
+  "correct": [
+   "The usual standard error assumes independence, so it is too small.",
+   "Dependent data carry less information."
+  ],
+  "distractors": [
+   {
+    "text": "Autocorrelation increases the mean return.",
+    "misconception": "confuses with the mean"
+   },
+   {
+    "text": "Autocorrelation lowers the volatility to zero.",
+    "misconception": "invents an effect"
+   },
+   {
+    "text": "It affects only the intercept of the regression.",
+    "misconception": "ignores the standard errors"
+   },
+   {
+    "text": "It has no effect on standard errors.",
+    "misconception": "ignores dependence"
+   },
+   {
+    "text": "It is only a problem for daily data.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "Smoothed or stale prices create positive autocorrelation and can overstate the Sharpe ratio and understate its standard error. Newey-West or block bootstrap corrections help."
+ },
+ {
+  "id": "rm-8.1",
+  "lecture": 8,
+  "stem": "How are nested models compared with a likelihood ratio test?",
+  "correct": [
+   "Twice the log-likelihood gain versus $\\chi^2$ on extra parameters.",
+   "$2(\\ell_1-\\ell_0)\\approx\\chi^2_q$."
+  ],
+  "distractors": [
+   {
+    "text": "The model with more parameters always wins.",
+    "misconception": "ignores the test"
+   },
+   {
+    "text": "The difference in $R^2$ is compared with a normal distribution.",
+    "misconception": "uses the wrong statistic"
+   },
+   {
+    "text": "Any two models can be compared, nested or not.",
+    "misconception": "ignores the nesting condition"
+   },
+   {
+    "text": "The degrees of freedom equal the sample size.",
+    "misconception": "uses the wrong degrees of freedom"
+   },
+   {
+    "text": "The larger model is rejected whenever its likelihood is higher.",
+    "misconception": "reverses the logic"
+   }
+  ],
+  "explanation": "A higher likelihood is guaranteed for the larger model; the test asks whether the gain exceeds what chance would give."
+ },
+ {
+  "id": "rm-8.2",
+  "lecture": 8,
+  "stem": "How do AIC and BIC compare models?",
+  "correct": [
+   "Each penalises model size; lower is preferred.",
+   "AIC $=-2\\ell+2k$, BIC $=-2\\ell+k\\ln n$."
+  ],
+  "distractors": [
+   {
+    "text": "Higher AIC or BIC is better.",
+    "misconception": "reverses the direction"
+   },
+   {
+    "text": "Both penalise the number of parameters by $2k$.",
+    "misconception": "confuses BIC with AIC"
+   },
+   {
+    "text": "They measure goodness of fit only, without a penalty.",
+    "misconception": "forgets the penalty"
+   },
+   {
+    "text": "They are valid only for nested models.",
+    "misconception": "restricts them wrongly"
+   },
+   {
+    "text": "AIC penalises more heavily than BIC for samples with $n>8$.",
+    "misconception": "reverses which penalty is larger"
+   }
+  ],
+  "explanation": "For $n>7$, $\\ln n>2$, so BIC prefers smaller models than AIC."
+ },
+ {
+  "id": "rm-8.3",
+  "lecture": 8,
+  "stem": "Why compare models on out-of-sample or cross-validated error rather than in-sample fit?",
+  "correct": [
+   "In-sample fit always improves with complexity.",
+   "Training error cannot pick the model."
+  ],
+  "distractors": [
+   {
+    "text": "Out-of-sample error is always lower than in-sample error.",
+    "misconception": "reverses the typical relationship"
+   },
+   {
+    "text": "In-sample fit predicts future performance perfectly.",
+    "misconception": "ignores overfitting"
+   },
+   {
+    "text": "Cross-validation is only for classification.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "Out-of-sample testing is needed only for linear models.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "Both measures always select the same model.",
+    "misconception": "ignores the difference"
+   }
+  ],
+  "explanation": "Nested models: the larger one always has the higher $R^2$. Out-of-sample error rises once a model starts fitting noise."
+ },
+ {
+  "id": "rm-8.4",
+  "lecture": 8,
+  "stem": "What principle guides the choice between two models with similar out-of-sample accuracy?",
+  "correct": [
+   "Prefer the simpler one, which is likely more robust.",
+   "Parsimony: less room to overfit."
+  ],
+  "distractors": [
+   {
+    "text": "Always choose the more complex model, since it contains the simpler one.",
+    "misconception": "ignores overfitting"
+   },
+   {
+    "text": "Choose the model with more features, as more information is better.",
+    "misconception": "ignores variance"
+   },
+   {
+    "text": "Choose the model that was tried first.",
+    "misconception": "uses an arbitrary rule"
+   },
+   {
+    "text": "Choose the model with the lowest in-sample error.",
+    "misconception": "ignores the evidence"
+   },
+   {
+    "text": "Averages cannot be used.",
+    "misconception": "gives wrong advice"
+   }
+  ],
+  "explanation": "The one-standard-error rule formalises parsimony: pick the simplest model within one standard error of the best."
+ },
+ {
+  "id": "rm-8.5",
+  "lecture": 8,
+  "stem": "Which comparison of two predictive models is statistically sound?",
+  "correct": [
+   "Evaluate both on the same out-of-sample period and test the loss difference.",
+   "Use a test that allows for correlated errors."
+  ],
+  "distractors": [
+   {
+    "text": "Compare in-sample $R^2$ values from different samples.",
+    "misconception": "uses different data"
+   },
+   {
+    "text": "Compare the best of many models with a single benchmark, with no adjustment.",
+    "misconception": "ignores selection"
+   },
+   {
+    "text": "Select the model with the largest Sharpe ratio in a period where only it was tested.",
+    "misconception": "lacks a common comparison"
+   },
+   {
+    "text": "Compare the number of parameters only.",
+    "misconception": "ignores performance"
+   },
+   {
+    "text": "Use the test set repeatedly to choose.",
+    "misconception": "biases the result"
+   }
+  ],
+  "explanation": "The Diebold-Mariano test is one example; the loss differential series is serially correlated, so a robust variance is needed."
+ },
+ {
+  "id": "rm-9.1",
+  "lecture": 9,
+  "stem": "What does a robust strategy look like in a parameter-sensitivity map?",
+  "correct": [
+   "Good results on a broad plateau, not a single sharp peak.",
+   "Neighbouring settings give similar results."
+  ],
+  "distractors": [
+   {
+    "text": "A single isolated peak with poor performance next to it.",
+    "misconception": "describes an overfitted result"
+   },
+   {
+    "text": "Performance that changes sign for small parameter changes.",
+    "misconception": "describes fragility"
+   },
+   {
+    "text": "The best parameter on the grid is much better than all others.",
+    "misconception": "suggests data mining"
+   },
+   {
+    "text": "Performance that is constant at exactly zero.",
+    "misconception": "describes no effect"
+   },
+   {
+    "text": "A different optimal parameter in every subsample.",
+    "misconception": "describes instability"
+   }
+  ],
+  "explanation": "A peak surrounded by poor results usually reflects luck; a plateau suggests a real effect that survives small errors in the parameters."
+ },
+ {
+  "id": "rm-9.2",
+  "lecture": 9,
+  "stem": "Why check the performance of a strategy in subperiods or regimes?",
+  "correct": [
+   "To see whether the result depends on one period, such as a crisis.",
+   "Stability across subsamples supports persistence."
+  ],
+  "distractors": [
+   {
+    "text": "Subperiods always have the same Sharpe ratio.",
+    "misconception": "ignores sampling variation"
+   },
+   {
+    "text": "To increase the sample size.",
+    "misconception": "confuses splitting with adding data"
+   },
+   {
+    "text": "To choose the best period for reporting.",
+    "misconception": "encourages cherry-picking"
+   },
+   {
+    "text": "Regimes cannot be identified.",
+    "misconception": "denies the practice"
+   },
+   {
+    "text": "Subperiod results must be averaged to give one number and never examined.",
+    "misconception": "discards information"
+   }
+  ],
+  "explanation": "Report subperiods without choosing them after the fact; a result driven by one episode, such as 2008, is fragile."
+ },
+ {
+  "id": "rm-9.3",
+  "lecture": 9,
+  "stem": "Which test checks robustness to assumptions about trading costs?",
+  "correct": [
+   "Re-run with higher costs and see if it survives.",
+   "A cost sensitivity analysis."
+  ],
+  "distractors": [
+   {
+    "text": "Assume costs are zero.",
+    "misconception": "is the opposite of a sensitivity test"
+   },
+   {
+    "text": "Lower the costs until the strategy looks good.",
+    "misconception": "biases the test"
+   },
+   {
+    "text": "Use the same cost for every asset.",
+    "misconception": "ignores differences"
+   },
+   {
+    "text": "Costs need not be tested since they are small.",
+    "misconception": "ignores impact"
+   },
+   {
+    "text": "Ignore costs on days with large returns.",
+    "misconception": "biases the test"
+   }
+  ],
+  "explanation": "Break-even cost shows how much the cost model can be wrong before the edge disappears."
+ },
+ {
+  "id": "rm-9.4",
+  "lecture": 9,
+  "stem": "What does it mean when performance depends strongly on a specific universe or data vendor?",
+  "correct": [
+   "It may reflect data quirks, not a real effect.",
+   "A real effect survives sample changes."
+  ],
+  "distractors": [
+   {
+    "text": "The result is more reliable because it is specific.",
+    "misconception": "reverses the interpretation"
+   },
+   {
+    "text": "Different vendors always give identical results.",
+    "misconception": "ignores data differences"
+   },
+   {
+    "text": "The universe has no effect on results.",
+    "misconception": "ignores selection"
+   },
+   {
+    "text": "It proves that the strategy has capacity.",
+    "misconception": "confuses the concepts"
+   },
+   {
+    "text": "It only matters for small caps.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "Robustness checks include different universes, liquidity filters, start dates and data sources."
+ },
+ {
+  "id": "rm-10.1",
+  "lecture": 10,
+  "stem": "What does reproducibility of a research result require?",
+  "correct": [
+   "Others can rerun the code and get the same results.",
+   "Pinned versions, seeded scripts."
+  ],
+  "distractors": [
+   {
+    "text": "A written description of the method, with no code.",
+    "misconception": "falls short of rerunning"
+   },
+   {
+    "text": "The same results by hand calculation.",
+    "misconception": "is not the standard"
+   },
+   {
+    "text": "Running the analysis once and saving the figures.",
+    "misconception": "does not allow reruns"
+   },
+   {
+    "text": "Using random seeds that change every run.",
+    "misconception": "prevents exact reproduction"
+   },
+   {
+    "text": "Keeping the data on one person's laptop.",
+    "misconception": "hinders access"
+   }
+  ],
+  "explanation": "Use version control, a fixed random seed, an environment file, a data version or hash and one command that runs the whole pipeline."
+ },
+ {
+  "id": "rm-10.2",
+  "lecture": 10,
+  "stem": "Why should a random seed be fixed and recorded in simulation-based research?",
+  "correct": [
+   "So the same random numbers can be regenerated.",
+   "Others can reproduce a stochastic result."
+  ],
+  "distractors": [
+   {
+    "text": "A fixed seed makes the random numbers truly random.",
+    "misconception": "misunderstands pseudorandom generators"
+   },
+   {
+    "text": "It improves the statistical quality of the simulation.",
+    "misconception": "confuses reproducibility with quality"
+   },
+   {
+    "text": "It removes the need for many simulation runs.",
+    "misconception": "confuses with variance"
+   },
+   {
+    "text": "Seeds should be chosen to give the best result.",
+    "misconception": "encourages cherry-picking"
+   },
+   {
+    "text": "A seed is only needed for deep learning.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "Report results across several seeds as well, to show the stochastic variation; a single lucky seed is not evidence."
+ },
+ {
+  "id": "rm-10.3",
+  "lecture": 10,
+  "stem": "What is the benefit of using version control for research code?",
+  "correct": [
+   "It links each result to the exact code.",
+   "Anyone can recover the version behind a result."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the code run faster.",
+    "misconception": "confuses with performance"
+   },
+   {
+    "text": "It removes the need to document the analysis.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "It guarantees correct results.",
+    "misconception": "confuses version control with correctness"
+   },
+   {
+    "text": "It stores the data more compactly.",
+    "misconception": "confuses with data compression"
+   },
+   {
+    "text": "It is only useful for large teams.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "Tag the commit used for each reported result. Large data files are tracked with hashes or data version tools."
+ },
+ {
+  "id": "rm-10.4",
+  "lecture": 10,
+  "stem": "Which feature makes a research pipeline fragile and hard to reproduce?",
+  "correct": [
+   "Manual steps such as spreadsheet edits.",
+   "Interventions that leave no trace in code."
+  ],
+  "distractors": [
+   {
+    "text": "A single script that runs from raw data to figures.",
+    "misconception": "describes good practice"
+   },
+   {
+    "text": "Configuration stored in a file under version control.",
+    "misconception": "describes good practice"
+   },
+   {
+    "text": "Pinned package versions.",
+    "misconception": "describes good practice"
+   },
+   {
+    "text": "Fixed random seeds.",
+    "misconception": "describes good practice"
+   },
+   {
+    "text": "Automated tests of data cleaning.",
+    "misconception": "describes good practice"
+   }
+  ],
+  "explanation": "Every transformation from raw data to final figure should be executable, so the paper can be rebuilt from scratch."
+ },
+ {
+  "id": "rm-10.5",
+  "lecture": 10,
+  "stem": "What should be stored to reproduce a result years later?",
+  "correct": [
+   "Code version, data, environment and seeds.",
+   "Everything needed to rebuild it."
+  ],
+  "distractors": [
+   {
+    "text": "Only the final figures and tables.",
+    "misconception": "prevents rebuilding"
+   },
+   {
+    "text": "Only the results spreadsheet.",
+    "misconception": "prevents rebuilding"
+   },
+   {
+    "text": "Only the paper PDF.",
+    "misconception": "prevents rebuilding"
+   },
+   {
+    "text": "The code, but not the versions of its libraries.",
+    "misconception": "software updates change results"
+   },
+   {
+    "text": "The data summaries, but not the raw data.",
+    "misconception": "prevents rebuilding"
+   }
+  ],
+  "explanation": "Libraries change behaviour across versions, so lock files or containers pin the environment."
+ },
+ {
+  "id": "rm-11.1",
+  "lecture": 11,
+  "stem": "What belongs in the limitations section of a research paper?",
+  "correct": [
+   "Weaknesses affecting conclusions: data, assumptions, costs, sample.",
+   "What the study cannot show."
+  ],
+  "distractors": [
+   {
+    "text": "Only minor typographical issues.",
+    "misconception": "trivialises the section"
+   },
+   {
+    "text": "Reasons why the results are certainly correct.",
+    "misconception": "reverses the purpose"
+   },
+   {
+    "text": "A summary of the abstract.",
+    "misconception": "confuses the sections"
+   },
+   {
+    "text": "Nothing, since limitations weaken the paper.",
+    "misconception": "discourages honesty"
+   },
+   {
+    "text": "Only the limitations that the reader will notice anyway.",
+    "misconception": "hides information"
+   }
+  ],
+  "explanation": "Stating limits (number of trials, in-sample period, cost assumptions) lets readers judge the evidence."
+ },
+ {
+  "id": "rm-11.2",
+  "lecture": 11,
+  "stem": "What makes a plot of strategy performance trustworthy?",
+  "correct": [
+   "It shows uncertainty and drawdowns and labels the sample and costs.",
+   "Cumulative performance with confidence bands."
+  ],
+  "distractors": [
+   {
+    "text": "A cumulative return chart with a truncated axis that exaggerates the growth.",
+    "misconception": "is misleading"
+   },
+   {
+    "text": "Only the best period shown in colour.",
+    "misconception": "is cherry-picking"
+   },
+   {
+    "text": "A log scale hidden without a label.",
+    "misconception": "misleads the reader"
+   },
+   {
+    "text": "Gross returns without saying so.",
+    "misconception": "hides costs"
+   },
+   {
+    "text": "A single line without any context.",
+    "misconception": "lacks information"
+   }
+  ],
+  "explanation": "Show net-of-cost performance, the sample used, and drawdowns; label axes and say whether the scale is log."
+ },
+ {
+  "id": "rm-11.3",
+  "lecture": 11,
+  "stem": "What is cherry-picking in a results section?",
+  "correct": [
+   "Showing only favourable results and hiding tests tried.",
+   "Selective reporting of attempts."
+  ],
+  "distractors": [
+   {
+    "text": "Choosing a sensible benchmark in advance.",
+    "misconception": "describes good practice"
+   },
+   {
+    "text": "Reporting all the trials and their number.",
+    "misconception": "describes good practice"
+   },
+   {
+    "text": "Choosing the sample period before looking at results.",
+    "misconception": "describes good practice"
+   },
+   {
+    "text": "Using a pre-registered test.",
+    "misconception": "describes good practice"
+   },
+   {
+    "text": "Rounding every reported number to two decimals.",
+    "misconception": "confuses a presentation choice with selective reporting"
+   }
+  ],
+  "explanation": "Report all variants considered and the selection rule so that readers can correct for multiple testing."
+ },
+ {
+  "id": "rm-11.4",
+  "lecture": 11,
+  "stem": "What is a sound structure for a research paper on a signal?",
+  "correct": [
+   "Question, data, method, results, robustness, limitations.",
+   "Motivation, hypothesis, results, caveats."
+  ],
+  "distractors": [
+   {
+    "text": "Results first, with the data and method omitted.",
+    "misconception": "prevents evaluation"
+   },
+   {
+    "text": "Method only, since results speak for themselves.",
+    "misconception": "omits context"
+   },
+   {
+    "text": "A list of all the figures, with no text.",
+    "misconception": "lacks structure"
+   },
+   {
+    "text": "Conclusion first, then selected results.",
+    "misconception": "risks hindsight bias"
+   },
+   {
+    "text": "Data, then the best result only.",
+    "misconception": "is selective"
+   }
+  ],
+  "explanation": "Each section answers a question a sceptical reader would ask: why, with what data, how, how robust, what are the limits."
+ },
+ {
+  "id": "rm-11.5",
+  "lecture": 11,
+  "stem": "How should an uncertain estimate of a mean return be reported?",
+  "correct": [
+   "With an interval or standard error, not only the point estimate.",
+   "Estimate with a $95\\%$ confidence interval."
+  ],
+  "distractors": [
+   {
+    "text": "As a point estimate with many decimal places, to show precision.",
+    "misconception": "confuses digits with accuracy"
+   },
+   {
+    "text": "Without any measure of precision.",
+    "misconception": "hides the uncertainty"
+   },
+   {
+    "text": "With only the $p$-value.",
+    "misconception": "omits the size of the effect"
+   },
+   {
+    "text": "Using the best year only.",
+    "misconception": "cherry-picks"
+   },
+   {
+    "text": "As a range that excludes the lowest 5% of results.",
+    "misconception": "discards the data"
+   }
+  ],
+  "explanation": "The interval $\\bar x\\pm1.96\\,s/\\sqrt n$ conveys both the size of the effect and how precisely it is known."
+ },
+ {
+  "id": "rm-11.6",
+  "lecture": 11,
+  "stem": "How should results be presented when many strategies were tested?",
+  "correct": [
+   "State how many were tried and show results adjusted for that selection.",
+   "Report all variants and use deflated metrics."
+  ],
+  "distractors": [
+   {
+    "text": "Present only the strategy with the best Sharpe ratio, with no mention of the others.",
+    "misconception": "hides the selection"
+   },
+   {
+    "text": "Show the best Sharpe ratio and call it the expected out-of-sample performance.",
+    "misconception": "ignores selection bias"
+   },
+   {
+    "text": "Hide the number of trials so as not to distract the reader.",
+    "misconception": "hides key information"
+   },
+   {
+    "text": "Report only the trials with positive returns.",
+    "misconception": "is selective"
+   },
+   {
+    "text": "Use the full sample Sharpe ratio, since it is the most accurate.",
+    "misconception": "ignores selection"
+   }
+  ],
+  "explanation": "A reader cannot interpret a Sharpe ratio of 1.5 without knowing whether it was the best of 3 or the best of 3,000."
+ }
+]

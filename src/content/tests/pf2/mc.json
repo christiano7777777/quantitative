@@ -1,0 +1,1570 @@
+[
+ {
+  "id": "pf2-1.1",
+  "lecture": 1,
+  "stem": "What does arbitrage pricing theory (APT) say about expected returns?",
+  "correct": [
+   "Expected excess returns are linear in factor exposures, one premium per factor.",
+   "No arbitrage ties returns to common factors."
+  ],
+  "distractors": [
+   {
+    "text": "Expected returns depend on each asset's own total variance, including idiosyncratic risk.",
+    "misconception": "confuses total risk with priced risk"
+   },
+   {
+    "text": "Expected returns are determined by the market beta alone, as in the CAPM.",
+    "misconception": "reduces the APT to a one-factor model"
+   },
+   {
+    "text": "Expected returns are unrelated to factor exposures, since factors average out.",
+    "misconception": "denies that factor risk is priced"
+   },
+   {
+    "text": "The APT specifies which factors must be used, namely size, value and momentum.",
+    "misconception": "attributes a particular factor list to the APT"
+   },
+   {
+    "text": "Expected returns are equal across assets that have the same expected payoff.",
+    "misconception": "confuses pricing with equal returns"
+   }
+  ],
+  "explanation": "With $r_i=a_i+\\sum_k\\beta_{ik}f_k+\\varepsilon_i$ and diversifiable $\\varepsilon_i$, no arbitrage implies $E[r_i]-r_f\\approx\\sum_k\\beta_{ik}\\lambda_k$."
+ },
+ {
+  "id": "pf2-1.2",
+  "lecture": 1,
+  "stem": "What does an asset's factor loading (exposure) $\\beta_{ik}$ measure?",
+  "correct": [
+   "The sensitivity of the return to factor $k$, other factors held fixed.",
+   "The slope on factor $k$ in a multiple regression."
+  ],
+  "distractors": [
+   {
+    "text": "The expected return of the asset.",
+    "misconception": "confuses a sensitivity with a mean"
+   },
+   {
+    "text": "The volatility of factor $k$.",
+    "misconception": "confuses the loading with a property of the factor"
+   },
+   {
+    "text": "The asset's idiosyncratic variance.",
+    "misconception": "confuses the loading with the residual risk"
+   },
+   {
+    "text": "The correlation between the asset and the factor, which always lies in $[-1,1]$.",
+    "misconception": "confuses a regression slope with a correlation"
+   },
+   {
+    "text": "The weight of the asset in the factor portfolio.",
+    "misconception": "confuses exposure with portfolio weight"
+   }
+  ],
+  "explanation": "$\\beta_{ik}=\\operatorname{Cov}(r_i,f_k\\mid\\text{other factors})/\\operatorname{Var}(f_k\\mid\\text{others})$; unlike a correlation it is not bounded by one."
+ },
+ {
+  "id": "pf2-1.3",
+  "lecture": 1,
+  "stem": "Why is idiosyncratic risk assumed not to earn a risk premium in the APT?",
+  "correct": [
+   "It diversifies away in large portfolios.",
+   "Residuals average out."
+  ],
+  "distractors": [
+   {
+    "text": "It is always zero for individual stocks.",
+    "misconception": "confuses diversifiable with absent"
+   },
+   {
+    "text": "It is perfectly correlated across stocks, so it is hedged.",
+    "misconception": "reverses the correlation structure"
+   },
+   {
+    "text": "It can only be removed by trading derivatives.",
+    "misconception": "ignores diversification"
+   },
+   {
+    "text": "It is priced only for small firms.",
+    "misconception": "makes an unsupported claim"
+   },
+   {
+    "text": "Diversification removes factor risk but not idiosyncratic risk.",
+    "misconception": "swaps the two"
+   }
+  ],
+  "explanation": "The variance of a portfolio's residual part falls like $1/N$; factor risk does not vanish with $N$."
+ },
+ {
+  "id": "pf2-1.4",
+  "lecture": 1,
+  "stem": "How does the APT differ from the CAPM?",
+  "correct": [
+   "The APT allows several risk factors; the CAPM has just the market.",
+   "Several priced betas versus one."
+  ],
+  "distractors": [
+   {
+    "text": "The APT requires investors to hold mean-variance efficient portfolios.",
+    "misconception": "attributes the CAPM's assumption to the APT"
+   },
+   {
+    "text": "The CAPM allows many factors and the APT only one.",
+    "misconception": "swaps the two"
+   },
+   {
+    "text": "The APT needs a market portfolio of all assets to be observable.",
+    "misconception": "gives the CAPM's testing problem to the APT"
+   },
+   {
+    "text": "The APT has no role for the risk-free rate.",
+    "misconception": "forgets the intercept of the pricing relation"
+   },
+   {
+    "text": "Both models give exactly the same expected returns for every asset.",
+    "misconception": "ignores the additional factors"
+   }
+  ],
+  "explanation": "The APT rests on a no-arbitrage argument with many assets rather than on investor preferences, but it leaves the factors to be chosen empirically."
+ },
+ {
+  "id": "pf2-1.5",
+  "lecture": 1,
+  "stem": "In a multi-factor model, how is an asset's factor-implied expected excess return computed?",
+  "correct": [
+   "Exposure times risk premium, summed over factors.",
+   "$E[r_i]-r_f=\\sum_k\\beta_{ik}\\lambda_k$."
+  ],
+  "distractors": [
+   {
+    "text": "As the product of the exposures with the factor volatilities.",
+    "misconception": "replaces premia with volatilities"
+   },
+   {
+    "text": "As the average of the exposures.",
+    "misconception": "ignores the premia"
+   },
+   {
+    "text": "As the largest exposure times the smallest premium.",
+    "misconception": "invents a rule"
+   },
+   {
+    "text": "As the sum of the factor premia, whatever the exposures.",
+    "misconception": "ignores the exposures"
+   },
+   {
+    "text": "As the asset's own historical average return.",
+    "misconception": "describes a different estimator"
+   }
+  ],
+  "explanation": "Exposures describe how much risk is borne; the factor premia describe the price of one unit of each risk."
+ },
+ {
+  "id": "pf2-2.1",
+  "lecture": 2,
+  "stem": "What do the SMB and HML factors represent in the Fama-French three-factor model?",
+  "correct": [
+   "Small minus big firms (size) and high minus low book-to-market (value).",
+   "Long-short size and value portfolios."
+  ],
+  "distractors": [
+   {
+    "text": "SMB is the return of the market minus the risk-free rate, and HML is its volatility.",
+    "misconception": "confuses them with market quantities"
+   },
+   {
+    "text": "SMB is high minus low book-to-market, and HML is small minus big.",
+    "misconception": "swaps the two labels"
+   },
+   {
+    "text": "Both are measures of volatility.",
+    "misconception": "confuses premia with risk measures"
+   },
+   {
+    "text": "HML is the return of stocks with a high momentum minus those with low.",
+    "misconception": "confuses value with momentum"
+   },
+   {
+    "text": "SMB buys large firms and sells small firms.",
+    "misconception": "reverses the long and short legs"
+   }
+  ],
+  "explanation": "SMB = Small Minus Big, HML = High (book-to-market) Minus Low. Both are zero-cost long-short returns built from sorted portfolios."
+ },
+ {
+  "id": "pf2-2.2",
+  "lecture": 2,
+  "stem": "How is the momentum factor (UMD) constructed?",
+  "correct": [
+   "Long winners, short losers, skipping the last month.",
+   "Buy top past performers against bottom."
+  ],
+  "distractors": [
+   {
+    "text": "Long past losers and short past winners, to capture reversal.",
+    "misconception": "reverses the legs"
+   },
+   {
+    "text": "Ranked on the previous month's return only.",
+    "misconception": "describes short-term reversal"
+   },
+   {
+    "text": "Ranked on book-to-market.",
+    "misconception": "confuses it with value"
+   },
+   {
+    "text": "Ranked on the future return, estimated from analyst forecasts.",
+    "misconception": "uses forecasts, not past returns"
+   },
+   {
+    "text": "Ranked on market capitalisation.",
+    "misconception": "confuses it with size"
+   }
+  ],
+  "explanation": "The most recent month is skipped to avoid short-term reversal and microstructure effects."
+ },
+ {
+  "id": "pf2-2.3",
+  "lecture": 2,
+  "stem": "Which describes the construction of long-short factor portfolios such as HML?",
+  "correct": [
+   "Sort stocks on a characteristic; the factor is the high group minus the low group.",
+   "A zero-cost long-short portfolio."
+  ],
+  "distractors": [
+   {
+    "text": "A portfolio that holds only the highest-ranked stock.",
+    "misconception": "confuses it with picking one stock"
+   },
+   {
+    "text": "A long-only portfolio of value stocks.",
+    "misconception": "ignores the short leg"
+   },
+   {
+    "text": "A regression of returns on the characteristic with the slope taken as the factor.",
+    "misconception": "describes Fama-MacBeth, not sorting"
+   },
+   {
+    "text": "A portfolio weighted by the estimated alpha.",
+    "misconception": "confuses it with alpha weighting"
+   },
+   {
+    "text": "A portfolio that is long and short equal dollar amounts of the same stock.",
+    "misconception": "invents a nonsensical portfolio"
+   }
+  ],
+  "explanation": "In the Fama-French $2\\times3$ sorts, HML averages the two high book-to-market portfolios minus the two low ones, so it is neutral to size."
+ },
+ {
+  "id": "pf2-2.4",
+  "lecture": 2,
+  "stem": "What is a known risk of momentum strategies?",
+  "correct": [
+   "Momentum crashes: sharp losses on rebounds.",
+   "Negative skewness."
+  ],
+  "distractors": [
+   {
+    "text": "Momentum returns are always positive in every period.",
+    "misconception": "ignores the crashes"
+   },
+   {
+    "text": "Momentum is perfectly hedged against market moves.",
+    "misconception": "ignores the time-varying market exposure"
+   },
+   {
+    "text": "Momentum has no turnover.",
+    "misconception": "ignores the high turnover"
+   },
+   {
+    "text": "Momentum returns are positively skewed.",
+    "misconception": "reverses the skew"
+   },
+   {
+    "text": "The strategy loses only when volatility is low.",
+    "misconception": "misidentifies the crash conditions"
+   }
+  ],
+  "explanation": "In market rebounds the short leg (past losers, high beta) rallies, giving crashes such as 2009."
+ },
+ {
+  "id": "pf2-3.1",
+  "lecture": 3,
+  "stem": "In a time-series test of a factor model, $r_{it}-r_{ft}=\\alpha_i+\\beta_if_t+\\varepsilon_{it}$, what does $\\alpha_i$ represent?",
+  "correct": [
+   "The return the factors fail to explain.",
+   "A pricing error."
+  ],
+  "distractors": [
+   {
+    "text": "The market beta of asset $i$.",
+    "misconception": "confuses the intercept with a slope"
+   },
+   {
+    "text": "The standard deviation of the residuals.",
+    "misconception": "confuses the intercept with the residual risk"
+   },
+   {
+    "text": "The expected value of the factor.",
+    "misconception": "confuses it with the factor premium"
+   },
+   {
+    "text": "The correlation between the asset and the factor.",
+    "misconception": "confuses it with a correlation"
+   },
+   {
+    "text": "The risk premium of the factor, which must be positive.",
+    "misconception": "confuses the intercept with the premium"
+   }
+  ],
+  "explanation": "If factors are excess returns and the model holds exactly, intercepts are zero; a nonzero intercept is Jensen's alpha."
+ },
+ {
+  "id": "pf2-3.2",
+  "lecture": 3,
+  "stem": "What does the Gibbons-Ross-Shanken (GRS) test examine?",
+  "correct": [
+   "Whether all intercepts are jointly zero.",
+   "A joint $F$-type test of zero pricing errors."
+  ],
+  "distractors": [
+   {
+    "text": "Whether each asset's beta is equal to one.",
+    "misconception": "confuses the intercepts with betas"
+   },
+   {
+    "text": "Whether the factors are correlated with each other.",
+    "misconception": "describes a different test"
+   },
+   {
+    "text": "Whether the residuals are normally distributed.",
+    "misconception": "describes a normality test"
+   },
+   {
+    "text": "Whether the market portfolio is the efficient portfolio.",
+    "misconception": "gives a related but different interpretation"
+   },
+   {
+    "text": "Whether the factor risk premia are equal across assets.",
+    "misconception": "confuses the null hypothesis"
+   }
+  ],
+  "explanation": "The GRS statistic compares the squared Sharpe ratio of the factors with that of the factors plus test assets; it needs $T$ to be large relative to $N$."
+ },
+ {
+  "id": "pf2-3.3",
+  "lecture": 3,
+  "stem": "How does the Fama-MacBeth procedure estimate risk premia?",
+  "correct": [
+   "Regress returns on betas each period, then average the slopes.",
+   "Betas first, then period-by-period regressions."
+  ],
+  "distractors": [
+   {
+    "text": "Run one time-series regression of each asset on the factor and average the intercepts.",
+    "misconception": "describes the time-series test"
+   },
+   {
+    "text": "Regress the factor return on the asset returns at each date.",
+    "misconception": "reverses the roles"
+   },
+   {
+    "text": "Use the average of the betas as the premium.",
+    "misconception": "confuses a beta with a premium"
+   },
+   {
+    "text": "Sort assets into portfolios and take the top minus bottom return.",
+    "misconception": "describes a sorting method"
+   },
+   {
+    "text": "Pool all the observations in one regression and use the OLS standard errors.",
+    "misconception": "ignores cross-sectional correlation"
+   }
+  ],
+  "explanation": "The premium estimate is $\\hat\\lambda=\\frac1T\\sum_t\\hat\\lambda_t$ from the cross-sectional slopes $\\hat\\lambda_t$."
+ },
+ {
+  "id": "pf2-3.4",
+  "lecture": 3,
+  "stem": "How are standard errors of the Fama-MacBeth risk premia obtained?",
+  "correct": [
+   "From the time-series variability of the period-by-period slopes.",
+   "$\\operatorname{sd}(\\hat\\lambda_t)/\\sqrt T$."
+  ],
+  "distractors": [
+   {
+    "text": "From the standard errors of each cross-sectional regression pooled together.",
+    "misconception": "ignores correlation between assets"
+   },
+   {
+    "text": "From the standard error of the betas only.",
+    "misconception": "ignores the second stage"
+   },
+   {
+    "text": "They cannot be computed, because the betas are estimated.",
+    "misconception": "believes estimation of betas prevents inference"
+   },
+   {
+    "text": "By assuming that residuals are independent across assets and time.",
+    "misconception": "assumes what the procedure avoids"
+   },
+   {
+    "text": "By bootstrapping the assets, not the periods.",
+    "misconception": "resamples the wrong dimension"
+   }
+  ],
+  "explanation": "Treating the $T$ slopes as a sample means $t=\\hat\\lambda/(s/\\sqrt T)$ is robust to cross-sectional dependence, but still ignores error in the betas unless corrected."
+ },
+ {
+  "id": "pf2-3.5",
+  "lecture": 3,
+  "stem": "Why are test assets often grouped into portfolios before estimating betas in asset pricing tests?",
+  "correct": [
+   "Portfolio betas are estimated more precisely than single-stock betas.",
+   "Grouping averages out beta noise."
+  ],
+  "distractors": [
+   {
+    "text": "Portfolios have higher expected returns than individual stocks.",
+    "misconception": "confuses precision with return level"
+   },
+   {
+    "text": "Portfolios have no idiosyncratic risk by construction.",
+    "misconception": "overstates diversification"
+   },
+   {
+    "text": "Individual stocks cannot be regressed on factors.",
+    "misconception": "invents a restriction"
+   },
+   {
+    "text": "Portfolios have betas that equal one.",
+    "misconception": "invents a property"
+   },
+   {
+    "text": "It makes the number of assets exceed the number of periods.",
+    "misconception": "reverses the effect"
+   }
+  ],
+  "explanation": "Noisy betas bias the second-stage slopes towards zero. Beta-sorted portfolios have less noisy betas, though they can hide cross-sectional information."
+ },
+ {
+  "id": "pf2-4.1",
+  "lecture": 4,
+  "stem": "What is the fundamental pricing equation with a stochastic discount factor $M$?",
+  "correct": [
+   "The price of a payoff $X$ is $P=E[MX]$.",
+   "A gross return satisfies $E[MR]=1$."
+  ],
+  "distractors": [
+   {
+    "text": "$P=E[X]/E[M]$ for every payoff.",
+    "misconception": "separates the expectations incorrectly"
+   },
+   {
+    "text": "$P=E[X]$ discounted at the risk-free rate, whatever the covariance.",
+    "misconception": "ignores risk adjustment"
+   },
+   {
+    "text": "$P=\\operatorname{Var}(MX)$.",
+    "misconception": "replaces the expectation by a variance"
+   },
+   {
+    "text": "$P=E[M]+E[X]$.",
+    "misconception": "adds instead of multiplying"
+   },
+   {
+    "text": "$E[MR]=0$ for gross returns.",
+    "misconception": "confuses gross and excess returns"
+   }
+  ],
+  "explanation": "Excess returns satisfy $E[MR^e]=0$. The SDF $M$ is the stochastic discount factor, also called the pricing kernel."
+ },
+ {
+  "id": "pf2-4.2",
+  "lecture": 4,
+  "stem": "How is the risk-free rate related to the stochastic discount factor?",
+  "correct": [
+   "The gross risk-free rate equals $1/E[M]$.",
+   "$R_f=1/E[M]$."
+  ],
+  "distractors": [
+   {
+    "text": "$R_f=E[M]$.",
+    "misconception": "inverts the relation"
+   },
+   {
+    "text": "$R_f=\\operatorname{Var}(M)$.",
+    "misconception": "replaces the mean by the variance"
+   },
+   {
+    "text": "$R_f=E[M^2]$.",
+    "misconception": "squares the SDF"
+   },
+   {
+    "text": "$R_f$ is independent of the SDF.",
+    "misconception": "ignores the relation"
+   },
+   {
+    "text": "$R_f=1-E[M]$.",
+    "misconception": "subtracts instead of inverting"
+   }
+  ],
+  "explanation": "The price of a unit riskless payoff is $E[M\\cdot1]$, so $R_f=1/E[M]$ and the discount factor for one period is $E[M]$."
+ },
+ {
+  "id": "pf2-4.3",
+  "lecture": 4,
+  "stem": "How does an asset's covariance with the SDF determine its risk premium?",
+  "correct": [
+   "$E[R^e]=-R_f\\operatorname{Cov}(M,R^e)$: payoffs in bad times earn lower premia.",
+   "Negative covariance with $M$ earns a positive premium."
+  ],
+  "distractors": [
+   {
+    "text": "Assets with positive covariance with $M$ earn the highest premia.",
+    "misconception": "reverses the sign"
+   },
+   {
+    "text": "The premium depends only on the asset's variance.",
+    "misconception": "ignores the covariance"
+   },
+   {
+    "text": "The premium is zero whenever the asset has a positive expected return.",
+    "misconception": "confuses risk premium with expected return"
+   },
+   {
+    "text": "The premium is determined by covariance with the risk-free rate.",
+    "misconception": "uses the wrong benchmark"
+   },
+   {
+    "text": "Covariance with $M$ matters only for derivatives.",
+    "misconception": "restricts the result"
+   }
+  ],
+  "explanation": "Investors value payoffs in bad times (high $M$) highly, so an asset that pays well then is a hedge and requires a low expected return."
+ },
+ {
+  "id": "pf2-4.4",
+  "lecture": 4,
+  "stem": "What does the fundamental theorem of asset pricing state?",
+  "correct": [
+   "No arbitrage holds if and only if a strictly positive SDF prices all payoffs.",
+   "No arbitrage is equivalent to positive state prices."
+  ],
+  "distractors": [
+   {
+    "text": "There is no arbitrage if and only if all assets have the same expected return.",
+    "misconception": "misstates the equivalence"
+   },
+   {
+    "text": "A pricing kernel exists only if markets are complete.",
+    "misconception": "confuses existence with uniqueness"
+   },
+   {
+    "text": "Absence of arbitrage implies that returns are normally distributed.",
+    "misconception": "invents a distributional implication"
+   },
+   {
+    "text": "Arbitrage opportunities exist whenever there is a risk premium.",
+    "misconception": "confuses risk premia with arbitrage"
+   },
+   {
+    "text": "A positive SDF exists only when investors are risk neutral.",
+    "misconception": "ties existence to a preference assumption"
+   }
+  ],
+  "explanation": "Positivity of $M$ is what rules out arbitrage; a sign-changing $M$ can price assets but permits arbitrage."
+ },
+ {
+  "id": "pf2-4.5",
+  "lecture": 4,
+  "stem": "Is the stochastic discount factor unique?",
+  "correct": [
+   "Unique if markets are complete; otherwise many SDFs fit.",
+   "Only the traded-payoff projection is fixed."
+  ],
+  "distractors": [
+   {
+    "text": "It is always unique, since the price of every asset is observed.",
+    "misconception": "forgets incompleteness"
+   },
+   {
+    "text": "It is never unique, even in complete markets.",
+    "misconception": "ignores the complete case"
+   },
+   {
+    "text": "It is unique only if returns are independent.",
+    "misconception": "invents a condition"
+   },
+   {
+    "text": "It is unique only when it is constant.",
+    "misconception": "invents a condition"
+   },
+   {
+    "text": "It is unique for any two assets but not for three or more.",
+    "misconception": "invents a rule"
+   }
+  ],
+  "explanation": "With $N$ assets and more states than assets, any $M$ with the same pricing of the assets works. The minimum-variance SDF is the one in the span of the payoffs."
+ },
+ {
+  "id": "pf2-5.1",
+  "lecture": 5,
+  "stem": "Why is the sample covariance matrix of $N$ assets singular when $N$ exceeds the number of observations $T$?",
+  "correct": [
+   "Its rank is at most $T-1$, so it has zero eigenvalues and is singular.",
+   "The data span at most $T-1$ dimensions."
+  ],
+  "distractors": [
+   {
+    "text": "Because returns are perfectly correlated.",
+    "misconception": "invents a cause"
+   },
+   {
+    "text": "Because the sample covariance is biased downwards.",
+    "misconception": "confuses bias with rank"
+   },
+   {
+    "text": "It is singular only if some assets have zero variance.",
+    "misconception": "gives a sufficient but not necessary cause"
+   },
+   {
+    "text": "It is always invertible, as variances are positive.",
+    "misconception": "ignores the rank"
+   },
+   {
+    "text": "Because the true covariance matrix is singular.",
+    "misconception": "confuses the sample with the population"
+   }
+  ],
+  "explanation": "Mean-variance optimisation needs $\\Sigma^{-1}$, so with $N>T$ shrinkage or a factor structure is required."
+ },
+ {
+  "id": "pf2-5.2",
+  "lecture": 5,
+  "stem": "How does shrinkage (as in Ledoit-Wolf) improve covariance estimation?",
+  "correct": [
+   "It pulls the sample matrix towards a target, cutting variance.",
+   "A weighted average with a simple target."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the estimate unbiased.",
+    "misconception": "forgets that shrinkage adds bias"
+   },
+   {
+    "text": "It increases the dispersion of eigenvalues.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It needs more data than the sample covariance.",
+    "misconception": "reverses the data requirement"
+   },
+   {
+    "text": "It replaces the covariance matrix with the identity.",
+    "misconception": "describes the extreme case"
+   },
+   {
+    "text": "It removes the market factor.",
+    "misconception": "confuses shrinkage with factor removal"
+   }
+  ],
+  "explanation": "$\\hat\\Sigma=\\delta F+(1-\\delta)S$. The sample largest eigenvalues are too large and the smallest too small; shrinkage corrects both."
+ },
+ {
+  "id": "pf2-5.3",
+  "lecture": 5,
+  "stem": "How does a factor model reduce the number of covariance parameters to estimate?",
+  "correct": [
+   "$\\Sigma=B\\Sigma_fB^\\top+D$ needs about $NK$ parameters, not $N^2/2$.",
+   "Assets link only through $K$ factors."
+  ],
+  "distractors": [
+   {
+    "text": "It sets all covariances between assets to zero.",
+    "misconception": "confuses a factor structure with independence"
+   },
+   {
+    "text": "It uses the sample covariance matrix directly.",
+    "misconception": "ignores the structure"
+   },
+   {
+    "text": "It adds parameters for each pair of assets.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It requires $N<K$.",
+    "misconception": "reverses the relation between assets and factors"
+   },
+   {
+    "text": "It estimates the covariance matrix without any data.",
+    "misconception": "invents an impossible method"
+   }
+  ],
+  "explanation": "With $N=500$ and $K=5$, the factor model has a few thousand parameters instead of over 125,000."
+ },
+ {
+  "id": "pf2-5.4",
+  "lecture": 5,
+  "stem": "What is true of the eigenvalues of the sample covariance matrix when $N/T$ is not small?",
+  "correct": [
+   "The largest are too big and the smallest too small.",
+   "Sample eigenvalues are too dispersed."
+  ],
+  "distractors": [
+   {
+    "text": "They are unbiased estimates of the true eigenvalues.",
+    "misconception": "ignores the high-dimensional bias"
+   },
+   {
+    "text": "They are all biased upwards.",
+    "misconception": "ignores the smallest eigenvalues"
+   },
+   {
+    "text": "They are all equal to the average eigenvalue.",
+    "misconception": "describes complete shrinkage"
+   },
+   {
+    "text": "The spread is too narrow.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "They converge to the true eigenvalues as $N$ grows.",
+    "misconception": "reverses the role of $N$"
+   }
+  ],
+  "explanation": "This is the Marchenko-Pastur effect; optimised portfolios exploit the spuriously small eigenvalues and so perform badly out of sample."
+ },
+ {
+  "id": "pf2-5.5",
+  "lecture": 5,
+  "stem": "Why can portfolio optimisation with a sample covariance matrix perform badly out of sample?",
+  "correct": [
+   "It loads on directions where variance is underestimated.",
+   "Small-eigenvalue errors give extreme weights."
+  ],
+  "distractors": [
+   {
+    "text": "Optimisation always gives the equal-weight portfolio.",
+    "misconception": "ignores the optimisation"
+   },
+   {
+    "text": "Because the covariance matrix is exact.",
+    "misconception": "ignores estimation error"
+   },
+   {
+    "text": "Because the optimiser ignores risk.",
+    "misconception": "misstates the objective"
+   },
+   {
+    "text": "Only expected-return errors matter, never covariance errors.",
+    "misconception": "ignores covariance error"
+   },
+   {
+    "text": "Because portfolio weights must be positive.",
+    "misconception": "invents a cause"
+   }
+  ],
+  "explanation": "The optimiser picks the portfolios that appear least risky in sample, which are the ones most affected by noise."
+ },
+ {
+  "id": "pf2-6.1",
+  "lecture": 6,
+  "stem": "How does the Black-Litterman model obtain its prior for expected returns?",
+  "correct": [
+   "By reverse optimisation from market weights.",
+   "Returns that make the market optimal."
+  ],
+  "distractors": [
+   {
+    "text": "From the historical average of each asset's return.",
+    "misconception": "describes the sample mean"
+   },
+   {
+    "text": "From the investor's views alone.",
+    "misconception": "ignores the prior"
+   },
+   {
+    "text": "By setting all the expected returns to zero.",
+    "misconception": "gives a trivial prior"
+   },
+   {
+    "text": "From the highest past return.",
+    "misconception": "invents a rule"
+   },
+   {
+    "text": "By minimising the portfolio variance.",
+    "misconception": "confuses it with the minimum variance portfolio"
+   }
+  ],
+  "explanation": "$\\delta$ is the risk aversion, $\\Sigma$ the covariance and $w_{mkt}$ the market weights. Equilibrium returns reflect the covariance structure."
+ },
+ {
+  "id": "pf2-6.2",
+  "lecture": 6,
+  "stem": "How are the views and the prior combined in the Black-Litterman posterior?",
+  "correct": [
+   "A precision-weighted average, so more certain sources count for more.",
+   "Bayesian updating of the prior with the views."
+  ],
+  "distractors": [
+   {
+    "text": "As a simple average of prior and views.",
+    "misconception": "ignores the confidence"
+   },
+   {
+    "text": "The views always replace the prior.",
+    "misconception": "ignores the prior"
+   },
+   {
+    "text": "The prior always dominates the views.",
+    "misconception": "ignores the views"
+   },
+   {
+    "text": "As a product of the prior and views.",
+    "misconception": "multiplies instead of weighting"
+   },
+   {
+    "text": "The weights are chosen by the portfolio manager independently of the uncertainty.",
+    "misconception": "ignores the Bayesian weighting"
+   }
+  ],
+  "explanation": "$\\mu_{BL}=[(\\tau\\Sigma)^{-1}+P^\\top\\Omega^{-1}P]^{-1}[(\\tau\\Sigma)^{-1}\\pi+P^\\top\\Omega^{-1}q]$."
+ },
+ {
+  "id": "pf2-6.3",
+  "lecture": 6,
+  "stem": "What is the effect of a smaller view uncertainty $\\Omega$ in Black-Litterman?",
+  "correct": [
+   "The posterior moves closer to the view.",
+   "A more confident view gets more weight."
+  ],
+  "distractors": [
+   {
+    "text": "The posterior moves closer to the prior.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The view is ignored.",
+    "misconception": "ignores the weighting"
+   },
+   {
+    "text": "The posterior variance increases.",
+    "misconception": "reverses the effect on the variance"
+   },
+   {
+    "text": "The prior covariance matrix changes.",
+    "misconception": "confuses the roles"
+   },
+   {
+    "text": "The posterior does not depend on $\\Omega$.",
+    "misconception": "ignores the dependence"
+   }
+  ],
+  "explanation": "As $\\Omega\\to0$ the view holds exactly; as $\\Omega\\to\\infty$ the posterior returns to the equilibrium prior."
+ },
+ {
+  "id": "pf2-6.4",
+  "lecture": 6,
+  "stem": "What happens in Black-Litterman if the investor has no views?",
+  "correct": [
+   "The posterior equals equilibrium returns.",
+   "The market portfolio is optimal."
+  ],
+  "distractors": [
+   {
+    "text": "The expected returns are zero.",
+    "misconception": "gives a wrong default"
+   },
+   {
+    "text": "The model fails because $P$ is empty.",
+    "misconception": "believes the model is undefined"
+   },
+   {
+    "text": "The portfolio is equal weighted.",
+    "misconception": "confuses the market portfolio with equal weights"
+   },
+   {
+    "text": "It becomes the minimum variance portfolio.",
+    "misconception": "confuses with a different portfolio"
+   },
+   {
+    "text": "The portfolio is fully invested in the risk-free asset.",
+    "misconception": "gives a wrong default"
+   }
+  ],
+  "explanation": "Since $\\pi=\\delta\\Sigma w_{mkt}$, the unconstrained solution $w=(\\delta\\Sigma)^{-1}\\pi=w_{mkt}$."
+ },
+ {
+  "id": "pf2-6.5",
+  "lecture": 6,
+  "stem": "What problem of mean-variance optimisation does Black-Litterman address?",
+  "correct": [
+   "Extreme, unstable weights from noisy mean inputs.",
+   "Tiny input changes move the optimum."
+  ],
+  "distractors": [
+   {
+    "text": "The impossibility of computing the efficient frontier.",
+    "misconception": "overstates the problem"
+   },
+   {
+    "text": "The lack of a risk measure.",
+    "misconception": "ignores that variance is the risk measure"
+   },
+   {
+    "text": "The requirement that returns be normally distributed.",
+    "misconception": "misidentifies the issue"
+   },
+   {
+    "text": "Too many assets to optimise.",
+    "misconception": "confuses it with dimensionality"
+   },
+   {
+    "text": "High transaction costs.",
+    "misconception": "confuses it with costs"
+   }
+  ],
+  "explanation": "Starting from market-consistent returns and tilting only on stated views gives diversified, intuitive portfolios."
+ },
+ {
+  "id": "pf2-7.1",
+  "lecture": 7,
+  "stem": "How is the risk contribution of asset $i$ in a portfolio with weights $w$ and covariance $\\Sigma$ defined?",
+  "correct": [
+   "$RC_i=w_i(\\Sigma w)_i/\\sqrt{w^\\top\\Sigma w}$.",
+   "Weight times marginal contribution."
+  ],
+  "distractors": [
+   {
+    "text": "$w_i\\sigma_i$, the weight times the stand-alone volatility.",
+    "misconception": "ignores correlations"
+   },
+   {
+    "text": "$w_i^2\\sigma_i^2$ summed over assets.",
+    "misconception": "ignores covariances"
+   },
+   {
+    "text": "The asset's share of the capital.",
+    "misconception": "confuses risk with weight"
+   },
+   {
+    "text": "The asset's expected return times its weight.",
+    "misconception": "confuses risk with return"
+   },
+   {
+    "text": "The asset's variance divided by the number of assets.",
+    "misconception": "ignores the weights"
+   }
+  ],
+  "explanation": "By Euler's theorem the volatility is homogeneous of degree one in $w$, so $\\sum_iRC_i=\\sigma_p$."
+ },
+ {
+  "id": "pf2-7.2",
+  "lecture": 7,
+  "stem": "What characterises an equal risk contribution (ERC) portfolio?",
+  "correct": [
+   "Every asset contributes the same share of total portfolio risk.",
+   "$RC_i=RC_j$ for all $i,j$."
+  ],
+  "distractors": [
+   {
+    "text": "All assets have the same weight.",
+    "misconception": "confuses it with equal weighting"
+   },
+   {
+    "text": "All assets have the same volatility.",
+    "misconception": "confuses weights with attributes"
+   },
+   {
+    "text": "The portfolio has the minimum possible variance.",
+    "misconception": "confuses it with the minimum variance portfolio"
+   },
+   {
+    "text": "The portfolio has the highest Sharpe ratio.",
+    "misconception": "confuses with the tangency portfolio"
+   },
+   {
+    "text": "The risk contributions are proportional to the expected returns.",
+    "misconception": "confuses with return-based allocation"
+   }
+  ],
+  "explanation": "ERC solves $w_i(\\Sigma w)_i=w_j(\\Sigma w)_j$. It does not use expected returns."
+ },
+ {
+  "id": "pf2-7.3",
+  "lecture": 7,
+  "stem": "What are the ERC weights of two uncorrelated assets with volatilities $\\sigma_1$ and $\\sigma_2$?",
+  "correct": [
+   "Proportional to $1/\\sigma_i$, the inverse volatilities.",
+   "$w_1=\\sigma_2/(\\sigma_1+\\sigma_2)$."
+  ],
+  "distractors": [
+   {
+    "text": "Equal weights of one half.",
+    "misconception": "ignores the volatilities"
+   },
+   {
+    "text": "Proportional to $\\sigma_i$.",
+    "misconception": "inverts the rule"
+   },
+   {
+    "text": "Proportional to $\\sigma_i^2$.",
+    "misconception": "uses variances instead of inverse volatilities"
+   },
+   {
+    "text": "Proportional to $1/\\sigma_i^2$.",
+    "misconception": "uses inverse variances"
+   },
+   {
+    "text": "Proportional to the expected returns.",
+    "misconception": "uses expected returns"
+   }
+  ],
+  "explanation": "With zero correlation $RC_i=w_i^2\\sigma_i^2/\\sigma_p$, so equal contributions need $w_i\\sigma_i$ constant. For two assets it holds for any correlation."
+ },
+ {
+  "id": "pf2-7.4",
+  "lecture": 7,
+  "stem": "Which statement describes risk parity compared with mean-variance optimisation?",
+  "correct": [
+   "It needs only the covariance matrix, not error-prone means.",
+   "It balances risk and may need leverage."
+  ],
+  "distractors": [
+   {
+    "text": "It maximises the Sharpe ratio.",
+    "misconception": "confuses it with the tangency portfolio"
+   },
+   {
+    "text": "It needs forecasts of expected returns for each asset.",
+    "misconception": "reverses the input requirement"
+   },
+   {
+    "text": "It always has a lower volatility than the minimum variance portfolio.",
+    "misconception": "is impossible, since the minimum variance portfolio has the lowest volatility"
+   },
+   {
+    "text": "It is the market-cap-weighted portfolio.",
+    "misconception": "confuses it with the market portfolio"
+   },
+   {
+    "text": "It concentrates risk in the most volatile asset.",
+    "misconception": "reverses the risk allocation"
+   }
+  ],
+  "explanation": "Risk parity portfolios overweight low-volatility assets (bonds) and therefore are often levered to reach a return target."
+ },
+ {
+  "id": "pf2-7.5",
+  "lecture": 7,
+  "stem": "What is the idea of robust portfolio optimisation?",
+  "correct": [
+   "Optimise for the best worst case over plausible parameters.",
+   "Guard against the least favourable inputs."
+  ],
+  "distractors": [
+   {
+    "text": "Choose the portfolio that maximises the in-sample Sharpe ratio.",
+    "misconception": "describes plain optimisation"
+   },
+   {
+    "text": "Remove the estimation of any parameters.",
+    "misconception": "confuses it with ignoring inputs"
+   },
+   {
+    "text": "Always hold the equal-weight portfolio.",
+    "misconception": "describes a naive rule"
+   },
+   {
+    "text": "Use the largest expected return of each asset.",
+    "misconception": "describes an optimistic rule"
+   },
+   {
+    "text": "Maximise the number of assets held.",
+    "misconception": "confuses it with diversification"
+   }
+  ],
+  "explanation": "A min-max problem; with ellipsoidal uncertainty in the means it adds a penalty on $\\|\\Sigma^{1/2}w\\|$ and shrinks the weights."
+ },
+ {
+  "id": "pf2-8.1",
+  "lecture": 8,
+  "stem": "What is the turnover of a portfolio rebalanced from weights $w^{old}$ to $w^{new}$?",
+  "correct": [
+   "$\\sum_i|w_i^{new}-w_i^{old}|$, often halved for one-way turnover.",
+   "The traded amount as a fraction of portfolio value."
+  ],
+  "distractors": [
+   {
+    "text": "$\\sum_i(w_i^{new}-w_i^{old})$, which is always zero for a fully invested portfolio.",
+    "misconception": "ignores the absolute value"
+   },
+   {
+    "text": "The largest weight of the new portfolio.",
+    "misconception": "gives an unrelated quantity"
+   },
+   {
+    "text": "The average return of the portfolio.",
+    "misconception": "confuses with performance"
+   },
+   {
+    "text": "The number of assets in the portfolio.",
+    "misconception": "confuses with breadth"
+   },
+   {
+    "text": "The change in the portfolio's volatility.",
+    "misconception": "confuses with risk"
+   }
+  ],
+  "explanation": "A rotation of 100% of the portfolio has two-way turnover of 200%, or 100% one-way."
+ },
+ {
+  "id": "pf2-8.2",
+  "lecture": 8,
+  "stem": "How are net returns related to gross returns in the presence of trading costs?",
+  "correct": [
+   "Net return is gross return minus costs on the amount traded.",
+   "Turnover times cost per unit."
+  ],
+  "distractors": [
+   {
+    "text": "Net return equals the gross return divided by the cost.",
+    "misconception": "divides instead of subtracting"
+   },
+   {
+    "text": "Costs are paid only on the profitable trades.",
+    "misconception": "ignores that costs are paid on all trades"
+   },
+   {
+    "text": "Costs only reduce the volatility of returns.",
+    "misconception": "confuses costs with risk"
+   },
+   {
+    "text": "Net return is always higher than gross return.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "Costs depend on the portfolio's holdings, not on the trades.",
+    "misconception": "confuses holding with trading"
+   }
+  ],
+  "explanation": "$r^{net}=r^{gross}-c\\cdot\\text{turnover}$. A strategy with a high gross Sharpe ratio can have a negative net return if turnover is large."
+ },
+ {
+  "id": "pf2-8.3",
+  "lecture": 8,
+  "stem": "What is the optimal behaviour with proportional (linear) trading costs?",
+  "correct": [
+   "A no-trade region around the target.",
+   "Rebalance within a band."
+  ],
+  "distractors": [
+   {
+    "text": "Always rebalance fully to the target each period.",
+    "misconception": "ignores costs"
+   },
+   {
+    "text": "Never trade at all.",
+    "misconception": "ignores the benefits"
+   },
+   {
+    "text": "Trade in proportion to the distance from the target at all times.",
+    "misconception": "describes quadratic costs"
+   },
+   {
+    "text": "Trade all assets by the same amount.",
+    "misconception": "invents a rule"
+   },
+   {
+    "text": "The optimal trade does not depend on the cost.",
+    "misconception": "ignores the cost"
+   }
+  ],
+  "explanation": "Linear costs give kinks in the objective, hence boundaries; quadratic costs give smooth partial adjustment."
+ },
+ {
+  "id": "pf2-8.4",
+  "lecture": 8,
+  "stem": "How do quadratic (market impact) costs affect trading decisions?",
+  "correct": [
+   "Big trades cost disproportionately, so they get split.",
+   "Cost per unit rises with size."
+  ],
+  "distractors": [
+   {
+    "text": "Cost per share is constant whatever the size.",
+    "misconception": "describes linear costs"
+   },
+   {
+    "text": "Large trades are cheaper per share.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "Quadratic costs only matter for small trades.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "Costs do not depend on liquidity.",
+    "misconception": "ignores liquidity"
+   },
+   {
+    "text": "It is optimal to trade everything immediately.",
+    "misconception": "ignores the penalty"
+   }
+  ],
+  "explanation": "With impact $\\propto q^2$ the cost of splitting $q$ into $n$ equal slices is $q^2/n$ times a constant, so slower execution lowers costs."
+ },
+ {
+  "id": "pf2-8.5",
+  "lecture": 8,
+  "stem": "When is a strategy profitable after costs?",
+  "correct": [
+   "When gross return per unit of turnover beats the cost per unit.",
+   "When alpha per unit traded exceeds cost."
+  ],
+  "distractors": [
+   {
+    "text": "Whenever the gross Sharpe ratio is positive.",
+    "misconception": "ignores costs"
+   },
+   {
+    "text": "Whenever turnover is low.",
+    "misconception": "ignores the gross return"
+   },
+   {
+    "text": "When the volatility is below the cost.",
+    "misconception": "compares unrelated quantities"
+   },
+   {
+    "text": "When the number of assets is large.",
+    "misconception": "confuses breadth with cost"
+   },
+   {
+    "text": "Costs never matter at institutional size.",
+    "misconception": "ignores market impact"
+   }
+  ],
+  "explanation": "Break-even cost $=\\text{gross return}/\\text{turnover}$. High-turnover signals need small costs to be exploited."
+ },
+ {
+  "id": "pf2-9.1",
+  "lecture": 9,
+  "stem": "What does empirical evidence suggest about published factor returns?",
+  "correct": [
+   "They fall after publication as the premia get arbitraged.",
+   "Post-publication returns are smaller."
+  ],
+  "distractors": [
+   {
+    "text": "They rise after publication, because more investors trade them.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "They are exactly the same in and out of sample.",
+    "misconception": "ignores decay"
+   },
+   {
+    "text": "They disappear entirely in all cases.",
+    "misconception": "overstates the decay"
+   },
+   {
+    "text": "They are higher at low volatility only.",
+    "misconception": "makes an unsupported claim"
+   },
+   {
+    "text": "They are unaffected by the number of tests run.",
+    "misconception": "ignores data mining"
+   }
+  ],
+  "explanation": "Both mispricing correction and statistical bias (data snooping) contribute to the decay."
+ },
+ {
+  "id": "pf2-9.2",
+  "lecture": 9,
+  "stem": "What risk does crowding in a factor strategy create?",
+  "correct": [
+   "Many holders of one position can trigger correlated unwinds.",
+   "Crowded trades reverse violently."
+  ],
+  "distractors": [
+   {
+    "text": "It lowers the correlation between strategies, so it diversifies.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It always raises the expected return.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It eliminates volatility.",
+    "misconception": "invents an effect"
+   },
+   {
+    "text": "It matters only for passive portfolios.",
+    "misconception": "misidentifies the cause"
+   },
+   {
+    "text": "It has no effect on liquidity.",
+    "misconception": "ignores liquidity"
+   }
+  ],
+  "explanation": "Crowding compresses premia, raises valuations of the longs, and can cause quant-crash episodes."
+ },
+ {
+  "id": "pf2-9.3",
+  "lecture": 9,
+  "stem": "What is the evidence on timing factor exposures?",
+  "correct": [
+   "Predictability is weak and hard to exploit net of costs.",
+   "Timing rules overfit and trade a lot."
+  ],
+  "distractors": [
+   {
+    "text": "Factor timing reliably beats static exposure.",
+    "misconception": "ignores the evidence"
+   },
+   {
+    "text": "Factor returns are perfectly predictable from valuation.",
+    "misconception": "overstates predictability"
+   },
+   {
+    "text": "Timing needs no information beyond the past return.",
+    "misconception": "ignores the limited evidence"
+   },
+   {
+    "text": "It is always profitable at high frequency.",
+    "misconception": "makes an unsupported claim"
+   },
+   {
+    "text": "Timing is the same as diversification.",
+    "misconception": "confuses concepts"
+   }
+  ],
+  "explanation": "Valuation spreads have some predictive power for long horizons, but the signal is noisy relative to the volatility of factor returns."
+ },
+ {
+  "id": "pf2-9.4",
+  "lecture": 9,
+  "stem": "How does an exponentially decaying alpha with half-life $h$ behave over time?",
+  "correct": [
+   "The remaining fraction halves every time $h$ passes.",
+   "After two half-lives a quarter of the alpha is left."
+  ],
+  "distractors": [
+   {
+    "text": "It falls by a fixed amount each period until zero.",
+    "misconception": "describes linear decay, not exponential"
+   },
+   {
+    "text": "It stays constant until $h$ and then vanishes.",
+    "misconception": "describes a cliff, not exponential decay"
+   },
+   {
+    "text": "It halves in the first period and then stops decaying.",
+    "misconception": "confuses decay with a one-off drop"
+   },
+   {
+    "text": "It grows with time because of compounding.",
+    "misconception": "reverses the direction of the decay"
+   },
+   {
+    "text": "It decays faster when the half-life is longer.",
+    "misconception": "reverses the effect of the half-life"
+   }
+  ],
+  "explanation": "Decay at rate $\\kappa=\\ln2/h$ gives $e^{-\\kappa t}=0.5^{t/h}$ of the original alpha after time $t$."
+ },
+ {
+  "id": "pf2-9.5",
+  "lecture": 9,
+  "stem": "Which approach helps against factor decay?",
+  "correct": [
+   "Diversify across factors and monitor out of sample.",
+   "Mix several premia."
+  ],
+  "distractors": [
+   {
+    "text": "Hold only the factor with the best past performance.",
+    "misconception": "chases past returns"
+   },
+   {
+    "text": "Ignore transaction costs.",
+    "misconception": "worsens the problem"
+   },
+   {
+    "text": "Increase leverage on the best factor.",
+    "misconception": "amplifies the risk"
+   },
+   {
+    "text": "Assume the premia are constant.",
+    "misconception": "ignores decay"
+   },
+   {
+    "text": "Trade the factor more frequently.",
+    "misconception": "ignores costs"
+   }
+  ],
+  "explanation": "Combining weakly correlated factors raises the Sharpe ratio and reduces the impact of any single decay."
+ },
+ {
+  "id": "pf2-10.1",
+  "lecture": 10,
+  "stem": "What are the three effects in Brinson attribution?",
+  "correct": [
+   "Allocation, selection and interaction.",
+   "Weights, picks, cross term."
+  ],
+  "distractors": [
+   {
+    "text": "Alpha, beta and residual.",
+    "misconception": "describes a factor decomposition"
+   },
+   {
+    "text": "Size, value and momentum.",
+    "misconception": "describes style factors"
+   },
+   {
+    "text": "Market, credit and liquidity.",
+    "misconception": "describes risk types"
+   },
+   {
+    "text": "Gross, net and active.",
+    "misconception": "describes return types"
+   },
+   {
+    "text": "Timing, selection and leverage.",
+    "misconception": "lists different items"
+   }
+  ],
+  "explanation": "Allocation $=(w^p_i-w^b_i)(R^b_i-R^b)$, selection $=w^b_i(R^p_i-R^b_i)$, interaction $=(w^p_i-w^b_i)(R^p_i-R^b_i)$."
+ },
+ {
+  "id": "pf2-10.2",
+  "lecture": 10,
+  "stem": "What does the interaction effect measure in Brinson attribution?",
+  "correct": [
+   "The joint effect of weighting and selection.",
+   "The cross term of weight and return gaps."
+  ],
+  "distractors": [
+   {
+    "text": "The effect of trading costs.",
+    "misconception": "gives an unrelated item"
+   },
+   {
+    "text": "The effect of the benchmark's own return.",
+    "misconception": "gives an unrelated item"
+   },
+   {
+    "text": "The correlation between sectors.",
+    "misconception": "confuses with correlations"
+   },
+   {
+    "text": "The portfolio's alpha.",
+    "misconception": "confuses with alpha"
+   },
+   {
+    "text": "The difference between gross and net returns.",
+    "misconception": "confuses with costs"
+   }
+  ],
+  "explanation": "It is $(w^p-w^b)(R^p-R^b)$ per sector; some conventions merge it with selection."
+ },
+ {
+  "id": "pf2-10.3",
+  "lecture": 10,
+  "stem": "How do the Brinson effects add up?",
+  "correct": [
+   "Allocation, selection and interaction sum to total active return.",
+   "Their sum equals $R_p-R_b$."
+  ],
+  "distractors": [
+   {
+    "text": "They sum to the portfolio return.",
+    "misconception": "forgets the benchmark"
+   },
+   {
+    "text": "They sum to the benchmark return.",
+    "misconception": "gives the wrong total"
+   },
+   {
+    "text": "They sum to the tracking error.",
+    "misconception": "confuses return with risk"
+   },
+   {
+    "text": "They need not add up to anything.",
+    "misconception": "ignores the identity"
+   },
+   {
+    "text": "They sum to zero.",
+    "misconception": "ignores the active return"
+   }
+  ],
+  "explanation": "The decomposition is exact within a single period; linking over several periods needs a smoothing method."
+ },
+ {
+  "id": "pf2-10.4",
+  "lecture": 10,
+  "stem": "What does factor-based performance attribution do?",
+  "correct": [
+   "Return splits into exposure times factor return, plus a specific part.",
+   "Factor contributions and a residual."
+  ],
+  "distractors": [
+   {
+    "text": "It splits return into sectors only.",
+    "misconception": "describes sector-based attribution"
+   },
+   {
+    "text": "It splits return into gross and net.",
+    "misconception": "confuses with costs"
+   },
+   {
+    "text": "It splits return into dividends and capital gains.",
+    "misconception": "confuses with sources of return"
+   },
+   {
+    "text": "It identifies the manager's skill without error.",
+    "misconception": "overstates the method"
+   },
+   {
+    "text": "It requires no model.",
+    "misconception": "ignores the factor model"
+   }
+  ],
+  "explanation": "Active return $=\\sum_k(\\beta^p_k-\\beta^b_k)f_k+$ specific; the result depends on the chosen factor model."
+ },
+ {
+  "id": "pf2-10.5",
+  "lecture": 10,
+  "stem": "What is a limitation of performance attribution?",
+  "correct": [
+   "It is ex post and depends on the chosen benchmark.",
+   "Results hinge on the factor set used."
+  ],
+  "distractors": [
+   {
+    "text": "It predicts future returns.",
+    "misconception": "confuses with a forecast"
+   },
+   {
+    "text": "It is independent of the benchmark.",
+    "misconception": "ignores the benchmark"
+   },
+   {
+    "text": "It gives the same answer under any model.",
+    "misconception": "ignores model dependence"
+   },
+   {
+    "text": "It only works for one-period returns.",
+    "misconception": "ignores linking methods"
+   },
+   {
+    "text": "It shows causes with certainty.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "A different sector classification or factor model re-labels the same active return, so attribution is descriptive rather than causal."
+ }
+]

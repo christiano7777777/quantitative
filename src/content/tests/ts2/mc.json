@@ -1,0 +1,1602 @@
+[
+ {
+  "id": "ts2-1.1",
+  "lecture": 1,
+  "stem": "Which statement about the unconditional distribution of daily asset returns is a stylised fact?",
+  "correct": [
+   "Its kurtosis is typically well above 3, so extreme moves are far more common than a normal model allows.",
+   "It has heavier tails than a normal distribution with the same variance."
+  ],
+  "distractors": [
+   {
+    "text": "Its kurtosis is typically below 3, because daily price moves are bounded by the size of the market.",
+    "misconception": "reverses the direction of the tail behaviour"
+   },
+   {
+    "text": "Its kurtosis is almost exactly 3, because daily returns are sums of many small independent trades.",
+    "misconception": "applies the central limit theorem to daily returns too naively"
+   },
+   {
+    "text": "It is strongly positively skewed, because large gains are more frequent than large losses for equity indices.",
+    "misconception": "reverses the typical skewness of equity index returns"
+   },
+   {
+    "text": "Its tails are thinner than normal at daily frequency and become heavier only at the monthly horizon.",
+    "misconception": "reverses the effect of the sampling horizon on tail weight"
+   },
+   {
+    "text": "It is well described by a normal distribution, apart from a few data errors in the extreme tails.",
+    "misconception": "dismisses heavy tails as measurement error"
+   }
+  ],
+  "explanation": "Daily returns are leptokurtic: sample kurtosis of 5 to 20 is common for equities, which is why normal VaR understates tail risk."
+ },
+ {
+  "id": "ts2-1.2",
+  "lecture": 1,
+  "stem": "Which pattern do volatility clustering and the serial dependence of returns display?",
+  "correct": [
+   "Returns are nearly uncorrelated; squared returns are persistently autocorrelated.",
+   "Large moves follow large moves of either sign, so $|r_t|$ and $r_t^2$ have positive, slowly decaying autocorrelation."
+  ],
+  "distractors": [
+   {
+    "text": "Returns are strongly positively autocorrelated, while their squares are uncorrelated.",
+    "misconception": "reverses which series carries the dependence"
+   },
+   {
+    "text": "Squared returns have no autocorrelation, because uncorrelated returns are independent.",
+    "misconception": "treats zero correlation as independence"
+   },
+   {
+    "text": "Absolute returns are negatively autocorrelated at the first lag, since a large move is followed by calm.",
+    "misconception": "gets the sign of the dependence in volatility wrong"
+   },
+   {
+    "text": "Returns and squared returns are both exactly white noise, so volatility is constant over time.",
+    "misconception": "ignores clustering of volatility"
+   },
+   {
+    "text": "Autocorrelations of absolute returns die out within a day, so clustering is very short-lived.",
+    "misconception": "understates the persistence of volatility"
+   }
+  ],
+  "explanation": "Returns are close to a martingale difference sequence, yet not independent: the conditional variance moves. The autocorrelations of $|r_t|$ stay positive for dozens of lags."
+ },
+ {
+  "id": "ts2-1.3",
+  "lecture": 1,
+  "stem": "What does the leverage effect describe?",
+  "correct": [
+   "Negative returns raise later volatility more than positive returns of equal size.",
+   "Volatility responds asymmetrically, rising more after price falls."
+  ],
+  "distractors": [
+   {
+    "text": "Positive returns raise future volatility more than negative returns of the same size.",
+    "misconception": "reverses the direction of the asymmetry"
+   },
+   {
+    "text": "Volatility responds identically to positive and negative returns of equal size.",
+    "misconception": "describes a symmetric response"
+   },
+   {
+    "text": "Traders borrow more when prices rise, so their margin accounts produce more volatile returns.",
+    "misconception": "takes leverage literally as trading on margin"
+   },
+   {
+    "text": "Returns are positively correlated with the change in volatility over the following day.",
+    "misconception": "gets the sign of the correlation wrong"
+   },
+   {
+    "text": "Volatility is higher on days when the trading volume is larger, whatever the sign of the return.",
+    "misconception": "confuses the leverage effect with the volume-volatility link"
+   }
+  ],
+  "explanation": "The correlation between $r_t$ and later volatility is negative. Falling equity prices raise a firm's debt-to-equity ratio, one explanation for the name."
+ },
+ {
+  "id": "ts2-1.4",
+  "lecture": 1,
+  "stem": "How does the distribution of returns change as the horizon grows from daily to monthly?",
+  "correct": [
+   "Tails become lighter and the distribution looks closer to normal, so kurtosis falls.",
+   "Aggregation over longer horizons moves the distribution toward normality."
+  ],
+  "distractors": [
+   {
+    "text": "Tails become heavier, because larger accumulated moves are possible over longer horizons.",
+    "misconception": "reverses the effect of aggregation"
+   },
+   {
+    "text": "The distribution stays exactly the same, since returns are identically distributed over time.",
+    "misconception": "ignores that aggregation changes the shape"
+   },
+   {
+    "text": "Volatility clustering becomes stronger, so monthly returns are more predictable than daily returns.",
+    "misconception": "mixes up clustering with predictability of returns"
+   },
+   {
+    "text": "The distribution becomes exactly normal for any monthly sample, whatever the daily dependence.",
+    "misconception": "turns an approximate tendency into an exact result"
+   },
+   {
+    "text": "Kurtosis rises in proportion to the number of days added.",
+    "misconception": "confuses the growth of the variance with the behaviour of kurtosis"
+   }
+  ],
+  "explanation": "Aggregational Gaussianity: sums of dependent but weakly dependent returns approach a normal law (the excess kurtosis of an i.i.d. sum of $k$ terms falls like $1/k$). Dependence slows but does not stop this."
+ },
+ {
+  "id": "ts2-1.5",
+  "lecture": 1,
+  "stem": "Why are log returns often preferred to simple returns for multi-period analysis?",
+  "correct": [
+   "The log return over several periods is the sum of the one-period log returns.",
+   "Log returns add across time, so a multi-period figure is easy to build."
+  ],
+  "distractors": [
+   {
+    "text": "Simple returns add across periods, while log returns multiply.",
+    "misconception": "swaps which return is additive"
+   },
+   {
+    "text": "A log return is exactly equal to the simple return for any size of price move.",
+    "misconception": "ignores that they differ for large moves"
+   },
+   {
+    "text": "Log returns cannot be below $-100\\%$, so they are bounded below.",
+    "misconception": "confuses log returns with simple returns, which are bounded by $-100\\%$"
+   },
+   {
+    "text": "Log returns are always normally distributed, whatever the asset.",
+    "misconception": "attributes normality to the transformation"
+   },
+   {
+    "text": "Log returns remove volatility clustering from the data.",
+    "misconception": "believes the transformation removes dependence in volatility"
+   }
+  ],
+  "explanation": "$r_{t,t+k}=\\ln(P_{t+k}/P_t)=\\sum_{j=1}^kr_{t+j}$. Simple returns are bounded below by $-1$, while log returns range over the whole real line."
+ },
+ {
+  "id": "ts2-2.1",
+  "lecture": 2,
+  "stem": "In an ARCH(1) model $\\varepsilon_t=\\sigma_tz_t$ with $z_t$ i.i.d. $(0,1)$, what is the conditional variance of $\\varepsilon_t$?",
+  "correct": [
+   "$\\sigma_t^2=\\omega+\\alpha\\varepsilon_{t-1}^2$, known at time $t-1$.",
+   "A function of the last squared shock: it varies but is predictable one step ahead."
+  ],
+  "distractors": [
+   {
+    "text": "A constant $\\omega$ for all $t$, since the shocks have mean zero.",
+    "misconception": "ignores the dependence on past shocks"
+   },
+   {
+    "text": "$\\omega+\\alpha\\varepsilon_{t+1}^2$, which depends on the next shock.",
+    "misconception": "lets the variance depend on the future"
+   },
+   {
+    "text": "$\\omega+\\alpha\\varepsilon_{t-1}$, which depends on the signed previous shock.",
+    "misconception": "forgets that the previous shock enters squared"
+   },
+   {
+    "text": "A random quantity with its own independent shock at each date, unknown at $t-1$.",
+    "misconception": "describes stochastic volatility rather than ARCH"
+   },
+   {
+    "text": "$\\omega+\\alpha\\sigma_{t-1}^2$, which depends only on the previous variance.",
+    "misconception": "describes a recursion without the squared shock"
+   }
+  ],
+  "explanation": "In ARCH the variance is a deterministic function of past shocks, which makes the likelihood easy to evaluate. Stochastic volatility has its own noise."
+ },
+ {
+  "id": "ts2-2.2",
+  "lecture": 2,
+  "stem": "Which conditions are needed for an ARCH($q$) model to have a positive conditional variance and a finite unconditional variance?",
+  "correct": [
+   "$\\omega>0$ and all $\\alpha_i\\ge0$ for positivity, and $\\sum_i\\alpha_i<1$ for the unconditional variance $\\omega/(1-\\sum\\alpha_i)$.",
+   "Nonnegative $\\alpha_i$ with positive $\\omega$, and the $\\alpha_i$ summing to less than one."
+  ],
+  "distractors": [
+   {
+    "text": "The $\\alpha_i$ may be any real numbers, as the squared shocks are positive anyway.",
+    "misconception": "ignores that negative coefficients can make the variance negative"
+   },
+   {
+    "text": "$\\sum_i\\alpha_i>1$, so that the variance reacts strongly to past shocks.",
+    "misconception": "reverses the stationarity condition"
+   },
+   {
+    "text": "$\\omega=0$, so that volatility is generated entirely by past shocks.",
+    "misconception": "allows a zero intercept that would let the variance collapse to zero"
+   },
+   {
+    "text": "The unconditional variance equals $\\omega$, whatever the values of the $\\alpha_i$.",
+    "misconception": "forgets the amplification from past shocks"
+   },
+   {
+    "text": "$\\alpha_i\\le0$, so that large shocks are followed by calm.",
+    "misconception": "gives the wrong sign for the ARCH coefficients"
+   }
+  ],
+  "explanation": "With $\\sigma^2=E\\varepsilon_t^2$ stationary, $\\sigma^2=\\omega+\\sum\\alpha_i\\sigma^2$, so $\\sigma^2=\\omega/(1-\\sum\\alpha_i)$, which needs $\\sum\\alpha_i<1$."
+ },
+ {
+  "id": "ts2-2.3",
+  "lecture": 2,
+  "stem": "An ARCH(1) model has normal innovations $z_t$. What is true of the unconditional distribution of $\\varepsilon_t$ when its fourth moment exists?",
+  "correct": [
+   "It has kurtosis above 3, so tails are heavier than normal even though $z_t$ is normal.",
+   "Mixing normal laws with changing variances produces excess kurtosis."
+  ],
+  "distractors": [
+   {
+    "text": "It is exactly normal, because each conditional distribution is normal.",
+    "misconception": "confuses conditional with unconditional normality"
+   },
+   {
+    "text": "It has kurtosis below 3, because the variance is bounded below by $\\omega$.",
+    "misconception": "reverses the direction of the kurtosis effect"
+   },
+   {
+    "text": "Its kurtosis equals 3, and heavy tails require non-normal innovations.",
+    "misconception": "attributes all tail weight to the innovation distribution"
+   },
+   {
+    "text": "It has the same kurtosis as $z_t$, since $\\varepsilon_t$ is a scalar multiple of $z_t$.",
+    "misconception": "forgets that the multiplier $\\sigma_t$ is random"
+   },
+   {
+    "text": "It is symmetric but has infinite kurtosis for every positive value of $\\alpha$.",
+    "misconception": "overlooks the condition for the fourth moment to exist"
+   }
+  ],
+  "explanation": "For ARCH(1), $E\\varepsilon^4/(E\\varepsilon^2)^2=3(1-\\alpha^2)/(1-3\\alpha^2)>3$ when $3\\alpha^2<1$. It is infinite when $3\\alpha^2\\ge1$."
+ },
+ {
+  "id": "ts2-2.4",
+  "lecture": 2,
+  "stem": "How are the parameters of an ARCH model typically estimated?",
+  "correct": [
+   "By maximising a Gaussian likelihood numerically (QMLE).",
+   "By maximising a Gaussian likelihood numerically, which stays consistent for non-normal innovations."
+  ],
+  "distractors": [
+   {
+    "text": "By ordinary least squares on $\\varepsilon_t$ in closed form, as in linear regression.",
+    "misconception": "confuses a variance model with a mean regression"
+   },
+   {
+    "text": "By setting $\\alpha$ equal to the first autocorrelation of the returns.",
+    "misconception": "confuses ARCH coefficients with return autocorrelation"
+   },
+   {
+    "text": "By maximum likelihood based on the unconditional density, ignoring the order of the data.",
+    "misconception": "ignores the dynamics that define the model"
+   },
+   {
+    "text": "Only by the method of moments, because a likelihood is not available.",
+    "misconception": "believes the likelihood cannot be written"
+   },
+   {
+    "text": "Consistency needs the innovations to be exactly normal, otherwise estimates are inconsistent.",
+    "misconception": "misses that Gaussian quasi-likelihood is robust"
+   }
+  ],
+  "explanation": "The conditional Gaussian log-likelihood is $-\\tfrac12\\sum\\{\\ln\\sigma_t^2+\\varepsilon_t^2/\\sigma_t^2\\}$. Standard errors need a robust (sandwich) form for non-normal innovations."
+ },
+ {
+  "id": "ts2-2.5",
+  "lecture": 2,
+  "stem": "How is Engle's LM test for ARCH effects carried out on the residuals $\\hat\\varepsilon_t$?",
+  "correct": [
+   "Regress $\\hat\\varepsilon_t^2$ on $q$ of its own lags; $nR^2$ is approximately $\\chi^2_q$ if there are no ARCH effects.",
+   "Test whether lagged squared residuals help predict the current squared residual, using $nR^2$ from that regression."
+  ],
+  "distractors": [
+   {
+    "text": "Regress $\\hat\\varepsilon_t$ on its own lags and test the coefficients, as for serial correlation.",
+    "misconception": "confuses the test for ARCH with a test of autocorrelation in levels"
+   },
+   {
+    "text": "Compare $R^2$ from regressing squared residuals on lags with the $t$ distribution with $n-q$ degrees of freedom.",
+    "misconception": "misstates the null distribution"
+   },
+   {
+    "text": "Reject the null of no ARCH when $nR^2$ is small, because lags then explain little.",
+    "misconception": "gets the rejection region wrong"
+   },
+   {
+    "text": "Fit an ARCH model first and test whether $\\omega=0$.",
+    "misconception": "confuses the LM test with a test on the intercept"
+   },
+   {
+    "text": "Apply the Ljung-Box test to the raw residuals; a significant value implies ARCH.",
+    "misconception": "misses that ARCH shows in squared, not raw, residuals"
+   }
+  ],
+  "explanation": "Under $H_0$ the squared residuals are unrelated to their past, so $nR^2\\to\\chi^2_q$. A significant value means conditional heteroskedasticity."
+ },
+ {
+  "id": "ts2-3.1",
+  "lecture": 3,
+  "stem": "In a GARCH(1,1) model $\\sigma_t^2=\\omega+\\alpha\\varepsilon_{t-1}^2+\\beta\\sigma_{t-1}^2$, when is the process covariance stationary?",
+  "correct": [
+   "When $\\alpha+\\beta<1$, and $\\alpha+\\beta$ is called the persistence.",
+   "When the persistence $\\alpha+\\beta$ is below one, given $\\omega>0$ and nonnegative $\\alpha,\\beta$."
+  ],
+  "distractors": [
+   {
+    "text": "When $\\alpha<1$ and $\\beta<1$ separately, whatever their sum.",
+    "misconception": "checks each coefficient instead of the sum"
+   },
+   {
+    "text": "When $\\alpha+\\beta>1$, so that shocks are amplified.",
+    "misconception": "reverses the condition"
+   },
+   {
+    "text": "When $\\beta$ alone is below one, and $\\alpha$ is unrestricted.",
+    "misconception": "ignores the contribution of the ARCH term"
+   },
+   {
+    "text": "When $\\omega=\\alpha+\\beta$, so that the variance is balanced.",
+    "misconception": "invents a balance condition"
+   },
+   {
+    "text": "Always, since the variance recursion is linear.",
+    "misconception": "assumes that linearity implies stability"
+   }
+  ],
+  "explanation": "Taking expectations, $\\sigma^2=\\omega+(\\alpha+\\beta)\\sigma^2$, so finite $\\sigma^2=\\omega/(1-\\alpha-\\beta)$ requires $\\alpha+\\beta<1$."
+ },
+ {
+  "id": "ts2-3.2",
+  "lecture": 3,
+  "stem": "What is the long-run (unconditional) variance of a stationary GARCH(1,1) model?",
+  "correct": [
+   "$\\omega/(1-\\alpha-\\beta)$.",
+   "The intercept divided by one minus the persistence."
+  ],
+  "distractors": [
+   {
+    "text": "$\\omega/(\\alpha+\\beta)$, the intercept divided by the persistence.",
+    "misconception": "confuses one minus the persistence with the persistence"
+   },
+   {
+    "text": "$\\omega$, since the other terms have mean zero.",
+    "misconception": "ignores the contribution of the lagged terms"
+   },
+   {
+    "text": "$\\omega/(1-\\alpha)$, because only the shock term feeds the variance.",
+    "misconception": "ignores the lagged variance term"
+   },
+   {
+    "text": "$\\omega(1-\\alpha-\\beta)$, so that more persistence lowers the long-run variance.",
+    "misconception": "multiplies where it should divide"
+   },
+   {
+    "text": "$\\omega/(1-\\beta)$, because $\\alpha\\varepsilon^2$ has mean $\\alpha\\sigma^2$ and cancels.",
+    "misconception": "drops the shock term in error"
+   }
+  ],
+  "explanation": "With $E\\varepsilon^2=\\sigma^2$ and $E\\sigma_t^2=\\sigma^2$, $\\sigma^2=\\omega+\\alpha\\sigma^2+\\beta\\sigma^2$."
+ },
+ {
+  "id": "ts2-3.3",
+  "lecture": 3,
+  "stem": "How do multi-step variance forecasts of a stationary GARCH(1,1) behave as the horizon $h$ increases?",
+  "correct": [
+   "Forecasts decay geometrically to the long-run variance at rate $\\alpha+\\beta$.",
+   "The gap to the long-run variance shrinks by $\\alpha+\\beta$ each step."
+  ],
+  "distractors": [
+   {
+    "text": "They stay at today's conditional variance for every horizon.",
+    "misconception": "ignores mean reversion"
+   },
+   {
+    "text": "They jump to the long-run variance after one step.",
+    "misconception": "ignores the gradual decay"
+   },
+   {
+    "text": "They grow without limit, as shocks accumulate.",
+    "misconception": "confuses a stationary model with an explosive one"
+   },
+   {
+    "text": "They revert faster the closer $\\alpha+\\beta$ is to one.",
+    "misconception": "reverses the effect of persistence on the speed"
+   },
+   {
+    "text": "They oscillate around the long-run variance with growing amplitude.",
+    "misconception": "invents an oscillation with the wrong stability"
+   }
+  ],
+  "explanation": "$E_t\\sigma_{t+h}^2-\\bar\\sigma^2=(\\alpha+\\beta)^{h-1}(\\sigma_{t+1}^2-\\bar\\sigma^2)$. The half-life is $\\ln(0.5)/\\ln(\\alpha+\\beta)$ steps."
+ },
+ {
+  "id": "ts2-3.4",
+  "lecture": 3,
+  "stem": "How does a GARCH(1,1) model relate to an ARCH model?",
+  "correct": [
+   "It is an ARCH($\\infty$) with geometrically declining weights.",
+   "Past squared shocks enter with weights declining geometrically."
+  ],
+  "distractors": [
+   {
+    "text": "It is equivalent to an ARCH(1), since only one shock lag appears.",
+    "misconception": "ignores the lagged variance term"
+   },
+   {
+    "text": "The weights on past squared shocks increase with their age.",
+    "misconception": "reverses the decay of the weights"
+   },
+   {
+    "text": "Weights on all past squared shocks are equal, giving a long memory.",
+    "misconception": "replaces geometric by flat weights"
+   },
+   {
+    "text": "It has no memory of shocks beyond the previous period.",
+    "misconception": "ignores the recursion through $\\sigma_{t-1}^2$"
+   },
+   {
+    "text": "It needs more parameters than an ARCH(10) model to describe the same memory.",
+    "misconception": "reverses the parsimony argument"
+   }
+  ],
+  "explanation": "$\\sigma_t^2=\\frac{\\omega}{1-\\beta}+\\alpha\\sum_{j\\ge1}\\beta^{j-1}\\varepsilon_{t-j}^2$. Three parameters give a long, smoothly declining memory."
+ },
+ {
+  "id": "ts2-3.5",
+  "lecture": 3,
+  "stem": "What characterises an IGARCH model, for which $\\alpha+\\beta=1$?",
+  "correct": [
+   "Variance shocks never die out in forecasts, and there is no finite variance.",
+   "Forecasts never revert, and the unconditional variance is infinite."
+  ],
+  "distractors": [
+   {
+    "text": "Variance forecasts converge to $\\omega/(1-\\alpha-\\beta)$, as in any GARCH model.",
+    "misconception": "divides by zero"
+   },
+   {
+    "text": "It has a finite unconditional variance, but forecasts converge more slowly.",
+    "misconception": "confuses very high persistence with unit persistence"
+   },
+   {
+    "text": "The returns become a random walk, so prices are non-stationary in mean.",
+    "misconception": "confuses persistence of variance with persistence of returns"
+   },
+   {
+    "text": "Conditional variance is constant over time.",
+    "misconception": "confuses the unit-root case with no ARCH effects"
+   },
+   {
+    "text": "The model cannot be estimated by maximum likelihood.",
+    "misconception": "believes estimation fails at the boundary"
+   }
+  ],
+  "explanation": "With $\\alpha+\\beta=1$, $E_t\\sigma_{t+h}^2=\\sigma_{t+1}^2+(h-1)\\omega$, so the forecast follows a line. RiskMetrics' exponentially weighted variance is an IGARCH with $\\omega=0$."
+ },
+ {
+  "id": "ts2-4.1",
+  "lecture": 4,
+  "stem": "In the GJR-GARCH model $\\sigma_t^2=\\omega+\\alpha\\varepsilon_{t-1}^2+\\gamma\\varepsilon_{t-1}^2\\mathbf 1\\{\\varepsilon_{t-1}<0\\}+\\beta\\sigma_{t-1}^2$, what does $\\gamma>0$ mean?",
+  "correct": [
+   "Negative shocks raise next-period variance more than positive shocks of the same size.",
+   "The variance response to bad news is larger by $\\gamma\\varepsilon^2$."
+  ],
+  "distractors": [
+   {
+    "text": "Positive shocks raise variance more than negative ones.",
+    "misconception": "reverses the direction of the asymmetry"
+   },
+   {
+    "text": "The model is symmetric in positive and negative shocks.",
+    "misconception": "ignores the asymmetry term"
+   },
+   {
+    "text": "Large shocks of either sign are given extra weight.",
+    "misconception": "confuses the sign indicator with a size indicator"
+   },
+   {
+    "text": "The model produces negative variance for some shocks.",
+    "misconception": "forgets that $\\alpha,\\gamma$ are constrained to keep variance positive"
+   },
+   {
+    "text": "The persistence of the process is unaffected by $\\gamma$.",
+    "misconception": "ignores that $\\gamma$ enters the persistence"
+   }
+  ],
+  "explanation": "The indicator switches on the extra term after negative shocks. Persistence is $\\alpha+\\gamma/2+\\beta$ for symmetric innovations."
+ },
+ {
+  "id": "ts2-4.2",
+  "lecture": 4,
+  "stem": "What is the main advantage of the EGARCH specification, which models $\\ln\\sigma_t^2$?",
+  "correct": [
+   "No sign constraints are needed, since $\\sigma_t^2=e^{\\ln\\sigma_t^2}>0$.",
+   "Modelling the logarithm keeps $\\sigma_t^2>0$ automatically."
+  ],
+  "distractors": [
+   {
+    "text": "It models $\\sigma_t$ rather than $\\sigma_t^2$, so the variance stays symmetric.",
+    "misconception": "confuses logging the variance with modelling the standard deviation"
+   },
+   {
+    "text": "It requires all the coefficients to be positive.",
+    "misconception": "imposes constraints that EGARCH removes"
+   },
+   {
+    "text": "It is symmetric by construction, so it cannot capture the leverage effect.",
+    "misconception": "ignores the sign term in EGARCH"
+   },
+   {
+    "text": "It makes the conditional variance constant.",
+    "misconception": "confuses a log specification with no dynamics"
+   },
+   {
+    "text": "Its news impact is always a symmetric parabola.",
+    "misconception": "describes GARCH(1,1) rather than EGARCH"
+   }
+  ],
+  "explanation": "$\\ln\\sigma_t^2=\\omega+\\beta\\ln\\sigma_{t-1}^2+\\alpha(|z_{t-1}|-E|z|)+\\gamma z_{t-1}$. A negative $\\gamma$ gives a larger variance after bad news."
+ },
+ {
+  "id": "ts2-4.3",
+  "lecture": 4,
+  "stem": "What is the role of Student-$t$ innovations in a GARCH model?",
+  "correct": [
+   "Heavier tails than normal, with finite variance if $\\nu>2$.",
+   "Fat-tailed innovations; the normal is the limit $\\nu\\to\\infty$."
+  ],
+  "distractors": [
+   {
+    "text": "They need $\\nu<2$ for finite variance, which makes tails heavier.",
+    "misconception": "reverses the condition for finite variance"
+   },
+   {
+    "text": "They remove the need for volatility clustering to explain heavy tails.",
+    "misconception": "believes fat-tailed innovations replace time-varying variance"
+   },
+   {
+    "text": "As $\\nu\\to\\infty$ they approach the Cauchy distribution.",
+    "misconception": "confuses the limit with $\\nu=1$"
+   },
+   {
+    "text": "They make the conditional distribution thinner-tailed than the normal.",
+    "misconception": "reverses the direction of the tails"
+   },
+   {
+    "text": "They make the conditional variance constant.",
+    "misconception": "confuses innovation shape with the variance equation"
+   }
+  ],
+  "explanation": "Even GARCH with normal innovations leaves excess kurtosis in the standardised residuals; a $t$ law with $\\nu\\approx5$ to $10$ often fits better."
+ },
+ {
+  "id": "ts2-4.4",
+  "lecture": 4,
+  "stem": "What does the news impact curve of a volatility model show?",
+  "correct": [
+   "How $\\sigma_t^2$ depends on $\\varepsilon_{t-1}$, other lags held fixed.",
+   "Next-period variance as a function of today's shock, past variance fixed."
+  ],
+  "distractors": [
+   {
+    "text": "The autocorrelation function of squared returns across lags.",
+    "misconception": "confuses the news impact with the autocorrelation function"
+   },
+   {
+    "text": "The way variance depends on future shocks in the data.",
+    "misconception": "lets the curve depend on shocks not yet observed"
+   },
+   {
+    "text": "A symmetric curve for every volatility model, including EGARCH and GJR.",
+    "misconception": "ignores the asymmetry in these models"
+   },
+   {
+    "text": "A straight line, since variance is linear in the shock.",
+    "misconception": "ignores that variance is quadratic in the shock"
+   },
+   {
+    "text": "The distribution of the standardised innovation.",
+    "misconception": "confuses the news impact with the innovation density"
+   }
+  ],
+  "explanation": "For GARCH(1,1), $\\sigma^2=\\text{const}+\\alpha\\varepsilon^2$ is symmetric about zero. GJR and EGARCH tilt it so that negative shocks have more impact."
+ },
+ {
+  "id": "ts2-4.5",
+  "lecture": 4,
+  "stem": "Which comparison of volatility models is valid?",
+  "correct": [
+   "A likelihood ratio test of $\\gamma=0$ compares nested GJR and GARCH, while non-nested models like EGARCH and GJR are compared by information criteria.",
+   "Nested models can be tested by a likelihood ratio test, and non-nested ones can be ranked by AIC or BIC."
+  ],
+  "distractors": [
+   {
+    "text": "A likelihood ratio test can compare any two models, nested or not.",
+    "misconception": "ignores the nesting requirement"
+   },
+   {
+    "text": "The model with the larger log-likelihood is always better, whatever the number of parameters.",
+    "misconception": "ignores the fitting penalty"
+   },
+   {
+    "text": "GARCH and GJR cannot be compared because they use different data.",
+    "misconception": "invents a data difference"
+   },
+   {
+    "text": "EGARCH nests GJR, so a standard likelihood ratio test applies.",
+    "misconception": "claims a nesting that does not hold"
+   },
+   {
+    "text": "A model is better if it gives the larger $R^2$ for regressing squared returns on its fitted variances, and nothing else matters.",
+    "misconception": "treats one evaluation metric as the only criterion"
+   }
+  ],
+  "explanation": "GJR reduces to GARCH when $\\gamma=0$, so the LR test is valid (the null lies inside the parameter space). EGARCH and GJR are not nested."
+ },
+ {
+  "id": "ts2-5.1",
+  "lecture": 5,
+  "stem": "What is realised variance computed from intraday returns, and what does it estimate?",
+  "correct": [
+   "The sum of squared intraday returns, estimating integrated variance.",
+   "$\\sum r^2$, consistent for integrated variance without noise."
+  ],
+  "distractors": [
+   {
+    "text": "The sum of absolute intraday returns, which estimates the conditional mean.",
+    "misconception": "confuses squared with absolute returns and variance with mean"
+   },
+   {
+    "text": "The square of the daily return, which is an unbiased estimate of tomorrow's variance.",
+    "misconception": "mistakes the daily squared return for the realised variance"
+   },
+   {
+    "text": "A GARCH forecast of the next day's variance.",
+    "misconception": "confuses a model-free estimator with a model forecast"
+   },
+   {
+    "text": "The variance of intraday returns around their sample mean, divided by their number.",
+    "misconception": "confuses the sum of squares with a sample variance"
+   },
+   {
+    "text": "A consistent estimator of integrated variance for any sampling frequency, even with large noise.",
+    "misconception": "ignores the effect of microstructure noise"
+   }
+  ],
+  "explanation": "Realised variance needs no volatility model: with continuous prices, $\\sum r^2\\to\\int_0^1\\sigma_s^2ds$ in probability as the interval shrinks."
+ },
+ {
+  "id": "ts2-5.2",
+  "lecture": 5,
+  "stem": "What is the effect of microstructure noise (such as bid-ask bounce) on realised variance computed at very high frequency?",
+  "correct": [
+   "It biases the estimate upward.",
+   "Squared noise terms add to every return, so RV exceeds the truth."
+  ],
+  "distractors": [
+   {
+    "text": "It biases the estimate downward, because noise averages out in the sum.",
+    "misconception": "reverses the direction of the bias"
+   },
+   {
+    "text": "It vanishes as the sampling frequency increases.",
+    "misconception": "confuses the noise with discretisation error"
+   },
+   {
+    "text": "It has no effect, since the noise has mean zero.",
+    "misconception": "ignores that squaring makes noise add positive terms"
+   },
+   {
+    "text": "It affects only the daily mean return.",
+    "misconception": "assigns the effect to the mean"
+   },
+   {
+    "text": "It biases the estimate by the same amount at every sampling frequency.",
+    "misconception": "forgets that the number of noise terms grows with frequency"
+   }
+  ],
+  "explanation": "With noise variance $\\omega^2$, $E[RV]\\approx\\int\\sigma^2+2n\\omega^2$, which grows with the number of returns $n$. Hence sparse sampling or noise-robust estimators are used."
+ },
+ {
+  "id": "ts2-5.3",
+  "lecture": 5,
+  "stem": "What does a volatility signature plot (average realised variance against the sampling interval) typically show?",
+  "correct": [
+   "A stable level at moderate intervals, rising sharply at the finest intervals when microstructure noise is present.",
+   "Realised variance flat for intervals of several minutes, then climbing at tick frequency."
+  ],
+  "distractors": [
+   {
+    "text": "Realised variance that falls at the finest intervals as noise averages out.",
+    "misconception": "reverses the effect of noise"
+   },
+   {
+    "text": "A flat line at all intervals, which proves there is noise.",
+    "misconception": "misreads a flat plot as evidence of noise"
+   },
+   {
+    "text": "The autocorrelation function of daily realised variance.",
+    "misconception": "confuses the plot with an autocorrelation function"
+   },
+   {
+    "text": "Realised variance rising with the sampling interval, because longer intervals have bigger returns.",
+    "misconception": "forgets that the sum of squares is stable if there is no noise"
+   },
+   {
+    "text": "Trading volume plotted against the sampling interval.",
+    "misconception": "confuses the variable shown"
+   }
+  ],
+  "explanation": "The rise at short intervals is the signature of noise: a plateau suggests an interval, such as 5 minutes, at which bias is small."
+ },
+ {
+  "id": "ts2-5.4",
+  "lecture": 5,
+  "stem": "What does bipower variation $\\frac\\pi2\\sum|r_i||r_{i-1}|$ achieve?",
+  "correct": [
+   "It estimates integrated variance robustly to jumps, so $RV-BV$ estimates the jump contribution.",
+   "Products of adjacent absolute returns are not dominated by a single jump, giving a jump-robust variance estimate."
+  ],
+  "distractors": [
+   {
+    "text": "It includes jumps in the variance estimate, just like realised variance.",
+    "misconception": "forgets that products dilute a single jump"
+   },
+   {
+    "text": "It estimates the microstructure noise variance.",
+    "misconception": "confuses jumps with noise"
+   },
+   {
+    "text": "It uses squared returns only, so it cannot be affected by jumps.",
+    "misconception": "misdescribes the construction"
+   },
+   {
+    "text": "$RV-BV$ estimates the continuous part of the variance.",
+    "misconception": "swaps the continuous and jump parts"
+   },
+   {
+    "text": "It is biased by the continuous part of the volatility and should only be used in the absence of volatility.",
+    "misconception": "invents a bias that is not there"
+   }
+  ],
+  "explanation": "With a jump, $RV$ picks up the squared jump, while $|r_i||r_{i-1}|$ contains at most one large factor. The factor $\\pi/2=1/(E|z|)^2$ corrects for $E|z|=\\sqrt{2/\\pi}$ under normality."
+ },
+ {
+  "id": "ts2-5.5",
+  "lecture": 5,
+  "stem": "What is the distributional behaviour of daily realised variance?",
+  "correct": [
+   "It is strongly right-skewed, while its logarithm is close to normal.",
+   "Logs of realised variance are roughly Gaussian."
+  ],
+  "distractors": [
+   {
+    "text": "It is symmetric and close to normal, so modelling it in levels is natural.",
+    "misconception": "ignores the strong skewness of realised variance"
+   },
+   {
+    "text": "Its logarithm is more skewed than its level.",
+    "misconception": "reverses the effect of the log transform"
+   },
+   {
+    "text": "It can be negative on days of falling prices.",
+    "misconception": "forgets that squared returns are nonnegative"
+   },
+   {
+    "text": "It is white noise with no persistence.",
+    "misconception": "ignores the strong persistence of volatility"
+   },
+   {
+    "text": "Its logarithm is undefined because realised variance is often zero.",
+    "misconception": "treats zero values as typical"
+   }
+  ],
+  "explanation": "RV is a sum of squares, hence positive and skewed; $\\ln RV$ is nearly Gaussian and highly persistent, so HAR-type regressions on logs are common."
+ },
+ {
+  "id": "ts2-6.1",
+  "lecture": 6,
+  "stem": "Why is ordinary least squares applied equation by equation to a VAR($p$) model efficient?",
+  "correct": [
+   "All equations share the same regressors, so joint estimation gains nothing.",
+   "With identical regressors OLS equals GLS."
+  ],
+  "distractors": [
+   {
+    "text": "The errors are uncorrelated across the equations, so GLS is unnecessary.",
+    "misconception": "assumes zero cross-equation correlation"
+   },
+   {
+    "text": "OLS is only valid if each equation has a different set of regressors.",
+    "misconception": "reverses the condition"
+   },
+   {
+    "text": "It is not efficient, and system GLS is always better.",
+    "misconception": "ignores the identical-regressor result"
+   },
+   {
+    "text": "Equations of a VAR cannot be estimated separately because they share parameters.",
+    "misconception": "believes parameters are shared across equations"
+   },
+   {
+    "text": "It requires the variables to be cointegrated.",
+    "misconception": "confuses VAR estimation with cointegration"
+   }
+  ],
+  "explanation": "Zellner's result: seemingly unrelated regressions give no gain when every equation has the same regressors. OLS is then also the Gaussian MLE."
+ },
+ {
+  "id": "ts2-6.2",
+  "lecture": 6,
+  "stem": "What is the stationarity condition for a VAR($p$) model in companion form?",
+  "correct": [
+   "All eigenvalues of the companion matrix have modulus less than one.",
+   "The companion matrix has all its eigenvalues strictly inside the unit circle."
+  ],
+  "distractors": [
+   {
+    "text": "All eigenvalues have modulus greater than one.",
+    "misconception": "reverses the condition"
+   },
+   {
+    "text": "All entries of each coefficient matrix are smaller than one in absolute value.",
+    "misconception": "replaces eigenvalues by entry sizes"
+   },
+   {
+    "text": "At least one eigenvalue lies on the unit circle.",
+    "misconception": "describes a unit root"
+   },
+   {
+    "text": "All eigenvalues have negative real part.",
+    "misconception": "confuses discrete-time with continuous-time stability"
+   },
+   {
+    "text": "The determinant of the companion matrix is exactly zero.",
+    "misconception": "confuses stationarity with singularity"
+   }
+  ],
+  "explanation": "Entries below one in size do not guarantee stability, for example $\\begin{pmatrix}0.9&0.9\\\\0&0.9\\end{pmatrix}$ is stable, but $\\begin{pmatrix}0.6&0.6\\\\0.6&0.6\\end{pmatrix}$ has eigenvalue $1.2$."
+ },
+ {
+  "id": "ts2-6.3",
+  "lecture": 6,
+  "stem": "What does it mean that $x$ Granger-causes $y$ in a VAR?",
+  "correct": [
+   "Lags of $x$ improve predictions of $y$ beyond its own lags.",
+   "Past $x$ has incremental predictive power, tested by a joint $F$ test."
+  ],
+  "distractors": [
+   {
+    "text": "Changes in $x$ cause changes in $y$ through an economic mechanism.",
+    "misconception": "confuses predictive content with structural causation"
+   },
+   {
+    "text": "The contemporaneous correlation between $x$ and $y$ is nonzero.",
+    "misconception": "confuses Granger causality with contemporaneous correlation"
+   },
+   {
+    "text": "It implies that $y$ cannot Granger-cause $x$.",
+    "misconception": "believes causality is one-directional by definition"
+   },
+   {
+    "text": "The two series are cointegrated.",
+    "misconception": "confuses predictive content with a long-run relationship"
+   },
+   {
+    "text": "The test is based on a single $t$ statistic of the contemporaneous coefficient.",
+    "misconception": "misdescribes the joint test on lags"
+   }
+  ],
+  "explanation": "Granger causality is about forecasting: it concerns whether the lags of $x$ add information. Feedback ($x\\to y$ and $y\\to x$) is possible."
+ },
+ {
+  "id": "ts2-6.4",
+  "lecture": 6,
+  "stem": "What is true of orthogonalised impulse responses in a VAR?",
+  "correct": [
+   "They depend on the variable ordering, and die out for a stationary VAR.",
+   "Cholesky responses change with the order of the variables."
+  ],
+  "distractors": [
+   {
+    "text": "They do not depend on the ordering, because the innovation covariance matrix is fixed.",
+    "misconception": "ignores the ordering dependence of Cholesky factorisations"
+   },
+   {
+    "text": "They equal the coefficient matrices of the VAR directly.",
+    "misconception": "confuses the impulse responses with the VAR coefficients"
+   },
+   {
+    "text": "They never die out, even in a stationary VAR.",
+    "misconception": "reverses the behaviour for a stationary system"
+   },
+   {
+    "text": "Ordering matters only if the innovations are uncorrelated.",
+    "misconception": "reverses the role of the correlation"
+   },
+   {
+    "text": "They give the causal effect of a structural shock, whatever the ordering.",
+    "misconception": "ignores the identifying assumption in the ordering"
+   }
+  ],
+  "explanation": "Cholesky imposes a recursive structure: the first variable responds contemporaneously to its own shock only. Different orderings are different structural assumptions."
+ },
+ {
+  "id": "ts2-6.5",
+  "lecture": 6,
+  "stem": "Why is the lag length of a VAR chosen carefully by an information criterion such as AIC or BIC?",
+  "correct": [
+   "Coefficients grow like $k^2p$, and BIC penalises lags more than AIC.",
+   "Lags consume degrees of freedom fast, and BIC chooses shorter lags."
+  ],
+  "distractors": [
+   {
+    "text": "The number of coefficients grows linearly in $k$, so lag length hardly matters.",
+    "misconception": "miscounts the parameters of a VAR"
+   },
+   {
+    "text": "AIC penalises extra parameters more than BIC, so AIC chooses shorter lags.",
+    "misconception": "reverses the penalties"
+   },
+   {
+    "text": "The best lag length is always the longest feasible one, as more lags can only help.",
+    "misconception": "ignores overfitting"
+   },
+   {
+    "text": "The criteria are only available for univariate models.",
+    "misconception": "believes the criteria do not apply to VARs"
+   },
+   {
+    "text": "The likelihood alone suffices, as it never prefers over-parametrised models.",
+    "misconception": "ignores that the likelihood rises with parameters"
+   }
+  ],
+  "explanation": "The penalty is $2/T$ per parameter for AIC and $\\ln T/T$ for BIC, and a VAR($p$) has $k+k^2p$ mean and slope parameters per full system."
+ },
+ {
+  "id": "ts2-7.1",
+  "lecture": 7,
+  "stem": "What does it mean for two $I(1)$ series to be cointegrated?",
+  "correct": [
+   "Some linear combination of them is stationary.",
+   "They share a common stochastic trend."
+  ],
+  "distractors": [
+   {
+    "text": "Both series are stationary, so any linear combination is stationary.",
+    "misconception": "confuses cointegration with stationarity"
+   },
+   {
+    "text": "Every linear combination is $I(1)$, so they drift together.",
+    "misconception": "describes the absence of cointegration"
+   },
+   {
+    "text": "The series are highly correlated in levels.",
+    "misconception": "confuses correlation with cointegration"
+   },
+   {
+    "text": "The two series have the same drift and the same variance.",
+    "misconception": "replaces a stationarity property by matching moments"
+   },
+   {
+    "text": "Their first differences are stationary, which holds for any two $I(1)$ series.",
+    "misconception": "describes a property of all $I(1)$ series"
+   }
+  ],
+  "explanation": "For $y_t=\\beta x_t+u_t$ with $u_t\\sim I(0)$ and $x_t\\sim I(1)$, the pair is cointegrated with vector $(1,-\\beta)$. The vector is determined only up to scale."
+ },
+ {
+  "id": "ts2-7.2",
+  "lecture": 7,
+  "stem": "What is the problem of spurious regression?",
+  "correct": [
+   "High $R^2$ and significant slope for unrelated random walks.",
+   "Unrelated $I(1)$ series look related, with misleading $t$ statistics."
+  ],
+  "distractors": [
+   {
+    "text": "The slope is never significant when the series are unrelated.",
+    "misconception": "ignores the inflated test statistics"
+   },
+   {
+    "text": "The residuals are stationary, so inference remains valid.",
+    "misconception": "reverses the property of the residuals"
+   },
+   {
+    "text": "The $R^2$ is close to zero for unrelated series.",
+    "misconception": "reverses the behaviour of $R^2$"
+   },
+   {
+    "text": "The problem disappears as the sample size grows.",
+    "misconception": "believes more data cure the problem"
+   },
+   {
+    "text": "It arises only for $I(2)$ processes, not for random walks.",
+    "misconception": "misidentifies the order of integration"
+   }
+  ],
+  "explanation": "Granger and Newbold showed that with independent random walks the $t$ statistic diverges as $T\\to\\infty$, rejecting no relationship far too often."
+ },
+ {
+  "id": "ts2-7.3",
+  "lecture": 7,
+  "stem": "How does the Engle-Granger procedure test for cointegration?",
+  "correct": [
+   "Regress in levels, then test the residuals for a unit root.",
+   "The null is no cointegration, with critical values differing from the usual ADF ones."
+  ],
+  "distractors": [
+   {
+    "text": "Test the residuals with the standard Dickey-Fuller critical values.",
+    "misconception": "ignores that residuals are estimated and critical values shift"
+   },
+   {
+    "text": "The null hypothesis is that the series are cointegrated.",
+    "misconception": "reverses the null and alternative"
+   },
+   {
+    "text": "Regress the first differences of one series on the first differences of the other and test the slope.",
+    "misconception": "uses differenced series, which discards the long-run information"
+   },
+   {
+    "text": "A rejection of the unit root in the residuals shows the series are not cointegrated.",
+    "misconception": "reverses the meaning of rejection"
+   },
+   {
+    "text": "It needs the cointegrating vector to be known in advance.",
+    "misconception": "believes the vector must be pre-specified"
+   }
+  ],
+  "explanation": "The residuals are chosen to be as stationary as possible, so the ordinary ADF distribution is shifted; MacKinnon provides the proper critical values."
+ },
+ {
+  "id": "ts2-7.4",
+  "lecture": 7,
+  "stem": "In the VECM $\\Delta y_t=\\alpha\\beta^\\top y_{t-1}+\\sum_i\\Gamma_i\\Delta y_{t-i}+\\varepsilon_t$, what do $\\alpha$ and $\\beta$ represent?",
+  "correct": [
+   "$\\beta$ holds cointegrating vectors, $\\alpha$ adjustment speeds.",
+   "$\\beta^\\top y_{t-1}$ is the error-correction term."
+  ],
+  "distractors": [
+   {
+    "text": "$\\alpha$ holds the cointegrating vectors and $\\beta$ the adjustment speeds.",
+    "misconception": "swaps the roles of the two matrices"
+   },
+   {
+    "text": "$\\alpha\\beta^\\top$ must be full rank for the series to be cointegrated.",
+    "misconception": "confuses the cointegrated case with a stationary VAR"
+   },
+   {
+    "text": "$\\beta^\\top y_{t-1}$ is a unit root process in all cases.",
+    "misconception": "forgets that the combination is stationary"
+   },
+   {
+    "text": "The model is expressed in levels only and has no differenced terms.",
+    "misconception": "ignores the differences on the left-hand side"
+   },
+   {
+    "text": "$\\alpha$ is unrestricted and $\\beta$ identified with its scale.",
+    "misconception": "drops the identification restriction"
+   }
+  ],
+  "explanation": "The rank of $\\alpha\\beta^\\top$ equals the number of cointegrating relations. Rank zero gives a VAR in differences, and full rank gives a stationary VAR in levels."
+ },
+ {
+  "id": "ts2-7.5",
+  "lecture": 7,
+  "stem": "For $k$ series that are all $I(1)$, which statement about cointegrating relations is correct?",
+  "correct": [
+   "At most $k-1$ independent cointegrating relations exist.",
+   "The rank lies between 0 and $k-1$."
+  ],
+  "distractors": [
+   {
+    "text": "There can be up to $k$ independent cointegrating relations.",
+    "misconception": "allows the rank to equal $k$, which would imply stationarity"
+   },
+   {
+    "text": "Rank zero means all the series are stationary.",
+    "misconception": "reverses the interpretation"
+   },
+   {
+    "text": "The cointegrating vector is unique, including its scale.",
+    "misconception": "forgets the normalisation issue"
+   },
+   {
+    "text": "The rank equals the number of unit roots in the system.",
+    "misconception": "confuses the rank with the number of unit roots"
+   },
+   {
+    "text": "The Johansen tests assume the cointegrating vectors are known.",
+    "misconception": "misdescribes the Johansen approach"
+   }
+  ],
+  "explanation": "Johansen's trace and maximum eigenvalue tests are sequential: reject $r=0$, then $r\\le1$, and so on. Unit roots number $k-r$."
+ },
+ {
+  "id": "ts2-8.1",
+  "lecture": 8,
+  "stem": "Which describes a linear Gaussian state space model?",
+  "correct": [
+   "An unobserved state evolves by a state equation, and the observations are noisy linear functions of the state.",
+   "Observations $y_t=Z\\alpha_t+\\varepsilon_t$ depend on a hidden state with dynamics $\\alpha_{t+1}=T\\alpha_t+\\eta_t$."
+  ],
+  "distractors": [
+   {
+    "text": "The state is observed directly and the noise comes only from the observation equation.",
+    "misconception": "forgets that the state is latent"
+   },
+   {
+    "text": "The measurement and state shocks are the same variable.",
+    "misconception": "merges two separate noise sources"
+   },
+   {
+    "text": "The state equation depends on future observations.",
+    "misconception": "makes the state depend on the future"
+   },
+   {
+    "text": "The model has no observation noise, so the data equal the state.",
+    "misconception": "drops the measurement error"
+   },
+   {
+    "text": "The state is always a constant over time.",
+    "misconception": "confuses the state with a fixed parameter"
+   }
+  ],
+  "explanation": "Examples: local level, ARMA models in state space form and dynamic regression. The Kalman filter provides the optimal linear predictor of the state."
+ },
+ {
+  "id": "ts2-8.2",
+  "lecture": 8,
+  "stem": "What does the Kalman filter do at each time step?",
+  "correct": [
+   "Predict the state, then correct it by the weighted prediction error.",
+   "A prediction step followed by an update with gain times innovation."
+  ],
+  "distractors": [
+   {
+    "text": "It uses only the latest observation and discards earlier estimates.",
+    "misconception": "ignores the recursion"
+   },
+   {
+    "text": "It runs backward through the sample to smooth the state.",
+    "misconception": "confuses filtering with smoothing"
+   },
+   {
+    "text": "The gain is independent of the variances involved.",
+    "misconception": "ignores that the gain depends on the variances"
+   },
+   {
+    "text": "The prediction step uses the current observation $y_t$.",
+    "misconception": "moves information into the prediction step"
+   },
+   {
+    "text": "It requires the states to be observed during estimation.",
+    "misconception": "ignores that states are latent"
+   }
+  ],
+  "explanation": "Filtering gives $E[\\alpha_t\\mid y_1,\\dots,y_t]$ and its variance; smoothing then uses the whole sample. In the Gaussian case these are exact."
+ },
+ {
+  "id": "ts2-8.3",
+  "lecture": 8,
+  "stem": "In the local level model, how does the Kalman gain depend on the variances?",
+  "correct": [
+   "It rises with state uncertainty and falls with observation noise.",
+   "$K=P/(P+R)$, so noisier data get less weight."
+  ],
+  "distractors": [
+   {
+    "text": "It increases with the observation noise variance.",
+    "misconception": "reverses the effect of the measurement noise"
+   },
+   {
+    "text": "It is always one half.",
+    "misconception": "ignores the dependence on variances"
+   },
+   {
+    "text": "It can exceed one, so that the update overshoots the observation.",
+    "misconception": "forgets that $K\\in[0,1]$ in the scalar case"
+   },
+   {
+    "text": "It does not depend on the state variance.",
+    "misconception": "ignores the role of $P$"
+   },
+   {
+    "text": "It is large when the measurement is very noisy, to correct the noise.",
+    "misconception": "confuses the response to noise"
+   }
+  ],
+  "explanation": "With $K\\to1$ the filter trusts the new data fully ($R\\to0$); with $K\\to0$ it ignores them ($R\\to\\infty$)."
+ },
+ {
+  "id": "ts2-8.4",
+  "lecture": 8,
+  "stem": "What happens in the local level model once the state variance has converged to its steady-state value?",
+  "correct": [
+   "An exponentially weighted moving average.",
+   "A fixed fraction of the error updates the level."
+  ],
+  "distractors": [
+   {
+    "text": "The state variance grows without limit.",
+    "misconception": "confuses convergence with divergence"
+   },
+   {
+    "text": "The filter becomes the simple average of all observations.",
+    "misconception": "replaces the exponential weighting with equal weights"
+   },
+   {
+    "text": "Weights on older observations increase with age.",
+    "misconception": "reverses the weights"
+   },
+   {
+    "text": "The filter equals the least squares linear trend fit.",
+    "misconception": "confuses the filter with a deterministic trend regression"
+   },
+   {
+    "text": "The gain is zero and the estimate stops changing.",
+    "misconception": "ignores the state noise"
+   }
+  ],
+  "explanation": "Steady state: $\\hat\\alpha_{t|t}=\\hat\\alpha_{t-1|t-1}+K(y_t-\\hat\\alpha_{t-1|t-1})$ with constant $K$, the exponential smoothing recursion."
+ },
+ {
+  "id": "ts2-8.5",
+  "lecture": 8,
+  "stem": "How is the likelihood of a Gaussian state space model computed?",
+  "correct": [
+   "From the filter's prediction errors $v_t$ and variances $F_t$.",
+   "By the prediction error decomposition, $-\\tfrac12\\sum\\{\\ln F_t+v_t^2/F_t\\}$."
+  ],
+  "distractors": [
+   {
+    "text": "It needs the smoothed states from a backward pass.",
+    "misconception": "confuses the likelihood with smoothing"
+   },
+   {
+    "text": "It is computed directly from the true states, which are known.",
+    "misconception": "ignores that states are latent"
+   },
+   {
+    "text": "It has a closed form in the parameters, so no numerical optimisation is needed.",
+    "misconception": "believes closed forms exist in general"
+   },
+   {
+    "text": "It uses $F_t$ as the variance of the filtered state.",
+    "misconception": "confuses the prediction error variance with the state variance"
+   },
+   {
+    "text": "It is based on the unconditional distribution of each observation, ignoring dependence.",
+    "misconception": "ignores the dependence between observations"
+   }
+  ],
+  "explanation": "The joint density factorises as $\\prod p(y_t\\mid y_{1:t-1})$, with $y_t\\mid y_{1:t-1}\\sim N(\\hat y_t,F_t)$. Parameters are found numerically."
+ },
+ {
+  "id": "ts2-9.1",
+  "lecture": 9,
+  "stem": "What defines a Markov switching model?",
+  "correct": [
+   "A latent regime follows a Markov chain and parameters depend on it.",
+   "The regime's next value depends only on its current value."
+  ],
+  "distractors": [
+   {
+    "text": "The regimes are observed, so the model can be estimated by regression on dummy variables.",
+    "misconception": "ignores that regimes are unobserved"
+   },
+   {
+    "text": "The regime at each date is independent of the previous regime.",
+    "misconception": "removes the Markov dependence"
+   },
+   {
+    "text": "The regime is a deterministic function of time.",
+    "misconception": "confuses switching with a deterministic break"
+   },
+   {
+    "text": "The regime depends on future regimes.",
+    "misconception": "reverses the direction of dependence"
+   },
+   {
+    "text": "The rows of the transition matrix need not sum to one.",
+    "misconception": "ignores the property of a transition matrix"
+   }
+  ],
+  "explanation": "Examples: a bull and a bear regime with different means and variances. The transition probabilities $p_{ij}=P(s_{t+1}=j\\mid s_t=i)$ are estimated with the other parameters."
+ },
+ {
+  "id": "ts2-9.2",
+  "lecture": 9,
+  "stem": "In a Markov chain regime model, what is the expected duration of regime $i$ with persistence probability $p_{ii}$?",
+  "correct": [
+   "$1/(1-p_{ii})$.",
+   "One divided by the probability of leaving the regime."
+  ],
+  "distractors": [
+   {
+    "text": "$1/p_{ii}$, one divided by the probability of staying.",
+    "misconception": "confuses staying with leaving"
+   },
+   {
+    "text": "$p_{ii}/(1-p_{ii})$.",
+    "misconception": "gives the ratio of staying to leaving"
+   },
+   {
+    "text": "$1-p_{ii}$, the probability of leaving.",
+    "misconception": "reports the leaving probability instead of a duration"
+   },
+   {
+    "text": "$p_{ii}$ periods, the staying probability.",
+    "misconception": "confuses a probability with a time"
+   },
+   {
+    "text": "$1/\\{p_{ii}(1-p_{ii})\\}$.",
+    "misconception": "invents a product in the denominator"
+   }
+  ],
+  "explanation": "The time spent is geometric with success probability $1-p_{ii}$, so its mean is $1/(1-p_{ii})$."
+ },
+ {
+  "id": "ts2-9.3",
+  "lecture": 9,
+  "stem": "How does the Hamilton filter update regime probabilities when a new observation arrives?",
+  "correct": [
+   "Posterior $\\propto$ the transition prior times the regime density at $y_t$.",
+   "Bayes' rule with a one-step transition prior."
+  ],
+  "distractors": [
+   {
+    "text": "The posterior equals the prior, ignoring the new observation.",
+    "misconception": "ignores the data"
+   },
+   {
+    "text": "It uses future observations to revise earlier regime probabilities.",
+    "misconception": "confuses filtering with smoothing"
+   },
+   {
+    "text": "The prior is the transition row of the single most probable previous regime.",
+    "misconception": "replaces averaging by a hard assignment"
+   },
+   {
+    "text": "Probabilities need not be normalised, since only ratios matter for decisions.",
+    "misconception": "forgets that probabilities must sum to one"
+   },
+   {
+    "text": "It only uses the regime densities and not the transition matrix.",
+    "misconception": "drops the dynamics"
+   }
+  ],
+  "explanation": "Bayes' rule: $P(s_t=j\\mid y_{1:t})\\propto f(y_t\\mid s_t=j)\\sum_ip_{ij}P(s_{t-1}=i\\mid y_{1:t-1})$. The normalising sum is the likelihood contribution."
+ },
+ {
+  "id": "ts2-9.4",
+  "lecture": 9,
+  "stem": "How do filtered and smoothed regime probabilities differ?",
+  "correct": [
+   "Filtered uses data to time $t$, smoothed uses the whole sample.",
+   "Only filtered probabilities are available in real time."
+  ],
+  "distractors": [
+   {
+    "text": "Smoothed probabilities use only past data, and filtered ones use the future.",
+    "misconception": "swaps filtering and smoothing"
+   },
+   {
+    "text": "They are identical for all models.",
+    "misconception": "ignores the role of future data"
+   },
+   {
+    "text": "Smoothed probabilities are available in real time.",
+    "misconception": "ignores that they need the whole sample"
+   },
+   {
+    "text": "Filtered probabilities use the whole sample, including future data.",
+    "misconception": "gives the information set of smoothing to filtering"
+   },
+   {
+    "text": "Smoothing changes the model parameters, filtering does not.",
+    "misconception": "confuses state inference with estimation"
+   }
+  ],
+  "explanation": "Smoothed regime dates are used in historical analysis such as dating recessions, while trading decisions must rely on filtered probabilities."
+ },
+ {
+  "id": "ts2-9.5",
+  "lecture": 9,
+  "stem": "Which feature complicates estimation of a Markov switching model?",
+  "correct": [
+   "Regime labels are arbitrary and the likelihood can have several local maxima, so several starting values are used.",
+   "Relabelling the regimes gives the same likelihood, and the surface is often multimodal."
+  ],
+  "distractors": [
+   {
+    "text": "The likelihood is globally concave, so any starting value reaches the maximum.",
+    "misconception": "assumes a concave likelihood"
+   },
+   {
+    "text": "A single EM run is guaranteed to find the global maximum.",
+    "misconception": "ignores local convergence of EM"
+   },
+   {
+    "text": "The number of regimes is tested by an ordinary likelihood ratio test with the standard chi-square limit.",
+    "misconception": "ignores the non-standard asymptotics"
+   },
+   {
+    "text": "The regimes are identified by their order in time.",
+    "misconception": "confuses labelling with temporal order"
+   },
+   {
+    "text": "The model is not identified unless the transition matrix is the identity.",
+    "misconception": "invents an identification condition"
+   }
+  ],
+  "explanation": "With two regimes, swapping the labels and the corresponding parameters gives identical fit. Testing one versus two regimes needs non-standard critical values."
+ },
+ {
+  "id": "ts2-10.1",
+  "lecture": 10,
+  "stem": "How is the spectral density of a stationary process related to its autocovariances?",
+  "correct": [
+   "It is the Fourier transform of the autocovariance function.",
+   "Power at each frequency is a weighted sum of all the autocovariances."
+  ],
+  "distractors": [
+   {
+    "text": "It is the Fourier transform of the series values themselves.",
+    "misconception": "confuses the periodogram with the spectral density"
+   },
+   {
+    "text": "White noise has all its power at frequency zero.",
+    "misconception": "reverses the shape for white noise"
+   },
+   {
+    "text": "The spectral density can be negative at some frequencies.",
+    "misconception": "forgets that the density is nonnegative"
+   },
+   {
+    "text": "It equals the autocovariance at lag zero for every frequency.",
+    "misconception": "confuses the density with the variance"
+   },
+   {
+    "text": "It depends only on the mean of the process.",
+    "misconception": "ignores the covariance structure"
+   }
+  ],
+  "explanation": "$\\int_{-\\pi}^{\\pi}f(\\omega)d\\omega=\\gamma(0)$, so the spectrum decomposes the variance across frequencies."
+ },
+ {
+  "id": "ts2-10.2",
+  "lecture": 10,
+  "stem": "What are the properties of the periodogram as an estimator of the spectral density?",
+  "correct": [
+   "It is asymptotically unbiased but inconsistent.",
+   "Each ordinate is roughly $f(\\omega)\\chi^2_2/2$, so its variance does not shrink as $n$ grows."
+  ],
+  "distractors": [
+   {
+    "text": "It is a consistent estimator, so its variance falls like $1/n$.",
+    "misconception": "believes more data reduce its variance"
+   },
+   {
+    "text": "It is biased for every sample size and unbiased only in the limit of zero frequency.",
+    "misconception": "misstates the bias"
+   },
+   {
+    "text": "It equals the spectral density exactly at the Fourier frequencies.",
+    "misconception": "treats a random estimate as the true density"
+   },
+   {
+    "text": "It is just the sample variance repeated at each frequency.",
+    "misconception": "confuses the periodogram with a scalar summary"
+   },
+   {
+    "text": "It is consistent but biased, with the bias falling like $1/n$.",
+    "misconception": "swaps the roles of bias and variance"
+   }
+  ],
+  "explanation": "Adding observations adds more Fourier frequencies rather than reducing the noise at each one. Smoothing or lag windows are needed for consistency."
+ },
+ {
+  "id": "ts2-10.3",
+  "lecture": 10,
+  "stem": "What is the effect of a wider smoothing window (bandwidth) when estimating a spectral density?",
+  "correct": [
+   "It lowers variance but adds bias.",
+   "Averaging more neighbouring frequencies stabilises the estimate but blurs peaks."
+  ],
+  "distractors": [
+   {
+    "text": "It lowers both bias and variance, so the widest window is best.",
+    "misconception": "ignores the bias-variance trade-off"
+   },
+   {
+    "text": "It raises the variance but lowers the bias.",
+    "misconception": "reverses the trade-off"
+   },
+   {
+    "text": "It has no effect on the variance, only on the plot appearance.",
+    "misconception": "ignores the averaging effect"
+   },
+   {
+    "text": "It reduces the number of observations used in the estimate.",
+    "misconception": "confuses bandwidth with sample size"
+   },
+   {
+    "text": "It makes the estimate exactly equal to the true density.",
+    "misconception": "treats smoothing as exact"
+   }
+  ],
+  "explanation": "Smoothing across frequencies averages roughly independent periodogram values. A narrow peak, such as a seasonal cycle, can be smeared out by a wide window."
+ },
+ {
+  "id": "ts2-10.4",
+  "lecture": 10,
+  "stem": "How does the sign of $\\phi$ in an AR(1) process $x_t=\\phi x_{t-1}+\\varepsilon_t$ affect its spectral density?",
+  "correct": [
+   "Low frequencies for $\\phi>0$, high frequencies for $\\phi<0$.",
+   "$\\phi>0$ peaks at frequency zero, $\\phi<0$ near $\\pi$."
+  ],
+  "distractors": [
+   {
+    "text": "For $\\phi>0$ power is concentrated at high frequencies.",
+    "misconception": "reverses the frequency concentration"
+   },
+   {
+    "text": "The spectrum is flat for every value of $\\phi$.",
+    "misconception": "ignores the autocorrelation structure"
+   },
+   {
+    "text": "The peak is at $\\omega=\\pi/2$ for any value of $\\phi$.",
+    "misconception": "confuses the AR(1) with a cyclical process"
+   },
+   {
+    "text": "The spectrum does not depend on $\\phi$, only on the innovation variance.",
+    "misconception": "forgets the factor $|1-\\phi e^{-i\\omega}|^{-2}$"
+   },
+   {
+    "text": "For $\\phi<0$ the spectrum has a peak at frequency zero.",
+    "misconception": "gets the sign wrong"
+   }
+  ],
+  "explanation": "$f(\\omega)=\\frac{\\sigma^2}{2\\pi}|1-\\phi e^{-i\\omega}|^{-2}=\\frac{\\sigma^2}{2\\pi}\\{1-2\\phi\\cos\\omega+\\phi^2\\}^{-1}$, largest at $\\omega=0$ when $\\phi>0$."
+ },
+ {
+  "id": "ts2-10.5",
+  "lecture": 10,
+  "stem": "A series contains a cycle with period $T$ observations. Where does it show in the periodogram?",
+  "correct": [
+   "As a peak near the frequency $2\\pi/T$.",
+   "At the Fourier frequency closest to $2\\pi/T$ radians per observation."
+  ],
+  "distractors": [
+   {
+    "text": "As a peak near $T/(2\\pi)$.",
+    "misconception": "inverts the relationship between period and frequency"
+   },
+   {
+    "text": "As a peak at frequency zero.",
+    "misconception": "confuses a cycle with a trend"
+   },
+   {
+    "text": "As a peak at the frequency $2\\pi T$.",
+    "misconception": "multiplies where it should divide"
+   },
+   {
+    "text": "It does not appear, as the periodogram only shows the random part.",
+    "misconception": "believes deterministic cycles are invisible"
+   },
+   {
+    "text": "As a flat increase of power at all frequencies.",
+    "misconception": "confuses a cycle with white noise"
+   }
+  ],
+  "explanation": "A sinusoid of period $T$ has angular frequency $2\\pi/T$. If $T$ does not divide $n$, power leaks into neighbouring Fourier frequencies."
+ }
+]

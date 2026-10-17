@@ -1,0 +1,1762 @@
+[
+ {
+  "id": "ml-1.1",
+  "lecture": 1,
+  "stem": "What distinguishes supervised from unsupervised learning?",
+  "correct": [
+   "Supervised learning fits a map from inputs to observed labels; unsupervised learning has inputs only.",
+   "Only the supervised setting provides target values $y$ to learn from."
+  ],
+  "distractors": [
+   {
+    "text": "Supervised learning always predicts a continuous quantity, while unsupervised learning predicts classes.",
+    "misconception": "confuses the learning setting with regression versus classification"
+   },
+   {
+    "text": "Unsupervised learning needs more labelled data than supervised learning because it must discover the labels.",
+    "misconception": "thinks unsupervised methods use labels"
+   },
+   {
+    "text": "Supervised learning uses a loss function, while unsupervised learning has no objective at all.",
+    "misconception": "believes unsupervised methods have no objective"
+   },
+   {
+    "text": "The two differ only in the algorithm used, not in the data that is available.",
+    "misconception": "ignores the presence or absence of labels"
+   },
+   {
+    "text": "Supervised learning requires a linear model, and unsupervised learning requires a nonlinear one.",
+    "misconception": "ties the setting to model class"
+   }
+  ],
+  "explanation": "Regression and classification are both supervised. Clustering and dimension reduction are unsupervised, as they have no labels $y$ to match."
+ },
+ {
+  "id": "ml-1.2",
+  "lecture": 1,
+  "stem": "Why is the training error a biased estimate of the test error?",
+  "correct": [
+   "The model was fitted to this very data, so it scores better here than on new data.",
+   "The same observations both fit the model and score it, so the error is optimistic."
+  ],
+  "distractors": [
+   {
+    "text": "The training set is always smaller than the test set, so its error is smaller.",
+    "misconception": "confuses optimism with sample size"
+   },
+   {
+    "text": "The test error is computed with a different loss function from the training error.",
+    "misconception": "invents a mismatch in the loss"
+   },
+   {
+    "text": "The training error is pessimistic, because fitted models underfit the data they see.",
+    "misconception": "reverses the direction of the bias"
+   },
+   {
+    "text": "Training error is biased only for nonlinear models, and unbiased for linear ones.",
+    "misconception": "thinks linear models avoid optimism"
+   },
+   {
+    "text": "The bias disappears as the model gets more complex.",
+    "misconception": "reverses the effect of complexity on optimism"
+   }
+  ],
+  "explanation": "Fitting uses the training labels, so for flexible models the training error is far below the error on fresh data. Held-out data are needed for an honest estimate."
+ },
+ {
+  "id": "ml-1.3",
+  "lecture": 1,
+  "stem": "How does the expected squared test error of a predictor decompose?",
+  "correct": [
+   "Squared bias plus variance of the fit plus the irreducible noise variance.",
+   "$E(y-\\hat f(x))^2=\\text{bias}^2+\\text{variance}+\\sigma^2$, where $\\sigma^2$ cannot be removed."
+  ],
+  "distractors": [
+   {
+    "text": "Bias plus variance, where the bias enters unsquared and there is no noise term.",
+    "misconception": "drops the square and the noise term"
+   },
+   {
+    "text": "Bias times variance plus the noise variance.",
+    "misconception": "multiplies instead of adding"
+   },
+   {
+    "text": "Variance only, since the bias vanishes for large samples.",
+    "misconception": "believes the bias disappears with data"
+   },
+   {
+    "text": "Squared bias minus variance plus noise, since variance reduces the error.",
+    "misconception": "subtracts the variance term"
+   },
+   {
+    "text": "Squared bias plus variance, with the noise term removed by a better model.",
+    "misconception": "thinks the noise is reducible"
+   }
+  ],
+  "explanation": "More flexible models have lower bias and higher variance; the noise $\\sigma^2$ is a floor that no model can go below."
+ },
+ {
+  "id": "ml-1.4",
+  "lecture": 1,
+  "stem": "Which pattern signals overfitting?",
+  "correct": [
+   "Training error keeps falling while validation error starts to rise.",
+   "A widening gap between low training error and higher held-out error."
+  ],
+  "distractors": [
+   {
+    "text": "Training and validation errors are both high and close to each other.",
+    "misconception": "describes underfitting"
+   },
+   {
+    "text": "Validation error is lower than training error and both fall together.",
+    "misconception": "describes healthy learning, not overfitting"
+   },
+   {
+    "text": "Training error rises while validation error falls.",
+    "misconception": "reverses the usual pattern"
+   },
+   {
+    "text": "Both errors are exactly zero.",
+    "misconception": "treats perfect fit as a test-set result"
+   },
+   {
+    "text": "The validation error is constant whatever the complexity.",
+    "misconception": "describes a model that ignores the inputs"
+   }
+  ],
+  "explanation": "Overfitting means fitting noise: more capacity keeps lowering training error, but held-out error eventually rises."
+ },
+ {
+  "id": "ml-1.5",
+  "lecture": 1,
+  "stem": "What is the irreducible error in a prediction problem?",
+  "correct": [
+   "The outcome's spread around its best prediction, which no model can remove.",
+   "Noise in $y$ given $x$, a floor on error."
+  ],
+  "distractors": [
+   {
+    "text": "The error caused by using too simple a model, which more data would remove.",
+    "misconception": "describes bias, which can be reduced"
+   },
+   {
+    "text": "The error caused by a small training set, which disappears with more data.",
+    "misconception": "describes estimation variance"
+   },
+   {
+    "text": "The error of the best model in the class on the training set.",
+    "misconception": "confuses irreducible error with training error"
+   },
+   {
+    "text": "The error that arises from rounding in the computer.",
+    "misconception": "confuses statistical noise with numerical error"
+   },
+   {
+    "text": "The error that regularisation always removes.",
+    "misconception": "believes penalties can remove noise"
+   }
+  ],
+  "explanation": "Even the true regression function leaves $\\operatorname{Var}(y\\mid x)$ unexplained. In finance, this noise is very large relative to the signal."
+ },
+ {
+  "id": "ml-2.1",
+  "lecture": 2,
+  "stem": "How are the least squares coefficients of a linear model characterised?",
+  "correct": [
+   "They solve the normal equations $X^\\top X\\beta=X^\\top y$, zeroing the gradient.",
+   "At the optimum the residual vector is orthogonal to every column of $X$."
+  ],
+  "distractors": [
+   {
+    "text": "They minimise the sum of absolute residuals, which is robust to outliers.",
+    "misconception": "describes least absolute deviations"
+   },
+   {
+    "text": "They maximise the correlation between $X$ and $y$ for each column separately.",
+    "misconception": "replaces joint fitting by marginal correlations"
+   },
+   {
+    "text": "They always equal the average of $y$ for every feature.",
+    "misconception": "confuses the fit with the sample mean"
+   },
+   {
+    "text": "They are found by an iterative procedure because no closed form exists.",
+    "misconception": "ignores the closed form of the normal equations"
+   },
+   {
+    "text": "They make the residuals have unit variance.",
+    "misconception": "confuses least squares with standardisation"
+   }
+  ],
+  "explanation": "The squared loss is a quadratic in $\\beta$, so its minimiser has a closed form when $X^\\top X$ is invertible; the residual is orthogonal to the column space of $X$."
+ },
+ {
+  "id": "ml-2.2",
+  "lecture": 2,
+  "stem": "What is the logistic loss for a binary classifier with predicted probability $p_i$ and label $y_i\\in\\{0,1\\}$?",
+  "correct": [
+   "The negative log-likelihood of the labels.",
+   "Bernoulli cross-entropy."
+  ],
+  "distractors": [
+   {
+    "text": "The squared difference $\\sum(y_i-p_i)^2$ between labels and probabilities.",
+    "misconception": "describes the Brier score"
+   },
+   {
+    "text": "The number of misclassified observations at the 0.5 threshold.",
+    "misconception": "describes the zero-one loss"
+   },
+   {
+    "text": "$\\sum\\max(0,1-y_if_i)$ with labels in $\\{-1,1\\}$.",
+    "misconception": "describes the hinge loss"
+   },
+   {
+    "text": "The sum of the absolute differences between labels and probabilities.",
+    "misconception": "confuses it with absolute error"
+   },
+   {
+    "text": "The log of the predicted probability of the wrong class.",
+    "misconception": "garbles the cross-entropy"
+   }
+  ],
+  "explanation": "Minimising the logistic loss is maximum likelihood for the Bernoulli model. It is convex in the weights and penalises confident wrong predictions heavily."
+ },
+ {
+  "id": "ml-2.3",
+  "lecture": 2,
+  "stem": "In gradient descent $\\theta\\leftarrow\\theta-\\eta\\nabla L(\\theta)$, what is the effect of the learning rate $\\eta$?",
+  "correct": [
+   "A step too large can overshoot and diverge; one too small crawls.",
+   "It scales each step, balancing stability against speed of progress."
+  ],
+  "distractors": [
+   {
+    "text": "It has no effect on convergence, only on the final accuracy.",
+    "misconception": "ignores the effect of step size on stability"
+   },
+   {
+    "text": "A larger $\\eta$ always converges faster, as steps are bigger.",
+    "misconception": "ignores overshoot"
+   },
+   {
+    "text": "The learning rate must be negative to move downhill.",
+    "misconception": "confuses the sign of the step with the sign of the rate"
+   },
+   {
+    "text": "It must equal the number of observations.",
+    "misconception": "invents a relation to the sample size"
+   },
+   {
+    "text": "Smaller steps make the loss rise, because the gradient is evaluated less often.",
+    "misconception": "misunderstands step size"
+   }
+  ],
+  "explanation": "For a quadratic loss with largest curvature $L$, gradient descent converges if $\\eta<2/L$ and diverges beyond it."
+ },
+ {
+  "id": "ml-2.4",
+  "lecture": 2,
+  "stem": "For logistic regression with weights $w$ and predicted probabilities $p_i$, what form does the gradient of the average loss take?",
+  "correct": [
+   "$\\frac1nX^\\top(p-y)$, the features weighted by the prediction errors.",
+   "A sum of feature vectors times the residuals $p_i-y_i$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\frac1nX^\\top(y-p)^2$, the squared errors.",
+    "misconception": "squares the residuals"
+   },
+   {
+    "text": "$\\frac1n(p-y)$ with no dependence on the features.",
+    "misconception": "forgets the features"
+   },
+   {
+    "text": "$\\frac1nX^\\top p(1-p)$, the variance of each prediction.",
+    "misconception": "confuses the gradient with the weights of the Hessian"
+   },
+   {
+    "text": "$\\frac1n\\sum\\log p_i$, the average log probability.",
+    "misconception": "gives the loss, not its gradient"
+   },
+   {
+    "text": "Zero at every parameter value, because the model is probabilistic.",
+    "misconception": "ignores the loss surface"
+   }
+  ],
+  "explanation": "The gradient is $X^\\top(p-y)/n$. The Hessian $X^\\top\\operatorname{diag}\\{p_i(1-p_i)\\}X/n$ is positive semidefinite, so the loss is convex."
+ },
+ {
+  "id": "ml-2.5",
+  "lecture": 2,
+  "stem": "What is true of gradient descent on the logistic loss for a linearly separable data set?",
+  "correct": [
+   "The loss only tends to zero as the weights grow without bound.",
+   "No finite minimiser exists."
+  ],
+  "distractors": [
+   {
+    "text": "It converges to a unique finite minimiser, as the loss is convex.",
+    "misconception": "overlooks that convexity does not guarantee a minimiser"
+   },
+   {
+    "text": "The weights oscillate, since separable data make the gradient change sign.",
+    "misconception": "invents oscillation"
+   },
+   {
+    "text": "It cannot decrease the loss, because the classifier is already perfect.",
+    "misconception": "confuses accuracy with loss"
+   },
+   {
+    "text": "The loss becomes negative after enough steps.",
+    "misconception": "forgets that the cross-entropy is nonnegative"
+   },
+   {
+    "text": "It converges only if the learning rate is set to one.",
+    "misconception": "invents a specific rate"
+   }
+  ],
+  "explanation": "Regularisation (or early stopping) keeps the weights finite: with an $L_2$ penalty the minimiser exists and is unique."
+ },
+ {
+  "id": "ml-3.1",
+  "lecture": 3,
+  "stem": "How do ridge and lasso penalties differ in their effect on a linear model?",
+  "correct": [
+   "Ridge shrinks coefficients smoothly; lasso can set some exactly to zero.",
+   "The $L_1$ penalty gives sparse solutions and the $L_2$ penalty does not."
+  ],
+  "distractors": [
+   {
+    "text": "Lasso shrinks all coefficients by the same factor, and ridge sets small ones to zero.",
+    "misconception": "swaps the behaviours"
+   },
+   {
+    "text": "Both penalties give exactly the same solutions.",
+    "misconception": "ignores the difference between the norms"
+   },
+   {
+    "text": "Ridge performs variable selection, while lasso is unaffected by collinearity.",
+    "misconception": "confuses the roles"
+   },
+   {
+    "text": "The $L_2$ penalty is not convex, and the $L_1$ penalty is.",
+    "misconception": "misstates convexity of the penalties"
+   },
+   {
+    "text": "Lasso increases the variance of coefficient estimates compared with least squares.",
+    "misconception": "reverses the effect on variance"
+   }
+  ],
+  "explanation": "Ridge keeps all predictors with smaller coefficients; the lasso is useful for selection but can be unstable among correlated predictors."
+ },
+ {
+  "id": "ml-3.2",
+  "lecture": 3,
+  "stem": "How does a larger regularisation parameter $\\lambda$ change a penalised regression fit?",
+  "correct": [
+   "It raises bias and lowers variance.",
+   "Coefficients shrink harder, giving a simpler model with higher training error."
+  ],
+  "distractors": [
+   {
+    "text": "It lowers bias and raises variance.",
+    "misconception": "reverses the trade-off"
+   },
+   {
+    "text": "It lowers both bias and variance, so the largest $\\lambda$ is best.",
+    "misconception": "ignores underfitting"
+   },
+   {
+    "text": "It does not change the training error.",
+    "misconception": "ignores that shrinkage worsens the training fit"
+   },
+   {
+    "text": "It increases the flexibility of the model, since coefficients are free to move.",
+    "misconception": "misreads the penalty"
+   },
+   {
+    "text": "It makes the fitted model identical to the least squares fit.",
+    "misconception": "describes $\\lambda\\to0$"
+   }
+  ],
+  "explanation": "$\\lambda=0$ gives least squares; as $\\lambda\\to\\infty$ the coefficients tend to zero (the intercept-only model)."
+ },
+ {
+  "id": "ml-3.3",
+  "lecture": 3,
+  "stem": "How does $K$-fold cross-validation estimate the prediction error?",
+  "correct": [
+   "Split into $K$ parts, train on $K-1$, score the held-out part, average the scores.",
+   "Each observation is validated exactly once, and the held-out errors are averaged."
+  ],
+  "distractors": [
+   {
+    "text": "It trains on all the data and scores on the same data $K$ times.",
+    "misconception": "describes the training error"
+   },
+   {
+    "text": "It scores the model on $K$ different random subsets of the training data, including the points it was trained on.",
+    "misconception": "lets training points leak into the validation set"
+   },
+   {
+    "text": "It trains on one part and scores on the remaining $K-1$ parts.",
+    "misconception": "reverses the roles of training and validation sets"
+   },
+   {
+    "text": "It fits $K$ models with different penalties and picks the one with the lowest training error.",
+    "misconception": "confuses it with picking by training error"
+   },
+   {
+    "text": "It requires an extra test set to be defined.",
+    "misconception": "believes the method needs a separate test set to run"
+   }
+  ],
+  "explanation": "Averaging over folds reduces the variance of the estimate. A final test set is still needed to assess a model whose $\\lambda$ was tuned on the folds."
+ },
+ {
+  "id": "ml-3.4",
+  "lecture": 3,
+  "stem": "Why must a final test set stay untouched while hyperparameters are tuned?",
+  "correct": [
+   "Picking the best of many settings on test data makes the error optimistic.",
+   "Tuning on it leaks information."
+  ],
+  "distractors": [
+   {
+    "text": "The test set is needed to compute the training error.",
+    "misconception": "confuses the roles of the data sets"
+   },
+   {
+    "text": "A used test set loses its labels, so it cannot score again.",
+    "misconception": "gives an invalid statistical reason"
+   },
+   {
+    "text": "Test data are too small to tune on, but otherwise tuning on them is fine.",
+    "misconception": "treats the problem as only one of size"
+   },
+   {
+    "text": "Tuning on the test set raises the variance but does not bias the estimate.",
+    "misconception": "ignores selection bias"
+   },
+   {
+    "text": "Test data may only be used once per day.",
+    "misconception": "invents a rule"
+   }
+  ],
+  "explanation": "Selection of the minimum over many candidates biases the winner's score downward. Keep a separate test set, or use nested cross-validation."
+ },
+ {
+  "id": "ml-3.5",
+  "lecture": 3,
+  "stem": "Compared with 5-fold cross-validation, what is a property of leave-one-out cross-validation (LOOCV)?",
+  "correct": [
+   "Lower bias, but $n$ fits are needed.",
+   "Training sets almost as large as the full data."
+  ],
+  "distractors": [
+   {
+    "text": "It has higher bias because the training sets are smaller.",
+    "misconception": "reverses the effect on bias"
+   },
+   {
+    "text": "It needs only a single model fit for any model.",
+    "misconception": "confuses it with the linear smoother shortcut"
+   },
+   {
+    "text": "It is always unbiased for the future error.",
+    "misconception": "overstates its properties"
+   },
+   {
+    "text": "It uses fewer observations for training than 5-fold CV.",
+    "misconception": "miscounts the training size"
+   },
+   {
+    "text": "It cannot be used for ridge regression.",
+    "misconception": "invents a restriction"
+   }
+  ],
+  "explanation": "For linear smoothers the LOOCV error has a closed form $\\frac1n\\sum\\{(y_i-\\hat y_i)/(1-h_{ii})\\}^2$, so one fit suffices in that case."
+ },
+ {
+  "id": "ml-4.1",
+  "lecture": 4,
+  "stem": "What does a $k$-nearest-neighbour classifier predict for a new point?",
+  "correct": [
+   "The majority class among the $k$ training points closest to it.",
+   "A vote of its $k$ nearest neighbours in the feature space."
+  ],
+  "distractors": [
+   {
+    "text": "The class of the training point with the largest feature values.",
+    "misconception": "confuses neighbours with extremes"
+   },
+   {
+    "text": "The majority class of the whole training set.",
+    "misconception": "ignores the local structure"
+   },
+   {
+    "text": "The average of the labels of all training points weighted equally.",
+    "misconception": "ignores the choice of neighbours"
+   },
+   {
+    "text": "The class given by a fitted linear boundary.",
+    "misconception": "describes a parametric classifier"
+   },
+   {
+    "text": "The class of the $k$ farthest points.",
+    "misconception": "reverses nearest and farthest"
+   }
+  ],
+  "explanation": "A small $k$ gives a flexible boundary with low bias and high variance; $k=n$ predicts the global majority class."
+ },
+ {
+  "id": "ml-4.2",
+  "lecture": 4,
+  "stem": "Why do distance-based methods such as $k$-NN degrade in high dimensions?",
+  "correct": [
+   "Distances concentrate, so the nearest and farthest points are almost equally far.",
+   "Data become sparse, and the \"near\" neighbours are no longer local."
+  ],
+  "distractors": [
+   {
+    "text": "Distances become exactly zero, so all points are neighbours.",
+    "misconception": "misstates the effect"
+   },
+   {
+    "text": "High-dimensional distances cannot be computed.",
+    "misconception": "confuses a statistical issue with a computational limit"
+   },
+   {
+    "text": "The nearest neighbours become more informative as dimension grows.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The training set grows with the dimension, so the method is slower but unaffected in accuracy.",
+    "misconception": "ignores the sparsity problem"
+   },
+   {
+    "text": "Only the Euclidean distance degrades; other distances stay informative at any dimension.",
+    "misconception": "overstates the exception"
+   }
+  ],
+  "explanation": "To keep neighbours local the sample size must grow exponentially in the dimension, which is the curse of dimensionality."
+ },
+ {
+  "id": "ml-4.3",
+  "lecture": 4,
+  "stem": "What condition makes a function $k(x,x')$ a valid kernel?",
+  "correct": [
+   "Its Gram matrices are positive semidefinite.",
+   "It is an inner product of feature maps, so every Gram matrix is symmetric PSD."
+  ],
+  "distractors": [
+   {
+    "text": "It is symmetric and nonnegative, whatever its Gram matrices look like.",
+    "misconception": "replaces positive semidefiniteness by nonnegativity"
+   },
+   {
+    "text": "It decreases with the distance between $x$ and $x'$.",
+    "misconception": "mistakes a property of some kernels for the condition"
+   },
+   {
+    "text": "It has values in the interval $[0,1]$.",
+    "misconception": "confuses a kernel with a similarity score"
+   },
+   {
+    "text": "It is the difference of two feature maps.",
+    "misconception": "replaces the inner product by a difference"
+   },
+   {
+    "text": "It is positive definite only for points in the training set.",
+    "misconception": "restricts the condition to the sample"
+   }
+  ],
+  "explanation": "Mercer's condition: positive semidefinite Gram matrices for every finite set of points, so $k(x,x')=\\langle\\varphi(x),\\varphi(x')\\rangle$ for some $\\varphi$."
+ },
+ {
+  "id": "ml-4.4",
+  "lecture": 4,
+  "stem": "Why should features be standardised before applying $k$-NN?",
+  "correct": [
+   "Large-scale features would dominate the distance and swamp the others.",
+   "Distances depend on units, so rescaling puts features on a common footing."
+  ],
+  "distractors": [
+   {
+    "text": "Standardising makes the labels balanced across classes.",
+    "misconception": "confuses scaling with class balance"
+   },
+   {
+    "text": "$k$-NN needs features with mean zero in order to be defined.",
+    "misconception": "invents a requirement"
+   },
+   {
+    "text": "Standardising removes the curse of dimensionality.",
+    "misconception": "overstates the benefit"
+   },
+   {
+    "text": "It is only needed when the features are categorical.",
+    "misconception": "misapplies the advice"
+   },
+   {
+    "text": "It is unnecessary because the nearest neighbour does not change under scaling of a single feature.",
+    "misconception": "forgets that scaling a feature changes the metric"
+   }
+  ],
+  "explanation": "Euclidean distance weighs a feature by its scale. A feature in dollars would swamp one in per cent unless both are rescaled."
+ },
+ {
+  "id": "ml-4.5",
+  "lecture": 4,
+  "stem": "What does the Cover-Hart result say about the nearest-neighbour classifier?",
+  "correct": [
+   "Asymptotically its error is at most twice the Bayes error.",
+   "Error is bounded by twice the optimum."
+  ],
+  "distractors": [
+   {
+    "text": "Asymptotically its error equals the Bayes error exactly.",
+    "misconception": "overstates the result"
+   },
+   {
+    "text": "Its error is at least twice the Bayes error.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "Its error is bounded by the training error divided by two.",
+    "misconception": "invents a bound"
+   },
+   {
+    "text": "It is optimal for any sample size.",
+    "misconception": "ignores the asymptotic nature"
+   },
+   {
+    "text": "Its error rate is independent of the Bayes error rate.",
+    "misconception": "denies the relation"
+   }
+  ],
+  "explanation": "For two classes, $R^*\\le R_{1NN}\\le2R^*(1-R^*)$. Letting $k\\to\\infty$ with $k/n\\to0$ gives the Bayes error."
+ },
+ {
+  "id": "ml-5.1",
+  "lecture": 5,
+  "stem": "What is the margin of a linear classifier $f(x)=w^\\top x+b$ in a support vector machine with canonical scaling?",
+  "correct": [
+   "The width $2/\\|w\\|$, which the SVM maximises.",
+   "The distance between the hyperplanes $w^\\top x+b=\\pm1$."
+  ],
+  "distractors": [
+   {
+    "text": "The number of correctly classified points.",
+    "misconception": "confuses the margin with accuracy"
+   },
+   {
+    "text": "The value of $b$, the intercept of the boundary.",
+    "misconception": "confuses the margin with the offset"
+   },
+   {
+    "text": "The width $\\|w\\|/2$, which the SVM maximises.",
+    "misconception": "inverts the formula"
+   },
+   {
+    "text": "The distance of the farthest point from the boundary.",
+    "misconception": "uses the farthest rather than the nearest point"
+   },
+   {
+    "text": "The training error of the classifier.",
+    "misconception": "confuses the margin with the error"
+   }
+  ],
+  "explanation": "Maximising $2/\\|w\\|$ is equivalent to minimising $\\tfrac12\\|w\\|^2$ subject to $y_i(w^\\top x_i+b)\\ge1$."
+ },
+ {
+  "id": "ml-5.2",
+  "lecture": 5,
+  "stem": "Which training points are support vectors of an SVM?",
+  "correct": [
+   "Points on or inside the margin; only they fix the solution.",
+   "Those with nonzero dual coefficients."
+  ],
+  "distractors": [
+   {
+    "text": "All the points of the minority class.",
+    "misconception": "confuses support vectors with class imbalance"
+   },
+   {
+    "text": "The points farthest from the boundary.",
+    "misconception": "reverses which points matter"
+   },
+   {
+    "text": "Every point misclassified by an unconstrained linear fit.",
+    "misconception": "confuses the criterion"
+   },
+   {
+    "text": "Exactly the points at the centre of each class.",
+    "misconception": "chooses the least informative points"
+   },
+   {
+    "text": "Only the points exactly on the margin, never those inside it.",
+    "misconception": "ignores margin violations in the soft margin case"
+   }
+  ],
+  "explanation": "Points strictly outside the margin have dual coefficient zero. The classifier depends only on support vectors."
+ },
+ {
+  "id": "ml-5.3",
+  "lecture": 5,
+  "stem": "In the soft-margin SVM with hinge loss $\\max(0,1-y_if(x_i))$ and penalty $C$, what does a larger $C$ do?",
+  "correct": [
+   "Margin violations cost more, so the margin narrows and the fit may overfit.",
+   "Fewer violations are tolerated."
+  ],
+  "distractors": [
+   {
+    "text": "It widens the margin and allows more violations.",
+    "misconception": "reverses the effect of $C$"
+   },
+   {
+    "text": "It has no effect on the solution, only on the speed.",
+    "misconception": "ignores the role of $C$"
+   },
+   {
+    "text": "It switches the loss from hinge to squared error.",
+    "misconception": "confuses a parameter with the choice of loss"
+   },
+   {
+    "text": "It makes the SVM equal to the nearest neighbour classifier.",
+    "misconception": "invents a relation"
+   },
+   {
+    "text": "It restricts the weights to be sparse.",
+    "misconception": "confuses the SVM with the lasso"
+   }
+  ],
+  "explanation": "The objective $\\tfrac12\\|w\\|^2+C\\sum\\xi_i$ balances margin against violations; $C\\to\\infty$ gives the hard-margin SVM."
+ },
+ {
+  "id": "ml-5.4",
+  "lecture": 5,
+  "stem": "What does the kernel trick allow in an SVM?",
+  "correct": [
+   "Nonlinear boundaries from inner products, without computing the feature map.",
+   "Kernels replace inner products in the dual."
+  ],
+  "distractors": [
+   {
+    "text": "It lets the SVM handle unlabelled data.",
+    "misconception": "confuses it with a semi-supervised method"
+   },
+   {
+    "text": "It reduces the number of training points.",
+    "misconception": "confuses it with data reduction"
+   },
+   {
+    "text": "It makes the problem non-convex so that it can fit more complicated boundaries.",
+    "misconception": "forgets that the dual remains convex"
+   },
+   {
+    "text": "It removes the need for the margin.",
+    "misconception": "misstates the role of the kernel"
+   },
+   {
+    "text": "It computes the feature map exactly in a lower dimension.",
+    "misconception": "believes the feature space is smaller"
+   }
+  ],
+  "explanation": "With an RBF kernel the implicit feature space is infinite-dimensional, yet the dual only needs the $n\\times n$ Gram matrix."
+ },
+ {
+  "id": "ml-5.5",
+  "lecture": 5,
+  "stem": "For the RBF kernel $k(x,x')=\\exp(-\\gamma\\|x-x'\\|^2)$, what is the effect of a very large $\\gamma$?",
+  "correct": [
+   "Each point influences only a tiny neighbourhood, so the boundary overfits.",
+   "Nearly memorises the data."
+  ],
+  "distractors": [
+   {
+    "text": "The boundary becomes nearly linear.",
+    "misconception": "describes $\\gamma\\to0$"
+   },
+   {
+    "text": "All points become equally similar.",
+    "misconception": "describes a very small $\\gamma$"
+   },
+   {
+    "text": "The classifier underfits, ignoring local structure.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The margin disappears, so the classifier cannot be trained.",
+    "misconception": "invents a failure"
+   },
+   {
+    "text": "It acts like a penalty on the weights.",
+    "misconception": "confuses the kernel width with regularisation"
+   }
+  ],
+  "explanation": "Large $\\gamma$ means narrow bumps, high variance and low bias; small $\\gamma$ gives a smooth near-linear boundary. Tune $\\gamma$ and $C$ jointly by cross-validation."
+ },
+ {
+  "id": "ml-6.1",
+  "lecture": 6,
+  "stem": "How is the best split of a node chosen in a classification tree?",
+  "correct": [
+   "The split with the largest drop in impurity such as Gini or entropy.",
+   "The purest children on average."
+  ],
+  "distractors": [
+   {
+    "text": "By the split that puts the same number of observations in each child.",
+    "misconception": "confuses it with balancing sizes"
+   },
+   {
+    "text": "By the split on the feature with the largest mean.",
+    "misconception": "ignores the labels"
+   },
+   {
+    "text": "By the split with the smallest training error across the whole tree.",
+    "misconception": "describes a global search, not greedy splitting"
+   },
+   {
+    "text": "By a random choice among the features.",
+    "misconception": "describes extra randomisation, not the rule"
+   },
+   {
+    "text": "By the split that maximises the number of leaves.",
+    "misconception": "confuses the criterion with complexity"
+   }
+  ],
+  "explanation": "For class proportions $p_k$, Gini is $1-\\sum p_k^2$ and entropy $-\\sum p_k\\log p_k$; both are zero at a pure node."
+ },
+ {
+  "id": "ml-6.2",
+  "lecture": 6,
+  "stem": "How is a decision tree usually built?",
+  "correct": [
+   "Greedily, one node at a time, with no global optimum guaranteed.",
+   "Top-down splits chosen locally."
+  ],
+  "distractors": [
+   {
+    "text": "By an exhaustive search that finds the globally optimal tree.",
+    "misconception": "forgets that the global problem is intractable"
+   },
+   {
+    "text": "Bottom-up, by merging leaves until one node remains.",
+    "misconception": "describes agglomerative clustering"
+   },
+   {
+    "text": "By gradient descent on the tree's parameters.",
+    "misconception": "misdescribes the construction"
+   },
+   {
+    "text": "By fitting a linear model in each node.",
+    "misconception": "describes model trees"
+   },
+   {
+    "text": "By sampling splits at random and keeping the best.",
+    "misconception": "describes a different algorithm"
+   }
+  ],
+  "explanation": "Finding the optimal tree is NP-hard, so CART uses greedy splitting and then prunes."
+ },
+ {
+  "id": "ml-6.3",
+  "lecture": 6,
+  "stem": "Why are fully grown decision trees prone to overfitting, and what is the remedy?",
+  "correct": [
+   "Tiny leaves fit noise (high variance); pruning or limiting depth helps.",
+   "Deep trees have high variance."
+  ],
+  "distractors": [
+   {
+    "text": "Deep trees have high bias, and the remedy is to grow them deeper.",
+    "misconception": "reverses bias and variance"
+   },
+   {
+    "text": "Trees overfit because they ignore the training labels.",
+    "misconception": "misstates the cause"
+   },
+   {
+    "text": "The remedy is to remove the validation set.",
+    "misconception": "gives a harmful remedy"
+   },
+   {
+    "text": "Trees never overfit, since splits are chosen on impurity.",
+    "misconception": "denies overfitting"
+   },
+   {
+    "text": "The remedy is to standardise the features.",
+    "misconception": "confuses it with scale-sensitive methods"
+   }
+  ],
+  "explanation": "A tree with one observation per leaf has zero training error. Pruning picks the subtree with the best penalised or cross-validated error."
+ },
+ {
+  "id": "ml-6.4",
+  "lecture": 6,
+  "stem": "What happens to a decision tree if a feature is replaced by a monotone transformation, such as its logarithm?",
+  "correct": [
+   "Same splits and predictions, since only the ordering of values matters.",
+   "Trees are invariant to it."
+  ],
+  "distractors": [
+   {
+    "text": "The tree changes, since splits depend on the scale of the feature.",
+    "misconception": "confuses trees with distance-based methods"
+   },
+   {
+    "text": "The tree gets deeper, since the transformed data are more spread out.",
+    "misconception": "invents an effect"
+   },
+   {
+    "text": "Only the root split changes.",
+    "misconception": "gives a specific but false claim"
+   },
+   {
+    "text": "The impurity becomes zero.",
+    "misconception": "confuses the transformation with the labels"
+   },
+   {
+    "text": "The tree can then no longer split on that feature.",
+    "misconception": "invents a restriction"
+   }
+  ],
+  "explanation": "Splits compare a value to a threshold, so any order-preserving transformation gives the same partitions. This is why trees need no feature scaling."
+ },
+ {
+  "id": "ml-6.5",
+  "lecture": 6,
+  "stem": "What type of function does a regression tree produce?",
+  "correct": [
+   "A piecewise constant function, so it cannot extrapolate a trend.",
+   "A step function with one value per leaf."
+  ],
+  "distractors": [
+   {
+    "text": "A piecewise linear function with continuous joints.",
+    "misconception": "describes linear splines"
+   },
+   {
+    "text": "A smooth function with continuous derivatives.",
+    "misconception": "describes smooth models"
+   },
+   {
+    "text": "A single global polynomial.",
+    "misconception": "describes polynomial regression"
+   },
+   {
+    "text": "A function that increases with every feature.",
+    "misconception": "describes monotone models"
+   },
+   {
+    "text": "A function that extrapolates the trend of the last leaf.",
+    "misconception": "believes trees extrapolate"
+   }
+  ],
+  "explanation": "Each leaf predicts the mean of its training responses, so predictions beyond the data stay at the edge leaf's value."
+ },
+ {
+  "id": "ml-7.1",
+  "lecture": 7,
+  "stem": "What is the main effect of bagging a high-variance learner?",
+  "correct": [
+   "Averaging bootstrap models lowers variance, bias about the same.",
+   "It stabilises predictions."
+  ],
+  "distractors": [
+   {
+    "text": "It lowers bias but leaves variance unchanged.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It increases variance by adding randomness.",
+    "misconception": "misstates the effect of averaging"
+   },
+   {
+    "text": "It always improves any learner, including linear regression.",
+    "misconception": "forgets that stable learners gain little"
+   },
+   {
+    "text": "It makes the model interpretable as a single tree.",
+    "misconception": "confuses it with pruning"
+   },
+   {
+    "text": "It removes the need for a validation set.",
+    "misconception": "overstates the benefit"
+   }
+  ],
+  "explanation": "Averaging $B$ identically distributed predictors with variance $\\sigma^2$ and correlation $\\rho$ has variance $\\rho\\sigma^2+(1-\\rho)\\sigma^2/B$."
+ },
+ {
+  "id": "ml-7.2",
+  "lecture": 7,
+  "stem": "How does a random forest improve on bagged trees?",
+  "correct": [
+   "Random feature subsets at each split decorrelate the trees.",
+   "Less correlation, so averaging helps more."
+  ],
+  "distractors": [
+   {
+    "text": "It lowers the bias of each tree by using all features at every split.",
+    "misconception": "reverses what the feature subsets do"
+   },
+   {
+    "text": "It grows trees sequentially, each correcting its predecessor.",
+    "misconception": "describes boosting"
+   },
+   {
+    "text": "It uses a single deep tree.",
+    "misconception": "misdescribes the method"
+   },
+   {
+    "text": "It increases the correlation between trees to share information.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It prunes each tree heavily.",
+    "misconception": "confuses it with pruning"
+   }
+  ],
+  "explanation": "With strongly predictive features, plain bagged trees all split on the same variable and stay correlated. Random subsets of size $m<p$ break this."
+ },
+ {
+  "id": "ml-7.3",
+  "lecture": 7,
+  "stem": "How does boosting build its model?",
+  "correct": [
+   "Weak learners are added in turn, each fitted to the current errors.",
+   "Mainly reduces bias."
+  ],
+  "distractors": [
+   {
+    "text": "It averages independent learners trained in parallel on bootstrap samples.",
+    "misconception": "describes bagging"
+   },
+   {
+    "text": "It fits one very deep tree and prunes it.",
+    "misconception": "describes a single tree"
+   },
+   {
+    "text": "It reduces variance but never bias.",
+    "misconception": "reverses what boosting does"
+   },
+   {
+    "text": "It cannot overfit, as every round improves the training fit.",
+    "misconception": "ignores the risk of overfitting"
+   },
+   {
+    "text": "It ignores the previous learners when fitting a new one.",
+    "misconception": "misdescribes the sequential dependence"
+   }
+  ],
+  "explanation": "Boosting fits the negative gradient of the loss; early stopping or shrinkage controls overfitting as rounds increase."
+ },
+ {
+  "id": "ml-7.4",
+  "lecture": 7,
+  "stem": "What is the out-of-bag (OOB) error of a bagged ensemble?",
+  "correct": [
+   "Each point is predicted only by trees that never saw it, then errors averaged.",
+   "A built-in test error estimate."
+  ],
+  "distractors": [
+   {
+    "text": "The error on observations that appear in every bootstrap sample.",
+    "misconception": "reverses which points are out of the bag"
+   },
+   {
+    "text": "The training error of the full ensemble.",
+    "misconception": "confuses it with the training error"
+   },
+   {
+    "text": "The error on a held-out test set provided by the user.",
+    "misconception": "confuses it with a test set"
+   },
+   {
+    "text": "The difference between the largest and smallest tree errors.",
+    "misconception": "gives an unrelated quantity"
+   },
+   {
+    "text": "It is biased towards zero, since each point is used for training.",
+    "misconception": "misses that OOB points were not used"
+   }
+  ],
+  "explanation": "About 37% of observations are left out of each bootstrap sample, so OOB predictions come from roughly a third of the trees."
+ },
+ {
+  "id": "ml-7.5",
+  "lecture": 7,
+  "stem": "In gradient boosting, what is the role of the learning rate (shrinkage) $\\nu$?",
+  "correct": [
+   "It scales each tree's contribution; small $\\nu$ needs more trees.",
+   "Small steps curb overfitting."
+  ],
+  "distractors": [
+   {
+    "text": "A large $\\nu$ always generalises better, as it needs fewer trees.",
+    "misconception": "ignores overfitting"
+   },
+   {
+    "text": "It sets the depth of each tree.",
+    "misconception": "confuses it with tree depth"
+   },
+   {
+    "text": "It is the fraction of data used in each tree.",
+    "misconception": "confuses it with subsampling"
+   },
+   {
+    "text": "It must equal one for the boosting algorithm to converge.",
+    "misconception": "invents a requirement"
+   },
+   {
+    "text": "It has no effect when early stopping is used.",
+    "misconception": "ignores that it sets the pace of the path"
+   }
+  ],
+  "explanation": "Each round adds $\\nu f_m(x)$. Lowering $\\nu$ and increasing the number of rounds trades computation for accuracy."
+ },
+ {
+  "id": "ml-8.1",
+  "lecture": 8,
+  "stem": "What does the naive Bayes classifier assume?",
+  "correct": [
+   "Features are conditionally independent given the class.",
+   "The class-conditional density factorises."
+  ],
+  "distractors": [
+   {
+    "text": "Features are unconditionally independent of each other.",
+    "misconception": "drops the conditioning on the class"
+   },
+   {
+    "text": "Features are Gaussian with identical variance in each class.",
+    "misconception": "describes a specific variant, not the assumption"
+   },
+   {
+    "text": "The classes are equally likely a priori.",
+    "misconception": "confuses it with a uniform prior"
+   },
+   {
+    "text": "The labels are independent of the features.",
+    "misconception": "describes a null model"
+   },
+   {
+    "text": "The features are all binary.",
+    "misconception": "confuses the assumption with one variant"
+   }
+  ],
+  "explanation": "Under the assumption $p(x\\mid y)=\\prod_jp(x_j\\mid y)$, estimation needs only one-dimensional densities. The class probabilities can still be well ranked even when the assumption is wrong."
+ },
+ {
+  "id": "ml-8.2",
+  "lecture": 8,
+  "stem": "How do LDA and QDA differ?",
+  "correct": [
+   "LDA shares one covariance (linear boundaries); QDA does not (quadratic).",
+   "Shared versus separate covariances."
+  ],
+  "distractors": [
+   {
+    "text": "LDA gives quadratic boundaries, and QDA linear ones.",
+    "misconception": "swaps the two"
+   },
+   {
+    "text": "Both assume diagonal covariances.",
+    "misconception": "confuses them with naive Bayes"
+   },
+   {
+    "text": "LDA does not assume normality, and QDA does.",
+    "misconception": "misstates the assumptions"
+   },
+   {
+    "text": "QDA has fewer parameters than LDA.",
+    "misconception": "reverses the parameter counts"
+   },
+   {
+    "text": "LDA needs the classes to be equally likely.",
+    "misconception": "invents a requirement"
+   }
+  ],
+  "explanation": "QDA estimates a covariance matrix per class, so it has more variance and needs more data than LDA."
+ },
+ {
+  "id": "ml-8.3",
+  "lecture": 8,
+  "stem": "How does a generative classifier compute the class probabilities $P(y\\mid x)$?",
+  "correct": [
+   "By Bayes' rule, density times prior.",
+   "$P(y=k\\mid x)\\propto p(x\\mid y=k)\\,\\pi_k$, normalised over classes."
+  ],
+  "distractors": [
+   {
+    "text": "Directly from the likelihood $p(x\\mid y)$ without a prior.",
+    "misconception": "drops the prior"
+   },
+   {
+    "text": "By fitting $P(y\\mid x)$ with a parametric model, ignoring $p(x)$.",
+    "misconception": "describes a discriminative model"
+   },
+   {
+    "text": "As the prior alone, since the features are noise.",
+    "misconception": "ignores the features"
+   },
+   {
+    "text": "By counting the neighbours of $x$ in each class.",
+    "misconception": "describes $k$-NN"
+   },
+   {
+    "text": "By taking the class with the largest feature mean.",
+    "misconception": "gives an unrelated rule"
+   }
+  ],
+  "explanation": "Generative models learn $p(x,y)$, so they can also be used to simulate data or to handle missing features."
+ },
+ {
+  "id": "ml-8.4",
+  "lecture": 8,
+  "stem": "Which statement about the EM algorithm for a Gaussian mixture model is correct?",
+  "correct": [
+   "It alternates soft assignments and updates, never lowering the likelihood.",
+   "May stop at a local maximum."
+  ],
+  "distractors": [
+   {
+    "text": "It converges to the global maximum from any start.",
+    "misconception": "ignores local maxima"
+   },
+   {
+    "text": "It assigns each point to exactly one component at each step.",
+    "misconception": "describes $k$-means"
+   },
+   {
+    "text": "The likelihood can decrease in some iterations.",
+    "misconception": "contradicts monotonicity"
+   },
+   {
+    "text": "It needs the true component labels.",
+    "misconception": "ignores that the labels are latent"
+   },
+   {
+    "text": "It fixes the covariances of all components to the identity.",
+    "misconception": "describes a special case"
+   }
+  ],
+  "explanation": "$k$-means is the limiting case with equal spherical covariances and hard assignments."
+ },
+ {
+  "id": "ml-8.5",
+  "lecture": 8,
+  "stem": "Why might a discriminative classifier such as logistic regression be preferred to a generative one?",
+  "correct": [
+   "It models $P(y\\mid x)$ directly, so it is more robust to wrong assumptions.",
+   "It needs no model for the distribution of the features."
+  ],
+  "distractors": [
+   {
+    "text": "It always has lower error than a generative model with any amount of data.",
+    "misconception": "overstates the advantage"
+   },
+   {
+    "text": "It can generate new feature vectors.",
+    "misconception": "attributes a generative ability to it"
+   },
+   {
+    "text": "It handles missing features naturally.",
+    "misconception": "describes the generative advantage"
+   },
+   {
+    "text": "It needs fewer training points than naive Bayes.",
+    "misconception": "reverses the usual sample-size behaviour"
+   },
+   {
+    "text": "It is unaffected by class imbalance.",
+    "misconception": "ignores the effect of imbalance"
+   }
+  ],
+  "explanation": "Ng and Jordan: naive Bayes may reach its (higher) asymptotic error with fewer samples, while logistic regression has lower asymptotic error."
+ },
+ {
+  "id": "ml-9.1",
+  "lecture": 9,
+  "stem": "What is the first principal component of a centred data matrix?",
+  "correct": [
+   "The unit direction along which the projected data vary most.",
+   "The top eigenvector of the covariance."
+  ],
+  "distractors": [
+   {
+    "text": "The direction along which the data have minimum variance.",
+    "misconception": "describes the last component"
+   },
+   {
+    "text": "The direction most correlated with the label.",
+    "misconception": "confuses PCA with supervised methods"
+   },
+   {
+    "text": "The feature with the largest mean.",
+    "misconception": "ignores the covariance structure"
+   },
+   {
+    "text": "The average of all the features.",
+    "misconception": "confuses it with a mean vector"
+   },
+   {
+    "text": "The direction of the largest single entry.",
+    "misconception": "invents a rule"
+   }
+  ],
+  "explanation": "PCA solves $\\max_{\\|v\\|=1}v^\\top Sv$; the maximum is the largest eigenvalue $\\lambda_1$ of $S$, with eigenvector $v_1$."
+ },
+ {
+  "id": "ml-9.2",
+  "lecture": 9,
+  "stem": "How is the proportion of variance explained by the $j$th principal component computed?",
+  "correct": [
+   "Its eigenvalue divided by the sum of all eigenvalues.",
+   "$\\lambda_j/\\sum_k\\lambda_k$ of the covariance matrix."
+  ],
+  "distractors": [
+   {
+    "text": "Its eigenvalue divided by the largest eigenvalue.",
+    "misconception": "divides by the wrong total"
+   },
+   {
+    "text": "The square of its eigenvector divided by $p$.",
+    "misconception": "gives an unrelated quantity"
+   },
+   {
+    "text": "The correlation of the component with the first one.",
+    "misconception": "uses the correlation, which is zero"
+   },
+   {
+    "text": "One divided by the number of components.",
+    "misconception": "assumes equal shares"
+   },
+   {
+    "text": "The sum of its loadings.",
+    "misconception": "confuses loadings with variance"
+   }
+  ],
+  "explanation": "The sum of all eigenvalues is the total variance. The scree plot of $\\lambda_j$ helps to choose the number of components."
+ },
+ {
+  "id": "ml-9.3",
+  "lecture": 9,
+  "stem": "How are principal components related to the singular value decomposition $X=UDV^\\top$ of a centred data matrix?",
+  "correct": [
+   "Columns of $V$ are the principal directions, with variances $d_j^2/(n-1)$.",
+   "Scores are $UD$."
+  ],
+  "distractors": [
+   {
+    "text": "The columns of $U$ are the principal directions.",
+    "misconception": "confuses the left and right singular vectors"
+   },
+   {
+    "text": "The variances are the singular values $d_j$ themselves.",
+    "misconception": "forgets to square and scale"
+   },
+   {
+    "text": "The decomposition is only available for square matrices.",
+    "misconception": "misstates SVD"
+   },
+   {
+    "text": "The principal directions are the rows of $D$.",
+    "misconception": "confuses the diagonal matrix with directions"
+   },
+   {
+    "text": "PCA requires the data matrix to be uncentred.",
+    "misconception": "forgets the centring"
+   }
+  ],
+  "explanation": "$X^\\top X=VD^2V^\\top$, so the eigenvectors of the covariance are the columns of $V$."
+ },
+ {
+  "id": "ml-9.4",
+  "lecture": 9,
+  "stem": "Why is the data centred (and often standardised) before PCA?",
+  "correct": [
+   "Without centring the first component captures the mean; large units dominate.",
+   "PCA is driven by variances."
+  ],
+  "distractors": [
+   {
+    "text": "PCA requires every variable to have a normal distribution.",
+    "misconception": "invents a distributional requirement"
+   },
+   {
+    "text": "Centring makes the components correlated with each other.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "Standardising is required for the SVD to exist.",
+    "misconception": "invents a condition"
+   },
+   {
+    "text": "Scaling has no effect on the components.",
+    "misconception": "ignores the effect of units"
+   },
+   {
+    "text": "Centring makes the eigenvalues all equal.",
+    "misconception": "invents an effect"
+   }
+  ],
+  "explanation": "Using the correlation matrix (standardised data) gives components that do not depend on the units. Covariance-based PCA is appropriate when variables share units."
+ },
+ {
+  "id": "ml-9.5",
+  "lecture": 9,
+  "stem": "Which statement about t-SNE is correct?",
+  "correct": [
+   "It keeps local neighbourhoods, but gaps and cluster sizes are unreliable.",
+   "Output depends on perplexity and seed."
+  ],
+  "distractors": [
+   {
+    "text": "It preserves global distances exactly.",
+    "misconception": "overstates what t-SNE preserves"
+   },
+   {
+    "text": "It is a linear projection like PCA.",
+    "misconception": "confuses it with a linear method"
+   },
+   {
+    "text": "It gives the same picture for every seed.",
+    "misconception": "ignores randomness"
+   },
+   {
+    "text": "Cluster sizes in the plot reflect the sizes of the clusters in the data.",
+    "misconception": "over-interprets the plot"
+   },
+   {
+    "text": "It can embed new data points without refitting.",
+    "misconception": "overlooks the lack of an explicit mapping"
+   }
+  ],
+  "explanation": "t-SNE matches neighbour probabilities; global structure is distorted, so it is for exploration, not inference."
+ },
+ {
+  "id": "ml-10.1",
+  "lecture": 10,
+  "stem": "What does the $k$-means algorithm do?",
+  "correct": [
+   "It alternates assigning points to centroids and recomputing centroids.",
+   "Each step lowers the objective."
+  ],
+  "distractors": [
+   {
+    "text": "It finds the global minimum of the within-cluster sum of squares.",
+    "misconception": "ignores local minima"
+   },
+   {
+    "text": "It chooses the number of clusters automatically.",
+    "misconception": "forgets that $k$ is an input"
+   },
+   {
+    "text": "It builds a tree of nested clusters.",
+    "misconception": "describes hierarchical clustering"
+   },
+   {
+    "text": "It needs labelled data.",
+    "misconception": "confuses it with classification"
+   },
+   {
+    "text": "It maximises the distance between points in the same cluster.",
+    "misconception": "reverses the objective"
+   }
+  ],
+  "explanation": "Both steps cannot increase $\\sum_i\\|x_i-\\mu_{c(i)}\\|^2$; the algorithm terminates because the number of partitions is finite."
+ },
+ {
+  "id": "ml-10.2",
+  "lecture": 10,
+  "stem": "Why can the within-cluster sum of squares not be used by itself to choose $k$?",
+  "correct": [
+   "It always decreases as $k$ grows, reaching zero when every point is alone.",
+   "More clusters always fit better."
+  ],
+  "distractors": [
+   {
+    "text": "It increases with $k$, so the smallest $k$ is best.",
+    "misconception": "reverses the monotonicity"
+   },
+   {
+    "text": "It is independent of $k$.",
+    "misconception": "ignores the dependence"
+   },
+   {
+    "text": "It is only defined for $k=2$.",
+    "misconception": "invents a restriction"
+   },
+   {
+    "text": "It is minimised at the true number of clusters.",
+    "misconception": "confuses the objective with a model-selection criterion"
+   },
+   {
+    "text": "It can only be computed on a test set.",
+    "misconception": "confuses it with prediction error"
+   }
+  ],
+  "explanation": "The elbow, silhouette, gap statistic or a stability analysis helps to pick $k$. Domain knowledge matters too."
+ },
+ {
+  "id": "ml-10.3",
+  "lecture": 10,
+  "stem": "How does the initialisation affect $k$-means?",
+  "correct": [
+   "Different starts reach different local minima.",
+   "The result depends on the start, since the objective is non-convex."
+  ],
+  "distractors": [
+   {
+    "text": "The algorithm always reaches the same solution.",
+    "misconception": "ignores local minima"
+   },
+   {
+    "text": "Initialisation affects only the speed, never the final clustering.",
+    "misconception": "ignores the local minima"
+   },
+   {
+    "text": "Starting with all centroids at the same point is best.",
+    "misconception": "describes a degenerate start"
+   },
+   {
+    "text": "The objective is convex, so any start is fine.",
+    "misconception": "misstates the convexity"
+   },
+   {
+    "text": "Random starts are never useful.",
+    "misconception": "gives bad advice"
+   }
+  ],
+  "explanation": "$k$-means++ chooses seeds spread out with probability proportional to squared distance, giving an $O(\\log k)$ approximation guarantee in expectation."
+ },
+ {
+  "id": "ml-10.4",
+  "lecture": 10,
+  "stem": "What is a drawback of single linkage in hierarchical agglomerative clustering?",
+  "correct": [
+   "Chaining: one close pair can merge two clusters into a straggly shape.",
+   "A bridge joins separate groups."
+  ],
+  "distractors": [
+   {
+    "text": "It always produces compact spherical clusters.",
+    "misconception": "describes complete linkage tendency"
+   },
+   {
+    "text": "It needs the number of clusters in advance.",
+    "misconception": "confuses it with $k$-means"
+   },
+   {
+    "text": "It is sensitive only to the farthest points.",
+    "misconception": "describes complete linkage"
+   },
+   {
+    "text": "It cannot produce a dendrogram.",
+    "misconception": "misstates the output"
+   },
+   {
+    "text": "It requires the data to be labelled.",
+    "misconception": "confuses it with supervised learning"
+   }
+  ],
+  "explanation": "Complete linkage uses the largest pairwise distance and tends to give compact clusters; average linkage is in between."
+ },
+ {
+  "id": "ml-10.5",
+  "lecture": 10,
+  "stem": "When is spectral clustering preferable to $k$-means?",
+  "correct": [
+   "When clusters are non-convex, since it uses a graph Laplacian eigenspace.",
+   "It separates concentric rings."
+  ],
+  "distractors": [
+   {
+    "text": "When the clusters are spherical and of equal size.",
+    "misconception": "describes the setting favouring $k$-means"
+   },
+   {
+    "text": "When the data have no similarity structure.",
+    "misconception": "ignores that it needs a similarity graph"
+   },
+   {
+    "text": "It is always faster than $k$-means.",
+    "misconception": "ignores the eigen-decomposition cost"
+   },
+   {
+    "text": "It avoids the need to choose the number of clusters.",
+    "misconception": "forgets that $k$ is chosen"
+   },
+   {
+    "text": "It uses only the Euclidean distance to centroids.",
+    "misconception": "describes $k$-means"
+   }
+  ],
+  "explanation": "It builds a similarity graph, takes the first $k$ eigenvectors of the Laplacian, and runs $k$-means on those embedded points."
+ },
+ {
+  "id": "ml-11.1",
+  "lecture": 11,
+  "stem": "What does the area under the ROC curve (AUC) measure?",
+  "correct": [
+   "The chance a random positive is scored above a random negative.",
+   "Ranking quality over all thresholds."
+  ],
+  "distractors": [
+   {
+    "text": "The proportion of correct predictions at the 0.5 threshold.",
+    "misconception": "confuses it with accuracy"
+   },
+   {
+    "text": "The probability that the predicted probabilities are calibrated.",
+    "misconception": "confuses discrimination with calibration"
+   },
+   {
+    "text": "The precision of the classifier at the best threshold.",
+    "misconception": "confuses it with precision"
+   },
+   {
+    "text": "The expected profit of a trading rule.",
+    "misconception": "confuses it with a financial metric"
+   },
+   {
+    "text": "The proportion of positive labels in the data.",
+    "misconception": "gives the prevalence"
+   }
+  ],
+  "explanation": "AUC is the Mann-Whitney statistic scaled to $[0,1]$. It is invariant to monotone transformations of the score, so it says nothing about calibration."
+ },
+ {
+  "id": "ml-11.2",
+  "lecture": 11,
+  "stem": "What is calibration of a probabilistic classifier?",
+  "correct": [
+   "Among cases given probability $p$, a fraction $p$ are positive.",
+   "Probabilities match frequencies."
+  ],
+  "distractors": [
+   {
+    "text": "The classifier has a high AUC.",
+    "misconception": "confuses calibration with discrimination"
+   },
+   {
+    "text": "The predicted probabilities sum to one for each class.",
+    "misconception": "confuses it with normalisation"
+   },
+   {
+    "text": "The classifier has equal error on both classes.",
+    "misconception": "confuses it with balanced error rates"
+   },
+   {
+    "text": "The training and test errors are equal.",
+    "misconception": "confuses it with generalisation"
+   },
+   {
+    "text": "Predicted probabilities are all close to 0 or 1.",
+    "misconception": "confuses it with confidence"
+   }
+  ],
+  "explanation": "A classifier can rank perfectly (AUC = 1) while its probabilities are far from the true frequencies. Platt scaling or isotonic regression recalibrates."
+ },
+ {
+  "id": "ml-11.3",
+  "lecture": 11,
+  "stem": "Why can accuracy be misleading on a heavily imbalanced data set?",
+  "correct": [
+   "Predicting the majority class gives high accuracy and finds no rare cases.",
+   "Rare-class recall matters more."
+  ],
+  "distractors": [
+   {
+    "text": "Accuracy is only defined for balanced data.",
+    "misconception": "misstates the metric"
+   },
+   {
+    "text": "Accuracy always equals the AUC.",
+    "misconception": "confuses two metrics"
+   },
+   {
+    "text": "Imbalanced data make the precision undefined.",
+    "misconception": "invents a problem"
+   },
+   {
+    "text": "Accuracy overweights the minority class.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It is misleading only when there are more than two classes.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "With 1% positives, \"never predict positive\" scores 99% accuracy. Use the precision-recall curve or cost-weighted metrics."
+ },
+ {
+  "id": "ml-11.4",
+  "lecture": 11,
+  "stem": "Why is purged cross-validation used for financial labels built from overlapping future windows?",
+  "correct": [
+   "Training samples whose label windows overlap the test period leak.",
+   "Overlap makes neighbours dependent."
+  ],
+  "distractors": [
+   {
+    "text": "Purging increases the amount of training data.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "Overlapping labels make ordinary $k$-fold cross-validation too pessimistic.",
+    "misconception": "reverses the direction of the bias"
+   },
+   {
+    "text": "It is needed only when the sample is small.",
+    "misconception": "misidentifies the cause"
+   },
+   {
+    "text": "It shuffles observations so that the folds are i.i.d.",
+    "misconception": "does the opposite of what is needed"
+   },
+   {
+    "text": "It removes the need for a separate test set.",
+    "misconception": "overstates the method"
+   }
+  ],
+  "explanation": "With a 5-day forward return label, a training point near the test boundary shares days with test labels. Purging and an embargo prevent that leakage."
+ },
+ {
+  "id": "ml-11.5",
+  "lecture": 11,
+  "stem": "Which practice is appropriate for validating a model on financial time series?",
+  "correct": [
+   "Use time-ordered splits like walk-forward, training before evaluation.",
+   "Test only on later data."
+  ],
+  "distractors": [
+   {
+    "text": "Use random shuffled $k$-fold splits to make the folds identically distributed.",
+    "misconception": "ignores dependence and look-ahead"
+   },
+   {
+    "text": "Select the model with the best in-sample Sharpe ratio.",
+    "misconception": "ignores overfitting"
+   },
+   {
+    "text": "Tune on the test period and report the best result.",
+    "misconception": "ignores selection bias"
+   },
+   {
+    "text": "Always train on the most recent data only.",
+    "misconception": "gives a fixed rule that is not generally valid"
+   },
+   {
+    "text": "Use the future to standardise the features.",
+    "misconception": "introduces look-ahead bias"
+   }
+  ],
+  "explanation": "Returns have a very low signal-to-noise ratio and non-stationary structure, so random splits that mix past and future flatter any model."
+ }
+]

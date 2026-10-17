@@ -1,0 +1,1794 @@
+[
+ {
+  "id": "reg2-1.1",
+  "lecture": 1,
+  "stem": "Which form describes an exponential dispersion family for a response $Y$ with natural parameter $\\theta$?",
+  "correct": [
+   "$f(y;\\theta,\\phi)=\\exp\\{(y\\theta-b(\\theta))/a(\\phi)+c(y,\\phi)\\}$, where $c$ does not involve $\\theta$.",
+   "The log-density is a term linear in $y\\theta$ minus $b(\\theta)$, scaled by the dispersion, plus a part free of $\\theta$."
+  ],
+  "distractors": [
+   {
+    "text": "$f(y;\\theta,\\phi)=\\exp\\{-(y-\\theta)^2/(2\\phi)\\}$ for every member, so every such family is normal with variance $\\phi$.",
+    "misconception": "takes the normal family as the only member"
+   },
+   {
+    "text": "A density whose support $\\{y:f(y;\\theta)>0\\}$ must change with $\\theta$, as for the uniform distribution on $(0,\\theta)$.",
+    "misconception": "forgets that the support must not depend on $\\theta$"
+   },
+   {
+    "text": "$f(y;\\theta,\\phi)=\\exp\\{y\\,b(\\theta)\\}\\,c(y,\\phi)$, with $\\theta$ entering only through a product with $y$ inside the exponent.",
+    "misconception": "drops the normalising function and mis-specifies the form"
+   },
+   {
+    "text": "Any density that has a finite mean and variance, since the exponential family is defined through moments.",
+    "misconception": "confuses the family with the existence of moments"
+   },
+   {
+    "text": "A density that is a sum of exponential terms, $f(y)=\\sum_k a_k e^{-\\lambda_k y}$.",
+    "misconception": "confuses the exponential family with mixtures of exponential distributions"
+   }
+  ],
+  "explanation": "Normal, Poisson, binomial, gamma and inverse Gaussian densities all fit the form. The support must not depend on $\\theta$, and $\\theta$ interacts with $y$ only through $y\\theta$."
+ },
+ {
+  "id": "reg2-1.2",
+  "lecture": 1,
+  "stem": "In an exponential dispersion family with $E[Y]=\\mu$, how is $\\operatorname{Var}(Y)$ determined?",
+  "correct": [
+   "By the dispersion parameter times a variance function $V(\\mu)$ of the mean.",
+   "As $a(\\phi)\\,b''(\\theta)$, which is a function of the mean times a scale factor."
+  ],
+  "distractors": [
+   {
+    "text": "It is a constant $\\sigma^2$ that does not depend on the mean, for every family.",
+    "misconception": "generalises from the normal linear model"
+   },
+   {
+    "text": "It equals the mean, $\\operatorname{Var}(Y)=\\mu$, for every member of the family.",
+    "misconception": "generalises from the Poisson distribution"
+   },
+   {
+    "text": "It is fixed by the link function, so a different link gives a different variance.",
+    "misconception": "confuses the link with the variance function"
+   },
+   {
+    "text": "It equals $\\mu^2$ for every family, because both are built from the second moment.",
+    "misconception": "generalises from the exponential distribution only"
+   },
+   {
+    "text": "It is unrelated to the mean, so the mean and the variance can be modelled separately.",
+    "misconception": "forgets that the mean-variance relation is built into the family"
+   }
+  ],
+  "explanation": "Examples: $V(\\mu)=1$ (normal), $\\mu$ (Poisson), $\\mu(1-\\mu)$ (Bernoulli), $\\mu^2$ (gamma). The link has no effect on $V$."
+ },
+ {
+  "id": "reg2-1.3",
+  "lecture": 1,
+  "stem": "What is the canonical link of a GLM?",
+  "correct": [
+   "The link making the linear predictor equal the natural parameter, $g=(b')^{-1}$.",
+   "The function mapping the mean $\\mu$ to the natural parameter $\\theta$."
+  ],
+  "distractors": [
+   {
+    "text": "The link that maps the mean into the interval $(0,1)$, whichever the response distribution.",
+    "misconception": "confuses canonical with probability-valued links"
+   },
+   {
+    "text": "The identity link, because it leaves the mean unchanged and is the simplest.",
+    "misconception": "thinks identity is canonical for every family"
+   },
+   {
+    "text": "The link that gives the smallest deviance among all possible choices of link.",
+    "misconception": "confuses canonical with best fitting"
+   },
+   {
+    "text": "The link whose inverse is the exponential function, such as the log link.",
+    "misconception": "thinks the log link is canonical for every family"
+   },
+   {
+    "text": "Any link whose inverse is a cumulative distribution function.",
+    "misconception": "confuses the canonical link with the probit family"
+   }
+  ],
+  "explanation": "With the canonical link, $X^\\top y$ is sufficient for $\\beta$, and Newton-Raphson and Fisher scoring coincide."
+ },
+ {
+  "id": "reg2-1.4",
+  "lecture": 1,
+  "stem": "Which pairing of response distribution and canonical link is correct?",
+  "correct": [
+   "Poisson with the log link.",
+   "Bernoulli responses with the logit link, because $\\log\\{p/(1-p)\\}$ is the natural parameter."
+  ],
+  "distractors": [
+   {
+    "text": "Poisson with the identity link, because counts are on the original scale.",
+    "misconception": "confuses a convenient link with the canonical one"
+   },
+   {
+    "text": "Bernoulli with the log link, so that fitted probabilities are multiplicative in the covariates.",
+    "misconception": "confuses the log link with the logit"
+   },
+   {
+    "text": "Normal with the logit link, since the logit is the most common link.",
+    "misconception": "confuses normal responses with binary responses"
+   },
+   {
+    "text": "Bernoulli with the probit link, which is the inverse of the standard normal cdf.",
+    "misconception": "takes probit to be canonical; it is a popular alternative"
+   },
+   {
+    "text": "Gamma with the log link, since both are used for positive responses.",
+    "misconception": "mistakes a common link for the canonical one, which is the inverse"
+   }
+  ],
+  "explanation": "Canonical links: identity (normal), log (Poisson), logit (Bernoulli/binomial), inverse (gamma). Probit and the log link for gamma are common but not canonical."
+ },
+ {
+  "id": "reg2-1.5",
+  "lecture": 1,
+  "stem": "In the GLM $g(\\mu_i)=x_i^\\top\\beta$, to what is the link function $g$ applied?",
+  "correct": [
+   "The expected response $\\mu_i=E[Y_i\\mid x_i]$.",
+   "The conditional mean of the response, not the response values themselves."
+  ],
+  "distractors": [
+   {
+    "text": "The observed response $y_i$, so a GLM is ordinary regression on $g(y_i)$.",
+    "misconception": "confuses a GLM with regression on a transformed response"
+   },
+   {
+    "text": "The regression coefficients $\\beta$, which are transformed before entering the model.",
+    "misconception": "misplaces the link on the parameters"
+   },
+   {
+    "text": "The covariates $x_i$, which are transformed before the linear predictor is formed.",
+    "misconception": "confuses the link with covariate transformations"
+   },
+   {
+    "text": "The residuals of the fit, so that they become approximately normal.",
+    "misconception": "thinks the link is a residual transformation"
+   },
+   {
+    "text": "The variance of $Y_i$, so that the variance becomes linear in the covariates.",
+    "misconception": "confuses the link with the variance function"
+   }
+  ],
+  "explanation": "$g(E[Y])\\ne E[g(Y)]$ in general, so a GLM with a log link differs from least squares on $\\log y$, which is also impossible when $y=0$."
+ },
+ {
+  "id": "reg2-2.1",
+  "lecture": 2,
+  "stem": "In a logistic regression with covariates $x$, what does $\\exp(\\beta_j)$ represent?",
+  "correct": [
+   "The factor by which the odds are multiplied per unit increase in $x_j$, others fixed.",
+   "The multiplicative change in the odds of success per one-unit rise in $x_j$."
+  ],
+  "distractors": [
+   {
+    "text": "The additive change in the probability of success for a one-unit increase in $x_j$.",
+    "misconception": "confuses odds with probabilities"
+   },
+   {
+    "text": "The relative risk, the ratio of the success probabilities for a one-unit difference in $x_j$.",
+    "misconception": "confuses the odds ratio with the risk ratio"
+   },
+   {
+    "text": "The change in the log-odds of success per unit increase in $x_j$, which is $\\beta_j$ and not $\\exp(\\beta_j)$.",
+    "misconception": "forgets that exponentiating converts the log-odds change into an odds ratio"
+   },
+   {
+    "text": "The multiplicative change in the probability of success per unit increase in $x_j$.",
+    "misconception": "treats the odds ratio as a probability ratio"
+   },
+   {
+    "text": "The probability of success when all covariates are equal to zero.",
+    "misconception": "confuses the slope with the intercept"
+   }
+  ],
+  "explanation": "$\\log\\{p/(1-p)\\}=x^\\top\\beta$ is linear in $x_j$ with slope $\\beta_j$, so a unit increase multiplies the odds by $e^{\\beta_j}$. The probability ratio is not constant."
+ },
+ {
+  "id": "reg2-2.2",
+  "lecture": 2,
+  "stem": "Suppose $x_j$ increases by one unit in a logistic regression with a positive coefficient. How does the success probability change?",
+  "correct": [
+   "By an amount depending on the baseline, though the log-odds always change by $\\beta_j$.",
+   "The probability change varies with the starting probability; only the logit change is constant."
+  ],
+  "distractors": [
+   {
+    "text": "It rises by exactly $\\beta_j$ whatever the starting values.",
+    "misconception": "treats the coefficient as an additive effect on the probability"
+   },
+   {
+    "text": "It is multiplied by $e^{\\beta_j}$ whatever the starting values.",
+    "misconception": "treats the odds ratio as a probability ratio"
+   },
+   {
+    "text": "It rises by the same amount at every baseline probability, since the model is linear in the logit.",
+    "misconception": "forgets that the logistic curve is nonlinear in probability"
+   },
+   {
+    "text": "It rises by $\\beta_j/4$ at every starting point, since this is the maximum slope of the curve.",
+    "misconception": "takes the maximum slope as the slope everywhere"
+   },
+   {
+    "text": "It does not change when the baseline probability is close to 0 or 1, however large $\\beta_j$ is.",
+    "misconception": "confuses a tiny change with no change"
+   }
+  ],
+  "explanation": "$dp/dx_j=\\beta_j\\,p(1-p)$, which is largest at $p=1/2$ and shrinks towards the tails."
+ },
+ {
+  "id": "reg2-2.3",
+  "lecture": 2,
+  "stem": "How are the coefficients of a logistic regression estimated by maximum likelihood?",
+  "correct": [
+   "Iteratively, by weighted least squares (IRLS) with weights $\\mu_i(1-\\mu_i)$ and a working response.",
+   "By Newton-Raphson or Fisher scoring, since the score equations have no closed form."
+  ],
+  "distractors": [
+   {
+    "text": "By the closed form $\\hat\\beta=(X^\\top X)^{-1}X^\\top y$ applied to the 0/1 responses.",
+    "misconception": "applies the least squares formula to a binary response"
+   },
+   {
+    "text": "By ordinary least squares on the empirical logits $\\log\\{y_i/(1-y_i)\\}$ of the individual responses.",
+    "misconception": "forgets that the logit of 0 or 1 is infinite"
+   },
+   {
+    "text": "By weighted least squares with all the weights equal to one, so each observation counts equally in every step.",
+    "misconception": "ignores the weights that depend on the fitted probabilities"
+   },
+   {
+    "text": "By minimising the sum of squared differences between $y_i$ and the fitted probabilities in one step.",
+    "misconception": "confuses the likelihood criterion with least squares"
+   },
+   {
+    "text": "By gradient descent only, because second derivatives of the log-likelihood do not exist.",
+    "misconception": "thinks the Hessian is unavailable"
+   }
+  ],
+  "explanation": "The score equations are nonlinear in $\\beta$. Each IRLS step regresses a working response $z_i=\\eta_i+(y_i-\\mu_i)/\\{\\mu_i(1-\\mu_i)\\}$ with weights $\\mu_i(1-\\mu_i)$."
+ },
+ {
+  "id": "reg2-2.4",
+  "lecture": 2,
+  "stem": "What happens to the maximum likelihood estimate in a logistic regression when a linear combination of covariates perfectly separates the 0s from the 1s?",
+  "correct": [
+   "The likelihood increases without bound, so no finite maximum likelihood estimate exists.",
+   "The coefficients diverge, as fitted probabilities approach 0 and 1."
+  ],
+  "distractors": [
+   {
+    "text": "The estimate exists and is unique, and it fits the data perfectly with small standard errors.",
+    "misconception": "thinks perfect fit gives a good estimate"
+   },
+   {
+    "text": "The estimate exists but is not unique, since any value beyond a threshold gives the same fit.",
+    "misconception": "confuses divergence with non-uniqueness of a finite maximiser"
+   },
+   {
+    "text": "This can only happen when the number of parameters exceeds the number of observations.",
+    "misconception": "believes separation needs more parameters than observations"
+   },
+   {
+    "text": "The Wald test becomes very reliable, because the estimated coefficient is very large.",
+    "misconception": "forgets that the standard errors blow up even faster"
+   },
+   {
+    "text": "The likelihood is exactly zero at every parameter value, so the model must be rejected.",
+    "misconception": "confuses a supremum approached at infinity with a zero likelihood"
+   }
+  ],
+  "explanation": "Under complete separation the likelihood has supremum 1 but no maximiser. Software shows huge coefficients and standard errors; penalisation or exact methods are the usual remedies."
+ },
+ {
+  "id": "reg2-2.5",
+  "lecture": 2,
+  "stem": "What is the conditional variance of a binary response $Y_i$ in a logistic regression with success probability $p_i$?",
+  "correct": [
+   "$p_i(1-p_i)$, so the variance depends on the covariates through the mean.",
+   "It varies with the mean, so the model is heteroskedastic by construction."
+  ],
+  "distractors": [
+   {
+    "text": "A constant $\\sigma^2$ that is the same for all observations.",
+    "misconception": "carries over the constant variance of linear regression"
+   },
+   {
+    "text": "Equal to $p_i$, the mean, as for a Poisson count.",
+    "misconception": "confuses the Bernoulli with the Poisson variance"
+   },
+   {
+    "text": "Equal to the odds $p_i/(1-p_i)$ of success.",
+    "misconception": "confuses the variance with the odds"
+   },
+   {
+    "text": "Equal to $\\sigma^2p_i$ with a free scale $\\sigma^2$ that is estimated from the data.",
+    "misconception": "gives a quasi-likelihood variance for a distribution that has none"
+   },
+   {
+    "text": "Zero once the covariates are known, since the response is fully determined by them.",
+    "misconception": "confuses a deterministic mean with a deterministic response"
+   }
+  ],
+  "explanation": "A Bernoulli variable has variance $p(1-p)$, largest at $p=1/2$. The variance function is therefore part of the model rather than a nuisance parameter."
+ },
+ {
+  "id": "reg2-3.1",
+  "lecture": 3,
+  "stem": "How is the deviance of a fitted GLM defined?",
+  "correct": [
+   "Twice the log-likelihood of the saturated model minus that of the fitted model.",
+   "$D=2\\{\\ell(\\text{saturated})-\\ell(\\text{fitted})\\}$, a comparison with a perfect-fit model."
+  ],
+  "distractors": [
+   {
+    "text": "Twice the difference between the log-likelihood of the fitted model and that of the null model.",
+    "misconception": "confuses the deviance with the null-deviance improvement"
+   },
+   {
+    "text": "Minus twice the log-likelihood of the fitted model, with no reference model.",
+    "misconception": "drops the saturated model from the comparison"
+   },
+   {
+    "text": "Twice the log-likelihood of the fitted model minus the saturated one, so it is negative or zero.",
+    "misconception": "reverses the order of the models"
+   },
+   {
+    "text": "The residual sum of squares of the fitted model, for every response distribution.",
+    "misconception": "identifies the deviance with least squares"
+   },
+   {
+    "text": "The number of observations minus the number of fitted parameters.",
+    "misconception": "confuses the deviance with the residual degrees of freedom"
+   }
+  ],
+  "explanation": "The saturated model has one parameter per observation, so $D\\ge0$, with $D=0$ for a perfect fit. For a normal linear model $D$ is the residual sum of squares over $\\sigma^2$."
+ },
+ {
+  "id": "reg2-3.2",
+  "lecture": 3,
+  "stem": "Two nested GLMs are compared, the larger one having $q$ more parameters. How is the likelihood ratio comparison carried out?",
+  "correct": [
+   "The drop in deviance is compared with $\\chi^2_q$, where $q$ is the number of added parameters.",
+   "Under the smaller model the deviance difference is approximately $\\chi^2_q$ in large samples."
+  ],
+  "distractors": [
+   {
+    "text": "The deviance of the larger model is the larger of the two, so the difference is negative.",
+    "misconception": "forgets that adding parameters lowers the deviance"
+   },
+   {
+    "text": "The difference of deviances has exactly a $\\chi^2_q$ distribution for every sample size.",
+    "misconception": "treats an asymptotic result as exact"
+   },
+   {
+    "text": "The degrees of freedom are $n-p$, the residual degrees of freedom of the larger model.",
+    "misconception": "uses the residual df instead of the difference in parameters"
+   },
+   {
+    "text": "The difference is compared with a $t$ distribution because the dispersion must be estimated.",
+    "misconception": "applies a normal-theory result to all GLMs"
+   },
+   {
+    "text": "The two models need not be nested, since the test only compares two deviances.",
+    "misconception": "ignores the nesting that the chi-square limit requires"
+   }
+  ],
+  "explanation": "$D_0-D_1=2(\\ell_1-\\ell_0)\\to\\chi^2_q$ under $H_0$ since the saturated terms cancel. For non-nested models use AIC or similar instead."
+ },
+ {
+  "id": "reg2-3.3",
+  "lecture": 3,
+  "stem": "Which statement about the Wald, score and likelihood ratio tests of a GLM hypothesis is correct?",
+  "correct": [
+   "They are asymptotically equivalent under the null, but can differ in small samples.",
+   "In large samples the three agree, while the Wald test can behave poorly when the estimate is far from zero."
+  ],
+  "distractors": [
+   {
+    "text": "They are identical for every sample size, so the choice among them never matters.",
+    "misconception": "treats asymptotic equivalence as identity"
+   },
+   {
+    "text": "The score test needs the model fitted under the alternative, and the likelihood ratio test only under the null.",
+    "misconception": "swaps what each test needs"
+   },
+   {
+    "text": "The Wald test is exactly chi-square in finite samples, and the other two are only approximate.",
+    "misconception": "gives the Wald test a finite-sample guarantee it lacks"
+   },
+   {
+    "text": "The likelihood ratio test needs only the fit under the null hypothesis.",
+    "misconception": "confuses the likelihood ratio test with the score test"
+   },
+   {
+    "text": "The Wald test is valid only for linear models, and for GLMs one must use the deviance.",
+    "misconception": "thinks Wald tests do not apply to GLMs"
+   }
+  ],
+  "explanation": "Wald uses $\\hat\\beta/\\mathrm{se}(\\hat\\beta)$ from the full fit, score uses only the null fit, LR uses both. The Hauck-Donner effect makes Wald unreliable for large effects."
+ },
+ {
+  "id": "reg2-3.4",
+  "lecture": 3,
+  "stem": "A logistic regression is fitted to individual 0/1 responses, each covariate pattern having essentially one observation. What can be said about the residual deviance?",
+  "correct": [
+   "It has no chi-square limit, so it is not a useful absolute test of fit.",
+   "Referring it to a chi-square law on the residual df is unjustified for ungrouped binary data."
+  ],
+  "distractors": [
+   {
+    "text": "It follows a chi-square distribution with $n-p$ degrees of freedom, so a value near $n-p$ shows good fit.",
+    "misconception": "applies the grouped-data result to individual binary data"
+   },
+   {
+    "text": "It equals zero when the model fits well, and a positive value signals lack of fit.",
+    "misconception": "confuses zero deviance with a perfect model on new data"
+   },
+   {
+    "text": "It is useful as a test of fit precisely because each pattern has one observation.",
+    "misconception": "reverses the condition needed for the approximation"
+   },
+   {
+    "text": "It always equals twice the number of fitted parameters.",
+    "misconception": "invents a deterministic value for the deviance"
+   },
+   {
+    "text": "It decreases as irrelevant covariates are added, so a smaller value always indicates a better model.",
+    "misconception": "ignores that the deviance cannot rise with extra parameters"
+   }
+  ],
+  "explanation": "The chi-square approximation to the deviance needs many observations per covariate pattern. Ungrouped binary deviance depends on the fitted values only, so use comparisons of nested models or calibration checks."
+ },
+ {
+  "id": "reg2-3.5",
+  "lecture": 3,
+  "stem": "Two GLMs that are not nested are compared with AIC $=-2\\ell+2p$. Which statement is correct?",
+  "correct": [
+   "The model with the smaller AIC is preferred; the penalty $2p$ discourages extra parameters.",
+   "AIC trades fit against model size, and lower values indicate better expected prediction."
+  ],
+  "distractors": [
+   {
+    "text": "The model with the larger AIC is preferred, because a higher value means greater fit.",
+    "misconception": "reverses the direction of the criterion"
+   },
+   {
+    "text": "The difference in AIC is compared with a chi-square quantile, exactly like the likelihood ratio test.",
+    "misconception": "treats AIC as a hypothesis test"
+   },
+   {
+    "text": "A likelihood ratio test is valid for any pair of models, whether or not one is nested in the other.",
+    "misconception": "ignores the nesting condition of the test"
+   },
+   {
+    "text": "AIC penalises each parameter by $\\log n$, so it prefers smaller models when $n$ is large.",
+    "misconception": "confuses AIC with BIC"
+   },
+   {
+    "text": "AIC can only be used to compare models with the same number of parameters.",
+    "misconception": "thinks the penalty makes it applicable only for equal sizes"
+   }
+  ],
+  "explanation": "AIC estimates expected out-of-sample log-likelihood up to a constant, so it also applies to non-nested models fitted to the same response data."
+ },
+ {
+  "id": "reg2-4.1",
+  "lecture": 4,
+  "stem": "In a Poisson regression with log link, $\\log\\mu_i=x_i^\\top\\beta$, what does $e^{\\beta_j}$ represent?",
+  "correct": [
+   "The factor by which the expected count is multiplied per unit increase in $x_j$.",
+   "The rate ratio for a one-unit change in $x_j$."
+  ],
+  "distractors": [
+   {
+    "text": "The amount added to the expected count for a one-unit increase in $x_j$.",
+    "misconception": "treats a multiplicative effect as additive"
+   },
+   {
+    "text": "The odds ratio for a one-unit increase in $x_j$, as in logistic regression.",
+    "misconception": "confuses the rate ratio with the odds ratio"
+   },
+   {
+    "text": "The change in the log expected count, which is $\\beta_j$ itself and not its exponential.",
+    "misconception": "forgets that the exponential converts the log change into a ratio"
+   },
+   {
+    "text": "The probability that the count exceeds zero when $x_j$ is one.",
+    "misconception": "confuses the coefficient with a probability"
+   },
+   {
+    "text": "The expected count when $x_j=0$, with the other covariates held at their mean.",
+    "misconception": "confuses the slope with the intercept"
+   }
+  ],
+  "explanation": "$\\mu(x_j+1)/\\mu(x_j)=e^{\\beta_j}$ is constant, so effects are multiplicative on the mean count."
+ },
+ {
+  "id": "reg2-4.2",
+  "lecture": 4,
+  "stem": "A Poisson model is fitted to count data whose true variance exceeds the mean, while the mean is correctly specified. What is the consequence?",
+  "correct": [
+   "The estimates of $\\beta$ stay consistent, but the standard errors are too small.",
+   "Coefficients remain valid, while the reported intervals are too narrow and tests reject too often."
+  ],
+  "distractors": [
+   {
+    "text": "The coefficient estimates are biased towards zero, though the standard errors remain valid.",
+    "misconception": "believes overdispersion biases the point estimates"
+   },
+   {
+    "text": "The usual standard errors are too large, so the tests are conservative.",
+    "misconception": "reverses the direction of the error in the standard errors"
+   },
+   {
+    "text": "Nothing changes, because the Poisson likelihood automatically adapts its variance to the data.",
+    "misconception": "forgets that the variance is tied to the mean"
+   },
+   {
+    "text": "The Poisson inference stays fully valid, because overdispersion affects only the mean function.",
+    "misconception": "confuses overdispersion with a mean-specification problem"
+   },
+   {
+    "text": "The deviance becomes much smaller than its degrees of freedom.",
+    "misconception": "confuses overdispersion with underdispersion"
+   }
+  ],
+  "explanation": "Overdispersion means $\\operatorname{Var}(Y)>\\mu$. Quasi-Poisson (scaling the standard errors by $\\sqrt{\\hat\\phi}$) or the negative binomial model corrects the inference."
+ },
+ {
+  "id": "reg2-4.3",
+  "lecture": 4,
+  "stem": "Which statement describes the negative binomial regression model for counts?",
+  "correct": [
+   "The variance is $\\mu+\\mu^2/k$, above the mean and growing faster than linearly.",
+   "It allows variance above the mean and tends to Poisson as the dispersion goes to zero."
+  ],
+  "distractors": [
+   {
+    "text": "The variance equals the mean, as in the Poisson model, but the mean can be larger.",
+    "misconception": "assigns the Poisson variance to the negative binomial"
+   },
+   {
+    "text": "The variance is smaller than the mean, so it models underdispersed counts.",
+    "misconception": "reverses the direction of the dispersion"
+   },
+   {
+    "text": "The variance is a constant that does not depend on the mean.",
+    "misconception": "carries over the constant variance of the normal model"
+   },
+   {
+    "text": "The variance is proportional to the mean, $\\operatorname{Var}(Y)=\\phi\\mu$, for a fixed constant $\\phi$.",
+    "misconception": "confuses the negative binomial with quasi-Poisson variance"
+   },
+   {
+    "text": "It cannot represent overdispersion, which needs a mixed-effects model.",
+    "misconception": "believes the negative binomial lacks dispersion"
+   }
+  ],
+  "explanation": "The negative binomial is a gamma mixture of Poisson distributions: conditional on a gamma-distributed rate the count is Poisson, so the extra variance is $\\mu^2/k$."
+ },
+ {
+  "id": "reg2-4.4",
+  "lecture": 4,
+  "stem": "Counts $Y_i$ arise over different exposure times $t_i$. Why is $\\log t_i$ included as an offset in a Poisson regression?",
+  "correct": [
+   "The offset has a coefficient fixed at one, so the model describes the rate $\\mu_i/t_i$.",
+   "It makes $E[Y_i]=t_i\\exp(x_i^\\top\\beta)$, so $\\beta$ acts on the rate per unit time."
+  ],
+  "distractors": [
+   {
+    "text": "The coefficient of $\\log t_i$ is estimated freely from the data, like any other covariate.",
+    "misconception": "confuses an offset with an ordinary covariate"
+   },
+   {
+    "text": "The offset has coefficient zero, so it has no effect on the fitted values.",
+    "misconception": "thinks an offset is a dummy term"
+   },
+   {
+    "text": "The offset multiplies the response $Y_i$ by $t_i$ so that large exposures are weighted down.",
+    "misconception": "confuses an offset with a case weight"
+   },
+   {
+    "text": "The offset is used only to avoid taking the logarithm of zero counts.",
+    "misconception": "invents a purpose unrelated to exposure"
+   },
+   {
+    "text": "The model is fitted to the log counts $\\log Y_i$, with $\\log t_i$ as the response correction.",
+    "misconception": "confuses the offset with a log-transformed response"
+   }
+  ],
+  "explanation": "With $\\log\\mu_i=\\log t_i+x_i^\\top\\beta$ the exposure enters exactly proportionally. Without an offset a unit change in exposure would be absorbed in an estimated slope."
+ },
+ {
+  "id": "reg2-4.5",
+  "lecture": 4,
+  "stem": "How is the dispersion in a Poisson model assessed from a fitted model?",
+  "correct": [
+   "By Pearson's statistic over the residual df; far above one means overdispersion.",
+   "By $\\sum(y_i-\\hat\\mu_i)^2/\\hat\\mu_i$ divided by its df; a ratio far above one signals extra variation."
+  ],
+  "distractors": [
+   {
+    "text": "By the same ratio, where a value well below one indicates overdispersion.",
+    "misconception": "reverses the interpretation of the ratio"
+   },
+   {
+    "text": "By the deviance divided by $n$, which equals one when the model fits.",
+    "misconception": "uses the wrong denominator"
+   },
+   {
+    "text": "It cannot be assessed, since the Poisson model fixes the variance equal to the mean.",
+    "misconception": "confuses an assumption with a quantity that can be checked"
+   },
+   {
+    "text": "By the ratio of the largest to the smallest fitted mean.",
+    "misconception": "confuses the dispersion with the range of the fitted values"
+   },
+   {
+    "text": "By the squared sum of the coefficients, which is large when counts vary a lot.",
+    "misconception": "confuses the dispersion with the size of the coefficients"
+   }
+  ],
+  "explanation": "If the Poisson variance is right, $X^2/(n-p)$ is near one. The quasi-Poisson estimate $\\hat\\phi=X^2/(n-p)$ is used to inflate the standard errors."
+ },
+ {
+  "id": "reg2-5.1",
+  "lecture": 5,
+  "stem": "In a multinomial logistic (baseline-category) model for $K$ classes, how are the class probabilities obtained?",
+  "correct": [
+   "From $K-1$ linear predictors against a baseline class, via the softmax, so they sum to one.",
+   "Each non-baseline class has its own coefficient vector for its log-odds against the baseline."
+  ],
+  "distractors": [
+   {
+    "text": "From $K$ separate coefficient vectors, all of which are identified from the data.",
+    "misconception": "forgets that adding a common vector leaves the probabilities unchanged"
+   },
+   {
+    "text": "Each class probability is fitted by its own binary logistic regression, and the $K$ answers are used as they stand.",
+    "misconception": "overlooks that separate fits do not sum to one"
+   },
+   {
+    "text": "The probabilities equal the fitted linear predictors divided by $K$.",
+    "misconception": "confuses the softmax with simple averaging"
+   },
+   {
+    "text": "By ordering the classes and fitting cumulative probabilities with a shared slope.",
+    "misconception": "describes the ordinal model"
+   },
+   {
+    "text": "From one coefficient vector shared by all classes and class-specific intercepts.",
+    "misconception": "describes the proportional odds assumption"
+   }
+  ],
+  "explanation": "$P(Y=k\\mid x)=e^{x^\\top\\beta_k}/\\sum_je^{x^\\top\\beta_j}$ with $\\beta_K=0$. Fitting separate binary logistic regressions is a different estimator."
+ },
+ {
+  "id": "reg2-5.2",
+  "lecture": 5,
+  "stem": "What does the independence of irrelevant alternatives (IIA) property say about the multinomial logit model?",
+  "correct": [
+   "The odds of $j$ against $k$ depend only on their own linear predictors, not on other classes.",
+   "Adding or removing other classes leaves the odds between two classes unchanged."
+  ],
+  "distractors": [
+   {
+    "text": "The odds between two classes depend on all the other classes through the normalising constant.",
+    "misconception": "confuses the probabilities with the odds"
+   },
+   {
+    "text": "The model treats the classes as ordered, so a change in one class shifts the rest.",
+    "misconception": "confuses nominal and ordinal outcomes"
+   },
+   {
+    "text": "The class probabilities do not depend on the covariates $x$.",
+    "misconception": "takes independence from alternatives to mean independence from covariates"
+   },
+   {
+    "text": "Each observation's class is independent of every other observation.",
+    "misconception": "confuses IIA with independence between observations"
+   },
+   {
+    "text": "The sum of the class probabilities need not equal one if irrelevant classes are dropped.",
+    "misconception": "forgets that probabilities are renormalised"
+   }
+  ],
+  "explanation": "$P_j/P_k=\\exp\\{x^\\top(\\beta_j-\\beta_k)\\}$ because the denominators cancel. This can be unrealistic when two classes are close substitutes."
+ },
+ {
+  "id": "reg2-5.3",
+  "lecture": 5,
+  "stem": "Which statement describes the proportional odds (cumulative logit) model for an ordinal response with categories $1,\\dots,K$?",
+  "correct": [
+   "$\\operatorname{logit}P(Y\\le j\\mid x)=\\alpha_j-x^\\top\\beta$, with ordered intercepts and a common slope vector.",
+   "The same $\\beta$ applies at every cut point; only the increasing intercepts differ."
+  ],
+  "distractors": [
+   {
+    "text": "Each cut point has its own slope vector, so the effects of covariates differ across cut points.",
+    "misconception": "describes a non-proportional model"
+   },
+   {
+    "text": "All the intercepts $\\alpha_j$ are equal, and only the slopes change between cut points.",
+    "misconception": "reverses the role of intercepts and slopes"
+   },
+   {
+    "text": "The categories are treated as unordered and compared with a baseline class.",
+    "misconception": "describes the multinomial logit"
+   },
+   {
+    "text": "The model is fitted by ordinary least squares on the category scores $1,\\dots,K$.",
+    "misconception": "treats the ordinal score as a numeric response"
+   },
+   {
+    "text": "The slope vector is zero, since the ordering of the categories carries all the information.",
+    "misconception": "thinks the ordering removes the need for covariates"
+   }
+  ],
+  "explanation": "The odds of $Y\\le j$ versus $Y>j$ are multiplied by $e^{-x^\\top\\beta}$ at every $j$, the same factor at each cut point (hence \"proportional odds\")."
+ },
+ {
+  "id": "reg2-5.4",
+  "lecture": 5,
+  "stem": "In the model $\\operatorname{logit}P(Y\\le j\\mid x)=\\alpha_j-x^\\top\\beta$ with $\\beta_1>0$, what does an increase in $x_1$ do?",
+  "correct": [
+   "It shifts probability towards higher categories at every cut point.",
+   "The probability of being in a category at or below any $j$ falls, so responses tend to be higher."
+  ],
+  "distractors": [
+   {
+    "text": "It shifts probability towards the lower categories, at every cut point.",
+    "misconception": "gets the direction of the sign convention wrong"
+   },
+   {
+    "text": "It affects only the first cut point and leaves the others unchanged.",
+    "misconception": "forgets that the same slope applies at every cut point"
+   },
+   {
+    "text": "It multiplies the probability of each single category by $e^{\\beta_1}$.",
+    "misconception": "confuses the odds of cumulative events with single-category probabilities"
+   },
+   {
+    "text": "It makes the intercepts $\\alpha_j$ closer together.",
+    "misconception": "confuses a covariate effect with a change in the cut points"
+   },
+   {
+    "text": "It leaves the distribution unchanged because the response is categorical.",
+    "misconception": "believes covariates cannot affect categorical outcomes"
+   }
+  ],
+  "explanation": "$P(Y\\le j)=\\operatorname{expit}(\\alpha_j-x^\\top\\beta)$ decreases in $x_1$ when $\\beta_1>0$, for every $j$. The sign convention should always be checked in software."
+ },
+ {
+  "id": "reg2-5.5",
+  "lecture": 5,
+  "stem": "Why is one class fixed as a baseline (with coefficients zero) in the softmax model?",
+  "correct": [
+   "Adding one vector to all class coefficients leaves the probabilities unchanged, so one set is fixed.",
+   "Softmax probabilities are invariant to a common shift of the class scores."
+  ],
+  "distractors": [
+   {
+    "text": "The baseline class is the most frequent class and it needs no coefficients.",
+    "misconception": "thinks the baseline must be the largest class"
+   },
+   {
+    "text": "Without a baseline the probabilities would not sum to one.",
+    "misconception": "confuses identifiability with normalisation"
+   },
+   {
+    "text": "A baseline is needed only for ordinal responses, not for nominal ones.",
+    "misconception": "confuses the nominal and ordinal models"
+   },
+   {
+    "text": "The baseline class is predicted for every observation unless another class has a larger score.",
+    "misconception": "confuses the baseline with a default prediction"
+   },
+   {
+    "text": "The choice of baseline changes the fitted class probabilities, so it has to be chosen carefully.",
+    "misconception": "forgets that any baseline gives the same fit"
+   }
+  ],
+  "explanation": "$\\operatorname{softmax}(s+c\\mathbf 1)=\\operatorname{softmax}(s)$. A different baseline only reparametrises the coefficients; fitted probabilities stay the same."
+ },
+ {
+  "id": "reg2-6.1",
+  "lecture": 6,
+  "stem": "The ridge estimator minimises $\\|y-X\\beta\\|^2+\\lambda\\|\\beta\\|^2$. Which statement is true for $\\lambda>0$?",
+  "correct": [
+   "$X^\\top X+\\lambda I$ is invertible even when $X^\\top X$ is singular, for example if $p>n$.",
+   "A unique ridge solution exists even with collinear columns or more predictors than observations."
+  ],
+  "distractors": [
+   {
+    "text": "The estimator requires $X^\\top X$ to be invertible, as ordinary least squares does.",
+    "misconception": "forgets that the penalty makes the matrix invertible"
+   },
+   {
+    "text": "The solution contains exact zeros, which perform variable selection.",
+    "misconception": "confuses ridge with the lasso"
+   },
+   {
+    "text": "The estimator is unbiased for $\\beta$, because the penalty vanishes when the sample is large.",
+    "misconception": "forgets that the bias is present at every finite $n$"
+   },
+   {
+    "text": "The intercept is penalised in exactly the same way as the other coefficients.",
+    "misconception": "forgets that the intercept is normally left unpenalised"
+   },
+   {
+    "text": "For every $\\lambda>0$ the solution equals the least squares solution scaled by $1/\\lambda$.",
+    "misconception": "thinks ridge is a uniform rescaling of OLS"
+   }
+  ],
+  "explanation": "$\\hat\\beta_\\lambda=(X^\\top X+\\lambda I)^{-1}X^\\top y$. The extra $\\lambda I$ makes the matrix positive definite, which stabilises nearly collinear designs."
+ },
+ {
+  "id": "reg2-6.2",
+  "lecture": 6,
+  "stem": "How does ridge regression affect the bias and variance of the estimates compared with least squares?",
+  "correct": [
+   "It adds bias but lowers variance, and some $\\lambda>0$ beats least squares in MSE.",
+   "A suitable $\\lambda$ trades a little bias for a larger variance reduction."
+  ],
+  "distractors": [
+   {
+    "text": "It keeps the estimates unbiased and lowers their variance.",
+    "misconception": "forgets that shrinkage biases the estimates"
+   },
+   {
+    "text": "It raises the variance and lowers the bias as $\\lambda$ increases.",
+    "misconception": "reverses the direction of the bias-variance trade-off"
+   },
+   {
+    "text": "It lowers the mean squared error for every value of $\\lambda$, however large.",
+    "misconception": "forgets that a large $\\lambda$ can make the bias dominate"
+   },
+   {
+    "text": "It removes the bias of least squares in the presence of collinear predictors.",
+    "misconception": "confuses variance inflation with bias"
+   },
+   {
+    "text": "It leaves the variance unchanged and only adds bias, so it never improves prediction.",
+    "misconception": "ignores the variance reduction"
+   }
+  ],
+  "explanation": "$\\operatorname{MSE}(\\lambda)$ has a negative derivative at $\\lambda=0$ (for $\\beta\\ne0$), so a small positive $\\lambda$ always improves on OLS, but large $\\lambda$ does not."
+ },
+ {
+  "id": "reg2-6.3",
+  "lecture": 6,
+  "stem": "Write $X=UDV^\\top$ for the singular value decomposition. How does ridge regression shrink the least squares fit in the singular directions?",
+  "correct": [
+   "Directions with small singular values are shrunk most, by the factor $d_j^2/(d_j^2+\\lambda)$.",
+   "Each direction is scaled by $d_j^2/(d_j^2+\\lambda)$, so low-variance directions are damped most."
+  ],
+  "distractors": [
+   {
+    "text": "Every direction is shrunk by the same factor, whatever its singular value.",
+    "misconception": "confuses ridge with a uniform rescaling"
+   },
+   {
+    "text": "Directions with large singular values are shrunk most.",
+    "misconception": "reverses which directions are damped"
+   },
+   {
+    "text": "Directions with small singular values are set exactly to zero, and the others are left unchanged.",
+    "misconception": "confuses ridge with truncated SVD"
+   },
+   {
+    "text": "The shrinkage factor does not depend on the design, only on $\\lambda$ and the sample size.",
+    "misconception": "forgets that the factors involve the singular values"
+   },
+   {
+    "text": "Only the first principal component is shrunk, since it carries the most variance.",
+    "misconception": "gets the target of the shrinkage wrong"
+   }
+  ],
+  "explanation": "$X\\hat\\beta_\\lambda=\\sum_ju_j\\,\\frac{d_j^2}{d_j^2+\\lambda}\\,u_j^\\top y$. Directions along which the data are least informative are damped most."
+ },
+ {
+  "id": "reg2-6.4",
+  "lecture": 6,
+  "stem": "Why should predictors usually be standardised before ridge regression?",
+  "correct": [
+   "The penalty is not scale invariant: changing a predictor's units changes how strongly it is shrunk.",
+   "Predictors in small units are penalised less than those in large units, for no statistical reason."
+  ],
+  "distractors": [
+   {
+    "text": "Ridge regression is scale invariant, so standardisation changes nothing.",
+    "misconception": "believes that the penalty is invariant to units"
+   },
+   {
+    "text": "Standardising is needed only for the intercept, which is never penalised.",
+    "misconception": "confuses the role of standardisation with the intercept"
+   },
+   {
+    "text": "Standardising is required for the lasso but not for ridge, since $L_2$ penalties are rotation invariant.",
+    "misconception": "confuses rotation invariance with scale invariance"
+   },
+   {
+    "text": "Standardising makes the penalised solution equal to the least squares solution.",
+    "misconception": "thinks standardisation removes the effect of the penalty"
+   },
+   {
+    "text": "Standardising increases the variance of the coefficient estimates, which helps the shrinkage.",
+    "misconception": "invents an effect of standardising on the variance"
+   }
+  ],
+  "explanation": "Least squares fits are unchanged by rescaling a column, but $\\lambda\\sum\\beta_j^2$ penalises the coefficient on the original scale. Standardise first, and do not penalise the intercept."
+ },
+ {
+  "id": "reg2-6.5",
+  "lecture": 6,
+  "stem": "How does the effective number of parameters (degrees of freedom) of a ridge fit behave as $\\lambda$ increases?",
+  "correct": [
+   "It falls from $p$ towards zero as $\\lambda$ grows.",
+   "The trace of the hat matrix shrinks from $p$ towards 0."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $p$ for every $\\lambda$, since all $p$ coefficients stay in the model.",
+    "misconception": "confuses the number of coefficients with the effective dimension"
+   },
+   {
+    "text": "It increases with $\\lambda$, since more shrinkage adds flexibility.",
+    "misconception": "reverses the direction"
+   },
+   {
+    "text": "It equals the number of coefficients that are exactly zero.",
+    "misconception": "confuses ridge with a selection method"
+   },
+   {
+    "text": "It equals $n$ for every $\\lambda$, since the fit uses all the observations.",
+    "misconception": "confuses effective parameters with sample size"
+   },
+   {
+    "text": "It does not depend on the design matrix, only on $\\lambda$.",
+    "misconception": "forgets that the singular values enter the formula"
+   }
+  ],
+  "explanation": "$\\mathrm{df}(\\lambda)=\\operatorname{tr}\\{X(X^\\top X+\\lambda I)^{-1}X^\\top\\}=\\sum_jd_j^2/(d_j^2+\\lambda)$, which equals $p$ (or $\\operatorname{rank}X$) at $\\lambda=0$ and tends to 0."
+ },
+ {
+  "id": "reg2-7.1",
+  "lecture": 7,
+  "stem": "Why does the lasso penalty $\\lambda\\|\\beta\\|_1$ produce coefficients that are exactly zero, whereas the ridge penalty does not?",
+  "correct": [
+   "The $L_1$ ball has corners on the axes, so contours often touch it where coordinates vanish.",
+   "The $L_1$ penalty has a kink at zero, so a coefficient can sit exactly at zero."
+  ],
+  "distractors": [
+   {
+    "text": "The lasso penalty is smooth at zero and shrinks every coefficient by the same proportion.",
+    "misconception": "confuses the lasso with ridge"
+   },
+   {
+    "text": "The $L_2$ ball has corners on the axes, which is why ridge sets small coefficients to zero.",
+    "misconception": "attributes the corners to the wrong norm"
+   },
+   {
+    "text": "The lasso deletes the predictors with the smallest variance, whatever their effect on the response.",
+    "misconception": "confuses penalised selection with variance filtering"
+   },
+   {
+    "text": "Exact zeros appear only when the predictors are orthogonal and never in general designs.",
+    "misconception": "believes sparsity is a special case of orthogonality"
+   },
+   {
+    "text": "The lasso penalty is applied to the residuals, which then become exactly zero.",
+    "misconception": "confuses penalising coefficients with penalising residuals"
+   }
+  ],
+  "explanation": "In one dimension the lasso solution is a soft-threshold, which is exactly zero when the least squares value is small enough (in absolute value, at most $\\lambda$ for an orthonormal design). The ridge solution is a proportional shrinkage, never exactly zero."
+ },
+ {
+  "id": "reg2-7.2",
+  "lecture": 7,
+  "stem": "For an orthonormal design with least squares coefficient $\\hat\\beta^{\\mathrm{ols}}_j$, what does the lasso do to $\\hat\\beta^{\\mathrm{ols}}_j$?",
+  "correct": [
+   "It subtracts the threshold from its absolute value, keeps the sign, and gives zero if below.",
+   "Soft-thresholding: shrink towards zero by a fixed amount and set to zero if smaller than it."
+  ],
+  "distractors": [
+   {
+    "text": "It multiplies every coefficient by the factor $1/(1+\\lambda)$.",
+    "misconception": "describes ridge regression for an orthonormal design"
+   },
+   {
+    "text": "It keeps coefficients above the threshold unchanged and sets the rest to zero.",
+    "misconception": "describes hard thresholding, which does not shrink the large ones"
+   },
+   {
+    "text": "It subtracts the threshold from every coefficient, even from those smaller than it, so the signs can flip.",
+    "misconception": "forgets to cut off at zero"
+   },
+   {
+    "text": "It sets exactly the smallest $\\lambda$ coefficients to zero, whatever their size.",
+    "misconception": "confuses the penalty parameter with a count of coefficients"
+   },
+   {
+    "text": "It leaves all coefficients unchanged, because orthonormal designs have no estimation error to shrink.",
+    "misconception": "believes orthogonality removes the need for shrinkage"
+   }
+  ],
+  "explanation": "$\\hat\\beta_j=\\operatorname{sign}(\\hat\\beta^{\\mathrm{ols}}_j)(|\\hat\\beta^{\\mathrm{ols}}_j|-\\lambda)_+$ (up to the scaling of $\\lambda$). Large coefficients are shrunk by $\\lambda$ and small ones removed."
+ },
+ {
+  "id": "reg2-7.3",
+  "lecture": 7,
+  "stem": "How does coordinate descent solve the lasso problem?",
+  "correct": [
+   "It cycles through the coefficients, soft-thresholding each against the partial residual.",
+   "Each step minimises exactly over one coordinate with the others fixed, a soft-threshold solution."
+  ],
+  "distractors": [
+   {
+    "text": "It updates all the coefficients at once with a closed-form formula, so no iteration is needed.",
+    "misconception": "believes the lasso has a closed form for general designs"
+   },
+   {
+    "text": "It cannot be applied, since the $L_1$ penalty is not differentiable at zero.",
+    "misconception": "thinks nondifferentiability blocks coordinate-wise minimisation"
+   },
+   {
+    "text": "It needs the design to be orthogonal, because otherwise the coordinates interact.",
+    "misconception": "believes the method requires orthogonality"
+   },
+   {
+    "text": "It converges to the ridge solution, because both penalties are convex.",
+    "misconception": "confuses the two penalised solutions"
+   },
+   {
+    "text": "It updates each coefficient by a step along the negative gradient of the unpenalised loss only.",
+    "misconception": "ignores the penalty in the update"
+   }
+  ],
+  "explanation": "Each coordinate update is $\\hat\\beta_j\\leftarrow S(x_j^\\top r_{(j)},\\lambda)/\\|x_j\\|^2$ with $r_{(j)}$ the partial residual. The objective is convex, so cycling converges."
+ },
+ {
+  "id": "reg2-7.4",
+  "lecture": 7,
+  "stem": "Several predictors are highly correlated and all carry signal. What does the lasso tend to do with them?",
+  "correct": [
+   "It tends to keep one of the group, rather arbitrarily, and drop the others.",
+   "Among nearly identical predictors it keeps a few, and a small data change can alter which."
+  ],
+  "distractors": [
+   {
+    "text": "It gives all of them equal coefficients, spreading the effect evenly over the group.",
+    "misconception": "attributes the grouping effect of ridge and elastic net to the lasso"
+   },
+   {
+    "text": "It always selects the predictor with the largest variance in the group.",
+    "misconception": "invents a deterministic rule"
+   },
+   {
+    "text": "It never selects any predictor that is correlated with another predictor.",
+    "misconception": "believes correlated predictors are all rejected"
+   },
+   {
+    "text": "It handles correlated predictors better than ridge, always keeping all the relevant ones.",
+    "misconception": "forgets that the lasso drops some in a correlated group"
+   },
+   {
+    "text": "It averages the correlated predictors into a single new variable before fitting.",
+    "misconception": "confuses the lasso with a principal components step"
+   }
+  ],
+  "explanation": "With correlated predictors the $L_1$ solution is not unique in the limit of perfect correlation and is unstable otherwise; the elastic net adds a ridge term to spread the weight."
+ },
+ {
+  "id": "reg2-7.5",
+  "lecture": 7,
+  "stem": "Which statement about lasso estimates is correct?",
+  "correct": [
+   "Nonzero estimates are shrunk towards zero, and with $p>n$ at most $n$ can be nonzero.",
+   "Shrinkage biases the selected coefficients, and at most $n$ variables are used when $p>n$."
+  ],
+  "distractors": [
+   {
+    "text": "The nonzero estimates are unbiased, since only the zero ones are affected by the penalty.",
+    "misconception": "forgets that the penalty shrinks all coefficients"
+   },
+   {
+    "text": "When $p>n$ the lasso can select all $p$ variables, since the penalty removes the ill-conditioning.",
+    "misconception": "confuses the lasso with ridge or the elastic net"
+   },
+   {
+    "text": "The nonzero estimates equal the least squares estimates on the selected variables.",
+    "misconception": "forgets that the lasso estimates are shrunk"
+   },
+   {
+    "text": "The lasso selects exactly the true set of relevant predictors in every design, for large $n$.",
+    "misconception": "ignores the conditions needed for selection consistency"
+   },
+   {
+    "text": "Ordinary standard errors computed after selection are valid, because the model is chosen before fitting.",
+    "misconception": "ignores that the selection used the same data"
+   }
+  ],
+  "explanation": "The lasso solution has at most $\\min(n,p)$ nonzero coefficients. Selection and shrinkage together mean that naive post-selection standard errors are invalid."
+ },
+ {
+  "id": "reg2-8.1",
+  "lecture": 8,
+  "stem": "How is the elastic net penalty constructed?",
+  "correct": [
+   "A combination of $L_1$ and $L_2$ penalties with a mixing weight, lasso at $\\alpha=1$ and ridge at $\\alpha=0$.",
+   "A weighted sum of the lasso and ridge penalties."
+  ],
+  "distractors": [
+   {
+    "text": "As the product of the $L_1$ and $L_2$ penalties, which is zero if either is zero.",
+    "misconception": "multiplies instead of adding"
+   },
+   {
+    "text": "With $\\alpha=1$ giving ridge and $\\alpha=0$ giving the lasso.",
+    "misconception": "swaps the two special cases"
+   },
+   {
+    "text": "By applying the lasso penalty to some coefficients and the ridge penalty to the others.",
+    "misconception": "confuses a blended penalty with a split of the coefficients"
+   },
+   {
+    "text": "As the sum of the $L_0$ and $L_2$ norms, which counts the nonzero coefficients.",
+    "misconception": "confuses the $L_1$ penalty with the nonconvex $L_0$ penalty"
+   },
+   {
+    "text": "As a nonconvex penalty, so the solution may depend on the starting point.",
+    "misconception": "forgets that the combination is convex"
+   }
+  ],
+  "explanation": "Penalty $\\lambda\\{\\alpha\\|\\beta\\|_1+\\tfrac{1-\\alpha}{2}\\|\\beta\\|_2^2\\}$ is convex, strictly so when $\\alpha<1$."
+ },
+ {
+  "id": "reg2-8.2",
+  "lecture": 8,
+  "stem": "Which property distinguishes the elastic net from the lasso when predictors are correlated?",
+  "correct": [
+   "It gives correlated predictors similar coefficients, and can select more than $n$ variables.",
+   "The $L_2$ term gives a grouping effect, and the selection is not capped at $n$."
+  ],
+  "distractors": [
+   {
+    "text": "It picks an arbitrary single predictor from each correlated group.",
+    "misconception": "attributes the behaviour of the lasso to the elastic net"
+   },
+   {
+    "text": "It cannot select more than $n$ predictors when $p>n$, exactly like the lasso.",
+    "misconception": "forgets that the cap does not apply with the ridge term"
+   },
+   {
+    "text": "It gives zero coefficients to all but one of the correlated predictors.",
+    "misconception": "describes the lasso's sparse treatment of a group"
+   },
+   {
+    "text": "It performs no better than the lasso whenever the predictors are correlated.",
+    "misconception": "ignores the benefit of the grouping effect"
+   },
+   {
+    "text": "It requires the predictors to be uncorrelated, since the ridge term assumes an orthogonal design.",
+    "misconception": "believes ridge needs orthogonality"
+   }
+  ],
+  "explanation": "The strictly convex $L_2$ part makes the solution unique and pulls the coefficients of highly correlated predictors together; the $L_1$ part still gives sparsity."
+ },
+ {
+  "id": "reg2-8.3",
+  "lecture": 8,
+  "stem": "Why is the tuning parameter $\\lambda$ chosen by held-out error, such as $K$-fold cross-validation, rather than by the training error?",
+  "correct": [
+   "Training error keeps falling as $\\lambda$ falls, so it always favours the most overfitted model.",
+   "Cross-validation scores the fit on held-out data, so it detects when a smaller $\\lambda$ overfits."
+  ],
+  "distractors": [
+   {
+    "text": "The training error is smallest at the best $\\lambda$, so both criteria give the same choice.",
+    "misconception": "believes training error is a good selection criterion"
+   },
+   {
+    "text": "Cross-validation chooses the $\\lambda$ at which all coefficients become nonzero.",
+    "misconception": "confuses model choice with a path property"
+   },
+   {
+    "text": "Cross-validation needs more predictors than observations to work.",
+    "misconception": "invents a condition on $p$ and $n$"
+   },
+   {
+    "text": "The training error is biased upward, so it overstates the prediction error.",
+    "misconception": "gets the direction of the optimism wrong"
+   },
+   {
+    "text": "Cross-validation fits each model once on all the data and divides the residuals into $K$ groups.",
+    "misconception": "misdescribes cross-validation as splitting residuals"
+   }
+  ],
+  "explanation": "In $K$-fold CV, for each $\\lambda$ the model is refitted on $K-1$ folds and scored on the held-out fold; the average error is minimised over $\\lambda$. Training error is optimistic."
+ },
+ {
+  "id": "reg2-8.4",
+  "lecture": 8,
+  "stem": "What does the \"one-standard-error rule\" recommend when choosing $\\lambda$ by cross-validation?",
+  "correct": [
+   "Take the most heavily penalised model with CV error within one standard error of the minimum.",
+   "Prefer the simplest model that predicts almost as well as the best."
+  ],
+  "distractors": [
+   {
+    "text": "Take the least penalised model whose CV error is within one standard error of the minimum.",
+    "misconception": "reverses the direction towards complexity"
+   },
+   {
+    "text": "Take the $\\lambda$ whose CV error equals the minimum CV error plus exactly one standard error.",
+    "misconception": "treats the rule as an equality"
+   },
+   {
+    "text": "Average all the $\\lambda$ values whose CV error is within one standard error of the minimum.",
+    "misconception": "invents an averaging step"
+   },
+   {
+    "text": "Choose the $\\lambda$ at which the training error equals the CV error.",
+    "misconception": "confuses the rule with comparing training and validation error"
+   },
+   {
+    "text": "Choose the $\\lambda$ that gives the smallest standard error of the CV error.",
+    "misconception": "confuses minimising error with minimising variability"
+   }
+  ],
+  "explanation": "The rule favours parsimony because the CV curve is flat near its minimum and noisy, so a larger $\\lambda$ within noise is usually preferable."
+ },
+ {
+  "id": "reg2-8.5",
+  "lecture": 8,
+  "stem": "Why does the smallest cross-validation error found during tuning give an optimistic estimate of future prediction error?",
+  "correct": [
+   "The same data selected the best $\\lambda$, so the minimum over candidates is biased downward.",
+   "The winner among many $\\lambda$ values uses the held-out errors twice, to choose and to assess."
+  ],
+  "distractors": [
+   {
+    "text": "Because cross-validation always overestimates the error of the fitted model.",
+    "misconception": "believes CV is pessimistic in general"
+   },
+   {
+    "text": "Because the minimum CV error is an unbiased estimate of future error, which does not require a fresh test set.",
+    "misconception": "ignores the selection effect"
+   },
+   {
+    "text": "Because only the training folds are used in the final estimate.",
+    "misconception": "misdescribes the mechanism of CV"
+   },
+   {
+    "text": "Because the standardisation of the predictors uses a different scale in each fold.",
+    "misconception": "confuses the selection bias with a scaling issue"
+   },
+   {
+    "text": "It is not optimistic; the optimism only matters when the number of candidate values of $\\lambda$ is below five.",
+    "misconception": "invents a threshold on the grid size"
+   }
+  ],
+  "explanation": "Use nested cross-validation or a separate test set for the final assessment, and repeat standardisation and any variable screening inside each training fold."
+ },
+ {
+  "id": "reg2-8.6",
+  "lecture": 8,
+  "stem": "Why must preprocessing steps that use the response, such as screening predictors by correlation with $y$, be repeated inside each cross-validation fold?",
+  "correct": [
+   "Doing them on all data first lets held-out information leak into the fit.",
+   "Screening on the full data uses the held-out responses, so validation error is no longer honest."
+  ],
+  "distractors": [
+   {
+    "text": "It is not necessary, because screening is a fixed step that is independent of the model.",
+    "misconception": "ignores that screening depends on the response"
+   },
+   {
+    "text": "Screening on all the data first makes the CV error too pessimistic.",
+    "misconception": "gets the direction of the leakage bias wrong"
+   },
+   {
+    "text": "It is necessary only for ridge regression, since the lasso performs its own selection.",
+    "misconception": "thinks only some penalised methods can leak"
+   },
+   {
+    "text": "Repeating the step in each fold is required because folds must have equal sizes.",
+    "misconception": "confuses leakage with fold balancing"
+   },
+   {
+    "text": "It matters only when the sample size is above one thousand.",
+    "misconception": "invents a sample-size threshold"
+   }
+  ],
+  "explanation": "Any step that looks at $y$ is part of the fitted procedure. With many predictors, screening on all the data can make pure noise appear to predict well in CV."
+ },
+ {
+  "id": "reg2-9.1",
+  "lecture": 9,
+  "stem": "What is the key feature of a regression using a basis expansion $f(x)=\\sum_j\\beta_jB_j(x)$ with fixed basis functions?",
+  "correct": [
+   "The model is linear in the coefficients, so least squares applies although $f$ is nonlinear in $x$.",
+   "With the basis chosen, it is a linear regression on the features $B_j(x)$."
+  ],
+  "distractors": [
+   {
+    "text": "The fit needs nonlinear optimisation over the coefficients because $f$ is nonlinear in $x$.",
+    "misconception": "confuses nonlinearity in $x$ with nonlinearity in the parameters"
+   },
+   {
+    "text": "The fitted function must be linear in $x$, so a basis expansion cannot capture curvature.",
+    "misconception": "forgets that the basis functions can be nonlinear"
+   },
+   {
+    "text": "The basis functions must be orthogonal for the coefficients to be identified.",
+    "misconception": "believes orthogonality is required"
+   },
+   {
+    "text": "The coefficients cannot be penalised, since they refer to the shape of the whole curve.",
+    "misconception": "thinks penalties do not apply to basis coefficients"
+   },
+   {
+    "text": "The number of basis functions must equal the number of observations.",
+    "misconception": "confuses a basis expansion with interpolation"
+   }
+  ],
+  "explanation": "For example $B_j(x)=x^j$ or B-spline functions. The design matrix has columns $B_j(x_i)$, and all linear model tools (hat matrix, CV shortcuts) apply."
+ },
+ {
+  "id": "reg2-9.2",
+  "lecture": 9,
+  "stem": "What defines a cubic spline with knots $\\xi_1<\\dots<\\xi_K$?",
+  "correct": [
+   "A piecewise cubic with continuous first and second derivatives at each knot.",
+   "Cubics joined at the knots so that the function and its first two derivatives are continuous."
+  ],
+  "distractors": [
+   {
+    "text": "A piecewise cubic with only the function values continuous at the knots, so the slope may jump.",
+    "misconception": "describes a weaker smoothness class"
+   },
+   {
+    "text": "A single cubic polynomial fitted to all the data, with the knots used only as plotting positions.",
+    "misconception": "confuses a spline with a global polynomial"
+   },
+   {
+    "text": "A piecewise cubic whose third derivative is continuous at every knot.",
+    "misconception": "asks for too much smoothness, which would force a single cubic"
+   },
+   {
+    "text": "A piecewise linear function with kinks at the knots.",
+    "misconception": "describes a linear spline"
+   },
+   {
+    "text": "A cubic polynomial in each piece, with the knots estimated freely as extra parameters in a regression spline.",
+    "misconception": "forgets that regression spline knots are chosen in advance"
+   }
+  ],
+  "explanation": "Continuity of $f,f',f''$ gives a function that looks smooth to the eye; only the third derivative jumps at a knot."
+ },
+ {
+  "id": "reg2-9.3",
+  "lecture": 9,
+  "stem": "What distinguishes a natural cubic spline from an ordinary cubic spline?",
+  "correct": [
+   "It is linear beyond the boundary knots, reducing boundary variance.",
+   "Outside the outermost knots it is a straight line, avoiding erratic cubic tails."
+  ],
+  "distractors": [
+   {
+    "text": "It is constant beyond the boundary knots, so the fitted curve flattens out.",
+    "misconception": "confuses linear with constant extrapolation"
+   },
+   {
+    "text": "It is quadratic beyond the boundary knots, giving gentle curvature.",
+    "misconception": "gives the wrong degree for the extrapolation"
+   },
+   {
+    "text": "It remains cubic beyond the boundary knots, but with an extra knot at each end.",
+    "misconception": "misses the constraint on the boundary behaviour"
+   },
+   {
+    "text": "It interpolates every data point exactly whatever the number of knots.",
+    "misconception": "confuses the natural spline with the interpolating spline"
+   },
+   {
+    "text": "It has no continuity constraints at the knots, only at the boundary points.",
+    "misconception": "reverses where the constraints apply"
+   }
+  ],
+  "explanation": "The two boundary constraints (second and third derivatives zero at the ends) cost two parameters each side but reduce boundary variance, where there is little data."
+ },
+ {
+  "id": "reg2-9.4",
+  "lecture": 9,
+  "stem": "A smoothing spline minimises $\\sum_i\\{y_i-f(x_i)\\}^2+\\lambda\\int f''(t)^2\\,dt$. What is true of its solution?",
+  "correct": [
+   "A natural cubic spline with knots at the data; $\\lambda\\to\\infty$ gives a line.",
+   "The minimiser is a natural cubic spline, tending to a linear fit as the penalty grows."
+  ],
+  "distractors": [
+   {
+    "text": "As $\\lambda\\to\\infty$ the solution interpolates the data, and as $\\lambda\\to0$ it becomes a straight line.",
+    "misconception": "swaps the limits"
+   },
+   {
+    "text": "The solution is a polynomial of degree $n-1$ that passes through every data point.",
+    "misconception": "confuses the smoothing spline with polynomial interpolation"
+   },
+   {
+    "text": "The knots must be placed on an equally spaced grid chosen by the analyst.",
+    "misconception": "forgets that the knots are at the data points"
+   },
+   {
+    "text": "As $\\lambda\\to\\infty$ the fit becomes a constant function equal to the sample mean.",
+    "misconception": "forgets that straight lines have zero second derivative and are not penalised"
+   },
+   {
+    "text": "The penalty is on the first derivative $\\int f'(t)^2dt$, which flattens the curve.",
+    "misconception": "misstates the order of the derivative in the penalty"
+   }
+  ],
+  "explanation": "Linear functions have $f''=0$, so they are unpenalised and are the limit for $\\lambda\\to\\infty$. For small $\\lambda$ the fit passes through the data."
+ },
+ {
+  "id": "reg2-9.5",
+  "lecture": 9,
+  "stem": "How does the flexibility of a spline regression (number of knots, or $\\lambda$ for a smoothing spline) affect bias and variance?",
+  "correct": [
+   "More flexibility lowers bias and raises variance; choose it by cross-validation or GCV.",
+   "Fewer knots or a larger $\\lambda$ give a smoother fit with more bias and less variance."
+  ],
+  "distractors": [
+   {
+    "text": "More knots always lower the test error, because the fit can follow the data more closely.",
+    "misconception": "confuses training error with test error"
+   },
+   {
+    "text": "The number of knots affects only the variance, with bias unchanged.",
+    "misconception": "ignores the bias of an over-smooth fit"
+   },
+   {
+    "text": "The effective degrees of freedom of a smoothing spline equal $n$ for every $\\lambda$.",
+    "misconception": "forgets that the penalty reduces the effective dimension"
+   },
+   {
+    "text": "A larger $\\lambda$ raises the variance and lowers the bias.",
+    "misconception": "reverses the effect of smoothing"
+   },
+   {
+    "text": "The choice of flexibility is a matter of taste, as no data-driven criterion exists.",
+    "misconception": "forgets about cross-validation and information criteria"
+   }
+  ],
+  "explanation": "Training error always falls with flexibility, while test error is U-shaped. For a smoothing spline $\\mathrm{df}(\\lambda)=\\operatorname{tr}(S_\\lambda)$ falls from $n$ to 2 as $\\lambda$ grows."
+ },
+ {
+  "id": "reg2-10.1",
+  "lecture": 10,
+  "stem": "In the random-intercept model $y_{ij}=x_{ij}^\\top\\beta+u_i+\\varepsilon_{ij}$ with $u_i\\sim N(0,\\sigma_u^2)$, what is the effect of $u_i$ on the data?",
+  "correct": [
+   "Observations in a cluster share $u_i$, so they are positively correlated; clusters are independent.",
+   "The shared effect induces equal positive correlation within a cluster."
+  ],
+  "distractors": [
+   {
+    "text": "Observations within a cluster are independent, since the random effect has mean zero.",
+    "misconception": "confuses zero mean with zero covariance"
+   },
+   {
+    "text": "Observations from different clusters are correlated through the common $\\beta$.",
+    "misconception": "confuses a shared parameter with a shared random effect"
+   },
+   {
+    "text": "The $u_i$ are unknown fixed constants, estimated separately by maximum likelihood.",
+    "misconception": "confuses random effects with fixed effects"
+   },
+   {
+    "text": "Observations within a cluster are negatively correlated, because the cluster effects must sum to zero.",
+    "misconception": "gets the sign of the induced correlation wrong"
+   },
+   {
+    "text": "The random effect changes the variance of $\\varepsilon_{ij}$ but does not create any covariance.",
+    "misconception": "believes the effect only inflates variances"
+   }
+  ],
+  "explanation": "$\\operatorname{Cov}(y_{ij},y_{ik})=\\sigma_u^2$ for $j\\ne k$ in the same cluster and $\\operatorname{Var}(y_{ij})=\\sigma_u^2+\\sigma^2$, so the within-cluster correlation is $\\sigma_u^2/(\\sigma_u^2+\\sigma^2)$."
+ },
+ {
+  "id": "reg2-10.2",
+  "lecture": 10,
+  "stem": "What does the intraclass correlation $\\rho=\\sigma_u^2/(\\sigma_u^2+\\sigma^2)$ measure in the random-intercept model?",
+  "correct": [
+   "The share of total variance lying between clusters, equal to the within-cluster correlation.",
+   "The correlation of two responses from the same cluster."
+  ],
+  "distractors": [
+   {
+    "text": "The ratio $\\sigma_u^2/\\sigma^2$ of between-cluster to within-cluster variance.",
+    "misconception": "forgets the denominator includes the total variance"
+   },
+   {
+    "text": "The share of the total variance within clusters, $\\sigma^2/(\\sigma_u^2+\\sigma^2)$.",
+    "misconception": "swaps the between and within components"
+   },
+   {
+    "text": "The correlation between the random effect $u_i$ and the error $\\varepsilon_{ij}$.",
+    "misconception": "confuses it with a correlation between model terms"
+   },
+   {
+    "text": "The proportion of the variance explained by the fixed effects.",
+    "misconception": "confuses it with an $R^2$"
+   },
+   {
+    "text": "The correlation between a cluster's mean response and the overall mean response.",
+    "misconception": "confuses within-cluster correlation with a correlation of averages"
+   }
+  ],
+  "explanation": "A value near 1 means clusters differ greatly relative to the variation inside them; near 0 means clustering can be ignored."
+ },
+ {
+  "id": "reg2-10.3",
+  "lecture": 10,
+  "stem": "How do the best linear unbiased predictors (BLUPs) of the random effects $u_i$ relate to the raw cluster mean deviations?",
+  "correct": [
+   "They are shrunk towards zero, more for small clusters or when $\\sigma_u^2$ is small relative to $\\sigma^2$.",
+   "Each is the raw deviation times a factor below one, smaller for small noisy clusters."
+  ],
+  "distractors": [
+   {
+    "text": "They equal the raw cluster mean deviations, because the best predictor is the sample average.",
+    "misconception": "forgets the shrinkage that comes from the prior distribution of $u_i$"
+   },
+   {
+    "text": "They are shrunk more strongly for large clusters, since more data give more reason to shrink.",
+    "misconception": "reverses the dependence on cluster size"
+   },
+   {
+    "text": "They are pushed away from zero, to exaggerate the differences between clusters.",
+    "misconception": "gets the direction of the shrinkage wrong"
+   },
+   {
+    "text": "They are not shrunk at all if the cluster effect is treated as random.",
+    "misconception": "believes that treating an effect as random avoids shrinkage"
+   },
+   {
+    "text": "They are shrunk towards the observed cluster mean, not towards the overall mean.",
+    "misconception": "gets the target of the shrinkage wrong"
+   }
+  ],
+  "explanation": "For a balanced random intercept, $\\hat u_i=\\frac{\\sigma_u^2}{\\sigma_u^2+\\sigma^2/m}(\\bar y_{i\\cdot}-\\bar y)$ approximately, with $m$ the cluster size; the factor tends to one as $m$ grows."
+ },
+ {
+  "id": "reg2-10.4",
+  "lecture": 10,
+  "stem": "Why is REML often preferred to ML for estimating the variance components of a linear mixed model?",
+  "correct": [
+   "ML ignores the degrees of freedom used on the fixed effects, so it underestimates variances.",
+   "REML maximises a likelihood free of $\\beta$, which reduces the downward bias in variances."
+  ],
+  "distractors": [
+   {
+    "text": "ML gives larger variance estimates than REML, because it uses the fixed effects twice.",
+    "misconception": "reverses the direction of the ML bias"
+   },
+   {
+    "text": "REML estimates the fixed effects and the random effects but not the variance components.",
+    "misconception": "confuses what REML estimates"
+   },
+   {
+    "text": "REML is exactly unbiased for the variance components in every model.",
+    "misconception": "overstates the correction"
+   },
+   {
+    "text": "REML can be used to compare models with different fixed effects by a likelihood ratio test.",
+    "misconception": "forgets that the REML likelihood depends on the fixed-effects design"
+   },
+   {
+    "text": "REML needs the random effects to be treated as fixed unknowns.",
+    "misconception": "confuses the method with a fixed effects analysis"
+   }
+  ],
+  "explanation": "As in $S^2$ with divisor $n-1$ versus $n$, ML variance estimates are biased downward. Compare models with different fixed effects by ML, not REML."
+ },
+ {
+  "id": "reg2-10.5",
+  "lecture": 10,
+  "stem": "What is the main conceptual difference between treating cluster effects as random and as fixed?",
+  "correct": [
+   "Random effects treat clusters as a sample from a population, allowing inference about new clusters.",
+   "Random effects borrow strength by shrinking towards a common mean; fixed effects do not pool."
+  ],
+  "distractors": [
+   {
+    "text": "Random effects are estimated by ordinary least squares, whereas fixed effects need maximum likelihood.",
+    "misconception": "confuses the distinction with the estimation method"
+   },
+   {
+    "text": "Random effects cannot be used to predict for a new cluster, whereas fixed effects can.",
+    "misconception": "reverses what each approach can predict"
+   },
+   {
+    "text": "Fixed effects give shrunken estimates and random effects give raw cluster means.",
+    "misconception": "swaps shrinkage between the two"
+   },
+   {
+    "text": "The two differ only in name, and always give the same estimates.",
+    "misconception": "believes the choice is purely terminological"
+   },
+   {
+    "text": "Random effects are appropriate only when the number of clusters is very large, above ten thousand.",
+    "misconception": "invents a threshold on the number of clusters"
+   }
+  ],
+  "explanation": "A random-effects model has one variance parameter $\\sigma_u^2$ for the cluster effects, while a fixed-effects model has one free parameter per cluster. Few clusters make $\\sigma_u^2$ hard to estimate."
+ },
+ {
+  "id": "reg2-11.1",
+  "lecture": 11,
+  "stem": "What is the Huber loss $\\rho_k(r)$ for a scaled residual $r$?",
+  "correct": [
+   "Quadratic for $|r|\\le k$ and linear beyond, so large residuals have bounded influence.",
+   "$r^2/2$ near zero, growing linearly for large $|r|$."
+  ],
+  "distractors": [
+   {
+    "text": "Quadratic for every $r$, as in least squares.",
+    "misconception": "describes least squares"
+   },
+   {
+    "text": "Linear near zero and quadratic in the tails.",
+    "misconception": "reverses the two regimes"
+   },
+   {
+    "text": "Equal to a constant for $|r|>k$, so large residuals are ignored entirely.",
+    "misconception": "describes redescending losses, such as Tukey's biweight"
+   },
+   {
+    "text": "The cube of the absolute residual, $|r|^3$, which penalises large residuals even more.",
+    "misconception": "describes a loss that increases outlier influence"
+   },
+   {
+    "text": "The indicator that $|r|>k$, so that only the number of large residuals counts.",
+    "misconception": "confuses the loss with an outlier count"
+   }
+  ],
+  "explanation": "$\\rho_k(r)=r^2/2$ for $|r|\\le k$ and $k|r|-k^2/2$ otherwise: it behaves like least squares for small residuals and like least absolute deviations for large ones."
+ },
+ {
+  "id": "reg2-11.2",
+  "lecture": 11,
+  "stem": "How does the effect of a single outlying response on the Huber regression estimate compare with its effect on least squares?",
+  "correct": [
+   "Its effect is bounded for Huber but can be arbitrarily large for least squares.",
+   "Huber caps the influence of an outlying response, while least squares has unbounded influence."
+  ],
+  "distractors": [
+   {
+    "text": "It is bounded for least squares and unbounded for Huber.",
+    "misconception": "reverses the roles of the two estimators"
+   },
+   {
+    "text": "It is bounded for both, because both minimise a convex loss.",
+    "misconception": "believes convexity bounds the influence"
+   },
+   {
+    "text": "Huber regression is also unaffected by a high-leverage point in $x$, whatever the response.",
+    "misconception": "believes Huber protects against outliers in the covariates"
+   },
+   {
+    "text": "Both are affected identically, because the loss is quadratic near zero in both cases.",
+    "misconception": "ignores the tails of the loss"
+   },
+   {
+    "text": "Least squares ignores outlying responses, since squared residuals are averaged.",
+    "misconception": "misreads how squaring amplifies large residuals"
+   }
+  ],
+  "explanation": "The influence function of an M-estimator is proportional to $\\psi(r)=\\rho'(r)$, which is $r$ for least squares and clipped at $\\pm k$ for Huber. Huber does not control leverage."
+ },
+ {
+  "id": "reg2-11.3",
+  "lecture": 11,
+  "stem": "What is meant by the breakdown point of an estimator, and how do the sample mean and median compare?",
+  "correct": [
+   "The smallest contaminated fraction that can ruin the estimate: about 0 for the mean, one half for the median.",
+   "The median tolerates nearly half bad observations, the mean none in the limit."
+  ],
+  "distractors": [
+   {
+    "text": "It is the fraction of observations the estimator removes, which is zero for the mean and one half for the median.",
+    "misconception": "confuses breakdown with trimming"
+   },
+   {
+    "text": "The mean has breakdown point one half and the median has $1/n$.",
+    "misconception": "swaps the two"
+   },
+   {
+    "text": "Both the mean and the median have breakdown point $1/n$.",
+    "misconception": "believes the median is as fragile as the mean"
+   },
+   {
+    "text": "Its value is the asymptotic variance of the estimator under contamination.",
+    "misconception": "confuses breakdown with efficiency"
+   },
+   {
+    "text": "The breakdown point of an estimator can exceed one half in the location model.",
+    "misconception": "ignores that more than half of bad data cannot be resisted"
+   }
+  ],
+  "explanation": "One arbitrarily large observation moves the mean anywhere, so its breakdown point is $1/n\\to0$. The median needs about half the sample corrupted."
+ },
+ {
+  "id": "reg2-11.4",
+  "lecture": 11,
+  "stem": "Why is a robust estimate of scale, such as the median absolute deviation (MAD), used when fitting a Huber regression?",
+  "correct": [
+   "$k$ only makes sense relative to the residual scale, and an ordinary standard deviation is inflated by outliers.",
+   "Residuals must be standardised by a scale that outliers do not distort."
+  ],
+  "distractors": [
+   {
+    "text": "The ordinary residual standard deviation is just as robust, so the choice does not matter.",
+    "misconception": "forgets that the sample standard deviation has breakdown point zero"
+   },
+   {
+    "text": "The scale is needed only to compute $p$-values and does not affect the fitted coefficients.",
+    "misconception": "thinks scaling does not enter the estimating equations"
+   },
+   {
+    "text": "Huber regression has no scale parameter, since the loss is already bounded.",
+    "misconception": "believes the loss is scale free"
+   },
+   {
+    "text": "MAD is used because it is the maximum likelihood estimate of the scale under normality.",
+    "misconception": "confuses robustness with likelihood optimality"
+   },
+   {
+    "text": "A robust scale makes the loss quadratic for every residual.",
+    "misconception": "confuses the role of the scale with the threshold"
+   }
+  ],
+  "explanation": "Huber's $\\rho$ is applied to $r/s$. With $s$ the MAD (divided by 0.6745 for normal consistency) the threshold $k=1.345$ gives about 95% efficiency under normality."
+ },
+ {
+  "id": "reg2-11.5",
+  "lecture": 11,
+  "stem": "How is a Huber regression computed in practice?",
+  "correct": [
+   "By iteratively reweighted least squares, with weights $\\min(1,k/|r_i|)$ on scaled residuals.",
+   "Repeated weighted least squares with weight $\\psi(r_i)/r_i$ recomputed from current residuals."
+  ],
+  "distractors": [
+   {
+    "text": "By a single least squares fit, since the Huber estimate has a closed form.",
+    "misconception": "believes no iteration is needed"
+   },
+   {
+    "text": "By weighted least squares with weights that grow with the size of the residual.",
+    "misconception": "reverses the direction of the weights"
+   },
+   {
+    "text": "By weights that are exactly zero for all residuals above $k$, which removes them.",
+    "misconception": "describes the Tukey biweight, not the Huber estimator"
+   },
+   {
+    "text": "By discarding the 5% of observations with the largest residuals and refitting once by least squares.",
+    "misconception": "confuses it with trimmed least squares"
+   },
+   {
+    "text": "By linear programming, because the Huber loss is piecewise linear everywhere.",
+    "misconception": "ignores the quadratic part of the loss"
+   }
+  ],
+  "explanation": "Weights equal 1 for $|r|\\le k$ and $k/|r|$ otherwise, so large residuals are damped but never ignored. The objective is convex, so IRLS converges to the global minimum."
+ }
+]

@@ -1,0 +1,1602 @@
+[
+ {
+  "id": "hd-1.1",
+  "lecture": 1,
+  "stem": "What is the curse of dimensionality for nearest-neighbour methods?",
+  "correct": [
+   "Points are far apart and nearly equidistant, so \"near\" is not local.",
+   "Coverage needs exponentially many samples."
+  ],
+  "distractors": [
+   {
+    "text": "High-dimensional distances cannot be computed on a finite computer.",
+    "misconception": "confuses a statistical issue with a numerical one"
+   },
+   {
+    "text": "Distances become exactly zero, so every point is a neighbour of every other.",
+    "misconception": "misstates the concentration effect"
+   },
+   {
+    "text": "Neighbours become more informative as the dimension grows.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The problem occurs only when the number of observations is smaller than the dimension.",
+    "misconception": "restricts it to the case $p>n$"
+   },
+   {
+    "text": "It disappears if the variables are standardised.",
+    "misconception": "believes scaling removes the sparsity"
+   }
+  ],
+  "explanation": "For $n$ points uniform in $[0,1]^p$, a neighbourhood containing a fraction $r$ of the data has side length $r^{1/p}$, close to 1 for large $p$."
+ },
+ {
+  "id": "hd-1.2",
+  "lecture": 1,
+  "stem": "Where is most of the volume of a high-dimensional unit ball?",
+  "correct": [
+   "In a thin shell near the surface: only $(1-\\varepsilon)^p$ lies inside.",
+   "Close to the boundary."
+  ],
+  "distractors": [
+   {
+    "text": "Near the centre, where the density is highest.",
+    "misconception": "confuses uniform density with concentration at the centre"
+   },
+   {
+    "text": "Spread evenly between the centre and the surface in every dimension.",
+    "misconception": "ignores the volume scaling like $r^p$"
+   },
+   {
+    "text": "Along the coordinate axes, where the ball touches the cube.",
+    "misconception": "invents a concentration on the axes"
+   },
+   {
+    "text": "Inside the inscribed cube.",
+    "misconception": "confuses the ball with the cube"
+   },
+   {
+    "text": "The volume is zero in high dimension.",
+    "misconception": "confuses the limit of the unit-ball volume with its shape"
+   }
+  ],
+  "explanation": "Volume scales as $r^p$, so a shell of relative width $\\varepsilon$ has fraction $1-(1-\\varepsilon)^p$, near 1 when $p\\varepsilon\\gg1$."
+ },
+ {
+  "id": "hd-1.3",
+  "lecture": 1,
+  "stem": "What goes wrong with ordinary least squares when the number of predictors $p$ exceeds the sample size $n$?",
+  "correct": [
+   "$X^\\top X$ is singular, so infinitely many solutions fit perfectly.",
+   "No unique coefficient vector exists."
+  ],
+  "distractors": [
+   {
+    "text": "The least squares fit has a very large residual sum of squares.",
+    "misconception": "reverses the fit: it is exactly zero"
+   },
+   {
+    "text": "OLS is still unique, but biased.",
+    "misconception": "ignores the rank deficiency"
+   },
+   {
+    "text": "The estimates become exactly zero.",
+    "misconception": "confuses it with strong shrinkage"
+   },
+   {
+    "text": "OLS cannot be computed, but ridge regression cannot be either.",
+    "misconception": "ignores that ridge remains well defined"
+   },
+   {
+    "text": "Standard errors become negative.",
+    "misconception": "invents a symptom"
+   }
+  ],
+  "explanation": "With $p>n$, $\\operatorname{rank}(X^\\top X)\\le n<p$. Interpolation fits the noise, so some regularisation or sparsity is required."
+ },
+ {
+  "id": "hd-1.4",
+  "lecture": 1,
+  "stem": "What happens to the distances between random points as the dimension grows?",
+  "correct": [
+   "They concentrate: the largest-to-smallest ratio tends to one.",
+   "Neighbours are barely closer than far points."
+  ],
+  "distractors": [
+   {
+    "text": "Distances grow in proportion to the dimension with a wide spread.",
+    "misconception": "ignores that the relative spread shrinks"
+   },
+   {
+    "text": "Distances become more varied, which makes neighbours easier to find.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The distances become independent of the dimension.",
+    "misconception": "ignores the scale with $\\sqrt p$"
+   },
+   {
+    "text": "Only the minimum distance changes.",
+    "misconception": "gives an incomplete description"
+   },
+   {
+    "text": "The nearest neighbour is always at the same position.",
+    "misconception": "invents a property"
+   }
+  ],
+  "explanation": "For i.i.d. coordinates, $\\|X-Y\\|^2$ has mean of order $p$ and standard deviation of order $\\sqrt p$, so relative variation vanishes like $1/\\sqrt p$."
+ },
+ {
+  "id": "hd-1.5",
+  "lecture": 1,
+  "stem": "Which approach is a standard response to the high-dimensional regime?",
+  "correct": [
+   "Impose structure such as sparsity, low rank or shrinkage.",
+   "Regularise or reduce the dimension."
+  ],
+  "distractors": [
+   {
+    "text": "Collect more variables to make the model more flexible.",
+    "misconception": "worsens the problem"
+   },
+   {
+    "text": "Increase the model's complexity until the training error is zero.",
+    "misconception": "invites overfitting"
+   },
+   {
+    "text": "Ignore the problem, because large samples always cure it.",
+    "misconception": "forgets that $p$ may grow with $n$"
+   },
+   {
+    "text": "Use only the variables with the smallest variance.",
+    "misconception": "gives an unjustified screening rule"
+   },
+   {
+    "text": "Remove the validation step, since there are too few observations.",
+    "misconception": "removes protection against overfitting"
+   }
+  ],
+  "explanation": "Examples are the lasso (sparsity), PCA (low rank), shrinkage covariance estimators and screening followed by refitting."
+ },
+ {
+  "id": "hd-2.1",
+  "lecture": 2,
+  "stem": "What is a sub-Gaussian random variable?",
+  "correct": [
+   "Tails at least as light as a Gaussian's.",
+   "Its moment generating function is bounded by a Gaussian's."
+  ],
+  "distractors": [
+   {
+    "text": "A variable with finite variance, whatever its tails.",
+    "misconception": "confuses finite variance with Gaussian-like tails"
+   },
+   {
+    "text": "A variable whose density is symmetric.",
+    "misconception": "confuses symmetry with tail decay"
+   },
+   {
+    "text": "A variable with a smaller variance than the standard normal.",
+    "misconception": "confuses it with variance"
+   },
+   {
+    "text": "A variable that is exactly normal.",
+    "misconception": "confuses a family with its smallest member"
+   },
+   {
+    "text": "A variable with exponential tails.",
+    "misconception": "describes sub-exponential variables"
+   }
+  ],
+  "explanation": "Bounded variables, Gaussians and Rademacher variables are sub-Gaussian; the exponential and the chi-square are not."
+ },
+ {
+  "id": "hd-2.2",
+  "lecture": 2,
+  "stem": "Which of these random variables is sub-Gaussian?",
+  "correct": [
+   "A bounded variable, such as a Rademacher sign.",
+   "A Gaussian."
+  ],
+  "distractors": [
+   {
+    "text": "An exponential random variable.",
+    "misconception": "has an exponential tail, which is heavier"
+   },
+   {
+    "text": "A chi-square variable with 1 degree of freedom.",
+    "misconception": "is the square of a Gaussian and sub-exponential"
+   },
+   {
+    "text": "A Student $t$ variable with 3 degrees of freedom.",
+    "misconception": "has polynomial tails"
+   },
+   {
+    "text": "A Poisson variable with large mean.",
+    "misconception": "has a tail heavier than Gaussian at a fixed scale"
+   },
+   {
+    "text": "A Cauchy variable.",
+    "misconception": "has no mean"
+   }
+  ],
+  "explanation": "Hoeffding's lemma: a variable in $[a,b]$ has $Ee^{\\lambda(X-EX)}\\le e^{\\lambda^2(b-a)^2/8}$, so it is sub-Gaussian with $\\sigma=(b-a)/2$."
+ },
+ {
+  "id": "hd-2.3",
+  "lecture": 2,
+  "stem": "What is the sub-Gaussian parameter of a sum $S=\\sum_{i=1}^nX_i$ of independent sub-Gaussian variables with parameters $\\sigma_i$?",
+  "correct": [
+   "$\\sigma_S^2=\\sum_i\\sigma_i^2$.",
+   "Squared parameters add, like variances."
+  ],
+  "distractors": [
+   {
+    "text": "$\\sigma_S=\\sum_i\\sigma_i$, which grows linearly in $n$.",
+    "misconception": "adds the parameters instead of their squares"
+   },
+   {
+    "text": "$\\sigma_S=\\max_i\\sigma_i$.",
+    "misconception": "takes the maximum"
+   },
+   {
+    "text": "$\\sigma_S=\\sigma/n$, because sums average out.",
+    "misconception": "confuses the sum with the mean"
+   },
+   {
+    "text": "A sum of sub-Gaussian variables is no longer sub-Gaussian.",
+    "misconception": "degrades the tail wrongly"
+   },
+   {
+    "text": "It does not depend on the number of terms.",
+    "misconception": "ignores the accumulation"
+   }
+  ],
+  "explanation": "The mean $S/n$ has parameter $\\sigma/\\sqrt n$, which is why averages concentrate at rate $1/\\sqrt n$."
+ },
+ {
+  "id": "hd-2.4",
+  "lecture": 2,
+  "stem": "How do the tails of a sub-exponential variable, such as the square of a Gaussian, compare with Gaussian tails?",
+  "correct": [
+   "Tails like $e^{-ct}$: heavier than Gaussian.",
+   "Heavy tails, but all moments finite."
+  ],
+  "distractors": [
+   {
+    "text": "They decay polynomially, as for Pareto variables.",
+    "misconception": "confuses sub-exponential with heavy tails"
+   },
+   {
+    "text": "They are identical to Gaussian tails.",
+    "misconception": "ignores the difference"
+   },
+   {
+    "text": "They are lighter than Gaussian tails.",
+    "misconception": "reverses the ordering"
+   },
+   {
+    "text": "They are bounded.",
+    "misconception": "confuses it with boundedness"
+   },
+   {
+    "text": "Their variance is infinite.",
+    "misconception": "attributes an incorrect property"
+   }
+  ],
+  "explanation": "A $\\chi^2_1$ variable has $P(X>t)\\approx e^{-t/2}$. Bernstein's inequality covers sums of sub-exponential variables with a two-regime tail."
+ },
+ {
+  "id": "hd-2.5",
+  "lecture": 2,
+  "stem": "Why is the sub-Gaussian property useful for concentration of an average?",
+  "correct": [
+   "A tail bound $e^{-nt^2/(2\\sigma^2)}$ follows.",
+   "Averages stray by $t$ with probability about $e^{-cnt^2}$."
+  ],
+  "distractors": [
+   {
+    "text": "It guarantees that the sample mean equals the population mean.",
+    "misconception": "confuses concentration with equality"
+   },
+   {
+    "text": "It implies the data are normally distributed.",
+    "misconception": "confuses it with normality"
+   },
+   {
+    "text": "It gives a bound that holds only for infinite samples.",
+    "misconception": "misses that the bound is non-asymptotic"
+   },
+   {
+    "text": "It makes the variance exactly equal to one.",
+    "misconception": "confuses with standardisation"
+   },
+   {
+    "text": "It removes the need for independence.",
+    "misconception": "ignores the independence assumption"
+   }
+  ],
+  "explanation": "Chebyshev gives only $\\sigma^2/(nt^2)$. The exponential bound is much stronger and allows a union bound over $e^{cn}$ events."
+ },
+ {
+  "id": "hd-3.1",
+  "lecture": 3,
+  "stem": "What does Hoeffding's inequality bound?",
+  "correct": [
+   "The chance a sum of independent bounded variables strays from its mean.",
+   "$P(S-ES\\ge t)\\le\\exp\\{-2t^2/\\sum(b_i-a_i)^2\\}$."
+  ],
+  "distractors": [
+   {
+    "text": "The variance of the sum of independent variables.",
+    "misconception": "confuses the tail with the variance"
+   },
+   {
+    "text": "The probability that a variable exceeds its mean, using its variance only.",
+    "misconception": "describes Chebyshev"
+   },
+   {
+    "text": "The deviation of a function of dependent variables.",
+    "misconception": "ignores independence"
+   },
+   {
+    "text": "The probability that the maximum exceeds a threshold, without any union bound.",
+    "misconception": "confuses it with a maximum bound"
+   },
+   {
+    "text": "Only the probability that the sum is negative.",
+    "misconception": "restricts the use"
+   }
+  ],
+  "explanation": "It uses only the ranges, not the variances; for small variances Bernstein's inequality is sharper."
+ },
+ {
+  "id": "hd-3.2",
+  "lecture": 3,
+  "stem": "How does Bernstein's inequality improve on Hoeffding's?",
+  "correct": [
+   "It uses the variance as well as the range.",
+   "Gaussian-like tails for small deviations."
+  ],
+  "distractors": [
+   {
+    "text": "It requires no assumption on the variables.",
+    "misconception": "ignores the boundedness"
+   },
+   {
+    "text": "It applies only to Gaussian variables.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It is always weaker than Hoeffding's.",
+    "misconception": "reverses the comparison"
+   },
+   {
+    "text": "It bounds the variance instead of the tail.",
+    "misconception": "confuses the object"
+   },
+   {
+    "text": "It does not need independence.",
+    "misconception": "ignores independence"
+   }
+  ],
+  "explanation": "$P(S-ES\\ge t)\\le\\exp\\{-t^2/(2(\\sum\\sigma_i^2+bt/3))\\}$ for $|X_i-EX_i|\\le b$; it is sharper for rare events with small variance."
+ },
+ {
+  "id": "hd-3.3",
+  "lecture": 3,
+  "stem": "What does McDiarmid's (bounded differences) inequality say?",
+  "correct": [
+   "If each input moves $f$ by at most $c_i$, $f$ concentrates.",
+   "Bounded sensitivity gives closeness to the mean."
+  ],
+  "distractors": [
+   {
+    "text": "Any function of independent variables is close to its mean.",
+    "misconception": "drops the bounded differences condition"
+   },
+   {
+    "text": "It applies only to sums, not to other functions.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It bounds the variance only.",
+    "misconception": "confuses with a variance bound"
+   },
+   {
+    "text": "It requires the inputs to be Gaussian.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It does not need independence.",
+    "misconception": "ignores independence"
+   }
+  ],
+  "explanation": "Hoeffding is the special case $f=\\sum X_i$ with $c_i=b_i-a_i$. It also covers statistics such as the empirical risk or the supremum of empirical processes."
+ },
+ {
+  "id": "hd-3.4",
+  "lecture": 3,
+  "stem": "How do Markov and Chebyshev bounds compare with Hoeffding's for the mean of $n$ bounded variables?",
+  "correct": [
+   "They decay only polynomially, far weaker than Hoeffding.",
+   "Chebyshev decays like $1/n$."
+  ],
+  "distractors": [
+   {
+    "text": "They are sharper than Hoeffding's for large $n$.",
+    "misconception": "reverses the comparison"
+   },
+   {
+    "text": "They are identical to Hoeffding's.",
+    "misconception": "ignores the difference"
+   },
+   {
+    "text": "They need independence, which Hoeffding does not.",
+    "misconception": "reverses the roles"
+   },
+   {
+    "text": "They apply to bounded variables only.",
+    "misconception": "restricts them wrongly"
+   },
+   {
+    "text": "They give exponentially small bounds.",
+    "misconception": "attributes the wrong rate"
+   }
+  ],
+  "explanation": "A union bound over $m$ events works with Hoeffding when $\\log m\\ll n$, but Chebyshev would need $m\\ll n$."
+ },
+ {
+  "id": "hd-3.5",
+  "lecture": 3,
+  "stem": "Why is the union bound combined with exponential concentration in high-dimensional statistics?",
+  "correct": [
+   "It controls a maximum over $p$ coordinates at a $\\log p$ cost.",
+   "It bounds any of $p$ deviations."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the coordinates independent.",
+    "misconception": "confuses a bound with an assumption"
+   },
+   {
+    "text": "It removes the dependence on $n$.",
+    "misconception": "ignores the sample size"
+   },
+   {
+    "text": "It gives an exact probability for the maximum.",
+    "misconception": "gives only a bound"
+   },
+   {
+    "text": "It works only when $p<n$.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It increases the sample size.",
+    "misconception": "confuses the bound with data"
+   }
+  ],
+  "explanation": "With tails $2e^{-nt^2/(2\\sigma^2)}$, $P(\\max_j|\\bar X_j|>t)\\le2pe^{-nt^2/(2\\sigma^2)}$, so $t\\approx\\sigma\\sqrt{2\\log(2p)/n}$ suffices."
+ },
+ {
+  "id": "hd-4.1",
+  "lecture": 4,
+  "stem": "How large is the operator-norm error of the sample covariance matrix for sub-Gaussian data with $p/n$ not small?",
+  "correct": [
+   "It is of order $\\sqrt{p/n}$.",
+   "Consistency needs $p/n\\to0$."
+  ],
+  "distractors": [
+   {
+    "text": "It vanishes whenever $n\\to\\infty$, whatever $p$.",
+    "misconception": "ignores the dependence on $p$"
+   },
+   {
+    "text": "It is of order $1/\\sqrt n$ regardless of $p$.",
+    "misconception": "forgets the dimension"
+   },
+   {
+    "text": "It is of order $p/\\sqrt n$.",
+    "misconception": "gives the wrong dependence"
+   },
+   {
+    "text": "It is zero for sub-Gaussian data.",
+    "misconception": "ignores sampling error"
+   },
+   {
+    "text": "It is of order $n/p$.",
+    "misconception": "inverts the ratio"
+   }
+  ],
+  "explanation": "In the proportional regime $p/n\\to\\gamma>0$, eigenvalues of the sample covariance spread over an interval around the truth (Marchenko-Pastur)."
+ },
+ {
+  "id": "hd-4.2",
+  "lecture": 4,
+  "stem": "How does shrinkage improve covariance estimation in high dimensions?",
+  "correct": [
+   "It pulls eigenvalues towards their average.",
+   "$(1-\\delta)S+\\delta F$ with a structured target."
+  ],
+  "distractors": [
+   {
+    "text": "It sets the small eigenvalues exactly to zero.",
+    "misconception": "describes thresholding of eigenvalues"
+   },
+   {
+    "text": "It makes the estimator unbiased.",
+    "misconception": "forgets the bias"
+   },
+   {
+    "text": "It increases the spread of the sample eigenvalues.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It needs more observations than variables.",
+    "misconception": "reverses the requirement"
+   },
+   {
+    "text": "It replaces the covariance by the identity in all cases.",
+    "misconception": "describes the extreme intensity"
+   }
+  ],
+  "explanation": "With target $F=(\\operatorname{tr}S/p)I$, each eigenvalue becomes $(1-\\delta)\\lambda_j+\\delta\\bar\\lambda$, so the largest shrinks and the smallest rises."
+ },
+ {
+  "id": "hd-4.3",
+  "lecture": 4,
+  "stem": "What is a consequence of $p>n$ for the sample covariance matrix?",
+  "correct": [
+   "Its rank is at most $n-1$.",
+   "It is singular."
+  ],
+  "distractors": [
+   {
+    "text": "It is full rank, as usual.",
+    "misconception": "ignores the rank bound"
+   },
+   {
+    "text": "Its eigenvalues are all equal.",
+    "misconception": "describes the identity"
+   },
+   {
+    "text": "Its eigenvalues are all negative.",
+    "misconception": "forgets that it is positive semidefinite"
+   },
+   {
+    "text": "It is biased downward in every entry.",
+    "misconception": "confuses rank with bias"
+   },
+   {
+    "text": "Its entries are zero.",
+    "misconception": "confuses it with a null matrix"
+   }
+  ],
+  "explanation": "Regularised estimates (shrinkage, factor models, graphical lasso) give invertible matrices."
+ },
+ {
+  "id": "hd-4.4",
+  "lecture": 4,
+  "stem": "How are the largest and smallest sample eigenvalues related to the true ones when $p/n$ is not small?",
+  "correct": [
+   "The largest are biased up and the smallest down.",
+   "Even for the identity, eigenvalues spread out."
+  ],
+  "distractors": [
+   {
+    "text": "They are unbiased estimates of the true eigenvalues.",
+    "misconception": "ignores the high-dimensional bias"
+   },
+   {
+    "text": "All are biased upward.",
+    "misconception": "ignores the smallest eigenvalues"
+   },
+   {
+    "text": "All are biased downward.",
+    "misconception": "ignores the largest eigenvalues"
+   },
+   {
+    "text": "They equal the true eigenvalues when the data are Gaussian.",
+    "misconception": "ignores the effect for Gaussian data"
+   },
+   {
+    "text": "They become exactly equal when $p>n$.",
+    "misconception": "describes an incorrect limit"
+   }
+  ],
+  "explanation": "This distortion is what optimised portfolios exploit, and why plug-in sample covariance matrices perform badly out of sample."
+ },
+ {
+  "id": "hd-4.5",
+  "lecture": 4,
+  "stem": "In covariance estimation, what is the advantage of a factor structure $\\Sigma=B\\Sigma_fB^\\top+D$?",
+  "correct": [
+   "It cuts free parameters from order $p^2$ to $pK$.",
+   "Few factors capture correlations."
+  ],
+  "distractors": [
+   {
+    "text": "It makes all assets uncorrelated.",
+    "misconception": "confuses it with a diagonal matrix"
+   },
+   {
+    "text": "It increases the number of parameters.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It requires $K=p$ factors.",
+    "misconception": "reverses the idea"
+   },
+   {
+    "text": "It removes the need for data.",
+    "misconception": "is impossible"
+   },
+   {
+    "text": "It guarantees an unbiased estimate.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "The cost is model bias if the true factor structure is wrong; shrinking towards a factor target balances the two."
+ },
+ {
+  "id": "hd-5.1",
+  "lecture": 5,
+  "stem": "What does the Marchenko-Pastur law describe?",
+  "correct": [
+   "The limiting spectrum of the sample covariance when $p/n\\to\\gamma>0$.",
+   "Eigenvalues of $\\frac1nX^\\top X$ for white noise with ratio $\\gamma$."
+  ],
+  "distractors": [
+   {
+    "text": "The limiting spectrum of a symmetric matrix with independent entries.",
+    "misconception": "describes the semicircle law"
+   },
+   {
+    "text": "The distribution of a single eigenvalue for fixed $p$.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "The distribution of the sample mean in high dimensions.",
+    "misconception": "confuses the object"
+   },
+   {
+    "text": "The eigenvalues of the true covariance matrix.",
+    "misconception": "confuses the sample with the population"
+   },
+   {
+    "text": "The distribution of the data.",
+    "misconception": "confuses the object"
+   }
+  ],
+  "explanation": "The support is $[(1-\\sqrt\\gamma)^2,(1+\\sqrt\\gamma)^2]$ (for unit variance), plus an atom at zero of mass $1-1/\\gamma$ if $\\gamma>1$."
+ },
+ {
+  "id": "hd-5.2",
+  "lecture": 5,
+  "stem": "What are the edges of the Marchenko-Pastur support for $\\gamma=p/n\\le1$ and unit variance?",
+  "correct": [
+   "$(1-\\sqrt\\gamma)^2$ and $(1+\\sqrt\\gamma)^2$.",
+   "Lower edge $(1-\\sqrt\\gamma)^2$, upper $(1+\\sqrt\\gamma)^2$."
+  ],
+  "distractors": [
+   {
+    "text": "$1-\\gamma$ and $1+\\gamma$.",
+    "misconception": "forgets the square roots"
+   },
+   {
+    "text": "$1-\\sqrt\\gamma$ and $1+\\sqrt\\gamma$.",
+    "misconception": "forgets the squares"
+   },
+   {
+    "text": "$0$ and $1+\\gamma$.",
+    "misconception": "gives an unrelated interval"
+   },
+   {
+    "text": "$(1-\\gamma)^2$ and $(1+\\gamma)^2$.",
+    "misconception": "squares $\\gamma$ rather than $\\sqrt\\gamma$"
+   },
+   {
+    "text": "Exactly 1, since the true covariance is the identity.",
+    "misconception": "ignores the spreading"
+   }
+  ],
+  "explanation": "As $\\gamma\\to0$ the interval shrinks to $\\{1\\}$; for $\\gamma=1$ the lower edge is 0."
+ },
+ {
+  "id": "hd-5.3",
+  "lecture": 5,
+  "stem": "What does the Wigner semicircle law describe?",
+  "correct": [
+   "The limiting eigenvalue density of a large symmetric random matrix.",
+   "A semicircle spectrum."
+  ],
+  "distractors": [
+   {
+    "text": "The spectrum of the sample covariance matrix.",
+    "misconception": "describes Marchenko-Pastur"
+   },
+   {
+    "text": "A Gaussian density for the eigenvalues.",
+    "misconception": "gives the wrong shape"
+   },
+   {
+    "text": "The distribution of the largest entry.",
+    "misconception": "confuses the object"
+   },
+   {
+    "text": "A uniform distribution on the unit interval.",
+    "misconception": "gives the wrong shape"
+   },
+   {
+    "text": "A heavy-tailed spectrum.",
+    "misconception": "gives the wrong support"
+   }
+  ],
+  "explanation": "For $W_n/\\sqrt n$ with unit variance entries, the density is $\\frac1{2\\pi}\\sqrt{4-x^2}$ on $[-2,2]$."
+ },
+ {
+  "id": "hd-5.4",
+  "lecture": 5,
+  "stem": "What is the mass at zero of the Marchenko-Pastur law when $\\gamma=p/n>1$?",
+  "correct": [
+   "$1-1/\\gamma$.",
+   "A fraction $1-n/p$ of eigenvalues is zero."
+  ],
+  "distractors": [
+   {
+    "text": "There is no mass at zero.",
+    "misconception": "ignores the rank bound"
+   },
+   {
+    "text": "A fraction $1/\\gamma$ is zero.",
+    "misconception": "confuses zero with nonzero fractions"
+   },
+   {
+    "text": "A fraction $\\gamma-1$ is zero.",
+    "misconception": "gives a wrong formula"
+   },
+   {
+    "text": "The mass at zero is always $1/2$.",
+    "misconception": "invents a value"
+   },
+   {
+    "text": "All eigenvalues are zero.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "$S=\\frac1nX^\\top X$ has rank at most $n$, so $p-n$ of its $p$ eigenvalues vanish."
+ },
+ {
+  "id": "hd-5.5",
+  "lecture": 5,
+  "stem": "What does the spread of sample eigenvalues in the Marchenko-Pastur regime imply for practice?",
+  "correct": [
+   "The largest sample eigenvalues exceed the true ones.",
+   "Bulk-edge eigenvalues are not factors."
+  ],
+  "distractors": [
+   {
+    "text": "Every eigenvalue above 1 is a real factor.",
+    "misconception": "ignores the noise bulk"
+   },
+   {
+    "text": "The sample covariance is reliable for any $p/n$.",
+    "misconception": "ignores the bias"
+   },
+   {
+    "text": "Only the smallest eigenvalues are affected.",
+    "misconception": "ignores the largest ones"
+   },
+   {
+    "text": "The spread vanishes if more variables are added.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The bulk edge depends on the signal strength.",
+    "misconception": "confuses noise bulk with spikes"
+   }
+  ],
+  "explanation": "A threshold for retaining components compares sample eigenvalues with the upper edge $(1+\\sqrt\\gamma)^2\\sigma^2$."
+ },
+ {
+  "id": "hd-6.1",
+  "lecture": 6,
+  "stem": "In a spiked covariance model, what does the Baik-Ben Arous-Peche (BBP) transition say?",
+  "correct": [
+   "A spike $\\ell$ separates from the bulk only if $\\ell>1+\\sqrt\\gamma$.",
+   "Below it, the top eigenvector is uninformative."
+  ],
+  "distractors": [
+   {
+    "text": "Every spike produces a separated sample eigenvalue, whatever its size.",
+    "misconception": "ignores the threshold"
+   },
+   {
+    "text": "The threshold is $\\ell>1+\\gamma$.",
+    "misconception": "drops the square root"
+   },
+   {
+    "text": "The threshold is $\\ell>(1+\\sqrt\\gamma)^2$.",
+    "misconception": "confuses the population threshold with the sample bulk edge"
+   },
+   {
+    "text": "Eigenvector consistency holds for every spike strength.",
+    "misconception": "ignores the phase transition"
+   },
+   {
+    "text": "The threshold does not depend on $p/n$.",
+    "misconception": "ignores the dependence"
+   }
+  ],
+  "explanation": "The bulk edge of the sample spectrum is $(1+\\sqrt\\gamma)^2$; the population spike must exceed $1+\\sqrt\\gamma$ to pull a sample eigenvalue to $\\ell(1+\\gamma/(\\ell-1))$, above that edge."
+ },
+ {
+  "id": "hd-6.2",
+  "lecture": 6,
+  "stem": "For a spike above the BBP threshold, how does the top sample eigenvalue relate to the population spike $\\ell$?",
+  "correct": [
+   "It is biased upward.",
+   "It overestimates the spike by a factor depending on $\\gamma$."
+  ],
+  "distractors": [
+   {
+    "text": "It converges to $\\ell$, the population spike.",
+    "misconception": "ignores the bias"
+   },
+   {
+    "text": "It converges to a value below $\\ell$.",
+    "misconception": "gets the direction wrong"
+   },
+   {
+    "text": "It equals the bulk edge.",
+    "misconception": "describes spikes below the threshold"
+   },
+   {
+    "text": "It does not depend on $\\gamma$.",
+    "misconception": "ignores the dimension ratio"
+   },
+   {
+    "text": "It converges to $\\ell(1-\\gamma)$.",
+    "misconception": "gives a wrong formula"
+   }
+  ],
+  "explanation": "For $\\ell=3,\\gamma=0.5$ the limit is $3(1+0.5/2)=3.75$, while the bulk edge is $(1+\\sqrt{0.5})^2\\approx2.91$."
+ },
+ {
+  "id": "hd-6.3",
+  "lecture": 6,
+  "stem": "Why is the top sample principal component a poor estimate of a weak signal direction when $p/n$ is large?",
+  "correct": [
+   "Below the BBP threshold it is orthogonal to the truth.",
+   "Noise dominates the weak signal."
+  ],
+  "distractors": [
+   {
+    "text": "PCA is always consistent for the leading eigenvector.",
+    "misconception": "ignores the high-dimensional regime"
+   },
+   {
+    "text": "The sample eigenvector is exactly the true one.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "PCA removes the noise perfectly when the data are centred.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "It is a poor estimate only when $p<n$.",
+    "misconception": "reverses the condition"
+   },
+   {
+    "text": "The alignment depends only on the sample size.",
+    "misconception": "ignores $p$"
+   }
+  ],
+  "explanation": "The squared cosine between sample and population leading eigenvectors tends to $\\frac{1-\\gamma/(\\ell-1)^2}{1+\\gamma/(\\ell-1)}<1$ above the threshold."
+ },
+ {
+  "id": "hd-6.4",
+  "lecture": 6,
+  "stem": "What is the practical way to decide how many principal components to keep in a high-dimensional data set?",
+  "correct": [
+   "Compare eigenvalues with the noise bulk edge, or use parallel analysis.",
+   "Keep those standing clear of noise."
+  ],
+  "distractors": [
+   {
+    "text": "Keep all components whose eigenvalues exceed 1.",
+    "misconception": "uses a rule that ignores $p/n$"
+   },
+   {
+    "text": "Keep the same fraction of components regardless of the data.",
+    "misconception": "ignores the spectrum"
+   },
+   {
+    "text": "Keep all components, since extra ones do no harm.",
+    "misconception": "keeps noise"
+   },
+   {
+    "text": "Keep components in proportion to the sample size.",
+    "misconception": "gives an arbitrary rule"
+   },
+   {
+    "text": "Discard components with the largest eigenvalues, since they are noise.",
+    "misconception": "reverses the logic"
+   }
+  ],
+  "explanation": "Parallel analysis compares each sample eigenvalue with that of permuted or simulated noise data of the same shape."
+ },
+ {
+  "id": "hd-6.5",
+  "lecture": 6,
+  "stem": "What happens to sample eigenvalues of a covariance matrix with a few large spikes and many unit eigenvalues?",
+  "correct": [
+   "A Marchenko-Pastur bulk plus a few outliers.",
+   "The bulk follows noise."
+  ],
+  "distractors": [
+   {
+    "text": "The bulk collapses at 1 once $n$ is large.",
+    "misconception": "ignores $p/n$"
+   },
+   {
+    "text": "All sample eigenvalues separate from each other.",
+    "misconception": "misstates the picture"
+   },
+   {
+    "text": "The bulk has the shape of a semicircle.",
+    "misconception": "gives the wrong law"
+   },
+   {
+    "text": "Outliers appear for every positive spike.",
+    "misconception": "ignores the threshold"
+   },
+   {
+    "text": "Only the top eigenvalue exists.",
+    "misconception": "ignores the bulk"
+   }
+  ],
+  "explanation": "The bulk reflects noise in the \"unit\" directions; strong spikes sit at $\\ell(1+\\gamma/(\\ell-1))$."
+ },
+ {
+  "id": "hd-7.1",
+  "lecture": 7,
+  "stem": "At what rate does the lasso estimate an $s$-sparse coefficient vector in a linear model with $p$ predictors and noise level $\\sigma$?",
+  "correct": [
+   "Squared error of order $s\\sigma^2\\log p/n$.",
+   "Not knowing the support costs only a $\\log p$ factor."
+  ],
+  "distractors": [
+   {
+    "text": "The error is of order $\\sigma^2p/n$, as in least squares.",
+    "misconception": "ignores the sparsity gain"
+   },
+   {
+    "text": "The error is of order $s\\sigma^2/n$ without the $\\log p$ factor.",
+    "misconception": "would be the oracle rate with known support"
+   },
+   {
+    "text": "The error does not depend on $p$.",
+    "misconception": "ignores the log factor"
+   },
+   {
+    "text": "The error is zero for all $n$.",
+    "misconception": "ignores noise"
+   },
+   {
+    "text": "The rate improves if $\\lambda$ is chosen as zero.",
+    "misconception": "reverses the choice"
+   }
+  ],
+  "explanation": "With known support OLS achieves $s\\sigma^2/n$. The lasso pays the extra $\\log p$, and needs a restricted eigenvalue condition on $X$."
+ },
+ {
+  "id": "hd-7.2",
+  "lecture": 7,
+  "stem": "What is the role of the restricted eigenvalue (compatibility) condition for the lasso?",
+  "correct": [
+   "It keeps $X$ well conditioned on sparse directions.",
+   "A lower bound on $\\|X\\delta\\|^2/n$."
+  ],
+  "distractors": [
+   {
+    "text": "It makes $X^\\top X$ invertible.",
+    "misconception": "confuses with full rank, impossible for $p>n$"
+   },
+   {
+    "text": "It requires all predictors to be uncorrelated.",
+    "misconception": "is far stronger than needed"
+   },
+   {
+    "text": "It guarantees exact support recovery.",
+    "misconception": "confuses with the irrepresentable condition"
+   },
+   {
+    "text": "It makes the noise sub-Gaussian.",
+    "misconception": "confuses design with noise"
+   },
+   {
+    "text": "It requires $n>p$.",
+    "misconception": "reverses the setting"
+   }
+  ],
+  "explanation": "When $p>n$ the matrix $X^\\top X$ is singular, but it can still be bounded below on the cone of approximately sparse vectors."
+ },
+ {
+  "id": "hd-7.3",
+  "lecture": 7,
+  "stem": "What does the irrepresentable condition ensure for the lasso?",
+  "correct": [
+   "Inactive predictors are not too correlated with active ones.",
+   "Needed for support recovery."
+  ],
+  "distractors": [
+   {
+    "text": "The coefficients are all large.",
+    "misconception": "confuses with the minimum signal strength"
+   },
+   {
+    "text": "The predictors are uncorrelated.",
+    "misconception": "is stronger than required"
+   },
+   {
+    "text": "The noise is Gaussian.",
+    "misconception": "confuses design with noise"
+   },
+   {
+    "text": "The number of predictors is less than $n$.",
+    "misconception": "confuses with dimension"
+   },
+   {
+    "text": "The lasso estimates are unbiased.",
+    "misconception": "forgets that shrinkage biases"
+   }
+  ],
+  "explanation": "In the form $\\|\\Sigma_{S^cS}\\Sigma_{SS}^{-1}\\operatorname{sign}(\\beta_S)\\|_\\infty<1$. It is not needed for prediction error bounds."
+ },
+ {
+  "id": "hd-7.4",
+  "lecture": 7,
+  "stem": "Why can prediction error of the lasso be small even when support recovery fails?",
+  "correct": [
+   "Correlated predictors can substitute for each other.",
+   "Prediction needs only compatibility, not selection conditions."
+  ],
+  "distractors": [
+   {
+    "text": "Support recovery and prediction are the same problem.",
+    "misconception": "conflates the two"
+   },
+   {
+    "text": "The lasso always recovers the support when prediction is good.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "Prediction needs larger coefficients than selection.",
+    "misconception": "reverses the requirement"
+   },
+   {
+    "text": "This occurs only for Gaussian designs.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "The lasso minimises the support size.",
+    "misconception": "misstates the objective"
+   }
+  ],
+  "explanation": "Exact selection also needs a minimum signal strength (beta-min) and the irrepresentable condition; prediction does not."
+ },
+ {
+  "id": "hd-7.5",
+  "lecture": 7,
+  "stem": "How can the maximum of $p$ noise correlations $|x_j^\\top\\varepsilon|/n$ be controlled when the noise is sub-Gaussian?",
+  "correct": [
+   "A union bound gives a level of order $\\sigma\\sqrt{\\log p/n}$.",
+   "All $p$ terms stay below about $\\sigma\\sqrt{2\\log p/n}$."
+  ],
+  "distractors": [
+   {
+    "text": "By $\\sigma\\sqrt{p/n}$, which grows with the dimension.",
+    "misconception": "gives a bound that is too large"
+   },
+   {
+    "text": "By $\\sigma/n$.",
+    "misconception": "gives a rate that is too small"
+   },
+   {
+    "text": "It cannot be controlled when $p>n$.",
+    "misconception": "ignores the union bound"
+   },
+   {
+    "text": "By $\\sigma\\log p/\\sqrt n$.",
+    "misconception": "misplaces the log factor"
+   },
+   {
+    "text": "It is exactly zero when the design is orthogonal.",
+    "misconception": "ignores the noise"
+   }
+  ],
+  "explanation": "Choosing $\\lambda$ above this level makes the lasso ignore pure-noise variables, which is the basis of the oracle inequality."
+ },
+ {
+  "id": "hd-8.1",
+  "lecture": 8,
+  "stem": "What does basis pursuit solve?",
+  "correct": [
+   "$\\min\\|x\\|_1$ subject to $Ax=y$, a convex problem.",
+   "The minimum $\\ell_1$ solution consistent with the data."
+  ],
+  "distractors": [
+   {
+    "text": "$\\min\\|x\\|_2$ subject to $Ax=y$.",
+    "misconception": "describes the minimum-norm least squares solution"
+   },
+   {
+    "text": "$\\min\\|x\\|_0$ subject to $Ax=y$, which is convex.",
+    "misconception": "describes the nonconvex $\\ell_0$ problem"
+   },
+   {
+    "text": "$\\min\\|y-Ax\\|_2$ without constraints.",
+    "misconception": "describes least squares"
+   },
+   {
+    "text": "$\\max\\|x\\|_1$ subject to $Ax=y$.",
+    "misconception": "reverses the optimisation"
+   },
+   {
+    "text": "The sparsest solution, found by exhaustive search.",
+    "misconception": "describes $\\ell_0$ minimisation"
+   }
+  ],
+  "explanation": "The $\\ell_1$ ball has corners on the axes, so the minimiser tends to be sparse. $\\ell_0$ is combinatorial."
+ },
+ {
+  "id": "hd-8.2",
+  "lecture": 8,
+  "stem": "What does the restricted isometry property (RIP) of order $s$ say about a matrix $A$?",
+  "correct": [
+   "$A$ nearly preserves lengths of $s$-sparse vectors.",
+   "Columns act almost orthonormally."
+  ],
+  "distractors": [
+   {
+    "text": "$A$ is square and orthogonal.",
+    "misconception": "confuses with an orthogonal matrix"
+   },
+   {
+    "text": "$A$ preserves the length of all vectors.",
+    "misconception": "impossible for $m<p$"
+   },
+   {
+    "text": "$A$ has full column rank.",
+    "misconception": "impossible for $m<p$"
+   },
+   {
+    "text": "The columns of $A$ are uncorrelated.",
+    "misconception": "is stronger than needed"
+   },
+   {
+    "text": "$A$ is sparse.",
+    "misconception": "confuses sparsity of $A$ with sparsity of $x$"
+   }
+  ],
+  "explanation": "If $\\delta_{2s}<\\sqrt2-1$, basis pursuit recovers every $s$-sparse vector exactly from noiseless measurements."
+ },
+ {
+  "id": "hd-8.3",
+  "lecture": 8,
+  "stem": "Which matrices satisfy the RIP with few measurements?",
+  "correct": [
+   "Random matrices, such as Gaussian ones.",
+   "i.i.d. sub-Gaussian entries."
+  ],
+  "distractors": [
+   {
+    "text": "Any matrix with $m\\ge s$ rows.",
+    "misconception": "ignores the logarithmic factor and randomness"
+   },
+   {
+    "text": "Matrices with identical columns.",
+    "misconception": "would not distinguish coordinates"
+   },
+   {
+    "text": "Only square matrices.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "Deterministic matrices with the same RIP order for all $m$.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "Random matrices need $m\\ge p$.",
+    "misconception": "ignores compressed sensing"
+   }
+  ],
+  "explanation": "Verifying RIP for a given matrix is hard; random constructions give it with high probability."
+ },
+ {
+  "id": "hd-8.4",
+  "lecture": 8,
+  "stem": "What is the point of compressed sensing?",
+  "correct": [
+   "A sparse signal needs far fewer measurements than its dimension.",
+   "Measurements scale with sparsity."
+  ],
+  "distractors": [
+   {
+    "text": "Any signal can be recovered from fewer measurements than its dimension.",
+    "misconception": "ignores the sparsity requirement"
+   },
+   {
+    "text": "It reduces noise in a measured signal.",
+    "misconception": "confuses it with denoising"
+   },
+   {
+    "text": "It compresses a signal after it has been fully measured.",
+    "misconception": "confuses with data compression"
+   },
+   {
+    "text": "It requires the number of measurements to equal the dimension.",
+    "misconception": "misses the point"
+   },
+   {
+    "text": "It applies only to images.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "$m\\approx Cs\\log(p/s)$ random measurements suffice, so a signal in dimension $10^6$ with $s=100$ needs a few thousand measurements."
+ },
+ {
+  "id": "hd-8.5",
+  "lecture": 8,
+  "stem": "Why does minimising the $\\ell_1$ norm tend to give sparse solutions, whereas minimising the $\\ell_2$ norm does not?",
+  "correct": [
+   "The $\\ell_1$ ball has corners on the axes.",
+   "$\\ell_2$ level sets are round."
+  ],
+  "distractors": [
+   {
+    "text": "The $\\ell_2$ ball has corners, so it selects variables.",
+    "misconception": "attributes corners to the wrong norm"
+   },
+   {
+    "text": "$\\ell_1$ minimisation is not convex.",
+    "misconception": "misstates convexity"
+   },
+   {
+    "text": "Both norms give the same solution.",
+    "misconception": "ignores the geometry"
+   },
+   {
+    "text": "$\\ell_1$ ignores the measurements.",
+    "misconception": "misstates the problem"
+   },
+   {
+    "text": "Sparsity comes from the solver rather than from the norm.",
+    "misconception": "attributes the effect to the algorithm"
+   }
+  ],
+  "explanation": "For $a_1x_1+a_2x_2=y$ the $\\ell_1$ solution puts all weight on the larger $|a_j|$, while the $\\ell_2$ solution uses both."
+ },
+ {
+  "id": "hd-9.1",
+  "lecture": 9,
+  "stem": "What is the family-wise error rate (FWER) and how does the Bonferroni correction control it?",
+  "correct": [
+   "The chance of any false rejection; testing at $\\alpha/m$ controls it.",
+   "FWER $=P(V\\ge1)$."
+  ],
+  "distractors": [
+   {
+    "text": "The expected proportion of false rejections among rejections.",
+    "misconception": "describes the false discovery rate"
+   },
+   {
+    "text": "The probability that a given test is wrong.",
+    "misconception": "describes a single test's error"
+   },
+   {
+    "text": "The number of false rejections divided by $m$.",
+    "misconception": "confuses it with a proportion of all tests"
+   },
+   {
+    "text": "Bonferroni controls it only if the tests are independent.",
+    "misconception": "adds an unnecessary assumption"
+   },
+   {
+    "text": "Bonferroni raises the level to $m\\alpha$.",
+    "misconception": "multiplies instead of dividing"
+   }
+  ],
+  "explanation": "Bonferroni is valid under any dependence but conservative. Holm's step-down procedure is uniformly more powerful."
+ },
+ {
+  "id": "hd-9.2",
+  "lecture": 9,
+  "stem": "What is the false discovery rate (FDR)?",
+  "correct": [
+   "The expected share of false rejections among rejections.",
+   "The average false fraction of discoveries."
+  ],
+  "distractors": [
+   {
+    "text": "The probability of at least one false rejection.",
+    "misconception": "describes FWER"
+   },
+   {
+    "text": "The proportion of true nulls that are rejected.",
+    "misconception": "describes the false positive rate"
+   },
+   {
+    "text": "The proportion of false nulls that are not rejected.",
+    "misconception": "describes the type II error rate"
+   },
+   {
+    "text": "The significance level of the individual tests.",
+    "misconception": "confuses with $\\alpha$"
+   },
+   {
+    "text": "The number of rejections.",
+    "misconception": "confuses with the rejection count"
+   }
+  ],
+  "explanation": "When thousands of hypotheses are tested, controlling FDR allows more discoveries than controlling FWER."
+ },
+ {
+  "id": "hd-9.3",
+  "lecture": 9,
+  "stem": "How does the Benjamini-Hochberg procedure work?",
+  "correct": [
+   "Sort $p$-values, find the largest $k$ with $p_{(k)}\\le kq/m$, reject the first $k$.",
+   "Compare ordered $p$-values with $kq/m$."
+  ],
+  "distractors": [
+   {
+    "text": "Reject every hypothesis with $p<q/m$.",
+    "misconception": "describes Bonferroni"
+   },
+   {
+    "text": "Reject all hypotheses with $p<q$.",
+    "misconception": "ignores multiplicity"
+   },
+   {
+    "text": "Compare $p_{(k)}$ with the decreasing threshold $(m-k+1)q/m$ and stop at the first failure.",
+    "misconception": "describes Holm-type thresholds"
+   },
+   {
+    "text": "Reject the hypothesis with the smallest $p$-value only.",
+    "misconception": "rejects one at most"
+   },
+   {
+    "text": "Use the median $p$-value.",
+    "misconception": "invents a rule"
+   }
+  ],
+  "explanation": "Under independence (or positive dependence) BH controls the FDR at $qm_0/m\\le q$, where $m_0$ is the number of true nulls."
+ },
+ {
+  "id": "hd-9.4",
+  "lecture": 9,
+  "stem": "What is the relationship between the number of rejections by Bonferroni and by Benjamini-Hochberg at the same nominal level?",
+  "correct": [
+   "BH rejects at least as many as Bonferroni.",
+   "BH is more powerful, controlling the weaker FDR."
+  ],
+  "distractors": [
+   {
+    "text": "Bonferroni always rejects at least as many as BH.",
+    "misconception": "reverses the relationship"
+   },
+   {
+    "text": "They always reject the same hypotheses.",
+    "misconception": "ignores the difference"
+   },
+   {
+    "text": "BH rejects fewer, to be safe.",
+    "misconception": "reverses the direction"
+   },
+   {
+    "text": "The comparison depends on the order of the hypotheses.",
+    "misconception": "ignores that $p$-values are sorted"
+   },
+   {
+    "text": "BH rejects more only if the tests are correlated.",
+    "misconception": "invents a condition"
+   }
+  ],
+  "explanation": "BH's last threshold is $q$ itself, so it can reject many $p$-values that Bonferroni misses, at the price of allowing some false discoveries."
+ },
+ {
+  "id": "hd-9.5",
+  "lecture": 9,
+  "stem": "In a study that tests $m=5{,}000$ stocks for alpha, why is FDR control often preferred to FWER control?",
+  "correct": [
+   "FWER control rejects almost nothing; FDR tolerates a few false hits.",
+   "A few false discoveries are acceptable."
+  ],
+  "distractors": [
+   {
+    "text": "FDR control guarantees no false discoveries.",
+    "misconception": "misstates FDR"
+   },
+   {
+    "text": "FWER control gives more discoveries than FDR control.",
+    "misconception": "reverses the relation"
+   },
+   {
+    "text": "FDR needs only a few tests.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "FWER control cannot be applied when $m$ is large.",
+    "misconception": "gives a false limitation"
+   },
+   {
+    "text": "FDR control removes the need for $p$-values.",
+    "misconception": "ignores the inputs"
+   }
+  ],
+  "explanation": "With $m=5000$ Bonferroni requires $p<10^{-5}$ at $\\alpha=5\\%$; BH adapts its threshold to the number of small $p$-values."
+ },
+ {
+  "id": "hd-10.1",
+  "lecture": 10,
+  "stem": "What does a zero entry $\\Theta_{ij}$ of the precision matrix $\\Theta=\\Sigma^{-1}$ of a Gaussian vector mean?",
+  "correct": [
+   "Conditionally independent given the others.",
+   "No edge joins them."
+  ],
+  "distractors": [
+   {
+    "text": "Variables $i$ and $j$ are independent.",
+    "misconception": "confuses conditional with marginal independence"
+   },
+   {
+    "text": "The covariance $\\Sigma_{ij}$ is zero.",
+    "misconception": "confuses the precision with the covariance"
+   },
+   {
+    "text": "The variables are identical.",
+    "misconception": "invents a meaning"
+   },
+   {
+    "text": "The variance of variable $i$ is zero.",
+    "misconception": "confuses off-diagonal with diagonal entries"
+   },
+   {
+    "text": "The correlation of $i$ and $j$ is one.",
+    "misconception": "invents a meaning"
+   }
+  ],
+  "explanation": "Two variables can be marginally correlated through a third variable yet conditionally independent; the precision matrix reveals this."
+ },
+ {
+  "id": "hd-10.2",
+  "lecture": 10,
+  "stem": "How is the partial correlation of variables $i$ and $j$ given all the others obtained from the precision matrix?",
+  "correct": [
+   "$\\rho_{ij\\cdot\\text{rest}}=-\\Theta_{ij}/\\sqrt{\\Theta_{ii}\\Theta_{jj}}$.",
+   "Scaled negative entry."
+  ],
+  "distractors": [
+   {
+    "text": "$\\rho=\\Theta_{ij}/\\sqrt{\\Theta_{ii}\\Theta_{jj}}$, with no minus sign.",
+    "misconception": "drops the sign"
+   },
+   {
+    "text": "$\\rho=-\\Sigma_{ij}/\\sqrt{\\Sigma_{ii}\\Sigma_{jj}}$.",
+    "misconception": "uses the covariance matrix"
+   },
+   {
+    "text": "$\\rho=\\Theta_{ij}$.",
+    "misconception": "forgets the scaling"
+   },
+   {
+    "text": "$\\rho=-\\Theta_{ij}/(\\Theta_{ii}+\\Theta_{jj})$.",
+    "misconception": "uses a wrong normalisation"
+   },
+   {
+    "text": "$\\rho=1/\\Theta_{ij}$.",
+    "misconception": "inverts the entry"
+   }
+  ],
+  "explanation": "The partial correlation is the correlation of the residuals after regressing out all other variables; its sign is opposite to that of $\\Theta_{ij}$."
+ },
+ {
+  "id": "hd-10.3",
+  "lecture": 10,
+  "stem": "What does the graphical lasso estimate?",
+  "correct": [
+   "A sparse precision matrix via an $\\ell_1$-penalised likelihood.",
+   "A conditional dependence graph."
+  ],
+  "distractors": [
+   {
+    "text": "A sparse covariance matrix by thresholding entries.",
+    "misconception": "describes thresholding the covariance"
+   },
+   {
+    "text": "The principal components of the data.",
+    "misconception": "confuses with PCA"
+   },
+   {
+    "text": "The regression coefficients of one variable on the rest.",
+    "misconception": "describes one node-wise regression"
+   },
+   {
+    "text": "A low-rank covariance matrix.",
+    "misconception": "confuses sparsity with low rank"
+   },
+   {
+    "text": "The marginal correlations between all pairs.",
+    "misconception": "confuses with the correlation matrix"
+   }
+  ],
+  "explanation": "The penalty is $\\lambda\\|\\Theta\\|_1$; the estimate is positive definite and exactly sparse for large enough $\\lambda$."
+ },
+ {
+  "id": "hd-10.4",
+  "lecture": 10,
+  "stem": "How is the regression of variable 1 on all the others related to the precision matrix?",
+  "correct": [
+   "The coefficient on $j$ is $-\\Theta_{1j}/\\Theta_{11}$.",
+   "Rows of the precision matrix, rescaled."
+  ],
+  "distractors": [
+   {
+    "text": "The coefficient on variable $j$ is $\\Theta_{1j}$.",
+    "misconception": "forgets the scaling and the sign"
+   },
+   {
+    "text": "The residual variance is $\\Theta_{11}$.",
+    "misconception": "inverts the quantity"
+   },
+   {
+    "text": "The coefficient is $\\Sigma_{1j}/\\Sigma_{11}$, the marginal regression coefficient.",
+    "misconception": "ignores the other variables"
+   },
+   {
+    "text": "The regression coefficients are unrelated to the precision matrix.",
+    "misconception": "ignores the relationship"
+   },
+   {
+    "text": "The coefficient on variable $j$ is $-\\Theta_{1j}/\\Theta_{jj}$.",
+    "misconception": "divides by the wrong diagonal"
+   }
+  ],
+  "explanation": "This is the basis of Meinshausen-Buhlmann neighbourhood selection: lasso-regress each variable on the others and read off the nonzero coefficients."
+ },
+ {
+  "id": "hd-10.5",
+  "lecture": 10,
+  "stem": "In a Gaussian graphical model, how are the edges of the graph determined?",
+  "correct": [
+   "The nonzero off-diagonal entries of the precision matrix.",
+   "Dependence after conditioning on the rest."
+  ],
+  "distractors": [
+   {
+    "text": "By the nonzero entries of the covariance matrix.",
+    "misconception": "confuses marginal and conditional dependence"
+   },
+   {
+    "text": "By the largest eigenvalues of the covariance matrix.",
+    "misconception": "confuses with PCA"
+   },
+   {
+    "text": "By the variables with the largest variance.",
+    "misconception": "confuses with variance"
+   },
+   {
+    "text": "By the pairs with positive marginal correlation.",
+    "misconception": "confuses with correlation"
+   },
+   {
+    "text": "The graph is complete in all cases.",
+    "misconception": "ignores sparsity"
+   }
+  ],
+  "explanation": "A chain $X_1\\to X_2\\to X_3$ has a dense covariance matrix but a precision matrix with $\\Theta_{13}=0$."
+ }
+]

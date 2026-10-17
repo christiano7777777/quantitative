@@ -1,0 +1,1442 @@
+[
+ {
+  "id": "mc-1.1",
+  "lecture": 1,
+  "stem": "What is a linear congruential generator (LCG)?",
+  "correct": [
+   "A recursion $x_{n+1}=(ax_n+c)\\bmod m$ imitating uniform numbers.",
+   "A deterministic linear sequence modulo $m$."
+  ],
+  "distractors": [
+   {
+    "text": "A generator that uses physical noise such as radioactive decay.",
+    "misconception": "describes a hardware generator"
+   },
+   {
+    "text": "A recursion $x_{n+1}=x_n^2\\bmod m$ without any multiplier.",
+    "misconception": "describes a different generator"
+   },
+   {
+    "text": "A sequence of independent random variables.",
+    "misconception": "ignores that it is deterministic"
+   },
+   {
+    "text": "A generator whose output depends on the clock only.",
+    "misconception": "confuses seeding with the recursion"
+   },
+   {
+    "text": "A recursion that has no period.",
+    "misconception": "ignores that the sequence repeats"
+   }
+  ],
+  "explanation": "The state space has $m$ values, so the period is at most $m$; the full period needs conditions on $a,c,m$."
+ },
+ {
+  "id": "mc-1.2",
+  "lecture": 1,
+  "stem": "What do the Hull-Dobell conditions guarantee for a linear congruential generator?",
+  "correct": [
+   "A full period $m$, under conditions on $a$, $c$ and $m$.",
+   "Every residue is visited before repeating."
+  ],
+  "distractors": [
+   {
+    "text": "That the output passes every statistical test.",
+    "misconception": "confuses period with quality"
+   },
+   {
+    "text": "That the successive outputs are independent.",
+    "misconception": "ignores the lattice structure"
+   },
+   {
+    "text": "That the period is always infinite.",
+    "misconception": "ignores that the period is at most $m$"
+   },
+   {
+    "text": "That the generator is cryptographically secure.",
+    "misconception": "confuses with security"
+   },
+   {
+    "text": "That the multiplier $a$ must equal $c$.",
+    "misconception": "invents a condition"
+   }
+  ],
+  "explanation": "A full period is necessary but not sufficient for good randomness: LCGs have lattice structure (planes in $k$ dimensions), as with RANDU."
+ },
+ {
+  "id": "mc-1.3",
+  "lecture": 1,
+  "stem": "Why is seeding a pseudo-random generator useful in simulation studies?",
+  "correct": [
+   "The same seed reproduces the same sequence.",
+   "A recorded seed makes a run repeatable."
+  ],
+  "distractors": [
+   {
+    "text": "A seed makes the numbers truly random.",
+    "misconception": "misunderstands pseudo-randomness"
+   },
+   {
+    "text": "A good seed improves the statistical quality of the simulation.",
+    "misconception": "confuses reproducibility with quality"
+   },
+   {
+    "text": "A seed is needed only for deterministic programs.",
+    "misconception": "reverses its purpose"
+   },
+   {
+    "text": "Seeds should be chosen to give the desired answer.",
+    "misconception": "encourages cherry-picking"
+   },
+   {
+    "text": "A seed lengthens the period of the generator.",
+    "misconception": "confuses with period"
+   }
+  ],
+  "explanation": "Use independent streams or different seeds for parallel runs, and report results over several seeds."
+ },
+ {
+  "id": "mc-1.4",
+  "lecture": 1,
+  "stem": "Which defect can a poor pseudo-random generator have even with a long period?",
+  "correct": [
+   "Correlation between successive values, as with few planes.",
+   "Lattice structure."
+  ],
+  "distractors": [
+   {
+    "text": "Outputs that are exactly uniform for every sample size.",
+    "misconception": "states a property of an ideal source"
+   },
+   {
+    "text": "A period larger than the number of states.",
+    "misconception": "is impossible"
+   },
+   {
+    "text": "Outputs outside the unit interval.",
+    "misconception": "confuses scaling with defects"
+   },
+   {
+    "text": "Outputs that cannot be reproduced.",
+    "misconception": "confuses with seeding"
+   },
+   {
+    "text": "A dependence on the computer's clock.",
+    "misconception": "confuses with seeding"
+   }
+  ],
+  "explanation": "Tests such as the spectral test, Diehard and TestU01 look for these defects; modern generators (Mersenne twister, PCG) pass them."
+ },
+ {
+  "id": "mc-2.1",
+  "lecture": 2,
+  "stem": "How does the acceptance-rejection method generate draws from a density $f$ with a proposal $g$ and constant $M$ such that $f\\le Mg$?",
+  "correct": [
+   "Draw $X\\sim g$; accept if $U\\le f(X)/\\{Mg(X)\\}$.",
+   "Keep proposals with probability $f/(Mg)$."
+  ],
+  "distractors": [
+   {
+    "text": "Accept $X$ if $U\\ge f(X)/\\{Mg(X)\\}$, the reverse inequality.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "Accept every draw from $g$ and weight it by $f/g$.",
+    "misconception": "describes importance sampling"
+   },
+   {
+    "text": "Return $F^{-1}(U)$ for a uniform draw $U$.",
+    "misconception": "describes inverse transform"
+   },
+   {
+    "text": "Accept $X$ only if $f(X)>g(X)$.",
+    "misconception": "gives a wrong rule"
+   },
+   {
+    "text": "Require the constant $M$ to be below one.",
+    "misconception": "gives an impossible condition"
+   }
+  ],
+  "explanation": "Since $\\int f=\\int g=1$ and $f\\le Mg$ we must have $M\\ge1$, with equality only if $f=g$."
+ },
+ {
+  "id": "mc-2.2",
+  "lecture": 2,
+  "stem": "What is the overall acceptance probability of the rejection method with envelope constant $M$?",
+  "correct": [
+   "$1/M$, so $M$ proposals per accepted draw.",
+   "The reciprocal of the envelope."
+  ],
+  "distractors": [
+   {
+    "text": "$M$, the envelope constant itself.",
+    "misconception": "inverts the quantity"
+   },
+   {
+    "text": "$1-1/M$, the rejection probability.",
+    "misconception": "gives the rejection probability"
+   },
+   {
+    "text": "$f(x)/g(x)$ at every point $x$.",
+    "misconception": "confuses with the pointwise ratio"
+   },
+   {
+    "text": "Always one half, for any target.",
+    "misconception": "states a false constant"
+   },
+   {
+    "text": "$1/M^2$, the squared reciprocal.",
+    "misconception": "squares the probability"
+   }
+  ],
+  "explanation": "$P(\\text{accept})=\\int g(x)\\frac{f(x)}{Mg(x)}dx=\\frac1M$. For a Beta(2,3) target with a uniform proposal, $M=16/9$."
+ },
+ {
+  "id": "mc-2.3",
+  "lecture": 2,
+  "stem": "When is inverse transform sampling practical?",
+  "correct": [
+   "When $F^{-1}$ is closed-form or cheap.",
+   "When the cdf can be inverted."
+  ],
+  "distractors": [
+   {
+    "text": "Only for the normal distribution.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "Only for discrete distributions.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "When the density is unnormalised.",
+    "misconception": "describes rejection or MCMC"
+   },
+   {
+    "text": "Never, since inverting $F$ is impossible.",
+    "misconception": "denies the method"
+   },
+   {
+    "text": "When the support is unbounded.",
+    "misconception": "gives a false restriction"
+   }
+  ],
+  "explanation": "For discrete distributions, search the cumulative probabilities; for the normal use an accurate approximation of $\\Phi^{-1}$."
+ },
+ {
+  "id": "mc-2.4",
+  "lecture": 2,
+  "stem": "Why must the proposal $g$ in the rejection method have heavier tails than the target $f$?",
+  "correct": [
+   "So that $f/g$ is bounded and a finite $M$ exists.",
+   "A light-tailed proposal cannot dominate the target."
+  ],
+  "distractors": [
+   {
+    "text": "To make the acceptance probability equal to one.",
+    "misconception": "ignores the cost of rejection"
+   },
+   {
+    "text": "Because the target must be discrete.",
+    "misconception": "gives a wrong reason"
+   },
+   {
+    "text": "It is not required, since $M$ can be infinite.",
+    "misconception": "would give zero acceptance"
+   },
+   {
+    "text": "Because heavier tails reduce the variance of the estimate.",
+    "misconception": "confuses with estimation"
+   },
+   {
+    "text": "To guarantee independence between proposals.",
+    "misconception": "gives a wrong reason"
+   }
+  ],
+  "explanation": "A normal proposal cannot envelope a Cauchy target, but a Cauchy proposal can envelope a normal one with a bounded ratio."
+ },
+ {
+  "id": "mc-3.1",
+  "lecture": 3,
+  "stem": "How does the Box-Muller transform produce normal variables?",
+  "correct": [
+   "Two uniforms give $Z_1=\\sqrt{-2\\ln U_1}\\cos(2\\pi U_2)$ and a sine partner.",
+   "A polar construction."
+  ],
+  "distractors": [
+   {
+    "text": "By adding twelve uniforms and subtracting 6.",
+    "misconception": "describes an approximate method"
+   },
+   {
+    "text": "By inverting the normal cdf in closed form.",
+    "misconception": "the inverse has no closed form"
+   },
+   {
+    "text": "By rejecting uniforms outside the unit circle.",
+    "misconception": "describes the polar (Marsaglia) rejection variant"
+   },
+   {
+    "text": "$Z=\\sqrt{-2\\ln U}$ alone.",
+    "misconception": "gives a non-normal variable"
+   },
+   {
+    "text": "By taking the logarithm of a uniform variable.",
+    "misconception": "gives an exponential variable"
+   }
+  ],
+  "explanation": "$R^2=-2\\ln U_1$ is exponential with mean 2, which is the squared radius of a standard bivariate normal."
+ },
+ {
+  "id": "mc-3.2",
+  "lecture": 3,
+  "stem": "How are correlated multivariate normal vectors generated with covariance $\\Sigma$?",
+  "correct": [
+   "Compute $\\Sigma=LL^\\top$ and return $\\mu+LZ$ with $Z$ standard normal.",
+   "Transform independent normals by a square root of $\\Sigma$."
+  ],
+  "distractors": [
+   {
+    "text": "Draw each coordinate independently with the right variance.",
+    "misconception": "gives uncorrelated coordinates"
+   },
+   {
+    "text": "Return $\\mu+\\Sigma Z$.",
+    "misconception": "uses $\\Sigma$ instead of its factor"
+   },
+   {
+    "text": "Return $\\mu+L^\\top Z^{-1}$.",
+    "misconception": "gives an invalid transformation"
+   },
+   {
+    "text": "Use the same normal draw for every coordinate.",
+    "misconception": "gives perfect correlation"
+   },
+   {
+    "text": "Add the correlation to each coordinate.",
+    "misconception": "gives a wrong transformation"
+   }
+  ],
+  "explanation": "$\\operatorname{Cov}(LZ)=LL^\\top=\\Sigma$. For $\\Sigma$ with unit variances and correlation $\\rho$, $X_2=\\rho Z_1+\\sqrt{1-\\rho^2}Z_2$."
+ },
+ {
+  "id": "mc-3.3",
+  "lecture": 3,
+  "stem": "What is the composition (mixture) method for sampling?",
+  "correct": [
+   "Pick a component by its mixing probability, then draw from it.",
+   "Draw the index first."
+  ],
+  "distractors": [
+   {
+    "text": "Add draws from all the components.",
+    "misconception": "confuses a mixture with a sum"
+   },
+   {
+    "text": "Average draws from all the components.",
+    "misconception": "confuses a mixture with an average"
+   },
+   {
+    "text": "Draw once from the component with the largest probability.",
+    "misconception": "ignores the others"
+   },
+   {
+    "text": "Use a rejection step on the first component.",
+    "misconception": "confuses methods"
+   },
+   {
+    "text": "Multiply draws from the components.",
+    "misconception": "confuses a mixture with a product"
+   }
+  ],
+  "explanation": "The result has the mixture density, whereas a sum of draws has the convolution."
+ },
+ {
+  "id": "mc-3.4",
+  "lecture": 3,
+  "stem": "Why is it important that Cholesky factorisation of a covariance matrix exists?",
+  "correct": [
+   "A positive definite matrix has a unique factor $L$.",
+   "It defines the transformation."
+  ],
+  "distractors": [
+   {
+    "text": "Any square matrix has a Cholesky factor.",
+    "misconception": "ignores the need for symmetry and positive definiteness"
+   },
+   {
+    "text": "It is needed to compute the mean.",
+    "misconception": "confuses with the mean"
+   },
+   {
+    "text": "It is used to generate uniform numbers.",
+    "misconception": "confuses with a different task"
+   },
+   {
+    "text": "It is required for the Box-Muller transform.",
+    "misconception": "confuses methods"
+   },
+   {
+    "text": "It works only for $2\\times2$ matrices.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "For $\\Sigma=\\begin{pmatrix}a&b\\\\b&d\\end{pmatrix}$, $L_{11}=\\sqrt a$, $L_{21}=b/\\sqrt a$, $L_{22}=\\sqrt{d-b^2/a}$."
+ },
+ {
+  "id": "mc-4.1",
+  "lecture": 4,
+  "stem": "How is $I=\\int_0^1f(x)\\,dx$ estimated by plain Monte Carlo, and what is its standard error?",
+  "correct": [
+   "$\\hat I=\\frac1n\\sum f(U_i)$, with standard error $s/\\sqrt n$.",
+   "A sample mean with error shrinking like $n^{-1/2}$."
+  ],
+  "distractors": [
+   {
+    "text": "The sample mean at equally spaced points, with error shrinking like $1/n$.",
+    "misconception": "describes a grid rule"
+   },
+   {
+    "text": "The sample variance of the $f(U_i)$.",
+    "misconception": "confuses the mean with the variance"
+   },
+   {
+    "text": "The standard error does not depend on the number of points.",
+    "misconception": "ignores $n$"
+   },
+   {
+    "text": "The estimate is biased by $1/\\sqrt n$.",
+    "misconception": "overlooks unbiasedness"
+   },
+   {
+    "text": "The standard error is $s\\sqrt n$.",
+    "misconception": "gets the scaling wrong"
+   }
+  ],
+  "explanation": "A 95% interval is $\\hat I\\pm1.96\\,s/\\sqrt n$, valid by the central limit theorem for large $n$."
+ },
+ {
+  "id": "mc-4.2",
+  "lecture": 4,
+  "stem": "What does the central limit theorem tell us about a Monte Carlo estimator?",
+  "correct": [
+   "The error is approximately normal with deviation $\\sigma/\\sqrt n$.",
+   "It looks Gaussian."
+  ],
+  "distractors": [
+   {
+    "text": "The error is exactly normal for every $n$.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "The error is zero for large $n$.",
+    "misconception": "confuses with exactness"
+   },
+   {
+    "text": "The error shrinks like $1/n$.",
+    "misconception": "gives the wrong rate"
+   },
+   {
+    "text": "The CLT requires the integrand to be bounded.",
+    "misconception": "adds a false condition"
+   },
+   {
+    "text": "The error does not depend on the variance of $f$.",
+    "misconception": "ignores the variance"
+   }
+  ],
+  "explanation": "Finite variance of $f(U)$ suffices. If it is infinite, the convergence is slower and non-Gaussian."
+ },
+ {
+  "id": "mc-4.3",
+  "lecture": 4,
+  "stem": "How can the number of Monte Carlo points be chosen to reach a given accuracy?",
+  "correct": [
+   "Estimate $\\sigma$ from a pilot and take $n\\ge(1.96\\sigma/\\varepsilon)^2$.",
+   "Use the standard error formula backwards."
+  ],
+  "distractors": [
+   {
+    "text": "Use $n=1.96\\sigma/\\varepsilon$.",
+    "misconception": "forgets the square"
+   },
+   {
+    "text": "Use a fixed number such as 1000 for every problem.",
+    "misconception": "ignores the accuracy"
+   },
+   {
+    "text": "$n$ is independent of $\\sigma$.",
+    "misconception": "ignores the variance"
+   },
+   {
+    "text": "Halving $\\varepsilon$ doubles $n$.",
+    "misconception": "uses the wrong power"
+   },
+   {
+    "text": "The sample size is determined by the dimension.",
+    "misconception": "confuses with grids"
+   }
+  ],
+  "explanation": "A tenfold improvement in accuracy costs a hundredfold increase in simulation effort."
+ },
+ {
+  "id": "mc-4.4",
+  "lecture": 4,
+  "stem": "When is Monte Carlo integration preferable to deterministic quadrature?",
+  "correct": [
+   "In high dimension, since its rate ignores dimension.",
+   "Grids need exponentially many points."
+  ],
+  "distractors": [
+   {
+    "text": "In one dimension with a smooth integrand.",
+    "misconception": "is where quadrature is far better"
+   },
+   {
+    "text": "When an exact answer is required.",
+    "misconception": "confuses the nature of the error"
+   },
+   {
+    "text": "When the integrand is a low-degree polynomial.",
+    "misconception": "is where quadrature is exact"
+   },
+   {
+    "text": "Never, as Monte Carlo is always less accurate.",
+    "misconception": "ignores the curse of dimensionality"
+   },
+   {
+    "text": "When the integrand has infinite variance.",
+    "misconception": "is where Monte Carlo struggles"
+   }
+  ],
+  "explanation": "Quasi-Monte Carlo (low-discrepancy sequences) can give rates near $1/n$ for smooth integrands in moderate dimension."
+ },
+ {
+  "id": "mc-5.1",
+  "lecture": 5,
+  "stem": "How does the antithetic variates method reduce variance?",
+  "correct": [
+   "Pairing $U$ with $1-U$ gives negatively correlated values.",
+   "Pair variance $\\sigma^2(1+\\rho)/2$, $\\rho<0$."
+  ],
+  "distractors": [
+   {
+    "text": "It uses two independent draws and averages them.",
+    "misconception": "describes plain Monte Carlo"
+   },
+   {
+    "text": "It always halves the variance.",
+    "misconception": "ignores the correlation"
+   },
+   {
+    "text": "It works for any $f$, including non-monotone.",
+    "misconception": "ignores the monotonicity condition"
+   },
+   {
+    "text": "It increases the variance for monotone $f$.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It uses a second variable with a known mean.",
+    "misconception": "describes control variates"
+   }
+  ],
+  "explanation": "For $f(u)=u$ the antithetic pair is exactly $1/2$, so the variance is zero; for symmetric $f$ it can double the variance."
+ },
+ {
+  "id": "mc-5.2",
+  "lecture": 5,
+  "stem": "How does a control variate reduce the variance?",
+  "correct": [
+   "Subtract $\\beta(C-E[C])$, with $\\beta=\\operatorname{Cov}(Y,C)/\\operatorname{Var}(C)$.",
+   "Variance falls by the factor $1-\\rho^2$."
+  ],
+  "distractors": [
+   {
+    "text": "Subtract the sample mean of $Y$ from every draw.",
+    "misconception": "removes the quantity of interest"
+   },
+   {
+    "text": "Use two independent estimators and average them.",
+    "misconception": "describes plain averaging"
+   },
+   {
+    "text": "The variance is reduced only when $\\rho=0$.",
+    "misconception": "reverses the condition"
+   },
+   {
+    "text": "It needs $C$ to have an unknown mean.",
+    "misconception": "reverses the requirement"
+   },
+   {
+    "text": "It biases the estimator in proportion to $\\beta$.",
+    "misconception": "overlooks unbiasedness"
+   }
+  ],
+  "explanation": "The estimator $\\bar Y-\\beta(\\bar C-E C)$ stays unbiased for any $\\beta$ because $E[\\bar C-EC]=0$."
+ },
+ {
+  "id": "mc-5.3",
+  "lecture": 5,
+  "stem": "What variance reduction factor does an optimal control variate with correlation $\\rho$ achieve?",
+  "correct": [
+   "The variance is multiplied by $1-\\rho^2$.",
+   "Only $\\rho^2$ matters."
+  ],
+  "distractors": [
+   {
+    "text": "$1-\\rho$, without squaring the correlation.",
+    "misconception": "forgets to square"
+   },
+   {
+    "text": "$\\rho^2$, the removed fraction.",
+    "misconception": "gives the reduction rather than the remaining fraction"
+   },
+   {
+    "text": "$1/(1-\\rho^2)$, the inverse factor.",
+    "misconception": "inverts the factor"
+   },
+   {
+    "text": "It does not depend on the correlation $\\rho$.",
+    "misconception": "ignores the correlation"
+   },
+   {
+    "text": "$(1-\\rho)^2$, squaring the wrong term.",
+    "misconception": "gives a wrong formula"
+   }
+  ],
+  "explanation": "With $\\rho=0.9$ the variance falls to $19\\%$ of the plain estimator, equivalent to about 5 times more draws."
+ },
+ {
+  "id": "mc-5.4",
+  "lecture": 5,
+  "stem": "Why can a poorly chosen control variate fail to help?",
+  "correct": [
+   "If it is weakly correlated, $1-\\rho^2$ stays near one.",
+   "Uncorrelated controls give no reduction."
+  ],
+  "distractors": [
+   {
+    "text": "Control variates always reduce variance, whatever the control.",
+    "misconception": "ignores the need for correlation"
+   },
+   {
+    "text": "The variance increases whenever $\\beta\\ne0$.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "A control must be independent of $Y$.",
+    "misconception": "reverses the requirement"
+   },
+   {
+    "text": "Controls bias the estimator.",
+    "misconception": "overlooks unbiasedness"
+   },
+   {
+    "text": "It works only if $E[C]$ is unknown.",
+    "misconception": "reverses the requirement"
+   }
+  ],
+  "explanation": "The optimal $\\beta$ is estimated by regressing $Y$ on $C$ in the same run, with a small bias of order $1/n$."
+ },
+ {
+  "id": "mc-6.1",
+  "lecture": 6,
+  "stem": "What is the optimal importance sampling density for estimating $E_p[f(X)]$ with $f\\ge0$?",
+  "correct": [
+   "Density proportional to $f(x)p(x)$, giving zero variance.",
+   "Mass where $|f|p$ is large."
+  ],
+  "distractors": [
+   {
+    "text": "The target density $p$ itself.",
+    "misconception": "describes plain Monte Carlo"
+   },
+   {
+    "text": "A uniform density on the support.",
+    "misconception": "ignores the integrand"
+   },
+   {
+    "text": "A density proportional to $1/(fp)$.",
+    "misconception": "inverts the choice"
+   },
+   {
+    "text": "A density with smaller tails than $p$.",
+    "misconception": "risks infinite variance"
+   },
+   {
+    "text": "Any density, since the weights correct the bias.",
+    "misconception": "ignores variance"
+   }
+  ],
+  "explanation": "The ideal is not usable since its normalising constant is the unknown integral, but it guides the choice."
+ },
+ {
+  "id": "mc-6.2",
+  "lecture": 6,
+  "stem": "How does stratified sampling reduce variance?",
+  "correct": [
+   "Sampling strata separately removes between-strata variance.",
+   "Proportional allocation never hurts."
+  ],
+  "distractors": [
+   {
+    "text": "It uses only samples from the largest stratum.",
+    "misconception": "ignores the other strata"
+   },
+   {
+    "text": "It adds an independent noise term.",
+    "misconception": "gives an unrelated change"
+   },
+   {
+    "text": "It can increase the variance relative to plain sampling.",
+    "misconception": "is false for proportional allocation"
+   },
+   {
+    "text": "It removes the within-stratum variance.",
+    "misconception": "removes the wrong part"
+   },
+   {
+    "text": "It needs correlated draws.",
+    "misconception": "confuses with antithetic variates"
+   }
+  ],
+  "explanation": "With equal strata of $[0,1]$ and one draw per stratum, $\\hat I=\\frac1K\\sum_kf(U_k)$ with $U_k$ uniform on stratum $k$."
+ },
+ {
+  "id": "mc-6.3",
+  "lecture": 6,
+  "stem": "How is rare-event probability such as $P(Z>c)$ for a standard normal estimated efficiently?",
+  "correct": [
+   "Sample from a shifted $N(c,1)$ and reweight.",
+   "A proposal in the rare region."
+  ],
+  "distractors": [
+   {
+    "text": "Draw from $N(0,1)$ and count the exceedances.",
+    "misconception": "needs very many draws"
+   },
+   {
+    "text": "Use antithetic variates for tail events.",
+    "misconception": "does not help for rare events"
+   },
+   {
+    "text": "Increase the standard deviation of the target.",
+    "misconception": "changes the target"
+   },
+   {
+    "text": "Use the sample mean of the draws.",
+    "misconception": "ignores the event"
+   },
+   {
+    "text": "Reject all draws below $c$.",
+    "misconception": "wastes draws without correcting the weights"
+   }
+  ],
+  "explanation": "For $c=4$ the plain estimator needs millions of draws for a few exceedances, whereas the tilted proposal puts about half its draws beyond $c$."
+ },
+ {
+  "id": "mc-6.4",
+  "lecture": 6,
+  "stem": "What is the weight in importance sampling with proposal $N(c,1)$ for a target $N(0,1)$ at the point $x$?",
+  "correct": [
+   "$w(x)=\\varphi(x)/\\varphi(x-c)=\\exp(-cx+c^2/2)$.",
+   "Target density over proposal density."
+  ],
+  "distractors": [
+   {
+    "text": "$\\exp(cx-c^2/2)$, with the signs flipped.",
+    "misconception": "has the wrong sign"
+   },
+   {
+    "text": "$\\varphi(x-c)/\\varphi(x)$, proposal over target.",
+    "misconception": "inverts the ratio"
+   },
+   {
+    "text": "$\\varphi(x)\\varphi(x-c)$, the product of densities.",
+    "misconception": "multiplies the densities"
+   },
+   {
+    "text": "$1$ for every point $x$.",
+    "misconception": "ignores the change of distribution"
+   },
+   {
+    "text": "The shift $c$ itself, a constant.",
+    "misconception": "gives a constant"
+   }
+  ],
+  "explanation": "A large $x$ (in the tail) gets a small weight, since the proposal oversamples that region."
+ },
+ {
+  "id": "mc-7.1",
+  "lecture": 7,
+  "stem": "What is the Euler-Maruyama scheme for $dS=\\mu S\\,dt+\\sigma S\\,dW$?",
+  "correct": [
+   "$S_{k+1}=S_k+\\mu S_k\\Delta t+\\sigma S_k\\sqrt{\\Delta t}\\,Z_k$.",
+   "Coefficients frozen over each step."
+  ],
+  "distractors": [
+   {
+    "text": "$S_{k+1}=S_k\\exp(\\mu\\Delta t)$.",
+    "misconception": "drops the noise term"
+   },
+   {
+    "text": "$S_{k+1}=S_k+\\sigma\\Delta t\\,Z_k$.",
+    "misconception": "misplaces the scaling"
+   },
+   {
+    "text": "$S_{k+1}=S_k+\\mu\\sqrt{\\Delta t}+\\sigma\\Delta t\\,Z_k$.",
+    "misconception": "swaps the scalings"
+   },
+   {
+    "text": "It reproduces the exact distribution of $S$.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "It needs a time step of exactly 1.",
+    "misconception": "invents a condition"
+   }
+  ],
+  "explanation": "Its strong error is of order $\\sqrt{\\Delta t}$ and its weak error of order $\\Delta t$."
+ },
+ {
+  "id": "mc-7.2",
+  "lecture": 7,
+  "stem": "What does the Milstein scheme add to Euler-Maruyama?",
+  "correct": [
+   "A correction $\\tfrac12\\sigma\\sigma'\\{(\\Delta W)^2-\\Delta t\\}$, giving strong order 1.",
+   "A second-order noise term."
+  ],
+  "distractors": [
+   {
+    "text": "A finer time step by a factor of two.",
+    "misconception": "describes a smaller step, not a new scheme"
+   },
+   {
+    "text": "A drift correction only.",
+    "misconception": "misplaces the term"
+   },
+   {
+    "text": "An exact simulation of the process.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "It lowers the weak order.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It removes the need for random numbers.",
+    "misconception": "ignores the noise"
+   }
+  ],
+  "explanation": "For GBM the Milstein term is $\\tfrac12\\sigma^2S_k(\\Delta t Z^2-\\Delta t)$; the exact step is $S_k\\exp\\{(\\mu-\\sigma^2/2)\\Delta t+\\sigma\\sqrt{\\Delta t}Z\\}$."
+ },
+ {
+  "id": "mc-7.3",
+  "lecture": 7,
+  "stem": "What is the difference between strong and weak convergence of a discretisation scheme?",
+  "correct": [
+   "Strong measures path error; weak measures error in expectations.",
+   "Weak suffices for pricing in expectation."
+  ],
+  "distractors": [
+   {
+    "text": "They are the same notion with different names.",
+    "misconception": "ignores the distinction"
+   },
+   {
+    "text": "Strong convergence is about the mean, weak convergence about the path.",
+    "misconception": "swaps the two"
+   },
+   {
+    "text": "Weak order is always the smaller of the two.",
+    "misconception": "reverses the typical ranking"
+   },
+   {
+    "text": "Strong convergence needs more time steps than weak convergence by definition.",
+    "misconception": "confuses with a consequence"
+   },
+   {
+    "text": "Weak convergence is irrelevant for option pricing.",
+    "misconception": "reverses the relevance"
+   }
+  ],
+  "explanation": "Euler-Maruyama has strong order $1/2$ and weak order $1$; Milstein has strong order $1$."
+ },
+ {
+  "id": "mc-7.4",
+  "lecture": 7,
+  "stem": "For geometric Brownian motion, what is the advantage of simulating $\\ln S$ rather than applying Euler to $S$?",
+  "correct": [
+   "The log scheme is exact and keeps $S$ positive.",
+   "Constant coefficients."
+  ],
+  "distractors": [
+   {
+    "text": "It has a larger discretisation error.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It can make $S$ negative.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It needs smaller time steps.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It works only for $\\mu=0$.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It changes the volatility.",
+    "misconception": "confuses with a model change"
+   }
+  ],
+  "explanation": "Euler on $S$ can produce negative prices for large steps, whereas $S_0\\exp(\\cdot)$ is always positive."
+ },
+ {
+  "id": "mc-8.1",
+  "lecture": 8,
+  "stem": "What is the acceptance probability of a random-walk Metropolis step for target density $\\pi$?",
+  "correct": [
+   "$\\min\\{1,\\pi(x')/\\pi(x)\\}$ for a symmetric proposal.",
+   "Uphill is always accepted."
+  ],
+  "distractors": [
+   {
+    "text": "$\\pi(x')/\\pi(x)$ without capping at one.",
+    "misconception": "may exceed one"
+   },
+   {
+    "text": "$\\min\\{1,\\pi(x)/\\pi(x')\\}$.",
+    "misconception": "inverts the ratio"
+   },
+   {
+    "text": "Always 0.5.",
+    "misconception": "ignores the target"
+   },
+   {
+    "text": "$\\pi(x')$ alone.",
+    "misconception": "ignores the current state"
+   },
+   {
+    "text": "The acceptance probability depends on the proposal width only.",
+    "misconception": "ignores the target"
+   }
+  ],
+  "explanation": "Only a ratio of target values appears, so the normalising constant is not needed."
+ },
+ {
+  "id": "mc-8.2",
+  "lecture": 8,
+  "stem": "What happens in Metropolis-Hastings with an asymmetric proposal $q(x'\\mid x)$?",
+  "correct": [
+   "The acceptance probability gets a proposal-ratio correction.",
+   "Hastings restores detailed balance."
+  ],
+  "distractors": [
+   {
+    "text": "The correction is not needed, since $\\pi$ alone decides.",
+    "misconception": "ignores the asymmetry"
+   },
+   {
+    "text": "The ratio is $q(x'\\mid x)/q(x\\mid x')$ times $\\pi(x)/\\pi(x')$.",
+    "misconception": "inverts both ratios"
+   },
+   {
+    "text": "The sampler then fails to converge.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "The acceptance probability is always one.",
+    "misconception": "describes Gibbs"
+   },
+   {
+    "text": "The proposal must be uniform.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "An independence sampler has $q(x'\\mid x)=q(x')$, giving the ratio of weights $\\pi/q$."
+ },
+ {
+  "id": "mc-8.3",
+  "lecture": 8,
+  "stem": "Why do the draws of a Metropolis-Hastings chain have a stationary distribution equal to $\\pi$?",
+  "correct": [
+   "The acceptance rule gives detailed balance for $\\pi$.",
+   "$\\pi(x)P(x,x')=\\pi(x')P(x',x)$."
+  ],
+  "distractors": [
+   {
+    "text": "Because the proposal is chosen to be $\\pi$.",
+    "misconception": "describes an independence sampler with perfect proposal"
+   },
+   {
+    "text": "Because the chain starts from $\\pi$.",
+    "misconception": "confuses with initialisation"
+   },
+   {
+    "text": "Because successive draws are independent.",
+    "misconception": "ignores the dependence"
+   },
+   {
+    "text": "Because the acceptance rate is exactly 0.5.",
+    "misconception": "invents a condition"
+   },
+   {
+    "text": "Because the chain never moves.",
+    "misconception": "is absurd"
+   }
+  ],
+  "explanation": "Convergence to $\\pi$ from any start also needs irreducibility and aperiodicity."
+ },
+ {
+  "id": "mc-8.4",
+  "lecture": 8,
+  "stem": "Why is a very high acceptance rate not the goal when tuning a random-walk Metropolis sampler?",
+  "correct": [
+   "Tiny steps are almost always accepted but explore the target slowly.",
+   "A moderate rate balances step size against acceptance."
+  ],
+  "distractors": [
+   {
+    "text": "Because accepted moves are always bad moves for the chain.",
+    "misconception": "confuses acceptance with the quality of moves"
+   },
+   {
+    "text": "Because a high acceptance rate means the target is multimodal.",
+    "misconception": "invents a link to multimodality"
+   },
+   {
+    "text": "Because rejected proposals carry no cost in an MCMC run.",
+    "misconception": "a rejection repeats the current state"
+   },
+   {
+    "text": "Because the chain must reject exactly half of its proposals.",
+    "misconception": "states a false constant"
+   },
+   {
+    "text": "Because acceptance rates are unrelated to the proposal scale.",
+    "misconception": "ignores the effect of the scale"
+   }
+  ],
+  "explanation": "Optimal scaling theory suggests an acceptance rate of roughly 23% in high dimension, with proposal standard deviation about $2.38/\\sqrt d$ times the target's."
+ },
+ {
+  "id": "mc-9.1",
+  "lecture": 9,
+  "stem": "What is the full conditional distribution used in Gibbs sampling?",
+  "correct": [
+   "The law of one variable given all the others.",
+   "The joint as a function of one coordinate."
+  ],
+  "distractors": [
+   {
+    "text": "The marginal distribution of $x_j$.",
+    "misconception": "confuses with the marginal"
+   },
+   {
+    "text": "The joint distribution of all variables.",
+    "misconception": "confuses with the joint"
+   },
+   {
+    "text": "The proposal density of a Metropolis step.",
+    "misconception": "confuses with proposals"
+   },
+   {
+    "text": "The prior distribution of $x_j$.",
+    "misconception": "confuses with the prior"
+   },
+   {
+    "text": "The distribution of $x_j$ given only the first variable.",
+    "misconception": "conditions on too little"
+   }
+  ],
+  "explanation": "For a bivariate normal with correlation $\\rho$ and unit variances, $x\\mid y\\sim N(\\rho y,1-\\rho^2)$."
+ },
+ {
+  "id": "mc-9.2",
+  "lecture": 9,
+  "stem": "How is a full conditional derived in practice?",
+  "correct": [
+   "Keep the joint-density factors in that variable and recognise the kernel.",
+   "Collect log-joint terms."
+  ],
+  "distractors": [
+   {
+    "text": "Integrate the joint density over the variable.",
+    "misconception": "gives a marginal, not a conditional"
+   },
+   {
+    "text": "Differentiate the joint density with respect to the variable.",
+    "misconception": "gives a gradient"
+   },
+   {
+    "text": "Take the maximum of the joint over the variable.",
+    "misconception": "gives a mode"
+   },
+   {
+    "text": "Divide by the marginal likelihood only.",
+    "misconception": "ignores the dependence"
+   },
+   {
+    "text": "Simulate it by rejection sampling.",
+    "misconception": "describes a sampling method"
+   }
+  ],
+  "explanation": "In a normal model with known variance, the full conditional of the mean is normal with precision $n\\tau+\\tau_0$."
+ },
+ {
+  "id": "mc-9.3",
+  "lecture": 9,
+  "stem": "What is blocking in Gibbs sampling?",
+  "correct": [
+   "Updating correlated variables together.",
+   "Drawing a parameter group jointly."
+  ],
+  "distractors": [
+   {
+    "text": "Skipping variables that are correlated.",
+    "misconception": "describes omission"
+   },
+   {
+    "text": "Updating variables in a random order.",
+    "misconception": "describes random scan"
+   },
+   {
+    "text": "Blocking the chain from visiting some states.",
+    "misconception": "misunderstands the term"
+   },
+   {
+    "text": "Using the same draw for every variable.",
+    "misconception": "confuses with perfect correlation"
+   },
+   {
+    "text": "Discarding blocks of draws as burn-in.",
+    "misconception": "confuses with burn-in"
+   }
+  ],
+  "explanation": "For a bivariate normal with high correlation, drawing $(x,y)$ jointly would be exact, whereas single-site Gibbs mixes slowly."
+ },
+ {
+  "id": "mc-9.4",
+  "lecture": 9,
+  "stem": "How does strong posterior correlation affect a single-site Gibbs sampler?",
+  "correct": [
+   "Axis-aligned moves are small, so mixing is slow.",
+   "ESS is far below the number of draws."
+  ],
+  "distractors": [
+   {
+    "text": "It makes Gibbs faster because conditionals are narrower.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It has no effect on Gibbs sampling.",
+    "misconception": "ignores the effect"
+   },
+   {
+    "text": "It makes the draws independent.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It makes the stationary distribution wrong.",
+    "misconception": "confuses speed with correctness"
+   },
+   {
+    "text": "It makes the sampler reject more proposals.",
+    "misconception": "Gibbs has no rejections"
+   }
+  ],
+  "explanation": "The lag-1 autocorrelation of $x$ in a bivariate normal Gibbs sampler is $\\rho^2$."
+ },
+ {
+  "id": "mc-10.1",
+  "lecture": 10,
+  "stem": "What does a burn-in period do in an MCMC run?",
+  "correct": [
+   "Initial draws that reflect the start are discarded.",
+   "The transient part is removed."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the retained draws independent.",
+    "misconception": "confuses with thinning"
+   },
+   {
+    "text": "It increases the effective sample size by dropping correlated draws.",
+    "misconception": "confuses with thinning"
+   },
+   {
+    "text": "It changes the target distribution.",
+    "misconception": "misunderstands the aim"
+   },
+   {
+    "text": "It is needed only for Gibbs samplers.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It guarantees convergence.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "Several chains from dispersed starting points can show how long the transient lasts."
+ },
+ {
+  "id": "mc-10.2",
+  "lecture": 10,
+  "stem": "How is the effective sample size of an MCMC run related to the autocorrelation?",
+  "correct": [
+   "$\\mathrm{ESS}=n/(1+2\\sum_k\\rho_k)$.",
+   "Strong autocorrelation means far fewer independent draws."
+  ],
+  "distractors": [
+   {
+    "text": "ESS equals $n$ whatever the autocorrelation.",
+    "misconception": "ignores correlation"
+   },
+   {
+    "text": "ESS is larger than $n$ for positive autocorrelation.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "ESS depends only on the burn-in length.",
+    "misconception": "confuses with burn-in"
+   },
+   {
+    "text": "ESS is the number of distinct values in the chain.",
+    "misconception": "confuses with a count"
+   },
+   {
+    "text": "ESS equals the acceptance rate times $n$.",
+    "misconception": "confuses with acceptance"
+   }
+  ],
+  "explanation": "The Monte Carlo standard error of a posterior mean is $\\mathrm{sd}/\\sqrt{\\mathrm{ESS}}$, not $\\mathrm{sd}/\\sqrt n$."
+ },
+ {
+  "id": "mc-10.3",
+  "lecture": 10,
+  "stem": "What does the Gelman-Rubin statistic $\\hat R$ indicate when it is close to 1?",
+  "correct": [
+   "Between- and within-chain variances agree.",
+   "Chains appear to have mixed."
+  ],
+  "distractors": [
+   {
+    "text": "The chain has exactly reached the target.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "The autocorrelation is zero.",
+    "misconception": "confuses with autocorrelation"
+   },
+   {
+    "text": "The acceptance rate is optimal.",
+    "misconception": "confuses with acceptance"
+   },
+   {
+    "text": "The effective sample size equals $n$.",
+    "misconception": "confuses with ESS"
+   },
+   {
+    "text": "The chain has not converged.",
+    "misconception": "reverses the interpretation"
+   }
+  ],
+  "explanation": "$\\hat R$ well above 1 (say over 1.1, or over 1.01 in current practice) shows that the chains have not converged."
+ },
+ {
+  "id": "mc-10.4",
+  "lecture": 10,
+  "stem": "Why are several chains from dispersed starting values recommended?",
+  "correct": [
+   "Disagreement between chains reveals non-convergence.",
+   "They allow $\\hat R$."
+  ],
+  "distractors": [
+   {
+    "text": "They make each chain converge faster.",
+    "misconception": "confuses with a speed effect"
+   },
+   {
+    "text": "They reduce the autocorrelation of each chain.",
+    "misconception": "confuses with autocorrelation"
+   },
+   {
+    "text": "They are needed only for discrete targets.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "One long chain is always enough.",
+    "misconception": "ignores the risk"
+   },
+   {
+    "text": "They change the stationary distribution.",
+    "misconception": "confuses with the target"
+   }
+  ],
+  "explanation": "A single chain trapped in one mode of a bimodal posterior looks perfectly converged."
+ },
+ {
+  "id": "mc-11.1",
+  "lecture": 11,
+  "stem": "How does the nonparametric bootstrap approximate the sampling distribution of a statistic?",
+  "correct": [
+   "Resample with replacement and recompute the statistic.",
+   "Treat the data as the population."
+  ],
+  "distractors": [
+   {
+    "text": "Draw new samples from a fitted normal distribution.",
+    "misconception": "describes the parametric bootstrap"
+   },
+   {
+    "text": "Resample without replacement, leaving out one point.",
+    "misconception": "describes the jackknife"
+   },
+   {
+    "text": "Permute the group labels.",
+    "misconception": "describes a permutation test"
+   },
+   {
+    "text": "Collect more data from the same population.",
+    "misconception": "is not resampling"
+   },
+   {
+    "text": "Use only the original sample once.",
+    "misconception": "gives a single value"
+   }
+  ],
+  "explanation": "The bootstrap standard error is the standard deviation of the replicates."
+ },
+ {
+  "id": "mc-11.2",
+  "lecture": 11,
+  "stem": "How is a percentile bootstrap interval for a statistic constructed?",
+  "correct": [
+   "The $\\alpha/2$ and $1-\\alpha/2$ quantiles of the replicates.",
+   "The central $1-\\alpha$ of sorted estimates."
+  ],
+  "distractors": [
+   {
+    "text": "Add and subtract $1.96$ standard errors from the estimate.",
+    "misconception": "describes a normal interval"
+   },
+   {
+    "text": "Use the minimum and maximum of the replicates.",
+    "misconception": "uses the extremes"
+   },
+   {
+    "text": "Take the quantiles of the original data.",
+    "misconception": "uses the sample, not the replicates"
+   },
+   {
+    "text": "Use the square root of the bootstrap variance only.",
+    "misconception": "gives a standard error, not an interval"
+   },
+   {
+    "text": "Subtract the bias from the endpoints only.",
+    "misconception": "describes a bias correction"
+   }
+  ],
+  "explanation": "With $B=1000$ replicates, the 95% interval runs from about the 25th to the 975th ordered value."
+ },
+ {
+  "id": "mc-11.3",
+  "lecture": 11,
+  "stem": "How is the bias of an estimator estimated by the bootstrap?",
+  "correct": [
+   "The replicate mean minus the original estimate.",
+   "Average resample versus sample."
+  ],
+  "distractors": [
+   {
+    "text": "As the standard deviation of the replicates.",
+    "misconception": "confuses bias with spread"
+   },
+   {
+    "text": "As the difference between two samples.",
+    "misconception": "gives an unrelated quantity"
+   },
+   {
+    "text": "As the largest replicate minus the smallest.",
+    "misconception": "gives the range"
+   },
+   {
+    "text": "The bootstrap cannot estimate bias.",
+    "misconception": "denies the use"
+   },
+   {
+    "text": "As the mean of the data minus the median.",
+    "misconception": "gives skewness"
+   }
+  ],
+  "explanation": "The bias-corrected estimate is $2\\hat\\theta-\\bar\\theta^*$."
+ },
+ {
+  "id": "mc-11.4",
+  "lecture": 11,
+  "stem": "When does the nonparametric bootstrap perform poorly?",
+  "correct": [
+   "For extreme-value statistics, or very small samples.",
+   "When the statistic is not smooth."
+  ],
+  "distractors": [
+   {
+    "text": "For the sample mean of a large sample.",
+    "misconception": "is where it works well"
+   },
+   {
+    "text": "For the sample variance of normal data.",
+    "misconception": "works reasonably"
+   },
+   {
+    "text": "Whenever the data are independent.",
+    "misconception": "describes its assumption"
+   },
+   {
+    "text": "Only when the sample is larger than 1000.",
+    "misconception": "reverses the condition"
+   },
+   {
+    "text": "For a linear statistic with finite variance.",
+    "misconception": "works well"
+   }
+  ],
+  "explanation": "The bootstrap distribution of the maximum puts probability $1-(1-1/n)^n\\approx0.63$ on the sample maximum itself."
+ },
+ {
+  "id": "mc-11.5",
+  "lecture": 11,
+  "stem": "How many distinct bootstrap resamples (as multisets) exist for a sample of $n$ distinct observations?",
+  "correct": [
+   "$\\binom{2n-1}{n}$.",
+   "Choosing $n$ items with repetition."
+  ],
+  "distractors": [
+   {
+    "text": "$n^n$, counting the order of draws.",
+    "misconception": "counts ordered resamples"
+   },
+   {
+    "text": "$n!$, the number of permutations.",
+    "misconception": "confuses with permutations"
+   },
+   {
+    "text": "$2^n$, the number of subsets.",
+    "misconception": "confuses with subsets"
+   },
+   {
+    "text": "$\\binom nn=1$, choosing without repetition.",
+    "misconception": "confuses with choosing without repetition"
+   },
+   {
+    "text": "$n^2$, the number of pairs.",
+    "misconception": "confuses with pairs of observations"
+   }
+  ],
+  "explanation": "Each of the $n^n=3125$ ordered resamples for $n=5$ is equally likely, but they are not equally likely as multisets."
+ }
+]

@@ -1,0 +1,1762 @@
+[
+ {
+  "id": "algo-1.1",
+  "lecture": 1,
+  "stem": "What does \"alpha\" mean in a trading strategy context?",
+  "correct": [
+   "Return unexplained by risk factors.",
+   "Skill-based excess return."
+  ],
+  "distractors": [
+   {
+    "text": "The total return of the market.",
+    "misconception": "confuses alpha with beta"
+   },
+   {
+    "text": "The volatility of the strategy.",
+    "misconception": "confuses return with risk"
+   },
+   {
+    "text": "The cost of trading.",
+    "misconception": "costs reduce alpha, they are not alpha"
+   },
+   {
+    "text": "The fraction of trades that win.",
+    "misconception": "hit rate is not alpha"
+   },
+   {
+    "text": "The leverage of the portfolio.",
+    "misconception": "leverage scales both alpha and risk"
+   }
+  ],
+  "explanation": "Alpha is estimated as the intercept of a regression on factor returns, and it must be significant net of costs to matter."
+ },
+ {
+  "id": "algo-1.2",
+  "lecture": 1,
+  "stem": "What are the main stages of a strategy's lifecycle?",
+  "correct": [
+   "Research, testing, sizing, execution, monitoring.",
+   "Hypothesis through testing to trading."
+  ],
+  "distractors": [
+   {
+    "text": "Execution first, then idea generation.",
+    "misconception": "reverses the order"
+   },
+   {
+    "text": "Only backtesting, since live trading adds nothing new.",
+    "misconception": "live conditions differ from the backtest"
+   },
+   {
+    "text": "Signal generation and nothing else.",
+    "misconception": "ignores sizing, costs and execution"
+   },
+   {
+    "text": "Deployment without any testing.",
+    "misconception": "skips validation"
+   },
+   {
+    "text": "Monitoring before there is a strategy.",
+    "misconception": "puts the stages out of order"
+   }
+  ],
+  "explanation": "Each stage can destroy value: weak signals, overfit backtests, poor sizing, high costs or operational errors."
+ },
+ {
+  "id": "algo-1.3",
+  "lecture": 1,
+  "stem": "Why is a signal not the same thing as a portfolio?",
+  "correct": [
+   "A signal is a forecast; a portfolio is positions.",
+   "Sizing and risk decisions."
+  ],
+  "distractors": [
+   {
+    "text": "A signal already specifies exact trades with costs.",
+    "misconception": "trades require a construction step"
+   },
+   {
+    "text": "A portfolio contains only one asset.",
+    "misconception": "portfolios hold many positions"
+   },
+   {
+    "text": "A signal is always a probability.",
+    "misconception": "signals can be any score"
+   },
+   {
+    "text": "A portfolio needs no signal.",
+    "misconception": "it is built from signals"
+   },
+   {
+    "text": "The two are identical in any strategy.",
+    "misconception": "they play different roles"
+   }
+  ],
+  "explanation": "Two strategies with the same signal can differ in outcome because of portfolio construction."
+ },
+ {
+  "id": "algo-1.4",
+  "lecture": 1,
+  "stem": "What does the fundamental law of active management relate?",
+  "correct": [
+   "Information ratio, forecast skill and breadth.",
+   "Skill times root breadth."
+  ],
+  "distractors": [
+   {
+    "text": "Costs to turnover.",
+    "misconception": "not the content of the law"
+   },
+   {
+    "text": "Volatility to drawdown.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "Alpha to beta linearly.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The Sharpe ratio to the risk-free rate only.",
+    "misconception": "misses the skill and breadth terms"
+   },
+   {
+    "text": "Capacity to market capitalisation.",
+    "misconception": "not what it states"
+   }
+  ],
+  "explanation": "Breadth counts independent bets; correlated bets add less than their number suggests."
+ },
+ {
+  "id": "algo-1.5",
+  "lecture": 1,
+  "stem": "Why is it important to separate in-sample and out-of-sample data when developing a strategy?",
+  "correct": [
+   "Only unused data gives an honest estimate of performance.",
+   "Tuned rules look good in sample."
+  ],
+  "distractors": [
+   {
+    "text": "Out-of-sample data always has higher returns.",
+    "misconception": "no such tendency"
+   },
+   {
+    "text": "In-sample data is unreliable and should be ignored.",
+    "misconception": "it is for fitting, not discarded"
+   },
+   {
+    "text": "It lets the researcher choose the best sample after seeing results.",
+    "misconception": "that would defeat the purpose"
+   },
+   {
+    "text": "It removes the need for transaction costs.",
+    "misconception": "costs are still needed"
+   },
+   {
+    "text": "Both samples must be identical.",
+    "misconception": "they must be distinct"
+   }
+  ],
+  "explanation": "Repeatedly looking at the out-of-sample set turns it into a second in-sample set."
+ },
+ {
+  "id": "algo-2.1",
+  "lecture": 2,
+  "stem": "What does a momentum signal assume?",
+  "correct": [
+   "Recent winners tend to keep outperforming.",
+   "Winners keep winning for months."
+  ],
+  "distractors": [
+   {
+    "text": "Prices always revert to their long-run mean immediately.",
+    "misconception": "describes reversal"
+   },
+   {
+    "text": "Past returns have no information about the future.",
+    "misconception": "negates momentum"
+   },
+   {
+    "text": "The cheapest assets by valuation always rise.",
+    "misconception": "describes value"
+   },
+   {
+    "text": "Volatility is constant.",
+    "misconception": "not the assumption"
+   },
+   {
+    "text": "Higher yield assets always outperform.",
+    "misconception": "describes carry"
+   }
+  ],
+  "explanation": "Time-series momentum uses an asset's own past return; cross-sectional momentum ranks assets against each other."
+ },
+ {
+  "id": "algo-2.2",
+  "lecture": 2,
+  "stem": "Why does the common 12-1 momentum signal skip the most recent month?",
+  "correct": [
+   "Very short-term returns tend to reverse.",
+   "The last month often shows reversal."
+  ],
+  "distractors": [
+   {
+    "text": "The most recent month is always missing from data.",
+    "misconception": "it is available but skipped deliberately"
+   },
+   {
+    "text": "To reduce transaction costs to zero.",
+    "misconception": "skipping a month does not remove costs"
+   },
+   {
+    "text": "To make the signal independent of volatility.",
+    "misconception": "it does not do that"
+   },
+   {
+    "text": "Because prices are only reported annually.",
+    "misconception": "prices are reported daily or monthly"
+   },
+   {
+    "text": "Because momentum works best over one day.",
+    "misconception": "it works over months"
+   }
+  ],
+  "explanation": "The reversal at one month is attributed to liquidity effects and overreaction."
+ },
+ {
+  "id": "algo-2.3",
+  "lecture": 2,
+  "stem": "What does a mean-reversion signal assume?",
+  "correct": [
+   "Prices revert towards a fair level.",
+   "Deviations shrink."
+  ],
+  "distractors": [
+   {
+    "text": "Prices follow a trend that persists.",
+    "misconception": "describes trend following"
+   },
+   {
+    "text": "Prices never return to their average.",
+    "misconception": "negates mean reversion"
+   },
+   {
+    "text": "Returns are perfectly predictable.",
+    "misconception": "it only expects a tendency"
+   },
+   {
+    "text": "Volatility always declines.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The spread must widen forever.",
+    "misconception": "opposite expectation"
+   }
+  ],
+  "explanation": "It works if the series is stationary around its mean; a trending series makes it lose money."
+ },
+ {
+  "id": "algo-2.4",
+  "lecture": 2,
+  "stem": "What is \"carry\" in a trading context?",
+  "correct": [
+   "Return from holding if prices stay put.",
+   "Yield, roll yield, interest gap."
+  ],
+  "distractors": [
+   {
+    "text": "The cost of borrowing a stock only.",
+    "misconception": "one component, not the definition"
+   },
+   {
+    "text": "The change in price from momentum.",
+    "misconception": "confuses with momentum"
+   },
+   {
+    "text": "The commission paid per trade.",
+    "misconception": "confuses with transaction cost"
+   },
+   {
+    "text": "The bid-ask spread.",
+    "misconception": "a cost, not carry"
+   },
+   {
+    "text": "The volatility of the asset.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Carry strategies tend to earn steady returns but can suffer sharp losses in crises."
+ },
+ {
+  "id": "algo-2.5",
+  "lecture": 2,
+  "stem": "Why are raw signals often standardised cross-sectionally (z-scored) before combining them?",
+  "correct": [
+   "It puts signals on a common scale.",
+   "Subtract the mean, divide by the standard deviation."
+  ],
+  "distractors": [
+   {
+    "text": "It guarantees positive returns.",
+    "misconception": "scaling does not create returns"
+   },
+   {
+    "text": "It removes the need to test the signal.",
+    "misconception": "testing is still needed"
+   },
+   {
+    "text": "It makes all assets identical.",
+    "misconception": "it preserves relative differences"
+   },
+   {
+    "text": "It increases the signal's predictive power by itself.",
+    "misconception": "it changes scale, not information"
+   },
+   {
+    "text": "It eliminates transaction costs.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Winsorising extreme values before standardising limits the influence of outliers."
+ },
+ {
+  "id": "algo-3.1",
+  "lecture": 3,
+  "stem": "What is statistical arbitrage with a pair of stocks?",
+  "correct": [
+   "Trading the spread of two related assets.",
+   "Long one, short the other when stretched."
+  ],
+  "distractors": [
+   {
+    "text": "Buying both stocks when the market rises.",
+    "misconception": "not a spread trade"
+   },
+   {
+    "text": "Risk-free profit with certainty.",
+    "misconception": "convergence is statistical, not guaranteed"
+   },
+   {
+    "text": "Trading two stocks with unrelated prices.",
+    "misconception": "requires a stable relationship"
+   },
+   {
+    "text": "Holding the pair for as long as possible regardless of spread.",
+    "misconception": "trades follow the spread"
+   },
+   {
+    "text": "Shorting both stocks.",
+    "misconception": "the legs are on opposite sides"
+   }
+  ],
+  "explanation": "The hedge ratio makes the position roughly neutral to common moves in the two stocks."
+ },
+ {
+  "id": "algo-3.2",
+  "lecture": 3,
+  "stem": "Why is correlation of returns not enough for a pairs trade?",
+  "correct": [
+   "Correlated returns can still drift apart in price.",
+   "A stationary spread needs a long-run relation."
+  ],
+  "distractors": [
+   {
+    "text": "Correlation is always zero for traded pairs.",
+    "misconception": "pairs are chosen for relatedness"
+   },
+   {
+    "text": "Cointegration means the two series are identical.",
+    "misconception": "it concerns a stationary combination"
+   },
+   {
+    "text": "Correlation measures the speed of mean reversion.",
+    "misconception": "it does not"
+   },
+   {
+    "text": "Correlation guarantees a profit.",
+    "misconception": "no guarantee"
+   },
+   {
+    "text": "Stationary spreads need uncorrelated returns.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Cointegration tests, such as Engle-Granger, check whether a linear combination of prices is stationary."
+ },
+ {
+  "id": "algo-3.3",
+  "lecture": 3,
+  "stem": "What does the half-life of a mean-reverting spread tell a trader?",
+  "correct": [
+   "How long a deviation takes to halve.",
+   "Shorter means faster reversion."
+  ],
+  "distractors": [
+   {
+    "text": "The fraction of profitable trades.",
+    "misconception": "unrelated to hit rate"
+   },
+   {
+    "text": "The maximum drawdown of the spread.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The correlation between the two legs.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "How long until the spread becomes non-stationary.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The transaction cost of the trade.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "For an AR(1) with coefficient $\\varphi$ the half-life is $-\\ln 2/\\ln\\varphi$."
+ },
+ {
+  "id": "algo-3.4",
+  "lecture": 3,
+  "stem": "What is the main risk of a pairs trade?",
+  "correct": [
+   "The relationship may break and the spread keep widening.",
+   "A structural change."
+  ],
+  "distractors": [
+   {
+    "text": "The spread reverts too quickly.",
+    "misconception": "fast reversion is favourable"
+   },
+   {
+    "text": "The hedge ratio is always exactly known.",
+    "misconception": "it is estimated and can change"
+   },
+   {
+    "text": "The trade has unlimited upside and no downside.",
+    "misconception": "losses are possible"
+   },
+   {
+    "text": "Prices are quoted in different currencies only.",
+    "misconception": "not the main risk"
+   },
+   {
+    "text": "Zero transaction costs.",
+    "misconception": "costs are a risk, not their absence"
+   }
+  ],
+  "explanation": "Stop-losses and periodic re-estimation of the hedge ratio are used to manage this risk."
+ },
+ {
+  "id": "algo-3.5",
+  "lecture": 3,
+  "stem": "What does a z-score of the spread measure?",
+  "correct": [
+   "Standard deviations of the spread from its mean.",
+   "The standardised deviation."
+  ],
+  "distractors": [
+   {
+    "text": "The probability that the trade will win.",
+    "misconception": "not a probability"
+   },
+   {
+    "text": "The transaction cost of the trade.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The correlation of the two legs.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The expected profit in dollars.",
+    "misconception": "it is unitless"
+   },
+   {
+    "text": "The half-life of the spread.",
+    "misconception": "a different quantity"
+   }
+  ],
+  "explanation": "Typical rules enter at $|z|>2$ and exit near $z=0$, but thresholds should be chosen out of sample."
+ },
+ {
+  "id": "algo-4.1",
+  "lecture": 4,
+  "stem": "How does a cross-sectional long-short strategy form its portfolio?",
+  "correct": [
+   "Rank assets; buy the top, sell the bottom.",
+   "Relative longs and shorts."
+  ],
+  "distractors": [
+   {
+    "text": "It buys every asset equally.",
+    "misconception": "no ranking is used"
+   },
+   {
+    "text": "It holds only long positions in the best asset.",
+    "misconception": "long-short has both legs"
+   },
+   {
+    "text": "It shorts the best assets and buys the worst.",
+    "misconception": "reverses the signal"
+   },
+   {
+    "text": "It trades only the market index.",
+    "misconception": "it trades individual assets"
+   },
+   {
+    "text": "It requires predicting the market's direction.",
+    "misconception": "it aims to be market neutral"
+   }
+  ],
+  "explanation": "Dollar neutrality means long and short exposures roughly cancel."
+ },
+ {
+  "id": "algo-4.2",
+  "lecture": 4,
+  "stem": "What is the information coefficient (IC) of a signal?",
+  "correct": [
+   "The correlation between signal and later returns.",
+   "Rank-based predictive skill."
+  ],
+  "distractors": [
+   {
+    "text": "The signal's transaction cost.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The portfolio's volatility.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The signal's turnover.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The fraction of assets with positive returns.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The Sharpe ratio of the market.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Typical ICs are small (a few percent) but add up over many assets and periods."
+ },
+ {
+  "id": "algo-4.3",
+  "lecture": 4,
+  "stem": "Why is a dollar-neutral long-short portfolio less exposed to the market?",
+  "correct": [
+   "Market moves hit longs and shorts oppositely.",
+   "Long gains offset short losses."
+  ],
+  "distractors": [
+   {
+    "text": "It holds only market-independent assets.",
+    "misconception": "stocks remain exposed to systematic factors"
+   },
+   {
+    "text": "Its beta is exactly zero by construction.",
+    "misconception": "beta neutrality needs separate control"
+   },
+   {
+    "text": "It earns the risk-free rate with certainty.",
+    "misconception": "residual risk remains"
+   },
+   {
+    "text": "It avoids all transaction costs.",
+    "misconception": "it trades both sides"
+   },
+   {
+    "text": "It cannot lose money.",
+    "misconception": "the spread can move against it"
+   }
+  ],
+  "explanation": "Exposures to factors such as size or sector can remain unless they are explicitly neutralised."
+ },
+ {
+  "id": "algo-4.4",
+  "lecture": 4,
+  "stem": "Why do quantile (decile) portfolio tests help evaluate a signal?",
+  "correct": [
+   "Whether returns rise across signal buckets.",
+   "The top-minus-bottom spread."
+  ],
+  "distractors": [
+   {
+    "text": "They remove the need for out-of-sample testing.",
+    "misconception": "still needed"
+   },
+   {
+    "text": "They guarantee the signal will work in the future.",
+    "misconception": "no guarantee"
+   },
+   {
+    "text": "They test only the largest asset.",
+    "misconception": "all assets are bucketed"
+   },
+   {
+    "text": "They are used to measure transaction costs.",
+    "misconception": "they assess returns by signal level"
+   },
+   {
+    "text": "They require the signal to be binary.",
+    "misconception": "buckets use the ranking of a continuous signal"
+   }
+  ],
+  "explanation": "A non-monotonic pattern suggests the signal works only at the extremes or is noise."
+ },
+ {
+  "id": "algo-4.5",
+  "lecture": 4,
+  "stem": "What is a common risk of cross-sectional strategies?",
+  "correct": [
+   "Crowding and factor reversals hit many positions.",
+   "Both legs can lose."
+  ],
+  "distractors": [
+   {
+    "text": "The portfolio cannot be diversified.",
+    "misconception": "it holds many names"
+   },
+   {
+    "text": "There is no exposure to any factor.",
+    "misconception": "factor exposures are typical"
+   },
+   {
+    "text": "Transaction costs are always zero.",
+    "misconception": "costs matter"
+   },
+   {
+    "text": "Profits are guaranteed by neutrality.",
+    "misconception": "neutrality does not remove risk"
+   },
+   {
+    "text": "The strategy trades only one asset.",
+    "misconception": "many assets are traded"
+   }
+  ],
+  "explanation": "Momentum crashes, such as in 2009, are a well-known example."
+ },
+ {
+  "id": "algo-5.1",
+  "lecture": 5,
+  "stem": "What is look-ahead bias in a backtest?",
+  "correct": [
+   "Using information not available then.",
+   "A signal using future data."
+  ],
+  "distractors": [
+   {
+    "text": "Using too few assets.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "Trading too frequently.",
+    "misconception": "unrelated to information timing"
+   },
+   {
+    "text": "Applying transaction costs twice.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "Using a moving average.",
+    "misconception": "moving averages can be computed without look-ahead"
+   },
+   {
+    "text": "Trading only liquid assets.",
+    "misconception": "a universe choice, not look-ahead"
+   }
+  ],
+  "explanation": "Example: using a quarter's final earnings before they were published."
+ },
+ {
+  "id": "algo-5.2",
+  "lecture": 5,
+  "stem": "What is survivorship bias in a backtest?",
+  "correct": [
+   "Using only assets that still exist.",
+   "Delisted names are ignored."
+  ],
+  "distractors": [
+   {
+    "text": "Using too many assets.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "Backtesting over too short a period.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "Using future prices in signals.",
+    "misconception": "describes look-ahead"
+   },
+   {
+    "text": "Including transaction costs.",
+    "misconception": "costs make results more realistic"
+   },
+   {
+    "text": "Choosing an inappropriate benchmark.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "A point-in-time database that retains delisted securities avoids it."
+ },
+ {
+  "id": "algo-5.3",
+  "lecture": 5,
+  "stem": "What is the main difference between a vectorised and an event-driven backtest?",
+  "correct": [
+   "Vectorised uses whole arrays; event-driven steps through time.",
+   "Event-driven is slower but realistic."
+  ],
+  "distractors": [
+   {
+    "text": "Vectorised backtests model order books exactly.",
+    "misconception": "they usually simplify execution"
+   },
+   {
+    "text": "Event-driven backtests cannot handle multiple assets.",
+    "misconception": "they can"
+   },
+   {
+    "text": "Only vectorised backtests can include costs.",
+    "misconception": "both can include costs"
+   },
+   {
+    "text": "They always give identical results.",
+    "misconception": "simplifications can change the results"
+   },
+   {
+    "text": "Vectorised backtests are the only ones that avoid look-ahead.",
+    "misconception": "both need care"
+   }
+  ],
+  "explanation": "The same strategy code can be reused live with an event-driven design."
+ },
+ {
+  "id": "algo-5.4",
+  "lecture": 5,
+  "stem": "Why should backtests use realistic fill assumptions?",
+  "correct": [
+   "Trading at the close with no impact overstates returns.",
+   "Slippage and partial fills cut returns."
+  ],
+  "distractors": [
+   {
+    "text": "Fill assumptions affect only the number of trades.",
+    "misconception": "they affect the prices obtained"
+   },
+   {
+    "text": "Fills have no effect on profits.",
+    "misconception": "they change realised prices"
+   },
+   {
+    "text": "Perfect fills are required by regulators.",
+    "misconception": "not a regulatory requirement"
+   },
+   {
+    "text": "Any assumption gives the same answer.",
+    "misconception": "results are sensitive"
+   },
+   {
+    "text": "They matter only for long-only strategies.",
+    "misconception": "they matter for all"
+   }
+  ],
+  "explanation": "Strategies with high turnover are especially sensitive to fill assumptions."
+ },
+ {
+  "id": "algo-5.5",
+  "lecture": 5,
+  "stem": "What is data snooping (data mining) bias?",
+  "correct": [
+   "Testing many ideas and reporting the best.",
+   "Selection inflates the winner."
+  ],
+  "distractors": [
+   {
+    "text": "Using too little data.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "Using only out-of-sample data.",
+    "misconception": "the opposite practice"
+   },
+   {
+    "text": "Using data from a single asset class.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "Cleaning the data too carefully.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "Using rolling windows.",
+    "misconception": "not a source of snooping by itself"
+   }
+  ],
+  "explanation": "Keep a record of the number of trials so multiple-testing corrections can be applied."
+ },
+ {
+  "id": "algo-6.1",
+  "lecture": 6,
+  "stem": "What costs besides commissions reduce a strategy's performance?",
+  "correct": [
+   "Spread, impact, financing and borrowing costs.",
+   "Slippage between decision and fill."
+  ],
+  "distractors": [
+   {
+    "text": "Only the exchange's fees.",
+    "misconception": "ignores implicit costs"
+   },
+   {
+    "text": "No costs other than commissions exist.",
+    "misconception": "implicit costs are often larger"
+   },
+   {
+    "text": "The signal's information coefficient.",
+    "misconception": "not a cost"
+   },
+   {
+    "text": "The strategy's Sharpe ratio.",
+    "misconception": "not a cost"
+   },
+   {
+    "text": "Profits from the long leg.",
+    "misconception": "not a cost"
+   }
+  ],
+  "explanation": "For active strategies, implicit costs (spread and impact) often exceed explicit fees."
+ },
+ {
+  "id": "algo-6.2",
+  "lecture": 6,
+  "stem": "How does market impact depend on order size under the square-root model?",
+  "correct": [
+   "Impact grows with the square root of size.",
+   "Sublinear in order size."
+  ],
+  "distractors": [
+   {
+    "text": "Impact is independent of order size.",
+    "misconception": "size matters"
+   },
+   {
+    "text": "Impact grows exponentially with size.",
+    "misconception": "square-root growth"
+   },
+   {
+    "text": "Impact falls as the order gets larger.",
+    "misconception": "it rises"
+   },
+   {
+    "text": "Impact depends only on the trader's name.",
+    "misconception": "it depends on size, volatility and volume"
+   },
+   {
+    "text": "Impact is zero for liquid stocks.",
+    "misconception": "smaller but not zero"
+   }
+  ],
+  "explanation": "The model scales with volatility as well: $\\text{impact}\\approx Y\\sigma\\sqrt{Q/V}$."
+ },
+ {
+  "id": "algo-6.3",
+  "lecture": 6,
+  "stem": "How does turnover relate to the cost drag on returns?",
+  "correct": [
+   "Drag is turnover times cost per unit.",
+   "Frequent traders need more gross return."
+  ],
+  "distractors": [
+   {
+    "text": "Cost drag is independent of turnover.",
+    "misconception": "costs scale with trading"
+   },
+   {
+    "text": "Higher turnover always reduces costs.",
+    "misconception": "the opposite"
+   },
+   {
+    "text": "Turnover affects only the signal's quality.",
+    "misconception": "affects cost"
+   },
+   {
+    "text": "Costs are paid only when positions are held.",
+    "misconception": "costs are paid when trading"
+   },
+   {
+    "text": "Only short positions incur costs.",
+    "misconception": "both sides incur costs"
+   }
+  ],
+  "explanation": "Reducing turnover with trade thresholds or smoothing can raise net returns."
+ },
+ {
+  "id": "algo-6.4",
+  "lecture": 6,
+  "stem": "What is slippage?",
+  "correct": [
+   "Expected price against executed price.",
+   "A cost from movement before the fill."
+  ],
+  "distractors": [
+   {
+    "text": "A commission charged by the broker.",
+    "misconception": "explicit fee, not slippage"
+   },
+   {
+    "text": "The interest on a margin loan.",
+    "misconception": "financing cost"
+   },
+   {
+    "text": "The tax on trading profits.",
+    "misconception": "confuses a trading cost with a tax"
+   },
+   {
+    "text": "A measure of the strategy's volatility.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The profit from a winning trade.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Slippage is usually positive cost for market orders and larger in volatile or illiquid markets."
+ },
+ {
+  "id": "algo-6.5",
+  "lecture": 6,
+  "stem": "Why can a strategy that looks profitable gross be unprofitable net?",
+  "correct": [
+   "Edge per trade below cost turns profit into loss.",
+   "Spreads and impact eat small edges."
+  ],
+  "distractors": [
+   {
+    "text": "Costs are always negligible.",
+    "misconception": "often not for active strategies"
+   },
+   {
+    "text": "Net returns are always higher than gross.",
+    "misconception": "costs reduce returns"
+   },
+   {
+    "text": "Gross returns include transaction costs.",
+    "misconception": "gross returns exclude them"
+   },
+   {
+    "text": "Costs apply only in backtests.",
+    "misconception": "they apply in live trading too"
+   },
+   {
+    "text": "Costs matter only for long-term investors.",
+    "misconception": "more for frequent traders"
+   }
+  ],
+  "explanation": "Break-even cost per trade is a useful number to quote with a strategy."
+ },
+ {
+  "id": "algo-7.1",
+  "lecture": 7,
+  "stem": "What does the Sharpe ratio measure?",
+  "correct": [
+   "Excess return per unit of volatility.",
+   "Return over risk."
+  ],
+  "distractors": [
+   {
+    "text": "The maximum loss from a peak.",
+    "misconception": "describes drawdown"
+   },
+   {
+    "text": "The number of winning trades.",
+    "misconception": "describes hit rate"
+   },
+   {
+    "text": "The total return of the strategy.",
+    "misconception": "ignores risk"
+   },
+   {
+    "text": "The correlation with the market.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The average transaction cost.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "To annualise a monthly Sharpe ratio multiply by $\\sqrt{12}$, assuming independent returns."
+ },
+ {
+  "id": "algo-7.2",
+  "lecture": 7,
+  "stem": "Why is maximum drawdown a useful complement to the Sharpe ratio?",
+  "correct": [
+   "It captures the worst peak-to-trough loss.",
+   "It reflects path-dependent pain."
+  ],
+  "distractors": [
+   {
+    "text": "It equals the standard deviation of returns.",
+    "misconception": "different quantities"
+   },
+   {
+    "text": "It is always smaller than volatility.",
+    "misconception": "no such relation"
+   },
+   {
+    "text": "It measures the average return.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "It is insensitive to the order of returns.",
+    "misconception": "it depends on the order"
+   },
+   {
+    "text": "It depends only on the final return.",
+    "misconception": "it depends on the path"
+   }
+  ],
+  "explanation": "Calmar ratio divides annualised return by maximum drawdown."
+ },
+ {
+  "id": "algo-7.3",
+  "lecture": 7,
+  "stem": "What does portfolio turnover measure?",
+  "correct": [
+   "The share of the portfolio traded per period.",
+   "Sum of $|\\Delta w|$, halved."
+  ],
+  "distractors": [
+   {
+    "text": "The volatility of returns.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The number of assets held.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The ratio of profit to loss.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The correlation between assets.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The average holding of cash.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Turnover drives trading costs, so compare strategies net of the costs it implies."
+ },
+ {
+  "id": "algo-7.4",
+  "lecture": 7,
+  "stem": "Why can the Sharpe ratio be misleading for strategies with option-like payoffs?",
+  "correct": [
+   "Skewed, fat-tailed returns hide rare large losses.",
+   "Selling insurance flatters it."
+  ],
+  "distractors": [
+   {
+    "text": "Sharpe ratios are always negative for such strategies.",
+    "misconception": "they can look excellent"
+   },
+   {
+    "text": "Volatility captures tail risk perfectly.",
+    "misconception": "it does not for skewed returns"
+   },
+   {
+    "text": "Option payoffs have no variance.",
+    "misconception": "they have variance"
+   },
+   {
+    "text": "The Sharpe ratio ignores the risk-free rate.",
+    "misconception": "it subtracts it"
+   },
+   {
+    "text": "Skewness does not affect any risk measure.",
+    "misconception": "states the opposite of the true effect"
+   }
+  ],
+  "explanation": "Report skewness, kurtosis and drawdown alongside Sharpe."
+ },
+ {
+  "id": "algo-7.5",
+  "lecture": 7,
+  "stem": "What is the hit rate of a strategy and why is it not enough alone?",
+  "correct": [
+   "The share of winning trades; win size matters too.",
+   "High hit rate, rare big losses."
+  ],
+  "distractors": [
+   {
+    "text": "The Sharpe ratio.",
+    "misconception": "different measure"
+   },
+   {
+    "text": "The total number of trades.",
+    "misconception": "that is a count, not a rate"
+   },
+   {
+    "text": "The annualised volatility.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The ratio of cost to gross profit.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The expected loss in a bad month.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Expectancy combines hit rate with the average win and loss."
+ },
+ {
+  "id": "algo-8.1",
+  "lecture": 8,
+  "stem": "What is the idea of a walk-forward test?",
+  "correct": [
+   "Repeatedly fit on a window and test on the next period.",
+   "It mimics deployment, with only past data available."
+  ],
+  "distractors": [
+   {
+    "text": "Fit on the entire sample and report in-sample results.",
+    "misconception": "describes in-sample fitting"
+   },
+   {
+    "text": "Choose parameters using the test period.",
+    "misconception": "leaks information"
+   },
+   {
+    "text": "Use only one fixed split chosen after seeing results.",
+    "misconception": "the idea is rolling re-estimation"
+   },
+   {
+    "text": "Train on the future and test on the past.",
+    "misconception": "reverses time"
+   },
+   {
+    "text": "Randomly shuffle observations before splitting.",
+    "misconception": "destroys time ordering"
+   }
+  ],
+  "explanation": "The out-of-sample results are stitched together to give one honest performance record."
+ },
+ {
+  "id": "algo-8.2",
+  "lecture": 8,
+  "stem": "What problem does the deflated Sharpe ratio address?",
+  "correct": [
+   "The inflated Sharpe of the best of many trials.",
+   "It adjusts for the trial count."
+  ],
+  "distractors": [
+   {
+    "text": "The low Sharpe ratio of the market.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The risk-free rate being non-zero.",
+    "misconception": "not its purpose"
+   },
+   {
+    "text": "The cost of trading.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The need to annualise returns.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The lack of enough assets.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "The more variants you try, the higher the best Sharpe ratio you would expect by chance alone."
+ },
+ {
+  "id": "algo-8.3",
+  "lecture": 8,
+  "stem": "Why does testing many strategy variants inflate the best result?",
+  "correct": [
+   "The maximum of noisy estimates is biased upwards.",
+   "Picking the winner picks luck too."
+  ],
+  "distractors": [
+   {
+    "text": "Each additional test lowers the noise.",
+    "misconception": "more tests do not lower noise"
+   },
+   {
+    "text": "Variants are always perfectly correlated.",
+    "misconception": "they may be only partly correlated"
+   },
+   {
+    "text": "The best variant is guaranteed to be the best in the future.",
+    "misconception": "selection bias, not guarantee"
+   },
+   {
+    "text": "Averaging the results removes selection bias.",
+    "misconception": "the selected winner remains biased"
+   },
+   {
+    "text": "Only the worst variants matter.",
+    "misconception": "the winner's bias is the problem"
+   }
+  ],
+  "explanation": "Correct with Bonferroni or false-discovery rate procedures, or by holding out untouched data."
+ },
+ {
+  "id": "algo-8.4",
+  "lecture": 8,
+  "stem": "What does the Bonferroni correction do?",
+  "correct": [
+   "It divides the threshold by the number of tests.",
+   "Controls any false positive."
+  ],
+  "distractors": [
+   {
+    "text": "It increases the number of tests.",
+    "misconception": "the number of tests is given"
+   },
+   {
+    "text": "It makes every p-value smaller.",
+    "misconception": "adjusted p-values are larger"
+   },
+   {
+    "text": "It removes the need for a null hypothesis.",
+    "misconception": "tests still have nulls"
+   },
+   {
+    "text": "It guarantees every discovery is true.",
+    "misconception": "it controls false positives only in probability"
+   },
+   {
+    "text": "It only applies to one test.",
+    "misconception": "it is for multiple tests"
+   }
+  ],
+  "explanation": "It is conservative when tests are positively correlated."
+ },
+ {
+  "id": "algo-8.5",
+  "lecture": 8,
+  "stem": "Why is a long sample length important for judging a Sharpe ratio?",
+  "correct": [
+   "The Sharpe ratio's standard error falls with sample length.",
+   "A few months can be luck."
+  ],
+  "distractors": [
+   {
+    "text": "The Sharpe ratio is exact for any sample size.",
+    "misconception": "it is estimated with error"
+   },
+   {
+    "text": "Short samples give lower Sharpe ratios on average.",
+    "misconception": "they are noisy, not biased downward"
+   },
+   {
+    "text": "Sample length affects only volatility.",
+    "misconception": "affects the precision of the ratio"
+   },
+   {
+    "text": "Longer samples always increase the Sharpe ratio.",
+    "misconception": "they make it more precise"
+   },
+   {
+    "text": "Sample length is irrelevant if returns are positive.",
+    "misconception": "precision still matters"
+   }
+  ],
+  "explanation": "The t-statistic of the mean return is about the annual Sharpe ratio times the square root of the years."
+ },
+ {
+  "id": "algo-9.1",
+  "lecture": 9,
+  "stem": "What is volatility targeting?",
+  "correct": [
+   "Scaling positions so risk stays near a chosen level.",
+   "Size inversely proportional to recent volatility."
+  ],
+  "distractors": [
+   {
+    "text": "Holding a fixed number of shares at all times.",
+    "misconception": "fixed shares let risk vary"
+   },
+   {
+    "text": "Increasing exposure whenever volatility rises.",
+    "misconception": "it does the opposite"
+   },
+   {
+    "text": "Setting leverage to maximise return regardless of risk.",
+    "misconception": "risk is the target"
+   },
+   {
+    "text": "Eliminating all volatility.",
+    "misconception": "aims for a stable level, not zero"
+   },
+   {
+    "text": "Choosing assets with zero volatility.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Volatility targeting tends to reduce exposure in turbulent times and raise it when markets are calm."
+ },
+ {
+  "id": "algo-9.2",
+  "lecture": 9,
+  "stem": "What does the Kelly criterion choose?",
+  "correct": [
+   "The bet size maximising expected log wealth.",
+   "The fraction maximising long-run growth."
+  ],
+  "distractors": [
+   {
+    "text": "The bet size that minimises risk.",
+    "misconception": "not its aim"
+   },
+   {
+    "text": "The largest bet that does not cause ruin.",
+    "misconception": "not its definition"
+   },
+   {
+    "text": "The bet size that maximises the expected profit in one period.",
+    "misconception": "that would be all-in on a positive edge"
+   },
+   {
+    "text": "A constant bet independent of edge.",
+    "misconception": "depends on edge and odds"
+   },
+   {
+    "text": "The fraction that equalises hit rate and miss rate.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Betting more than twice Kelly gives a negative growth rate."
+ },
+ {
+  "id": "algo-9.3",
+  "lecture": 9,
+  "stem": "Why do practitioners often bet a fraction of full Kelly?",
+  "correct": [
+   "Edge estimates are uncertain and full Kelly means big drawdowns.",
+   "It trades growth for lower volatility."
+  ],
+  "distractors": [
+   {
+    "text": "Full Kelly has zero expected growth.",
+    "misconception": "it maximises growth"
+   },
+   {
+    "text": "Fractions of Kelly increase growth beyond Kelly.",
+    "misconception": "growth is maximised at full Kelly"
+   },
+   {
+    "text": "Kelly applies only to fractions.",
+    "misconception": "it gives a single optimal fraction"
+   },
+   {
+    "text": "Fractional Kelly removes all risk.",
+    "misconception": "it only reduces it"
+   },
+   {
+    "text": "Estimation error always makes full Kelly too small.",
+    "misconception": "overestimated edge makes it too large"
+   }
+  ],
+  "explanation": "Overestimating the edge leads to overbetting, which is much worse than underbetting."
+ },
+ {
+  "id": "algo-9.4",
+  "lecture": 9,
+  "stem": "How does position sizing affect strategy risk apart from the signal?",
+  "correct": [
+   "Sizing sets how much capital each bet exposes.",
+   "Bigger positions, more risk and return."
+  ],
+  "distractors": [
+   {
+    "text": "Position size has no effect on risk.",
+    "misconception": "it scales risk directly"
+   },
+   {
+    "text": "Sizing changes the signal's information coefficient.",
+    "misconception": "sizing does not change the signal's skill"
+   },
+   {
+    "text": "Risk depends only on the signal.",
+    "misconception": "both matter"
+   },
+   {
+    "text": "Larger positions reduce volatility.",
+    "misconception": "they increase it"
+   },
+   {
+    "text": "Position size matters only for the first trade.",
+    "misconception": "it matters at every rebalance"
+   }
+  ],
+  "explanation": "Risk-based sizing equalises each bet's risk contribution rather than its dollar amount."
+ },
+ {
+  "id": "algo-9.5",
+  "lecture": 9,
+  "stem": "What is the downside of sizing positions purely by recent realised volatility?",
+  "correct": [
+   "Realised volatility is noisy and lags.",
+   "A spike can arrive before the estimate adjusts."
+  ],
+  "distractors": [
+   {
+    "text": "Volatility estimates are exact.",
+    "misconception": "they are noisy"
+   },
+   {
+    "text": "It makes returns perfectly stable.",
+    "misconception": "it stabilises risk only approximately"
+   },
+   {
+    "text": "It ignores correlations by design, so it is optimal.",
+    "misconception": "ignoring correlations is a limitation"
+   },
+   {
+    "text": "It increases risk in volatile markets by design.",
+    "misconception": "it reduces it"
+   },
+   {
+    "text": "It cannot be computed from past data.",
+    "misconception": "it uses past data"
+   }
+  ],
+  "explanation": "Combining short and long windows or using implied volatility can help."
+ },
+ {
+  "id": "algo-10.1",
+  "lecture": 10,
+  "stem": "What does a TWAP algorithm do?",
+  "correct": [
+   "It splits an order into equal pieces at regular times.",
+   "It ignores volume."
+  ],
+  "distractors": [
+   {
+    "text": "It trades in proportion to market volume.",
+    "misconception": "describes VWAP and POV"
+   },
+   {
+    "text": "It sends the entire order at once.",
+    "misconception": "opposite of slicing"
+   },
+   {
+    "text": "It waits for the best price and then trades.",
+    "misconception": "not TWAP"
+   },
+   {
+    "text": "It trades only at the close.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "It trades more when the price is high.",
+    "misconception": "no price rule"
+   }
+  ],
+  "explanation": "TWAP is simple and predictable, which can be exploited by others."
+ },
+ {
+  "id": "algo-10.2",
+  "lecture": 10,
+  "stem": "How does a VWAP schedule differ from TWAP?",
+  "correct": [
+   "It follows the expected volume profile.",
+   "Sizes track forecast volume."
+  ],
+  "distractors": [
+   {
+    "text": "It trades equal amounts at every time.",
+    "misconception": "describes TWAP"
+   },
+   {
+    "text": "It trades only in the first minute.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "It ignores volume.",
+    "misconception": "it is volume based"
+   },
+   {
+    "text": "It targets the highest price.",
+    "misconception": "it targets the volume-weighted average"
+   },
+   {
+    "text": "It never trades near the close.",
+    "misconception": "the profile decides"
+   }
+  ],
+  "explanation": "The benchmark is the day's volume-weighted average price, so performance is judged against it."
+ },
+ {
+  "id": "algo-10.3",
+  "lecture": 10,
+  "stem": "What does a POV (percentage of volume) algorithm do?",
+  "correct": [
+   "It trades a fixed share of market volume.",
+   "Speed adapts to activity."
+  ],
+  "distractors": [
+   {
+    "text": "It trades a fixed number of shares per minute.",
+    "misconception": "describes a constant-rate schedule"
+   },
+   {
+    "text": "It trades only when the price is low.",
+    "misconception": "no price rule"
+   },
+   {
+    "text": "It follows a precomputed schedule only.",
+    "misconception": "it reacts to realised volume"
+   },
+   {
+    "text": "It sets the order size to the total daily volume.",
+    "misconception": "it uses a small fraction"
+   },
+   {
+    "text": "It always completes the order at a known time.",
+    "misconception": "the end time depends on volume"
+   }
+  ],
+  "explanation": "A low participation rate reduces impact but lengthens execution and exposes the order to price risk."
+ },
+ {
+  "id": "algo-10.4",
+  "lecture": 10,
+  "stem": "What is the trade-off in choosing how fast to execute an order?",
+  "correct": [
+   "Fast execution raises impact; slow adds timing risk.",
+   "They oppose."
+  ],
+  "distractors": [
+   {
+    "text": "Faster execution always lowers all costs.",
+    "misconception": "impact increases"
+   },
+   {
+    "text": "Slower execution always lowers all costs.",
+    "misconception": "timing risk increases"
+   },
+   {
+    "text": "Speed does not affect cost.",
+    "misconception": "states the opposite of the true effect"
+   },
+   {
+    "text": "Only the commission depends on speed.",
+    "misconception": "impact and risk depend on it"
+   },
+   {
+    "text": "Timing risk is eliminated by waiting.",
+    "misconception": "waiting adds it"
+   }
+  ],
+  "explanation": "Almgren-Chriss formalises this trade-off with a risk-aversion parameter."
+ },
+ {
+  "id": "algo-10.5",
+  "lecture": 10,
+  "stem": "Why do execution algorithms randomise their slice sizes and times?",
+  "correct": [
+   "Predictable patterns can be traded against.",
+   "Less leakage."
+  ],
+  "distractors": [
+   {
+    "text": "To increase the market impact.",
+    "misconception": "the aim is to reduce impact"
+   },
+   {
+    "text": "To make the order smaller.",
+    "misconception": "total size is unchanged"
+   },
+   {
+    "text": "To guarantee the best price.",
+    "misconception": "no guarantee"
+   },
+   {
+    "text": "To comply with a rule requiring randomness.",
+    "misconception": "not a rule"
+   },
+   {
+    "text": "To avoid paying commissions.",
+    "misconception": "commissions remain"
+   }
+  ],
+  "explanation": "Information leakage is one reason large orders are hidden or split across venues."
+ },
+ {
+  "id": "algo-11.1",
+  "lecture": 11,
+  "stem": "What is the role of a kill switch in live trading?",
+  "correct": [
+   "It stops trading when a limit is breached.",
+   "A guard against runaway losses."
+  ],
+  "distractors": [
+   {
+    "text": "It increases leverage when losses occur.",
+    "misconception": "opposite of risk control"
+   },
+   {
+    "text": "It sends more orders when the system is slow.",
+    "misconception": "not its function"
+   },
+   {
+    "text": "It improves the strategy's alpha.",
+    "misconception": "it limits damage"
+   },
+   {
+    "text": "It is used only during backtesting.",
+    "misconception": "it applies to live trading"
+   },
+   {
+    "text": "It deletes the trade history.",
+    "misconception": "it should preserve logs"
+   }
+  ],
+  "explanation": "Many large losses in history came from runaway algorithms without such controls."
+ },
+ {
+  "id": "algo-11.2",
+  "lecture": 11,
+  "stem": "Why are pre-trade risk checks used?",
+  "correct": [
+   "They block orders breaching size or exposure limits.",
+   "They catch fat-finger errors."
+  ],
+  "distractors": [
+   {
+    "text": "They guarantee profit.",
+    "misconception": "they limit errors"
+   },
+   {
+    "text": "They are run only after the day ends.",
+    "misconception": "pre-trade means before sending"
+   },
+   {
+    "text": "They replace the need for monitoring.",
+    "misconception": "monitoring is also required"
+   },
+   {
+    "text": "They increase order sizes.",
+    "misconception": "they cap them"
+   },
+   {
+    "text": "They are used only for backtesting.",
+    "misconception": "they apply live"
+   }
+  ],
+  "explanation": "Typical checks include maximum order size, position limits and price collars."
+ },
+ {
+  "id": "algo-11.3",
+  "lecture": 11,
+  "stem": "What should live monitoring compare against?",
+  "correct": [
+   "Live behaviour against backtest expectations.",
+   "Fills and P&L against model assumptions."
+  ],
+  "distractors": [
+   {
+    "text": "Only the previous day's profit.",
+    "misconception": "ignores the model's expectations"
+   },
+   {
+    "text": "Nothing, since live results are always right.",
+    "misconception": "monitoring needs a benchmark"
+   },
+   {
+    "text": "The performance of unrelated strategies.",
+    "misconception": "not the relevant benchmark"
+   },
+   {
+    "text": "The time of day only.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The number of traders in the firm.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Persistent gaps between live and simulated results can signal data problems, bugs or decay of the signal."
+ },
+ {
+  "id": "algo-11.4",
+  "lecture": 11,
+  "stem": "What does a value-at-risk limit state?",
+  "correct": [
+   "A loss threshold exceeded with small probability.",
+   "A quantile of losses."
+  ],
+  "distractors": [
+   {
+    "text": "The maximum possible loss.",
+    "misconception": "VaR is not a worst case"
+   },
+   {
+    "text": "The average loss.",
+    "misconception": "VaR is a quantile, not a mean"
+   },
+   {
+    "text": "The profit target.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "A guarantee that losses never exceed it.",
+    "misconception": "losses can exceed VaR"
+   },
+   {
+    "text": "The volatility of the portfolio.",
+    "misconception": "related but not the same"
+   }
+  ],
+  "explanation": "Expected shortfall measures the average loss beyond the VaR quantile."
+ },
+ {
+  "id": "algo-11.5",
+  "lecture": 11,
+  "stem": "Why monitor the data feed in a live system?",
+  "correct": [
+   "Bad or stale data produces wrong orders.",
+   "Missing ticks and outliers cause errors."
+  ],
+  "distractors": [
+   {
+    "text": "Data feeds are always correct.",
+    "misconception": "errors do occur"
+   },
+   {
+    "text": "Monitoring the feed reduces transaction costs to zero.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "It is needed only for backtests.",
+    "misconception": "live systems depend on feeds"
+   },
+   {
+    "text": "It replaces risk limits.",
+    "misconception": "both are needed"
+   },
+   {
+    "text": "It increases latency by design.",
+    "misconception": "checks aim to be light"
+   }
+  ],
+  "explanation": "Sanity checks include price jumps, timestamps and cross-source comparisons."
+ }
+]
