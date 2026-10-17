@@ -1657,7 +1657,7 @@
   "label": "Nonparametric",
   "domain": "stat",
   "prerequisites": [
-   "inf"
+   "p2"
   ],
   "courses": "HKU STAT3620",
   "starred": false,
