@@ -890,7 +890,7 @@
    "p1",
    "mvc"
   ],
-  "courses": "HKU SDST2602 · CUHK STAT2006",
+  "courses": "CUHK STAT2006 · HKU SDST2601 (joint distributions) and SDST2602 (LLN, CLT)",
   "starred": false,
   "summary": "Continuous and multivariate random variables, transformations, conditional expectation, and the limit theorems that underlie all of statistics.",
   "outcomes": [
@@ -898,7 +898,7 @@
    "Transform random variables and derive their distributions",
    "Use MGFs, conditioning and the CLT to solve problems"
   ],
-  "note": "Follows HKU SDST2602 (multivariate and continuous probability). Assumes the discrete named distributions from Probability I.",
+  "note": "Not a copy of one HKU course. HKU SDST2602 is estimation and hypothesis testing (our Statistical Inference), so this topic collects the multivariate and continuous probability that HKU spreads over SDST2601 and the start of SDST2602, plus MGFs, order statistics and the multivariate normal needed for inference. Assumes the discrete named distributions from Probability I.",
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
@@ -1042,7 +1042,7 @@
   "prerequisites": [
    "p2"
   ],
-  "courses": "HKU STAT3602 · HKUST MATH3423 · CityU MS2602",
+  "courses": "HKU SDST2602 (+ SDST3602 in part) · HKUST MATH3423 · CityU MS2602",
   "starred": false,
   "summary": "Estimation, testing and confidence intervals from a unified likelihood-based viewpoint.",
   "outcomes": [
@@ -1050,7 +1050,7 @@
    "Construct tests and intervals",
    "Judge optimality via sufficiency and the Cramer-Rao bound"
   ],
-  "note": "Follows HKU STAT3602. Assumes Probability II including MGFs and the CLT.",
+  "note": "Closest to HKU SDST2602 (sampling distributions, MLE and method of moments, bias and efficiency, LRT, Neyman-Pearson, chi-square tests, confidence intervals). Sufficiency, UMVUE and Cramer-Rao come from the more advanced HKU SDST3602, which also covers decision theory, UMP and monotone-likelihood-ratio tests, exponential families and bootstrap; those last items are not in this topic. Assumes Probability II including MGFs and the CLT.",
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
