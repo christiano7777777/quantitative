@@ -1,5 +1,5 @@
 // LQ-F: chi-square tests: a 2x3 independence table (Pearson and likelihood ratio statistics) and a binomial goodness of fit
-// with one estimated parameter. Lectures 11 (chi-square tests), 9 (likelihood ratio statistic), 3 (MLE of p).
+// with one estimated parameter. Lectures 11 (chi-square tests), 9 (likelihood ratio statistic), 4 (MLE of p).
 import type { Rng } from '../../../../lib/rng'
 import type { LQGenerator, LQInstance } from '../../../../lib/types'
 import { dec, tex, tol2, tol4 } from '../../../shared/format'
@@ -52,7 +52,7 @@ export function build({ table, counts }: Params): LQInstance {
       },
       {
         prompt: 'In ' + tex(M) + ' groups of three trials, the numbers of groups with 0, 1, 2, 3 successes were ' + tex(counts.join(',')) + '. Under the model that every trial succeeds independently with probability ' + tex('p') + ', find the maximum likelihood estimate ' + tex('\\hat p') + ' (4 decimal places).',
-        answer: phat, tolerance: tol4, lecture: 3,
+        answer: phat, tolerance: tol4, lecture: 4,
         explanation: tex('\\hat p=\\dfrac{\\text{total successes}}{\\text{total trials}}=\\dfrac{' + (counts[1] + 2 * counts[2] + 3 * counts[3]) + '}{' + 3 * M + '}') + ' = ' + dec(phat) + '.',
       },
       {
@@ -64,4 +64,4 @@ export function build({ table, counts }: Params): LQInstance {
   }
 }
 
-export const genF: LQGenerator = { id: 'inf-lq-f-chisq', generate: (rng) => build(sample(rng)) }
+export const genF: LQGenerator = { id: 'p2-lq-f-chisq', generate: (rng) => build(sample(rng)) }

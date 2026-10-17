@@ -1,6 +1,6 @@
 [
  {
-  "id": "inf-1.1",
+  "id": "p2-1.1",
   "lecture": 1,
   "stem": "Let $X_1,\\dots,X_n$ be an i.i.d. sample from $N(\\mu,\\sigma^2)$ with sample mean $\\bar X$ and sample variance $S^2$. Which statement about $\\bar X$ and $S^2$ is true?",
   "correct": [
@@ -32,7 +32,7 @@
   "explanation": "For normal samples $\\bar X$ and $S^2$ are exactly independent for every $n$ (Cochran/Basu); this property fails for other distributions and is what makes the $t$ statistic work."
  },
  {
-  "id": "inf-1.2",
+  "id": "p2-1.2",
   "lecture": 1,
   "stem": "Let $X_1,\\dots,X_n$ be i.i.d. $N(\\mu,\\sigma^2)$ and let $S^2=\\frac1{n-1}\\sum_i(X_i-\\bar X)^2$. What is the exact distribution of $(n-1)S^2/\\sigma^2$?",
   "correct": [
@@ -64,7 +64,7 @@
   "explanation": "$\\sum(X_i-\\bar X)^2/\\sigma^2$ is a sum of $n$ squared standardised terms with one linear constraint, so it is $\\chi^2_{n-1}$ exactly under normality."
  },
  {
-  "id": "inf-1.3",
+  "id": "p2-1.3",
   "lecture": 1,
   "stem": "Why does $T=\\sqrt n(\\bar X-\\mu)/S$ for a normal sample have heavier tails than the standard normal distribution?",
   "correct": [
@@ -96,7 +96,7 @@
   "explanation": "The numerator is exactly normal; the extra tail weight comes from dividing by the random $S$. As $n$ grows $S\\to\\sigma$ and $T$ approaches the normal."
  },
  {
-  "id": "inf-1.4",
+  "id": "p2-1.4",
   "lecture": 1,
   "stem": "Let $U\\sim\\chi^2_m$ and $V\\sim\\chi^2_n$ be independent. Which random variable has the $F$ distribution with $(m,n)$ degrees of freedom?",
   "correct": [
@@ -128,7 +128,7 @@
   "explanation": "An $F$ variable is a ratio of independent mean squares $\\chi^2_m/m$ and $\\chi^2_n/n$; a plain ratio, sum, product or difference does not have that law."
  },
  {
-  "id": "inf-1.5",
+  "id": "p2-1.5",
   "lecture": 1,
   "stem": "$X_1,\\dots,X_n$ are i.i.d. with mean $\\mu$ and finite variance $\\sigma^2$, but the distribution is not normal. Which statement about $\\bar X$ is true for every sample size $n$?",
   "correct": [
@@ -160,8 +160,168 @@
   "explanation": "By independence $\\operatorname{Var}(\\bar X)=\\sigma^2/n$ and by linearity $E\\bar X=\\mu$, for any distribution with finite variance. Normality is needed only for exact normality of $\\bar X$."
  },
  {
-  "id": "inf-2.1",
+  "id": "p2-2.1",
   "lecture": 2,
+  "stem": "Let $X\\ge 0$ be a random variable with finite mean and let $a>0$. Which statement is Markov's inequality?",
+  "correct": [
+   "$P(X\\ge a)\\le E[X]/a$, for every non-negative $X$ with a finite mean.",
+   "The probability that $X$ reaches the level $a$ is at most $E[X]/a$ whenever $X\\ge0$."
+  ],
+  "distractors": [
+   {
+    "text": "$P(X\\ge a)\\ge E[X]/a$, for every non-negative $X$ with a finite mean.",
+    "misconception": "reverses the direction of the inequality"
+   },
+   {
+    "text": "$P(X\\ge a)\\le \\operatorname{Var}(X)/a^2$, for every non-negative $X$ with finite variance.",
+    "misconception": "confuses Markov's inequality with Chebyshev's"
+   },
+   {
+    "text": "$P(X\\ge a)\\le E[X]/a$, for every real $X$ whether or not it takes negative values.",
+    "misconception": "forgets that Markov's inequality needs a non-negative variable"
+   },
+   {
+    "text": "$P(X\\ge a)=E[X]/a$, so the bound is attained by every non-negative $X$.",
+    "misconception": "treats the upper bound as an exact probability"
+   },
+   {
+    "text": "$P(X\\ge a)\\le E[X^2]/a$, for every non-negative $X$ with a finite second moment.",
+    "misconception": "puts the wrong moment in the bound, so it is not dimensionally correct"
+   }
+  ],
+  "explanation": "Markov's inequality bounds the upper tail of a non-negative variable by its mean divided by the level. It is only a bound, and it needs $X\\ge0$. Chebyshev's inequality is Markov applied to $(X-\\mu)^2$."
+ },
+ {
+  "id": "p2-2.2",
+  "lecture": 2,
+  "stem": "Let $X$ have mean $\\mu$ and finite variance $\\sigma^2>0$, and let $k>0$. Which statement is Chebyshev's inequality?",
+  "correct": [
+   "$P(|X-\\mu|\\ge k\\sigma)\\le 1/k^2$, for every distribution with finite variance.",
+   "At most $1/k^2$ of the probability lies $k$ or more standard deviations from the mean, whatever the shape."
+  ],
+  "distractors": [
+   {
+    "text": "$P(|X-\\mu|\\ge k\\sigma)\\le 1/k$, for every distribution with finite variance.",
+    "misconception": "gets the power of $k$ wrong, losing the square that comes from the variance"
+   },
+   {
+    "text": "$P(|X-\\mu|\\ge k\\sigma)\\le 1/k^2$, but only when $X$ is exactly normally distributed.",
+    "misconception": "believes the inequality needs a normal distribution, when it holds for all distributions"
+   },
+   {
+    "text": "$P(|X-\\mu|\\ge k\\sigma)=1/k^2$, for every distribution with finite variance.",
+    "misconception": "treats the bound as an exact probability"
+   },
+   {
+    "text": "$P(|X-\\mu|\\le k\\sigma)\\le 1/k^2$, for every distribution with finite variance.",
+    "misconception": "bounds the central probability instead of the tail probability"
+   },
+   {
+    "text": "$P(|X-\\mu|\\ge k\\sigma)\\le \\sigma^2/k$, for every distribution with finite variance.",
+    "misconception": "misplaces the variance and the power of $k$ in the bound"
+   }
+  ],
+  "explanation": "Applying Markov's inequality to $(X-\\mu)^2$ at level $k^2\\sigma^2$ gives $P(|X-\\mu|\\ge k\\sigma)\\le \\sigma^2/(k^2\\sigma^2)=1/k^2$. It is distribution-free, so it is usually far from tight."
+ },
+ {
+  "id": "p2-2.3",
+  "lecture": 2,
+  "stem": "$X_1,X_2,\\dots$ are i.i.d. with mean $\\mu$ and finite variance, and $\\bar X_n$ is the sample mean. What does the weak law of large numbers say?",
+  "correct": [
+   "For every $\\varepsilon>0$, $P(|\\bar X_n-\\mu|>\\varepsilon)\\to0$ as $n\\to\\infty$.",
+   "$\\bar X_n$ converges in probability to $\\mu$, so for large $n$ it lies near $\\mu$ with high probability."
+  ],
+  "distractors": [
+   {
+    "text": "$\\bar X_n$ equals $\\mu$ exactly once the sample size $n$ is large enough.",
+    "misconception": "confuses convergence in probability with exact equality"
+   },
+   {
+    "text": "$\\bar X_n-\\mu$ has a distribution that approaches the standard normal as $n$ grows.",
+    "misconception": "confuses the law of large numbers with the central limit theorem, which needs the $\\sqrt n$ scaling"
+   },
+   {
+    "text": "The sum $X_1+\\dots+X_n$ stays within a fixed distance of $n\\mu$ with high probability.",
+    "misconception": "applies the law to the sum, whose fluctuations actually grow like $\\sqrt n$"
+   },
+   {
+    "text": "After a run of values below $\\mu$, later observations tend to exceed $\\mu$ to compensate.",
+    "misconception": "gambler's fallacy: the law does not need observations to correct past deviations"
+   },
+   {
+    "text": "$\\bar X_n\\to\\mu$ in probability only if the $X_i$ themselves are normally distributed.",
+    "misconception": "believes the law needs normality, when finite variance (even just a mean) suffices"
+   }
+  ],
+  "explanation": "Chebyshev gives $P(|\\bar X_n-\\mu|>\\varepsilon)\\le\\sigma^2/(n\\varepsilon^2)\\to0$. This is convergence in probability, not equality, and it needs no normality."
+ },
+ {
+  "id": "p2-2.4",
+  "lecture": 2,
+  "stem": "$X_1,\\dots,X_n$ are i.i.d. with mean $\\mu$ and variance $\\sigma^2\\in(0,\\infty)$, not necessarily normal. Which statement is the central limit theorem?",
+  "correct": [
+   "$\\sqrt n(\\bar X_n-\\mu)/\\sigma$ converges in distribution to $N(0,1)$ as $n\\to\\infty$.",
+   "For large $n$, $\\bar X_n$ is approximately $N(\\mu,\\sigma^2/n)$, whatever the distribution of the $X_i$."
+  ],
+  "distractors": [
+   {
+    "text": "The observations $X_i$ themselves become approximately normal as the sample size $n$ grows.",
+    "misconception": "confuses the distribution of the sample mean with the distribution of single observations"
+   },
+   {
+    "text": "$\\sqrt n(\\bar X_n-\\mu)/\\sigma$ converges to $N(0,1)$ only when the $X_i$ have a symmetric distribution.",
+    "misconception": "believes symmetry is required, when only finite variance is needed"
+   },
+   {
+    "text": "$(\\bar X_n-\\mu)/\\sigma$ converges in distribution to $N(0,1)$ as the sample size $n$ grows.",
+    "misconception": "forgets the factor $\\sqrt n$; without it the limit is the constant $0$"
+   },
+   {
+    "text": "$\\sqrt n(\\bar X_n-\\mu)/\\sigma$ is exactly $N(0,1)$ for every $n\\ge1$, whatever the distribution.",
+    "misconception": "confuses an approximate limit result with an exact finite-sample result"
+   },
+   {
+    "text": "$\\bar X_n$ is approximately $N(\\mu,\\sigma^2)$ once the sample size $n$ is large.",
+    "misconception": "forgets that the variance of the sample mean shrinks to $\\sigma^2/n$"
+   }
+  ],
+  "explanation": "The CLT is a limit statement about the standardised mean. It gives only approximate normality at finite $n$, requires finite variance, and does not make the individual observations normal."
+ },
+ {
+  "id": "p2-2.5",
+  "lecture": 2,
+  "stem": "Which relation between modes of convergence holds for every sequence of random variables $Y_n$ and limit $Y$?",
+  "correct": [
+   "If $Y_n\\to Y$ in probability, then $Y_n\\to Y$ in distribution.",
+   "Convergence in probability is the stronger mode, and it always implies convergence in distribution."
+  ],
+  "distractors": [
+   {
+    "text": "If $Y_n\\to Y$ in distribution, then $Y_n\\to Y$ in probability.",
+    "misconception": "reverses the implication; a common law does not make the variables close to $Y$"
+   },
+   {
+    "text": "If $Y_n\\to Y$ in probability, then $Y_n(\\omega)\\to Y(\\omega)$ for every outcome $\\omega$.",
+    "misconception": "confuses convergence in probability with pointwise convergence"
+   },
+   {
+    "text": "If $Y_n\\to Y$ in probability, then $P(Y_n=Y)\\to1$ even when $Y$ is continuous.",
+    "misconception": "reads closeness in probability as exact equality with high probability"
+   },
+   {
+    "text": "If $Y_n$ and $Z_n$ both converge in distribution to $N(0,1)$, then $Y_n-Z_n\\to0$ in probability.",
+    "misconception": "assumes equal limit laws force the variables to be close, ignoring dependence"
+   },
+   {
+    "text": "Convergence in distribution requires the random variables to be defined on the same probability space and to agree.",
+    "misconception": "confuses convergence in distribution with convergence of the variables themselves"
+   }
+  ],
+  "explanation": "Convergence in probability implies convergence in distribution, but not conversely: if $Z\\sim N(0,1)$, then $Y_n=-Z$ has the same law as $Z$ for every $n$ yet does not converge to $Z$ in probability."
+ },
+ {
+  "id": "p2-3.1",
+  "lecture": 3,
   "stem": "What is the principle behind the method of moments?",
   "correct": [
    "Equate population moments, as functions of the parameters, to sample moments and solve.",
@@ -178,7 +338,7 @@
    },
    {
     "text": "Choose the unbiased estimator that has the smallest variance among all unbiased estimators.",
-    "misconception": "describes the UMVUE criterion"
+    "misconception": "describes a minimum-variance criterion rather than moment matching"
    },
    {
     "text": "Set the sample moments equal to zero and solve the resulting equations for the parameters.",
@@ -192,8 +352,8 @@
   "explanation": "Method of moments sets $E_\\theta[X^k]=\\frac1n\\sum X_i^k$ for $k=1,\\dots,p$ for a $p$-parameter model and solves for $\\theta$."
  },
  {
-  "id": "inf-2.2",
-  "lecture": 2,
+  "id": "p2-3.2",
+  "lecture": 3,
   "stem": "A model has $p$ unknown parameters. How many moment equations does the method of moments normally use?",
   "correct": [
    "Typically $p$ equations, so that the number of equations matches the number of unknowns.",
@@ -224,8 +384,8 @@
   "explanation": "Solving for $p$ unknowns needs $p$ equations; a model with a single parameter can often be solved from the mean alone, while a two-parameter family needs two moments."
  },
  {
-  "id": "inf-2.3",
-  "lecture": 2,
+  "id": "p2-3.3",
+  "lecture": 3,
   "stem": "Why is a method of moments estimator typically consistent?",
   "correct": [
    "The LLN gives convergence of sample moments, and the estimator is a continuous function of them.",
@@ -245,8 +405,8 @@
     "misconception": "treats convergence in probability as exact equality"
    },
    {
-    "text": "Because it achieves the Cramer-Rao lower bound, which forces its variance to zero.",
-    "misconception": "thinks attaining the bound is required for consistency"
+    "text": "Because it is the minimum variance estimator, which forces its variance to zero.",
+    "misconception": "thinks being the minimum variance estimator is required for consistency"
    },
    {
     "text": "Because the central limit theorem makes the sample moments exactly normal for every sample size.",
@@ -256,8 +416,8 @@
   "explanation": "Consistency of sample moments follows from the LLN; if the solution map from moments to parameters is continuous, the continuous mapping theorem gives consistency of the estimator."
  },
  {
-  "id": "inf-2.4",
-  "lecture": 2,
+  "id": "p2-3.4",
+  "lecture": 3,
   "stem": "Which is a typical weakness of the method of moments compared with maximum likelihood?",
   "correct": [
    "Its variance can exceed that of the MLE, and a solved value can violate a parameter constraint such as positivity.",
@@ -288,8 +448,8 @@
   "explanation": "Moment estimators ignore most of the information in the density, so they are usually less efficient than the MLE and need not respect the parameter constraints."
  },
  {
-  "id": "inf-2.5",
-  "lecture": 2,
+  "id": "p2-3.5",
+  "lecture": 3,
   "stem": "$X_1,\\dots,X_n$ are i.i.d. uniform on $(0,\\theta)$. The moment estimator is $\\hat\\theta=2\\bar X$. Which statement is true?",
   "correct": [
    "For some samples $2\\bar X<X_{(n)}$, an estimate the data rule out.",
@@ -320,8 +480,8 @@
   "explanation": "$E[2\\bar X]=\\theta$ and $2\\bar X\\to\\theta$, but $2\\bar X$ can fall below $X_{(n)}$, which is impossible for the true $\\theta$. The MLE $X_{(n)}$ never has this problem and is far more precise."
  },
  {
-  "id": "inf-3.1",
-  "lecture": 3,
+  "id": "p2-4.1",
+  "lecture": 4,
   "stem": "How is the likelihood function $L(\\theta;x)$ best described?",
   "correct": [
    "The joint density of the observed data, viewed as a function of $\\theta$.",
@@ -352,8 +512,8 @@
   "explanation": "Likelihood has the same algebraic form as the joint density but is read with $x$ fixed and $\\theta$ varying; it need not integrate to one in $\\theta$."
  },
  {
-  "id": "inf-3.2",
-  "lecture": 3,
+  "id": "p2-4.2",
+  "lecture": 4,
   "stem": "Let $\\hat\\theta$ be the maximum likelihood estimator of $\\theta$ and let $g$ be any function. What is the MLE of $g(\\theta)$?",
   "correct": [
    "Maximum likelihood is invariant under reparametrisation, so the MLE of $g(\\theta)$ is $g(\\hat\\theta)$ whatever $g$ is.",
@@ -384,8 +544,8 @@
   "explanation": "The maximised likelihood value is the same however the model is parametrised, so the maximiser transforms with $g$; this is unlike unbiasedness, which is not preserved by nonlinear $g$."
  },
  {
-  "id": "inf-3.3",
-  "lecture": 3,
+  "id": "p2-4.3",
+  "lecture": 4,
   "stem": "Under standard regularity conditions, what is true of the score $U(\\theta)=\\partial\\log L(\\theta;X)/\\partial\\theta$ evaluated at the true parameter value?",
   "correct": [
    "Its expectation is zero.",
@@ -393,8 +553,8 @@
   ],
   "distractors": [
    {
-    "text": "Its expectation equals the Fisher information.",
-    "misconception": "confuses the mean of the score with its variance"
+    "text": "Its expectation equals the log-likelihood at the true value.",
+    "misconception": "confuses the mean of the score with the log-likelihood"
    },
    {
     "text": "It is exactly zero for every sample, because the MLE solves the score equation.",
@@ -413,11 +573,11 @@
     "misconception": "confuses the score with the estimation error"
    }
   ],
-  "explanation": "$E_\\theta[U(\\theta)]=\\int\\partial_\\theta f\\,dx=\\partial_\\theta\\int f\\,dx=0$. The variance of the score is the Fisher information."
+  "explanation": "$E_\\theta[U(\\theta)]=\\int\\partial_\\theta f\\,dx=\\partial_\\theta\\int f\\,dx=0$."
  },
  {
-  "id": "inf-3.4",
-  "lecture": 3,
+  "id": "p2-4.4",
+  "lecture": 4,
   "stem": "$X_1,\\dots,X_n$ are i.i.d. uniform on $(0,\\theta)$. Why is the MLE of $\\theta$ not obtained by setting the derivative of the log-likelihood to zero?",
   "correct": [
    "The likelihood is largest at the boundary $X_{(n)}$, where the derivative is not zero.",
@@ -448,8 +608,8 @@
   "explanation": "$L(\\theta)=\\theta^{-n}\\mathbf 1\\{\\theta\\ge X_{(n)}\\}$ has no stationary point; its largest value is at the smallest allowed $\\theta$, namely $X_{(n)}$."
  },
  {
-  "id": "inf-3.5",
-  "lecture": 3,
+  "id": "p2-4.5",
+  "lecture": 4,
   "stem": "When a maximum likelihood estimate has no closed form, Newton-Raphson updates $\\theta\\leftarrow\\theta-\\ell'(\\theta)/\\ell''(\\theta)$ on the log-likelihood $\\ell$. Which statement is correct?",
   "correct": [
    "Each step linearises the score equation, and it may converge to a local maximum.",
@@ -480,8 +640,8 @@
   "explanation": "Newton's method is a local root-finder for $\\ell'(\\theta)=0$. Near a maximum $\\ell''<0$; outside well-behaved regions it may diverge or find a different stationary point."
  },
  {
-  "id": "inf-4.1",
-  "lecture": 4,
+  "id": "p2-5.1",
+  "lecture": 5,
   "stem": "How does the mean squared error of an estimator $\\hat\\theta$ decompose?",
   "correct": [
    "It is the variance of the estimator plus the square of its bias.",
@@ -512,8 +672,8 @@
   "explanation": "Expanding $E(\\hat\\theta-\\theta)^2$ around $E\\hat\\theta$ gives $\\operatorname{Var}(\\hat\\theta)+\\operatorname{bias}^2$; the cross term vanishes."
  },
  {
-  "id": "inf-4.2",
-  "lecture": 4,
+  "id": "p2-5.2",
+  "lecture": 5,
   "stem": "Compare an unbiased estimator with a biased one for the same parameter. Which statement is true?",
   "correct": [
    "A biased estimator can have smaller MSE when the variance drop outweighs the squared bias.",
@@ -544,8 +704,8 @@
   "explanation": "Shrinkage estimators such as ridge or James-Stein trade a little bias for a larger drop in variance, so they can beat unbiased estimators in MSE."
  },
  {
-  "id": "inf-4.3",
-  "lecture": 4,
+  "id": "p2-5.3",
+  "lecture": 5,
   "stem": "Which statement about consistency and unbiasedness of an estimator is true?",
   "correct": [
    "Neither implies the other: both consistent-but-biased and unbiased-but-inconsistent estimators exist.",
@@ -569,15 +729,15 @@
     "misconception": "confuses convergence with exact attainment"
    },
    {
-    "text": "Consistency holds only for estimators that attain the Cramer-Rao lower bound.",
+    "text": "Consistency holds only for estimators with the smallest possible variance.",
     "misconception": "ties consistency to efficiency"
    }
   ],
   "explanation": "The first observation $X_1$ is unbiased for $\\mu$ but does not converge. The divisor-$n$ variance is biased by $-\\sigma^2/n$ but converges to $\\sigma^2$."
  },
  {
-  "id": "inf-4.4",
-  "lecture": 4,
+  "id": "p2-5.4",
+  "lecture": 5,
   "stem": "$T_1$ and $T_2$ are both unbiased estimators of $\\theta$, and $T_1$ is said to be more efficient than $T_2$. What does this mean?",
   "correct": [
    "The variance of $T_1$ is smaller than the variance of $T_2$.",
@@ -601,15 +761,15 @@
     "misconception": "confuses efficiency with consistency"
    },
    {
-    "text": "$T_1$ attains the Cramer-Rao bound, whereas $T_2$ has no finite variance.",
-    "misconception": "makes efficiency an all-or-nothing property of the bound"
+    "text": "$T_1$ has variance exactly zero, whereas $T_2$ has a positive variance.",
+    "misconception": "makes efficiency an all-or-nothing property"
    }
   ],
   "explanation": "Among unbiased estimators, efficiency is compared through variance (equivalently MSE): smaller variance means more efficient."
  },
  {
-  "id": "inf-4.5",
-  "lecture": 4,
+  "id": "p2-5.5",
+  "lecture": 5,
   "stem": "For a normal sample, consider estimators of $\\sigma^2$ of the form $c\\sum_i(X_i-\\bar X)^2$. Which statement about the choice of $c$ is true?",
   "correct": [
    "The MSE-minimising multiplier is smaller than the unbiased one, so the best estimator is biased.",
@@ -640,8 +800,8 @@
   "explanation": "The MSE of $c\\cdot SS$ is minimised at $c=1/(n+1)$, below the unbiased $1/(n-1)$ and below the MLE's $1/n$. The best estimator is biased downward."
  },
  {
-  "id": "inf-5.1",
-  "lecture": 5,
+  "id": "p2-6.1",
+  "lecture": 6,
   "stem": "What does it mean for a statistic $T(X)$ to be sufficient for $\\theta$?",
   "correct": [
    "Given $T$, the law of the data is free of $\\theta$.",
@@ -672,8 +832,8 @@
   "explanation": "Sufficiency means $P(X\\mid T=t;\\theta)$ is free of $\\theta$. The statistic $T=X$ is always sufficient, so dimension reduction is not part of the definition."
  },
  {
-  "id": "inf-5.2",
-  "lecture": 5,
+  "id": "p2-6.2",
+  "lecture": 6,
   "stem": "In the factorisation theorem a statistic $T(x)$ is sufficient for $\\theta$ if the joint density can be written in which form?",
   "correct": [
    "$f(x;\\theta)=g\\big(T(x),\\theta\\big)\\,h(x)$, where $h$ does not involve $\\theta$.",
@@ -704,8 +864,8 @@
   "explanation": "Factorisation: the parameter may interact with the data only through $T(x)$. Any term depending on both $\\theta$ and the data separately must be a function of $T$."
  },
  {
-  "id": "inf-5.3",
-  "lecture": 5,
+  "id": "p2-6.3",
+  "lecture": 6,
   "stem": "A sufficient statistic $T$ and an unbiased estimator $U$ of $\\theta$ are given. What does the Rao-Blackwell theorem say about $E[U\\mid T]$?",
   "correct": [
    "It is unbiased for $\\theta$ with variance no larger than that of $U$.",
@@ -725,8 +885,8 @@
     "misconception": "forgets that sufficiency is needed for the conditional expectation to be an estimator"
    },
    {
-    "text": "It is the UMVUE of $\\theta$ regardless of whether $T$ is complete.",
-    "misconception": "confuses Rao-Blackwell with Lehmann-Scheffe"
+    "text": "It is the unique best unbiased estimator of $\\theta$, whatever the sufficient $T$.",
+    "misconception": "overstates Rao-Blackwell: it improves $U$ but need not give the best unbiased estimator"
    },
    {
     "text": "It reduces the bias of $U$ while leaving its variance unchanged.",
@@ -736,231 +896,71 @@
   "explanation": "Sufficiency makes $E[U\\mid T]$ a genuine statistic, the tower property keeps unbiasedness, and the conditional variance formula shows variance cannot rise."
  },
  {
-  "id": "inf-5.4",
-  "lecture": 5,
-  "stem": "What does the Lehmann-Scheffe theorem say?",
-  "correct": [
-   "An unbiased function of a complete sufficient statistic is the unique UMVUE.",
-   "Unbiased and based on a complete sufficient statistic implies minimum variance."
-  ],
-  "distractors": [
-   {
-    "text": "Any unbiased function of a merely sufficient statistic is the UMVUE.",
-    "misconception": "drops the completeness assumption"
-   },
-   {
-    "text": "A UMVUE need not be unique, because many unbiased estimators can attain the minimum variance.",
-    "misconception": "denies the uniqueness that completeness provides"
-   },
-   {
-    "text": "A complete sufficient statistic exists for every parametric family, so a UMVUE always exists.",
-    "misconception": "assumes existence of complete sufficient statistics"
-   },
-   {
-    "text": "The UMVUE always attains the Cramer-Rao lower bound exactly.",
-    "misconception": "assumes the bound is always attained"
-   },
-   {
-    "text": "A complete sufficient statistic must itself be an unbiased estimator of the parameter.",
-    "misconception": "confuses the statistic with the estimator built from it"
-   }
-  ],
-  "explanation": "Completeness makes the Rao-Blackwellised estimator unique, so any unbiased function of a complete sufficient statistic has the least variance. The UMVUE can have variance above the CR bound."
- },
- {
-  "id": "inf-5.5",
-  "lecture": 5,
-  "stem": "A statistic $T$ is called complete when which condition holds?",
-  "correct": [
-   "If $E_\\theta[g(T)]=0$ for every $\\theta$, then $g(T)=0$ with probability one.",
-   "The only function of $T$ with zero mean at all $\\theta$ is zero (a.s.)."
-  ],
-  "distractors": [
-   {
-    "text": "If $E_\\theta[g(T)]=0$ for a single value of $\\theta$, then $g(T)=0$ almost surely.",
-    "misconception": "requires the condition at one parameter value rather than all"
-   },
-   {
-    "text": "The distribution of $T$ is the same for every value of $\\theta$.",
-    "misconception": "describes an ancillary statistic"
-   },
-   {
-    "text": "The factorisation theorem holds for $T$, so that $T$ is sufficient.",
-    "misconception": "confuses completeness with sufficiency"
-   },
-   {
-    "text": "$T$ is itself an unbiased estimator of $\\theta$ with the smallest variance.",
-    "misconception": "confuses completeness with being a UMVUE"
-   },
-   {
-    "text": "$g(T)=0$ for every function $g$ for which $T$ takes at least two different values.",
-    "misconception": "gives a nonsensical definition about the values of $T$"
-   }
-  ],
-  "explanation": "Completeness says there are no non-trivial unbiased estimators of zero based on $T$. This is what delivers uniqueness in Lehmann-Scheffe."
- },
- {
-  "id": "inf-6.1",
+  "id": "p2-6.4",
   "lecture": 6,
-  "stem": "Under regularity conditions, how is the Fisher information $I(\\theta)$ of one observation characterised?",
+  "stem": "$X_1,\\dots,X_n$ are i.i.d. Poisson$(\\lambda)$. Which statistic is sufficient for $\\lambda$ by the factorisation theorem?",
   "correct": [
-   "It is the variance of the score, which equals minus the expected second derivative.",
-   "$I(\\theta)=\\operatorname{Var}\\big(\\partial_\\theta\\log f(X;\\theta)\\big)=-E\\big[\\partial^2_\\theta\\log f(X;\\theta)\\big]$."
+   "The sample total $\\sum_i X_i$, because the joint pmf depends on the data only through it.",
+   "$\\sum_i X_i$, since $f(x;\\lambda)=e^{-n\\lambda}\\lambda^{\\sum x_i}\\big/\\prod_i x_i!$ factorises through the total."
   ],
   "distractors": [
    {
-    "text": "It is the expected value of the score, which measures how far the likelihood slopes on average.",
-    "misconception": "confuses the mean of the score with its variance"
+    "text": "The sample variance $S^2$, because it measures the spread of the observations.",
+    "misconception": "believes any summary of the data is sufficient, without checking the factorisation"
    },
    {
-    "text": "It is the expected second derivative of the log-density, taken without the minus sign.",
-    "misconception": "drops the sign, giving a non-positive quantity"
+    "text": "The first observation $X_1$, because each observation has mean $\\lambda$.",
+    "misconception": "confuses unbiasedness with sufficiency; $X_1$ discards the other observations"
    },
    {
-    "text": "It is the variance of the maximum likelihood estimator for a single observation.",
-    "misconception": "confuses information with the variance of the estimator"
+    "text": "The product $\\prod_i X_i$, because the pmf is a product of terms.",
+    "misconception": "matches the product form of the pmf to the wrong statistic"
    },
    {
-    "text": "It is the second derivative of the log-likelihood at the maximum, which is a random quantity.",
-    "misconception": "confuses the observed information with its expectation"
+    "text": "The sample range $X_{(n)}-X_{(1)}$, because it summarises how far the data spread.",
+    "misconception": "picks a summary with no connection to the exponent of $\\lambda$ in the factorisation"
    },
    {
-    "text": "It is the expected log-likelihood ratio between $\\theta$ and the true parameter.",
-    "misconception": "confuses information with Kullback-Leibler divergence"
+    "text": "The sample size $n$, because it appears in the exponent of $e^{-n\\lambda}$.",
+    "misconception": "mistakes a known constant for a statistic that carries information about $\\lambda$"
    }
   ],
-  "explanation": "$I(\\theta)=E[U^2]=\\operatorname{Var}(U)$ since $EU=0$, and under regularity the information identity gives $-E[\\ell'']$. Observed information is the random version."
+  "explanation": "The joint pmf is $e^{-n\\lambda}\\lambda^{\\sum x_i}\\big/\\prod x_i!$. With $g(T,\\lambda)=e^{-n\\lambda}\\lambda^{T}$, $T=\\sum x_i$ and $h(x)=1/\\prod x_i!$, the factorisation theorem shows $T$ is sufficient."
  },
  {
-  "id": "inf-6.2",
+  "id": "p2-6.5",
   "lecture": 6,
-  "stem": "$X_1,\\dots,X_n$ are i.i.d. with Fisher information $I(\\theta)$ per observation. What is the information in the whole sample?",
+  "stem": "$X_1,\\dots,X_n$ are i.i.d. uniform on $(0,\\theta)$. Which statistic is sufficient for $\\theta$?",
   "correct": [
-   "Scores of independent observations add, and so do their variances, giving $nI(\\theta)$.",
-   "Information adds over independent observations, giving $nI(\\theta)$."
+   "The sample maximum $X_{(n)}$, since the likelihood depends on the data only through it.",
+   "$X_{(n)}$ alone, because the joint density factorises through $\\mathbf 1\\{X_{(n)}\\le\\theta\\}$."
   ],
   "distractors": [
    {
-    "text": "It is $I(\\theta)/n$, because averaging over observations dilutes the information.",
-    "misconception": "confuses information with the variance of the sample mean"
+    "text": "The sample mean $\\bar X$, because $\\theta=2E[X]$ and the mean estimates the middle.",
+    "misconception": "confuses a moment estimator with a sufficient statistic"
    },
    {
-    "text": "It is $\\sqrt n\\,I(\\theta)$, because precision grows with the square root of the sample size.",
-    "misconception": "transfers the standard error rate to the information"
+    "text": "The sample minimum $X_{(1)}$, because small values constrain the support.",
+    "misconception": "picks the wrong end of the sample; the upper endpoint is bounded by the maximum"
    },
    {
-    "text": "It is $I(\\theta)^n$, because independent observations multiply.",
-    "misconception": "multiplies where independent scores' variances add"
+    "text": "The sample median, because it is a robust summary of the location.",
+    "misconception": "believes a robust summary keeps all information about the parameter"
    },
    {
-    "text": "It equals $I(\\theta)$ whatever $n$, since all observations share the same parameter.",
-    "misconception": "ignores that each observation adds information"
+    "text": "No statistic smaller than the whole sample, because the support depends on $\\theta$.",
+    "misconception": "believes a parameter-dependent support rules out any data reduction"
    },
    {
-    "text": "It is $n^2I(\\theta)$, since the number of pairs of observations grows like $n^2$.",
-    "misconception": "invents a quadratic growth from counting pairs"
+    "text": "The sample variance $S^2$, because $\\operatorname{Var}(X)=\\theta^2/12$ depends on $\\theta$.",
+    "misconception": "treats any statistic whose mean depends on the parameter as sufficient"
    }
   ],
-  "explanation": "Scores of independent observations add, so their variances add: $\\operatorname{Var}(\\sum U_i)=nI(\\theta)$."
+  "explanation": "The joint density is $\\theta^{-n}\\mathbf 1\\{x_{(n)}\\le\\theta\\}\\mathbf 1\\{x_{(1)}\\ge0\\}$, which depends on $x$ and $\\theta$ only through $x_{(n)}$ apart from a factor free of $\\theta$. So $X_{(n)}$ is sufficient even though the support depends on $\\theta$."
  },
  {
-  "id": "inf-6.3",
-  "lecture": 6,
-  "stem": "Which statement of the Cramer-Rao lower bound is correct under regularity conditions?",
-  "correct": [
-   "Any unbiased estimator has variance at least $1/\\{nI(\\theta)\\}$.",
-   "No unbiased estimator can have variance below the reciprocal of the sample information."
-  ],
-  "distractors": [
-   {
-    "text": "Any unbiased estimator of $\\theta$ has variance at most $1/\\{nI(\\theta)\\}$.",
-    "misconception": "reverses the inequality"
-   },
-   {
-    "text": "Every UMVUE attains the bound with equality, since it is optimal.",
-    "misconception": "thinks the best unbiased estimator always reaches the bound"
-   },
-   {
-    "text": "The bound holds for every estimator, biased or not, in exactly the same form.",
-    "misconception": "ignores the bias correction needed for biased estimators"
-   },
-   {
-    "text": "Equality holds exactly when the estimator is the maximum likelihood estimator, for every finite $n$.",
-    "misconception": "treats the MLE as always exactly efficient"
-   },
-   {
-    "text": "The bound is $nI(\\theta)$, so more data allows less accuracy.",
-    "misconception": "inverts the information and the variance"
-   }
-  ],
-  "explanation": "The bound is the inverse information; it need not be attainable, and for a biased estimator the bound becomes $\\{1+b'(\\theta)\\}^2/\\{nI(\\theta)\\}$."
- },
- {
-  "id": "inf-6.4",
-  "lecture": 6,
-  "stem": "Why does the Cramer-Rao argument fail for $X_1,\\dots,X_n$ i.i.d. uniform on $(0,\\theta)$?",
-  "correct": [
-   "The support depends on $\\theta$, so differentiating under the integral sign is invalid.",
-   "A regularity condition fails because the range of the data moves with the parameter."
-  ],
-  "distractors": [
-   {
-    "text": "The uniform distribution has an infinite variance, so no estimator has a finite variance.",
-    "misconception": "wrongly thinks the uniform has infinite variance"
-   },
-   {
-    "text": "The parameter must be positive, and the bound requires parameters on the whole real line.",
-    "misconception": "thinks the bound needs an unrestricted parameter"
-   },
-   {
-    "text": "The sample size is too small for the information to be defined.",
-    "misconception": "thinks regularity depends on $n$"
-   },
-   {
-    "text": "The maximum likelihood estimator is biased, and the bound applies only to biased estimators.",
-    "misconception": "reverses which estimators the bound concerns"
-   },
-   {
-    "text": "The log-likelihood is convex in $\\theta$, so the second derivative has the wrong sign.",
-    "misconception": "mistakes the shape of the log-likelihood"
-   }
-  ],
-  "explanation": "Without a $\\theta$-free support, the score need not have mean zero. Indeed $X_{(n)}$ has variance of order $n^{-2}$, which is below the formal bound of order $n^{-1}$."
- },
- {
-  "id": "inf-6.5",
-  "lecture": 6,
-  "stem": "Under standard regularity conditions, which describes the large-sample behaviour of the maximum likelihood estimator $\\hat\\theta_n$ for i.i.d. data?",
-  "correct": [
-   "It is approximately normal, centred at the true $\\theta$, with variance $1/\\{nI(\\theta)\\}$, so it is asymptotically efficient.",
-   "$\\sqrt n(\\hat\\theta_n-\\theta)$ tends in law to a normal with variance $1/I(\\theta)$."
-  ],
-  "distractors": [
-   {
-    "text": "It is approximately normal with variance $I(\\theta)/n$, so a larger information widens the interval.",
-    "misconception": "puts information in the numerator"
-   },
-   {
-    "text": "It has exactly a normal distribution for every sample size, whichever the model.",
-    "misconception": "turns an asymptotic statement into an exact one"
-   },
-   {
-    "text": "It is asymptotically normal only when the observations themselves are normally distributed.",
-    "misconception": "ties asymptotic normality to normal data"
-   },
-   {
-    "text": "Its variance approaches $1/I(\\theta)$ and does not shrink as $n$ grows.",
-    "misconception": "forgets the factor $n$ in the information"
-   },
-   {
-    "text": "It is approximately normal but with a mean that differs from $\\theta$ by a bias of order one.",
-    "misconception": "believes the MLE has a non-vanishing asymptotic bias"
-   }
-  ],
-  "explanation": "The asymptotic variance $1/I(\\theta)$ is the CR bound, so the MLE is asymptotically efficient. In practice $I(\\hat\\theta)$ is plugged in for the standard error."
- },
- {
-  "id": "inf-7.1",
+  "id": "p2-7.1",
   "lecture": 7,
   "stem": "A 95% confidence interval for $\\mu$ is computed from one sample and equals $(a,b)$. Which interpretation is correct?",
   "correct": [
@@ -992,7 +992,7 @@
   "explanation": "Confidence refers to the random interval before the data are seen. After computation the interval either contains $\\mu$ or it does not."
  },
  {
-  "id": "inf-7.2",
+  "id": "p2-7.2",
   "lecture": 7,
   "stem": "What defines a pivotal quantity for a parameter $\\theta$?",
   "correct": [
@@ -1010,7 +1010,7 @@
    },
    {
     "text": "An unbiased estimator of $\\theta$ with the smallest possible variance.",
-    "misconception": "confuses a pivot with a UMVUE"
+    "misconception": "confuses a pivot with a minimum-variance unbiased estimator"
    },
    {
     "text": "Any function of the data and $\\theta$ with a normal distribution, whatever its mean and variance.",
@@ -1024,7 +1024,7 @@
   "explanation": "For a normal sample $\\sqrt n(\\bar X-\\mu)/S\\sim t_{n-1}$ is a pivot: it involves $\\mu$ and the data, yet its law is free of $\\mu,\\sigma$. Inverting a probability statement about it gives the interval."
  },
  {
-  "id": "inf-7.3",
+  "id": "p2-7.3",
   "lecture": 7,
   "stem": "How do the width of a confidence interval for a mean, the confidence level and the sample size relate?",
   "correct": [
@@ -1056,7 +1056,7 @@
   "explanation": "Width is about $2\\,c\\,\\sigma/\\sqrt n$ with $c$ the critical value: it grows with the confidence level and shrinks like $n^{-1/2}$."
  },
  {
-  "id": "inf-7.4",
+  "id": "p2-7.4",
   "lecture": 7,
   "stem": "For a normal sample, which statement about the confidence interval for $\\sigma^2$ based on $(n-1)S^2/\\sigma^2\\sim\\chi^2_{n-1}$ is correct?",
   "correct": [
@@ -1088,7 +1088,7 @@
   "explanation": "Inverting $\\chi^2_{1-\\alpha/2}\\le(n-1)S^2/\\sigma^2\\le\\chi^2_{\\alpha/2}$ gives $(n-1)S^2/\\chi^2_{\\alpha/2}\\le\\sigma^2\\le(n-1)S^2/\\chi^2_{1-\\alpha/2}$, which is asymmetric about $S^2$."
  },
  {
-  "id": "inf-7.5",
+  "id": "p2-7.5",
   "lecture": 7,
   "stem": "Which statement about the Wald interval $\\hat p\\pm z\\sqrt{\\hat p(1-\\hat p)/n}$ for a proportion is correct?",
   "correct": [
@@ -1120,7 +1120,7 @@
   "explanation": "The standard error uses $\\hat p$, so it collapses at $\\hat p=0$ or $1$, and the normal approximation is poor in small samples; Wilson or exact intervals behave better."
  },
  {
-  "id": "inf-8.1",
+  "id": "p2-8.1",
   "lecture": 8,
   "stem": "What is a Type I error in a hypothesis test of $H_0$ against $H_1$?",
   "correct": [
@@ -1152,7 +1152,7 @@
   "explanation": "A Type I error is a false rejection; its probability under $H_0$ is at most the significance level $\\alpha$."
  },
  {
-  "id": "inf-8.2",
+  "id": "p2-8.2",
   "lecture": 8,
   "stem": "Which statement about the power of a test of $H_0$ against a specific alternative is correct?",
   "correct": [
@@ -1184,7 +1184,7 @@
   "explanation": "Power is $P_\\theta(\\text{reject }H_0)$ for $\\theta$ in $H_1$. It grows with $n$, with the distance from $H_0$, and with $\\alpha$; a smaller $\\alpha$ lowers it."
  },
  {
-  "id": "inf-8.3",
+  "id": "p2-8.3",
   "lecture": 8,
   "stem": "How is the p-value of a test defined?",
   "correct": [
@@ -1216,7 +1216,7 @@
   "explanation": "A p-value is computed under $H_0$ and is a statement about data, not about the truth of $H_0$. Rejecting when $p\\le\\alpha$ gives a test of size $\\alpha$."
  },
  {
-  "id": "inf-8.4",
+  "id": "p2-8.4",
   "lecture": 8,
   "stem": "How does a two-sided level-$\\alpha$ test of $H_0:\\theta=\\theta_0$ relate to a $100(1-\\alpha)\\%$ confidence interval built from the same pivot?",
   "correct": [
@@ -1248,7 +1248,7 @@
   "explanation": "Duality: the confidence set is the collection of $\\theta_0$ values not rejected by the level-$\\alpha$ test."
  },
  {
-  "id": "inf-8.5",
+  "id": "p2-8.5",
   "lecture": 8,
   "stem": "For a fixed sample size and fixed alternative, what happens to $\\beta$, the Type II error probability, when the significance level $\\alpha$ is lowered?",
   "correct": [
@@ -1280,7 +1280,7 @@
   "explanation": "With the data distribution fixed, shrinking the rejection region lowers $\\alpha$ but also lowers the chance of rejecting under $H_1$. Only more data lowers both."
  },
  {
-  "id": "inf-9.1",
+  "id": "p2-9.1",
   "lecture": 9,
   "stem": "For testing a simple $H_0:\\theta=\\theta_0$ against a simple $H_1:\\theta=\\theta_1$, what does the Neyman-Pearson lemma say?",
   "correct": [
@@ -1312,7 +1312,7 @@
   "explanation": "The NP lemma: among all tests with size at most $\\alpha$, the test that rejects for large likelihood ratio has the greatest power."
  },
  {
-  "id": "inf-9.2",
+  "id": "p2-9.2",
   "lecture": 9,
   "stem": "Suppose a family has a monotone likelihood ratio in a statistic $T$. For testing $H_0:\\theta\\le\\theta_0$ against $H_1:\\theta>\\theta_0$ what holds?",
   "correct": [
@@ -1344,7 +1344,7 @@
   "explanation": "Monotone likelihood ratio makes the NP region for $\\theta_1>\\theta_0$ the same set $\\{T>c\\}$ for every $\\theta_1$. For two-sided alternatives no UMP test exists in general."
  },
  {
-  "id": "inf-9.3",
+  "id": "p2-9.3",
   "lecture": 9,
   "stem": "The likelihood ratio statistic is $\\Lambda=\\sup_{\\theta\\in\\Theta_0}L(\\theta)\\big/\\sup_{\\theta\\in\\Theta}L(\\theta)$. When does the likelihood ratio test reject?",
   "correct": [
@@ -1376,7 +1376,7 @@
   "explanation": "Since $\\Theta_0\\subset\\Theta$, $0\\le\\Lambda\\le1$; values near zero mean imposing $H_0$ costs much likelihood, which is evidence against $H_0$."
  },
  {
-  "id": "inf-9.4",
+  "id": "p2-9.4",
   "lecture": 9,
   "stem": "What does Wilks' theorem say about the likelihood ratio statistic under $H_0$ in regular problems?",
   "correct": [
@@ -1408,7 +1408,7 @@
   "explanation": "In regular problems $-2\\log\\Lambda\\to\\chi^2_r$ with $r=\\dim\\Theta-\\dim\\Theta_0$. Boundary nulls, such as a variance component equal to zero, give mixtures instead."
  },
  {
-  "id": "inf-9.5",
+  "id": "p2-9.5",
   "lecture": 9,
   "stem": "For a normal sample with unknown variance, what is the likelihood ratio test of $H_0:\\mu=\\mu_0$ against $\\mu\\ne\\mu_0$?",
   "correct": [
@@ -1440,7 +1440,7 @@
   "explanation": "With unknown $\\sigma^2$, $\\Lambda=\\big(1+T^2/(n-1)\\big)^{-n/2}$. Rejecting for small $\\Lambda$ is the same as rejecting for large $|T|$."
  },
  {
-  "id": "inf-10.1",
+  "id": "p2-10.1",
   "lecture": 10,
   "stem": "Which assumption does the one-sample $t$ test of $H_0:\\mu=\\mu_0$ need to give an exact $t_{n-1}$ null distribution?",
   "correct": [
@@ -1472,7 +1472,7 @@
   "explanation": "Exactness needs normality because independence of $\\bar X$ and $S^2$ and the chi-square law of $S^2$ rest on it. For large $n$ the CLT makes the test approximately valid for non-normal data."
  },
  {
-  "id": "inf-10.2",
+  "id": "p2-10.2",
   "lecture": 10,
   "stem": "In comparing two population means, what separates the pooled two-sample $t$ test from Welch's test?",
   "correct": [
@@ -1504,7 +1504,7 @@
   "explanation": "The pooled statistic uses $s_p^2$ and has an exact $t_{n_1+n_2-2}$ law if variances are equal; Welch uses separate variances and an approximate (Satterthwaite) $t$ law."
  },
  {
-  "id": "inf-10.3",
+  "id": "p2-10.3",
   "lecture": 10,
   "stem": "Why can a paired $t$ test be more powerful than an independent two-sample test when the two measurements on each unit are positively correlated?",
   "correct": [
@@ -1536,7 +1536,7 @@
   "explanation": "$\\operatorname{Var}(X-Y)=\\sigma_X^2+\\sigma_Y^2-2\\operatorname{Cov}(X,Y)$ is smaller when the covariance is positive. With zero correlation pairing gains nothing and loses degrees of freedom."
  },
  {
-  "id": "inf-10.4",
+  "id": "p2-10.4",
   "lecture": 10,
   "stem": "The $F$ test for $H_0:\\sigma_1^2=\\sigma_2^2$ uses $F=S_1^2/S_2^2$ from two independent normal samples. Which statement is correct?",
   "correct": [
@@ -1568,7 +1568,7 @@
   "explanation": "The $F$ ratio of normal-theory variances relies on kurtosis-sensitive $S^2$; heavy tails make the null distribution wrong even for large $n$."
  },
  {
-  "id": "inf-10.5",
+  "id": "p2-10.5",
   "lecture": 10,
   "stem": "To test $H_0:\\sigma^2=\\sigma_0^2$ for a normal sample, one uses $\\chi^2=(n-1)S^2/\\sigma_0^2$. Which statement is correct?",
   "correct": [
@@ -1600,7 +1600,7 @@
   "explanation": "The chi-square density is right-skewed on $(0,\\infty)$, so the lower and upper $\\alpha/2$ points are different distances from $n-1$. Large values signal $\\sigma^2>\\sigma_0^2$."
  },
  {
-  "id": "inf-11.1",
+  "id": "p2-11.1",
   "lecture": 11,
   "stem": "In a chi-square goodness-of-fit test with $k$ categories, where $m$ parameters of the null model are estimated from the data by maximum likelihood on the grouped counts, what are the degrees of freedom?",
   "correct": [
@@ -1632,7 +1632,7 @@
   "explanation": "Pearson's statistic $\\sum(O-E)^2/E$ has about $k-1-m$ degrees of freedom: the total constraint and each estimated parameter remove one."
  },
  {
-  "id": "inf-11.2",
+  "id": "p2-11.2",
   "lecture": 11,
   "stem": "In an $r\\times c$ contingency table, how is the chi-square test of independence set up?",
   "correct": [
@@ -1664,7 +1664,7 @@
   "explanation": "The margins are estimated: $(r-1)+(c-1)$ free parameters among $rc-1$ free cell probabilities leaves $rc-1-(r-1)-(c-1)=(r-1)(c-1)$."
  },
  {
-  "id": "inf-11.3",
+  "id": "p2-11.3",
   "lecture": 11,
   "stem": "What condition is needed for the chi-square approximation of Pearson's statistic to be reasonable?",
   "correct": [
@@ -1696,7 +1696,7 @@
   "explanation": "Pearson's statistic is asymptotically chi-square. Cells with tiny expected counts make the distribution of $(O-E)^2/E$ discrete and skewed, so categories are merged or an exact test is used."
  },
  {
-  "id": "inf-11.4",
+  "id": "p2-11.4",
   "lecture": 11,
   "stem": "For a goodness-of-fit test based on Pearson's statistic, which part of the chi-square distribution forms the usual rejection region?",
   "correct": [
@@ -1728,7 +1728,7 @@
   "explanation": "Each term $(O-E)^2/E$ is nonnegative, so lack of fit pushes the statistic up. Very small values would suggest data that fit too well, which is rarely a rejection reason."
  },
  {
-  "id": "inf-11.5",
+  "id": "p2-11.5",
   "lecture": 11,
   "stem": "A chi-square test of independence on a large sample gives a very small p-value. Which conclusion is justified?",
   "correct": [

@@ -1,9 +1,10 @@
 // Every LQ answer is recomputed by a DIFFERENT method from the generator's own:
-//  A: Simpson integration of the density of the sample maximum, and Monte Carlo of the three estimators.
-//  B: numerical integration of the Gamma density, Monte Carlo, exact fractions for the estimates.
+//  A: Simpson integration of the density of the sample maximum, and Monte Carlo of the estimators and the Chebyshev bound.
+//  B: numerical integration of the Gamma density (tail, bias, MSE, variance), Monte Carlo, exact fractions for the estimates.
 //  D: enumeration of all 2^n outcome sequences with exact fractions, and a brute-force search for the sample size.
 //  E: exact fractions from the raw data (two-pass variance), and the t table checked by numerical integration of the t density.
 //  F: exact fractions for Pearson statistics; G^2 from a different algebraic identity.
+//  H: brute-force searches for sample sizes, integrated normal density, exact binomial cdf, Monte Carlo with a skewed population.
 //  G: log-likelihood maximised numerically, the pmf products computed directly, exact Poisson sums, Monte Carlo.
 import { describe, expect, it } from 'vitest'
 import { makeRng } from '../../../../lib/rng'
@@ -16,12 +17,13 @@ import * as D from './d-binomial'
 import * as E from './e-twosample'
 import * as Fq from './f-chisq'
 import * as G from './g-poisson'
+import * as H from './h-clt'
 
 const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => `${prefix}${i}`)
 const answers = (inst: LQInstance) => inst.parts.map((p) => p.answer)
 const close = (got: number, want: number, tol = 1e-9) => expect(Math.abs(got - want), `got ${got}, want ${want}`).toBeLessThan(tol)
 const rel = (got: number, want: number, r: number) => expect(Math.abs(got - want), `got ${got}, want ${want}`).toBeLessThan(r * Math.abs(want))
-const lectures = topics.find((t) => t.id === 'inf')!.lectures.length
+const lectures = topics.find((t) => t.id === 'p2')!.lectures.length
 
 const gens: [string, LQGenerator, number][] = [
   ['A', { id: 'A', generate: (r) => A.build(A.sample(r)) }, 5],
@@ -30,6 +32,7 @@ const gens: [string, LQGenerator, number][] = [
   ['E', { id: 'E', generate: (r) => E.build(E.sample(r)) }, 5],
   ['F', { id: 'F', generate: (r) => Fq.build(Fq.sample(r)) }, 5],
   ['G', { id: 'G', generate: (r) => G.build(G.sample(r)) }, 5],
+  ['H', { id: 'H', generate: (r) => H.build(H.sample(r)) }, 5],
 ]
 
 describe.each(gens)('generator %s: generic rules', (name, gen, nParts) => {
@@ -73,89 +76,155 @@ function simpson(f: (x: number) => number, a: number, b: number, n = 4000): numb
 
 // ---------- A ----------
 describe('generator A against independent computation', () => {
-  it('estimates exactly, MSEs and variance by integrating the density of the maximum (300 seeds)', () => {
+  it('estimates exactly, Chebyshev bound and variance reduction by integrating densities (300 seeds)', () => {
     for (const s of seeds('A', 300)) {
       const prm = A.sample(makeRng(s))
       const ans = answers(A.build(prm))
-      const { theta, n, tenths } = prm
+      const { theta, n, tenths, r } = prm
       const sum = tenths.reduce((a, b) => a.add(F(b, 10)), F(0))
       close(ans[0], sum.div(F(n)).mul(F(2)).num)
       close(ans[1], [...tenths].sort((a, b) => b - a)[0] / 10)
       // density of the maximum: n x^(n-1) / theta^n on (0, theta)
       const dens = (x: number) => (n * x ** (n - 1)) / theta ** n
       const mean = simpson((x) => x * dens(x), 0, theta)
-      const mse = simpson((x) => (x - theta) ** 2 * dens(x), 0, theta)
-      const v = simpson((x) => (((n + 1) / n) * x - theta) ** 2 * dens(x), 0, theta)
-      close(ans[3], mse, 1e-6)
-      close(ans[4], v, 1e-6)
       close(mean, (n * theta) / (n + 1), 1e-6)
+      const v = simpson((x) => (((n + 1) / n) * x - theta) ** 2 * dens(x), 0, theta)
+      // variance of 2 X_1 by integrating against the uniform density
+      const v1 = simpson((x) => (2 * x - theta) ** 2 / theta, 0, theta)
+      close(ans[4], v1 - v, 1e-6)
+      // Var(2 Xbar) = 4 Var(X) / n with Var(X) integrated; MSE = Var since unbiased
+      const varX = simpson((x) => (x - theta / 2) ** 2 / theta, 0, theta)
+      close(ans[2], (4 * varX) / n, 1e-6)
+      close(ans[3], (4 * varX) / n / (r * theta) ** 2, 1e-6)
+      expect(ans[3]).toBeLessThan(1)
     }
   })
-  it('Monte Carlo: the moment estimator MSE, the MLE MSE and the UMVUE variance (6 seeds)', () => {
+  it('Monte Carlo: MSE of the moment estimator, Chebyshev bound holds, variance reduction (6 seeds)', () => {
     for (const s of seeds('A', 6)) {
       const prm = A.sample(makeRng(s))
       const ans = answers(A.build(prm))
-      const { theta, n } = prm
+      const { theta, n, r } = prm
       const rng = makeRng('sim' + s)
       const runs = 200000
-      let e1 = 0, e2 = 0, u1 = 0, u2 = 0
-      for (let r = 0; r < runs; r++) {
-        let sm = 0, mx = 0
-        for (let i = 0; i < n; i++) { const x = theta * rng.next(); sm += x; mx = Math.max(mx, x) }
-        e1 += (2 * (sm / n) - theta) ** 2
-        e2 += (mx - theta) ** 2
+      let e1 = 0, hit = 0, a1 = 0, a2 = 0, b1 = 0, b2 = 0
+      for (let k = 0; k < runs; k++) {
+        let sm = 0, mx = 0, x1 = 0
+        for (let i = 0; i < n; i++) { const x = theta * rng.next(); if (i === 0) x1 = x; sm += x; mx = Math.max(mx, x) }
+        const mom = 2 * (sm / n)
+        e1 += (mom - theta) ** 2
+        if (Math.abs(mom - theta) >= r * theta) hit++
         const u = ((n + 1) / n) * mx
-        u1 += u; u2 += u * u
+        a1 += 2 * x1; a2 += (2 * x1) ** 2; b1 += u; b2 += u * u
       }
       rel(ans[2], e1 / runs, 0.02)
-      rel(ans[3], e2 / runs, 0.03)
-      rel(ans[4], u2 / runs - (u1 / runs) ** 2, 0.03)
-      rel(u1 / runs, theta, 0.01) // unbiased
+      expect(hit / runs).toBeLessThanOrEqual(ans[3])
+      const varRaw = a2 / runs - (a1 / runs) ** 2, varRB = b2 / runs - (b1 / runs) ** 2
+      rel(ans[4], varRaw - varRB, 0.05)
+      rel(b1 / runs, theta, 0.01) // the Rao-Blackwell estimator is unbiased
     }
   }, 60000)
 })
 
 // ---------- B ----------
 describe('generator B against independent computation', () => {
-  it('Gamma tail by numerical integration, exact estimates, E[1/T^2] by integration (300 seeds)', () => {
+  it('Gamma tail, bias, MSE and Chebyshev bound by numerical integration; exact MLE (300 seeds)', () => {
     for (const s of seeds('B', 300)) {
       const prm = B.sample(makeRng(s))
       const ans = answers(B.build(prm))
-      const { n, lam, c, tenths } = prm
+      const { n, lam, c, eps, tenths } = prm
       const fact = (k: number): number => (k <= 1 ? 1 : k * fact(k - 1))
       const gam = (t: number) => (lam ** n * t ** (n - 1) * Math.exp(-lam * t)) / fact(n - 1)
       const tail = simpson(gam, n * c, n * c + 80 / lam, 20000)
       close(ans[0], tail, 1e-6)
       const T = tenths.reduce((a, b) => a.add(F(b, 10)), F(0))
       close(ans[1], F(n).div(T).num)
-      close(ans[2], F(n - 1).div(T).num)
-      close(ans[3], (lam * lam) / n)
-      // variance of (n-1)/T by integrating against the Gamma density
-      const m1 = simpson((t) => ((n - 1) / t) * gam(t), 1e-9, 80 / lam, 40000)
-      const m2 = simpson((t) => (((n - 1) / t) ** 2) * gam(t), 1e-9, 80 / lam, 40000)
-      close(m1, lam, 1e-3)
-      close(ans[4], m2 - m1 * m1, 2e-3)
+      const hi = 80 / lam
+      const m1 = simpson((t) => (n / t) * gam(t), 1e-9, hi, 40000)
+      const mse = simpson((t) => (n / t - lam) ** 2 * gam(t), 1e-9, hi, 40000)
+      close(ans[2], m1 - lam, 2e-3)
+      close(ans[3], mse, 3e-3)
+      // Var(Xbar) by integration, then Chebyshev
+      const vx = simpson((t) => (t / n - 1 / lam) ** 2 * gam(t), 0, hi, 40000)
+      close(ans[4], vx / (eps * eps), 1e-4)
+      expect(ans[4]).toBeLessThan(1)
     }
-  }, 60000)
-  it('Monte Carlo: P(Xbar > c) and the variance of the UMVUE (5 seeds)', () => {
+  }, 120000)
+  it('Monte Carlo: P(Xbar > c), bias and MSE of the MLE, Chebyshev bound holds (5 seeds)', () => {
     for (const s of seeds('B', 5)) {
       const prm = B.sample(makeRng(s))
       const ans = answers(B.build(prm))
-      const { n, lam, c } = prm
+      const { n, lam, c, eps } = prm
       const rng = makeRng('sim' + s)
       const runs = 300000
-      let hit = 0, u1 = 0, u2 = 0
+      let hit = 0, ch = 0, b = 0, e2 = 0
       for (let r = 0; r < runs; r++) {
         let t = 0
         for (let i = 0; i < n; i++) t += -Math.log(1 - rng.next()) / lam
         if (t / n > c) hit++
-        const u = (n - 1) / t
-        u1 += u; u2 += u * u
+        if (Math.abs(t / n - 1 / lam) >= eps) ch++
+        b += n / t - lam
+        e2 += (n / t - lam) ** 2
       }
       close(ans[0], hit / runs, 0.005)
-      rel(u1 / runs, lam, 0.03)
-      // heavy-tailed for n = 3: loose bound
-      rel(ans[4], u2 / runs - (u1 / runs) ** 2, n === 3 ? 0.35 : 0.1)
+      expect(ch / runs).toBeLessThanOrEqual(ans[4])
+      // heavy-tailed for n = 3 and 4: loose bounds
+      rel(ans[2], b / runs, n === 3 ? 0.15 : 0.1)
+      rel(ans[3], e2 / runs, n === 3 ? 0.35 : 0.15)
+    }
+  }, 60000)
+})
+
+// ---------- H ----------
+describe('generator H against independent computation', () => {
+  /** Normal cdf by Simpson integration of the density, independent of the format.ts approximation. */
+  const Phi = (z: number) => 0.5 + simpson((x) => Math.exp(-x * x / 2) / Math.sqrt(2 * Math.PI), 0, z, 2000)
+  it('Chebyshev bound, brute-force sample sizes, CLT tail, binomial approximation (300 seeds)', () => {
+    for (const s of seeds('H', 300)) {
+      const prm = H.sample(makeRng(s))
+      const ans = answers(H.build(prm))
+      const { n, sigma, mu, m, z, eps, delta, bn, bp, bk } = prm
+      // (a) bound for the deviation m * sigma / sqrt(n) is exactly 1 / m^2
+      close(ans[0], 1 / (m * m), 1e-12)
+      // (b) smallest n by search
+      let k = 1
+      while ((sigma * sigma) / (k * eps * eps) > delta + 1e-12) k++
+      expect(ans[1]).toBe(k)
+      // (c) the threshold is mu + z standard errors, and the tail comes from the integrated density
+      const c = mu + z * (sigma / Math.sqrt(n))
+      close((c - mu) / (sigma / Math.sqrt(n)), z, 1e-9)
+      close(ans[2], 0.5 - simpson((x) => Math.exp(-x * x / 2) / Math.sqrt(2 * Math.PI), 0, z, 2000), 1e-6)
+      // (d) smallest n with P(|Z| < eps sqrt(n) / sigma) >= 0.95 using 1.96
+      let q = 1
+      while (eps * Math.sqrt(q) / sigma < 1.96) q++
+      expect(ans[3]).toBe(q)
+      // (e) exact binomial cdf is close to the normal approximation (within 0.03 for these n)
+      let exact = 0, pm = Math.pow(1 - bp, bn)
+      for (let j = 0; j <= bk; j++) { exact += pm; pm *= ((bn - j) / (j + 1)) * (bp / (1 - bp)) }
+      expect(Math.abs(ans[4] - exact)).toBeLessThan(0.03)
+      const bz = (bk + 0.5 - bn * bp) / Math.sqrt(bn * bp * (1 - bp))
+      close(ans[4], Phi(bz), 1e-5)
+    }
+  })
+  it('Monte Carlo: CLT tail for a skewed (exponential) population and Chebyshev bound validity (4 seeds)', () => {
+    for (const s of seeds('H', 4)) {
+      const prm = H.sample(makeRng(s))
+      const ans = answers(H.build(prm))
+      const { n, sigma, mu, m, z } = prm
+      const se = sigma / Math.sqrt(n)
+      const rng = makeRng('sim' + s)
+      const runs = 100000
+      let hit = 0, dev = 0
+      for (let r = 0; r < runs; r++) {
+        // shifted exponential with mean mu and sd sigma: mu - sigma + sigma * Exp(1)
+        let t = 0
+        for (let i = 0; i < n; i++) t += mu - sigma + sigma * -Math.log(1 - rng.next())
+        const xbar = t / n
+        if (xbar > mu + z * se) hit++
+        if (Math.abs(xbar - mu) >= m * se) dev++
+      }
+      // the CLT approximation is rough for a skewed population with small n: loose tolerance
+      close(ans[2], hit / runs, 0.04)
+      expect(dev / runs).toBeLessThanOrEqual(ans[0])
     }
   }, 60000)
 })

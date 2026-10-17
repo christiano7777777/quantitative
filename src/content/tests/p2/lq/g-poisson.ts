@@ -1,5 +1,5 @@
 // LQ-G: Poisson counts: MLE, likelihood ratio statistic, and the Neyman-Pearson test (size, power, likelihood ratio).
-// Lectures 3 (MLE), 8 (size and power), 9 (likelihood ratio test, Neyman-Pearson).
+// Lectures 4 (MLE), 8 (size and power), 9 (likelihood ratio test, Neyman-Pearson).
 import type { Rng } from '../../../../lib/rng'
 import type { LQGenerator, LQInstance } from '../../../../lib/types'
 import { dec, tex, tol2, tol4 } from '../../../shared/format'
@@ -42,7 +42,7 @@ export function build({ n, lam0, counts, c }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the maximum likelihood estimate of ' + L + '.',
-        answer: mle, tolerance: tol4, lecture: 3,
+        answer: mle, tolerance: tol4, lecture: 4,
         explanation: tex('\\ell(\\lambda)=S\\ln\\lambda-n\\lambda+\\text{const}') + ' is maximised at ' + tex('\\hat\\lambda=S/n=' + S + '/' + n) + ' = ' + dec(mle) + '.',
       },
       {
@@ -69,4 +69,4 @@ export function build({ n, lam0, counts, c }: Params): LQInstance {
   }
 }
 
-export const genG: LQGenerator = { id: 'inf-lq-g-poisson', generate: (rng) => build(sample(rng)) }
+export const genG: LQGenerator = { id: 'p2-lq-g-poisson', generate: (rng) => build(sample(rng)) }

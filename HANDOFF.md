@@ -31,7 +31,8 @@ prerequisites have tests; use Dev mode to try them.
 |---|---|
 | `sp` Stochastic Processes | done, MC bank rewritten after an external AI review |
 | `p3` Probability III | done (pilot): 55 MC, 5 LQ generators, slots `[A] [B,C] [D,E]`. **MC content not yet reviewed by a human or a second AI** |
-| `inf` Statistical Inference | done: 55 MC, 6 LQ generators, slots `[A,B] [D,E] [F,G]`. MC not yet reviewed by a human or second AI |
+| `p2` Probability II (HKU SDST2602) | done: 55 MC, 7 LQ generators, slots `[A,B,H] [D,E] [F,G]`. Converted from the old `inf` test; lecture 2 (LLN, CLT) is new. MC not yet reviewed |
+| `inf` Statistical Inference (HKU SDST3602) | done: 55 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. Exponential families, UMVUE, Cramer-Rao, decision theory, UMP tests, bootstrap. MC not yet reviewed |
 | `reg2` Regression II | done: 56 MC (6 in lecture 8), 7 LQ generators, slots `[A,B] [D,E] [F,G,H]`. MC not yet reviewed |
 | `ts2` Time Series II | done: 50 MC, 8 LQ generators, slots `[A,B] [D,E,F] [G,H,I]`. MC not yet reviewed |
 | `ml` Machine Learning | done: 55 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. Theory plus hand computation only; LQ-A part 5 is a short "read this gradient-descent procedure" item. MC not yet reviewed |
@@ -45,6 +46,12 @@ prerequisites have tests; use Dev mode to try them.
 | `mc` Monte Carlo | done: 45 MC (4 per lecture, 5 in lecture 11, below the usual 55), 7 LQ generators, slots `[A,B] [C,D,E] [F,G]`. MC not yet reviewed |
 | `algo` Algo / Quant Trading | done: 55 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]` (no coding). MC not yet reviewed |
 | `pz` Probability Puzzles | done: 52 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `exp` Experimental Design | done: 55 MC, 8 LQ generators, slots `[A,B,C] [D,E] [F,G,H]`. MC not yet reviewed |
+| `rl` Reinforcement Learning | done: 58 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `ms2` Microstructure II | done: 53 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `sc` Stochastic Calculus | done: 60 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `lt` Learning Theory | done: 50 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `it` Information Theory | done: 56 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]`. MC not yet reviewed |
 | `latex` LaTeX & Research Writing | **not built, waiting for the owner**: see "Proposal for `latex`" below |
 | the other topics (prerequisites) | not started |
 
@@ -74,6 +81,7 @@ prerequisites have tests; use Dev mode to try them.
   `selectPaper` in `src/lib/test-builder.ts` to see whether least-recently-seen should be preferred.
 
 ## Items for a human or second-AI reviewer, per topic
+- New bonus topics (`exp, rl, ms2, sc, lt, it`) and the reshaped `p2`/`inf`: each builder's list of doubtful question ids is in that session's report; the subtlest are `sc-2.2` (Holder exponents), `sc-8.1` (Girsanov sign convention), `lt-8.3` (stability constant), `ms2-1.3` (Kyle informativeness), `inf-5.3` (admissibility wording), `rl-6.4` (offline lambda-return equivalence), `exp-8.1` (pooled variance in the CI).
 - `inf`: (1) `inf-11.1` assumes the MLE is taken from the grouped counts; with MLE from ungrouped data the df lie between k-1-m and k-1
   (Chernoff-Lehmann). (2) `inf-4.5` (MSE-optimal divisor n+1 for normal data) and `inf-6.4` (Cramer-Rao fails for U(0,theta)) are the
   subtlest statements. (3) The LQ t table (`e-twosample.ts`, df 8-11) is printed in the question; the test checks it by integrating the t density.
