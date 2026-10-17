@@ -1,0 +1,1762 @@
+[
+ {
+  "id": "dl-1.1",
+  "lecture": 1,
+  "stem": "What is the role of a nonlinear activation function between the layers of an MLP?",
+  "correct": [
+   "Without it, stacked layers collapse into one linear map.",
+   "It lets the network represent non-linear functions."
+  ],
+  "distractors": [
+   {
+    "text": "It speeds up matrix multiplication on a GPU.",
+    "misconception": "confuses the role with hardware efficiency"
+   },
+   {
+    "text": "It guarantees that the loss surface is convex.",
+    "misconception": "nonlinearities make the loss non-convex"
+   },
+   {
+    "text": "It makes every hidden unit output a probability.",
+    "misconception": "only some activations are bounded in (0,1)"
+   },
+   {
+    "text": "It removes the need for biases in every layer.",
+    "misconception": "biases and activations do different jobs"
+   },
+   {
+    "text": "It keeps the number of parameters constant across depths.",
+    "misconception": "the activation has no parameters"
+   }
+  ],
+  "explanation": "Composing affine maps gives an affine map, so only the nonlinearity makes depth useful."
+ },
+ {
+  "id": "dl-1.2",
+  "lecture": 1,
+  "stem": "What does the universal approximation theorem say about a feed-forward network with one hidden layer?",
+  "correct": [
+   "With enough units it approximates any continuous function on a compact set.",
+   "Representability, not learnability."
+  ],
+  "distractors": [
+   {
+    "text": "Training by gradient descent will always find the approximating weights.",
+    "misconception": "existence is not learnability"
+   },
+   {
+    "text": "A small fixed number of units suffices for every function.",
+    "misconception": "the required width may be enormous"
+   },
+   {
+    "text": "It generalises to unseen data without any regularisation.",
+    "misconception": "approximation is not generalisation"
+   },
+   {
+    "text": "Deeper networks are mathematically impossible to improve on it.",
+    "misconception": "depth can be exponentially more efficient"
+   },
+   {
+    "text": "It applies only to networks with a linear output activation.",
+    "misconception": "invents a restriction"
+   }
+  ],
+  "explanation": "The theorem is about existence of weights, not about how many units are needed, whether training finds them, or generalisation."
+ },
+ {
+  "id": "dl-1.3",
+  "lecture": 1,
+  "stem": "Why is the ReLU activation $\\max(0,z)$ popular in hidden layers?",
+  "correct": [
+   "Gradient 1 for positive inputs.",
+   "It is cheap and sparse."
+  ],
+  "distractors": [
+   {
+    "text": "Its output is bounded between 0 and 1.",
+    "misconception": "ReLU is unbounded above"
+   },
+   {
+    "text": "Its derivative is nonzero everywhere.",
+    "misconception": "the derivative is zero for negative inputs"
+   },
+   {
+    "text": "It is smooth at the origin.",
+    "misconception": "it has a kink at zero"
+   },
+   {
+    "text": "It always has zero-mean outputs.",
+    "misconception": "outputs are non-negative"
+   },
+   {
+    "text": "It can never leave a unit permanently inactive.",
+    "misconception": "a unit stuck in the negative region can die"
+   }
+  ],
+  "explanation": "Dead ReLUs, with zero gradient for all inputs, are the main drawback; leaky variants keep a small slope."
+ },
+ {
+  "id": "dl-1.4",
+  "lecture": 1,
+  "stem": "Why is the sigmoid a natural output activation for binary classification with cross-entropy loss?",
+  "correct": [
+   "It maps a score to a class probability in $(0,1)$.",
+   "With cross-entropy the gradient is $\\hat y-y$."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the network output exactly 0 or 1.",
+    "misconception": "the output is a probability, not a hard label"
+   },
+   {
+    "text": "It prevents overfitting by bounding the weights.",
+    "misconception": "bounding outputs does not bound weights"
+   },
+   {
+    "text": "It makes the loss surface convex in all the weights.",
+    "misconception": "only for a single linear layer"
+   },
+   {
+    "text": "It is preferred over softmax for ten or more classes.",
+    "misconception": "softmax is used for several classes"
+   },
+   {
+    "text": "It outputs a negative score for the negative class.",
+    "misconception": "outputs lie in $(0,1)$"
+   }
+  ],
+  "explanation": "Softmax generalises the sigmoid to several classes; both pair naturally with cross-entropy."
+ },
+ {
+  "id": "dl-1.5",
+  "lecture": 1,
+  "stem": "How does the number of parameters in a fully connected layer depend on its sizes?",
+  "correct": [
+   "Inputs times outputs, plus biases.",
+   "A product of adjacent widths."
+  ],
+  "distractors": [
+   {
+    "text": "It grows only with the number of outputs.",
+    "misconception": "ignores the input size"
+   },
+   {
+    "text": "It depends on the batch size used in training.",
+    "misconception": "parameters do not depend on batch size"
+   },
+   {
+    "text": "It equals the number of training examples.",
+    "misconception": "confuses parameters with data"
+   },
+   {
+    "text": "It is the sum of inputs and outputs.",
+    "misconception": "a weight connects each pair, giving a product"
+   },
+   {
+    "text": "It is independent of the layer widths.",
+    "misconception": "widths set the shape of the weight matrix"
+   }
+  ],
+  "explanation": "Widening two adjacent layers by a factor of 2 multiplies the weights between them by 4."
+ },
+ {
+  "id": "dl-2.1",
+  "lecture": 2,
+  "stem": "What is backpropagation?",
+  "correct": [
+   "The chain rule giving every weight's gradient.",
+   "A backward sweep reusing derivatives."
+  ],
+  "distractors": [
+   {
+    "text": "A method for choosing the learning rate.",
+    "misconception": "it computes gradients, not step sizes"
+   },
+   {
+    "text": "A way of initialising the weights.",
+    "misconception": "it needs weights to already exist"
+   },
+   {
+    "text": "An optimiser that updates weights without gradients.",
+    "misconception": "it supplies the gradients"
+   },
+   {
+    "text": "A technique that removes units during training.",
+    "misconception": "describes dropout"
+   },
+   {
+    "text": "A procedure that guarantees reaching the global minimum.",
+    "misconception": "it gives gradients only, not convergence"
+   }
+  ],
+  "explanation": "One forward pass stores activations; one backward pass then yields all gradients at a cost comparable to the forward pass."
+ },
+ {
+  "id": "dl-2.2",
+  "lecture": 2,
+  "stem": "Why does backpropagation run backwards rather than forwards through the graph?",
+  "correct": [
+   "One scalar loss, so one sweep gives all gradients.",
+   "Reverse mode suits many parameters."
+  ],
+  "distractors": [
+   {
+    "text": "Forward mode would give wrong gradients.",
+    "misconception": "forward mode is correct but costlier here"
+   },
+   {
+    "text": "Activations can only be computed from the output side.",
+    "misconception": "activations are computed forwards"
+   },
+   {
+    "text": "It avoids needing to store any intermediate values.",
+    "misconception": "it requires stored activations"
+   },
+   {
+    "text": "It makes the gradients independent of the data.",
+    "misconception": "gradients depend on the data"
+   },
+   {
+    "text": "It reduces the number of parameters.",
+    "misconception": "it does not change the model"
+   }
+  ],
+  "explanation": "Forward mode costs one pass per parameter; reverse mode costs one pass in total for a scalar loss."
+ },
+ {
+  "id": "dl-2.3",
+  "lecture": 2,
+  "stem": "In the chain rule for a hidden unit's weight, which factors appear?",
+  "correct": [
+   "Upstream gradient, local derivative, input.",
+   "Error signal times incoming signal."
+  ],
+  "distractors": [
+   {
+    "text": "Only the weight itself.",
+    "misconception": "the weight's value alone does not give its gradient"
+   },
+   {
+    "text": "The learning rate.",
+    "misconception": "the learning rate enters the update, not the gradient"
+   },
+   {
+    "text": "The labels of other training examples.",
+    "misconception": "the loss gradient involves this example's quantities"
+   },
+   {
+    "text": "The sum of all weights in the network.",
+    "misconception": "unrelated to the local chain"
+   },
+   {
+    "text": "Only the activation derivative.",
+    "misconception": "omits the upstream and input factors"
+   }
+  ],
+  "explanation": "A zero activation derivative (a saturated sigmoid or inactive ReLU) cuts the gradient off."
+ },
+ {
+  "id": "dl-2.4",
+  "lecture": 2,
+  "stem": "Why do saturating activations such as the sigmoid make gradients vanish in deep networks?",
+  "correct": [
+   "Small derivatives compound across many layers.",
+   "The backward signal keeps shrinking."
+  ],
+  "distractors": [
+   {
+    "text": "The sigmoid makes the forward activations explode.",
+    "misconception": "it bounds forward activations"
+   },
+   {
+    "text": "The sigmoid has no derivative.",
+    "misconception": "it is differentiable everywhere"
+   },
+   {
+    "text": "Backpropagation only works for one layer.",
+    "misconception": "it works for any depth"
+   },
+   {
+    "text": "Gradients vanish only when the learning rate is zero.",
+    "misconception": "vanishing comes from the factors, not the step size"
+   },
+   {
+    "text": "Vanishing occurs only in the output layer.",
+    "misconception": "it is most severe in early layers"
+   }
+  ],
+  "explanation": "ReLU, residual connections and careful initialisation all help keep the backward signal from decaying."
+ },
+ {
+  "id": "dl-2.5",
+  "lecture": 2,
+  "stem": "What is the purpose of a gradient check using finite differences?",
+  "correct": [
+   "To test backpropagation numerically.",
+   "To catch gradient bugs."
+  ],
+  "distractors": [
+   {
+    "text": "To speed up training by replacing backprop.",
+    "misconception": "finite differences are far slower"
+   },
+   {
+    "text": "To choose the best learning rate.",
+    "misconception": "it does not tune hyperparameters"
+   },
+   {
+    "text": "To make the loss convex.",
+    "misconception": "it does not change the loss"
+   },
+   {
+    "text": "To remove vanishing gradients.",
+    "misconception": "it only verifies correctness"
+   },
+   {
+    "text": "To compute exact gradients at no extra cost.",
+    "misconception": "it costs two evaluations per parameter and is approximate"
+   }
+  ],
+  "explanation": "It is used for debugging only, with small networks, because it needs two forward passes per parameter."
+ },
+ {
+  "id": "dl-3.1",
+  "lecture": 3,
+  "stem": "What is the main difference between stochastic gradient descent and full-batch gradient descent?",
+  "correct": [
+   "SGD uses a mini-batch: cheap but noisy.",
+   "Full batch uses all data per step."
+  ],
+  "distractors": [
+   {
+    "text": "SGD uses a different loss function.",
+    "misconception": "the loss is the same, only its estimate differs"
+   },
+   {
+    "text": "SGD is guaranteed to reach the global minimum.",
+    "misconception": "no such guarantee for non-convex losses"
+   },
+   {
+    "text": "Full-batch descent has noisier steps.",
+    "misconception": "the noise is in the mini-batch estimate"
+   },
+   {
+    "text": "SGD ignores the gradient direction.",
+    "misconception": "it still follows a gradient estimate"
+   },
+   {
+    "text": "Full-batch descent needs no learning rate.",
+    "misconception": "it needs one as well"
+   }
+  ],
+  "explanation": "The noise can help escape sharp minima and saddle points, and it scales cost per step with the batch size, not the dataset size."
+ },
+ {
+  "id": "dl-3.2",
+  "lecture": 3,
+  "stem": "What does momentum do in gradient descent?",
+  "correct": [
+   "It averages past gradients, smoothing updates.",
+   "It damps oscillation."
+  ],
+  "distractors": [
+   {
+    "text": "It increases the learning rate each step without limit.",
+    "misconception": "momentum does not change the learning rate"
+   },
+   {
+    "text": "It makes updates depend only on the current gradient.",
+    "misconception": "it uses past gradients as well"
+   },
+   {
+    "text": "It replaces the gradient with the loss value.",
+    "misconception": "the gradient is still used"
+   },
+   {
+    "text": "It guarantees convergence in one step.",
+    "misconception": "it only accelerates progress"
+   },
+   {
+    "text": "It removes the need for a learning rate.",
+    "misconception": "the step size still matters"
+   }
+  ],
+  "explanation": "With coefficient $\\beta$ the effective step along a constant gradient is amplified by about $1/(1-\\beta)$."
+ },
+ {
+  "id": "dl-3.3",
+  "lecture": 3,
+  "stem": "What distinguishes Adam from plain SGD?",
+  "correct": [
+   "It keeps running averages of the gradient and its square.",
+   "Each coordinate gets its own step size."
+  ],
+  "distractors": [
+   {
+    "text": "It uses the Hessian matrix exactly.",
+    "misconception": "Adam uses only first-order information"
+   },
+   {
+    "text": "It uses a single global step size for all parameters.",
+    "misconception": "the point is per-parameter scaling"
+   },
+   {
+    "text": "It needs no hyperparameters.",
+    "misconception": "it has $\\beta_1,\\beta_2,\\varepsilon$ and a learning rate"
+   },
+   {
+    "text": "It always converges faster than SGD in generalisation terms.",
+    "misconception": "speed of training does not imply better generalisation"
+   },
+   {
+    "text": "It never needs a learning-rate schedule.",
+    "misconception": "schedules often still help"
+   }
+  ],
+  "explanation": "Bias correction compensates for the moment estimates starting at zero, which matters in the first steps."
+ },
+ {
+  "id": "dl-3.4",
+  "lecture": 3,
+  "stem": "Why use a learning-rate schedule that decreases over training?",
+  "correct": [
+   "Big early steps, small late steps that settle.",
+   "A decaying step averages out noise."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the loss convex.",
+    "misconception": "the loss does not change"
+   },
+   {
+    "text": "It increases the number of parameters.",
+    "misconception": "schedules do not touch the model size"
+   },
+   {
+    "text": "It is needed only for full-batch descent.",
+    "misconception": "with SGD noise it matters more"
+   },
+   {
+    "text": "It guarantees zero training error.",
+    "misconception": "no such guarantee"
+   },
+   {
+    "text": "It removes the need for early stopping.",
+    "misconception": "the two address different issues"
+   }
+  ],
+  "explanation": "Warm-up (a short increase at the start) is also common, especially with Adam and transformers."
+ },
+ {
+  "id": "dl-3.5",
+  "lecture": 3,
+  "stem": "What happens if the learning rate is too large?",
+  "correct": [
+   "Updates overshoot and may diverge.",
+   "Steps jump across the valley."
+  ],
+  "distractors": [
+   {
+    "text": "Training always converges, only more slowly.",
+    "misconception": "too large a step can diverge"
+   },
+   {
+    "text": "The gradients become exactly zero.",
+    "misconception": "they do not vanish because of the step size"
+   },
+   {
+    "text": "The model underfits but is stable.",
+    "misconception": "instability is the typical symptom"
+   },
+   {
+    "text": "The number of parameters shrinks.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "It acts exactly like weight decay.",
+    "misconception": "the effects differ"
+   }
+  ],
+  "explanation": "A learning-rate sweep, with loss plotted against rate, is a standard way to find a workable range."
+ },
+ {
+  "id": "dl-4.1",
+  "lecture": 4,
+  "stem": "What does L2 weight decay do in training?",
+  "correct": [
+   "It penalises large weights.",
+   "Weights shrink towards zero each step."
+  ],
+  "distractors": [
+   {
+    "text": "It sets some weights exactly to zero.",
+    "misconception": "describes L1 sparsity"
+   },
+   {
+    "text": "It increases the capacity of the model.",
+    "misconception": "it restricts capacity"
+   },
+   {
+    "text": "It changes the labels.",
+    "misconception": "labels are untouched"
+   },
+   {
+    "text": "It only affects the biases.",
+    "misconception": "usually applied to weights"
+   },
+   {
+    "text": "It speeds up the forward pass.",
+    "misconception": "no effect on speed"
+   }
+  ],
+  "explanation": "Each step multiplies the weight by $(1-\\eta\\lambda)$ before the data-gradient update."
+ },
+ {
+  "id": "dl-4.2",
+  "lecture": 4,
+  "stem": "How does dropout regularise a network?",
+  "correct": [
+   "Zeroing units stops co-adaptation, like averaging thinned networks.",
+   "Noise prevents reliance on one unit."
+  ],
+  "distractors": [
+   {
+    "text": "It prunes the network permanently after training.",
+    "misconception": "dropout is only active during training"
+   },
+   {
+    "text": "It increases the effective number of training examples exactly.",
+    "misconception": "it is not data augmentation"
+   },
+   {
+    "text": "It is applied at test time with the same random masks.",
+    "misconception": "test time uses all units, with scaling"
+   },
+   {
+    "text": "It makes the network deterministic during training.",
+    "misconception": "training is stochastic"
+   },
+   {
+    "text": "It removes the need for a validation set.",
+    "misconception": "validation is still needed"
+   }
+  ],
+  "explanation": "Inverted dropout divides kept activations by $1-p$ in training so no scaling is needed at test time."
+ },
+ {
+  "id": "dl-4.3",
+  "lecture": 4,
+  "stem": "How does early stopping act as a regulariser?",
+  "correct": [
+   "It halts when validation loss stops improving.",
+   "Fewer steps keep weights near the start."
+  ],
+  "distractors": [
+   {
+    "text": "It reduces the training loss to its minimum.",
+    "misconception": "it stops before that point"
+   },
+   {
+    "text": "It uses the test set to decide when to stop.",
+    "misconception": "the validation set must be used"
+   },
+   {
+    "text": "It increases the number of parameters.",
+    "misconception": "no change in parameters"
+   },
+   {
+    "text": "It is equivalent to a larger learning rate.",
+    "misconception": "different mechanisms"
+   },
+   {
+    "text": "It works only for linear models.",
+    "misconception": "it is widely used for neural networks"
+   }
+  ],
+  "explanation": "Using the test set to stop would leak information and bias the final evaluation."
+ },
+ {
+  "id": "dl-4.4",
+  "lecture": 4,
+  "stem": "Why is it a mistake to tune hyperparameters on the test set?",
+  "correct": [
+   "The test score becomes optimistic.",
+   "Selection leaks held-out information."
+  ],
+  "distractors": [
+   {
+    "text": "The test set is too small to give any information.",
+    "misconception": "size is not the reason"
+   },
+   {
+    "text": "It makes the model underfit.",
+    "misconception": "the bias is in the evaluation, not in fitting"
+   },
+   {
+    "text": "Tuning is only allowed on the training set.",
+    "misconception": "a separate validation set is the right place"
+   },
+   {
+    "text": "It increases the number of parameters.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "It guarantees a worse test score.",
+    "misconception": "it makes the score look better than truth"
+   }
+  ],
+  "explanation": "Use training for fitting, validation for choices, and test once at the end."
+ },
+ {
+  "id": "dl-4.5",
+  "lecture": 4,
+  "stem": "What is the main effect of data augmentation?",
+  "correct": [
+   "Label-preserving transformations enlarge the training set.",
+   "It teaches invariances."
+  ],
+  "distractors": [
+   {
+    "text": "It reduces the number of parameters.",
+    "misconception": "the model is unchanged"
+   },
+   {
+    "text": "It guarantees zero validation error.",
+    "misconception": "no such guarantee"
+   },
+   {
+    "text": "It changes the test labels.",
+    "misconception": "augmentations apply to training data"
+   },
+   {
+    "text": "It replaces the need for regularisation entirely.",
+    "misconception": "it complements other methods"
+   },
+   {
+    "text": "It speeds up each epoch.",
+    "misconception": "it usually adds cost"
+   }
+  ],
+  "explanation": "Augmentations must preserve the label; flipping a digit '6' vertically may not."
+ },
+ {
+  "id": "dl-5.1",
+  "lecture": 5,
+  "stem": "Why does weight initialisation matter in deep networks?",
+  "correct": [
+   "Signals shrink or blow up with depth.",
+   "Good scaling keeps variance roughly constant."
+  ],
+  "distractors": [
+   {
+    "text": "It only affects the final accuracy, not the training dynamics.",
+    "misconception": "it strongly affects early training"
+   },
+   {
+    "text": "Any constant value works equally well.",
+    "misconception": "identical weights break symmetry badly"
+   },
+   {
+    "text": "Initial weights are irrelevant once training starts.",
+    "misconception": "the starting point shapes the optimisation path"
+   },
+   {
+    "text": "It determines the number of layers.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "Zero initialisation is ideal for hidden layers.",
+    "misconception": "all units would receive identical gradients"
+   }
+  ],
+  "explanation": "Initialising all weights to zero makes units in a layer identical forever (symmetry), so they must be random."
+ },
+ {
+  "id": "dl-5.2",
+  "lecture": 5,
+  "stem": "What is the idea behind Xavier (Glorot) initialisation?",
+  "correct": [
+   "Variance near $2/(n_{\\text{in}}+n_{\\text{out}})$.",
+   "It balances forward and backward signals."
+  ],
+  "distractors": [
+   {
+    "text": "Set all weights equal to the layer width.",
+    "misconception": "a constant does not preserve variance"
+   },
+   {
+    "text": "Use huge weights to speed up training.",
+    "misconception": "large weights can saturate or explode"
+   },
+   {
+    "text": "It is designed specifically for ReLU units.",
+    "misconception": "He initialisation targets ReLU"
+   },
+   {
+    "text": "It sets the biases to large values.",
+    "misconception": "it concerns the weight variance"
+   },
+   {
+    "text": "It makes the weights integer valued.",
+    "misconception": "weights are real numbers"
+   }
+  ],
+  "explanation": "He initialisation uses $2/n_{\\text{in}}$ because ReLU zeroes half of its inputs."
+ },
+ {
+  "id": "dl-5.3",
+  "lecture": 5,
+  "stem": "What does batch normalisation compute during training?",
+  "correct": [
+   "It standardises each feature by the batch mean and variance.",
+   "It re-centres and re-scales activations per batch."
+  ],
+  "distractors": [
+   {
+    "text": "It normalises each example across all its features using a fixed constant.",
+    "misconception": "describes layer normalisation roughly, not batch normalisation"
+   },
+   {
+    "text": "It applies only at test time.",
+    "misconception": "it is applied in training and uses running statistics at test time"
+   },
+   {
+    "text": "It removes all learnable parameters.",
+    "misconception": "it adds a scale and shift"
+   },
+   {
+    "text": "It makes the batch size irrelevant.",
+    "misconception": "small batches give noisy statistics"
+   },
+   {
+    "text": "It rescales the labels.",
+    "misconception": "labels are not touched"
+   }
+  ],
+  "explanation": "At test time running averages of the batch statistics replace the mini-batch values."
+ },
+ {
+  "id": "dl-5.4",
+  "lecture": 5,
+  "stem": "How does layer normalisation differ from batch normalisation?",
+  "correct": [
+   "It normalises over one example's features.",
+   "It does not depend on the batch."
+  ],
+  "distractors": [
+   {
+    "text": "It normalises over the batch dimension.",
+    "misconception": "that is batch normalisation"
+   },
+   {
+    "text": "It needs running averages for inference.",
+    "misconception": "per-example statistics need no running averages"
+   },
+   {
+    "text": "It has no learnable parameters.",
+    "misconception": "it has a gain and a bias"
+   },
+   {
+    "text": "It works only for images.",
+    "misconception": "it is common in sequence models"
+   },
+   {
+    "text": "It changes the labels.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Because the statistics are per example, training and inference behave identically."
+ },
+ {
+  "id": "dl-5.5",
+  "lecture": 5,
+  "stem": "If a layer has $n$ inputs with unit variance, independent weights of variance $\\sigma^2$ and no bias, what is the variance of a pre-activation?",
+  "correct": [
+   "It equals $n\\sigma^2$.",
+   "Fan-in times weight variance."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $\\sigma^2$ regardless of $n$.",
+    "misconception": "ignores the sum over inputs"
+   },
+   {
+    "text": "It equals $n^2\\sigma^2$.",
+    "misconception": "variance of a sum of independent terms adds, it does not square"
+   },
+   {
+    "text": "It equals $\\sigma^2/n$.",
+    "misconception": "inverts the dependence on fan-in"
+   },
+   {
+    "text": "It is zero.",
+    "misconception": "the inputs and weights are nonzero"
+   },
+   {
+    "text": "It depends only on the biases.",
+    "misconception": "there are no biases here"
+   }
+  ],
+  "explanation": "This calculation underlies the initialisation rules: they set $\\sigma^2$ so that the variance does not grow or shrink with depth."
+ },
+ {
+  "id": "dl-6.1",
+  "lecture": 6,
+  "stem": "Why do convolutional layers suit image data?",
+  "correct": [
+   "Shared weights and local connectivity.",
+   "One kernel detects a feature everywhere."
+  ],
+  "distractors": [
+   {
+    "text": "They connect every pixel to every output unit.",
+    "misconception": "describes a fully connected layer"
+   },
+   {
+    "text": "Their parameter count grows with the image size.",
+    "misconception": "the kernel size is independent of the image size"
+   },
+   {
+    "text": "They are invariant to any rotation by design.",
+    "misconception": "convolution gives equivariance to shifts, not rotations"
+   },
+   {
+    "text": "They need no training.",
+    "misconception": "kernels are learned"
+   },
+   {
+    "text": "They can only process grey-scale images.",
+    "misconception": "channels handle colour"
+   }
+  ],
+  "explanation": "Pooling and strides then add some invariance to small shifts."
+ },
+ {
+  "id": "dl-6.2",
+  "lecture": 6,
+  "stem": "What does max pooling do?",
+  "correct": [
+   "It keeps the largest value in each window.",
+   "It cuts spatial size and adds shift invariance."
+  ],
+  "distractors": [
+   {
+    "text": "It adds learnable weights to each window.",
+    "misconception": "pooling has no parameters"
+   },
+   {
+    "text": "It averages the values in each window.",
+    "misconception": "describes average pooling"
+   },
+   {
+    "text": "It increases the resolution of the feature map.",
+    "misconception": "it reduces resolution"
+   },
+   {
+    "text": "It changes the number of channels.",
+    "misconception": "it acts per channel"
+   },
+   {
+    "text": "It is differentiable with respect to every input in the window.",
+    "misconception": "only the maximal element receives gradient"
+   }
+  ],
+  "explanation": "In backpropagation the gradient flows to the position that attained the maximum."
+ },
+ {
+  "id": "dl-6.3",
+  "lecture": 6,
+  "stem": "What is the receptive field of a unit in a convolutional network?",
+  "correct": [
+   "The input region influencing the unit.",
+   "Its dependency cone."
+  ],
+  "distractors": [
+   {
+    "text": "The number of channels in its layer.",
+    "misconception": "confuses field size with width"
+   },
+   {
+    "text": "The batch of images it sees.",
+    "misconception": "confuses with the mini-batch"
+   },
+   {
+    "text": "The learning rate applied to it.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The size of its kernel only.",
+    "misconception": "ignores stacking, strides and dilation"
+   },
+   {
+    "text": "The number of its parameters.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Stacking small kernels grows the receptive field cheaply; strides and dilations grow it faster."
+ },
+ {
+  "id": "dl-6.4",
+  "lecture": 6,
+  "stem": "What is the effect of stride greater than one in a convolution?",
+  "correct": [
+   "The kernel jumps several pixels.",
+   "It downsamples."
+  ],
+  "distractors": [
+   {
+    "text": "It increases the number of parameters.",
+    "misconception": "the kernel size sets the parameters"
+   },
+   {
+    "text": "It enlarges the output size.",
+    "misconception": "larger stride shrinks the output"
+   },
+   {
+    "text": "It makes the kernel larger.",
+    "misconception": "kernel size is separate"
+   },
+   {
+    "text": "It flips the kernel.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "It removes padding.",
+    "misconception": "padding is a separate option"
+   }
+  ],
+  "explanation": "The output width is $\\lfloor (W+2P-K)/S\\rfloor+1$."
+ },
+ {
+  "id": "dl-6.5",
+  "lecture": 6,
+  "stem": "What is the role of padding in a convolution?",
+  "correct": [
+   "Borders let the output keep its size.",
+   "Zero padding preserves size."
+  ],
+  "distractors": [
+   {
+    "text": "It increases the receptive field of the kernel.",
+    "misconception": "padding does not change the kernel's reach"
+   },
+   {
+    "text": "It removes the bias.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "It always shrinks the output.",
+    "misconception": "padding can keep or enlarge it"
+   },
+   {
+    "text": "It adds parameters.",
+    "misconception": "padding values are fixed, not learned"
+   },
+   {
+    "text": "It sets the stride to one.",
+    "misconception": "the two are independent"
+   }
+  ],
+  "explanation": "Without padding, each layer trims the border, and information at the edges is under-used."
+ },
+ {
+  "id": "dl-7.1",
+  "lecture": 7,
+  "stem": "What problem do residual (skip) connections address?",
+  "correct": [
+   "Blocks learn a correction, easing deep optimisation.",
+   "The identity path carries gradients."
+  ],
+  "distractors": [
+   {
+    "text": "They reduce the number of parameters of each layer to zero.",
+    "misconception": "blocks still have their layers"
+   },
+   {
+    "text": "They make the network linear.",
+    "misconception": "the residual branch is nonlinear"
+   },
+   {
+    "text": "They prevent overfitting completely.",
+    "misconception": "they ease optimisation, not generalisation"
+   },
+   {
+    "text": "They only work with sigmoid activations.",
+    "misconception": "they are used with ReLU"
+   },
+   {
+    "text": "They remove the need for normalisation.",
+    "misconception": "ResNets still use batch normalisation"
+   }
+  ],
+  "explanation": "A block computes $x+F(x)$, so if the best map is near identity, $F$ only needs to be near zero."
+ },
+ {
+  "id": "dl-7.2",
+  "lecture": 7,
+  "stem": "Why can the degradation problem appear in plain very deep networks?",
+  "correct": [
+   "Deeper plain nets can show higher training error.",
+   "Optimisation fails to copy the shallow model."
+  ],
+  "distractors": [
+   {
+    "text": "Deeper networks always overfit more.",
+    "misconception": "degradation is worse training error, not overfitting"
+   },
+   {
+    "text": "Deeper networks have fewer parameters.",
+    "misconception": "depth adds parameters"
+   },
+   {
+    "text": "Deeper networks cannot represent shallow ones.",
+    "misconception": "extra layers could be identity"
+   },
+   {
+    "text": "It occurs only when the test set is too small.",
+    "misconception": "the symptom is on training data"
+   },
+   {
+    "text": "It is caused by data augmentation.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Residual learning was proposed to fix exactly this observation."
+ },
+ {
+  "id": "dl-7.3",
+  "lecture": 7,
+  "stem": "How does a bottleneck block (1×1, 3×3, 1×1 convolutions) save computation?",
+  "correct": [
+   "A 1×1 convolution first cuts channels.",
+   "Spatial work runs on fewer channels."
+  ],
+  "distractors": [
+   {
+    "text": "It removes the spatial convolution entirely.",
+    "misconception": "a 3×3 convolution is still used"
+   },
+   {
+    "text": "It increases the number of channels in the 3×3 layer.",
+    "misconception": "the 3×3 layer sees fewer channels"
+   },
+   {
+    "text": "It uses larger kernels.",
+    "misconception": "kernels stay small"
+   },
+   {
+    "text": "It removes the skip connection.",
+    "misconception": "the skip is kept"
+   },
+   {
+    "text": "It applies pooling.",
+    "misconception": "no pooling is involved"
+   }
+  ],
+  "explanation": "A 1×1 convolution mixes channels at each position and has $C_{\\text{in}}C_{\\text{out}}$ weights."
+ },
+ {
+  "id": "dl-7.4",
+  "lecture": 7,
+  "stem": "In a residual block, what must hold for the skip connection to be a plain identity addition?",
+  "correct": [
+   "Input and branch shapes must match.",
+   "Otherwise the shortcut needs a projection."
+  ],
+  "distractors": [
+   {
+    "text": "The block must use dropout.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The block must have no nonlinearity.",
+    "misconception": "the branch has nonlinearities"
+   },
+   {
+    "text": "The input must be a vector, not an image.",
+    "misconception": "any matching tensor works"
+   },
+   {
+    "text": "The learning rate must be zero.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The weights must be shared with the next block.",
+    "misconception": "blocks have separate weights"
+   }
+  ],
+  "explanation": "When dimensions change, a 1×1 convolution on the shortcut matches shapes."
+ },
+ {
+  "id": "dl-7.5",
+  "lecture": 7,
+  "stem": "Why are parameter counts and FLOPs different measures of cost for a CNN?",
+  "correct": [
+   "Early layers: few parameters, many operations.",
+   "FLOPs depend on positions visited."
+  ],
+  "distractors": [
+   {
+    "text": "They are always proportional.",
+    "misconception": "weight sharing breaks proportionality"
+   },
+   {
+    "text": "FLOPs depend only on the number of layers.",
+    "misconception": "they depend on sizes and resolution"
+   },
+   {
+    "text": "Parameters depend on the image size.",
+    "misconception": "convolutional parameters do not"
+   },
+   {
+    "text": "FLOPs are zero for convolutions.",
+    "misconception": "convolutions dominate the compute"
+   },
+   {
+    "text": "Parameters count activations.",
+    "misconception": "activations are not parameters"
+   }
+  ],
+  "explanation": "Fully connected layers do the opposite: many parameters, but each is used once per example."
+ },
+ {
+  "id": "dl-8.1",
+  "lecture": 8,
+  "stem": "What is the key idea of a recurrent neural network?",
+  "correct": [
+   "A hidden state updated from the last state and the input.",
+   "One cell reused at every step."
+  ],
+  "distractors": [
+   {
+    "text": "It processes all positions independently in parallel.",
+    "misconception": "it is sequential in the state"
+   },
+   {
+    "text": "It uses a different set of weights at each time step.",
+    "misconception": "weights are shared across steps"
+   },
+   {
+    "text": "It has no hidden state.",
+    "misconception": "the state is the memory"
+   },
+   {
+    "text": "It works only on fixed-length inputs.",
+    "misconception": "it can handle variable lengths"
+   },
+   {
+    "text": "It removes the need for backpropagation.",
+    "misconception": "training uses backprop through time"
+   }
+  ],
+  "explanation": "Backpropagation through time unrolls the recurrence into a deep network with tied weights."
+ },
+ {
+  "id": "dl-8.2",
+  "lecture": 8,
+  "stem": "Why do vanilla RNNs suffer from vanishing or exploding gradients?",
+  "correct": [
+   "A product of many Jacobians.",
+   "Repeated multiplication shrinks or blows up the signal."
+  ],
+  "distractors": [
+   {
+    "text": "Because the input sequence is too short.",
+    "misconception": "long sequences cause the problem"
+   },
+   {
+    "text": "Because they have too many output units.",
+    "misconception": "the issue is depth in time"
+   },
+   {
+    "text": "Because the loss is not differentiable.",
+    "misconception": "the loss is differentiable"
+   },
+   {
+    "text": "Because they have no weights.",
+    "misconception": "they have recurrent weights"
+   },
+   {
+    "text": "Because the learning rate is always zero.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Gradient clipping handles explosion; gated architectures address vanishing."
+ },
+ {
+  "id": "dl-8.3",
+  "lecture": 8,
+  "stem": "How does the LSTM cell help preserve information over long spans?",
+  "correct": [
+   "An additive cell update passes gradients with little decay.",
+   "Forget gates near one keep the state."
+  ],
+  "distractors": [
+   {
+    "text": "It deletes the hidden state at every step.",
+    "misconception": "gating chooses what to keep"
+   },
+   {
+    "text": "It removes all nonlinearities.",
+    "misconception": "gates use sigmoids and tanh"
+   },
+   {
+    "text": "It uses a different weight at each time step.",
+    "misconception": "weights are still shared"
+   },
+   {
+    "text": "It processes the sequence in reverse only.",
+    "misconception": "direction is unrelated"
+   },
+   {
+    "text": "It guarantees the gradient never vanishes.",
+    "misconception": "it mitigates but does not eliminate decay"
+   }
+  ],
+  "explanation": "The cell state acts like a conveyor belt modified by input and forget gates."
+ },
+ {
+  "id": "dl-8.4",
+  "lecture": 8,
+  "stem": "How does a GRU differ from an LSTM?",
+  "correct": [
+   "It merges cell and hidden states.",
+   "A simpler gated unit."
+  ],
+  "distractors": [
+   {
+    "text": "It has no gates at all.",
+    "misconception": "gates are its core"
+   },
+   {
+    "text": "It has three gates and a separate cell state.",
+    "misconception": "that describes the LSTM"
+   },
+   {
+    "text": "It is not recurrent.",
+    "misconception": "it is a recurrent unit"
+   },
+   {
+    "text": "It requires attention.",
+    "misconception": "attention is separate"
+   },
+   {
+    "text": "It always has more parameters than an LSTM.",
+    "misconception": "it has fewer"
+   }
+  ],
+  "explanation": "The update gate interpolates between the previous state and a candidate state."
+ },
+ {
+  "id": "dl-8.5",
+  "lecture": 8,
+  "stem": "What does bidirectional processing add to a recurrent model?",
+  "correct": [
+   "Each position sees both past and future context.",
+   "Forward and backward RNNs are combined."
+  ],
+  "distractors": [
+   {
+    "text": "It halves the number of parameters.",
+    "misconception": "it roughly doubles them"
+   },
+   {
+    "text": "It allows predicting future values from future inputs without leakage concerns.",
+    "misconception": "using the future is invalid when forecasting it"
+   },
+   {
+    "text": "It removes vanishing gradients.",
+    "misconception": "the problem remains"
+   },
+   {
+    "text": "It makes the sequence shorter.",
+    "misconception": "the length is unchanged"
+   },
+   {
+    "text": "It works only for images.",
+    "misconception": "it is used for text and speech"
+   }
+  ],
+  "explanation": "It suits tasks where the whole sequence is available, such as tagging, not online forecasting."
+ },
+ {
+  "id": "dl-9.1",
+  "lecture": 9,
+  "stem": "What does self-attention compute for each token?",
+  "correct": [
+   "A weighted average of values with softmax weights.",
+   "A content-based mixture of positions."
+  ],
+  "distractors": [
+   {
+    "text": "A fixed average of neighbouring tokens.",
+    "misconception": "weights are data dependent, not fixed"
+   },
+   {
+    "text": "A convolution with a fixed kernel.",
+    "misconception": "attention weights come from the data"
+   },
+   {
+    "text": "A copy of the previous token.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "A random sample of tokens.",
+    "misconception": "weights are deterministic given the input"
+   },
+   {
+    "text": "A count of word frequencies.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Every token can attend directly to every other, so long-range dependencies need one step, not many."
+ },
+ {
+  "id": "dl-9.2",
+  "lecture": 9,
+  "stem": "Why are the dot products scaled by $1/\\sqrt{d_k}$ in scaled dot-product attention?",
+  "correct": [
+   "Large dot products saturate the softmax.",
+   "Variance grows with $d_k$."
+  ],
+  "distractors": [
+   {
+    "text": "To make the attention weights sum to $d_k$.",
+    "misconception": "softmax weights sum to one"
+   },
+   {
+    "text": "To reduce the number of parameters.",
+    "misconception": "scaling has no parameters"
+   },
+   {
+    "text": "To make the output a probability.",
+    "misconception": "the weights, not the output, are probabilities"
+   },
+   {
+    "text": "To prevent the use of multiple heads.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "To ensure keys are orthogonal.",
+    "misconception": "scaling does not orthogonalise"
+   }
+  ],
+  "explanation": "Scaling makes the softmax temperature roughly independent of the key dimension."
+ },
+ {
+  "id": "dl-9.3",
+  "lecture": 9,
+  "stem": "Why does a transformer need positional encoding?",
+  "correct": [
+   "Self-attention ignores token order.",
+   "Shuffled tokens give shuffled outputs."
+  ],
+  "distractors": [
+   {
+    "text": "To reduce the dimension of the embeddings.",
+    "misconception": "positional encoding adds information, not compression"
+   },
+   {
+    "text": "To make attention faster.",
+    "misconception": "unrelated to speed"
+   },
+   {
+    "text": "Because words are numbers.",
+    "misconception": "order, not numeric type, is the issue"
+   },
+   {
+    "text": "Because softmax cannot be computed otherwise.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "To remove the need for embeddings.",
+    "misconception": "embeddings are still used"
+   }
+  ],
+  "explanation": "Sinusoidal, learned or relative encodings are all used; each gives the model order information."
+ },
+ {
+  "id": "dl-9.4",
+  "lecture": 9,
+  "stem": "What is the benefit of multi-head attention?",
+  "correct": [
+   "Heads attend to different relationships.",
+   "Richer representations."
+  ],
+  "distractors": [
+   {
+    "text": "It reduces the sequence length.",
+    "misconception": "length is unchanged"
+   },
+   {
+    "text": "It removes the need for feed-forward layers.",
+    "misconception": "blocks still use feed-forward layers"
+   },
+   {
+    "text": "Every head must learn the same pattern.",
+    "misconception": "the aim is diversity"
+   },
+   {
+    "text": "It makes attention linear in the sequence length.",
+    "misconception": "cost remains quadratic"
+   },
+   {
+    "text": "It eliminates all parameters.",
+    "misconception": "each head has projections"
+   }
+  ],
+  "explanation": "Head outputs are concatenated and mixed by an output projection."
+ },
+ {
+  "id": "dl-9.5",
+  "lecture": 9,
+  "stem": "What is the computational drawback of full self-attention on long sequences?",
+  "correct": [
+   "Cost grows quadratically with length.",
+   "The $n\\times n$ matrix is costly."
+  ],
+  "distractors": [
+   {
+    "text": "It grows linearly and is therefore cheap.",
+    "misconception": "the full matrix is quadratic"
+   },
+   {
+    "text": "It cannot be parallelised.",
+    "misconception": "it is highly parallel"
+   },
+   {
+    "text": "It needs a recurrent state.",
+    "misconception": "no recurrence is required"
+   },
+   {
+    "text": "It grows exponentially with length.",
+    "misconception": "quadratic, not exponential"
+   },
+   {
+    "text": "It is independent of sequence length.",
+    "misconception": "cost depends on the length"
+   }
+  ],
+  "explanation": "Sparse, local and linear-attention variants reduce this cost."
+ },
+ {
+  "id": "dl-10.1",
+  "lecture": 10,
+  "stem": "What is the goal of an autoencoder?",
+  "correct": [
+   "To learn a compressed code that rebuilds the input.",
+   "Encoder and decoder trained to reconstruct."
+  ],
+  "distractors": [
+   {
+    "text": "To classify inputs into labelled classes.",
+    "misconception": "autoencoders are unsupervised"
+   },
+   {
+    "text": "To increase the dimension of the data.",
+    "misconception": "the bottleneck is usually smaller"
+   },
+   {
+    "text": "To generate labels for the test set.",
+    "misconception": "not its purpose"
+   },
+   {
+    "text": "To memorise labels.",
+    "misconception": "it reconstructs inputs"
+   },
+   {
+    "text": "To guarantee a perfect copy for any bottleneck size.",
+    "misconception": "a narrow bottleneck forces loss of information"
+   }
+  ],
+  "explanation": "With a linear encoder and decoder and squared loss, it recovers PCA subspaces."
+ },
+ {
+  "id": "dl-10.2",
+  "lecture": 10,
+  "stem": "What does a variational autoencoder (VAE) add to a plain autoencoder?",
+  "correct": [
+   "A distribution over codes tied to a prior by a KL term.",
+   "A bound on the likelihood."
+  ],
+  "distractors": [
+   {
+    "text": "It removes the decoder.",
+    "misconception": "a decoder is essential"
+   },
+   {
+    "text": "It uses adversarial training with a discriminator.",
+    "misconception": "describes a GAN"
+   },
+   {
+    "text": "It encodes each input to a single fixed point only.",
+    "misconception": "the code is a distribution"
+   },
+   {
+    "text": "It ignores the prior.",
+    "misconception": "the prior enters through the KL term"
+   },
+   {
+    "text": "It needs labelled data.",
+    "misconception": "it is unsupervised"
+   }
+  ],
+  "explanation": "The reparameterisation $z=\\mu+\\sigma\\epsilon$ makes sampling differentiable."
+ },
+ {
+  "id": "dl-10.3",
+  "lecture": 10,
+  "stem": "What are the two terms of the ELBO in a VAE?",
+  "correct": [
+   "A reconstruction term and a KL term to the prior.",
+   "Likelihood minus cost of departing from the prior."
+  ],
+  "distractors": [
+   {
+    "text": "A classification loss and a regularisation term.",
+    "misconception": "these are not the VAE terms"
+   },
+   {
+    "text": "A generator loss and a discriminator loss.",
+    "misconception": "describes a GAN"
+   },
+   {
+    "text": "Two reconstruction terms.",
+    "misconception": "the second term is a KL"
+   },
+   {
+    "text": "The prior and the posterior probabilities of the label.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The learning rate and the batch size.",
+    "misconception": "not loss terms"
+   }
+  ],
+  "explanation": "Raising the weight on the KL term (as in a β-VAE) trades reconstruction fidelity for a smoother latent space."
+ },
+ {
+  "id": "dl-10.4",
+  "lecture": 10,
+  "stem": "How does a GAN train its generator?",
+  "correct": [
+   "The generator tries to fool a discriminator.",
+   "A minimax game between two networks."
+  ],
+  "distractors": [
+   {
+    "text": "By minimising the pixel-wise distance to a specific target image.",
+    "misconception": "there is no per-sample target"
+   },
+   {
+    "text": "By maximising the KL divergence from the prior.",
+    "misconception": "describes no GAN objective"
+   },
+   {
+    "text": "By reconstructing its own input.",
+    "misconception": "describes an autoencoder"
+   },
+   {
+    "text": "Without any gradient.",
+    "misconception": "gradients through the discriminator are used"
+   },
+   {
+    "text": "By labelling the real data.",
+    "misconception": "real data is used only as positives for the discriminator"
+   }
+  ],
+  "explanation": "Training can be unstable, and mode collapse (the generator covering only some modes) is a known failure."
+ },
+ {
+  "id": "dl-10.5",
+  "lecture": 10,
+  "stem": "What is mode collapse in GANs?",
+  "correct": [
+   "The generator makes only a few kinds of output.",
+   "Many latents map to nearly one sample."
+  ],
+  "distractors": [
+   {
+    "text": "The discriminator outputs exactly 0.5 everywhere forever.",
+    "misconception": "that is a theoretical equilibrium, not collapse"
+   },
+   {
+    "text": "The loss reaches zero for the generator because of good training.",
+    "misconception": "collapse is a failure, not success"
+   },
+   {
+    "text": "The data set has only one class.",
+    "misconception": "collapse concerns the generator"
+   },
+   {
+    "text": "The learning rate becomes negative.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The latent dimension doubles.",
+    "misconception": "unrelated"
+   }
+  ],
+  "explanation": "Remedies include modified losses (Wasserstein), minibatch features and regularisation."
+ },
+ {
+  "id": "dl-11.1",
+  "lecture": 11,
+  "stem": "Why is \"overfit a single small batch\" a useful first debugging test?",
+  "correct": [
+   "A correct loop drives a tiny batch's loss near zero.",
+   "Failure suggests a bug."
+  ],
+  "distractors": [
+   {
+    "text": "It shows that the model will generalise well.",
+    "misconception": "it tests the pipeline, not generalisation"
+   },
+   {
+    "text": "It gives the final test accuracy.",
+    "misconception": "no test data is involved"
+   },
+   {
+    "text": "It replaces the validation set.",
+    "misconception": "validation is still needed later"
+   },
+   {
+    "text": "It shows regularisation is working.",
+    "misconception": "memorising is the opposite of regularising"
+   },
+   {
+    "text": "It proves the dataset is clean.",
+    "misconception": "it does not check data quality"
+   }
+  ],
+  "explanation": "Do this before long runs; it is cheap and catches many mistakes early."
+ },
+ {
+  "id": "dl-11.2",
+  "lecture": 11,
+  "stem": "What does a training loss that keeps falling while validation loss rises suggest?",
+  "correct": [
+   "Overfitting: a generalisation gap.",
+   "More regularisation or early stopping may help."
+  ],
+  "distractors": [
+   {
+    "text": "Underfitting, so the model should be made smaller.",
+    "misconception": "underfitting shows high loss on both"
+   },
+   {
+    "text": "A learning rate that is too small.",
+    "misconception": "the symptom is a generalisation gap"
+   },
+   {
+    "text": "A bug that makes the training loss meaningless.",
+    "misconception": "the pattern is the classic overfitting signature"
+   },
+   {
+    "text": "That the validation set is too easy.",
+    "misconception": "an easy set would not show rising loss"
+   },
+   {
+    "text": "Convergence to the global optimum.",
+    "misconception": "rising validation loss does not indicate this"
+   }
+  ],
+  "explanation": "Plot both curves; the optimum for model selection is near where validation loss is lowest."
+ },
+ {
+  "id": "dl-11.3",
+  "lecture": 11,
+  "stem": "Why is random search often preferred over grid search for hyperparameters?",
+  "correct": [
+   "Few hyperparameters matter, and random search varies them more.",
+   "Better coverage for the same budget."
+  ],
+  "distractors": [
+   {
+    "text": "It guarantees finding the global optimum.",
+    "misconception": "no search method guarantees that"
+   },
+   {
+    "text": "It needs no validation data.",
+    "misconception": "evaluation still needs validation data"
+   },
+   {
+    "text": "It uses gradients with respect to the hyperparameters.",
+    "misconception": "random search is gradient-free"
+   },
+   {
+    "text": "It always requires fewer evaluations than any other method.",
+    "misconception": "no such guarantee"
+   },
+   {
+    "text": "It is deterministic.",
+    "misconception": "it is random"
+   }
+  ],
+  "explanation": "Learning rates are best searched on a log scale."
+ },
+ {
+  "id": "dl-11.4",
+  "lecture": 11,
+  "stem": "What is the purpose of loss scaling in mixed-precision training?",
+  "correct": [
+   "Scaling stops small gradients underflowing in half precision.",
+   "Scale up, then unscale before the update."
+  ],
+  "distractors": [
+   {
+    "text": "It increases the numerical precision of the weights.",
+    "misconception": "master weights keep full precision separately"
+   },
+   {
+    "text": "It lowers the learning rate.",
+    "misconception": "the learning rate is unchanged"
+   },
+   {
+    "text": "It removes the need for a backward pass.",
+    "misconception": "the backward pass is still needed"
+   },
+   {
+    "text": "It prevents overfitting.",
+    "misconception": "numerical issue, not generalisation"
+   },
+   {
+    "text": "It increases the model size.",
+    "misconception": "parameters are not added"
+   }
+  ],
+  "explanation": "Half precision has a narrow range, so tiny values become zero without scaling."
+ },
+ {
+  "id": "dl-11.5",
+  "lecture": 11,
+  "stem": "What does an initial loss far above $\\ln K$ in a $K$-class softmax classifier suggest?",
+  "correct": [
+   "Something is wrong, as chance gives about $\\ln K$.",
+   "Over-confident wrong outputs."
+  ],
+  "distractors": [
+   {
+    "text": "The model is already well trained.",
+    "misconception": "well-trained models have lower loss"
+   },
+   {
+    "text": "The number of classes is too small.",
+    "misconception": "unrelated"
+   },
+   {
+    "text": "The learning rate is optimal.",
+    "misconception": "not implied"
+   },
+   {
+    "text": "The validation set is leaking.",
+    "misconception": "leakage lowers loss"
+   },
+   {
+    "text": "The model has too few parameters.",
+    "misconception": "the starting value does not reflect capacity"
+   }
+  ],
+  "explanation": "Checking the first loss against $\\ln K$ is a quick sanity test before training."
+ }
+]
