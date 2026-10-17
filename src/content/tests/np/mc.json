@@ -1,0 +1,1602 @@
+[
+ {
+  "id": "np-1.1",
+  "lecture": 1,
+  "stem": "What is the main advantage of a distribution-free (nonparametric) test over a parametric one?",
+  "correct": [
+   "Validity does not rest on a distributional family such as the normal.",
+   "It stays valid when normality fails."
+  ],
+  "distractors": [
+   {
+    "text": "It always has greater power than the parametric test.",
+    "misconception": "ignores that power can be lower when the parametric model holds"
+   },
+   {
+    "text": "It needs no assumptions at all, not even independence.",
+    "misconception": "overstates what is dropped"
+   },
+   {
+    "text": "It uses the actual values of the data more fully than a parametric test.",
+    "misconception": "reverses what rank tests do"
+   },
+   {
+    "text": "It works only for categorical data.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It gives estimates with smaller variance in every case.",
+    "misconception": "confuses validity with efficiency"
+   }
+  ],
+  "explanation": "Rank tests keep the stated significance level whatever the continuous distribution; the price is a small loss of power when the parametric model is exactly right."
+ },
+ {
+  "id": "np-1.2",
+  "lecture": 1,
+  "stem": "How does the Wilcoxon signed-rank test compare in efficiency with the one-sample $t$ test?",
+  "correct": [
+   "Its efficiency is $3/\\pi$ under normality and can exceed 1 for heavy tails.",
+   "It loses little power for normal data."
+  ],
+  "distractors": [
+   {
+    "text": "It is always far less efficient than the $t$ test.",
+    "misconception": "ignores the high efficiency under normality"
+   },
+   {
+    "text": "It is always more efficient than the $t$ test.",
+    "misconception": "ignores that the $t$ test is best under normality"
+   },
+   {
+    "text": "Its efficiency is exactly 1 for every distribution.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "It has an efficiency of zero for symmetric data.",
+    "misconception": "gives a false value"
+   },
+   {
+    "text": "Efficiency comparisons are impossible because the tests use different statistics.",
+    "misconception": "denies the comparison"
+   }
+  ],
+  "explanation": "The ARE of the Wilcoxon test relative to the $t$ test never falls below 0.864 for any continuous distribution, which makes it a safe choice."
+ },
+ {
+  "id": "np-1.3",
+  "lecture": 1,
+  "stem": "Why are rank-based methods robust to outliers?",
+  "correct": [
+   "An extreme value has only the top rank, however large.",
+   "Ranks remove the size of outliers."
+  ],
+  "distractors": [
+   {
+    "text": "Outliers are automatically deleted before ranking.",
+    "misconception": "confuses ranking with trimming"
+   },
+   {
+    "text": "Ranks are computed after the outliers are replaced by the mean.",
+    "misconception": "invents a replacement step"
+   },
+   {
+    "text": "Ranks assign larger weight to extreme values.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "Rank methods ignore the order of the observations.",
+    "misconception": "confuses ranks with orderless summaries"
+   },
+   {
+    "text": "They are not robust, only distribution-free.",
+    "misconception": "denies the robustness"
+   }
+  ],
+  "explanation": "In the sample $1,2,3,4,1000$, the ranks are $1,\\dots,5$ whatever the last value is, whereas it dominates the mean and the standard deviation."
+ },
+ {
+  "id": "np-1.4",
+  "lecture": 1,
+  "stem": "What do nonparametric methods trade off for their flexibility?",
+  "correct": [
+   "Some efficiency when the parametric model is right.",
+   "Slower convergence in estimation problems."
+  ],
+  "distractors": [
+   {
+    "text": "They are always biased.",
+    "misconception": "confuses with bias"
+   },
+   {
+    "text": "They require larger sample sizes than parametric methods in every setting, without exception.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "They cannot be used for hypothesis testing.",
+    "misconception": "denies their use"
+   },
+   {
+    "text": "They need more assumptions than parametric methods.",
+    "misconception": "reverses the idea"
+   },
+   {
+    "text": "They are inconsistent.",
+    "misconception": "denies consistency"
+   }
+  ],
+  "explanation": "Nonparametric density and regression estimators converge slower than $n^{-1/2}$ (for example $n^{-2/5}$), a cost of weaker assumptions."
+ },
+ {
+  "id": "np-1.5",
+  "lecture": 1,
+  "stem": "Which situation favours a nonparametric method?",
+  "correct": [
+   "Small skewed or heavy-tailed samples with outliers.",
+   "Ordinal data, where only order matters."
+  ],
+  "distractors": [
+   {
+    "text": "Large normal samples with no outliers.",
+    "misconception": "favours parametric methods"
+   },
+   {
+    "text": "A situation with known parametric form and clean data.",
+    "misconception": "favours parametric methods"
+   },
+   {
+    "text": "Data that are exactly normal by design.",
+    "misconception": "favours parametric methods"
+   },
+   {
+    "text": "A model whose parameters have to be estimated precisely.",
+    "misconception": "favours parametric methods"
+   },
+   {
+    "text": "Data with no variation.",
+    "misconception": "makes any test meaningless"
+   }
+  ],
+  "explanation": "Ordinal ratings (1 to 5 stars) have no meaningful differences, so rank methods are natural."
+ },
+ {
+  "id": "np-2.1",
+  "lecture": 2,
+  "stem": "What does the sign test use in a paired design?",
+  "correct": [
+   "Only the signs of the differences; under the null the count is $\\mathrm{Bin}(n,1/2)$.",
+   "The number of positive nonzero differences."
+  ],
+  "distractors": [
+   {
+    "text": "The sizes of the differences, ranked from smallest to largest.",
+    "misconception": "describes the signed-rank test"
+   },
+   {
+    "text": "The mean of the differences divided by its standard error.",
+    "misconception": "describes the paired $t$ test"
+   },
+   {
+    "text": "The sum of the squared differences.",
+    "misconception": "gives an unrelated statistic"
+   },
+   {
+    "text": "The count of differences larger than one standard deviation.",
+    "misconception": "invents a statistic"
+   },
+   {
+    "text": "The sign of the sample mean only.",
+    "misconception": "confuses with the mean"
+   }
+  ],
+  "explanation": "Zero differences are discarded. The test is for the median of the differences being zero, and needs no symmetry."
+ },
+ {
+  "id": "np-2.2",
+  "lecture": 2,
+  "stem": "How does the Wilcoxon signed-rank test use the differences?",
+  "correct": [
+   "It ranks absolute differences and sums the ranks of the positive ones.",
+   "It combines signs with ranks of magnitudes."
+  ],
+  "distractors": [
+   {
+    "text": "It ranks the raw differences from smallest to largest, ignoring signs.",
+    "misconception": "ignores the absolute values and signs"
+   },
+   {
+    "text": "It counts only the signs.",
+    "misconception": "describes the sign test"
+   },
+   {
+    "text": "It adds the positive differences themselves.",
+    "misconception": "uses the values instead of ranks"
+   },
+   {
+    "text": "It compares the group means.",
+    "misconception": "describes a different test"
+   },
+   {
+    "text": "It uses the ranks of the observations from both groups pooled.",
+    "misconception": "describes the rank-sum test"
+   }
+  ],
+  "explanation": "$W^+=\\sum_iR_i\\mathbf 1\\{d_i>0\\}$ with $R_i$ the rank of $|d_i|$. It needs the differences to be symmetric about the median under $H_0$."
+ },
+ {
+  "id": "np-2.3",
+  "lecture": 2,
+  "stem": "Under $H_0$, what are the mean and variance of the Wilcoxon signed-rank statistic $W^+$ for $n$ nonzero differences (no ties)?",
+  "correct": [
+   "Mean $n(n+1)/4$ and variance $n(n+1)(2n+1)/24$.",
+   "$E W^+=n(n+1)/4$."
+  ],
+  "distractors": [
+   {
+    "text": "Mean $n/2$ and variance $n/4$.",
+    "misconception": "gives the sign test moments"
+   },
+   {
+    "text": "Mean $n(n+1)/2$ and variance $n(n+1)(2n+1)/6$.",
+    "misconception": "gives the moments of the total of ranks"
+   },
+   {
+    "text": "Mean $n(n+1)/4$ and variance $n^2/12$.",
+    "misconception": "mixes the formulas"
+   },
+   {
+    "text": "Mean $0$ and variance $n$.",
+    "misconception": "gives the moments of a normal statistic"
+   },
+   {
+    "text": "Mean $n^2/4$ and variance $n^2/24$.",
+    "misconception": "gives a wrong formula"
+   }
+  ],
+  "explanation": "Each rank $i$ is included with probability $1/2$, so $EW^+=\\tfrac12\\sum i=n(n+1)/4$ and $\\operatorname{Var}=\\tfrac14\\sum i^2=n(n+1)(2n+1)/24$."
+ },
+ {
+  "id": "np-2.4",
+  "lecture": 2,
+  "stem": "Which assumption does the Wilcoxon signed-rank test need that the sign test does not?",
+  "correct": [
+   "The differences are symmetric about their median.",
+   "Symmetry under the null."
+  ],
+  "distractors": [
+   {
+    "text": "The differences are normally distributed.",
+    "misconception": "describes the $t$ test"
+   },
+   {
+    "text": "The two samples have equal variances.",
+    "misconception": "confuses with the two-sample setting"
+   },
+   {
+    "text": "The observations are independent, which the sign test does not need.",
+    "misconception": "both tests need independence"
+   },
+   {
+    "text": "The sample is large.",
+    "misconception": "describes an approximation, not an assumption"
+   },
+   {
+    "text": "The data are discrete.",
+    "misconception": "gets the condition backwards"
+   }
+  ],
+  "explanation": "Without symmetry, a significant signed-rank result may reflect skewness rather than a nonzero median."
+ },
+ {
+  "id": "np-2.5",
+  "lecture": 2,
+  "stem": "What is the treatment of zero differences and ties in the signed-rank test?",
+  "correct": [
+   "Zeros are dropped, ties get average ranks.",
+   "Mid-ranks for ties."
+  ],
+  "distractors": [
+   {
+    "text": "Zeros are given the largest rank.",
+    "misconception": "invents a rule"
+   },
+   {
+    "text": "Zeros count as positive differences.",
+    "misconception": "invents a rule"
+   },
+   {
+    "text": "Ties are broken at random in all cases.",
+    "misconception": "is not the standard rule"
+   },
+   {
+    "text": "Tied observations are always deleted.",
+    "misconception": "discards too much"
+   },
+   {
+    "text": "Zeros and ties need no special handling.",
+    "misconception": "ignores the issue"
+   }
+  ],
+  "explanation": "With ties, the variance of $W^+$ is reduced by a correction, and exact tables no longer apply."
+ },
+ {
+  "id": "np-3.1",
+  "lecture": 3,
+  "stem": "What does the Mann-Whitney (Wilcoxon rank-sum) test compare?",
+  "correct": [
+   "Two independent samples, through pooled ranks.",
+   "Whether $P(X>Y)=1/2$."
+  ],
+  "distractors": [
+   {
+    "text": "Two paired samples through the signs of the differences.",
+    "misconception": "describes the sign test"
+   },
+   {
+    "text": "The means of two samples, assuming normality.",
+    "misconception": "describes the $t$ test"
+   },
+   {
+    "text": "The variances of two samples.",
+    "misconception": "confuses location with scale"
+   },
+   {
+    "text": "Two proportions.",
+    "misconception": "confuses with a proportion test"
+   },
+   {
+    "text": "Three or more groups.",
+    "misconception": "describes the Kruskal-Wallis test"
+   }
+  ],
+  "explanation": "If the two distributions differ only by a shift, the test is a test of equal medians; in general it tests stochastic dominance."
+ },
+ {
+  "id": "np-3.2",
+  "lecture": 3,
+  "stem": "How is the Mann-Whitney statistic $U$ related to the rank sum $W$ of sample 1 (sizes $n_1$ and $n_2$)?",
+  "correct": [
+   "$U_1=W-n_1(n_1+1)/2$.",
+   "$U_1+U_2=n_1n_2$."
+  ],
+  "distractors": [
+   {
+    "text": "$U_1=W/n_1$.",
+    "misconception": "divides instead of subtracting"
+   },
+   {
+    "text": "$U_1=W-n_1n_2/2$.",
+    "misconception": "subtracts the null mean of $U$"
+   },
+   {
+    "text": "$U_1=W+n_1(n_1+1)/2$.",
+    "misconception": "adds instead of subtracting"
+   },
+   {
+    "text": "$U_1=n_1n_2-W$.",
+    "misconception": "confuses with the other sample's statistic"
+   },
+   {
+    "text": "$U_1$ and $U_2$ are independent.",
+    "misconception": "ignores the sum constraint"
+   }
+  ],
+  "explanation": "The smallest rank sum possible is $n_1(n_1+1)/2$, when sample 1 holds the lowest ranks, which gives $U_1=0$."
+ },
+ {
+  "id": "np-3.3",
+  "lecture": 3,
+  "stem": "What are the mean and variance of $U$ under $H_0$ for sample sizes $n_1,n_2$ (no ties)?",
+  "correct": [
+   "Mean $n_1n_2/2$, variance $n_1n_2(n_1+n_2+1)/12$.",
+   "$E U=n_1n_2/2$."
+  ],
+  "distractors": [
+   {
+    "text": "Mean $n_1n_2$ and variance $n_1n_2(n_1+n_2)/12$.",
+    "misconception": "gives wrong constants"
+   },
+   {
+    "text": "Mean $n_1n_2/2$ and variance $n_1n_2/4$.",
+    "misconception": "gives the binomial-like variance"
+   },
+   {
+    "text": "Mean $(n_1+n_2)/2$ and variance $(n_1+n_2)/12$.",
+    "misconception": "uses the total sample size only"
+   },
+   {
+    "text": "Mean $0$ and variance $1$.",
+    "misconception": "gives standardised moments"
+   },
+   {
+    "text": "Mean $n_1n_2/2$ and variance $n_1n_2(n_1+n_2+1)/6$.",
+    "misconception": "doubles the variance"
+   }
+  ],
+  "explanation": "These give $z=(U-n_1n_2/2)/\\sqrt{n_1n_2(n_1+n_2+1)/12}$, with a tie correction to the variance if needed."
+ },
+ {
+  "id": "np-3.4",
+  "lecture": 3,
+  "stem": "What does the quantity $U_1/(n_1n_2)$ estimate?",
+  "correct": [
+   "The chance a random observation of sample 1 beats one of sample 2.",
+   "The probabilistic index $P(X>Y)$."
+  ],
+  "distractors": [
+   {
+    "text": "The difference in medians.",
+    "misconception": "confuses with a location shift"
+   },
+   {
+    "text": "The ratio of the two sample means.",
+    "misconception": "confuses with means"
+   },
+   {
+    "text": "The correlation between the two samples.",
+    "misconception": "confuses with correlation"
+   },
+   {
+    "text": "The significance level of the test.",
+    "misconception": "confuses with $\\alpha$"
+   },
+   {
+    "text": "The probability that the two samples are equal.",
+    "misconception": "confuses with equality"
+   }
+  ],
+  "explanation": "A value of 0.5 means no tendency; values near 1 mean sample 1 almost always exceeds sample 2. It is also the area under the ROC curve."
+ },
+ {
+  "id": "np-3.5",
+  "lecture": 3,
+  "stem": "How are ties handled in the Mann-Whitney test?",
+  "correct": [
+   "Ties get average ranks, and the variance gets a correction.",
+   "Mid-ranks are used."
+  ],
+  "distractors": [
+   {
+    "text": "Tied observations are removed from the sample.",
+    "misconception": "discards data"
+   },
+   {
+    "text": "Ties are always assigned the lowest rank.",
+    "misconception": "is biased"
+   },
+   {
+    "text": "Ties are not possible for continuous data, so they can be ignored in practice.",
+    "misconception": "ignores rounding"
+   },
+   {
+    "text": "Ties are broken in favour of the larger sample.",
+    "misconception": "invents a rule"
+   },
+   {
+    "text": "Ties make the test invalid.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "With many ties (such as ordinal ratings), the normal approximation with the tie correction is used instead of exact tables."
+ },
+ {
+  "id": "np-4.1",
+  "lecture": 4,
+  "stem": "What does the Kruskal-Wallis test do?",
+  "correct": [
+   "Whether $k$ independent samples share a distribution, using pooled ranks.",
+   "The rank version of one-way ANOVA."
+  ],
+  "distractors": [
+   {
+    "text": "It compares paired measurements with signs.",
+    "misconception": "describes the sign test"
+   },
+   {
+    "text": "It tests the equality of $k$ variances.",
+    "misconception": "confuses location with scale"
+   },
+   {
+    "text": "It tests for a trend over time.",
+    "misconception": "confuses with a trend test"
+   },
+   {
+    "text": "It compares two samples only.",
+    "misconception": "restricts to two groups"
+   },
+   {
+    "text": "It requires normality in each group.",
+    "misconception": "reverses the idea"
+   }
+  ],
+  "explanation": "A significant result says that at least one group differs; post-hoc pairwise tests (Dunn) show which."
+ },
+ {
+  "id": "np-4.2",
+  "lecture": 4,
+  "stem": "How is the Kruskal-Wallis statistic computed?",
+  "correct": [
+   "$H=\\frac{12}{N(N+1)}\\sum_i R_i^2/n_i-3(N+1)$, compared with $\\chi^2_{k-1}$.",
+   "From group rank sums."
+  ],
+  "distractors": [
+   {
+    "text": "$H=\\sum_i(\\bar R_i-\\bar R)$, compared with $\\chi^2_{k}$.",
+    "misconception": "gives a statistic summing to zero with wrong degrees of freedom"
+   },
+   {
+    "text": "$H=\\sum_in_i\\bar x_i$, compared with a normal distribution.",
+    "misconception": "uses means instead of ranks"
+   },
+   {
+    "text": "From the largest and the smallest group means.",
+    "misconception": "ignores the middle groups"
+   },
+   {
+    "text": "$H$ is compared with $\\chi^2_{N-1}$.",
+    "misconception": "uses the wrong degrees of freedom"
+   },
+   {
+    "text": "$H$ uses the raw observations, not ranks, and is compared with a $t$ distribution.",
+    "misconception": "discards the rank structure"
+   }
+  ],
+  "explanation": "Under $H_0$ every group has expected rank sum $n_i(N+1)/2$, and $H$ measures deviations from it."
+ },
+ {
+  "id": "np-4.3",
+  "lecture": 4,
+  "stem": "What is the Friedman test used for?",
+  "correct": [
+   "Comparing $k$ treatments on the same blocks, ranking within blocks.",
+   "A rank analogue of two-way ANOVA."
+  ],
+  "distractors": [
+   {
+    "text": "Comparing $k$ independent groups.",
+    "misconception": "describes Kruskal-Wallis"
+   },
+   {
+    "text": "Comparing two independent samples.",
+    "misconception": "describes Mann-Whitney"
+   },
+   {
+    "text": "Testing for rank correlation between two variables.",
+    "misconception": "describes Spearman"
+   },
+   {
+    "text": "Testing whether data follow a distribution.",
+    "misconception": "describes a goodness-of-fit test"
+   },
+   {
+    "text": "Estimating a density.",
+    "misconception": "describes smoothing"
+   }
+  ],
+  "explanation": "The statistic $\\frac{12}{bk(k+1)}\\sum_jR_j^2-3b(k+1)$ uses rank sums $R_j$ across blocks and is approximately $\\chi^2_{k-1}$."
+ },
+ {
+  "id": "np-4.4",
+  "lecture": 4,
+  "stem": "How does the Friedman test differ from the Kruskal-Wallis test?",
+  "correct": [
+   "Friedman ranks within blocks; Kruskal-Wallis ranks pooled data.",
+   "Related versus independent samples."
+  ],
+  "distractors": [
+   {
+    "text": "Friedman ranks the pooled data across all subjects.",
+    "misconception": "describes Kruskal-Wallis"
+   },
+   {
+    "text": "Kruskal-Wallis ranks within blocks.",
+    "misconception": "swaps the two"
+   },
+   {
+    "text": "Both are for independent samples.",
+    "misconception": "ignores the block structure"
+   },
+   {
+    "text": "Friedman needs normal data.",
+    "misconception": "reverses the idea"
+   },
+   {
+    "text": "They give identical statistics.",
+    "misconception": "ignores the difference"
+   }
+  ],
+  "explanation": "A block is a subject measured under every treatment; ranking within it removes subject-to-subject differences."
+ },
+ {
+  "id": "np-4.5",
+  "lecture": 4,
+  "stem": "What are the large-sample null distributions of the Kruskal-Wallis and Friedman statistics?",
+  "correct": [
+   "Both are approximately $\\chi^2$ with $k-1$ degrees of freedom.",
+   "One fewer than the number of groups."
+  ],
+  "distractors": [
+   {
+    "text": "Both are approximately standard normal.",
+    "misconception": "confuses with a $z$ statistic"
+   },
+   {
+    "text": "Chi-square with $N-1$ degrees of freedom.",
+    "misconception": "uses the sample size"
+   },
+   {
+    "text": "Chi-square with $k$ degrees of freedom.",
+    "misconception": "forgets to subtract one"
+   },
+   {
+    "text": "An $F$ distribution with $(k-1,N-k)$ degrees of freedom.",
+    "misconception": "describes ANOVA"
+   },
+   {
+    "text": "Uniform on $[0,1]$.",
+    "misconception": "confuses with a $p$-value"
+   }
+  ],
+  "explanation": "For small samples exact permutation tables are used. A significant result calls for pairwise follow-up tests with a multiplicity correction."
+ },
+ {
+  "id": "np-5.1",
+  "lecture": 5,
+  "stem": "What is the Kolmogorov-Smirnov statistic for testing $H_0:F=F_0$?",
+  "correct": [
+   "$D_n=\\sup_x|F_n(x)-F_0(x)|$, the largest vertical gap.",
+   "The maximum gap between empirical and claimed cdfs."
+  ],
+  "distractors": [
+   {
+    "text": "The sum of squared differences between $F_n$ and $F_0$.",
+    "misconception": "describes the Cramer-von Mises statistic"
+   },
+   {
+    "text": "The difference between the sample mean and the hypothesised mean.",
+    "misconception": "confuses with a test of the mean"
+   },
+   {
+    "text": "The difference of the sample medians.",
+    "misconception": "confuses with a location test"
+   },
+   {
+    "text": "The area between $F_n$ and $F_0$.",
+    "misconception": "describes an integral distance"
+   },
+   {
+    "text": "The difference between the largest and smallest observations.",
+    "misconception": "gives the range"
+   }
+  ],
+  "explanation": "Compute from the ordered sample: $D_n=\\max_i\\max\\{i/n-F_0(x_{(i)}),\\ F_0(x_{(i)})-(i-1)/n\\}$."
+ },
+ {
+  "id": "np-5.2",
+  "lecture": 5,
+  "stem": "When is the null distribution of the Kolmogorov-Smirnov statistic free of the underlying distribution?",
+  "correct": [
+   "When $F_0$ is continuous and fully specified.",
+   "Critical values do not depend on which."
+  ],
+  "distractors": [
+   {
+    "text": "For any $F_0$, including discrete ones.",
+    "misconception": "ignores the continuity requirement"
+   },
+   {
+    "text": "When the parameters of $F_0$ are estimated from the same data.",
+    "misconception": "invalidates the standard critical values"
+   },
+   {
+    "text": "Only when the data are normal.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "Only for samples of size one.",
+    "misconception": "gives an absurd restriction"
+   },
+   {
+    "text": "Never, since it always depends on the distribution.",
+    "misconception": "denies the property"
+   }
+  ],
+  "explanation": "If parameters are estimated (the normal with estimated mean and variance), use Lilliefors' modified critical values, which are smaller."
+ },
+ {
+  "id": "np-5.3",
+  "lecture": 5,
+  "stem": "Why is the Anderson-Darling test often more powerful than the Kolmogorov-Smirnov test against tail alternatives?",
+  "correct": [
+   "It weights the tails more heavily.",
+   "It stresses tail discrepancies."
+  ],
+  "distractors": [
+   {
+    "text": "It ignores the tails entirely.",
+    "misconception": "reverses the weighting"
+   },
+   {
+    "text": "It uses only the median.",
+    "misconception": "misdescribes the statistic"
+   },
+   {
+    "text": "It is a rank test based on signs.",
+    "misconception": "confuses with the sign test"
+   },
+   {
+    "text": "It does not need a specified distribution.",
+    "misconception": "ignores that it tests a null distribution"
+   },
+   {
+    "text": "It uses the largest vertical distance.",
+    "misconception": "describes the KS statistic"
+   }
+  ],
+  "explanation": "The statistic integrates $(F_n-F_0)^2/\\{F_0(1-F_0)\\}$, which blows up in the tails and so detects heavy tails. For financial returns tail fit matters."
+ },
+ {
+  "id": "np-5.4",
+  "lecture": 5,
+  "stem": "What does the two-sample Kolmogorov-Smirnov test compare?",
+  "correct": [
+   "Largest gap between two empirical cdfs.",
+   "Whether two samples differ."
+  ],
+  "distractors": [
+   {
+    "text": "The means of the two samples.",
+    "misconception": "confuses with a location test"
+   },
+   {
+    "text": "The variances of the two samples.",
+    "misconception": "confuses with a scale test"
+   },
+   {
+    "text": "The ranks of paired observations.",
+    "misconception": "describes a paired test"
+   },
+   {
+    "text": "Only the medians of the two samples.",
+    "misconception": "restricts the sensitivity"
+   },
+   {
+    "text": "The sample with the more extreme minimum.",
+    "misconception": "gives an unrelated rule"
+   }
+  ],
+  "explanation": "It is sensitive to differences in location, scale or shape, but most sensitive around the centre of the distributions."
+ },
+ {
+  "id": "np-5.5",
+  "lecture": 5,
+  "stem": "How should a result of a Kolmogorov-Smirnov test with a very large sample be read?",
+  "correct": [
+   "Even a tiny departure can be significant.",
+   "The test detects negligible deviations."
+  ],
+  "distractors": [
+   {
+    "text": "A significant result always means the departure is large.",
+    "misconception": "confuses significance with size"
+   },
+   {
+    "text": "Large samples make the test lose power.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The test is invalid for large samples.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "The $p$-value is independent of the sample size.",
+    "misconception": "ignores the dependence"
+   },
+   {
+    "text": "Nonsignificance proves that $F=F_0$.",
+    "misconception": "confuses with proof of the null"
+   }
+  ],
+  "explanation": "$\\sqrt nD_n$ is compared with the Kolmogorov distribution; the 5% point is about 1.36, so $D_n>1.36/\\sqrt n$ rejects."
+ },
+ {
+  "id": "np-6.1",
+  "lecture": 6,
+  "stem": "How is Spearman's rank correlation computed?",
+  "correct": [
+   "The Pearson correlation between the ranks.",
+   "Rank each variable, then correlate the ranks."
+  ],
+  "distractors": [
+   {
+    "text": "As the Pearson correlation of the raw values.",
+    "misconception": "describes Pearson's correlation"
+   },
+   {
+    "text": "As the number of concordant pairs minus discordant pairs, divided by the total.",
+    "misconception": "describes Kendall's tau"
+   },
+   {
+    "text": "As the correlation between the signs of the values.",
+    "misconception": "discards the magnitudes"
+   },
+   {
+    "text": "As the slope of the regression of ranks on values.",
+    "misconception": "gives a different quantity"
+   },
+   {
+    "text": "As the average of the ranks of the two variables.",
+    "misconception": "gives a mean, not a correlation"
+   }
+  ],
+  "explanation": "$d_i$ is the difference between the two ranks of observation $i$. $\\rho_S=\\pm1$ for any strictly monotone relation."
+ },
+ {
+  "id": "np-6.2",
+  "lecture": 6,
+  "stem": "How is Kendall's tau defined?",
+  "correct": [
+   "$(C-D)/\\{n(n-1)/2\\}$, concordant minus discordant.",
+   "Concordance probability minus discordance."
+  ],
+  "distractors": [
+   {
+    "text": "The Pearson correlation of the ranks.",
+    "misconception": "describes Spearman's rho"
+   },
+   {
+    "text": "The number of concordant pairs divided by $n$.",
+    "misconception": "uses the wrong denominator"
+   },
+   {
+    "text": "The sum of squared rank differences.",
+    "misconception": "gives an unrelated quantity"
+   },
+   {
+    "text": "$C/D$, the ratio of concordant to discordant pairs.",
+    "misconception": "uses a ratio"
+   },
+   {
+    "text": "The largest rank difference.",
+    "misconception": "gives an unrelated quantity"
+   }
+  ],
+  "explanation": "A pair $(i,j)$ is concordant if $(x_i-x_j)(y_i-y_j)>0$. Tau has a direct probabilistic meaning, unlike rho."
+ },
+ {
+  "id": "np-6.3",
+  "lecture": 6,
+  "stem": "Which relationship does a rank correlation detect that the Pearson correlation may miss?",
+  "correct": [
+   "A monotone but nonlinear relationship.",
+   "Any monotone association."
+  ],
+  "distractors": [
+   {
+    "text": "A relationship that is not monotone, such as a U shape.",
+    "misconception": "ranks also miss non-monotone relations"
+   },
+   {
+    "text": "A causal relationship.",
+    "misconception": "confuses association with causation"
+   },
+   {
+    "text": "A linear relationship only.",
+    "misconception": "describes Pearson"
+   },
+   {
+    "text": "Independence between the variables.",
+    "misconception": "gets the idea backwards"
+   },
+   {
+    "text": "Only perfect relationships.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "For $y=e^x$ on $x=1,\\dots,10$ the rank correlation is exactly 1, while Pearson's is noticeably smaller. Both are near 0 for $y=x^2$ on a symmetric $x$ range."
+ },
+ {
+  "id": "np-6.4",
+  "lecture": 6,
+  "stem": "What happens to Spearman's and Kendall's coefficients if one variable is transformed by a strictly increasing function?",
+  "correct": [
+   "They are unchanged, since the ranks are the same.",
+   "Both are invariant to monotone increasing transformations."
+  ],
+  "distractors": [
+   {
+    "text": "They change in proportion to the transformation.",
+    "misconception": "confuses with Pearson"
+   },
+   {
+    "text": "They become exactly 1.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "They change sign.",
+    "misconception": "is true only for decreasing transformations"
+   },
+   {
+    "text": "They are unchanged only for linear transformations.",
+    "misconception": "restricts the invariance wrongly"
+   },
+   {
+    "text": "They are unchanged only for log transformations.",
+    "misconception": "restricts the invariance wrongly"
+   }
+  ],
+  "explanation": "A strictly decreasing transformation reverses the ranks and changes the sign of the coefficients. Pearson's correlation is only invariant to linear maps."
+ },
+ {
+  "id": "np-6.5",
+  "lecture": 6,
+  "stem": "How do Kendall's tau and Spearman's rho typically compare in size?",
+  "correct": [
+   "Spearman's rho is usually larger in size than Kendall's tau.",
+   "Tau reads as a probability difference."
+  ],
+  "distractors": [
+   {
+    "text": "Kendall's tau is always larger in absolute value.",
+    "misconception": "reverses the typical relation"
+   },
+   {
+    "text": "They are always equal.",
+    "misconception": "ignores the different scales"
+   },
+   {
+    "text": "They have the opposite sign for the same data.",
+    "misconception": "invents a relation"
+   },
+   {
+    "text": "Tau is bounded by 0.5 and rho by 1.",
+    "misconception": "gives wrong bounds"
+   },
+   {
+    "text": "Both lie in $[0,1]$.",
+    "misconception": "forgets negative values"
+   }
+  ],
+  "explanation": "Both lie in $[-1,1]$. Under bivariate normality $\\tau=\\tfrac2\\pi\\arcsin\\rho$, which gives a ratio near 2/3 at moderate values."
+ },
+ {
+  "id": "np-7.1",
+  "lecture": 7,
+  "stem": "What assumption makes a permutation test valid?",
+  "correct": [
+   "Under $H_0$ the labels are exchangeable.",
+   "All relabellings are equally likely."
+  ],
+  "distractors": [
+   {
+    "text": "The data are normally distributed.",
+    "misconception": "is not needed"
+   },
+   {
+    "text": "The sample is large.",
+    "misconception": "is not needed"
+   },
+   {
+    "text": "The variances are known.",
+    "misconception": "is not needed"
+   },
+   {
+    "text": "The observations are paired.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "Only the order of the observations matters.",
+    "misconception": "confuses with a time-series test"
+   }
+  ],
+  "explanation": "Exchangeability can fail with unequal variances between groups or dependent data, in which case a plain permutation test can be invalid."
+ },
+ {
+  "id": "np-7.2",
+  "lecture": 7,
+  "stem": "How is an exact permutation p-value computed for a difference in group means?",
+  "correct": [
+   "Enumerate all assignments and find the share at least as extreme.",
+   "The share of relabellings with a gap as large as observed."
+  ],
+  "distractors": [
+   {
+    "text": "By comparing the statistic with a normal distribution.",
+    "misconception": "describes a normal approximation"
+   },
+   {
+    "text": "By resampling the data with replacement.",
+    "misconception": "describes the bootstrap"
+   },
+   {
+    "text": "By dividing the observed difference by its estimated standard error.",
+    "misconception": "describes a $t$ test"
+   },
+   {
+    "text": "By counting the sign changes.",
+    "misconception": "describes the sign test"
+   },
+   {
+    "text": "By using only the observed assignment.",
+    "misconception": "gives a degenerate distribution"
+   }
+  ],
+  "explanation": "With groups of sizes $n_1,n_2$ there are $\\binom{n_1+n_2}{n_1}$ assignments; the observed one is included, so the smallest p-value is $1/\\binom{n}{n_1}$."
+ },
+ {
+  "id": "np-7.3",
+  "lecture": 7,
+  "stem": "How many distinct assignments exist when $m$ of $N$ units are randomly assigned to treatment?",
+  "correct": [
+   "$\\binom Nm$, as order within groups is irrelevant.",
+   "Ways to choose the treated units."
+  ],
+  "distractors": [
+   {
+    "text": "$N!$, counting every ordering of the units.",
+    "misconception": "counts orderings"
+   },
+   {
+    "text": "$2^N$, counting all binary labellings.",
+    "misconception": "counts labellings that ignore the group sizes"
+   },
+   {
+    "text": "$m!\\,(N-m)!$, a product of factorials.",
+    "misconception": "multiplies factorials instead of dividing"
+   },
+   {
+    "text": "$N\\cdot m$, the product of the sizes.",
+    "misconception": "multiplies the sizes"
+   },
+   {
+    "text": "$\\binom Nm/2$, halving for symmetry.",
+    "misconception": "divides by two wrongly"
+   }
+  ],
+  "explanation": "The number of assignments sets the smallest attainable p-value, $1/\\binom Nm$, so small experiments can have limited resolution."
+ },
+ {
+  "id": "np-7.4",
+  "lecture": 7,
+  "stem": "What is a Monte Carlo permutation test?",
+  "correct": [
+   "It approximates the permutation distribution with random relabellings.",
+   "Random permutations estimate the $p$-value."
+  ],
+  "distractors": [
+   {
+    "text": "It gives exactly the same value as enumeration for any number of draws.",
+    "misconception": "ignores Monte Carlo error"
+   },
+   {
+    "text": "It resamples data with replacement.",
+    "misconception": "describes the bootstrap"
+   },
+   {
+    "text": "It requires a parametric model.",
+    "misconception": "reverses the idea"
+   },
+   {
+    "text": "It cannot be used for large samples.",
+    "misconception": "reverses the use"
+   },
+   {
+    "text": "It uses the normal approximation.",
+    "misconception": "describes a different method"
+   }
+  ],
+  "explanation": "A p-value estimate $(1+\\#\\{T^*\\ge T_{obs}\\})/(1+B)$ with $B$ random permutations remains valid."
+ },
+ {
+  "id": "np-7.5",
+  "lecture": 7,
+  "stem": "What is an advantage of permutation tests over $t$ tests?",
+  "correct": [
+   "Exact validity in finite samples under exchangeability.",
+   "Any test statistic can be used."
+  ],
+  "distractors": [
+   {
+    "text": "They always have more power.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "They need no assumption at all.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "They are faster to compute.",
+    "misconception": "is not generally true"
+   },
+   {
+    "text": "They estimate the effect size more accurately.",
+    "misconception": "confuses test with estimation"
+   },
+   {
+    "text": "They work for any dependence structure.",
+    "misconception": "ignores the exchangeability requirement"
+   }
+  ],
+  "explanation": "For the difference in means with many observations, the permutation test is close to the $t$ test, but it also allows medians, trimmed means or ranks."
+ },
+ {
+  "id": "np-8.1",
+  "lecture": 8,
+  "stem": "What is the nonparametric bootstrap?",
+  "correct": [
+   "Resample with replacement and recompute the statistic each time.",
+   "Treat the empirical distribution as the population."
+  ],
+  "distractors": [
+   {
+    "text": "Draw new samples from a fitted normal distribution.",
+    "misconception": "describes a parametric bootstrap"
+   },
+   {
+    "text": "Resample without replacement, leaving out one observation at a time.",
+    "misconception": "describes the jackknife"
+   },
+   {
+    "text": "Split the sample into two halves.",
+    "misconception": "describes sample splitting"
+   },
+   {
+    "text": "Permute the group labels.",
+    "misconception": "describes a permutation test"
+   },
+   {
+    "text": "Increase the sample size by repeating the data.",
+    "misconception": "confuses resampling with more information"
+   }
+  ],
+  "explanation": "The bootstrap standard error is the standard deviation of the bootstrap replicates $\\hat\\theta^*_1,\\dots,\\hat\\theta^*_B$."
+ },
+ {
+  "id": "np-8.2",
+  "lecture": 8,
+  "stem": "How is a percentile bootstrap confidence interval formed?",
+  "correct": [
+   "The $\\alpha/2$ and $1-\\alpha/2$ quantiles of the replicates.",
+   "The middle $1-\\alpha$ of sorted estimates."
+  ],
+  "distractors": [
+   {
+    "text": "Add and subtract $1.96$ standard errors from the estimate.",
+    "misconception": "describes a normal interval"
+   },
+   {
+    "text": "Use the extreme minimum and maximum of the replicates.",
+    "misconception": "uses the extremes"
+   },
+   {
+    "text": "Take the quantiles of the original data.",
+    "misconception": "uses the sample, not the replicates"
+   },
+   {
+    "text": "Use the standard error from the formula for the mean.",
+    "misconception": "confuses with the parametric interval"
+   },
+   {
+    "text": "Take the mean of the replicates plus and minus one.",
+    "misconception": "gives an arbitrary interval"
+   }
+  ],
+  "explanation": "The percentile interval is transformation-respecting; BCa refines it by correcting for bias and skewness."
+ },
+ {
+  "id": "np-8.3",
+  "lecture": 8,
+  "stem": "How does the jackknife estimate the bias of a statistic $\\hat\\theta$?",
+  "correct": [
+   "$(n-1)(\\bar\\theta_{(\\cdot)}-\\hat\\theta)$, from leave-one-out estimates.",
+   "Compare the full estimate with leave-one-out averages."
+  ],
+  "distractors": [
+   {
+    "text": "$\\bar\\theta_{(\\cdot)}-\\hat\\theta$, without the factor $n-1$.",
+    "misconception": "forgets the factor"
+   },
+   {
+    "text": "As the standard deviation of the leave-one-out estimates.",
+    "misconception": "confuses bias with spread"
+   },
+   {
+    "text": "As the difference between the mean and the median of the data.",
+    "misconception": "confuses with skewness"
+   },
+   {
+    "text": "By resampling with replacement many times.",
+    "misconception": "describes the bootstrap"
+   },
+   {
+    "text": "It cannot estimate bias.",
+    "misconception": "denies the use"
+   }
+  ],
+  "explanation": "The jackknife-corrected estimate is $n\\hat\\theta-(n-1)\\bar\\theta_{(\\cdot)}$, which removes the $O(1/n)$ bias."
+ },
+ {
+  "id": "np-8.4",
+  "lecture": 8,
+  "stem": "Where does the jackknife fail?",
+  "correct": [
+   "For non-smooth statistics such as the median.",
+   "Sample quantiles are not smooth functions."
+  ],
+  "distractors": [
+   {
+    "text": "For the sample mean.",
+    "misconception": "the jackknife works well for the mean"
+   },
+   {
+    "text": "For linear statistics.",
+    "misconception": "the jackknife works well for smooth statistics"
+   },
+   {
+    "text": "For any statistic when the sample size is above 100.",
+    "misconception": "gives a false limit"
+   },
+   {
+    "text": "For smooth functions of means.",
+    "misconception": "the jackknife works for these"
+   },
+   {
+    "text": "Whenever the data are normal.",
+    "misconception": "invents a condition"
+   }
+  ],
+  "explanation": "Bootstrap works for the median; neither works for the sample maximum."
+ },
+ {
+  "id": "np-8.5",
+  "lecture": 8,
+  "stem": "In a sample of size $n$, what is the probability that a given observation does not appear in a bootstrap resample?",
+  "correct": [
+   "$(1-1/n)^n$, about $e^{-1}\\approx0.368$ for large $n$, so roughly a third is left out.",
+   "Each draw misses it with probability $1-1/n$."
+  ],
+  "distractors": [
+   {
+    "text": "$1/n$, the chance that one particular draw picks it.",
+    "misconception": "gives the probability of a single draw"
+   },
+   {
+    "text": "One half, since each observation is equally likely to be in or out.",
+    "misconception": "gives a false value"
+   },
+   {
+    "text": "$1-1/n^2$, because pairs of draws are independent.",
+    "misconception": "gives a wrong formula"
+   },
+   {
+    "text": "Exactly zero, since resampling uses all the data.",
+    "misconception": "ignores sampling with replacement"
+   },
+   {
+    "text": "$(1/n)^n$, the chance of drawing it every time.",
+    "misconception": "gives the probability of drawing it every time"
+   }
+  ],
+  "explanation": "The remaining 63% of observations appear at least once; this is why out-of-bag error is based on roughly a third of the trees in bagging."
+ },
+ {
+  "id": "np-9.1",
+  "lecture": 9,
+  "stem": "How does a kernel density estimator with kernel $K$ and bandwidth $h$ work?",
+  "correct": [
+   "$\\hat f(x)=\\frac1{nh}\\sum_iK\\{(x-X_i)/h\\}$, a smooth bump averaged over the observations.",
+   "Average kernel functions centred at the data."
+  ],
+  "distractors": [
+   {
+    "text": "$\\hat f(x)$ is the fraction of data in a fixed bin around $x$.",
+    "misconception": "describes a histogram"
+   },
+   {
+    "text": "$\\hat f(x)$ is the sample mean of the kernel values at the grid.",
+    "misconception": "confuses with a mean"
+   },
+   {
+    "text": "It fits a normal density by maximum likelihood.",
+    "misconception": "describes a parametric fit"
+   },
+   {
+    "text": "The kernel is placed at the grid points rather than at the data.",
+    "misconception": "misplaces the kernel"
+   },
+   {
+    "text": "The sum of the bumps is divided by $n$, but not by $h$.",
+    "misconception": "omits $1/h$ and does not integrate to one"
+   }
+  ],
+  "explanation": "The factor $1/h$ keeps the area at 1, since $\\int K\\{(x-X_i)/h\\}dx=h$."
+ },
+ {
+  "id": "np-9.2",
+  "lecture": 9,
+  "stem": "What is the effect of the bandwidth $h$ on a kernel density estimate?",
+  "correct": [
+   "Small $h$ is wiggly and noisy; large $h$ oversmooths and adds bias.",
+   "It sets the bias-variance trade-off."
+  ],
+  "distractors": [
+   {
+    "text": "A small $h$ gives a smooth estimate with large bias.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The bandwidth does not affect the shape.",
+    "misconception": "ignores its role"
+   },
+   {
+    "text": "A large $h$ gives a more detailed estimate.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The choice of $h$ matters less than the kernel.",
+    "misconception": "reverses the relative importance"
+   },
+   {
+    "text": "Larger $h$ lowers both bias and variance.",
+    "misconception": "ignores the trade-off"
+   }
+  ],
+  "explanation": "$\\text{bias}\\approx h^2f''(x)\\mu_2(K)/2$ and $\\text{variance}\\approx f(x)R(K)/(nh)$; both are balanced by $h\\propto n^{-1/5}$."
+ },
+ {
+  "id": "np-9.3",
+  "lecture": 9,
+  "stem": "How does the asymptotically optimal bandwidth (for mean integrated squared error) scale with the sample size $n$?",
+  "correct": [
+   "In proportion to $n^{-1/5}$.",
+   "Slowly with $n$."
+  ],
+  "distractors": [
+   {
+    "text": "In proportion to $n^{-1/2}$.",
+    "misconception": "confuses with the parametric rate"
+   },
+   {
+    "text": "In proportion to $n^{-1}$.",
+    "misconception": "shrinks too fast"
+   },
+   {
+    "text": "It does not depend on $n$.",
+    "misconception": "ignores the sample size"
+   },
+   {
+    "text": "In proportion to $n^{1/5}$.",
+    "misconception": "has the wrong sign of the exponent"
+   },
+   {
+    "text": "In proportion to $\\log n$.",
+    "misconception": "gives an unrelated rate"
+   }
+  ],
+  "explanation": "Parametric densities converge at rate $n^{-1}$ in MISE; this slower rate is the price of flexibility. Silverman's rule is $h=1.06\\,\\hat\\sigma n^{-1/5}$."
+ },
+ {
+  "id": "np-9.4",
+  "lecture": 9,
+  "stem": "Which is true of the choice of kernel in density estimation?",
+  "correct": [
+   "It matters little next to the bandwidth.",
+   "Epanechnikov is optimal but others lose little."
+  ],
+  "distractors": [
+   {
+    "text": "The kernel matters more than the bandwidth.",
+    "misconception": "reverses the relative importance"
+   },
+   {
+    "text": "Only the Gaussian kernel gives a valid estimate.",
+    "misconception": "restricts the choice"
+   },
+   {
+    "text": "The kernel must be uniform.",
+    "misconception": "restricts the choice"
+   },
+   {
+    "text": "A kernel that is not symmetric is optimal.",
+    "misconception": "gives a wrong property"
+   },
+   {
+    "text": "A kernel with a heavy tail removes bias.",
+    "misconception": "confuses tails with bias"
+   }
+  ],
+  "explanation": "Kernels are nonnegative, symmetric and integrate to one; they differ in efficiency by under 5%."
+ },
+ {
+  "id": "np-9.5",
+  "lecture": 9,
+  "stem": "What is a known weakness of the kernel density estimator near the boundary of a bounded support?",
+  "correct": [
+   "It leaks mass outside the support and is biased near the edge.",
+   "Bumps spill over the boundary."
+  ],
+  "distractors": [
+   {
+    "text": "It is exactly right at the boundary.",
+    "misconception": "ignores the spillover"
+   },
+   {
+    "text": "It overestimates the density everywhere.",
+    "misconception": "misstates"
+   },
+   {
+    "text": "Boundary problems arise only for the Gaussian kernel.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "There is no bias but a larger variance.",
+    "misconception": "confuses the issue"
+   },
+   {
+    "text": "It cannot be computed at the boundary.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "Examples: densities of returns' absolute values or durations, supported on $[0,\\infty)$. Reflecting the data or using log transformations helps."
+ },
+ {
+  "id": "np-10.1",
+  "lecture": 10,
+  "stem": "What does the Nadaraya-Watson estimator of the regression function compute at $x$?",
+  "correct": [
+   "A kernel-weighted average of the responses.",
+   "A local mean weighted towards nearby points."
+  ],
+  "distractors": [
+   {
+    "text": "A local linear fit to the nearest points.",
+    "misconception": "describes local linear regression"
+   },
+   {
+    "text": "The global mean of all responses.",
+    "misconception": "ignores the kernel"
+   },
+   {
+    "text": "A polynomial fitted to all the data.",
+    "misconception": "describes polynomial regression"
+   },
+   {
+    "text": "The response of the single nearest neighbour.",
+    "misconception": "describes 1-NN"
+   },
+   {
+    "text": "The slope of a line through the data.",
+    "misconception": "confuses with a slope"
+   }
+  ],
+  "explanation": "It is a locally constant fit; as $h\\to\\infty$ it tends to the sample mean, and as $h\\to0$ it interpolates the data."
+ },
+ {
+  "id": "np-10.2",
+  "lecture": 10,
+  "stem": "Why is local linear regression often preferred to Nadaraya-Watson?",
+  "correct": [
+   "Less bias at boundaries, as it fits a line.",
+   "Local slope removes edge bias."
+  ],
+  "distractors": [
+   {
+    "text": "It is always faster to compute.",
+    "misconception": "confuses with computation"
+   },
+   {
+    "text": "It does not need a bandwidth.",
+    "misconception": "ignores the bandwidth"
+   },
+   {
+    "text": "It has no variance.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "It fits the global mean.",
+    "misconception": "describes a different estimator"
+   },
+   {
+    "text": "It applies only to equally spaced data.",
+    "misconception": "reverses the benefit"
+   }
+  ],
+  "explanation": "Local linear regression reproduces linear functions exactly, so its bias depends on the curvature only, not on the design density."
+ },
+ {
+  "id": "np-10.3",
+  "lecture": 10,
+  "stem": "What is LOESS (LOWESS)?",
+  "correct": [
+   "Local regression with weights falling with distance.",
+   "Weighted local lines."
+  ],
+  "distractors": [
+   {
+    "text": "A global polynomial fit.",
+    "misconception": "describes polynomial regression"
+   },
+   {
+    "text": "A kernel density estimator.",
+    "misconception": "confuses with density estimation"
+   },
+   {
+    "text": "A method for testing normality.",
+    "misconception": "confuses with a test"
+   },
+   {
+    "text": "Regression through the origin.",
+    "misconception": "confuses with a model restriction"
+   },
+   {
+    "text": "A moving average with equal weights.",
+    "misconception": "describes a simpler smoother"
+   }
+  ],
+  "explanation": "The span (the fraction of points used) plays the role of the bandwidth; a larger span gives a smoother curve."
+ },
+ {
+  "id": "np-10.4",
+  "lecture": 10,
+  "stem": "How is the bandwidth of a kernel regression typically chosen?",
+  "correct": [
+   "By cross-validation, minimising leave-one-out prediction error.",
+   "Held-out prediction error."
+  ],
+  "distractors": [
+   {
+    "text": "By taking the smallest value that gives an interpolating fit.",
+    "misconception": "chooses a high-variance estimate"
+   },
+   {
+    "text": "By choosing the largest bandwidth so that the curve is a line.",
+    "misconception": "chooses a high-bias estimate"
+   },
+   {
+    "text": "It is determined by the kernel.",
+    "misconception": "confuses kernel and bandwidth"
+   },
+   {
+    "text": "By minimising the in-sample error.",
+    "misconception": "would choose $h\\to0$"
+   },
+   {
+    "text": "It is fixed at 1 for standardised data.",
+    "misconception": "gives an arbitrary rule"
+   }
+  ],
+  "explanation": "The in-sample squared error decreases as $h\\to0$, so a held-out criterion (leave-one-out CV, GCV) is needed."
+ },
+ {
+  "id": "np-10.5",
+  "lecture": 10,
+  "stem": "How do nonparametric regression estimators behave as the number of predictors grows?",
+  "correct": [
+   "They suffer the curse of dimensionality: neighbourhoods empty out.",
+   "The rate deteriorates with $d$."
+  ],
+  "distractors": [
+   {
+    "text": "They improve with more predictors.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "They are unaffected by dimension.",
+    "misconception": "ignores the problem"
+   },
+   {
+    "text": "They converge faster than parametric models.",
+    "misconception": "reverses the ranking"
+   },
+   {
+    "text": "Only the bandwidth changes, not the rate.",
+    "misconception": "ignores the rate"
+   },
+   {
+    "text": "The problem arises only in classification.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "Additive or single-index models restore reasonable rates by imposing structure."
+ }
+]
