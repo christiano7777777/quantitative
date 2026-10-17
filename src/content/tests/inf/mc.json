@@ -1,0 +1,1762 @@
+[
+ {
+  "id": "inf-1.1",
+  "lecture": 1,
+  "stem": "What does the Fisher-Neyman factorization theorem say about a statistic $T(X)$?",
+  "correct": [
+   "$T$ is sufficient exactly when $f(x\\mid\\theta)=g(T(x),\\theta)\\,h(x)$ for some functions $g$ and $h$ with $h$ free of $\\theta$.",
+   "The density splits into a $\\theta$-part seen only through $T$ and a $\\theta$-free remainder."
+  ],
+  "distractors": [
+   {
+    "text": "$T$ is sufficient exactly when the distribution of $T(X)$ is the same for every $\\theta$.",
+    "misconception": "confuses sufficiency with ancillarity"
+   },
+   {
+    "text": "$T$ is sufficient exactly when it is the unbiased estimator of $\\theta$ with smallest variance.",
+    "misconception": "confuses sufficiency with UMVU optimality"
+   },
+   {
+    "text": "$T$ is sufficient exactly when the likelihood is maximised at $T(x)$ for every sample.",
+    "misconception": "confuses sufficiency with the MLE"
+   },
+   {
+    "text": "$T$ is sufficient exactly when $h(x)$ in the factorization depends on $\\theta$ only through $T$.",
+    "misconception": "misplaces the parameter: $h$ must not involve $\\theta$"
+   },
+   {
+    "text": "$T$ is sufficient only when it has the same dimension as the parameter $\\theta$.",
+    "misconception": "believes a sufficient statistic must match the parameter dimension"
+   }
+  ],
+  "explanation": "Factorization gives sufficiency: all dependence on $\\theta$ passes through $T$, and $h$ is free of $\\theta$. Dimensions need not match, and ancillarity is the opposite property."
+ },
+ {
+  "id": "inf-1.2",
+  "lecture": 1,
+  "stem": "Why is $U(0,\\theta)$ not an exponential family in $\\theta$?",
+  "correct": [
+   "Its support $(0,\\theta)$ depends on $\\theta$, which a density $h(x)\\exp\\{\\eta(\\theta)T(x)-A(\\theta)\\}$ cannot produce.",
+   "The set where the density is positive moves with $\\theta$, unlike in the exponential form."
+  ],
+  "distractors": [
+   {
+    "text": "Its density is not differentiable with respect to $\\theta$ at the points where it is positive.",
+    "misconception": "confuses the family form with smoothness"
+   },
+   {
+    "text": "It has no sufficient statistic smaller than the whole sample, so it cannot have the exponential form.",
+    "misconception": "ignores that the sample maximum is sufficient"
+   },
+   {
+    "text": "Its density integrates to a value that depends on $\\theta$, so it is not a proper density.",
+    "misconception": "forgets the normalising factor $1/\\theta$"
+   },
+   {
+    "text": "It has more than one unknown parameter, whereas the exponential form allows only one.",
+    "misconception": "miscounts parameters (and $k$-parameter families exist)"
+   },
+   {
+    "text": "Its mean $\\theta/2$ is not finite, so the cumulant function does not exist.",
+    "misconception": "the mean exists; support is the real issue"
+   }
+  ],
+  "explanation": "The exponential-family form has the same support for all $\\theta$. For $U(0,\\theta)$ the sample maximum is sufficient, but the support changes, so it is not in the family."
+ },
+ {
+  "id": "inf-1.3",
+  "lecture": 1,
+  "stem": "Let $X_1,\\dots,X_n$ be an i.i.d. sample from a full-rank exponential family with natural statistic $T$. What can be said about $\\sum_i T(X_i)$?",
+  "correct": [
+   "It is a minimal sufficient statistic for the natural parameter, and it is also complete.",
+   "It is sufficient, minimal and complete when the natural parameter space contains an open set."
+  ],
+  "distractors": [
+   {
+    "text": "It is sufficient but can never be minimal, because it uses all observations.",
+    "misconception": "believes using all data prevents minimality"
+   },
+   {
+    "text": "It is ancillary, since the density does not change shape across observations.",
+    "misconception": "confuses sufficiency with ancillarity"
+   },
+   {
+    "text": "It is unbiased for the natural parameter, which makes it the UMVUE of it.",
+    "misconception": "confuses a statistic's role with an unbiased estimator of $\\eta$"
+   },
+   {
+    "text": "It is sufficient and minimal, but completeness fails whenever the sample size exceeds the dimension.",
+    "misconception": "misstates when completeness holds"
+   },
+   {
+    "text": "It is complete only when the sample is normal; for other exponential families it is not.",
+    "misconception": "restricts completeness to the normal family"
+   }
+  ],
+  "explanation": "For full-rank exponential families $\\sum T(X_i)$ is complete and sufficient, hence minimal sufficient. Completeness rests on uniqueness of Laplace transforms and needs an open natural parameter set."
+ },
+ {
+  "id": "inf-1.4",
+  "lecture": 1,
+  "stem": "A statistic $S(X)$ is called ancillary for $\\theta$. What does this mean?",
+  "correct": [
+   "The distribution of $S(X)$ is exactly the same for every value of $\\theta$ in the parameter space.",
+   "$S$ has a law free of $\\theta$, so alone it carries no information about it."
+  ],
+  "distractors": [
+   {
+    "text": "$S$ is a function of every sufficient statistic, so it is as informative as the whole sample.",
+    "misconception": "confuses with being a function of a minimal sufficient statistic"
+   },
+   {
+    "text": "$S$ has expectation zero for every $\\theta$, so it is an unbiased estimator of zero.",
+    "misconception": "confuses ancillarity with mean zero"
+   },
+   {
+    "text": "$S$ is independent of every other statistic computed from the same sample.",
+    "misconception": "overstates; independence needs completeness (Basu)"
+   },
+   {
+    "text": "$S$ carries all the information about $\\theta$ available in the sample.",
+    "misconception": "reverses the meaning"
+   },
+   {
+    "text": "$S$ is a sufficient statistic whose dimension is smaller than that of the sample.",
+    "misconception": "confuses with data reduction by sufficiency"
+   }
+  ],
+  "explanation": "Ancillary means the law of $S$ does not involve $\\theta$. Ancillary statistics need not be independent of a sufficient one unless the sufficient statistic is complete (Basu)."
+ },
+ {
+  "id": "inf-1.5",
+  "lecture": 1,
+  "stem": "Let $X_1,\\dots,X_n$ be i.i.d. $N(\\theta,1)$ with $n\\ge2$. Which statistic is ancillary for $\\theta$?",
+  "correct": [
+   "$X_1-\\bar X$, since it has the $N(0,1-1/n)$ law whatever $\\theta$ is, and so is ancillary.",
+   "The first deviation from the mean, since its law is free of $\\theta$ for every $n\\ge2$."
+  ],
+  "distractors": [
+   {
+    "text": "The sample mean $\\bar X$, since its variance $1/n$ does not depend on $\\theta$.",
+    "misconception": "only the variance is free of $\\theta$; the law of $\\bar X$ is not"
+   },
+   {
+    "text": "The sum of squares $\\sum_i X_i^2$, because it is a symmetric function of the sample.",
+    "misconception": "symmetry does not remove dependence on $\\theta$"
+   },
+   {
+    "text": "The sample maximum $\\max_i X_i$, because the order of the data is irrelevant.",
+    "misconception": "its law shifts with $\\theta$"
+   },
+   {
+    "text": "The statistic $\\bar X+X_1-\\bar X$, because the two pieces are independent.",
+    "misconception": "the sum is $X_1$, which depends on $\\theta$"
+   },
+   {
+    "text": "The sample mean $\\bar X$, because it is sufficient and so cannot depend on $\\theta$.",
+    "misconception": "confuses sufficiency with ancillarity"
+   }
+  ],
+  "explanation": "Subtracting the mean removes the location: $X_1-\\bar X$ depends only on the $N(0,1)$ errors. By Basu it is independent of the complete sufficient $\\bar X$."
+ },
+ {
+  "id": "inf-2.1",
+  "lecture": 2,
+  "stem": "What does it mean for a statistic $T$ to be complete?",
+  "correct": [
+   "If $E_\\theta g(T)=0$ for every $\\theta$, then $g(T)=0$ with probability one under every $\\theta$.",
+   "No nonzero function of $T$ is an unbiased estimator of zero."
+  ],
+  "distractors": [
+   {
+    "text": "If $E_\\theta g(T)=0$ for some single $\\theta$, then $g(T)=0$ almost surely.",
+    "misconception": "drops the requirement of holding for all $\\theta$"
+   },
+   {
+    "text": "$T$ is a function of every other sufficient statistic, so no data reduction is possible.",
+    "misconception": "confuses completeness with minimal sufficiency"
+   },
+   {
+    "text": "$T$ has the same distribution for all $\\theta$, so $E_\\theta g(T)$ is constant.",
+    "misconception": "confuses completeness with ancillarity"
+   },
+   {
+    "text": "$T$ is an unbiased estimator of $\\theta$ with the smallest possible variance.",
+    "misconception": "confuses completeness with UMVU"
+   },
+   {
+    "text": "Every unbiased estimator of $\\theta$ that depends on $T$ has the same variance.",
+    "misconception": "misreads uniqueness of unbiased functions as equal variance"
+   }
+  ],
+  "explanation": "Completeness says the only unbiased estimator of zero based on $T$ is zero. It gives uniqueness of unbiased estimators that are functions of $T$."
+ },
+ {
+  "id": "inf-2.2",
+  "lecture": 2,
+  "stem": "Let $T$ be complete and sufficient and let $h(T)$ be unbiased for $g(\\theta)$. What does the Lehmann-Scheffe theorem conclude?",
+  "correct": [
+   "$h(T)$ is the unique UMVUE of $g(\\theta)$, having the smallest variance among all unbiased estimators.",
+   "No unbiased estimator of $g(\\theta)$ has smaller variance than $h(T)$ at any $\\theta$."
+  ],
+  "distractors": [
+   {
+    "text": "$h(T)$ has the smallest mean squared error among all estimators, including biased ones.",
+    "misconception": "extends optimality beyond unbiased estimators"
+   },
+   {
+    "text": "$h(T)$ has minimum variance only among those unbiased estimators that are functions of $T$.",
+    "misconception": "misses that Rao-Blackwell extends it to all unbiased estimators"
+   },
+   {
+    "text": "$h(T)$ attains the Cramer-Rao lower bound for every $\\theta$ and every sample size.",
+    "misconception": "assumes the bound is always attained"
+   },
+   {
+    "text": "$h(T)$ is a UMVUE, but other UMVUEs of $g(\\theta)$ exist that differ with positive probability.",
+    "misconception": "ignores uniqueness"
+   },
+   {
+    "text": "$h(T)$ is the maximum likelihood estimator of $g(\\theta)$.",
+    "misconception": "confuses the UMVUE with the MLE"
+   }
+  ],
+  "explanation": "With completeness, Rao-Blackwell improves any unbiased estimator to a function of $T$, and completeness makes that function unique. So $h(T)$ is the best unbiased estimator."
+ },
+ {
+  "id": "inf-2.3",
+  "lecture": 2,
+  "stem": "Which statement about Rao-Blackwellization is correct? Here $\\delta(X)$ is unbiased for $g(\\theta)$ and $T$ is sufficient.",
+  "correct": [
+   "$E[\\delta\\mid T]$ is unbiased and has variance no larger than that of $\\delta$.",
+   "Conditioning an unbiased estimator on $T$ never raises its variance."
+  ],
+  "distractors": [
+   {
+    "text": "$E[\\delta(X)\\mid T]$ always has strictly smaller variance than $\\delta(X)$.",
+    "misconception": "ignores the equality case when $\\delta$ is already a function of $T$"
+   },
+   {
+    "text": "$E[\\delta(X)\\mid T]$ reduces the variance but introduces bias that vanishes as $n$ grows.",
+    "misconception": "believes conditioning induces bias"
+   },
+   {
+    "text": "The result needs $T$ to be complete, otherwise $E[\\delta(X)\\mid T]$ may depend on $\\theta$.",
+    "misconception": "confuses sufficiency with completeness"
+   },
+   {
+    "text": "The result holds for any statistic $T$, because conditioning always reduces variance.",
+    "misconception": "forgets that sufficiency makes the conditional expectation computable without $\\theta$"
+   },
+   {
+    "text": "$E[\\delta(X)\\mid T]$ is the maximum likelihood estimator of $g(\\theta)$.",
+    "misconception": "confuses Rao-Blackwellization with maximum likelihood"
+   }
+  ],
+  "explanation": "Sufficiency makes $E[\\delta\\mid T]$ free of $\\theta$, hence an estimator. Unbiasedness follows from the tower rule and variance does not increase by the law of total variance."
+ },
+ {
+  "id": "inf-2.4",
+  "lecture": 2,
+  "stem": "Basu's theorem concerns a complete sufficient statistic $T$ and an ancillary statistic $S$. What does it assert?",
+  "correct": [
+   "$T$ and $S$ are independent under every value of $\\theta$.",
+   "Complete sufficient and ancillary statistics are independent."
+  ],
+  "distractors": [
+   {
+    "text": "Any sufficient statistic is independent of any ancillary statistic.",
+    "misconception": "drops the completeness requirement"
+   },
+   {
+    "text": "$S$ is a function of $T$, so the two are perfectly dependent.",
+    "misconception": "reverses the conclusion"
+   },
+   {
+    "text": "$T$ and $S$ are independent only at the value $\\theta$ where $S$ has mean zero.",
+    "misconception": "restricts independence to one $\\theta$"
+   },
+   {
+    "text": "$T$ and $S$ are uncorrelated but may still be dependent.",
+    "misconception": "weakens independence to zero correlation"
+   },
+   {
+    "text": "$T$ is independent of all unbiased estimators of $\\theta$.",
+    "misconception": "confuses ancillary statistics with unbiased estimators"
+   }
+  ],
+  "explanation": "Basu gives full independence. A standard use: for normal samples with known variance, $\\bar X$ is complete sufficient and $S^2$ is ancillary, so $\\bar X$ and $S^2$ are independent."
+ },
+ {
+  "id": "inf-2.5",
+  "lecture": 2,
+  "stem": "For $X_1,\\dots,X_n$ i.i.d. Poisson($\\lambda$), why does $\\mathbf 1\\{X_1=0\\}$ help in finding the UMVUE of $e^{-\\lambda}$?",
+  "correct": [
+   "It is unbiased for $e^{-\\lambda}$, so conditioning it on the complete sufficient statistic $\\sum_iX_i$ gives the UMVUE.",
+   "Rao-Blackwellizing it by the sum $\\sum_iX_i$ gives the UMVUE, a function of that sum."
+  ],
+  "distractors": [
+   {
+    "text": "It is itself a function of the complete sufficient statistic, so it is already the UMVUE.",
+    "misconception": "misses that the indicator depends on $X_1$ alone"
+   },
+   {
+    "text": "Its conditional expectation given $\\sum_i X_i$ equals $e^{-\\bar X}$, which is therefore the UMVUE.",
+    "misconception": "confuses plug-in with the conditional expectation, which is biased"
+   },
+   {
+    "text": "It is ancillary for $\\lambda$, so by Basu's theorem it is independent of the sample mean.",
+    "misconception": "misidentifies it as ancillary; its mean depends on $\\lambda$"
+   },
+   {
+    "text": "It is consistent for $e^{-\\lambda}$, and consistency suffices for being the UMVUE.",
+    "misconception": "confuses consistency with optimality"
+   },
+   {
+    "text": "It is the maximum likelihood estimator of $e^{-\\lambda}$ based on the first observation.",
+    "misconception": "confuses unbiased indicator with an MLE"
+   }
+  ],
+  "explanation": "The indicator is unbiased; $E[\\mathbf 1\\{X_1=0\\}\\mid\\sum X_i=s]=(1-1/n)^s$, a function of the complete sufficient statistic, hence the UMVUE. The plug-in $e^{-\\bar X}$ is biased."
+ },
+ {
+  "id": "inf-3.1",
+  "lecture": 3,
+  "stem": "Under regularity conditions, which expression gives the Fisher information $I(\\theta)$ of one observation?",
+  "correct": [
+   "$I(\\theta)=\\operatorname{Var}_\\theta\\{\\partial_\\theta\\log f(X\\mid\\theta)\\}=-E_\\theta[\\partial^2_\\theta\\log f(X\\mid\\theta)]$.",
+   "The score variance, i.e. minus the expected Hessian of $\\log f$."
+  ],
+  "distractors": [
+   {
+    "text": "$I(\\theta)=E_\\theta\\!\\left[\\frac{\\partial}{\\partial\\theta}\\log f(X\\mid\\theta)\\right]$, the expected score.",
+    "misconception": "the expected score is zero, not the information"
+   },
+   {
+    "text": "$I(\\theta)=E_\\theta\\!\\left[\\frac{\\partial^2}{\\partial\\theta^2}\\log f(X\\mid\\theta)\\right]$, without the minus sign.",
+    "misconception": "sign error: this expectation is non-positive"
+   },
+   {
+    "text": "$I(\\theta)=1/\\operatorname{Var}_\\theta(X)$ for every regular model.",
+    "misconception": "true only in special models such as the normal mean"
+   },
+   {
+    "text": "$I(\\theta)=\\frac{\\partial}{\\partial\\theta}\\log f(x\\mid\\theta)$ evaluated at the observed value $x$.",
+    "misconception": "confuses the observed score with its variance"
+   },
+   {
+    "text": "$I(\\theta)=E_\\theta\\{(X-\\theta)^2\\}$, the mean squared deviation of the observation from the parameter.",
+    "misconception": "confuses information with the variance of the data"
+   }
+  ],
+  "explanation": "Information is the variance of the score, which has mean zero, and equals the negative expected Hessian. The identity needs differentiation under the integral sign."
+ },
+ {
+  "id": "inf-3.2",
+  "lecture": 3,
+  "stem": "For $n$ i.i.d. observations with one-observation information $I_1(\\theta)$, what is the information $I_n(\\theta)$ in the whole sample?",
+  "correct": [
+   "$I_n(\\theta)=n\\,I_1(\\theta)$, since the scores of independent observations add and so do their variances.",
+   "It grows linearly with the sample size, as $n$ times $I_1$."
+  ],
+  "distractors": [
+   {
+    "text": "$I_n(\\theta)=\\sqrt n\\,I_1(\\theta)$, because standard errors scale like $\\sqrt n$.",
+    "misconception": "confuses scaling of information with that of standard error"
+   },
+   {
+    "text": "$I_n(\\theta)=I_1(\\theta)/n$, because averaging reduces the information per observation.",
+    "misconception": "confuses information with the variance of the mean"
+   },
+   {
+    "text": "$I_n(\\theta)=I_1(\\theta)$, because all observations concern the same parameter.",
+    "misconception": "ignores that independent observations add information"
+   },
+   {
+    "text": "$I_n(\\theta)=n^2I_1(\\theta)$, because the log-likelihood is a sum of $n$ terms.",
+    "misconception": "squares the sample size instead of summing variances"
+   },
+   {
+    "text": "$I_n(\\theta)=I_1(\\theta)^n$, because the joint density is a product of $n$ densities.",
+    "misconception": "turns the sum of log-likelihood terms into a power"
+   }
+  ],
+  "explanation": "The log-likelihood is a sum, so the score is a sum of independent terms with variance $nI_1(\\theta)$. The estimator's variance bound therefore shrinks like $1/n$."
+ },
+ {
+  "id": "inf-3.3",
+  "lecture": 3,
+  "stem": "Which statement of the Cramer-Rao inequality is correct under regularity conditions?",
+  "correct": [
+   "Any unbiased estimator $T$ of $g(\\theta)$ satisfies $\\operatorname{Var}_\\theta(T)\\ge g'(\\theta)^2/I_n(\\theta)$.",
+   "Unbiasedness forces the variance to be at least $g'(\\theta)^2/I_n(\\theta)$."
+  ],
+  "distractors": [
+   {
+    "text": "Any estimator of $\\theta$, biased or not, satisfies $\\operatorname{Var}_\\theta(T)\\ge1/I_n(\\theta)$.",
+    "misconception": "applies the unbiased bound to biased estimators"
+   },
+   {
+    "text": "Any unbiased estimator of $g(\\theta)$ satisfies $\\operatorname{Var}_\\theta(T)\\le g'(\\theta)^2/I_n(\\theta)$.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "Any unbiased estimator of $g(\\theta)$ satisfies $\\operatorname{Var}_\\theta(T)\\ge g(\\theta)^2/I_n(\\theta)$.",
+    "misconception": "replaces the derivative $g'$ by $g$"
+   },
+   {
+    "text": "The bound holds for every statistical model, including those whose support depends on $\\theta$.",
+    "misconception": "ignores the regularity conditions"
+   },
+   {
+    "text": "Any unbiased estimator of $g(\\theta)$ satisfies $\\operatorname{Var}_\\theta(T)\\ge g'(\\theta)/I_n(\\theta)$, with the derivative unsquared.",
+    "misconception": "forgets to square the derivative"
+   }
+  ],
+  "explanation": "Cauchy-Schwarz applied to $\\operatorname{Cov}(T,\\text{score})=g'(\\theta)$ gives the bound. Regularity requires a $\\theta$-free support so that integration and differentiation can be exchanged."
+ },
+ {
+  "id": "inf-3.4",
+  "lecture": 3,
+  "stem": "When does an unbiased estimator $T$ of $g(\\theta)$ attain the Cramer-Rao bound at every $\\theta$?",
+  "correct": [
+   "Exactly when the score equals $a(\\theta)\\{T-g(\\theta)\\}$ for some function $a(\\theta)$, i.e. equality in Cauchy-Schwarz.",
+   "When the score is linear in $T$, with $\\theta$-only coefficients."
+  ],
+  "distractors": [
+   {
+    "text": "Whenever $T$ is a sufficient statistic for $\\theta$.",
+    "misconception": "sufficiency does not imply equality in the bound"
+   },
+   {
+    "text": "Whenever $T$ is the UMVUE of $g(\\theta)$, since the UMVUE has smallest variance.",
+    "misconception": "the UMVUE can have variance above the bound"
+   },
+   {
+    "text": "Whenever $T$ is the maximum likelihood estimator, at every sample size.",
+    "misconception": "the MLE attains the bound only asymptotically, if at all"
+   },
+   {
+    "text": "Only when $T$ is a biased estimator, which has smaller variance than any unbiased one.",
+    "misconception": "confuses the bound for unbiased estimators with a bias-variance trade-off"
+   },
+   {
+    "text": "Exactly when $T$ is a complete statistic, since completeness forces the smallest possible variance.",
+    "misconception": "confuses completeness with equality in Cauchy-Schwarz"
+   }
+  ],
+  "explanation": "Equality holds iff the score is proportional to $T-g(\\theta)$. This forces an exponential family in which $T$ estimates the mean of the natural statistic."
+ },
+ {
+  "id": "inf-3.5",
+  "lecture": 3,
+  "stem": "For a normal sample with unknown mean and variance, $S^2$ is the UMVUE of $\\sigma^2$. How does its variance compare with the Cramer-Rao bound for $\\sigma^2$?",
+  "correct": [
+   "Its variance $2\\sigma^4/(n-1)$ is strictly above the bound $2\\sigma^4/n$, so a UMVUE need not attain the bound.",
+   "It is the best unbiased estimator, yet the bound is not attained at any finite $n$."
+  ],
+  "distractors": [
+   {
+    "text": "It attains the bound exactly for every $n$, since $S^2$ is a function of a complete sufficient statistic.",
+    "misconception": "assumes UMVUE implies equality in the bound"
+   },
+   {
+    "text": "It cannot be the UMVUE, since an estimator that misses the bound cannot be optimal.",
+    "misconception": "believes the bound must be reached by the best estimator"
+   },
+   {
+    "text": "The bound does not exist, because the mean is unknown and so the information is undefined.",
+    "misconception": "ignores that the information matrix is diagonal here"
+   },
+   {
+    "text": "It is the maximum likelihood estimator $\\hat\\sigma^2$, which is the one that attains the bound.",
+    "misconception": "confuses $S^2$ with the biased MLE"
+   },
+   {
+    "text": "It attains the bound at each $n$, because the sample mean attains the bound for estimating $\\mu$.",
+    "misconception": "transfers attainment from the mean to the variance"
+   }
+  ],
+  "explanation": "Var$(S^2)=2\\sigma^4/(n-1)$ while the bound is $2\\sigma^4/n$. Attainment needs the score to be linear in the estimator, which fails when the mean is unknown; $S^2$ is still UMVUE by Lehmann-Scheffe."
+ },
+ {
+  "id": "inf-4.1",
+  "lecture": 4,
+  "stem": "Under regularity conditions, what is the asymptotic distribution of the MLE $\\hat\\theta_n$ from $n$ i.i.d. observations at the true value $\\theta_0$?",
+  "correct": [
+   "$\\sqrt n(\\hat\\theta_n-\\theta_0)$ converges in distribution to $N\\!\\left(0,\\,1/I_1(\\theta_0)\\right)$.",
+   "The MLE is approximately normal, centred at $\\theta_0$ with variance $1/\\{nI_1(\\theta_0)\\}$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\sqrt n(\\hat\\theta_n-\\theta_0)$ converges in distribution to $N\\!\\left(0,\\,I_1(\\theta_0)\\right)$.",
+    "misconception": "inverts the information"
+   },
+   {
+    "text": "$\\hat\\theta_n-\\theta_0$ converges in distribution to $N\\!\\left(0,\\,1/I_1(\\theta_0)\\right)$ without any scaling.",
+    "misconception": "forgets the $\\sqrt n$ scaling, which would make it degenerate"
+   },
+   {
+    "text": "$\\sqrt n(\\hat\\theta_n-\\theta_0)$ converges to a chi-square limit with one degree of freedom.",
+    "misconception": "confuses the MLE limit with that of the LRT statistic"
+   },
+   {
+    "text": "The limit holds only if $\\hat\\theta_n$ is an unbiased estimator of $\\theta_0$ for every $n$.",
+    "misconception": "requires finite-sample unbiasedness unnecessarily"
+   },
+   {
+    "text": "$\\sqrt n(\\hat\\theta_n-\\theta_0)$ converges to $N\\!\\left(0,\\,1/I_1(\\theta_0)\\right)$ only when the model is a normal location family.",
+    "misconception": "restricts a general theorem to the normal case"
+   }
+  ],
+  "explanation": "The MLE is consistent, asymptotically normal and asymptotically efficient, attaining the Cramer-Rao variance $1/\\{nI_1(\\theta_0)\\}$ in the limit. No finite-sample unbiasedness is needed."
+ },
+ {
+  "id": "inf-4.2",
+  "lecture": 4,
+  "stem": "Which of the Wald, score and likelihood ratio statistics for $H_0:\\theta=\\theta_0$ can be computed using only the fit under the null?",
+  "correct": [
+   "The score statistic $U(\\theta_0)^2/I_n(\\theta_0)$, which needs only the score and information under the null.",
+   "The score statistic, which is evaluated at the null value alone."
+  ],
+  "distractors": [
+   {
+    "text": "The Wald statistic, because it only compares the MLE with $\\theta_0$.",
+    "misconception": "overlooks that the Wald statistic needs the unrestricted MLE"
+   },
+   {
+    "text": "The likelihood ratio statistic, since it is a function of the null likelihood alone.",
+    "misconception": "overlooks the maximised likelihood in the numerator"
+   },
+   {
+    "text": "All three, since they are asymptotically equivalent under the null.",
+    "misconception": "asymptotic equivalence does not mean identical inputs"
+   },
+   {
+    "text": "None of them, since every large-sample test needs the maximum likelihood estimator.",
+    "misconception": "does not know the score test"
+   },
+   {
+    "text": "The Wald statistic with the information evaluated at $\\theta_0$, because that avoids fitting the alternative.",
+    "misconception": "the Wald statistic still uses the unrestricted MLE in its numerator"
+   }
+  ],
+  "explanation": "Wald uses $(\\hat\\theta-\\theta_0)^2I_n(\\hat\\theta)$, the LRT uses the maximised likelihood, but the score test uses $U(\\theta_0)$ and $I_n(\\theta_0)$ only. All have a $\\chi^2_1$ limit under $H_0$."
+ },
+ {
+  "id": "inf-4.3",
+  "lecture": 4,
+  "stem": "Neyman and Scott: $X_{i1},X_{i2}$ are independent $N(\\mu_i,\\sigma^2)$ for $i=1,\\dots,n$. The MLE of $\\sigma^2$ converges to $\\sigma^2/2$. What does this show?",
+  "correct": [
+   "Consistency of the MLE can fail when the nuisance parameters grow with $n$.",
+   "Growing nuisance parameters can destroy consistency."
+  ],
+  "distractors": [
+   {
+    "text": "The MLE of a variance is always inconsistent for normal data.",
+    "misconception": "overgeneralises; the MLE is consistent with fixed $\\mu$"
+   },
+   {
+    "text": "The bias of the MLE disappears as $n$ grows, so it is consistent after all.",
+    "misconception": "the bias does not vanish here"
+   },
+   {
+    "text": "The likelihood is unbounded, so no maximum exists.",
+    "misconception": "the likelihood has a maximum, but at the wrong value"
+   },
+   {
+    "text": "The pairs are dependent, so the factorization of the likelihood is invalid.",
+    "misconception": "the pairs are independent"
+   },
+   {
+    "text": "Maximum likelihood is inconsistent in every model that has more than one unknown parameter.",
+    "misconception": "overgeneralises from a failure with growing dimension"
+   }
+  ],
+  "explanation": "Each $\\mu_i$ is estimated from only two observations, so the within-pair residual variance is underestimated by a factor 2 regardless of $n$. The fixed-dimension assumption fails."
+ },
+ {
+  "id": "inf-4.4",
+  "lecture": 4,
+  "stem": "Let $g$ be differentiable with $g'(\\theta_0)\\neq0$ and let $\\hat\\theta_n$ be the MLE. What is the asymptotic distribution of $g(\\hat\\theta_n)$?",
+  "correct": [
+   "Approximately $N\\!\\left(g(\\theta_0),\\ g'(\\theta_0)^2/\\{nI_1(\\theta_0)\\}\\right)$, and $g(\\hat\\theta_n)$ is the MLE of $g(\\theta)$.",
+   "By invariance and the delta method, variance $g'(\\theta_0)^2/\\{nI_1(\\theta_0)\\}$."
+  ],
+  "distractors": [
+   {
+    "text": "Approximately $N\\!\\left(g(\\theta_0),\\ g'(\\theta_0)/\\{nI_1(\\theta_0)\\}\\right)$, with the derivative unsquared.",
+    "misconception": "forgets to square the derivative in the delta method"
+   },
+   {
+    "text": "Approximately $N\\!\\left(g(\\theta_0),\\ 1/\\{nI_1(g(\\theta_0))\\}\\right)$, using the same information function.",
+    "misconception": "ignores the change of parameter in the information"
+   },
+   {
+    "text": "Not normal in general, since a nonlinear map destroys normality.",
+    "misconception": "ignores the delta method"
+   },
+   {
+    "text": "Normal, but $g(\\hat\\theta_n)$ is the MLE of $g(\\theta)$ only when $g$ is linear.",
+    "misconception": "ignores invariance of the MLE"
+   },
+   {
+    "text": "It is approximately normal with variance $g'(\\theta_0)^2\\,nI_1(\\theta_0)$, since information multiplies the variance.",
+    "misconception": "multiplies by the information instead of dividing"
+   }
+  ],
+  "explanation": "The delta method multiplies the variance by $g'(\\theta_0)^2$, and the MLE is invariant under reparametrization. Hence $g(\\hat\\theta_n)$ is asymptotically efficient for $g(\\theta)$."
+ },
+ {
+  "id": "inf-4.5",
+  "lecture": 4,
+  "stem": "For a Wald interval for $\\theta$, which choice of standard error is justified by the large-sample theory of the MLE?",
+  "correct": [
+   "Either observed information $-\\ell''(\\hat\\theta)$ or expected $nI_1(\\hat\\theta)$, both evaluated at the MLE.",
+   "Either the observed or the expected information, evaluated at the MLE."
+  ],
+  "distractors": [
+   {
+    "text": "$1/\\sqrt{nI_1(\\theta_0)}$ with the true value, which is the only valid choice.",
+    "misconception": "believes plug-in of the MLE is invalid"
+   },
+   {
+    "text": "$1/\\{nI_1(\\hat\\theta)\\}$ without the square root, because information is a variance.",
+    "misconception": "confuses the information with its square root in the standard error"
+   },
+   {
+    "text": "Only the expected information, because the observed information is random.",
+    "misconception": "ignores that the observed information is consistent for it"
+   },
+   {
+    "text": "The sample standard deviation of the data divided by $\\sqrt n$, in every model.",
+    "misconception": "applies the normal-mean formula to all models"
+   },
+   {
+    "text": "The reciprocal of the maximised log-likelihood $\\ell(\\hat\\theta)$, since a larger likelihood means a smaller error.",
+    "misconception": "confuses the height of the likelihood with its curvature"
+   }
+  ],
+  "explanation": "Both $-\\ell''(\\hat\\theta)/n$ and $I_1(\\hat\\theta)$ converge to $I_1(\\theta_0)$, so replacing the unknown information by either at the MLE preserves the normal limit by Slutsky."
+ },
+ {
+  "id": "inf-5.1",
+  "lecture": 5,
+  "stem": "What is the risk function $R(\\theta,\\delta)$ of a decision rule $\\delta$ with loss $L$?",
+  "correct": [
+   "$E_\\theta\\{L(\\theta,\\delta(X))\\}$, the expected loss over repeated samples at a fixed $\\theta$.",
+   "The average loss of the rule over the sampling distribution."
+  ],
+  "distractors": [
+   {
+    "text": "$R(\\theta,\\delta)=L(\\theta,\\delta(x))$ evaluated at the single observed sample $x$.",
+    "misconception": "confuses loss with risk"
+   },
+   {
+    "text": "$R(\\theta,\\delta)=\\int R(\\theta,\\delta)\\,\\pi(\\theta)\\,d\\theta$, the average over a prior.",
+    "misconception": "confuses risk with Bayes risk"
+   },
+   {
+    "text": "$R(\\theta,\\delta)=\\operatorname{Var}_\\theta(\\delta(X))$, the sampling variance of the rule.",
+    "misconception": "equates risk with variance, ignoring bias"
+   },
+   {
+    "text": "$R(\\theta,\\delta)=E\\{L(\\theta,\\delta(X))\\mid X=x\\}$, the expected loss given the data.",
+    "misconception": "confuses frequentist risk with posterior expected loss"
+   },
+   {
+    "text": "$R(\\theta,\\delta)=\\sup_x L(\\theta,\\delta(x))$, the largest loss over all possible samples.",
+    "misconception": "confuses risk with the worst-case loss"
+   }
+  ],
+  "explanation": "Risk averages the loss over the sampling distribution of $X$, with $\\theta$ held fixed. A rule is judged by the whole function $\\theta\\mapsto R(\\theta,\\delta)$."
+ },
+ {
+  "id": "inf-5.2",
+  "lecture": 5,
+  "stem": "Under squared error loss, how does the risk of an estimator $\\delta$ of $\\theta$ decompose?",
+  "correct": [
+   "Risk equals the variance of the estimator plus the square of its bias.",
+   "The risk is the variance plus the bias squared, for every estimator."
+  ],
+  "distractors": [
+   {
+    "text": "$R(\\theta,\\delta)=\\operatorname{Var}_\\theta(\\delta)+\\operatorname{bias}_\\theta(\\delta)$, with the bias unsquared.",
+    "misconception": "forgets to square the bias"
+   },
+   {
+    "text": "$R(\\theta,\\delta)=\\operatorname{Var}_\\theta(\\delta)-\\{\\operatorname{bias}_\\theta(\\delta)\\}^2$, so bias can reduce the risk.",
+    "misconception": "sign error"
+   },
+   {
+    "text": "$R(\\theta,\\delta)=\\operatorname{Var}_\\theta(\\delta)$, because the loss is centred at the true value.",
+    "misconception": "ignores the bias term"
+   },
+   {
+    "text": "$R(\\theta,\\delta)=\\{\\operatorname{bias}_\\theta(\\delta)\\}^2$ for unbiased and biased estimators alike.",
+    "misconception": "drops the variance"
+   },
+   {
+    "text": "The identity $R(\\theta,\\delta)=\\operatorname{Var}_\\theta(\\delta)+\\{\\operatorname{bias}_\\theta(\\delta)\\}^2$ holds only for normal data.",
+    "misconception": "believes the decomposition needs normality"
+   }
+  ],
+  "explanation": "$E(\\delta-\\theta)^2=\\operatorname{Var}(\\delta)+(E\\delta-\\theta)^2$. A small bias can be worthwhile if it reduces the variance more, so unbiased rules are not always best."
+ },
+ {
+  "id": "inf-5.3",
+  "lecture": 5,
+  "stem": "When is a decision rule $\\delta$ inadmissible?",
+  "correct": [
+   "Another rule has no larger risk anywhere and smaller risk somewhere.",
+   "It is dominated: some other rule is never worse and sometimes better."
+  ],
+  "distractors": [
+   {
+    "text": "Exactly when some rule $\\delta'$ has $R(\\theta,\\delta')<R(\\theta,\\delta)$ at every single $\\theta$.",
+    "misconception": "demands strict improvement everywhere"
+   },
+   {
+    "text": "Some rule $\\delta'$ has smaller risk at the true value of $\\theta$ for the data observed.",
+    "misconception": "compares at one unknown $\\theta$ only"
+   },
+   {
+    "text": "The maximum risk of $\\delta$ over $\\theta$ exceeds that of another rule $\\delta'$.",
+    "misconception": "confuses inadmissible with not minimax"
+   },
+   {
+    "text": "The rule $\\delta$ is biased, so an unbiased rule must dominate it.",
+    "misconception": "confuses bias with inadmissibility"
+   },
+   {
+    "text": "Some rule $\\delta'$ has smaller risk than $\\delta$ when averaged over a given prior $\\pi$.",
+    "misconception": "confuses admissibility with a Bayes risk comparison"
+   }
+  ],
+  "explanation": "Admissibility is about domination across all $\\theta$. A rule beaten at some $\\theta$ and beating the other at another $\\theta$ is not dominated. Large maximum risk does not imply inadmissibility."
+ },
+ {
+  "id": "inf-5.4",
+  "lecture": 5,
+  "stem": "Under squared error loss, with a model whose distributions are mutually absolutely continuous, is the constant estimator $\\delta(X)\\equiv c$ admissible for $\\theta$?",
+  "correct": [
+   "Yes: its risk is zero at $\\theta=c$, so any rival with no larger risk there must equal $c$.",
+   "Zero risk at $\\theta=c$ leaves no room for a dominating rule."
+  ],
+  "distractors": [
+   {
+    "text": "No, because it ignores the data and so is dominated by the sample mean.",
+    "misconception": "the sample mean has positive risk at $\\theta=c$"
+   },
+   {
+    "text": "No, because it is biased for every $\\theta\\neq c$ and bias implies inadmissibility.",
+    "misconception": "confuses bias with inadmissibility"
+   },
+   {
+    "text": "Yes, but only when $c=0$, which is the sole value with zero risk.",
+    "misconception": "every value $c$ gives zero risk at $\\theta=c$"
+   },
+   {
+    "text": "No, because its maximum risk over $\\theta$ is infinite, hence it is not minimax.",
+    "misconception": "confuses maximum risk with admissibility"
+   },
+   {
+    "text": "No, because shrinking $c$ towards the sample mean gives an estimator with smaller risk.",
+    "misconception": "the shrunk estimator has positive risk at $\\theta=c$"
+   }
+  ],
+  "explanation": "Admissibility is a weak property, satisfied by silly rules. A dominating rule would need zero risk at $\\theta=c$, and so would equal $c$ a.s. under $P_c$ and hence under all $P_\\theta$."
+ },
+ {
+  "id": "inf-5.5",
+  "lecture": 5,
+  "stem": "Under which condition can randomised rules be dispensed with, in the sense that some non-randomised rule has risk no larger?",
+  "correct": [
+   "When the loss $L(\\theta,a)$ is convex in the action $a$, by Jensen's inequality.",
+   "Convex loss lets the mean action replace the random one."
+  ],
+  "distractors": [
+   {
+    "text": "When the loss is the 0-1 loss, as in hypothesis testing.",
+    "misconception": "randomised tests are needed for exact size with 0-1 loss"
+   },
+   {
+    "text": "When the parameter space is finite.",
+    "misconception": "finiteness of $\\Theta$ does not remove the benefit of randomising"
+   },
+   {
+    "text": "When the rule is admissible, because admissible rules are non-randomised.",
+    "misconception": "admissible rules can be randomised"
+   },
+   {
+    "text": "Never, because randomisation always strictly lowers the risk.",
+    "misconception": "over-states the benefit of randomisation"
+   },
+   {
+    "text": "When the sample space is discrete, since only then can the randomisation be absorbed.",
+    "misconception": "invents a condition on the sample space"
+   }
+  ],
+  "explanation": "For convex loss, replacing a random action by its mean does not increase expected loss (Jensen). With 0-1 loss the action set is not convex, which is why randomised tests are needed."
+ },
+ {
+  "id": "inf-6.1",
+  "lecture": 6,
+  "stem": "Under absolute error loss $|\\theta-a|$, what is the Bayes estimator?",
+  "correct": [
+   "The posterior median of $\\theta$ given the data.",
+   "The value splitting the posterior distribution into two halves of mass $1/2$."
+  ],
+  "distractors": [
+   {
+    "text": "The posterior mean of $\\theta$ given the data.",
+    "misconception": "this is the Bayes rule for squared error loss"
+   },
+   {
+    "text": "The posterior mode of $\\theta$ given the data.",
+    "misconception": "this arises as a limit of 0-1 loss"
+   },
+   {
+    "text": "The median of the prior distribution of $\\theta$.",
+    "misconception": "ignores the data"
+   },
+   {
+    "text": "The maximum likelihood estimate, which is also the posterior median in every model.",
+    "misconception": "confuses the MLE with a posterior summary"
+   },
+   {
+    "text": "The midpoint of the posterior 2.5% and 97.5% quantiles.",
+    "misconception": "confuses the centre of an interval with a Bayes estimator"
+   }
+  ],
+  "explanation": "Squared error gives the posterior mean, absolute error the posterior median and 0-1 loss the posterior mode. They coincide only for symmetric unimodal posteriors."
+ },
+ {
+  "id": "inf-6.2",
+  "lecture": 6,
+  "stem": "How is a Bayes rule with respect to a prior $\\pi$ characterised?",
+  "correct": [
+   "It minimises the posterior expected loss at each observed $x$.",
+   "It minimises the prior-averaged risk, found pointwise in $x$."
+  ],
+  "distractors": [
+   {
+    "text": "It minimises the maximum over $\\theta$ of the risk function.",
+    "misconception": "confuses a Bayes rule with a minimax rule"
+   },
+   {
+    "text": "It minimises the risk $R(\\theta,\\delta)$ at every $\\theta$ simultaneously.",
+    "misconception": "no rule is uniformly best in general"
+   },
+   {
+    "text": "It minimises the prior expected loss before any data are observed.",
+    "misconception": "ignores conditioning on the data"
+   },
+   {
+    "text": "It is unbiased for $\\theta$ under the prior and has the smallest variance.",
+    "misconception": "confuses Bayes rules with UMVU estimators"
+   },
+   {
+    "text": "It always has risk $R(\\theta,\\delta)$ that is constant in $\\theta$.",
+    "misconception": "confuses a Bayes rule with an equaliser rule"
+   }
+  ],
+  "explanation": "Bayes risk equals the expected posterior expected loss, so minimising the posterior expected loss pointwise in $x$ minimises it. Maximum risk is the minimax criterion instead."
+ },
+ {
+  "id": "inf-6.3",
+  "lecture": 6,
+  "stem": "What does it mean for a decision rule $\\delta^*$ to be minimax?",
+  "correct": [
+   "It minimises the worst-case risk, that is the supremum over $\\theta$ of $R(\\theta,\\delta)$ among all rules.",
+   "Its worst-case risk is the smallest among all rules."
+  ],
+  "distractors": [
+   {
+    "text": "It minimises the Bayes risk $\\int R(\\theta,\\delta)\\pi(\\theta)d\\theta$ under a chosen prior $\\pi$.",
+    "misconception": "confuses minimax with Bayes"
+   },
+   {
+    "text": "It has the smallest risk at the true value of $\\theta$ for the data observed.",
+    "misconception": "compares at one unknown $\\theta$ only"
+   },
+   {
+    "text": "It has the smallest variance among all unbiased estimators of $\\theta$.",
+    "misconception": "confuses minimax with UMVU"
+   },
+   {
+    "text": "Its risk equals zero at some value of $\\theta$ in the parameter space.",
+    "misconception": "confuses minimaxity with zero risk at a point"
+   },
+   {
+    "text": "Its risk is constant in $\\theta$ and equal to its Bayes risk under a fixed prior.",
+    "misconception": "confuses minimaxity with having constant risk"
+   }
+  ],
+  "explanation": "Minimax guards against the worst case and is pessimistic. It can differ from the Bayes rule for any natural prior, and it need not be unique."
+ },
+ {
+  "id": "inf-6.4",
+  "lecture": 6,
+  "stem": "A Bayes rule $\\delta_\\pi$ has risk $R(\\theta,\\delta_\\pi)\\le r_\\pi$ for all $\\theta$, where $r_\\pi$ is its Bayes risk. What follows?",
+  "correct": [
+   "$\\delta_\\pi$ is minimax and $\\pi$ is a least favourable prior.",
+   "A constant-risk Bayes rule is minimax."
+  ],
+  "distractors": [
+   {
+    "text": "$\\delta_\\pi$ is minimax only if $\\pi$ is the uniform prior.",
+    "misconception": "minimaxity holds for any such $\\pi$"
+   },
+   {
+    "text": "$\\delta_\\pi$ is minimax but $\\pi$ is not least favourable.",
+    "misconception": "the bound makes $\\pi$ least favourable"
+   },
+   {
+    "text": "Every minimax rule must then have constant risk.",
+    "misconception": "reverses the implication; minimax rules need not have constant risk"
+   },
+   {
+    "text": "$\\delta_\\pi$ is unbiased because its risk does not vary with $\\theta$.",
+    "misconception": "confuses constant risk with unbiasedness"
+   },
+   {
+    "text": "$\\delta_\\pi$ is the unique Bayes rule for every other prior as well.",
+    "misconception": "confuses a Bayes rule for one prior with one for all priors"
+   }
+  ],
+  "explanation": "For any rule $\\delta$, $\\sup_\\theta R(\\theta,\\delta)\\ge\\int R\\,d\\pi\\ge r_\\pi\\ge\\sup_\\theta R(\\theta,\\delta_\\pi)$. Hence $\\delta_\\pi$ is minimax and $\\pi$ least favourable. The converse need not hold."
+ },
+ {
+  "id": "inf-6.5",
+  "lecture": 6,
+  "stem": "Which statement about Bayes rules, admissibility and minimaxity is correct?",
+  "correct": [
+   "A unique Bayes rule for a proper prior is admissible.",
+   "Uniqueness of the Bayes rule for a proper prior rules out domination."
+  ],
+  "distractors": [
+   {
+    "text": "Every minimax rule is admissible.",
+    "misconception": "minimax rules can be dominated"
+   },
+   {
+    "text": "Every Bayes rule for an improper prior is admissible.",
+    "misconception": "improper priors may give inadmissible rules"
+   },
+   {
+    "text": "Every admissible rule is a Bayes rule for some proper prior.",
+    "misconception": "admissible rules can be limits of Bayes rules"
+   },
+   {
+    "text": "A Bayes rule is minimax for every prior with full support.",
+    "misconception": "only particular least favourable priors give minimax rules"
+   },
+   {
+    "text": "A Bayes rule is admissible only if its Bayes risk is exactly zero.",
+    "misconception": "invents a condition"
+   }
+  ],
+  "explanation": "A dominating rule would have Bayes risk no larger, contradicting uniqueness. The converse fails: admissible rules may be only limits of Bayes rules (for example $\\bar X$ for a normal mean)."
+ },
+ {
+  "id": "inf-7.1",
+  "lecture": 7,
+  "stem": "What is a conjugate prior for a given likelihood?",
+  "correct": [
+   "A prior family such that the posterior also belongs to the same family for every sample.",
+   "Updating a member of the family returns a member of that family."
+  ],
+  "distractors": [
+   {
+    "text": "A prior that has no influence on the posterior whatever the data.",
+    "misconception": "confuses conjugacy with noninformativeness"
+   },
+   {
+    "text": "A prior whose mean equals the maximum likelihood estimate of the data.",
+    "misconception": "confuses with empirical Bayes"
+   },
+   {
+    "text": "A prior that is flat over the whole parameter space.",
+    "misconception": "confuses conjugacy with uniform priors"
+   },
+   {
+    "text": "A prior that makes the posterior mean equal to the prior mean.",
+    "misconception": "ignores learning from the data"
+   },
+   {
+    "text": "A prior whose density is bounded, so that the integral in Bayes' theorem converges.",
+    "misconception": "confuses conjugacy with properness"
+   }
+  ],
+  "explanation": "Conjugacy is a convenience: for example Beta priors with binomial data give Beta posteriors. It is about closure under updating, not about neutrality of the prior."
+ },
+ {
+  "id": "inf-7.2",
+  "lecture": 7,
+  "stem": "With a $\\mathrm{Beta}(\\alpha,\\beta)$ prior and $k$ successes in $n$ Bernoulli trials, how does the posterior mean relate to the prior mean and the sample proportion?",
+  "correct": [
+   "An average of prior mean and $k/n$, weight $n/(\\alpha+\\beta+n)$ on data.",
+   "The weight on the data tends to 1 as the sample size grows."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $k/n$ for every choice of $\\alpha$ and $\\beta$.",
+    "misconception": "ignores the prior"
+   },
+   {
+    "text": "It is a weighted average whose weight on the prior grows with $n$.",
+    "misconception": "reverses the effect of sample size"
+   },
+   {
+    "text": "It lies outside the interval between the prior mean and $k/n$ when $n$ is large.",
+    "misconception": "it always lies between them"
+   },
+   {
+    "text": "It equals $(k+\\alpha)/n$, since the prior adds only successes.",
+    "misconception": "forgets that the denominator grows by $\\alpha+\\beta$"
+   },
+   {
+    "text": "It is a weighted average of $\\alpha/\\beta$ and $k/n$ with weight $n/(\\alpha+\\beta+n)$ on the data.",
+    "misconception": "uses the wrong prior mean, which is $\\alpha/(\\alpha+\\beta)$"
+   }
+  ],
+  "explanation": "The posterior is $\\mathrm{Beta}(\\alpha+k,\\beta+n-k)$ with mean $(\\alpha+k)/(\\alpha+\\beta+n)$, a convex combination of $\\alpha/(\\alpha+\\beta)$ and $k/n$ with data weight $n/(\\alpha+\\beta+n)$."
+ },
+ {
+  "id": "inf-7.3",
+  "lecture": 7,
+  "stem": "How does a 95% credible interval differ from a 95% confidence interval?",
+  "correct": [
+   "Credible is a probability for $\\theta$ given the data; confidence is long-run coverage.",
+   "Posterior probability for $\\theta$ versus long-run coverage of the procedure."
+  ],
+  "distractors": [
+   {
+    "text": "They have the same interpretation, and only the calculation differs.",
+    "misconception": "conflates the two interpretations"
+   },
+   {
+    "text": "A confidence interval contains $\\theta$ with probability 0.95 given the observed data.",
+    "misconception": "misreads confidence as a posterior probability"
+   },
+   {
+    "text": "A credible interval always has exactly 95% frequentist coverage for every $\\theta$.",
+    "misconception": "credible intervals have no guaranteed coverage"
+   },
+   {
+    "text": "A 95% credible interval is unique for a given posterior.",
+    "misconception": "equal-tailed and highest posterior density intervals can differ"
+   },
+   {
+    "text": "Credible intervals can be used only for large samples, whereas confidence intervals have no such limit.",
+    "misconception": "credible intervals are exact in any sample size"
+   }
+  ],
+  "explanation": "The credible interval treats $\\theta$ as random given the data; the confidence interval treats the data as random for fixed $\\theta$. Credible intervals need not have exact frequentist coverage."
+ },
+ {
+  "id": "inf-7.4",
+  "lecture": 7,
+  "stem": "What does the Bernstein-von Mises theorem say about the posterior in regular models with a prior positive near the true value?",
+  "correct": [
+   "The posterior is about $N(\\hat\\theta,1/\\{nI_1(\\hat\\theta)\\})$ for large $n$.",
+   "Credible intervals and Wald intervals agree asymptotically."
+  ],
+  "distractors": [
+   {
+    "text": "The posterior converges to the prior as $n$ grows.",
+    "misconception": "reverses the direction: data dominate the prior"
+   },
+   {
+    "text": "The result holds even when the prior gives zero mass to the true parameter.",
+    "misconception": "a prior with zero mass near $\\theta_0$ cannot be overcome"
+   },
+   {
+    "text": "The posterior variance stays of order one however large $n$ is.",
+    "misconception": "the posterior concentrates at rate $1/\\sqrt n$"
+   },
+   {
+    "text": "The result holds only for normal likelihoods.",
+    "misconception": "it holds for regular models generally"
+   },
+   {
+    "text": "The posterior mean stays a fixed distance from the MLE, set by the prior, however large $n$ is.",
+    "misconception": "the prior's influence vanishes"
+   }
+  ],
+  "explanation": "Under regularity, the posterior is asymptotically normal around the MLE with variance $1/(nI)$. Prior influence vanishes, so credible intervals have asymptotically correct frequentist coverage."
+ },
+ {
+  "id": "inf-7.5",
+  "lecture": 7,
+  "stem": "For $X_i\\sim N(\\theta,\\sigma^2)$ with known $\\sigma^2$ and the improper flat prior $\\pi(\\theta)\\propto1$, what is the posterior?",
+  "correct": [
+   "A proper normal posterior with mean $\\bar x$ and variance $\\sigma^2/n$, for every $n$.",
+   "The z interval is then the 95% credible interval."
+  ],
+  "distractors": [
+   {
+    "text": "An improper distribution, since the prior is improper.",
+    "misconception": "improper priors may still give proper posteriors"
+   },
+   {
+    "text": "$N(0,\\sigma^2)$, because the flat prior pulls the posterior mean towards zero.",
+    "misconception": "a flat prior does not shrink"
+   },
+   {
+    "text": "$N(\\bar x,\\sigma^2)$, with the variance not reduced by the sample size.",
+    "misconception": "forgets that the data's precision adds up"
+   },
+   {
+    "text": "$N(\\bar x,\\sigma^2/n)$ only when $n$ is large.",
+    "misconception": "the result is exact for every $n$"
+   },
+   {
+    "text": "No usable posterior exists, because Bayes' theorem requires the prior to be a proper density.",
+    "misconception": "Bayes' theorem can still be applied formally"
+   }
+  ],
+  "explanation": "The likelihood is proportional to a normal density in $\\theta$, which integrates to a finite value, so the posterior is proper. Improper priors can give improper posteriors in other models."
+ },
+ {
+  "id": "inf-8.1",
+  "lecture": 8,
+  "stem": "What does the Neyman-Pearson lemma say for testing a simple $H_0:f_0$ against a simple $H_1:f_1$ at level $\\alpha$?",
+  "correct": [
+   "Reject for large $f_1/f_0$, with $k$ set so that the size is $\\alpha$ (randomising on ties).",
+   "A large likelihood ratio $f_1/f_0$ rejects, at size $\\alpha$."
+  ],
+  "distractors": [
+   {
+    "text": "The test rejecting when $f_0(x)/f_1(x)>k$ is most powerful.",
+    "misconception": "inverts the likelihood ratio"
+   },
+   {
+    "text": "The most powerful test rejects when $|x|$ is large, in every model.",
+    "misconception": "ignores the model"
+   },
+   {
+    "text": "The most powerful test minimises the size subject to a fixed power.",
+    "misconception": "reverses the roles of size and power"
+   },
+   {
+    "text": "The lemma applies only when both hypotheses are composite.",
+    "misconception": "it concerns simple hypotheses"
+   },
+   {
+    "text": "The critical value $k$ is chosen so that the power, not the size, equals $1-\\alpha$.",
+    "misconception": "the size constraint fixes $k$"
+   }
+  ],
+  "explanation": "Reject for large $f_1/f_0$; $k$ is chosen so the size equals $\\alpha$ and randomisation is used for discrete data. It is a most powerful test for simple versus simple."
+ },
+ {
+  "id": "inf-8.2",
+  "lecture": 8,
+  "stem": "What does it mean for a level-$\\alpha$ test to be uniformly most powerful (UMP) for $H_0:\\theta\\in\\Theta_0$ against $H_1:\\theta\\in\\Theta_1$?",
+  "correct": [
+   "Its power at every $\\theta\\in\\Theta_1$ is at least that of every other level-$\\alpha$ test.",
+   "No other level-$\\alpha$ test has higher power at any alternative."
+  ],
+  "distractors": [
+   {
+    "text": "Its power at every $\\theta\\in\\Theta_1$ is at least $1-\\alpha$.",
+    "misconception": "confuses power with confidence level"
+   },
+   {
+    "text": "Its power at one fixed alternative $\\theta_1$ is the largest.",
+    "misconception": "most powerful only at a point, not uniformly"
+   },
+   {
+    "text": "Its size is smaller than that of any other level-$\\alpha$ test.",
+    "misconception": "confuses power with size"
+   },
+   {
+    "text": "Its power function is at least $\\alpha$ everywhere on $\\Theta_1$, but not necessarily maximal.",
+    "misconception": "describes unbiasedness"
+   },
+   {
+    "text": "Its power takes the same value at every point of $\\Theta_1$.",
+    "misconception": "confuses with a constant power function"
+   }
+  ],
+  "explanation": "UMP means best simultaneously for all alternatives. A UMP test is a most powerful test for each simple alternative with the same critical region; unbiasedness is a weaker property."
+ },
+ {
+  "id": "inf-8.3",
+  "lecture": 8,
+  "stem": "Suppose the family has nondecreasing monotone likelihood ratio in $T(X)$, and consider $H_0:\\theta\\le\\theta_0$ against $H_1:\\theta>\\theta_0$. What is the UMP test of level $\\alpha$ (Karlin-Rubin)?",
+  "correct": [
+   "Reject for $T>c$, randomising at $T=c$ if needed, with size $\\alpha$ at $\\theta_0$.",
+   "A one-sided threshold on $T$ with size $\\alpha$ is UMP."
+  ],
+  "distractors": [
+   {
+    "text": "Reject when $T(X)<c$, since a small value indicates a large $\\theta$.",
+    "misconception": "gets the direction wrong when the ratio increases in $T$"
+   },
+   {
+    "text": "Reject when $|T(X)-E_{\\theta_0}T|>c$, which is UMP for one-sided alternatives.",
+    "misconception": "uses a two-sided region for a one-sided problem"
+   },
+   {
+    "text": "The test is UMP only for simple $H_0:\\theta=\\theta_0$ and not for composite $H_0:\\theta\\le\\theta_0$.",
+    "misconception": "ignores that the power is monotone, so the size is attained at $\\theta_0$"
+   },
+   {
+    "text": "A UMP test exists only for normal families.",
+    "misconception": "the MLR property suffices"
+   },
+   {
+    "text": "Reject when $T(X)>c$, with $c$ chosen so that the type II error at $\\theta_0$ equals $\\alpha$.",
+    "misconception": "calibrates the wrong error probability"
+   }
+  ],
+  "explanation": "MLR makes the power function nondecreasing in $\\theta$, so the size over $\\theta\\le\\theta_0$ is controlled at $\\theta_0$. The NP test for $\\theta_0$ against any $\\theta_1>\\theta_0$ has the same one-sided region."
+ },
+ {
+  "id": "inf-8.4",
+  "lecture": 8,
+  "stem": "For $X\\sim N(\\theta,1)$, why is there no UMP test of $H_0:\\theta=\\theta_0$ against $H_1:\\theta\\ne\\theta_0$ at level $\\alpha$?",
+  "correct": [
+   "The best tests for each side of $\\theta_0$ reject in opposite directions.",
+   "The one-sided optimal tests conflict, one rejecting low and one high."
+  ],
+  "distractors": [
+   {
+    "text": "The Neyman-Pearson lemma does not apply to normal families.",
+    "misconception": "the lemma applies to every simple pair"
+   },
+   {
+    "text": "The family lacks monotone likelihood ratio in any statistic.",
+    "misconception": "it has MLR; the issue is the two-sided alternative"
+   },
+   {
+    "text": "A test of size exactly $\\alpha$ cannot be constructed for a continuous variable.",
+    "misconception": "size $\\alpha$ is easily attained"
+   },
+   {
+    "text": "Every two-sided test has power below $\\alpha$ somewhere on the alternative.",
+    "misconception": "equal-tailed tests are unbiased with power above $\\alpha$"
+   },
+   {
+    "text": "A two-sided UMP test could exist only if the sample space were discrete.",
+    "misconception": "discreteness is irrelevant"
+   }
+  ],
+  "explanation": "Each one-sided UMP test is more powerful than any two-sided test on its own side but has power below $\\alpha$ on the other side. Imposing unbiasedness leads to the UMPU two-sided test."
+ },
+ {
+  "id": "inf-8.5",
+  "lecture": 8,
+  "stem": "A one-parameter exponential family has density $h(x)\\exp\\{\\eta(\\theta)T(x)-A(\\theta)\\}$. When does it have monotone likelihood ratio in $T$?",
+  "correct": [
+   "When $\\eta(\\theta)$ is nondecreasing in $\\theta$.",
+   "Increasing $\\eta$ gives MLR in $T$."
+  ],
+  "distractors": [
+   {
+    "text": "When $\\eta(\\theta)$ is concave in $\\theta$.",
+    "misconception": "concavity is irrelevant; monotonicity is required"
+   },
+   {
+    "text": "When $T$ is a bounded statistic.",
+    "misconception": "boundedness does not matter"
+   },
+   {
+    "text": "For every continuous $\\eta(\\theta)$ regardless of its shape.",
+    "misconception": "a nonmonotone $\\eta$ destroys MLR"
+   },
+   {
+    "text": "Only when $\\eta(\\theta)=\\theta$ exactly.",
+    "misconception": "any monotone transformation suffices"
+   },
+   {
+    "text": "When $T$ is a complete statistic, since completeness yields a monotone ratio.",
+    "misconception": "confuses completeness with MLR"
+   }
+  ],
+  "explanation": "The ratio $f_{\\theta_2}/f_{\\theta_1}=\\exp\\{(\\eta(\\theta_2)-\\eta(\\theta_1))T-\\dots\\}$ is increasing in $T$ iff $\\eta(\\theta_2)>\\eta(\\theta_1)$ for $\\theta_2>\\theta_1$. A decreasing $\\eta$ gives MLR in $-T$."
+ },
+ {
+  "id": "inf-9.1",
+  "lecture": 9,
+  "stem": "What is an unbiased level-$\\alpha$ test of $H_0:\\theta\\in\\Theta_0$ against $H_1:\\theta\\in\\Theta_1$?",
+  "correct": [
+   "A test whose power function is at most $\\alpha$ on $\\Theta_0$ and at least $\\alpha$ on $\\Theta_1$ everywhere.",
+   "Its power never falls below $\\alpha$ anywhere in $H_1$."
+  ],
+  "distractors": [
+   {
+    "text": "A test whose power on $\\Theta_1$ is at least $1-\\alpha$.",
+    "misconception": "confuses unbiasedness with high power"
+   },
+   {
+    "text": "A test that has the same power at every point of the parameter space.",
+    "misconception": "confuses with a constant power function"
+   },
+   {
+    "text": "A test with type I error probability exactly zero.",
+    "misconception": "confuses with a trivial test"
+   },
+   {
+    "text": "A test that is uniformly most powerful among all level-$\\alpha$ tests.",
+    "misconception": "confuses unbiasedness with UMP"
+   },
+   {
+    "text": "A test whose rejection region does not depend on the observed data at all.",
+    "misconception": "confuses unbiased with trivial tests"
+   }
+  ],
+  "explanation": "Unbiasedness requires the chance of rejecting a false null to be at least the size. The trivial test $\\phi\\equiv\\alpha$ is unbiased, so a UMP test, which beats it, is automatically unbiased."
+ },
+ {
+  "id": "inf-9.2",
+  "lecture": 9,
+  "stem": "In a one-parameter exponential family, which description fits the UMP unbiased test of $H_0:\\theta=\\theta_0$ against $H_1:\\theta\\ne\\theta_0$?",
+  "correct": [
+   "Reject when $T<c_1$ or $T>c_2$, with size $\\alpha$ and zero power slope at $\\theta_0$ (unbiasedness).",
+   "A two-tailed region on $T$ with unbiased cut-offs."
+  ],
+  "distractors": [
+   {
+    "text": "It rejects only when $T$ is large, as in the one-sided UMP test.",
+    "misconception": "uses the one-sided region"
+   },
+   {
+    "text": "It always puts probability $\\alpha/2$ in each tail under $\\theta_0$.",
+    "misconception": "equal tails are correct only for symmetric null distributions"
+   },
+   {
+    "text": "It is the same test for every family, rejecting for $|T|>z_{\\alpha/2}$.",
+    "misconception": "assumes a normal cut-off for all families"
+   },
+   {
+    "text": "It is not unbiased, which is why it can be uniformly more powerful than any unbiased test.",
+    "misconception": "misreads the optimality: the best is over unbiased tests"
+   },
+   {
+    "text": "It is UMP as well, because two-sided UMP tests always exist in exponential families.",
+    "misconception": "no UMP test exists for two-sided alternatives"
+   }
+  ],
+  "explanation": "The power function is minimised at $\\theta_0$ for an unbiased test, so its derivative there is zero. This fixes the cut-offs, which are tail-symmetric only for symmetric null distributions of $T$."
+ },
+ {
+  "id": "inf-9.3",
+  "lecture": 9,
+  "stem": "Why is a UMP level-$\\alpha$ test, when it exists, automatically unbiased?",
+  "correct": [
+   "It beats the trivial test $\\phi\\equiv\\alpha$, so its power is at least $\\alpha$ everywhere on $\\Theta_1$.",
+   "It beats the trivial test $\\phi\\equiv\\alpha$ in power, so it is unbiased."
+  ],
+  "distractors": [
+   {
+    "text": "UMP tests are never unbiased, since they sacrifice power on one side.",
+    "misconception": "reverses the relationship"
+   },
+   {
+    "text": "Unbiasedness is part of the definition of a UMP test.",
+    "misconception": "unbiasedness is not required in the definition"
+   },
+   {
+    "text": "Only two-sided UMP tests are unbiased, since one-sided ones are biased.",
+    "misconception": "one-sided UMP tests are also unbiased"
+   },
+   {
+    "text": "A UMPU test is always UMP, because adding a restriction cannot lower power.",
+    "misconception": "reverses the logic: restriction makes UMPU weaker"
+   },
+   {
+    "text": "UMP tests are unbiased only when the null hypothesis is simple.",
+    "misconception": "invents an unnecessary condition"
+   }
+  ],
+  "explanation": "The randomised test $\\phi\\equiv\\alpha$ has level $\\alpha$ and power $\\alpha$ everywhere, so a UMP test has power $\\ge\\alpha$ on $\\Theta_1$. The converse fails: UMPU tests need not be UMP."
+ },
+ {
+  "id": "inf-9.4",
+  "lecture": 9,
+  "stem": "Why condition on a sufficient statistic for the nuisance parameter when testing a hypothesis about the parameter of interest?",
+  "correct": [
+   "Given it, the null law is free of the nuisance parameter, so the size is exact.",
+   "It removes the nuisance parameter from the null law."
+  ],
+  "distractors": [
+   {
+    "text": "It raises power at every alternative compared with unconditional tests.",
+    "misconception": "conditioning is for exact size, not guaranteed power"
+   },
+   {
+    "text": "It turns the composite alternative into a simple alternative.",
+    "misconception": "the alternative stays composite"
+   },
+   {
+    "text": "It discards all information about the parameter of interest.",
+    "misconception": "the conditional law keeps that information"
+   },
+   {
+    "text": "It makes the test asymptotic, with size $\\alpha$ only in large samples.",
+    "misconception": "conditional tests are exact in finite samples"
+   },
+   {
+    "text": "Conditioning guarantees that the test is also UMP unconditionally for every nuisance value.",
+    "misconception": "overclaims optimality from conditioning"
+   }
+  ],
+  "explanation": "Conditioning gives a similar test: size $\\alpha$ for every value of the nuisance parameter. For exponential families, conditional tests based on the complementary statistic yield UMPU tests."
+ },
+ {
+  "id": "inf-9.5",
+  "lecture": 9,
+  "stem": "In a $2\\times2$ table with row and column totals held fixed, what is the null distribution of one cell count when the two classifications are independent?",
+  "correct": [
+   "Hypergeometric, which is the basis of Fisher's exact test for the table.",
+   "The count has a hypergeometric law given the margins."
+  ],
+  "distractors": [
+   {
+    "text": "Binomial with success probability $1/2$ and as many trials as the table total.",
+    "misconception": "confuses with comparing two Poisson counts"
+   },
+   {
+    "text": "Normal for every table size, because counts are sums.",
+    "misconception": "replaces an exact law by an asymptotic one"
+   },
+   {
+    "text": "Poisson with mean equal to the product of the margins over the total.",
+    "misconception": "ignores the fixed margins"
+   },
+   {
+    "text": "Uniform over all integers from zero to the table total.",
+    "misconception": "ignores the constraint from the margins"
+   },
+   {
+    "text": "Geometric, with success probability equal to the proportion in the first row.",
+    "misconception": "confuses with waiting-time laws"
+   }
+  ],
+  "explanation": "Fixing the margins removes the nuisance parameters (the marginal probabilities), and the cell count becomes hypergeometric under independence. The exact test is conditional."
+ },
+ {
+  "id": "inf-10.1",
+  "lecture": 10,
+  "stem": "How is a confidence set obtained by inverting a family of tests?",
+  "correct": [
+   "Gather all $\\theta_0$ that the level-$\\alpha$ test of $H_0:\\theta=\\theta_0$ does not reject for the observed $x$.",
+   "The $\\theta_0$ values not rejected by the test at level $\\alpha$."
+  ],
+  "distractors": [
+   {
+    "text": "Collect all $\\theta_0$ that the level-$\\alpha$ test of $H_0:\\theta=\\theta_0$ rejects at the observed $x$.",
+    "misconception": "takes the rejection set instead of the acceptance set"
+   },
+   {
+    "text": "Collect the values $\\theta_0$ at which the p-value equals exactly $\\alpha$.",
+    "misconception": "takes the boundary instead of the acceptance region"
+   },
+   {
+    "text": "Take all $\\theta_0$ for which $\\theta_0$ equals the maximum likelihood estimate.",
+    "misconception": "uses a point estimate"
+   },
+   {
+    "text": "The set has coverage $\\alpha$ because it is built from tests of size $\\alpha$.",
+    "misconception": "confuses coverage $1-\\alpha$ with size"
+   },
+   {
+    "text": "The set of $\\theta_0$ where the likelihood is at least half of its maximum value.",
+    "misconception": "uses an arbitrary threshold instead of a test"
+   }
+  ],
+  "explanation": "A test of level $\\alpha$ accepts the true $\\theta$ with probability at least $1-\\alpha$, so the acceptance set has coverage at least $1-\\alpha$. The set is random through $x$."
+ },
+ {
+  "id": "inf-10.2",
+  "lecture": 10,
+  "stem": "What does inverting a UMP one-sided test of $H_0:\\theta\\le\\theta_0$ give?",
+  "correct": [
+   "A uniformly most accurate lower confidence bound at level $1-\\alpha$.",
+   "A UMA lower confidence bound, the most accurate at that level."
+  ],
+  "distractors": [
+   {
+    "text": "The shortest possible two-sided interval for $\\theta$.",
+    "misconception": "confuses accuracy with length of two-sided intervals"
+   },
+   {
+    "text": "The Wald interval, because both rely on the MLE.",
+    "misconception": "the Wald interval is an approximate normal-theory interval"
+   },
+   {
+    "text": "A Bayesian credible bound with posterior probability $1-\\alpha$.",
+    "misconception": "confuses duality with posterior probability"
+   },
+   {
+    "text": "An interval that is always unbiased and two-sided.",
+    "misconception": "one-sided bounds are not two-sided intervals"
+   },
+   {
+    "text": "A confidence interval whose length is the smallest possible at every parameter value.",
+    "misconception": "confuses accuracy with length"
+   }
+  ],
+  "explanation": "Optimality transfers by duality: a UMP test gives a confidence bound which, among all bounds of the same level, is least likely to include false values of $\\theta$."
+ },
+ {
+  "id": "inf-10.3",
+  "lecture": 10,
+  "stem": "How does an interval from inverting the likelihood ratio test differ from the Wald interval?",
+  "correct": [
+   "It can be asymmetric and is reparametrization invariant.",
+   "It follows the shape of the likelihood, not a normal approximation."
+  ],
+  "distractors": [
+   {
+    "text": "It is always symmetric about the MLE, like the Wald interval.",
+    "misconception": "ignores the asymmetric likelihood shape"
+   },
+   {
+    "text": "It requires the Fisher information to be computed.",
+    "misconception": "only needs the likelihood"
+   },
+   {
+    "text": "It is not invariant: reparametrizing $\\theta$ changes the set of accepted values.",
+    "misconception": "the Wald interval is not invariant, the LR interval is"
+   },
+   {
+    "text": "It is always wider than the Wald interval.",
+    "misconception": "no such ordering holds in general"
+   },
+   {
+    "text": "Its coverage is exact in every finite sample, whereas the Wald interval is only approximate.",
+    "misconception": "the LR interval is also approximate"
+   }
+  ],
+  "explanation": "The set $\\{\\theta:2\\{\\ell(\\hat\\theta)-\\ell(\\theta)\\}\\le\\chi^2_{1,1-\\alpha}\\}$ follows the likelihood and maps to the set for $g(\\theta)$ under reparametrization. The Wald interval depends on the scale used."
+ },
+ {
+  "id": "inf-10.4",
+  "lecture": 10,
+  "stem": "What does \"95% confidence\" for an interval computed from the data actually mean?",
+  "correct": [
+   "95% of intervals built this way over repeated samples cover $\\theta$.",
+   "Long-run coverage frequency of the interval-producing method."
+  ],
+  "distractors": [
+   {
+    "text": "The probability that $\\theta$ lies in the realised interval is 0.95.",
+    "misconception": "treats $\\theta$ as random after seeing the data"
+   },
+   {
+    "text": "95% of the sample observations lie inside the interval.",
+    "misconception": "confuses with a prediction or tolerance interval"
+   },
+   {
+    "text": "95% of future sample means fall in this interval.",
+    "misconception": "confuses with a prediction interval"
+   },
+   {
+    "text": "The interval contains $\\theta$ with posterior probability 0.95.",
+    "misconception": "describes a credible interval"
+   },
+   {
+    "text": "95% of the possible values of the parameter lie inside the realised interval.",
+    "misconception": "treats the interval as a statement about a spread of parameter values"
+   }
+  ],
+  "explanation": "Confidence refers to the random interval before the data are seen. After observing it, $\\theta$ is fixed and either inside or not; the 95% describes the method."
+ },
+ {
+  "id": "inf-10.5",
+  "lecture": 10,
+  "stem": "What does it mean for a confidence set $C(X)$ to be unbiased at level $1-\\alpha$?",
+  "correct": [
+   "True values are covered more often than false values.",
+   "It covers the truth at least as often as any false value."
+  ],
+  "distractors": [
+   {
+    "text": "It has coverage exactly $1-\\alpha$ at every $\\theta$.",
+    "misconception": "confuses unbiasedness with exact coverage"
+   },
+   {
+    "text": "It is centred at an unbiased point estimator of $\\theta$.",
+    "misconception": "confuses with unbiased estimation"
+   },
+   {
+    "text": "It has the shortest expected length among intervals of that level.",
+    "misconception": "confuses with optimality in length"
+   },
+   {
+    "text": "Every confidence interval derived from a test is unbiased.",
+    "misconception": "only tests that are unbiased give unbiased sets"
+   },
+   {
+    "text": "It contains false values of $\\theta$ with higher probability than the true value.",
+    "misconception": "reverses the unbiasedness inequality"
+   }
+  ],
+  "explanation": "By duality, a set is unbiased iff the corresponding tests are unbiased. UMPU tests give uniformly most accurate unbiased confidence sets."
+ },
+ {
+  "id": "inf-11.1",
+  "lecture": 11,
+  "stem": "What is the plug-in principle behind the bootstrap?",
+  "correct": [
+   "Replace $F$ by the empirical cdf $\\hat F_n$ and evaluate the target under $\\hat F_n$.",
+   "Treat the empirical distribution as if it were the population."
+  ],
+  "distractors": [
+   {
+    "text": "Replace $F$ by a fitted normal distribution and compute the quantity analytically.",
+    "misconception": "confuses with parametric normal approximation"
+   },
+   {
+    "text": "Replace the sample by its population mean and resample from that.",
+    "misconception": "misunderstands what is resampled"
+   },
+   {
+    "text": "Draw new observations from the true $F$ for the standard error.",
+    "misconception": "F is unknown"
+   },
+   {
+    "text": "Resample without replacement to obtain a different sample of the same size.",
+    "misconception": "without replacement gives the same data back"
+   },
+   {
+    "text": "Replace the statistic by its linear approximation and apply the delta method.",
+    "misconception": "confuses the bootstrap with the delta method"
+   }
+  ],
+  "explanation": "The nonparametric bootstrap approximates the sampling distribution of $\\hat\\theta(X_1,\\dots,X_n)$ under $F$ by that under $\\hat F_n$, which is simulated by drawing $n$ points with replacement."
+ },
+ {
+  "id": "inf-11.2",
+  "lecture": 11,
+  "stem": "How is a bootstrap standard error of an estimator $\\hat\\theta$ computed from $B$ resamples?",
+  "correct": [
+   "Standard deviation of the resampled estimates $\\hat\\theta^{*b}$.",
+   "The spread of the resampled estimates."
+  ],
+  "distractors": [
+   {
+    "text": "Divide the standard deviation of the $B$ values $\\hat\\theta^{*b}$ by $\\sqrt B$.",
+    "misconception": "confuses with Monte Carlo error of the mean"
+   },
+   {
+    "text": "Take the standard deviation of the original data and divide by $\\sqrt n$.",
+    "misconception": "gives the standard error of the mean only"
+   },
+   {
+    "text": "Use resamples of size $n/2$ drawn without replacement.",
+    "misconception": "wrong resample size and scheme"
+   },
+   {
+    "text": "Take the average of the $B$ values $\\hat\\theta^{*b}$.",
+    "misconception": "the average estimates the expected value, not the spread"
+   },
+   {
+    "text": "Take the standard deviation across the resamples and multiply it by $\\sqrt n$.",
+    "misconception": "rescales a quantity that is already a standard error"
+   }
+  ],
+  "explanation": "The bootstrap standard error is $\\{\\frac1{B-1}\\sum_b(\\hat\\theta^{*b}-\\bar\\theta^*)^2\\}^{1/2}$. $B$ controls only the simulation error; it does not shrink the statistical error."
+ },
+ {
+  "id": "inf-11.3",
+  "lecture": 11,
+  "stem": "What is the bootstrap estimate of the bias of $\\hat\\theta$?",
+  "correct": [
+   "The average of the bootstrap values $\\hat\\theta^{*b}$ minus the original estimate $\\hat\\theta$.",
+   "Mean of bootstrap values minus the original estimate."
+  ],
+  "distractors": [
+   {
+    "text": "The original estimate $\\hat\\theta$ minus the average of the bootstrap values.",
+    "misconception": "sign reversed"
+   },
+   {
+    "text": "The average of the bootstrap values minus the true value $\\theta$.",
+    "misconception": "the true value is unknown"
+   },
+   {
+    "text": "The variance of the bootstrap values $\\hat\\theta^{*b}$.",
+    "misconception": "confuses bias with variance"
+   },
+   {
+    "text": "The bias-corrected estimator is $\\bar\\theta^*$, the average of the bootstrap values.",
+    "misconception": "the corrected estimator is $2\\hat\\theta-\\bar\\theta^*$"
+   },
+   {
+    "text": "Zero for every statistic, since resampling from the data is unbiased.",
+    "misconception": "true for the sample mean only"
+   }
+  ],
+  "explanation": "The bias $E_F\\hat\\theta-\\theta$ is estimated by $E_{\\hat F}\\hat\\theta^*-\\hat\\theta$. The corrected estimate is $\\hat\\theta-(\\bar\\theta^*-\\hat\\theta)=2\\hat\\theta-\\bar\\theta^*$."
+ },
+ {
+  "id": "inf-11.4",
+  "lecture": 11,
+  "stem": "Why does the nonparametric bootstrap fail for the sample maximum of a $U(0,\\theta)$ sample?",
+  "correct": [
+   "The bootstrap law has an atom of mass about $0.63$ at the observed maximum.",
+   "The bootstrap law puts an atom at the sample maximum."
+  ],
+  "distractors": [
+   {
+    "text": "The sample size is too small, and the bootstrap works once $n$ is large enough.",
+    "misconception": "no sample size repairs this"
+   },
+   {
+    "text": "The maximum has infinite variance, so its bootstrap law is undefined.",
+    "misconception": "the maximum has finite variance"
+   },
+   {
+    "text": "The number of resamples $B$ must be larger than $n^2$.",
+    "misconception": "the failure is not a simulation issue"
+   },
+   {
+    "text": "The maximum is biased downward, and bootstrap cannot handle biased estimators.",
+    "misconception": "bias alone does not cause failure"
+   },
+   {
+    "text": "The bootstrap fails for every estimator other than the sample mean.",
+    "misconception": "overgeneralises; it works for smooth statistics"
+   }
+  ],
+  "explanation": "The probability that a resample contains the observed maximum is $1-(1-1/n)^n\\to1-e^{-1}$. The bootstrap law of $n(\\theta_{\\max}-\\max^*)$ is not consistent: the statistic is not smooth in $F$."
+ },
+ {
+  "id": "inf-11.5",
+  "lecture": 11,
+  "stem": "For the sample mean with finite variance $\\sigma^2$, what does bootstrap consistency say?",
+  "correct": [
+   "Given the data, $\\sqrt n(\\bar X^*-\\bar X)$ has the same limit $N(0,\\sigma^2)$ as $\\sqrt n(\\bar X-\\mu)$.",
+   "The centred bootstrap mean mimics the true law."
+  ],
+  "distractors": [
+   {
+    "text": "It holds only when the population is normal.",
+    "misconception": "needs only a finite variance"
+   },
+   {
+    "text": "It requires the variance to be infinite so that the mean is not degenerate.",
+    "misconception": "the opposite condition"
+   },
+   {
+    "text": "The bootstrap distribution of $\\bar X^*$ is centred at the population mean $\\mu$.",
+    "misconception": "it is centred at $\\bar X$"
+   },
+   {
+    "text": "It requires the number of resamples to equal the sample size $n$.",
+    "misconception": "$B$ is only a simulation size"
+   },
+   {
+    "text": "The bootstrap law is wider than the true law by a factor tending to $\\sqrt2$.",
+    "misconception": "no such inflation occurs"
+   }
+  ],
+  "explanation": "The bootstrap law of $\\bar X^*$ is centred at $\\bar X$, so the centred and scaled version mimics $\\sqrt n(\\bar X-\\mu)$. Consistency here follows from the CLT and needs only a finite variance."
+ }
+]
