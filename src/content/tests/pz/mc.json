@@ -1,0 +1,1666 @@
+[
+ {
+  "id": "pz-1.1",
+  "lecture": 1,
+  "stem": "What does the \"stars and bars\" method count?",
+  "correct": [
+   "Ways to place $n$ identical items in $k$ boxes: $\\binom{n+k-1}{k-1}$.",
+   "Nonnegative solutions of $x_1+\\dots+x_k=n$."
+  ],
+  "distractors": [
+   {
+    "text": "The ways to distribute $n$ distinguishable items among $k$ boxes.",
+    "misconception": "confuses identical and distinguishable items"
+   },
+   {
+    "text": "The number of orderings of $n$ items, $n!$.",
+    "misconception": "confuses with permutations"
+   },
+   {
+    "text": "The ways to choose $k$ items from $n$, $\\binom nk$.",
+    "misconception": "confuses with plain combinations"
+   },
+   {
+    "text": "The number of solutions with each $x_i\\ge1$ is also $\\binom{n+k-1}{k-1}$.",
+    "misconception": "forgets to shift the variables"
+   },
+   {
+    "text": "The probability of an item landing in a box.",
+    "misconception": "confuses a count with a probability"
+   }
+  ],
+  "explanation": "With each $x_i\\ge1$ the count is $\\binom{n-1}{k-1}$ (set $y_i=x_i-1$ and use $n-k$ stars)."
+ },
+ {
+  "id": "pz-1.2",
+  "lecture": 1,
+  "stem": "When is counting the complement an efficient strategy?",
+  "correct": [
+   "When \"none\" is simple but \"at least one\" is not.",
+   "The opposite has a single product form."
+  ],
+  "distractors": [
+   {
+    "text": "Whenever the event has probability near one half.",
+    "misconception": "confuses with symmetry"
+   },
+   {
+    "text": "Only when events are independent.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "When the sample space is infinite.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "When the events are disjoint.",
+    "misconception": "confuses with additivity"
+   },
+   {
+    "text": "It always requires inclusion-exclusion.",
+    "misconception": "confuses the two methods"
+   }
+  ],
+  "explanation": "\"At least one six in four rolls\" is $1-(5/6)^4$, far simpler than adding the cases with 1, 2, 3, 4 sixes."
+ },
+ {
+  "id": "pz-1.3",
+  "lecture": 1,
+  "stem": "What is a bijection argument in counting?",
+  "correct": [
+   "Match two sets one-to-one, count the easier.",
+   "Pair objects, each hit once."
+  ],
+  "distractors": [
+   {
+    "text": "Count each object twice and divide by two.",
+    "misconception": "describes double counting"
+   },
+   {
+    "text": "Count only the objects satisfying a symmetry.",
+    "misconception": "describes a symmetry argument"
+   },
+   {
+    "text": "Show that two events are independent.",
+    "misconception": "confuses with probability"
+   },
+   {
+    "text": "Pick one object at random and compute its probability.",
+    "misconception": "confuses with sampling"
+   },
+   {
+    "text": "Order the objects and count the first one.",
+    "misconception": "is not a counting method"
+   }
+  ],
+  "explanation": "Paths from $(0,0)$ to $(a,b)$ correspond to arrangements of $a$ rights and $b$ ups, so they number $\\binom{a+b}{a}$."
+ },
+ {
+  "id": "pz-1.4",
+  "lecture": 1,
+  "stem": "Why does symmetry often simplify a probability puzzle?",
+  "correct": [
+   "Exchangeable positions are equally likely to play any role.",
+   "Swapping identical objects leaves probabilities unchanged."
+  ],
+  "distractors": [
+   {
+    "text": "Symmetry always makes the answer one half.",
+    "misconception": "overgeneralises"
+   },
+   {
+    "text": "Symmetric problems have no solution.",
+    "misconception": "states an absurdity"
+   },
+   {
+    "text": "It removes the need to define the sample space.",
+    "misconception": "ignores the model"
+   },
+   {
+    "text": "It applies only to games with two players.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "Symmetry changes the probabilities in favour of the first item.",
+    "misconception": "reverses the idea"
+   }
+  ],
+  "explanation": "The probability that card number 7 of a shuffled deck is an ace is $4/52$, exactly as for card number 1."
+ },
+ {
+  "id": "pz-1.5",
+  "lecture": 1,
+  "stem": "Which error occurs when counting unordered selections as if they were ordered?",
+  "correct": [
+   "Overcounting: each set once per ordering.",
+   "Each set appears $k!$ times."
+  ],
+  "distractors": [
+   {
+    "text": "Undercounting, since orderings are ignored.",
+    "misconception": "reverses the direction"
+   },
+   {
+    "text": "The count is exact, because order never matters.",
+    "misconception": "ignores the issue"
+   },
+   {
+    "text": "The count is too small by exactly one.",
+    "misconception": "gives a false size"
+   },
+   {
+    "text": "Only repeated elements are counted twice.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "The count becomes infinite.",
+    "misconception": "states an absurdity"
+   }
+  ],
+  "explanation": "Choosing a committee of 3 from 10 gives $10\\cdot9\\cdot8=720$ ordered lists, but only $720/6=120$ committees."
+ },
+ {
+  "id": "pz-2.1",
+  "lecture": 2,
+  "stem": "What is first-step analysis?",
+  "correct": [
+   "Condition on the first step and reuse the problem.",
+   "A recursion from splitting on what happens first."
+  ],
+  "distractors": [
+   {
+    "text": "Looking only at the first step and ignoring later ones.",
+    "misconception": "ignores the recursion"
+   },
+   {
+    "text": "Computing the probability that the first step succeeds.",
+    "misconception": "confuses with a one-step event"
+   },
+   {
+    "text": "Ordering the outcomes by size.",
+    "misconception": "confuses with ranking"
+   },
+   {
+    "text": "Solving the problem for the largest state first.",
+    "misconception": "describes an ordering of states"
+   },
+   {
+    "text": "Using independence of the first and the last step.",
+    "misconception": "makes a false claim"
+   }
+  ],
+  "explanation": "For the expected number of flips $E$ until a head, $E=1+(1-p)E$, so $E=1/p$."
+ },
+ {
+  "id": "pz-2.2",
+  "lecture": 2,
+  "stem": "What is the expected number of tosses of a coin with head probability $p$ until the first head?",
+  "correct": [
+   "$1/p$, from the recursion $E=1+(1-p)E$.",
+   "The geometric mean."
+  ],
+  "distractors": [
+   {
+    "text": "$p$, the head probability on a single toss.",
+    "misconception": "confuses the mean with the success probability"
+   },
+   {
+    "text": "$1/(1-p)$, the mean wait for a tail.",
+    "misconception": "uses the failure probability"
+   },
+   {
+    "text": "$p/(1-p)$, the odds of a head.",
+    "misconception": "gives the odds"
+   },
+   {
+    "text": "$1/p^2$, the squared reciprocal.",
+    "misconception": "squares the denominator"
+   },
+   {
+    "text": "$(1-p)/p$, the mean count of tails before it.",
+    "misconception": "gives the expected number of failures"
+   }
+  ],
+  "explanation": "A fair coin needs 2 tosses on average. A die needs 6 rolls on average to show a given face."
+ },
+ {
+  "id": "pz-2.3",
+  "lecture": 2,
+  "stem": "Why does the recursion $E=1+\\frac12E+\\frac12\\cdot0$ not hold for the number of tosses to get HH?",
+  "correct": [
+   "After a head the state differs from the start.",
+   "The wait depends on the previous toss."
+  ],
+  "distractors": [
+   {
+    "text": "Because the tosses are not independent.",
+    "misconception": "the tosses are independent"
+   },
+   {
+    "text": "Because the answer is infinite.",
+    "misconception": "the expectation is finite"
+   },
+   {
+    "text": "Because HH is impossible.",
+    "misconception": "the event is possible"
+   },
+   {
+    "text": "Recursions cannot be used for coin problems.",
+    "misconception": "denies the method"
+   },
+   {
+    "text": "Because coin tosses have memory.",
+    "misconception": "coins have no memory"
+   }
+  ],
+  "explanation": "Use states \"no progress\" and \"just threw H\": $E_0=1+\\frac12E_1+\\frac12E_0$ and $E_1=1+\\frac12\\cdot0+\\frac12E_0$, giving $E_0=6$."
+ },
+ {
+  "id": "pz-2.4",
+  "lecture": 2,
+  "stem": "What principle underlies conditioning on the first step in expectations?",
+  "correct": [
+   "The law of total expectation: $E[T]=\\sum_sP(s)E[T\\mid s]$.",
+   "An expectation averages its conditional expectations."
+  ],
+  "distractors": [
+   {
+    "text": "The expectation of a product is the product of expectations.",
+    "misconception": "needs independence"
+   },
+   {
+    "text": "Expectation is additive over disjoint events only.",
+    "misconception": "misstates additivity"
+   },
+   {
+    "text": "Conditional expectations always equal the unconditional one.",
+    "misconception": "assumes independence"
+   },
+   {
+    "text": "The first step decides the outcome, so later steps can be ignored.",
+    "misconception": "ignores later steps"
+   },
+   {
+    "text": "The variance of the sum is the sum of the variances.",
+    "misconception": "confuses with variance"
+   }
+  ],
+  "explanation": "The expected time conditional on the first step equals one plus the expected remaining time from the state reached."
+ },
+ {
+  "id": "pz-2.5",
+  "lecture": 2,
+  "stem": "In a gambler's-ruin type problem with absorbing barriers, how is the hitting probability found by recursion?",
+  "correct": [
+   "First-step conditioning gives $h_i=ph_{i+1}+qh_{i-1}$.",
+   "Solve one-step equations."
+  ],
+  "distractors": [
+   {
+    "text": "Simulate until one value is reached.",
+    "misconception": "replaces the method by simulation"
+   },
+   {
+    "text": "Add the probabilities along one path.",
+    "misconception": "ignores all other paths"
+   },
+   {
+    "text": "Use $h_i=p^i$.",
+    "misconception": "gives a formula valid only in special cases"
+   },
+   {
+    "text": "Divide the starting position by the number of steps.",
+    "misconception": "invents a formula"
+   },
+   {
+    "text": "It cannot be computed exactly.",
+    "misconception": "denies the solution"
+   }
+  ],
+  "explanation": "The fair case gives a linear solution $h_i=i/N$."
+ },
+ {
+  "id": "pz-2.6",
+  "lecture": 2,
+  "stem": "How can the expected number of flips to see HT be shorter than for HH even though both have probability $1/4$ at each position?",
+  "correct": [
+   "After a miss HH restarts, HT keeps an H.",
+   "HT cannot overlap itself."
+  ],
+  "distractors": [
+   {
+    "text": "HT is more likely than HH.",
+    "misconception": "the two patterns are equally likely at any given position"
+   },
+   {
+    "text": "Coins favour tails after a head.",
+    "misconception": "coins have no memory"
+   },
+   {
+    "text": "HH is impossible with a fair coin.",
+    "misconception": "the event is possible"
+   },
+   {
+    "text": "The result is a calculation error.",
+    "misconception": "the difference is genuine"
+   },
+   {
+    "text": "The expected times are equal.",
+    "misconception": "the expected times differ: 6 versus 4"
+   }
+  ],
+  "explanation": "For a fair coin, $E[\\text{HH}]=6$ and $E[\\text{HT}]=4$; the waiting time depends on self-overlap (the Conway correction)."
+ },
+ {
+  "id": "pz-3.1",
+  "lecture": 3,
+  "stem": "What is the probability that no six appears in $n$ rolls of a fair die?",
+  "correct": [
+   "$(5/6)^n$, since each roll avoids six independently.",
+   "One minus $1-(5/6)^n$, the complement."
+  ],
+  "distractors": [
+   {
+    "text": "$1-n/6$, adding the probabilities of sixes.",
+    "misconception": "adds probabilities of disjoint events wrongly"
+   },
+   {
+    "text": "$5n/6$, five sixths times the rolls.",
+    "misconception": "multiplies by $n$ instead of raising to the power"
+   },
+   {
+    "text": "$(1/6)^n$, every roll showing a six.",
+    "misconception": "gives the probability of all sixes"
+   },
+   {
+    "text": "$5/(6n)$, five sixths shared among rolls.",
+    "misconception": "divides wrongly"
+   },
+   {
+    "text": "$\\binom n5/6^n$, a count of choices of rolls.",
+    "misconception": "gives an unrelated expression"
+   }
+  ],
+  "explanation": "At least one six in 4 rolls has probability $1-(5/6)^4\\approx0.518$ (de Mere's problem)."
+ },
+ {
+  "id": "pz-3.2",
+  "lecture": 3,
+  "stem": "What is the expected number of rolls of a fair die needed to see every face at least once?",
+  "correct": [
+   "Sum waits for each new face, $6H_6$.",
+   "The coupon collector time."
+  ],
+  "distractors": [
+   {
+    "text": "6, since each face has probability $1/6$.",
+    "misconception": "confuses with the time for one face"
+   },
+   {
+    "text": "21, which is $1+2+\\dots+6$.",
+    "misconception": "sums the wrong quantities"
+   },
+   {
+    "text": "36, which is $6\\cdot6$.",
+    "misconception": "uses a crude bound"
+   },
+   {
+    "text": "Infinite, since faces may repeat forever.",
+    "misconception": "the expectation is finite"
+   },
+   {
+    "text": "12, since two rolls per face are needed.",
+    "misconception": "invents a rule"
+   }
+  ],
+  "explanation": "When $j$ faces have been seen, the next new face takes $6/(6-j)$ rolls on average; summing over $j=0,\\dots,5$ gives $6H_6$."
+ },
+ {
+  "id": "pz-3.3",
+  "lecture": 3,
+  "stem": "Why does the number of rolls until a given face first appears follow a geometric law?",
+  "correct": [
+   "Independent identical trials stopped at the first success.",
+   "The wait for the first success is geometric."
+  ],
+  "distractors": [
+   {
+    "text": "The rolls are dependent, and later ones depend on earlier ones.",
+    "misconception": "the rolls are independent"
+   },
+   {
+    "text": "The probability of success increases with every failed roll.",
+    "misconception": "confuses with the gambler's fallacy"
+   },
+   {
+    "text": "The count is uniform on $1,\\dots,6$.",
+    "misconception": "confuses the distribution"
+   },
+   {
+    "text": "Because the die has six faces, the count is at most 6.",
+    "misconception": "the count is unbounded"
+   },
+   {
+    "text": "It is geometric only when the die is loaded.",
+    "misconception": "invents a condition"
+   }
+  ],
+  "explanation": "$P(T=k)=(5/6)^{k-1}\\cdot\\tfrac16$, with mean 6 and variance 30."
+ },
+ {
+  "id": "pz-3.4",
+  "lecture": 3,
+  "stem": "What is the gambler's fallacy?",
+  "correct": [
+   "Believing independent trials are \"due\" a change.",
+   "Thinking a tail becomes more likely after heads."
+  ],
+  "distractors": [
+   {
+    "text": "Believing that the average of many trials drifts away from the expected value.",
+    "misconception": "reverses the law of large numbers"
+   },
+   {
+    "text": "Believing that a biased coin has a different probability from a fair coin.",
+    "misconception": "states a true fact"
+   },
+   {
+    "text": "Calculating a probability by counting outcomes.",
+    "misconception": "describes a valid method"
+   },
+   {
+    "text": "Thinking that the number of heads in $n$ fair tosses is always exactly $n/2$.",
+    "misconception": "confuses the expected value with the realised count"
+   },
+   {
+    "text": "Believing that rare events cannot happen.",
+    "misconception": "is a different error"
+   }
+  ],
+  "explanation": "After ten heads, the probability of the eleventh head is still $1/2$. The law of large numbers concerns fractions, not the absolute difference."
+ },
+ {
+  "id": "pz-3.5",
+  "lecture": 3,
+  "stem": "What is the expected number of heads in $n$ tosses of a coin with head probability $p$, and how does one see it quickly?",
+  "correct": [
+   "$np$, a sum of $n$ indicators with mean $p$.",
+   "Linearity, with no binomial needed."
+  ],
+  "distractors": [
+   {
+    "text": "$n/2$ for every coin, whatever its bias.",
+    "misconception": "forgets that $p$ may differ from one half"
+   },
+   {
+    "text": "$p/n$, the head probability shared out.",
+    "misconception": "divides instead of multiplying"
+   },
+   {
+    "text": "$np(1-p)$, the spread of the count.",
+    "misconception": "gives the variance"
+   },
+   {
+    "text": "$n(1-p)$, the mean count of tails.",
+    "misconception": "gives the expected number of tails"
+   },
+   {
+    "text": "It needs the whole binomial distribution first.",
+    "misconception": "ignores linearity"
+   }
+  ],
+  "explanation": "The variance is $np(1-p)$, found the same way because the indicators are independent."
+ },
+ {
+  "id": "pz-4.1",
+  "lecture": 4,
+  "stem": "What does the hypergeometric distribution model?",
+  "correct": [
+   "Successes in draws without replacement from a finite population.",
+   "Dependent draws."
+  ],
+  "distractors": [
+   {
+    "text": "The number of successes in independent draws with replacement.",
+    "misconception": "describes the binomial"
+   },
+   {
+    "text": "The number of trials until the first success.",
+    "misconception": "describes the geometric"
+   },
+   {
+    "text": "The number of events in a fixed time.",
+    "misconception": "describes the Poisson"
+   },
+   {
+    "text": "The proportion of successes in an infinite population.",
+    "misconception": "describes a limiting case"
+   },
+   {
+    "text": "The sum of independent normal variables.",
+    "misconception": "describes an unrelated distribution"
+   }
+  ],
+  "explanation": "The probability of $k$ aces in a 5-card hand is $\\binom4k\\binom{48}{5-k}/\\binom{52}5$."
+ },
+ {
+  "id": "pz-4.2",
+  "lecture": 4,
+  "stem": "What does exchangeability imply for the position of an ace in a shuffled deck?",
+  "correct": [
+   "Each card is equally likely to be the ace at any position.",
+   "Single-position events do not depend on the position."
+  ],
+  "distractors": [
+   {
+    "text": "The second card is more likely to be an ace if the first was not.",
+    "misconception": "conflates conditional with unconditional"
+   },
+   {
+    "text": "The last card is less likely to be an ace.",
+    "misconception": "ignores symmetry"
+   },
+   {
+    "text": "The probability of an ace increases with the position.",
+    "misconception": "ignores symmetry"
+   },
+   {
+    "text": "Exchangeability means the cards are independent.",
+    "misconception": "confuses with independence"
+   },
+   {
+    "text": "The first card is the most likely to be an ace.",
+    "misconception": "ignores symmetry"
+   }
+  ],
+  "explanation": "Cards are exchangeable but not independent: given that the first card is an ace, the second is an ace with probability $3/51$."
+ },
+ {
+  "id": "pz-4.3",
+  "lecture": 4,
+  "stem": "How does linearity of expectation help to find the expected number of aces among the top $m$ cards of a shuffled deck?",
+  "correct": [
+   "Write the count as a sum of indicators with mean $4/52$ each.",
+   "Expectation of a sum is the sum of expectations."
+  ],
+  "distractors": [
+   {
+    "text": "The indicators must be independent for the sum to have mean $4m/52$.",
+    "misconception": "confuses with variance"
+   },
+   {
+    "text": "The mean is $4m/(52-m)$.",
+    "misconception": "gives a wrong formula"
+   },
+   {
+    "text": "One must compute the whole hypergeometric distribution.",
+    "misconception": "ignores the shortcut"
+   },
+   {
+    "text": "The mean is $m/4$.",
+    "misconception": "inverts the fraction"
+   },
+   {
+    "text": "The mean depends on the order of the top cards.",
+    "misconception": "denies exchangeability"
+   }
+  ],
+  "explanation": "The same argument gives $E[\\text{number of hearts in 5 cards}]=5\\cdot13/52=1.25$."
+ },
+ {
+  "id": "pz-4.4",
+  "lecture": 4,
+  "stem": "What is the difference between drawing with and without replacement?",
+  "correct": [
+   "With replacement draws are independent; without, they are dependent.",
+   "Without replacement each draw changes the composition."
+  ],
+  "distractors": [
+   {
+    "text": "The two give the same joint probabilities.",
+    "misconception": "ignores the dependence"
+   },
+   {
+    "text": "Drawing without replacement gives independent draws.",
+    "misconception": "reverses the roles"
+   },
+   {
+    "text": "Drawing with replacement gives dependent draws.",
+    "misconception": "reverses the roles"
+   },
+   {
+    "text": "They differ only for the first draw.",
+    "misconception": "ignores later draws"
+   },
+   {
+    "text": "Without replacement the marginal probability of each draw changes with its position.",
+    "misconception": "the marginal probability does not change"
+   }
+  ],
+  "explanation": "The marginal distribution of each draw is the same in both schemes; only joint probabilities differ."
+ },
+ {
+  "id": "pz-4.5",
+  "lecture": 4,
+  "stem": "What is the probability that the first ace appears at position $k$ in a shuffled deck?",
+  "correct": [
+   "Non-aces in the first $k-1$ draws, then an ace at $k$.",
+   "$\\frac{48}{52}\\cdot\\frac{47}{51}\\cdots\\frac{4}{52-k+1}$."
+  ],
+  "distractors": [
+   {
+    "text": "$(48/52)^{k-1}\\cdot(4/52)$, as if draws were independent.",
+    "misconception": "treats the draws as independent"
+   },
+   {
+    "text": "$4/52$ for every position $k$.",
+    "misconception": "confuses the marginal with the first-ace event"
+   },
+   {
+    "text": "$k/52$, growing with the position.",
+    "misconception": "gives an unrelated expression"
+   },
+   {
+    "text": "$\\binom41/\\binom{52}k$, a ratio of binomial counts.",
+    "misconception": "gives an unrelated expression"
+   },
+   {
+    "text": "$1/13$ for every position $k$.",
+    "misconception": "confuses with a constant probability"
+   }
+  ],
+  "explanation": "Without replacement the probabilities change at each draw, so the geometric formula does not apply."
+ },
+ {
+  "id": "pz-5.1",
+  "lecture": 5,
+  "stem": "In a fair gambler's ruin starting at $i$ with absorbing barriers at $0$ and $N$, what is the probability of reaching $N$ first?",
+  "correct": [
+   "$i/N$, the starting share.",
+   "Fortune as a share of the total."
+  ],
+  "distractors": [
+   {
+    "text": "$1/2$ for every starting fortune $i$.",
+    "misconception": "forgets the dependence on $i$"
+   },
+   {
+    "text": "$i/(N-i)$, the odds of winning.",
+    "misconception": "gives the odds"
+   },
+   {
+    "text": "$(N-i)/N$, the chance of ruin.",
+    "misconception": "gives the probability of ruin"
+   },
+   {
+    "text": "$i^2/N^2$, the squared share.",
+    "misconception": "squares the fraction"
+   },
+   {
+    "text": "$1/N$, whatever the start.",
+    "misconception": "ignores the starting point"
+   }
+  ],
+  "explanation": "$S_n$ is a martingale, so $E[S_T]=i=N\\cdot P(\\text{reach }N)$."
+ },
+ {
+  "id": "pz-5.2",
+  "lecture": 5,
+  "stem": "In a fair gambler's ruin, what is the expected number of steps until absorption starting at $i$ with barriers $0$ and $N$?",
+  "correct": [
+   "$i(N-i)$, the product of the barrier distances.",
+   "Distance to ruin times distance to the target."
+  ],
+  "distractors": [
+   {
+    "text": "$N$, whatever the starting position.",
+    "misconception": "ignores the starting position"
+   },
+   {
+    "text": "$i/N$, the probability of winning.",
+    "misconception": "gives the winning probability"
+   },
+   {
+    "text": "$N^2$, a bound for every start.",
+    "misconception": "gives a bound"
+   },
+   {
+    "text": "$i+(N-i)=N$ regardless of the start.",
+    "misconception": "adds instead of multiplying"
+   },
+   {
+    "text": "Infinite, since a random walk can wander forever.",
+    "misconception": "forgets the absorbing barriers"
+   }
+  ],
+  "explanation": "$S_n^2-n$ is a martingale, so $E[T]=E[S_T^2]-i^2=N^2\\cdot\\tfrac iN-i^2=i(N-i)$."
+ },
+ {
+  "id": "pz-5.3",
+  "lecture": 5,
+  "stem": "What does the reflection principle say about a simple random walk?",
+  "correct": [
+   "Paths touching a level and ending beyond it match reflected-endpoint paths.",
+   "Reflect the path after its first visit."
+  ],
+  "distractors": [
+   {
+    "text": "The walk returns to the origin with probability 1/2.",
+    "misconception": "gives a false value"
+   },
+   {
+    "text": "The walk is symmetric, so its mean is zero.",
+    "misconception": "states a different fact"
+   },
+   {
+    "text": "All paths of a given length have different probabilities.",
+    "misconception": "the paths of equal length are equally likely"
+   },
+   {
+    "text": "The walk never crosses a level.",
+    "misconception": "states a false claim"
+   },
+   {
+    "text": "Reflection doubles the variance.",
+    "misconception": "invents an effect"
+   }
+  ],
+  "explanation": "$P(\\max_{k\\le n}S_k\\ge a)=P(S_n\\ge a)+P(S_n>a)$ for the simple symmetric walk."
+ },
+ {
+  "id": "pz-5.4",
+  "lecture": 5,
+  "stem": "What does the ballot theorem say?",
+  "correct": [
+   "A leads throughout with probability $(a-b)/(a+b)$.",
+   "Margin over total."
+  ],
+  "distractors": [
+   {
+    "text": "The probability that A is ahead at the end is $a/(a+b)$.",
+    "misconception": "gives the probability of a random vote for A"
+   },
+   {
+    "text": "The probability that the count is tied at some point is 1/2.",
+    "misconception": "gives a false value"
+   },
+   {
+    "text": "A is always ahead if $a>b$.",
+    "misconception": "ignores random order"
+   },
+   {
+    "text": "The probability is $a/b$.",
+    "misconception": "gives a ratio larger than one"
+   },
+   {
+    "text": "The probability is $(a-b)/a$.",
+    "misconception": "uses the wrong denominator"
+   }
+  ],
+  "explanation": "With $a=3,b=1$ the probability is $2/4=1/2$: of the 4 orders, only 2 keep A strictly ahead."
+ },
+ {
+  "id": "pz-5.5",
+  "lecture": 5,
+  "stem": "What is true about the return of a symmetric simple random walk on the integers to its starting point?",
+  "correct": [
+   "It returns with probability 1, but the mean return time is infinite.",
+   "Recurrent, with infinite mean time."
+  ],
+  "distractors": [
+   {
+    "text": "It returns with probability less than 1.",
+    "misconception": "describes a transient walk"
+   },
+   {
+    "text": "The expected return time is finite.",
+    "misconception": "forgets that the mean is infinite"
+   },
+   {
+    "text": "It never returns.",
+    "misconception": "describes escape to infinity"
+   },
+   {
+    "text": "It returns exactly after an even number of steps with probability 1/2.",
+    "misconception": "gives a false value"
+   },
+   {
+    "text": "It returns if and only if the walk is biased.",
+    "misconception": "reverses the idea"
+   }
+  ],
+  "explanation": "$P(S_{2n}=0)=\\binom{2n}n4^{-n}\\sim1/\\sqrt{\\pi n}$, whose sum diverges (recurrence), while the return time has a tail $\\sim n^{-1/2}$."
+ },
+ {
+  "id": "pz-6.1",
+  "lecture": 6,
+  "stem": "What are the expected minimum and maximum of $n$ independent uniform$(0,1)$ variables?",
+  "correct": [
+   "$E[\\min]=1/(n+1)$ and $E[\\max]=n/(n+1)$.",
+   "The $k$th smallest has mean $k/(n+1)$."
+  ],
+  "distractors": [
+   {
+    "text": "$E[\\min]=1/n$ and $E[\\max]=(n-1)/n$, dividing by $n$.",
+    "misconception": "uses $n$ instead of $n+1$"
+   },
+   {
+    "text": "$E[\\min]=0$ and $E[\\max]=1$, the endpoints.",
+    "misconception": "gives the support endpoints"
+   },
+   {
+    "text": "$E[\\min]=1/2^n$, a halving at each variable.",
+    "misconception": "gives a probability, not an expectation"
+   },
+   {
+    "text": "$E[\\min]=E[\\max]=1/2$, the mean of one.",
+    "misconception": "gives the mean of one variable"
+   },
+   {
+    "text": "$E[\\max]=1-1/2^n$, from halving the gap.",
+    "misconception": "confuses with the median"
+   }
+  ],
+  "explanation": "The $n$ points split $(0,1)$ into $n+1$ gaps of equal expected length $1/(n+1)$."
+ },
+ {
+  "id": "pz-6.2",
+  "lecture": 6,
+  "stem": "What can be said about the spacings (gaps) between $n$ uniform points on $(0,1)$ and the endpoints?",
+  "correct": [
+   "The $n+1$ spacings are exchangeable, each with mean $1/(n+1)$.",
+   "All gaps share a distribution."
+  ],
+  "distractors": [
+   {
+    "text": "The middle spacing is the largest.",
+    "misconception": "ignores exchangeability"
+   },
+   {
+    "text": "The spacings are independent.",
+    "misconception": "confuses with independence; they sum to 1"
+   },
+   {
+    "text": "The first spacing has mean $1/n$.",
+    "misconception": "uses the wrong count"
+   },
+   {
+    "text": "The spacings are all equal to $1/(n+1)$.",
+    "misconception": "confuses the mean with the realised value"
+   },
+   {
+    "text": "The largest spacing has the same mean as the smallest.",
+    "misconception": "ignores the order of the gaps"
+   }
+  ],
+  "explanation": "The spacings are exchangeable but dependent, since they sum to 1: $(D_1,\\dots,D_{n+1})$ is uniform on the simplex."
+ },
+ {
+  "id": "pz-6.3",
+  "lecture": 6,
+  "stem": "Which factors determine the probability that Buffon's needle crosses one of the parallel lines?",
+  "correct": [
+   "Needle length relative to line spacing, averaged over its angle.",
+   "Longer needles or closer lines cross more."
+  ],
+  "distractors": [
+   {
+    "text": "Only the number of lines, since each line is crossed independently.",
+    "misconception": "ignores the length and spacing"
+   },
+   {
+    "text": "The needle's thickness and its weight, through where it lands.",
+    "misconception": "invents irrelevant physical factors"
+   },
+   {
+    "text": "Nothing, since the needle crosses with probability one half whatever its length.",
+    "misconception": "ignores the dependence on length"
+   },
+   {
+    "text": "The angle alone, with the needle length averaged out of the answer.",
+    "misconception": "keeps only the angle and drops the length"
+   },
+   {
+    "text": "The area of the table and the position where the needle starts.",
+    "misconception": "the table size and start are irrelevant"
+   }
+  ],
+  "explanation": "Averaging $\\ell|\\sin\\theta|/d$ over $\\theta\\in[0,\\pi]$ gives $2\\ell/(\\pi d)$ for $\\ell\\le d$, so the dependence is on the ratio $\\ell/d$ only."
+ },
+ {
+  "id": "pz-6.4",
+  "lecture": 6,
+  "stem": "When can the three pieces of a stick broken at two random points form a triangle?",
+  "correct": [
+   "Exactly when every piece is shorter than half the stick.",
+   "When no single piece is longer than the sum of the other two."
+  ],
+  "distractors": [
+   {
+    "text": "Whenever the two break points are different from each other.",
+    "misconception": "ignores the triangle inequality"
+   },
+   {
+    "text": "Only when the stick is broken into three equal pieces.",
+    "misconception": "requires an unnecessary equality"
+   },
+   {
+    "text": "Only when the first break lies before the middle of the stick.",
+    "misconception": "looks at a single break point"
+   },
+   {
+    "text": "Whenever the shortest piece is longer than half the stick.",
+    "misconception": "reverses the condition"
+   },
+   {
+    "text": "Always, since any three positive lengths can form a triangle.",
+    "misconception": "ignores the triangle inequality"
+   }
+  ],
+  "explanation": "The triple of piece lengths is uniform on a simplex and the triangle region (all pieces below one half) is its middle triangle, a quarter of the area."
+ },
+ {
+  "id": "pz-6.5",
+  "lecture": 6,
+  "stem": "What does Bertrand's paradox illustrate?",
+  "correct": [
+   "\"Choose a chord at random\" is ambiguous; mechanisms differ.",
+   "Probability depends on how the experiment is defined."
+  ],
+  "distractors": [
+   {
+    "text": "A probability of 1/2 is always correct for symmetric problems.",
+    "misconception": "states a false rule"
+   },
+   {
+    "text": "Geometric probabilities cannot be defined.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "The answer is always $1/3$.",
+    "misconception": "picks one of the answers"
+   },
+   {
+    "text": "Continuous probability is inconsistent.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "Chords are not random.",
+    "misconception": "misreads the point"
+   }
+  ],
+  "explanation": "The chord longer than the side of the inscribed triangle has probability $1/3$ (random endpoints), $1/2$ (random radius) or $1/4$ (random midpoint)."
+ },
+ {
+  "id": "pz-7.1",
+  "lecture": 7,
+  "stem": "How are absorption probabilities found in a Markov chain with absorbing states?",
+  "correct": [
+   "Solve the first-step equations $h_i=\\sum_jp_{ij}h_j$.",
+   "Compute $(I-Q)^{-1}R$."
+  ],
+  "distractors": [
+   {
+    "text": "By taking the stationary distribution.",
+    "misconception": "confuses with long-run behaviour"
+   },
+   {
+    "text": "By multiplying the transition matrix by itself once.",
+    "misconception": "gives only two-step probabilities"
+   },
+   {
+    "text": "By taking the largest entry of the matrix.",
+    "misconception": "gives an unrelated quantity"
+   },
+   {
+    "text": "By simulation only.",
+    "misconception": "denies exact solution"
+   },
+   {
+    "text": "By counting the number of absorbing states.",
+    "misconception": "confuses the number with the probabilities"
+   }
+  ],
+  "explanation": "The hitting probabilities form the minimal nonnegative solution of the system."
+ },
+ {
+  "id": "pz-7.2",
+  "lecture": 7,
+  "stem": "How is the expected time to absorption obtained for a chain with transient states?",
+  "correct": [
+   "Solve $t_i=1+\\sum_jp_{ij}t_j$ over transient states.",
+   "Condition on the first step and add one."
+  ],
+  "distractors": [
+   {
+    "text": "As the reciprocal of the largest eigenvalue of $P$.",
+    "misconception": "gives an unrelated quantity"
+   },
+   {
+    "text": "As the number of states.",
+    "misconception": "gives a bound"
+   },
+   {
+    "text": "As the stationary probability of the absorbing state.",
+    "misconception": "absorbing states have no stationary distribution on transient states"
+   },
+   {
+    "text": "As the probability of absorption.",
+    "misconception": "confuses time with probability"
+   },
+   {
+    "text": "As $\\sum_jp_{ij}t_j$ without the 1.",
+    "misconception": "forgets to count the step"
+   }
+  ],
+  "explanation": "The matrix $N=(I-Q)^{-1}$ is the fundamental matrix; $N_{ij}$ is the expected number of visits to $j$ starting from $i$."
+ },
+ {
+  "id": "pz-7.3",
+  "lecture": 7,
+  "stem": "What is the stationary distribution of a simple random walk on a connected undirected graph?",
+  "correct": [
+   "Proportional to the degree.",
+   "High-degree vertices are visited more."
+  ],
+  "distractors": [
+   {
+    "text": "Uniform on the vertices, whatever the graph.",
+    "misconception": "holds only for regular graphs"
+   },
+   {
+    "text": "Proportional to the inverse degree.",
+    "misconception": "inverts the relation"
+   },
+   {
+    "text": "Concentrated at the vertex of the smallest degree.",
+    "misconception": "reverses the relation"
+   },
+   {
+    "text": "There is no stationary distribution.",
+    "misconception": "ignores existence"
+   },
+   {
+    "text": "Proportional to the number of vertices.",
+    "misconception": "gives an unrelated quantity"
+   }
+  ],
+  "explanation": "Detailed balance holds: $\\pi_vP_{vw}=\\deg(v)/(2|E|)\\cdot1/\\deg(v)=1/(2|E|)$ for every edge."
+ },
+ {
+  "id": "pz-7.4",
+  "lecture": 7,
+  "stem": "How is the expected return time to a vertex $v$ of a simple random walk on a connected finite graph related to the stationary distribution?",
+  "correct": [
+   "The reciprocal of the stationary probability of $v$.",
+   "High-degree vertices are revisited sooner."
+  ],
+  "distractors": [
+   {
+    "text": "It equals the degree of $v$, however large the graph is.",
+    "misconception": "confuses return time with degree"
+   },
+   {
+    "text": "It equals the number of vertices for every connected graph.",
+    "misconception": "holds only for special graphs"
+   },
+   {
+    "text": "It equals the stationary probability of $v$ itself.",
+    "misconception": "confuses a rate with a time"
+   },
+   {
+    "text": "It is infinite because the walk may wander forever.",
+    "misconception": "states a false claim for finite chains"
+   },
+   {
+    "text": "It is the same at every vertex of every connected graph.",
+    "misconception": "holds only for regular graphs"
+   }
+  ],
+  "explanation": "Here $\\pi_v=\\deg(v)/(2|E|)$, so the expected return time is $2|E|/\\deg(v)$; on a cycle of length $n$ it is $n$."
+ },
+ {
+  "id": "pz-7.5",
+  "lecture": 7,
+  "stem": "Why can a random walk on a graph with a symmetric structure (such as the cube) often be reduced to a smaller chain?",
+  "correct": [
+   "Equivalent vertices can be lumped, tracking only the distance.",
+   "Symmetry merges identical states."
+  ],
+  "distractors": [
+   {
+    "text": "Symmetry makes all vertices have the same hitting time to every other vertex.",
+    "misconception": "overgeneralises"
+   },
+   {
+    "text": "Symmetry makes the chain deterministic.",
+    "misconception": "states an absurdity"
+   },
+   {
+    "text": "Lumping changes the probabilities.",
+    "misconception": "lumping preserves the relevant probabilities"
+   },
+   {
+    "text": "Symmetric graphs have no absorbing states.",
+    "misconception": "irrelevant claim"
+   },
+   {
+    "text": "Only the starting vertex matters.",
+    "misconception": "ignores the target"
+   }
+  ],
+  "explanation": "On the 3-cube the distance to the target is $0,1,2,3$, so a 4-state birth-death chain replaces the 8-state chain."
+ },
+ {
+  "id": "pz-8.1",
+  "lecture": 8,
+  "stem": "What does linearity of expectation say?",
+  "correct": [
+   "$E[X_1+\\dots+X_n]=\\sum E[X_i]$, dependent or not.",
+   "Expectation of a sum is the sum of expectations."
+  ],
+  "distractors": [
+   {
+    "text": "$E[XY]=E[X]E[Y]$ for all variables.",
+    "misconception": "needs independence"
+   },
+   {
+    "text": "The variance of a sum is the sum of variances.",
+    "misconception": "needs uncorrelatedness"
+   },
+   {
+    "text": "It holds only for independent variables.",
+    "misconception": "adds a false condition"
+   },
+   {
+    "text": "It holds only for identically distributed variables.",
+    "misconception": "adds a false condition"
+   },
+   {
+    "text": "It holds only for finitely many variables with finite variance.",
+    "misconception": "adds a false condition"
+   }
+  ],
+  "explanation": "This is why counting expected matches with indicators works even for strongly dependent events."
+ },
+ {
+  "id": "pz-8.2",
+  "lecture": 8,
+  "stem": "Why does a random permutation of $n$ elements have the same expected number of fixed points for every $n$?",
+  "correct": [
+   "Each position is fixed with probability $1/n$; linearity sums $n$ terms.",
+   "Expectation is additive despite dependence."
+  ],
+  "distractors": [
+   {
+    "text": "Because the fixed points are independent of each other.",
+    "misconception": "the indicators are not independent"
+   },
+   {
+    "text": "Because the expected number grows with $n$ and the probability shrinks.",
+    "misconception": "the expected number does not grow"
+   },
+   {
+    "text": "Because a permutation always has exactly one fixed point.",
+    "misconception": "many permutations have none"
+   },
+   {
+    "text": "Because the probability of no fixed point is zero for large $n$.",
+    "misconception": "confuses expectation with the probability of none"
+   },
+   {
+    "text": "Because the fixed points follow a binomial law with mean $n/2$.",
+    "misconception": "gives the wrong distribution and mean"
+   }
+  ],
+  "explanation": "The expected number is exactly 1, while the probability of no fixed point tends to $1/e\\approx0.368$."
+ },
+ {
+  "id": "pz-8.3",
+  "lecture": 8,
+  "stem": "What is the expected number of rolls to see all faces of a fair six-sided die, and why is linearity helpful?",
+  "correct": [
+   "Split into stages, one geometric wait per new face; the means add.",
+   "A sum of waiting times has summed expectations."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $6\\cdot6=36$.",
+    "misconception": "uses a crude product"
+   },
+   {
+    "text": "The stages are independent, which is required for expectations to add.",
+    "misconception": "adds a false condition"
+   },
+   {
+    "text": "It equals $6/2=3$.",
+    "misconception": "gives a wrong value"
+   },
+   {
+    "text": "Linearity does not apply since the stages depend on each other.",
+    "misconception": "misapplies the theorem"
+   },
+   {
+    "text": "It equals the expected time for one face.",
+    "misconception": "ignores the others"
+   }
+  ],
+  "explanation": "The stage lengths are independent geometrics; but only their means are needed."
+ },
+ {
+  "id": "pz-8.4",
+  "lecture": 8,
+  "stem": "Why does the expected number of records in a random ordering of $n$ distinct values grow only logarithmically?",
+  "correct": [
+   "Position $k$ is a record with probability $1/k$, summing to $H_n$.",
+   "Late positions rarely beat all earlier values."
+  ],
+  "distractors": [
+   {
+    "text": "Because exactly half of the positions are records on average.",
+    "misconception": "gives a linear count"
+   },
+   {
+    "text": "Because only the first value can ever be a record.",
+    "misconception": "counts only the first value"
+   },
+   {
+    "text": "Because every position is a record with the same probability.",
+    "misconception": "ignores the $1/k$ decay"
+   },
+   {
+    "text": "Because records come in independent blocks of fixed length.",
+    "misconception": "invents a block structure"
+   },
+   {
+    "text": "Because the number of records is constant for large $n$.",
+    "misconception": "the expected count keeps growing"
+   }
+  ],
+  "explanation": "The expected number is $H_n\\approx\\ln n+0.577$, found by summing record indicators with means $1/k$."
+ },
+ {
+  "id": "pz-8.5",
+  "lecture": 8,
+  "stem": "How can the expected number of coinciding birthday pairs among $n$ people be found using indicators?",
+  "correct": [
+   "Expected coinciding pairs: $\\binom n2/365$, by linearity.",
+   "Sum pair indicators of probability $1/365$."
+  ],
+  "distractors": [
+   {
+    "text": "The expected number of pairs is $n/365$.",
+    "misconception": "counts people rather than pairs"
+   },
+   {
+    "text": "It is $\\binom n2/365^2$.",
+    "misconception": "squares the denominator"
+   },
+   {
+    "text": "The indicators must be independent for this to hold.",
+    "misconception": "adds a false condition"
+   },
+   {
+    "text": "It is $1-(364/365)^n$.",
+    "misconception": "gives the probability for one person"
+   },
+   {
+    "text": "It is $n^2/365$.",
+    "misconception": "forgets the factor $1/2$"
+   }
+  ],
+  "explanation": "With $n=23$ the expected number of pairs is $253/365\\approx0.69$, consistent with the near-even chance of at least one pair."
+ },
+ {
+  "id": "pz-9.1",
+  "lecture": 9,
+  "stem": "Why does switching win more often than staying in the Monty Hall game with a knowledgeable host?",
+  "correct": [
+   "The first pick is right a third of the time; the other door holds the rest.",
+   "The host's goat reveals nothing about the first pick."
+  ],
+  "distractors": [
+   {
+    "text": "Because the two remaining doors are equally likely to hide the car.",
+    "misconception": "treats the two doors as equally likely"
+   },
+   {
+    "text": "Because the host moves the car to the unopened door.",
+    "misconception": "the car never moves"
+   },
+   {
+    "text": "Because the host opens a random door that happens to be a goat.",
+    "misconception": "the host knows where the car is"
+   },
+   {
+    "text": "Because staying is a worse bet only when the host opens the left door.",
+    "misconception": "the answer does not depend on which door"
+   },
+   {
+    "text": "Because switching resets the choice with fresh randomness.",
+    "misconception": "no new randomness is introduced"
+   }
+  ],
+  "explanation": "Staying wins with probability $1/3$ and switching with probability $2/3$."
+ },
+ {
+  "id": "pz-9.2",
+  "lecture": 9,
+  "stem": "What changes in the Monty Hall problem if the host opens a random unchosen door, and it happens to be a goat?",
+  "correct": [
+   "Switching and staying tie, as the host's act is uninformative.",
+   "A random host may reveal the car."
+  ],
+  "distractors": [
+   {
+    "text": "Switching still wins with probability $2/3$.",
+    "misconception": "ignores the changed mechanism"
+   },
+   {
+    "text": "Staying wins with probability $2/3$.",
+    "misconception": "reverses the answer"
+   },
+   {
+    "text": "The probability of winning is $1/3$ either way.",
+    "misconception": "gives a wrong value"
+   },
+   {
+    "text": "The problem becomes unsolvable.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "Switching wins with probability 1.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "The answer depends on how the information arises: a host who knows and avoids the car gives $2/3$; a random one gives $1/2$."
+ },
+ {
+  "id": "pz-9.3",
+  "lecture": 9,
+  "stem": "Why is the chance that both children are boys not one half after learning that at least one is a boy?",
+  "correct": [
+   "The information removes only the two-girl family, leaving three.",
+   "One of the three families has two boys."
+  ],
+  "distractors": [
+   {
+    "text": "Because the other child is independent and so is a boy half of the time.",
+    "misconception": "treats the other child as unrelated to the information"
+   },
+   {
+    "text": "Because the information tells which child, the older or the younger, is the boy.",
+    "misconception": "confuses with naming a specific child"
+   },
+   {
+    "text": "Because the sexes of siblings are positively correlated.",
+    "misconception": "contradicts the independence assumption"
+   },
+   {
+    "text": "Because the information does not change the original probability of a quarter.",
+    "misconception": "ignores the information"
+   },
+   {
+    "text": "Because the boy's name changes the family's composition.",
+    "misconception": "invents a dependence"
+   }
+  ],
+  "explanation": "If you learn instead that the older child is a boy, the probability is $1/2$: the way the information is obtained matters."
+ },
+ {
+  "id": "pz-9.4",
+  "lecture": 9,
+  "stem": "What is the base rate fallacy in a medical test problem?",
+  "correct": [
+   "Ignoring prevalence, so rare diseases are overestimated after a positive.",
+   "Mistaking sensitivity for the chance of disease."
+  ],
+  "distractors": [
+   {
+    "text": "Believing that a negative test proves the absence of disease.",
+    "misconception": "describes a different error"
+   },
+   {
+    "text": "Using Bayes' rule.",
+    "misconception": "describes the correct method"
+   },
+   {
+    "text": "Believing that a test with high sensitivity must also have high specificity.",
+    "misconception": "describes a different error"
+   },
+   {
+    "text": "Counting only the positive tests.",
+    "misconception": "describes a different error"
+   },
+   {
+    "text": "Ignoring the false negatives.",
+    "misconception": "describes a different error"
+   }
+  ],
+  "explanation": "With prevalence 1%, sensitivity 99% and specificity 95%, $P(D\\mid +)=0.0099/(0.0099+0.0495)\\approx0.167$."
+ },
+ {
+  "id": "pz-9.5",
+  "lecture": 9,
+  "stem": "Why does the way information is obtained matter in conditional probability puzzles?",
+  "correct": [
+   "Different mechanisms for learning a fact give different likelihoods.",
+   "Being told is not the same as the event."
+  ],
+  "distractors": [
+   {
+    "text": "It does not matter, since conditioning is on the event only.",
+    "misconception": "ignores the mechanism"
+   },
+   {
+    "text": "Only the content of the information matters, never the source.",
+    "misconception": "ignores the mechanism"
+   },
+   {
+    "text": "It matters only for continuous distributions.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "The prior probabilities are always irrelevant.",
+    "misconception": "ignores priors"
+   },
+   {
+    "text": "Mechanisms matter only if they are randomised.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "\"The host opens a goat door\" can arise from knowledge (always) or by chance; the posterior of the car differs."
+ },
+ {
+  "id": "pz-10.1",
+  "lecture": 10,
+  "stem": "What is a good first step when facing an unfamiliar probability puzzle under time pressure?",
+  "correct": [
+   "Look for structure: symmetry, linearity, recursion, complement.",
+   "Test a tiny case."
+  ],
+  "distractors": [
+   {
+    "text": "Start enumerating all outcomes immediately.",
+    "misconception": "wastes time and invites errors"
+   },
+   {
+    "text": "Guess and then try to justify the guess.",
+    "misconception": "risks error"
+   },
+   {
+    "text": "Use a simulation for every problem.",
+    "misconception": "may not be available and is slow"
+   },
+   {
+    "text": "Compute the full distribution first.",
+    "misconception": "is often unnecessary"
+   },
+   {
+    "text": "Memorise the answer.",
+    "misconception": "does not generalise"
+   }
+  ],
+  "explanation": "Many puzzles collapse under one idea (indicators, symmetry, first step) that avoids a long calculation."
+ },
+ {
+  "id": "pz-10.2",
+  "lecture": 10,
+  "stem": "Which check helps to catch mistakes in a quick answer?",
+  "correct": [
+   "Test tiny and limiting cases, and check the range.",
+   "Check extremes and symmetry."
+  ],
+  "distractors": [
+   {
+    "text": "Ensure the answer has many decimal places.",
+    "misconception": "confuses digits with accuracy"
+   },
+   {
+    "text": "Check whether the answer is a simple fraction.",
+    "misconception": "many correct answers are not simple"
+   },
+   {
+    "text": "Make the answer larger than one half.",
+    "misconception": "invents a criterion"
+   },
+   {
+    "text": "Repeat the same calculation once more.",
+    "misconception": "repeats the same error"
+   },
+   {
+    "text": "Ask whether the answer was in a textbook.",
+    "misconception": "is not a check"
+   }
+  ],
+  "explanation": "A formula for the expected waiting time that gives a negative or smaller-than-one value for $p=1$ is wrong."
+ },
+ {
+  "id": "pz-10.3",
+  "lecture": 10,
+  "stem": "When is it sensible to skip a problem and return to it later in a timed set?",
+  "correct": [
+   "When no structure appears quickly.",
+   "When time spent exceeds the expected gain."
+  ],
+  "distractors": [
+   {
+    "text": "Never, since every problem must be finished before moving on.",
+    "misconception": "ignores time limits"
+   },
+   {
+    "text": "Only when the problem is about cards.",
+    "misconception": "invents a rule"
+   },
+   {
+    "text": "Whenever the first idea fails once.",
+    "misconception": "gives up too soon"
+   },
+   {
+    "text": "Only at the end of the test.",
+    "misconception": "ignores the strategy"
+   },
+   {
+    "text": "When the answer is expected to be a fraction.",
+    "misconception": "invents a rule"
+   }
+  ],
+  "explanation": "Time allocation matters as much as technique: secure the quick problems first."
+ },
+ {
+  "id": "pz-10.4",
+  "lecture": 10,
+  "stem": "How can an approximate calculation support an exact one in a timed problem?",
+  "correct": [
+   "A rough approximation checks the exact answer.",
+   "Order of magnitude reveals slips."
+  ],
+  "distractors": [
+   {
+    "text": "It replaces the need for an exact answer in every case.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "Approximations are always more accurate than exact answers.",
+    "misconception": "states a false claim"
+   },
+   {
+    "text": "It is useful only for continuous distributions.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "Approximations are not allowed in timed sets.",
+    "misconception": "states a false rule"
+   },
+   {
+    "text": "It confirms the answer if the digits agree.",
+    "misconception": "misses the purpose"
+   }
+  ],
+  "explanation": "For the chance of no match among 23 birthdays, $\\exp(-\\binom{23}2/365)\\approx0.49$ already tells you the exact value is near a half."
+ },
+ {
+  "id": "pz-10.5",
+  "lecture": 10,
+  "stem": "Why is it useful to restate a puzzle as a sum of indicators or as a random walk?",
+  "correct": [
+   "Familiar tools such as linearity and reflection apply.",
+   "A reformulation makes a count standard."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the problem deterministic.",
+    "misconception": "misstates the effect"
+   },
+   {
+    "text": "Reformulation changes the answer.",
+    "misconception": "it should not"
+   },
+   {
+    "text": "It is only useful for fair coins.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It avoids having to understand the problem.",
+    "misconception": "misses the point"
+   },
+   {
+    "text": "It always gives an approximation.",
+    "misconception": "many reformulations are exact"
+   }
+  ],
+  "explanation": "\"Expected number of runs\" in a sequence becomes a sum over positions of the indicator that the next symbol differs."
+ },
+ {
+  "id": "pz-10.6",
+  "lecture": 10,
+  "stem": "What is a common source of error in conditional probability puzzles done quickly?",
+  "correct": [
+   "Treating dependence as independence.",
+   "Wrong sample space."
+  ],
+  "distractors": [
+   {
+    "text": "Using too many decimal places.",
+    "misconception": "is not an error source"
+   },
+   {
+    "text": "Using Bayes' rule.",
+    "misconception": "is correct practice"
+   },
+   {
+    "text": "Drawing a diagram.",
+    "misconception": "is helpful"
+   },
+   {
+    "text": "Counting the favourable outcomes.",
+    "misconception": "is a valid method"
+   },
+   {
+    "text": "Enumerating a small case.",
+    "misconception": "is a good check"
+   }
+  ],
+  "explanation": "Writing out the (weighted) sample space for a small case is usually the safest fix."
+ }
+]
