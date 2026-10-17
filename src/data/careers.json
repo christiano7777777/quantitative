@@ -20,7 +20,14 @@
    "mc",
    "algo",
    "pz",
-   "latex"
+   "latex",
+   "exp",
+   "rl",
+   "ms2",
+   "sc",
+   "lt",
+   "it",
+   "cpp2"
   ]
  },
  {
@@ -38,10 +45,17 @@
   ],
   "bonus": [
    "fermi",
-   "dv1",
    "ts1",
    "algo",
-   "dm"
+   "p3",
+   "inf",
+   "ml",
+   "reg2",
+   "pf2",
+   "risk",
+   "ll",
+   "cpp2",
+   "ir1"
   ]
  },
  {
@@ -60,7 +74,15 @@
    "cr",
    "cpp2",
    "p3",
-   "ovt"
+   "ovt",
+   "ms2",
+   "risk",
+   "ll",
+   "ml",
+   "ts2",
+   "bay",
+   "pf2",
+   "algo"
   ]
  },
  {
@@ -80,7 +102,15 @@
    "ts2",
    "reg2",
    "ir1",
-   "dv2"
+   "dv2",
+   "sc",
+   "pf2",
+   "ml",
+   "bay",
+   "hd",
+   "num2",
+   "ms1",
+   "cpp2"
   ]
  },
  {
@@ -101,7 +131,16 @@
    "cv",
    "bay",
    "hd",
-   "latex"
+   "latex",
+   "mc",
+   "np",
+   "ci",
+   "inf",
+   "reg2",
+   "rm",
+   "mlops",
+   "sc",
+   "cpp2"
   ]
  },
  {
@@ -121,7 +160,13 @@
    "cpp2",
    "llm",
    "sd",
-   "cv"
+   "cv",
+   "nlp",
+   "rl",
+   "ll",
+   "inf",
+   "algo",
+   "bay"
   ]
  },
  {
@@ -142,7 +187,15 @@
    "hd",
    "dl",
    "tools",
-   "latex"
+   "latex",
+   "mc",
+   "ts2",
+   "rm",
+   "nlp",
+   "mlops",
+   "sd",
+   "pz",
+   "ds2"
   ]
  },
  {
@@ -161,7 +214,15 @@
   ],
   "bonus": [
    "ll",
-   "py"
+   "ml",
+   "mlops",
+   "llm",
+   "algo",
+   "it",
+   "num1",
+   "la2",
+   "dl",
+   "rm"
   ]
  }
 ]
