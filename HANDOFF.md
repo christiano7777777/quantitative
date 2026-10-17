@@ -52,6 +52,10 @@ prerequisites have tests; use Dev mode to try them.
 | `sc` Stochastic Calculus | done: 60 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
 | `lt` Learning Theory | done: 50 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
 | `it` Information Theory | done: 56 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]`. MC not yet reviewed |
+| `ts1` Time Series I | done: 55 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `opt` Optimization | done: 55 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `la2` Linear Algebra II | done: 58 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]`. MC not yet reviewed |
+| `ra` Real Analysis | done: 56 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]`. Follows the topic data (measure theory and Lebesgue integration). MC not yet reviewed |
 | `latex` LaTeX & Research Writing | **not built, waiting for the owner**: see "Proposal for `latex`" below |
 | the other topics (prerequisites) | not started |
 
