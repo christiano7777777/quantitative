@@ -1,0 +1,1794 @@
+[
+ {
+  "id": "it-1.1",
+  "lecture": 1,
+  "stem": "Why is the entropy $H(X)=-\\sum_x p(x)\\log p(x)$ a sensible measure of the information in a source?",
+  "correct": [
+   "It is the average surprise $-\\log p(X)$ of an outcome, so rarer outcomes carry more information.",
+   "It is the expected surprise of one outcome, with rare outcomes the most surprising."
+  ],
+  "distractors": [
+   {
+    "text": "It is the number of different outcomes the source can produce, whatever their probabilities.",
+    "misconception": "confuses entropy with the alphabet size"
+   },
+   {
+    "text": "It is the probability of the most likely outcome, since likely outcomes carry the information.",
+    "misconception": "reverses the role of rare and common outcomes"
+   },
+   {
+    "text": "It is the variance of the outcomes, which measures how spread out they are.",
+    "misconception": "confuses entropy with variance"
+   },
+   {
+    "text": "It is the average of the outcome probabilities, weighted by the outcome values.",
+    "misconception": "confuses entropy with an expectation of the values"
+   },
+   {
+    "text": "It is the length of the shortest description of the most likely outcome only.",
+    "misconception": "ignores the averaging over all outcomes"
+   }
+  ],
+  "explanation": "The self-information $-\\log p(x)$ is large for rare outcomes; entropy averages it. It depends only on the probabilities, not on the labels or numerical values of the outcomes."
+ },
+ {
+  "id": "it-1.2",
+  "lecture": 1,
+  "stem": "A source takes $M$ values. For which distribution is $H(X)$ largest, and what is that largest value?",
+  "correct": [
+   "The uniform distribution, with maximum entropy $\\log M$ bits for a base-2 logarithm.",
+   "Equally likely values, giving entropy $\\log_2 M$."
+  ],
+  "distractors": [
+   {
+    "text": "A distribution with one value of probability close to 1, giving entropy close to $\\log M$.",
+    "misconception": "believes a concentrated distribution is the most uncertain"
+   },
+   {
+    "text": "Any distribution on $M$ values, since all of them have entropy exactly equal to $\\log M$.",
+    "misconception": "thinks entropy depends only on the alphabet size"
+   },
+   {
+    "text": "The geometric-like distribution $p_i\\propto 2^{-i}$, with entropy about $M$ bits.",
+    "misconception": "confuses a dyadic distribution with the maximiser"
+   },
+   {
+    "text": "The uniform distribution, with maximum entropy $M$ bits for any alphabet size.",
+    "misconception": "forgets the logarithm in the maximum"
+   },
+   {
+    "text": "A two-point distribution on the extreme values, with entropy $\\log 2$ bits.",
+    "misconception": "confuses spread of the values with entropy"
+   }
+  ],
+  "explanation": "By Jensen (or $D(p\\|u)\\ge 0$), $H(X)\\le\\log M$ with equality iff $p$ is uniform. A nearly deterministic source has entropy near 0."
+ },
+ {
+  "id": "it-1.3",
+  "lecture": 1,
+  "stem": "Let $Y=g(X)$ for a deterministic function $g$. Which statement about entropies holds?",
+  "correct": [
+   "$H(Y)\\le H(X)$, with equality when $g$ is one-to-one on the values taken by $X$.",
+   "A deterministic function of a variable cannot raise its entropy."
+  ],
+  "distractors": [
+   {
+    "text": "$H(Y)\\ge H(X)$, because applying a function can only add information.",
+    "misconception": "thinks processing creates information"
+   },
+   {
+    "text": "$H(Y)=H(X)$ for every function $g$, since $Y$ is determined by $X$.",
+    "misconception": "confuses determination of Y by X with the reverse"
+   },
+   {
+    "text": "$H(Y)$ and $H(X)$ are unrelated, since the function may map to any alphabet.",
+    "misconception": "ignores the many-to-one collapse of probabilities"
+   },
+   {
+    "text": "$H(Y)\\le H(X)$ with equality only when $g$ is constant.",
+    "misconception": "reverses the equality case"
+   },
+   {
+    "text": "$H(Y)=0$, because $Y$ is a deterministic function of $X$.",
+    "misconception": "confuses a function of X with a constant"
+   }
+  ],
+  "explanation": "Merging outcomes can only lose information: $H(X)=H(X,g(X))=H(g(X))+H(X|g(X))\\ge H(g(X))$."
+ },
+ {
+  "id": "it-1.4",
+  "lecture": 1,
+  "stem": "Why does the choice of the base of the logarithm in the entropy matter little?",
+  "correct": [
+   "Changing the base multiplies $H(X)$ by a constant factor, so only the unit changes.",
+   "Entropies in two bases differ by a fixed multiplicative constant."
+  ],
+  "distractors": [
+   {
+    "text": "Different bases give a different ordering of sources by entropy, so the base must be agreed in advance.",
+    "misconception": "thinks the base changes comparisons between sources"
+   },
+   {
+    "text": "Entropy is only defined for base 2, so other bases must be converted by a table.",
+    "misconception": "thinks bits are the only possible unit"
+   },
+   {
+    "text": "Changing the base adds a constant to $H(X)$, as with a change of origin.",
+    "misconception": "confuses a scale factor with a shift"
+   },
+   {
+    "text": "Changing the base changes the probabilities but not the values of the outcomes.",
+    "misconception": "confuses the base with the distribution"
+   },
+   {
+    "text": "The base only matters when the alphabet is infinite.",
+    "misconception": "restricts the unit change to a special case"
+   }
+  ],
+  "explanation": "$\\log_b x=\\log_a x/\\log_a b$, so $H_b(X)=H_a(X)/\\log_a b$. The unit is bits for base 2 and nats for base $e$."
+ },
+ {
+  "id": "it-1.5",
+  "lecture": 1,
+  "stem": "Two independent events have probabilities $p$ and $q$. How do their self-informations $-\\log p$ and $-\\log q$ combine for the joint event?",
+  "correct": [
+   "They add: the joint event has self-information $-\\log p-\\log q$.",
+   "The information of the two events is the sum of the two."
+  ],
+  "distractors": [
+   {
+    "text": "They multiply, since the probabilities multiply.",
+    "misconception": "forgets that the logarithm turns products into sums"
+   },
+   {
+    "text": "The joint event has the larger of the two informations.",
+    "misconception": "replaces additivity with a maximum"
+   },
+   {
+    "text": "They average, since information is an expectation.",
+    "misconception": "confuses self-information with its average"
+   },
+   {
+    "text": "They subtract, since independent events cancel each other.",
+    "misconception": "confuses independence with cancellation"
+   },
+   {
+    "text": "The joint event has the smaller of the two informations.",
+    "misconception": "replaces additivity with a minimum"
+   }
+  ],
+  "explanation": "$-\\log(pq)=-\\log p-\\log q$. Additivity over independent events is the property that singles out the logarithm."
+ },
+ {
+  "id": "it-2.1",
+  "lecture": 2,
+  "stem": "Which identity is the chain rule for entropy?",
+  "correct": [
+   "$H(X,Y)=H(X)+H(Y|X)$, whether or not $X$ and $Y$ are independent.",
+   "Joint entropy is the entropy of $X$ plus what $Y$ adds."
+  ],
+  "distractors": [
+   {
+    "text": "$H(X,Y)=H(X)\\,H(Y|X)$.",
+    "misconception": "multiplies where entropies add"
+   },
+   {
+    "text": "$H(X,Y)=H(X)+H(Y)$ for all $X$ and $Y$, whether or not they are dependent.",
+    "misconception": "assumes independence is not needed"
+   },
+   {
+    "text": "$H(X,Y)=H(X|Y)+H(Y|X)$, since each variable is explained by the other.",
+    "misconception": "forgets the mutual information term"
+   },
+   {
+    "text": "$H(X,Y)=H(X)-H(Y|X)$, since conditioning removes information.",
+    "misconception": "subtracts the conditional entropy"
+   },
+   {
+    "text": "$H(X,Y)=\\max\\{H(X),H(Y)\\}$, since the larger variable determines the other.",
+    "misconception": "confuses the joint with the larger marginal"
+   }
+  ],
+  "explanation": "By $p(x,y)=p(x)p(y|x)$ and taking $-E\\log$. In general $H(X,Y)\\le H(X)+H(Y)$, with equality iff $X$ and $Y$ are independent."
+ },
+ {
+  "id": "it-2.2",
+  "lecture": 2,
+  "stem": "Which statement about conditioning and entropy is correct?",
+  "correct": [
+   "$H(X|Y)\\le H(X)$ on average, though a single value $y$ may raise it.",
+   "Conditioning never raises the average entropy."
+  ],
+  "distractors": [
+   {
+    "text": "$H(X|Y=y)\\le H(X)$ for every single value $y$ of $Y$.",
+    "misconception": "applies the average statement to each outcome"
+   },
+   {
+    "text": "$H(X|Y)\\ge H(X)$, since extra variables make the problem more complicated.",
+    "misconception": "thinks conditioning adds uncertainty"
+   },
+   {
+    "text": "$H(X|Y)=H(X)$ unless $Y$ is a function of $X$.",
+    "misconception": "confuses dependence with functional dependence"
+   },
+   {
+    "text": "$H(X|Y)\\le H(X)$ with equality iff $X$ is a function of $Y$.",
+    "misconception": "reverses the equality case"
+   },
+   {
+    "text": "$H(X|Y)<H(X)$ strictly, whatever the joint distribution.",
+    "misconception": "forgets the case of independence"
+   }
+  ],
+  "explanation": "$H(X)-H(X|Y)=I(X;Y)\\ge 0$, with equality iff independent. A single observation $y$ can be misleading and raise the uncertainty, but not on average."
+ },
+ {
+  "id": "it-2.3",
+  "lecture": 2,
+  "stem": "What are the basic properties of the Kullback-Leibler divergence $D(p\\|q)$ between two distributions?",
+  "correct": [
+   "$D(p\\|q)\\ge0$ with equality iff $p=q$, but in general $D(p\\|q)\\ne D(q\\|p)$.",
+   "Never negative, zero only if $p=q$, and asymmetric."
+  ],
+  "distractors": [
+   {
+    "text": "$D(p\\|q)=D(q\\|p)$ always, so it is a genuine distance between distributions.",
+    "misconception": "treats KL divergence as a symmetric metric"
+   },
+   {
+    "text": "$D(p\\|q)$ can be negative when $q$ puts more mass than $p$ on some outcomes.",
+    "misconception": "forgets Gibbs' inequality"
+   },
+   {
+    "text": "$D(p\\|q)$ is finite for any pair $p,q$ on the same alphabet.",
+    "misconception": "ignores infinity when q vanishes where p does not"
+   },
+   {
+    "text": "It satisfies the triangle inequality, $D(p\\|r)\\le D(p\\|q)+D(q\\|r)$.",
+    "misconception": "treats it as a metric"
+   },
+   {
+    "text": "$D(p\\|q)=0$ whenever $p$ and $q$ have the same entropy.",
+    "misconception": "confuses equal entropies with equal distributions"
+   }
+  ],
+  "explanation": "Gibbs' inequality follows from Jensen. KL divergence is not symmetric, fails the triangle inequality, and is infinite if $p(x)>0=q(x)$ for some $x$."
+ },
+ {
+  "id": "it-2.4",
+  "lecture": 2,
+  "stem": "How is the mutual information $I(X;Y)$ characterised?",
+  "correct": [
+   "It equals $D(p(x,y)\\|p(x)p(y))$, and is zero iff $X$ and $Y$ are independent.",
+   "$H(X)-H(X|Y)$, the uncertainty about $X$ that $Y$ removes."
+  ],
+  "distractors": [
+   {
+    "text": "It is zero iff $X$ and $Y$ are uncorrelated, since correlation measures dependence.",
+    "misconception": "confuses uncorrelated with independent"
+   },
+   {
+    "text": "It is the sum $H(X)+H(Y)$, the total information in the two variables.",
+    "misconception": "forgets the joint entropy in the definition"
+   },
+   {
+    "text": "It can be negative when $X$ and $Y$ are negatively dependent.",
+    "misconception": "confuses it with the sign of correlation"
+   },
+   {
+    "text": "It is the conditional entropy $H(X|Y)$, the uncertainty that remains.",
+    "misconception": "confuses the removed with the remaining uncertainty"
+   },
+   {
+    "text": "It satisfies $I(X;Y)\\le H(X)$ with equality iff $X$ and $Y$ are independent.",
+    "misconception": "reverses the equality case"
+   }
+  ],
+  "explanation": "$I(X;Y)\\ge 0$ with equality iff independent. Uncorrelated variables can have positive mutual information, for example $Y=X^2$ with $X$ symmetric."
+ },
+ {
+  "id": "it-2.5",
+  "lecture": 2,
+  "stem": "$X\\to Y\\to Z$ is a Markov chain. Which statement is the data-processing inequality?",
+  "correct": [
+   "$I(X;Z)\\le I(X;Y)$: processing cannot add information about $X$.",
+   "Processing cannot create information."
+  ],
+  "distractors": [
+   {
+    "text": "$I(X;Z)\\ge I(X;Y)$, since $Z$ is computed from more data.",
+    "misconception": "thinks more processing adds information"
+   },
+   {
+    "text": "$I(X;Z)=I(X;Y)$ for every Markov chain.",
+    "misconception": "thinks the chain structure preserves information"
+   },
+   {
+    "text": "$I(X;Z)=I(X;Y)+I(Y;Z)$, as information adds along the chain.",
+    "misconception": "treats mutual information as additive along a chain"
+   },
+   {
+    "text": "$H(X|Z)\\le H(X|Y)$, so $Z$ is at least as informative about $X$ as $Y$.",
+    "misconception": "reverses the conditional-entropy form"
+   },
+   {
+    "text": "$I(X;Z)\\le I(X;Y)$ needs $Z$ to be a one-to-one function of $Y$.",
+    "misconception": "restricts the inequality to invertible maps"
+   }
+  ],
+  "explanation": "By the chain rule $I(X;Y,Z)=I(X;Y)=I(X;Z)+I(X;Y|Z)\\ge I(X;Z)$, since $I(X;Z|Y)=0$ for a Markov chain. It holds for any processing, including noisy."
+ },
+ {
+  "id": "it-3.1",
+  "lecture": 3,
+  "stem": "In the information diagram of two variables $X$ and $Y$, which region corresponds to $I(X;Y)$?",
+  "correct": [
+   "The intersection of the sets $\\tilde X$ and $\\tilde Y$, while $H(X,Y)$ is their union.",
+   "The overlap of the two sets $\\tilde X$ and $\\tilde Y$ in the diagram."
+  ],
+  "distractors": [
+   {
+    "text": "The set difference $\\tilde X\\setminus\\tilde Y$, the part of $X$ not explained by $Y$.",
+    "misconception": "confuses mutual information with conditional entropy"
+   },
+   {
+    "text": "The symmetric difference $\\tilde X\\triangle\\tilde Y$, where exactly one of the variables is present.",
+    "misconception": "confuses the overlap with the non-overlap"
+   },
+   {
+    "text": "The union $\\tilde X\\cup\\tilde Y$, the total information in the two variables.",
+    "misconception": "confuses it with joint entropy"
+   },
+   {
+    "text": "The whole sample space, whose measure is always 1.",
+    "misconception": "confuses the information measure with a probability measure"
+   },
+   {
+    "text": "The complement of $\\tilde X\\cup\\tilde Y$, the information in neither variable.",
+    "misconception": "confuses the empty region with the overlap"
+   }
+  ],
+  "explanation": "With $\\mu^*(\\tilde X)=H(X)$, $\\mu^*(\\tilde X\\cap\\tilde Y)=I(X;Y)$, $\\mu^*(\\tilde X\\setminus\\tilde Y)=H(X|Y)$ and $\\mu^*(\\tilde X\\cup\\tilde Y)=H(X,Y)$."
+ },
+ {
+  "id": "it-3.2",
+  "lecture": 3,
+  "stem": "For three variables, which statement about the I-measure $\\mu^*$ is true?",
+  "correct": [
+   "The atom $\\tilde X\\cap\\tilde Y\\cap\\tilde Z$ can have negative measure, so $\\mu^*$ is not a measure in the usual sense.",
+   "$I(X;Y;Z)$ can be negative, for example when $Z=X\\oplus Y$ for fair independent bits."
+  ],
+  "distractors": [
+   {
+    "text": "Every atom has non-negative measure, as the measure of a set cannot be negative.",
+    "misconception": "assumes information diagrams behave like probability areas"
+   },
+   {
+    "text": "The measure of every atom is non-negative, because every Shannon measure is non-negative.",
+    "misconception": "extends the non-negativity of I(X;Y|Z) to all atoms"
+   },
+   {
+    "text": "The three-way term is negative only when the variables are dependent in pairs.",
+    "misconception": "misidentifies the example of three-way dependence"
+   },
+   {
+    "text": "The three-way term is always zero, since three variables cannot overlap in information.",
+    "misconception": "ignores genuine three-way structure"
+   },
+   {
+    "text": "The triple intersection is non-negative whenever two of the variables are independent.",
+    "misconception": "gives a false sufficient condition"
+   }
+  ],
+  "explanation": "With $X,Y$ independent fair bits and $Z=X\\oplus Y$: $I(X;Y)=0$ but $I(X;Y|Z)=1$, so $\\mu^*(\\tilde X\\cap\\tilde Y\\cap\\tilde Z)=I(X;Y)-I(X;Y|Z)=-1$."
+ },
+ {
+  "id": "it-3.3",
+  "lecture": 3,
+  "stem": "Which identity can be read directly from the information diagram of $X$ and $Y$?",
+  "correct": [
+   "$H(X)=H(X|Y)+I(X;Y)$, which can be read directly off the diagram of two variables.",
+   "$\\tilde X$ is the union of $\\tilde X\\setminus\\tilde Y$ and $\\tilde X\\cap\\tilde Y$, two disjoint parts."
+  ],
+  "distractors": [
+   {
+    "text": "$H(X,Y)=H(X)+H(Y)+I(X;Y)$.",
+    "misconception": "counts the overlap twice"
+   },
+   {
+    "text": "$H(X|Y)=H(X)+I(X;Y)$, since conditioning adds the overlap.",
+    "misconception": "gets the sign of the overlap wrong"
+   },
+   {
+    "text": "$I(X;Y)=H(X,Y)+H(X)+H(Y)$.",
+    "misconception": "gets all three signs wrong"
+   },
+   {
+    "text": "$H(X,Y)=H(X|Y)+H(Y|X)$.",
+    "misconception": "forgets the overlap region"
+   },
+   {
+    "text": "$I(X;Y)=H(X)H(Y)$, the overlap of two sets of measures $H(X)$ and $H(Y)$.",
+    "misconception": "multiplies where measures add"
+   }
+  ],
+  "explanation": "The region $\\tilde X$ is the disjoint union of $\\tilde X\\setminus\\tilde Y$ and $\\tilde X\\cap\\tilde Y$. The joint entropy is $H(X)+H(Y)-I(X;Y)$."
+ },
+ {
+  "id": "it-3.4",
+  "lecture": 3,
+  "stem": "$X\\to Y\\to Z$ is a Markov chain. What does this say in the information diagram?",
+  "correct": [
+   "The atom $\\tilde X\\cap\\tilde Z\\setminus\\tilde Y$ has zero measure, that is, $I(X;Z|Y)=0$.",
+   "Given $Y$, no information is shared between $X$ and $Z$."
+  ],
+  "distractors": [
+   {
+    "text": "The atom $\\tilde X\\cap\\tilde Y\\cap\\tilde Z$ has measure zero.",
+    "misconception": "confuses the triple overlap with the conditional overlap"
+   },
+   {
+    "text": "The sets $\\tilde X$ and $\\tilde Z$ are disjoint, so $I(X;Z)=0$.",
+    "misconception": "confuses conditional independence with independence"
+   },
+   {
+    "text": "The sets $\\tilde X$ and $\\tilde Y$ are disjoint, so $X$ and $Y$ are independent.",
+    "misconception": "ignores that the chain starts with a dependence"
+   },
+   {
+    "text": "The atom $\\tilde X\\cap\\tilde Y\\setminus\\tilde Z$ has measure zero, so $I(X;Y|Z)=0$.",
+    "misconception": "confuses with a different conditional independence"
+   },
+   {
+    "text": "The atom $\\tilde Y\\setminus(\\tilde X\\cup\\tilde Z)$ has measure zero, so $H(Y|X,Z)=0$.",
+    "misconception": "confuses the Markov property with determinism"
+   }
+  ],
+  "explanation": "The Markov property is $I(X;Z|Y)=0$, the measure of the atom in $\\tilde X\\cap\\tilde Z$ but outside $\\tilde Y$. The triple overlap can still be non-zero."
+ },
+ {
+  "id": "it-3.5",
+  "lecture": 3,
+  "stem": "How many atoms does the information diagram of $n$ random variables have?",
+  "correct": [
+   "There are $2^n-1$ atoms, one per non-empty subset.",
+   "Counting the non-empty subsets of the variables gives it."
+  ],
+  "distractors": [
+   {
+    "text": "There are $2^n$ atoms, one of them being the region outside every set.",
+    "misconception": "counts the empty region as an atom"
+   },
+   {
+    "text": "There are $n$ atoms, one per variable.",
+    "misconception": "ignores overlaps"
+   },
+   {
+    "text": "There are $n(n-1)/2$ atoms, one for each pair of variables.",
+    "misconception": "counts only pairwise overlaps"
+   },
+   {
+    "text": "There are $2^{n-1}$ atoms, one for each subset of even size.",
+    "misconception": "invents a parity restriction"
+   },
+   {
+    "text": "There are $n!$ atoms, one for each ordering of the variables.",
+    "misconception": "confuses subsets with orderings"
+   }
+  ],
+  "explanation": "Atoms are indexed by non-empty subsets $G$ of $\\{1,\\dots,n\\}$, those inside the sets of $G$ and outside the others; the region outside every set is excluded because its measure is 0."
+ },
+ {
+  "id": "it-4.1",
+  "lecture": 4,
+  "stem": "What does the Kraft inequality say about a binary prefix code with codeword lengths $l_1,\\dots,l_m$?",
+  "correct": [
+   "$\\sum_i2^{-l_i}\\le1$, and any such lengths allow a prefix code.",
+   "A prefix code exists iff $\\sum_i2^{-l_i}\\le1$ for these lengths."
+  ],
+  "distractors": [
+   {
+    "text": "$\\sum_i l_i\\le 1$, so that the codeword lengths are summable.",
+    "misconception": "forgets the exponent"
+   },
+   {
+    "text": "$\\sum_i 2^{-l_i}=1$ for every prefix code, with equality exactly.",
+    "misconception": "replaces the inequality by equality"
+   },
+   {
+    "text": "$\\sum_i 2^{-l_i}\\ge 1$, since the code must cover all binary strings.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "$\\sum_i 2^{-l_i}\\le 1$ is needed for a prefix code, but then a code with those lengths might still fail to exist.",
+    "misconception": "misses the sufficiency part"
+   },
+   {
+    "text": "$\\sum_i l_i 2^{-l_i}\\le 1$, so that the expected length is at most one.",
+    "misconception": "misplaces the length weights"
+   }
+  ],
+  "explanation": "Each codeword of length $l$ in a prefix code occupies a fraction $2^{-l}$ of the code tree's leaves, and the subtrees are disjoint; the converse builds the code level by level."
+ },
+ {
+  "id": "it-4.2",
+  "lecture": 4,
+  "stem": "Which statement about the Huffman code for a given distribution is correct?",
+  "correct": [
+   "Merging the two least likely symbols repeatedly builds a minimal prefix code.",
+   "Among all prefix codes, Huffman codes have the smallest average length."
+  ],
+  "distractors": [
+   {
+    "text": "It minimises the length of the longest codeword, rather than the expected length.",
+    "misconception": "confuses average length with worst-case length"
+   },
+   {
+    "text": "It assigns the shortest codeword to the least probable symbol.",
+    "misconception": "reverses the length ordering"
+   },
+   {
+    "text": "It is the unique optimal code, so any other optimal code is a relabelling of it.",
+    "misconception": "forgets ties and different tree shapes"
+   },
+   {
+    "text": "Merging the two most probable symbols first gives the minimal expected length.",
+    "misconception": "reverses which symbols are merged"
+   },
+   {
+    "text": "It has expected length exactly equal to $H(X)$ for every source.",
+    "misconception": "confuses optimal with entropy-achieving"
+   }
+  ],
+  "explanation": "The two least likely symbols can be taken as siblings at the deepest level in some optimal code, which reduces the problem to $m-1$ symbols; induction gives optimality."
+ },
+ {
+  "id": "it-4.3",
+  "lecture": 4,
+  "stem": "A source with entropy $H(X)$ is encoded by an optimal binary prefix code with expected length $L$. Which relation holds?",
+  "correct": [
+   "$H(X)\\le L<H(X)+1$, so the average length is within one bit of the entropy.",
+   "Entropy bounds $L$ from below, and $L$ stays within one bit of it."
+  ],
+  "distractors": [
+   {
+    "text": "$L\\le H(X)$, since the code compresses the source.",
+    "misconception": "reverses the lower bound"
+   },
+   {
+    "text": "$L=H(X)$ for every source, since the code is optimal.",
+    "misconception": "thinks optimal codes always meet the entropy"
+   },
+   {
+    "text": "$L\\ge H(X)+1$, since an integer number of bits is needed per symbol.",
+    "misconception": "turns the upper bound into a lower bound"
+   },
+   {
+    "text": "$H(X)-1<L\\le H(X)$, since rounding lengths down gives a code.",
+    "misconception": "confuses rounding up with rounding down"
+   },
+   {
+    "text": "$L<H(X)$ for sources with many symbols, because the code uses fewer bits than the entropy.",
+    "misconception": "thinks large alphabets beat the entropy"
+   }
+  ],
+  "explanation": "Lengths $l_i=\\lceil-\\log p_i\\rceil$ satisfy Kraft and give $L<H+1$; the lower bound $L\\ge H$ is Gibbs' inequality combined with the Kraft sum being at most 1. Equality $L=H$ holds iff all $p_i$ are powers of $1/2$."
+ },
+ {
+  "id": "it-4.4",
+  "lecture": 4,
+  "stem": "When is the expected length of an optimal binary prefix code exactly equal to the entropy?",
+  "correct": [
+   "When each probability is a power of $1/2$, that is, dyadic.",
+   "For dyadic distributions only."
+  ],
+  "distractors": [
+   {
+    "text": "When the source has only two symbols.",
+    "misconception": "forgets that a binary source can have entropy below one bit"
+   },
+   {
+    "text": "When all symbol probabilities are different.",
+    "misconception": "confuses distinctness with dyadic structure"
+   },
+   {
+    "text": "When the number of symbols is a power of 2.",
+    "misconception": "confuses alphabet size with probabilities"
+   },
+   {
+    "text": "When the distribution is uniform on any number of symbols.",
+    "misconception": "misses that uniform needs a power-of-two size"
+   },
+   {
+    "text": "Never, because the expected length always exceeds the entropy strictly.",
+    "misconception": "ignores the dyadic case"
+   }
+  ],
+  "explanation": "$L-H(X)=\\sum_i p_i\\log\\{p_i/2^{-l_i}\\}$ vanishes iff $p_i=2^{-l_i}$ for all $i$. A binary source with $p=(0.9,0.1)$ has $H<1$ but $L=1$."
+ },
+ {
+  "id": "it-4.5",
+  "lecture": 4,
+  "stem": "Which statement about Huffman codes for the same source is true?",
+  "correct": [
+   "Different Huffman codes may exist for the source, all having the same expected length.",
+   "Ties in the merging steps can change codeword lengths without changing the average."
+  ],
+  "distractors": [
+   {
+    "text": "The Huffman code is unique up to relabelling the 0 and 1 branches.",
+    "misconception": "forgets ties between probabilities"
+   },
+   {
+    "text": "Different Huffman codes can have different expected lengths, one of them being better.",
+    "misconception": "forgets that all choices remain optimal"
+   },
+   {
+    "text": "Every Huffman code gives each symbol the same length as every other Huffman code.",
+    "misconception": "confuses the average length with the individual lengths"
+   },
+   {
+    "text": "A Huffman code is uniquely decodable only if the probabilities are all different.",
+    "misconception": "links decodability to tie-breaking"
+   },
+   {
+    "text": "Huffman codes are optimal only among codes with the same maximum length.",
+    "misconception": "invents a restriction"
+   }
+  ],
+  "explanation": "Ties can be resolved differently, giving different length profiles (for instance, probabilities $0.4,0.2,0.2,0.1,0.1$) but the same optimal average; the variance of the lengths may differ."
+ },
+ {
+  "id": "it-5.1",
+  "lecture": 5,
+  "stem": "What is the content of the weak asymptotic equipartition property for an i.i.d. source $X_1,X_2,\\dots$ with entropy $H$?",
+  "correct": [
+   "$-\\frac1n\\log p(X_1,\\dots,X_n)\\to H$ in probability, for an i.i.d. source.",
+   "Log-probability per symbol concentrates at $H$."
+  ],
+  "distractors": [
+   {
+    "text": "Every sequence of length $n$ has probability close to $2^{-nH}$.",
+    "misconception": "applies the concentration to all sequences"
+   },
+   {
+    "text": "$-\\frac1n\\log p(X_1,\\dots,X_n)\\to\\log|\\mathcal X|$, the log of the alphabet size.",
+    "misconception": "confuses entropy with the maximum entropy"
+   },
+   {
+    "text": "The sample mean of the symbols converges to $H$.",
+    "misconception": "confuses the log-probability average with the symbol average"
+   },
+   {
+    "text": "The number of sequences with positive probability is close to $2^{nH}$.",
+    "misconception": "confuses the support with the typical set"
+   },
+   {
+    "text": "The sequence probability $p(X^n)$ converges to a constant.",
+    "misconception": "ignores that the probability decays exponentially"
+   }
+  ],
+  "explanation": "Apply the weak law of large numbers to the i.i.d. variables $-\\log p(X_i)$ whose mean is $H$. Only most of the probability, not every sequence, lies near $2^{-nH}$."
+ },
+ {
+  "id": "it-5.2",
+  "lecture": 5,
+  "stem": "What can be said about the weakly typical set $A_\\epsilon^{(n)}$ for large $n$?",
+  "correct": [
+   "It has probability near 1 and about $2^{nH}$ members, each of probability about $2^{-nH}$.",
+   "Roughly $2^{nH}$ nearly equiprobable sequences carry almost all the mass."
+  ],
+  "distractors": [
+   {
+    "text": "It contains almost all sequences of length $n$, about $|\\mathcal X|^n$ of them.",
+    "misconception": "confuses the typical set with the full space"
+   },
+   {
+    "text": "It contains the sequences with the largest probabilities and has size close to 1.",
+    "misconception": "confuses typical with the single most probable sequence"
+   },
+   {
+    "text": "It has probability close to 0, but contains a majority of the sequences.",
+    "misconception": "reverses the probability and counting statements"
+   },
+   {
+    "text": "It has about $2^{nH}$ elements, whose probabilities differ widely from each other.",
+    "misconception": "misses the equipartition"
+   },
+   {
+    "text": "It has about $nH$ elements, one for each unit of entropy.",
+    "misconception": "forgets the exponent"
+   }
+  ],
+  "explanation": "The size is at most $2^{n(H+\\epsilon)}$ because each member has probability at least $2^{-n(H+\\epsilon)}$, and for large $n$ it is at least $(1-\\epsilon)2^{n(H-\\epsilon)}$."
+ },
+ {
+  "id": "it-5.3",
+  "lecture": 5,
+  "stem": "What does the source coding theorem for i.i.d. sources say about the compression rate $R$ in bits per symbol?",
+  "correct": [
+   "Rates $R>H$ allow reliable block compression, and rates $R<H$ do not allow it.",
+   "Entropy is the threshold for the reliable compression of long blocks."
+  ],
+  "distractors": [
+   {
+    "text": "Any rate $R>0$ allows error-free compression when the block length is long enough.",
+    "misconception": "forgets the entropy limit"
+   },
+   {
+    "text": "Only rates $R\\ge\\log_2|\\mathcal X|$ allow reliable compression.",
+    "misconception": "confuses entropy with the alphabet size"
+   },
+   {
+    "text": "Rates $R<H$ are possible provided the code is allowed a small probability of error that does not vanish.",
+    "misconception": "confuses a fixed error with vanishing error"
+   },
+   {
+    "text": "Rates $R>H$ are impossible, since $H$ is the minimum number of bits per symbol.",
+    "misconception": "reverses the direction of the threshold"
+   },
+   {
+    "text": "Zero-error compression at rate $R=H$ is always possible with fixed-length blocks.",
+    "misconception": "confuses vanishing error with zero error"
+   }
+  ],
+  "explanation": "Index the typical set with $n(H+\\epsilon)$ bits and code everything else arbitrarily; the converse follows since $2^{nR}$ sequences cannot carry probability close to 1 if $R<H$."
+ },
+ {
+  "id": "it-5.4",
+  "lecture": 5,
+  "stem": "A binary source has $P(1)=0.1$. Is the single most probable sequence of length $n$, the all-zero sequence, in the typical set for large $n$?",
+  "correct": [
+   "No: its log-probability per symbol is $-\\log0.9$, which is not near $H$, so it is not typical.",
+   "It is more probable than any typical sequence, but it is not typical itself."
+  ],
+  "distractors": [
+   {
+    "text": "Yes, since a typical set must contain the most probable sequence.",
+    "misconception": "confuses typical with most probable"
+   },
+   {
+    "text": "Yes, since the all-zero sequence has the highest probability and probabilities decay as $2^{-nH}$.",
+    "misconception": "assumes every sequence has probability $2^{-nH}$"
+   },
+   {
+    "text": "No, because its probability is smaller than $2^{-n(H+\\epsilon)}$.",
+    "misconception": "reverses which side of the typical range it lies on"
+   },
+   {
+    "text": "Yes, because its empirical frequencies equal the true probability of the symbol 0.",
+    "misconception": "confuses the sequence with a typical type"
+   },
+   {
+    "text": "It is typical for every $n$, but its probability tends to zero.",
+    "misconception": "mixes up typical status with vanishing probability"
+   }
+  ],
+  "explanation": "The all-zero sequence has probability $0.9^n$, larger than $2^{-nH}$ with $H=h(0.1)\\approx0.47$ since $-\\log_2 0.9\\approx0.15<H$. Its total mass is tiny; typical sequences have about $0.1n$ ones."
+ },
+ {
+  "id": "it-5.5",
+  "lecture": 5,
+  "stem": "Why is weak typicality enough for the source coding theorem, even though weakly typical sequences need not have the right symbol frequencies?",
+  "correct": [
+   "Only the sequence probability matters for counting: members have probability near $2^{-nH}$.",
+   "The counting argument needs the probabilities of sequences, not their symbol frequencies."
+  ],
+  "distractors": [
+   {
+    "text": "Because weakly typical sequences have exactly the right symbol frequencies for any source.",
+    "misconception": "confuses weak with strong typicality"
+   },
+   {
+    "text": "Because the theorem only holds for sources with uniform distributions.",
+    "misconception": "restricts the theorem"
+   },
+   {
+    "text": "Because the typical set is chosen to be independent of the source distribution.",
+    "misconception": "ignores that typicality is defined through the source"
+   },
+   {
+    "text": "Because compression needs only a rate larger than the log of the alphabet size.",
+    "misconception": "confuses with the trivial fixed-length rate"
+   },
+   {
+    "text": "Because the theorem is proved from the central limit theorem rather than the law of large numbers.",
+    "misconception": "misnames the tool"
+   }
+  ],
+  "explanation": "Weak typicality is defined by $|-\\frac1n\\log p(x^n)-H|\\le\\epsilon$ and is enough for the AEP; strong typicality (frequencies) is needed for finer results such as joint typicality arguments with channels."
+ },
+ {
+  "id": "it-6.1",
+  "lecture": 6,
+  "stem": "How is a strongly typical sequence defined for a finite-alphabet source with distribution $p$?",
+  "correct": [
+   "Each symbol's relative frequency is within $\\delta$ of its probability.",
+   "The empirical distribution is close to $p$ in every component."
+  ],
+  "distractors": [
+   {
+    "text": "Its probability is within $2^{\\pm n\\delta}$ of $2^{-nH}$.",
+    "misconception": "describes weak typicality"
+   },
+   {
+    "text": "Its first symbol has the highest probability and its last has the lowest.",
+    "misconception": "invents an ordering condition"
+   },
+   {
+    "text": "Its empirical entropy equals the true entropy of the source exactly.",
+    "misconception": "confuses closeness with equality"
+   },
+   {
+    "text": "Its relative frequency of the most probable symbol is close to 1.",
+    "misconception": "confuses frequencies with a concentration on one symbol"
+   },
+   {
+    "text": "Its symbols are pairwise different.",
+    "misconception": "invents a distinctness condition"
+   }
+  ],
+  "explanation": "Strong typicality bounds $|N(a;x^n)/n-p(a)|$ for every symbol $a$. It implies weak typicality (with a larger $\\epsilon$), but not conversely."
+ },
+ {
+  "id": "it-6.2",
+  "lecture": 6,
+  "stem": "Which statement relates strong and weak typicality?",
+  "correct": [
+   "A strongly typical sequence is weakly typical too (for a suitable $\\epsilon$), but not conversely.",
+   "For a finite alphabet, strong typicality is the more demanding notion."
+  ],
+  "distractors": [
+   {
+    "text": "Weak and strong typicality define the same set of sequences.",
+    "misconception": "treats the two as equivalent"
+   },
+   {
+    "text": "Every weakly typical sequence is strongly typical, as the entropy fixes the frequencies.",
+    "misconception": "reverses the implication"
+   },
+   {
+    "text": "Strong typicality is defined only for continuous variables.",
+    "misconception": "confuses discrete with continuous"
+   },
+   {
+    "text": "Strong typicality is weaker, since it only fixes the most frequent symbol.",
+    "misconception": "misjudges the strength"
+   },
+   {
+    "text": "Strongly typical sequences exist only if the source is uniform.",
+    "misconception": "invents a condition"
+   }
+  ],
+  "explanation": "Different frequency vectors can give the same value of $-\\frac1n\\log p(x^n)$, and weak typicality only controls that one number, not the individual frequencies."
+ },
+ {
+  "id": "it-6.3",
+  "lecture": 6,
+  "stem": "Why is strong typicality used in the proof of the channel coding theorem?",
+  "correct": [
+   "It lets one count the output sequences jointly typical with a given input.",
+   "Jointly typical pairs have frequencies near $p(x,y)$."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the channel noiseless on the typical set.",
+    "misconception": "confuses typicality with absence of noise"
+   },
+   {
+    "text": "It shows that every input sequence is jointly typical with every output sequence.",
+    "misconception": "overstates the joint typicality"
+   },
+   {
+    "text": "It ensures that the capacity equals the entropy of the source.",
+    "misconception": "confuses capacity with source entropy"
+   },
+   {
+    "text": "It replaces the need for random coding by a deterministic code construction.",
+    "misconception": "misses the random-coding step"
+   },
+   {
+    "text": "It guarantees zero error for each message in the code.",
+    "misconception": "confuses vanishing error with zero error"
+   }
+  ],
+  "explanation": "Strong typicality gives control over frequency counts of pairs $(x,y)$, and so over conditional typicality: the number of $y^n$ jointly typical with a typical $x^n$ is about $2^{nH(Y|X)}$."
+ },
+ {
+  "id": "it-6.4",
+  "lecture": 6,
+  "stem": "An independent input $\\tilde X^n$ and output $Y^n$ are drawn from the marginals of a pair $(X,Y)$ with mutual information $I(X;Y)$. What is the probability that they are jointly typical?",
+  "correct": [
+   "It is about $2^{-nI(X;Y)}$, which is small when $I(X;Y)>0$.",
+   "It is exponentially small, with exponent equal to $I(X;Y)$."
+  ],
+  "distractors": [
+   {
+    "text": "It is about $2^{-nH(X,Y)}$, the probability of one joint sequence.",
+    "misconception": "confuses the pair set with a single pair"
+   },
+   {
+    "text": "It is close to 1, because both are drawn from the right marginals.",
+    "misconception": "forgets independence versus dependence"
+   },
+   {
+    "text": "It is about $2^{nI(X;Y)}$, which is large.",
+    "misconception": "gets the sign of the exponent wrong"
+   },
+   {
+    "text": "It is exactly $0$ for any $n$ when $I(X;Y)>0$.",
+    "misconception": "forgets that the probability is positive"
+   },
+   {
+    "text": "It is about $2^{-nH(X)}$ regardless of the mutual information.",
+    "misconception": "ignores the dependence of the pair"
+   }
+  ],
+  "explanation": "There are about $2^{nH(X,Y)}$ jointly typical pairs, each of probability about $2^{-n(H(X)+H(Y))}$ under independence, giving the total $2^{-n(H(X)+H(Y)-H(X,Y))}=2^{-nI(X;Y)}$."
+ },
+ {
+  "id": "it-6.5",
+  "lecture": 6,
+  "stem": "How many sequences have a given type (empirical distribution) $P$ with probabilities $P(a)$, as $n$ grows?",
+  "correct": [
+   "About $2^{nH(P)}$ sequences have that type, where $H(P)$ is its entropy.",
+   "Exponentially many in $n$, at rate equal to the entropy of the type."
+  ],
+  "distractors": [
+   {
+    "text": "About $2^{nH(p)}$ with $p$ the true source distribution, whatever the type.",
+    "misconception": "confuses the type with the source"
+   },
+   {
+    "text": "Exactly $n!$ sequences, for any type.",
+    "misconception": "ignores repeated symbols"
+   },
+   {
+    "text": "About $|\\mathcal X|^n$ sequences, because any arrangement is allowed.",
+    "misconception": "ignores the fixed counts"
+   },
+   {
+    "text": "About $nH(P)$ sequences.",
+    "misconception": "forgets the exponent"
+   },
+   {
+    "text": "Exactly one sequence, the sorted one.",
+    "misconception": "confuses a type with a sequence"
+   }
+  ],
+  "explanation": "The type class has $n!/\\prod_a (nP(a))!$ elements, between $(n+1)^{-|\\mathcal X|}2^{nH(P)}$ and $2^{nH(P)}$ (Stirling). Strongly typical sequences belong to types near $p$."
+ },
+ {
+  "id": "it-7.1",
+  "lecture": 7,
+  "stem": "How is the capacity $C$ of a discrete memoryless channel $p(y|x)$ defined?",
+  "correct": [
+   "$C=\\max_{p(x)}I(X;Y)$, the maximum over inputs.",
+   "The maximum, over inputs, of the information in the output."
+  ],
+  "distractors": [
+   {
+    "text": "$C=\\max_{p(x)} H(Y)$, the largest output entropy.",
+    "misconception": "ignores the noise entropy H(Y|X)"
+   },
+   {
+    "text": "$C=\\max_{p(x)} H(X)$, the largest input entropy.",
+    "misconception": "ignores the channel"
+   },
+   {
+    "text": "$C=\\min_{p(x)} I(X;Y)$, the worst case over inputs.",
+    "misconception": "swaps the maximum for a minimum"
+   },
+   {
+    "text": "$C=I(X;Y)$ for the uniform input, whatever the channel.",
+    "misconception": "assumes the uniform input is always optimal"
+   },
+   {
+    "text": "$C=\\max_{p(x)} H(X|Y)$, the largest uncertainty after observation.",
+    "misconception": "confuses information with remaining uncertainty"
+   }
+  ],
+  "explanation": "$I(X;Y)$ is a function of $p(x)$ for the fixed channel, concave in $p(x)$. The uniform input is optimal for symmetric channels but not in general."
+ },
+ {
+  "id": "it-7.2",
+  "lecture": 7,
+  "stem": "What does the channel coding theorem say for a discrete memoryless channel with capacity $C$?",
+  "correct": [
+   "Every rate below $C$ is achievable with error tending to 0, and no rate above $C$ is.",
+   "Reliable communication is possible exactly at rates below $C$ bits per use."
+  ],
+  "distractors": [
+   {
+    "text": "Rates below $C$ are achievable only with a positive error probability that cannot vanish.",
+    "misconception": "forgets vanishing error"
+   },
+   {
+    "text": "Rates above $C$ are achievable if the codewords are long enough.",
+    "misconception": "thinks long blocks beat capacity"
+   },
+   {
+    "text": "Every rate is achievable if the channel is used with feedback.",
+    "misconception": "thinks feedback raises capacity of a DMC"
+   },
+   {
+    "text": "Only rates equal to $C$ exactly are achievable.",
+    "misconception": "confuses the supremum with the only achievable rate"
+   },
+   {
+    "text": "Achievable rates are those below $H(X)$ of the source.",
+    "misconception": "confuses channel and source coding"
+   }
+  ],
+  "explanation": "Random coding with jointly typical decoding gives vanishing error for $R<C$; Fano's inequality gives the converse for $R>C$. The coding gain is paid in block length and delay."
+ },
+ {
+  "id": "it-7.3",
+  "lecture": 7,
+  "stem": "What is the capacity of the binary symmetric channel with crossover probability $p$?",
+  "correct": [
+   "$C=1-h(p)$ bits, with $h$ the binary entropy.",
+   "One minus the noise entropy."
+  ],
+  "distractors": [
+   {
+    "text": "$C=1-p$ bits, as each bit is lost with probability $p$.",
+    "misconception": "uses the erasure channel formula"
+   },
+   {
+    "text": "$C=h(p)$ bits, the entropy of the noise.",
+    "misconception": "confuses capacity with noise entropy"
+   },
+   {
+    "text": "$C=1-h(p)$ for $p\\le1/2$ and $C=0$ for $p>1/2$.",
+    "misconception": "forgets that flipped outputs can be relabelled"
+   },
+   {
+    "text": "$C=1+h(p)$ bits, since the noise adds randomness.",
+    "misconception": "adds the noise"
+   },
+   {
+    "text": "$C=\\log_2(1/p)$ bits.",
+    "misconception": "invents a formula"
+   }
+  ],
+  "explanation": "$I(X;Y)=H(Y)-h(p)\\le1-h(p)$ with equality for uniform input. $C=0$ at $p=1/2$ and $C=1$ at $p=0$ or $p=1$, since a channel that always flips is perfectly informative."
+ },
+ {
+  "id": "it-7.4",
+  "lecture": 7,
+  "stem": "Which statement describes the binary erasure channel with erasure probability $\\varepsilon$?",
+  "correct": [
+   "Its capacity is $1-\\varepsilon$, and a uniform input achieves it.",
+   "The best rate is the fraction of symbols that are not erased."
+  ],
+  "distractors": [
+   {
+    "text": "Its capacity is $1-h(\\varepsilon)$, as for the binary symmetric channel.",
+    "misconception": "confuses erasures with flips"
+   },
+   {
+    "text": "Its capacity is $h(\\varepsilon)$, the entropy of the erasure event.",
+    "misconception": "confuses capacity with noise entropy"
+   },
+   {
+    "text": "Its capacity is $1-\\varepsilon$, but only when the receiver knows the input.",
+    "misconception": "adds an invalid condition"
+   },
+   {
+    "text": "Its capacity is $(1-\\varepsilon)^2$ since both input values can be erased.",
+    "misconception": "squares the survival probability"
+   },
+   {
+    "text": "Its capacity is $0$ for any $\\varepsilon>0$, since information is lost.",
+    "misconception": "thinks any loss destroys capacity"
+   }
+  ],
+  "explanation": "$I(X;Y)=H(X)-H(X|Y)=(1-\\varepsilon)H(X)$, maximised at $H(X)=1$ by the uniform input. Erased symbols are known to be missing, so no flips are mixed in."
+ },
+ {
+  "id": "it-7.5",
+  "lecture": 7,
+  "stem": "Which of the following is a property of the mutual information $I(X;Y)$ for a fixed channel?",
+  "correct": [
+   "It is a concave function of the input distribution $p(x)$ for a fixed channel.",
+   "Mixing two input distributions does at least as well as averaging their values."
+  ],
+  "distractors": [
+   {
+    "text": "It is a convex function of the input distribution, so the maximum is at an extreme point.",
+    "misconception": "confuses concave with convex"
+   },
+   {
+    "text": "It is a linear function of $p(x)$, so any input is as good as another.",
+    "misconception": "treats it as linear"
+   },
+   {
+    "text": "It is a concave function of the channel $p(y|x)$ for a fixed input.",
+    "misconception": "swaps the roles of input and channel"
+   },
+   {
+    "text": "It is increasing in each probability $p(x)$.",
+    "misconception": "confuses concavity with monotonicity"
+   },
+   {
+    "text": "It is concave in $p(x)$ only when the channel is symmetric.",
+    "misconception": "restricts the concavity to a special case"
+   }
+  ],
+  "explanation": "For a fixed channel, $I(X;Y)$ is concave in $p(x)$ and (for a fixed input) convex in the channel; concavity makes the capacity optimisation a convex program."
+ },
+ {
+  "id": "it-8.1",
+  "lecture": 8,
+  "stem": "How is the rate-distortion function $R(D)$ of a source with distortion measure $d$ defined?",
+  "correct": [
+   "$R(D)=\\min I(X;\\hat X)$ over conditional distributions with $E\\,d(X,\\hat X)\\le D$.",
+   "Least mutual information between source and reproduction at distortion $D$."
+  ],
+  "distractors": [
+   {
+    "text": "$R(D)=\\max I(X;\\hat X)$ over conditional distributions with $E\\,d(X,\\hat X)\\le D$.",
+    "misconception": "swaps minimum and maximum"
+   },
+   {
+    "text": "$R(D)=H(X)-D$, a straight line in the allowed distortion.",
+    "misconception": "replaces the optimisation by a formula"
+   },
+   {
+    "text": "$R(D)=\\min H(\\hat X)$ over reproduction distributions with distortion at most $D$.",
+    "misconception": "confuses mutual information with output entropy"
+   },
+   {
+    "text": "$R(D)=\\min I(X;\\hat X)$ over conditional distributions with $d(x,\\hat x)\\le D$ for every pair.",
+    "misconception": "requires the distortion for every pair, not on average"
+   },
+   {
+    "text": "$R(D)=E\\,d(X,\\hat X)$ for the best code.",
+    "misconception": "confuses rate with distortion"
+   }
+  ],
+  "explanation": "Minimising the information that the reproduction carries about the source, subject to the average-distortion constraint, gives the least rate; the minimum is over test channels."
+ },
+ {
+  "id": "it-8.2",
+  "lecture": 8,
+  "stem": "Which properties does the rate-distortion function $R(D)$ have?",
+  "correct": [
+   "Non-increasing, convex, zero for large $D$.",
+   "Convex, falling to zero."
+  ],
+  "distractors": [
+   {
+    "text": "It is concave and increasing in $D$.",
+    "misconception": "reverses the direction and the curvature"
+   },
+   {
+    "text": "It is non-increasing and concave in $D$.",
+    "misconception": "confuses convex with concave"
+   },
+   {
+    "text": "It is constant in $D$ for all $D\\ge0$.",
+    "misconception": "ignores the trade-off"
+   },
+   {
+    "text": "It is convex but may increase for large $D$.",
+    "misconception": "forgets that larger tolerance cannot cost more"
+   },
+   {
+    "text": "It reaches 0 only when $D=0$.",
+    "misconception": "confuses the lossless end with the lossy end"
+   }
+  ],
+  "explanation": "Convexity follows from convexity of $I$ in the test channel and time-sharing between two test channels; $R(D)=0$ at $D_{\\max}=\\min_{\\hat x}E\\,d(X,\\hat x)$ with a constant reproduction."
+ },
+ {
+  "id": "it-8.3",
+  "lecture": 8,
+  "stem": "What are the values of $R(D)$ at the two ends of the distortion range for a discrete source with Hamming distortion?",
+  "correct": [
+   "$R(0)=H(X)$, and $R(D)=0$ once $D\\ge D_{\\max}$.",
+   "$H(X)$ at $D=0$, zero at large $D$."
+  ],
+  "distractors": [
+   {
+    "text": "$R(0)=0$ and $R(D)$ is largest for the largest $D$.",
+    "misconception": "reverses the ends"
+   },
+   {
+    "text": "$R(0)=\\log|\\mathcal X|$ for any source distribution.",
+    "misconception": "confuses entropy with maximum entropy"
+   },
+   {
+    "text": "$R(D)=0$ only when $D=1$.",
+    "misconception": "takes the largest possible distortion rather than the zero-rate point"
+   },
+   {
+    "text": "$R(0)=H(X)$ and $R(D)>0$ for every $D<1$.",
+    "misconception": "misses the zero-rate point for a skewed source"
+   },
+   {
+    "text": "$R(0)=1$ bit for every binary source.",
+    "misconception": "confuses with a uniform source"
+   }
+  ],
+  "explanation": "At $D=0$ the reproduction must equal $X$, so $R=I(X;X)=H(X)$. Guessing the most likely symbol always has distortion $1-\\max_x p(x)$ with no information transmitted."
+ },
+ {
+  "id": "it-8.4",
+  "lecture": 8,
+  "stem": "What does the rate-distortion theorem state about lossy compression of an i.i.d. source at average distortion $D$?",
+  "correct": [
+   "Rates above $R(D)$ are achievable at distortion near $D$; rates below are not.",
+   "$R(D)$ is the least number of bits per symbol at distortion $D$."
+  ],
+  "distractors": [
+   {
+    "text": "Rates above $R(D)$ are achievable only with distortion exactly zero.",
+    "misconception": "ignores the allowed distortion"
+   },
+   {
+    "text": "Rates below $R(D)$ are achievable if the block length is long enough.",
+    "misconception": "thinks long blocks beat the bound"
+   },
+   {
+    "text": "The rate $R(D)$ can be achieved with single-symbol codes, without long blocks.",
+    "misconception": "confuses with scalar quantisation"
+   },
+   {
+    "text": "Rates above $H(X)$ are needed for any non-zero distortion.",
+    "misconception": "confuses lossy with lossless"
+   },
+   {
+    "text": "$R(D)$ is the minimum rate for the worst-case distortion of each sequence.",
+    "misconception": "confuses average with worst-case distortion"
+   }
+  ],
+  "explanation": "Achievability uses a random codebook with jointly typical encoding; the converse uses $nR\\ge I(X^n;\\hat X^n)\\ge\\sum I(X_i;\\hat X_i)\\ge nR(E\\,d)$ and convexity."
+ },
+ {
+  "id": "it-8.5",
+  "lecture": 8,
+  "stem": "For a Bernoulli($p$) source with $p\\le1/2$ and Hamming distortion, what is $R(D)$ for $0\\le D<p$?",
+  "correct": [
+   "$R(D)=h(p)-h(D)$.",
+   "$h(p)-h(D)$ bits."
+  ],
+  "distractors": [
+   {
+    "text": "$R(D)=h(p)-D$.",
+    "misconception": "replaces the binary entropy of D by D"
+   },
+   {
+    "text": "$R(D)=h(D)-h(p)$.",
+    "misconception": "reverses the sign"
+   },
+   {
+    "text": "$R(D)=1-h(D)$, as for the binary symmetric channel.",
+    "misconception": "forgets the source bias"
+   },
+   {
+    "text": "$R(D)=h(p)(1-D)$.",
+    "misconception": "invents a proportional formula"
+   },
+   {
+    "text": "$R(D)=h(p-D)$.",
+    "misconception": "applies the entropy to the difference"
+   }
+  ],
+  "explanation": "The test channel is a binary symmetric channel from $\\hat X$ to $X$ with crossover $D$: $I(X;\\hat X)=H(X)-H(X|\\hat X)=h(p)-h(D)$. For $D\\ge p$ the rate is 0."
+ },
+ {
+  "id": "it-9.1",
+  "lecture": 9,
+  "stem": "What is the idea of the Blahut-Arimoto algorithm for channel capacity?",
+  "correct": [
+   "It alternately maximises over the input law and a backward channel.",
+   "Alternating maximisation in two steps."
+  ],
+  "distractors": [
+   {
+    "text": "It evaluates $I(X;Y)$ at the uniform input only.",
+    "misconception": "confuses the algorithm with a single evaluation"
+   },
+   {
+    "text": "It solves $\\nabla I=0$ by Newton's method in the simplex.",
+    "misconception": "names a different optimiser"
+   },
+   {
+    "text": "It alternately maximises the input entropy and the output entropy.",
+    "misconception": "confuses the objective"
+   },
+   {
+    "text": "It is a random search over input distributions.",
+    "misconception": "confuses with stochastic search"
+   },
+   {
+    "text": "It minimises $I(X;Y)$ by alternating between two minimisations.",
+    "misconception": "swaps maximisation and minimisation for capacity"
+   }
+  ],
+  "explanation": "$C=\\max_r\\max_q\\sum_x\\sum_y r(x)W(y|x)\\log\\{q(x|y)/r(x)\\}$; the best $q$ for a given $r$ is the posterior, and the best $r$ for a given $q$ is a normalised exponential."
+ },
+ {
+  "id": "it-9.2",
+  "lecture": 9,
+  "stem": "Which properties does Blahut-Arimoto have for capacity computation?",
+  "correct": [
+   "The lower bound rises at every step and converges to $C$.",
+   "Monotone improvement, with limit $C$."
+  ],
+  "distractors": [
+   {
+    "text": "The bound can decrease for some steps and still converge.",
+    "misconception": "confuses with non-monotone methods"
+   },
+   {
+    "text": "It converges to a local maximum which may not be the capacity.",
+    "misconception": "forgets concavity"
+   },
+   {
+    "text": "It needs the initial input distribution to be the optimal one.",
+    "misconception": "confuses the start with the answer"
+   },
+   {
+    "text": "It converges in a single step for any channel.",
+    "misconception": "overstates the speed"
+   },
+   {
+    "text": "It converges to the capacity regardless of whether the start has zero entries.",
+    "misconception": "forgets that zero entries stay at zero"
+   }
+  ],
+  "explanation": "Each step maximises a function of the pair $(r,q)$, so the objective never decreases; concavity of $I$ in $r$ means a stationary point is global. Zero entries of $r$ remain zero."
+ },
+ {
+  "id": "it-9.3",
+  "lecture": 9,
+  "stem": "In the Blahut-Arimoto capacity iteration, how is the new input distribution computed from the current one $r$?",
+  "correct": [
+   "$r'(x)\\propto r(x)\\exp D(W(\\cdot|x)\\|q)$, with $q$ the output.",
+   "Reweight by the exponentiated divergence."
+  ],
+  "distractors": [
+   {
+    "text": "$r'(x)\\propto r(x)D(W(\\cdot|x)\\|q)$, without the exponential.",
+    "misconception": "drops the exponential"
+   },
+   {
+    "text": "$r'(x)\\propto\\exp(-D(W(\\cdot|x)\\|q))$, favouring rows close to the output.",
+    "misconception": "reverses the sign"
+   },
+   {
+    "text": "$r'(x)=1/|\\mathcal X|$ at every step.",
+    "misconception": "confuses the update with uniform restart"
+   },
+   {
+    "text": "$r'(x)\\propto q(x)$, copying the output distribution.",
+    "misconception": "confuses input and output alphabets"
+   },
+   {
+    "text": "$r'(x)\\propto H(W(\\cdot|x))$, favouring noisy rows.",
+    "misconception": "rewards noise"
+   }
+  ],
+  "explanation": "Inputs whose rows are far (in divergence) from the current output distribution get more weight. At the optimum all used inputs have equal divergence, equal to $C$."
+ },
+ {
+  "id": "it-9.4",
+  "lecture": 9,
+  "stem": "Which stopping rule is available for the Blahut-Arimoto capacity algorithm?",
+  "correct": [
+   "Stop when $\\max_xD(W(\\cdot|x)\\|q)$ and the lower bound nearly agree.",
+   "Compare computable upper and lower bounds."
+  ],
+  "distractors": [
+   {
+    "text": "Stop after exactly $|\\mathcal X|$ iterations, which is always enough.",
+    "misconception": "invents an iteration count"
+   },
+   {
+    "text": "Stop when the input distribution becomes uniform.",
+    "misconception": "confuses the start with the end"
+   },
+   {
+    "text": "Stop when the mutual information is positive.",
+    "misconception": "uses a trivial criterion"
+   },
+   {
+    "text": "Stop when the upper bound falls below the lower bound.",
+    "misconception": "reverses which is larger"
+   },
+   {
+    "text": "There is no stopping rule, because the iterates never converge.",
+    "misconception": "ignores convergence"
+   }
+  ],
+  "explanation": "$I(r)\\le C\\le\\max_x D(W(\\cdot|x)\\|q)$ at each step, where $q$ is the output distribution of $r$; the gap tends to 0 as the iteration converges."
+ },
+ {
+  "id": "it-9.5",
+  "lecture": 9,
+  "stem": "What is the role of the slope parameter in the Blahut-Arimoto algorithm for the rate-distortion function?",
+  "correct": [
+   "It picks the point of the $R(D)$ curve with that tangent slope.",
+   "One parameter value gives one point on the curve."
+  ],
+  "distractors": [
+   {
+    "text": "It is the number of iterations the algorithm is run for.",
+    "misconception": "confuses the parameter with the iteration count"
+   },
+   {
+    "text": "It is the block length of the source code.",
+    "misconception": "confuses with the code length"
+   },
+   {
+    "text": "It is the distortion level, which must be given as an input.",
+    "misconception": "confuses the slope with the distortion"
+   },
+   {
+    "text": "It is the probability of the least likely source symbol.",
+    "misconception": "confuses with a source parameter"
+   },
+   {
+    "text": "It is always set to zero to find the minimum rate.",
+    "misconception": "ignores the trade-off"
+   }
+  ],
+  "explanation": "The iteration minimises $I(X;\\hat X)+s\\,E\\,d(X,\\hat X)$ with $s<0$ the slope of $R(D)$; varying $s$ traces out the curve, and $D$ is an output of the iteration, not an input."
+ },
+ {
+  "id": "it-10.1",
+  "lecture": 10,
+  "stem": "Which statement about the differential entropy $h(X)=-\\int f\\log f$ of a continuous random variable is correct?",
+  "correct": [
+   "It can be negative, for instance for $U(0,a)$ with $a<1$.",
+   "Unlike discrete entropy, it need not be non-negative."
+  ],
+  "distractors": [
+   {
+    "text": "It is always non-negative, as for discrete entropy.",
+    "misconception": "carries over the discrete property"
+   },
+   {
+    "text": "It is always at most 0, since $f\\le1$.",
+    "misconception": "confuses the density with a probability"
+   },
+   {
+    "text": "It equals the entropy of the discretised variable.",
+    "misconception": "ignores the divergence as the grid is refined"
+   },
+   {
+    "text": "It is the number of bits needed to describe $X$ exactly.",
+    "misconception": "ignores that exact description needs infinite bits"
+   },
+   {
+    "text": "It is non-negative if and only if $X$ has finite variance.",
+    "misconception": "confuses with a moment condition"
+   }
+  ],
+  "explanation": "A density can exceed 1, so $-\\log f$ can be negative. For $U(0,a)$, $h=\\log a<0$ when $a<1$ (in bits)."
+ },
+ {
+  "id": "it-10.2",
+  "lecture": 10,
+  "stem": "How does the differential entropy change under a linear transformation $Y=aX+b$ with $a\\ne0$?",
+  "correct": [
+   "$h(Y)=h(X)+\\log|a|$, so a shift changes nothing but a scaling does.",
+   "Shifts do not matter."
+  ],
+  "distractors": [
+   {
+    "text": "$h(Y)=h(X)$, as for discrete entropy under a relabelling.",
+    "misconception": "carries over invariance from the discrete case"
+   },
+   {
+    "text": "$h(Y)=|a|\\,h(X)+b$.",
+    "misconception": "treats entropy as a linear functional"
+   },
+   {
+    "text": "$h(Y)=h(X)+b$, since only the shift matters.",
+    "misconception": "confuses the shift with the scale"
+   },
+   {
+    "text": "$h(Y)=h(X)-\\log|a|$.",
+    "misconception": "gets the sign wrong"
+   },
+   {
+    "text": "$h(Y)=h(X)+\\log a^2$ for every real $a$.",
+    "misconception": "squares the scale factor"
+   }
+  ],
+  "explanation": "$f_Y(y)=f_X((y-b)/a)/|a|$, so $-E\\log f_Y(Y)=h(X)+\\log|a|$. Mutual information, in contrast, is invariant under such invertible maps."
+ },
+ {
+  "id": "it-10.3",
+  "lecture": 10,
+  "stem": "Among all distributions on the real line with a given variance $\\sigma^2$, which has the largest differential entropy?",
+  "correct": [
+   "The normal distribution, with $h=\\frac12\\log(2\\pi e\\sigma^2)$.",
+   "The Gaussian maximises entropy for a fixed variance."
+  ],
+  "distractors": [
+   {
+    "text": "The uniform distribution with variance $\\sigma^2$.",
+    "misconception": "confuses with the bounded-support case"
+   },
+   {
+    "text": "The exponential distribution with variance $\\sigma^2$.",
+    "misconception": "confuses with the fixed-mean case"
+   },
+   {
+    "text": "The Laplace distribution, since it has heavier tails.",
+    "misconception": "confuses tail weight with entropy"
+   },
+   {
+    "text": "None, because the supremum is infinite.",
+    "misconception": "forgets the variance constraint"
+   },
+   {
+    "text": "The distribution concentrated at two points.",
+    "misconception": "confuses with the discrete maximum"
+   }
+  ],
+  "explanation": "By $D(f\\|\\phi)\\ge0$ with $\\phi$ the normal density of the same variance: $h(f)\\le-\\int f\\log\\phi=\\frac12\\log(2\\pi e\\sigma^2)$. The uniform on an interval has the maximum for bounded support, and the exponential for given mean on $[0,\\infty)$."
+ },
+ {
+  "id": "it-10.4",
+  "lecture": 10,
+  "stem": "What is the relation between the discrete entropy of a finely quantised continuous variable and its differential entropy?",
+  "correct": [
+   "$H(X^\\Delta)\\approx h(X)-\\log\\Delta$, unbounded as $\\Delta\\to0$.",
+   "It exceeds $h(X)$ by about $-\\log\\Delta$."
+  ],
+  "distractors": [
+   {
+    "text": "$H(X^\\Delta)\\to h(X)$ as $\\Delta\\to0$.",
+    "misconception": "treats the differential entropy as a limit"
+   },
+   {
+    "text": "$H(X^\\Delta)\\approx h(X)+\\log\\Delta$, which tends to $-\\infty$.",
+    "misconception": "gets the sign of the log wrong"
+   },
+   {
+    "text": "$H(X^\\Delta)$ does not depend on $\\Delta$.",
+    "misconception": "ignores the resolution"
+   },
+   {
+    "text": "$H(X^\\Delta)=h(X)$ exactly when $\\Delta$ is a power of 2.",
+    "misconception": "invents an exact case"
+   },
+   {
+    "text": "$H(X^\\Delta)\\le h(X)$, since quantisation loses information.",
+    "misconception": "confuses information loss with entropy"
+   }
+  ],
+  "explanation": "The probability of a bin is about $f(x)\\Delta$, so $H=-\\sum f\\Delta\\log(f\\Delta)\\approx h(X)-\\log\\Delta$. Differences such as mutual information do converge."
+ },
+ {
+  "id": "it-10.5",
+  "lecture": 10,
+  "stem": "Which quantities keep their discrete properties when passing to continuous variables?",
+  "correct": [
+   "The divergence $D(f\\|g)$ and the mutual information $I(X;Y)$ remain non-negative.",
+   "$D(f\\|g)\\ge0$ and $I(X;Y)\\ge0$ still hold for densities."
+  ],
+  "distractors": [
+   {
+    "text": "The entropy $h(X)\\ge0$ remains non-negative.",
+    "misconception": "carries over non-negativity of entropy"
+   },
+   {
+    "text": "The mutual information can be negative, as the differential entropies can be.",
+    "misconception": "confuses differences of h with I"
+   },
+   {
+    "text": "The divergence $D(f\\|g)$ is zero for any pair of densities with equal differential entropy.",
+    "misconception": "confuses equal entropy with equal distribution"
+   },
+   {
+    "text": "The divergence becomes symmetric.",
+    "misconception": "invents a property"
+   },
+   {
+    "text": "The mutual information is infinite for any dependent continuous pair.",
+    "misconception": "confuses with the deterministic case"
+   }
+  ],
+  "explanation": "$I(X;Y)=h(X)-h(X|Y)=D(f_{XY}\\|f_Xf_Y)\\ge0$ by Jensen. Only the entropy itself loses non-negativity and invariance under invertible maps."
+ },
+ {
+  "id": "it-10.6",
+  "lecture": 10,
+  "stem": "Which maximum-entropy statement is correct?",
+  "correct": [
+   "On $[0,\\infty)$ with a given mean, the exponential maximises entropy.",
+   "For a fixed mean on the half-line, the exponential is optimal."
+  ],
+  "distractors": [
+   {
+    "text": "The normal distribution maximises it, since it has the largest entropy overall.",
+    "misconception": "ignores the support constraint"
+   },
+   {
+    "text": "The uniform distribution on $[0,2\\mu]$ maximises it for mean $\\mu$.",
+    "misconception": "confuses with the bounded case"
+   },
+   {
+    "text": "The gamma distribution with shape 2 maximises it.",
+    "misconception": "names an arbitrary family"
+   },
+   {
+    "text": "No density attains the maximum, because the supremum is infinite.",
+    "misconception": "forgets the mean constraint"
+   },
+   {
+    "text": "A point mass at the mean, as it has the smallest spread.",
+    "misconception": "confuses the minimum with the maximum"
+   }
+  ],
+  "explanation": "With $f(x)=\\lambda e^{-\\lambda x}$, $D(g\\|f)\\ge0$ gives $h(g)\\le1-\\ln\\lambda$ nats for all $g$ with mean $1/\\lambda$; the bound is attained by $g=f$."
+ },
+ {
+  "id": "it-11.1",
+  "lecture": 11,
+  "stem": "What is the capacity of the discrete-time additive white Gaussian noise channel $Y=X+Z$, $Z\\sim N(0,N)$, with average power constraint $E X^2\\le P$?",
+  "correct": [
+   "$C=\\frac12\\log(1+P/N)$ bits per channel use.",
+   "Half the logarithm of one plus the SNR."
+  ],
+  "distractors": [
+   {
+    "text": "$C=\\frac12\\log(P/N)$ bits per use.",
+    "misconception": "forgets the 1 inside the logarithm"
+   },
+   {
+    "text": "$C=\\log(1+P/N)$ bits per use.",
+    "misconception": "forgets the one half for real signals"
+   },
+   {
+    "text": "$C=P/N$ bits per use, linear in the signal-to-noise ratio.",
+    "misconception": "ignores the logarithm"
+   },
+   {
+    "text": "$C=\\frac12\\log(1+P)$ bits per use, independent of the noise.",
+    "misconception": "drops the noise"
+   },
+   {
+    "text": "$C=\\frac12\\log(1+N/P)$ bits per use.",
+    "misconception": "inverts the signal-to-noise ratio"
+   }
+  ],
+  "explanation": "$I(X;Y)=h(Y)-h(Z)\\le\\frac12\\log2\\pi e(P+N)-\\frac12\\log2\\pi eN$, with equality for Gaussian $X$. Capacity grows only logarithmically in the power."
+ },
+ {
+  "id": "it-11.2",
+  "lecture": 11,
+  "stem": "Why is the Gaussian input optimal for the additive Gaussian noise channel under a power constraint?",
+  "correct": [
+   "$h(Y)$ is maximal for Gaussian $Y$, which a Gaussian input gives.",
+   "The output entropy is largest for a normal output."
+  ],
+  "distractors": [
+   {
+    "text": "Because a Gaussian input minimises the noise entropy $h(Z)$.",
+    "misconception": "confuses the roles of input and noise"
+   },
+   {
+    "text": "Because the Gaussian has the smallest entropy for a given variance.",
+    "misconception": "reverses the maximum entropy fact"
+   },
+   {
+    "text": "Because the Gaussian input has no power constraint.",
+    "misconception": "ignores the constraint"
+   },
+   {
+    "text": "Because the Gaussian has the largest alphabet.",
+    "misconception": "confuses with the discrete case"
+   },
+   {
+    "text": "Because the Gaussian input makes the noise vanish.",
+    "misconception": "misunderstands the noise"
+   }
+  ],
+  "explanation": "$I=h(Y)-h(Z)$ with $h(Z)$ fixed; $\\operatorname{Var}Y\\le P+N$ and the normal maximises $h$ for given variance. A finite-alphabet input is suboptimal at high signal-to-noise ratios."
+ },
+ {
+  "id": "it-11.3",
+  "lecture": 11,
+  "stem": "What does the capacity formula imply when the power $P$ is increased with $N$ fixed?",
+  "correct": [
+   "It grows without bound, but only logarithmically.",
+   "Slow, logarithmic growth."
+  ],
+  "distractors": [
+   {
+    "text": "Capacity grows linearly in $P$.",
+    "misconception": "ignores the logarithm"
+   },
+   {
+    "text": "Capacity saturates at $\\frac12\\log(1+N)$.",
+    "misconception": "invents a saturation level"
+   },
+   {
+    "text": "Capacity is independent of $P$ once $P>N$.",
+    "misconception": "thinks capacity stops at SNR 1"
+   },
+   {
+    "text": "Capacity grows like $\\sqrt P$.",
+    "misconception": "invents a growth rate"
+   },
+   {
+    "text": "Capacity decreases for large $P$ because of interference.",
+    "misconception": "invents interference"
+   }
+  ],
+  "explanation": "At high SNR, $\\frac12\\log(1+P/N)\\approx\\frac12\\log(P/N)$, so multiplying $P$ by 2 adds $\\frac12$ bit per use. Bandwidth, not power, is the cheaper way to increase rate."
+ },
+ {
+  "id": "it-11.4",
+  "lecture": 11,
+  "stem": "For parallel Gaussian channels with noise variances $N_1,\\dots,N_k$ and total power $P$, how is power allocated by water-filling?",
+  "correct": [
+   "Set $P_i=(\\nu-N_i)^+$ with $\\sum P_i=P$, so noisier channels get less power.",
+   "Power fills up to a common level."
+  ],
+  "distractors": [
+   {
+    "text": "Allocate the same power $P/k$ to each channel, whatever its noise.",
+    "misconception": "ignores the noise differences"
+   },
+   {
+    "text": "Allocate the most power to the noisiest channel to compensate for it.",
+    "misconception": "reverses the allocation"
+   },
+   {
+    "text": "Put all the power in the least noisy channel.",
+    "misconception": "confuses the greedy with the optimal allocation"
+   },
+   {
+    "text": "Allocate power proportional to the noise variance $N_i$.",
+    "misconception": "reverses the dependence on noise"
+   },
+   {
+    "text": "Give each channel $P_i=\\nu+N_i$ so that the totals are equal.",
+    "misconception": "flips the sign of the noise"
+   }
+  ],
+  "explanation": "Maximise $\\sum\\frac12\\log(1+P_i/N_i)$ subject to $\\sum P_i=P$ and $P_i\\ge0$ by KKT: $\\frac{1}{2(N_i+P_i)}=\\lambda$ on used channels, so $N_i+P_i=\\nu$ is constant."
+ },
+ {
+  "id": "it-11.5",
+  "lecture": 11,
+  "stem": "What is the capacity of $k$ independent parallel Gaussian channels with a total power constraint?",
+  "correct": [
+   "The sum $\\sum_i\\frac12\\log(1+P_i/N_i)$ at the water-filling powers.",
+   "Each channel adds its own capacity."
+  ],
+  "distractors": [
+   {
+    "text": "The capacity of the best channel at the full power $P$.",
+    "misconception": "ignores the use of other channels"
+   },
+   {
+    "text": "The average of the individual capacities at equal power.",
+    "misconception": "takes an average instead of a sum"
+   },
+   {
+    "text": "$\\frac12\\log(1+P/\\sum N_i)$, treating the noises as one.",
+    "misconception": "merges the channels incorrectly"
+   },
+   {
+    "text": "The sum of capacities with every channel at power $P$.",
+    "misconception": "ignores the total constraint"
+   },
+   {
+    "text": "The capacity of the worst channel, since it limits the rest.",
+    "misconception": "confuses with a bottleneck"
+   }
+  ],
+  "explanation": "Independent channels carry independent information, and the optimal input is independent Gaussian across channels, so the mutual information adds. Equal powers $P/k$ are suboptimal unless the noises are equal."
+ }
+]
