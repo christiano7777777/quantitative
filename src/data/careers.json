@@ -1,0 +1,167 @@
+[
+ {
+  "id": "qr",
+  "label": "Quant Researcher",
+  "required": [
+   "p3",
+   "inf",
+   "reg2",
+   "ts2",
+   "ml",
+   "rm",
+   "bay",
+   "pf2"
+  ],
+  "bonus": [
+   "hd",
+   "ci",
+   "np",
+   "dl",
+   "mc",
+   "algo",
+   "pz",
+   "latex"
+  ]
+ },
+ {
+  "id": "qt",
+  "label": "Quant Trader",
+  "required": [
+   "p2",
+   "gt",
+   "ev",
+   "pz",
+   "mm",
+   "ovt",
+   "ms2",
+   "mm0"
+  ],
+  "bonus": [
+   "fermi",
+   "dv1",
+   "ts1",
+   "algo",
+   "dm"
+  ]
+ },
+ {
+  "id": "dq",
+  "label": "Derivatives Quant",
+  "required": [
+   "sc",
+   "dv2",
+   "ir2",
+   "num2",
+   "mc",
+   "sprod",
+   "vol"
+  ],
+  "bonus": [
+   "cr",
+   "cpp2",
+   "p3",
+   "ovt"
+  ]
+ },
+ {
+  "id": "rmg",
+  "label": "Risk Management",
+  "required": [
+   "risk",
+   "cr",
+   "oprisk",
+   "ts1",
+   "mc",
+   "inf",
+   "dv1"
+  ],
+  "bonus": [
+   "insur",
+   "ts2",
+   "reg2",
+   "ir1",
+   "dv2"
+  ]
+ },
+ {
+  "id": "air",
+  "label": "AI Researcher",
+  "required": [
+   "p3",
+   "opt",
+   "la2",
+   "dl",
+   "nlp",
+   "llm",
+   "rl",
+   "lt",
+   "it"
+  ],
+  "bonus": [
+   "cv",
+   "bay",
+   "hd",
+   "latex"
+  ]
+ },
+ {
+  "id": "mle",
+  "label": "ML Engineer",
+  "required": [
+   "ml",
+   "dl",
+   "py",
+   "ds2",
+   "db",
+   "dist",
+   "mlops",
+   "tools"
+  ],
+  "bonus": [
+   "cpp2",
+   "llm",
+   "sd",
+   "cv"
+  ]
+ },
+ {
+  "id": "ds",
+  "label": "Data Scientist",
+  "required": [
+   "inf",
+   "reg2",
+   "ci",
+   "ml",
+   "bay",
+   "exp",
+   "db"
+  ],
+  "bonus": [
+   "ts1",
+   "np",
+   "hd",
+   "dl",
+   "tools",
+   "latex"
+  ]
+ },
+ {
+  "id": "swe",
+  "label": "Software Engineer",
+  "required": [
+   "ds2",
+   "cpp2",
+   "os",
+   "db",
+   "dist",
+   "net",
+   "sd",
+   "tools",
+   "arch"
+  ],
+  "bonus": [
+   "ll",
+   "py"
+  ]
+ }
+]

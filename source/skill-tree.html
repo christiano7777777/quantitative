@@ -1,0 +1,1204 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Quantitative Skill Tree</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: header + controls, scrollable layered DAG (columns = prerequisite depth), detail panel below */
+:root{
+  --bg:#f5f6f8; --panel:#ffffff; --fg:#17202b; --muted:#5b6675; --line:#cdd3dc; --edge:#b9c1cc;
+  --pre:#2459c9; --next:#c27a00; --req:#16804a; --bonus:#c27a00;
+  --math:#2f5d9e; --stat:#1f7a6d; --ai:#8a3fa0; --deriv:#b5542a; --mkt:#7d6400; --puzzle:#b0305a; --cs:#4a5568;
+  --font-body:"IBM Plex Sans",system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1319; --panel:#171c24; --fg:#e6e9ee; --muted:#97a1ae; --line:#323a48; --edge:#3b4453;
+  --pre:#6f9cff; --next:#f0b44a; --req:#5fd38f; --bonus:#f0b44a;
+  --math:#86aae6; --stat:#5cc2b1; --ai:#c99ae0; --deriv:#ec9a70; --mkt:#d9b84a; --puzzle:#ef8aab; --cs:#aab5c7;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1319; --panel:#171c24; --fg:#e6e9ee; --muted:#97a1ae; --line:#323a48; --edge:#3b4453;
+  --pre:#6f9cff; --next:#f0b44a; --req:#5fd38f; --bonus:#f0b44a;
+  --math:#86aae6; --stat:#5cc2b1; --ai:#c99ae0; --deriv:#ec9a70; --mkt:#d9b84a; --puzzle:#ef8aab; --cs:#aab5c7;
+  color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.5}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px;max-width:1600px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+h1{font-size:1.5rem;margin:0;font-weight:600;text-wrap:balance}
+.sub{color:var(--muted);margin:0;max-width:72ch}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.85rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sw.line{height:3px;border-radius:2px;width:18px}
+.controls{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center}
+.ctl{display:flex;gap:8px;align-items:center;min-width:0}
+.ctl label{font-size:.85rem;color:var(--muted);white-space:nowrap}
+select{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg);max-width:100%;min-width:0}
+.graph{overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel);max-height:70vh}
+svg text{font-family:var(--font-body);font-size:12px;fill:var(--fg)}
+.node{cursor:pointer}
+.node rect.box{fill:var(--panel);stroke:var(--line);stroke-width:1}
+.node.star rect.box{stroke-dasharray:4 3}
+.node:focus{outline:none}
+.node:focus rect.box{stroke:var(--fg);stroke-width:2}
+.node.sel rect.box{stroke:var(--fg);stroke-width:2.5}
+.node.anc rect.box{stroke:var(--pre);stroke-width:2}
+.node.desc rect.box{stroke:var(--next);stroke-width:2}
+.node.req rect.box{stroke:var(--req);stroke-width:2.5}
+.node.bonus rect.box{stroke:var(--bonus);stroke-width:2}
+.node.path rect.box{stroke:var(--pre);stroke-width:1.5}
+.node.dim{opacity:.25}
+path.e{fill:none;stroke:var(--edge);stroke-width:1.2}
+path.e.anc,path.e.path{stroke:var(--pre);stroke-width:1.8}
+path.e.desc{stroke:var(--next);stroke-width:1.8}
+path.e.dim{opacity:.14}
+.colhead{font-family:var(--font-mono);font-size:11px;fill:var(--muted);letter-spacing:.06em}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:12px}
+.panel h2{margin:0;font-size:1.2rem;font-weight:600;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.badge{font-size:.75rem;font-weight:500;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.badge.star{border-style:dashed}
+.row{display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:start}
+.row>div{min-width:0}
+.k{font-size:.8rem;color:var(--muted);letter-spacing:.04em;padding-top:3px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:.85rem;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+.chip.pre{border-color:var(--pre)}
+.chip.next,.chip.bonus{border-color:var(--bonus)}
+.chip.req{border-color:var(--req)}
+.chip:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.courses{font-family:var(--font-mono);font-size:.82rem}
+.none{color:var(--muted);font-size:.85rem}
+.stat{font-variant-numeric:tabular-nums}
+.lec{display:grid;gap:4px;border-top:1px solid var(--line);padding-top:14px}
+.lec h3{margin:0;font-size:1rem;font-weight:600}
+.lecnote{color:var(--muted);font-size:.85rem;max-width:90ch}
+.lrow{display:grid;grid-template-columns:2rem minmax(0,1fr) minmax(0,1.5fr) minmax(0,1.5fr);gap:4px 16px;padding:9px 0;border-top:1px solid var(--line);align-items:start}
+.lrow.head{border-top:0;font-size:.75rem;color:var(--muted);letter-spacing:.04em;padding:8px 0 4px}
+.ln{font-family:var(--font-mono);color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums}
+.lt{font-weight:500}
+.lcell{font-size:.88rem;min-width:0}
+.tag{display:inline-block;font-size:.72rem;padding:1px 7px;border-radius:999px;border:1px solid var(--pre);color:var(--pre);margin-right:6px}
+.lcode{margin-top:4px}
+@media (max-width:700px){.lrow{grid-template-columns:2rem minmax(0,1fr)}.lrow.head{display:none}.lcell{grid-column:2}.lcell::before{content:attr(data-k);display:block;font-size:.75rem;color:var(--muted)}}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.node rect.box,path.e{transition:stroke .15s,opacity .15s}.node{transition:opacity .15s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Quantitative Skill Tree</h1>
+    <p class="sub">Each box is one topic (a multi-tier topic gets one box per tier), ordered left to right by study sequence. Pick a career to see what it requires, or click any box to see its prerequisites and what it unlocks.</p>
+  </header>
+  <div class="controls">
+    <div class="ctl"><label for="career">Career</label><select id="career"></select></div>
+    <div class="ctl"><label for="pick">Topic</label><select id="pick"></select></div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="graph" id="graph"></div>
+  <section class="panel" id="panel" aria-live="polite"></section>
+</div>
+
+<script>
+const D={
+  math:["Math","--math"],stat:["Probability & Statistics","--stat"],ai:["AI / ML","--ai"],
+  deriv:["Derivatives & Risk","--deriv"],mkt:["Markets & Trading","--mkt"],puzzle:["Problem Solving","--puzzle"],cs:["Computing","--cs"]
+};
+const DO=Object.keys(D);
+const N=[
+ {id:"calc",l:"Calculus",d:"math",p:[],c:"HKU MATH1013 · CUHK MATH1010 · CityU MA1200/1201"},
+ {id:"mvc",l:"Multivariable Calculus",d:"math",p:["calc"],c:"HKU MATH2014 · CUHK MATH2010 · HKUST MATH2011 · CityU MA2001"},
+ {id:"la1",l:"Linear Algebra I",d:"math",p:[],c:"HKU MATH2101 · CUHK MATH1030 · HKUST MATH2121"},
+ {id:"la2",l:"Linear Algebra II",d:"math",p:["la1"],c:"CUHK MATH2040A · HKU Linear Algebra II (syllabus not verified); plus SVD / PCA applications"},
+ {id:"dm",l:"Discrete Math & Combinatorics",d:"math",p:[],c:"HKU COMP2121 · HKUST COMP2711"},
+ {id:"de",l:"Differential Equations",d:"math",p:["calc","la1"],c:"HKU MATH3405 · CityU MA3511"},
+ {id:"ra",l:"Real Analysis",d:"math",p:["calc"],c:"CityU MA4542"},
+ {id:"opt",l:"Optimization",d:"math",p:["mvc","la1"],c:"CityU MS3601 · CUHK MATH3215"},
+ {id:"num1",l:"Numerical Methods I",d:"math",p:["calc","la1","py"],c:"CUHK MATH3230"},
+ {id:"num2",l:"Numerical Methods II",d:"math",p:["num1","de"],c:"CUHK MATH3240 · CityU MA3514"},
+ {id:"it",l:"Information Theory",d:"math",p:["p2"],c:"CUHK Information Theory (Institute of Network Coding; course code not found)"},
+ {id:"p1",l:"Probability I",d:"stat",p:["calc"],c:"HKU SDST2601 · HKUST MATH2421 · CityU MA2510"},
+ {id:"p2",l:"Probability II",d:"stat",p:["p1","mvc"],c:"HKU SDST2602 · CUHK STAT2006"},
+ {id:"p3",l:"Probability III",d:"stat",p:["p2","ra"],c:"HKU MATH3603 · HKUST MAFS5020"},
+ {id:"inf",l:"Statistical Inference",d:"stat",p:["p2"],c:"HKU STAT3602 · HKUST MATH3423 · CityU MS2602"},
+ {id:"reg1",l:"Regression I",d:"stat",p:["p1","la1"],c:"HKU ECON2280 · CUHK STAT3008 · CityU MS3252"},
+ {id:"reg2",l:"Regression II",d:"stat",p:["reg1","inf","la2"],c:"HKUST MAFS5140"},
+ {id:"sp",l:"Stochastic Processes",d:"stat",p:["p2"],c:"HKU SDST3603 · CUHK STAT3007 · HKUST ISOM3540"},
+ {id:"ts1",l:"Time Series I",d:"stat",p:["reg1","sp"],c:"HKU SDST4601 · CityU EF4822"},
+ {id:"ts2",l:"Time Series II",d:"stat",p:["ts1","inf"],c:"HKUST MAFS5130 · CUHK STAT6204"},
+ {id:"bay",l:"Bayesian",d:"stat",p:["inf","py"],c:"HKU STAT4610 · CUHK STAT4010"},
+ {id:"mc",l:"Monte Carlo",d:"stat",p:["p2","py"],c:"CUHK RMSC4001 · HKU STAT8309"},
+ {id:"np",l:"Nonparametric",d:"stat",p:["inf"],c:"HKU STAT3620"},
+ {id:"hd",l:"High-dimensional Stats",d:"stat",p:["reg2","la2"],c:"CUHK STAT5103"},
+ {id:"ci",l:"Causal Inference",d:"stat",p:["reg1","inf"],c:"HKU SDST4613 · HKU ECON3284 · HKUST IEDA4000D"},
+ {id:"exp",l:"Experimental Design / A/B Testing",d:"stat",p:["inf","reg1"],c:"CityU DSC4110 (mostly industrial experimental design; no university course covers the A/B testing part)"},
+ {id:"rm",l:"Research Methods",d:"stat",p:["reg1","ml"],c:"No standalone course; partly covered in HKU STAT8020 · HKUST MAFS5310",s:1},
+ {id:"ml",l:"Machine Learning",d:"ai",p:["reg1","opt","py"],c:"CUHK CSCI3320 · HKUST COMP4211 · HKUST MAFS5340 · HKU COMP7409 · CUHK RMSC4002"},
+ {id:"dl",l:"Deep Learning",d:"ai",p:["ml"],c:"HKU COMP3340 · CUHK STAT4012 · HKU DASC7606"},
+ {id:"nlp",l:"NLP",d:"ai",p:["dl"],c:"HKU COMP3361 · HKUST COMP4221"},
+ {id:"llm",l:"LLM / Generative AI",d:"ai",p:["nlp"],c:"CUHK STAT6209"},
+ {id:"rl",l:"Reinforcement Learning",d:"ai",p:["ml","sp"],c:"HKUST MAFS5370"},
+ {id:"cv",l:"Computer Vision",d:"ai",p:["dl"],c:"HKUST COMP4471"},
+ {id:"lt",l:"Learning Theory",d:"ai",p:["ml","p3"],c:"CUHK CSCI4230"},
+ {id:"mlops",l:"MLOps",d:"ai",p:["ml","db","tools"],c:"No university course",s:1},
+ {id:"sc",l:"Stochastic Calculus",d:"deriv",p:["sp","mvc"],c:"HKU FINA3350 · CityU EF3520 · HKUST MAFS5010 · CUHK RMSC4005"},
+ {id:"dv1",l:"Derivatives I",d:"deriv",p:["p1"],c:"HKU FINA2322 · HKUST FINA3203"},
+ {id:"dv2",l:"Derivatives II",d:"deriv",p:["dv1","sc"],c:"CityU EF4820 · HKUST MAFS5030"},
+ {id:"vol",l:"Volatility Models",d:"deriv",p:["dv2","num1"],c:"No university course (local vol, Heston, SABR)",s:1},
+ {id:"ir1",l:"Interest Rate I",d:"deriv",p:["dv1"],c:"HKU FINA3323 · HKUST FINA4303"},
+ {id:"ir2",l:"Interest Rate II",d:"deriv",p:["ir1","sc"],c:"CityU EF4821 · HKUST MAFS5040 · CUHK RMSC6001"},
+ {id:"cr",l:"Credit Risk",d:"deriv",p:["dv1","p2"],c:"HKU FINA3322 · CUHK RMSC6002 · HKUST MAFS5220"},
+ {id:"risk",l:"Risk Management / VaR",d:"deriv",p:["pf1","p2"],c:"HKU FINA4341 · CUHK RMSC5003"},
+ {id:"oprisk",l:"Operational Risk & Regulation",d:"deriv",p:["risk"],c:"CUHK RMSC4006 · CUHK RMSC3001 (Basel)"},
+ {id:"insur",l:"Risk Theory & Insurance",d:"deriv",p:["p2"],c:"CUHK RMSC4004 (course title only)"},
+ {id:"sprod",l:"Structured Products",d:"deriv",p:["dv2","mc"],c:"HKU FINA4354 · HKUST MAFS5330"},
+ {id:"pf1",l:"Portfolio & Asset Pricing I",d:"mkt",p:["p1","mvc"],c:"HKU FINA2320 · CityU EF3320"},
+ {id:"pf2",l:"Portfolio & Asset Pricing II",d:"mkt",p:["pf1","opt","reg1"],c:"HKUST MAFS5210 · CUHK RMSC6006"},
+ {id:"ms1",l:"Microstructure I",d:"mkt",p:["p1"],c:"HKUST FINA4103 · CityU EF4323"},
+ {id:"ms2",l:"Microstructure II",d:"mkt",p:["ms1","sp","opt"],c:"HKUST MAFS5270"},
+ {id:"algo",l:"Algo / Quant Trading",d:"mkt",p:["reg1","ts1","py","ms1"],c:"HKU FINA4359 · HKU STAT8020 · HKUST FINA4803"},
+ {id:"ovt",l:"Options & Vol Trading",d:"mkt",p:["dv1","ev"],c:"CUHK FINA4370 (course title only)"},
+ {id:"mm",l:"Market Making",d:"mkt",p:["ms1","ev","gt"],c:"No university course",s:1},
+ {id:"pz",l:"Probability Puzzles",d:"puzzle",p:["p1","dm"],c:"No university course",s:1},
+ {id:"ev",l:"EV & Kelly",d:"puzzle",p:["p1"],c:"No university course",s:1},
+ {id:"gt",l:"Game Theory",d:"puzzle",p:["p1"],c:"HKU ECON2214 · CUHK ECON3160 · CityU EF4484"},
+ {id:"mm0",l:"Mental Math",d:"puzzle",p:[],c:"No university course",s:1},
+ {id:"fermi",l:"Fermi Estimation",d:"puzzle",p:[],c:"No university course",s:1},
+ {id:"tools",l:"Dev Tools (Linux · Git)",d:"cs",p:[],c:"No standalone university course",s:1},
+ {id:"latex",l:"LaTeX & Research Writing",d:"cs",p:[],c:"No university course (math typesetting, figures, BibTeX citations, paper structure)",s:1},
+ {id:"py",l:"Python",d:"cs",p:[],c:"HKU COMP1117 · HKUST MAFS5360"},
+ {id:"arch",l:"Computer Architecture",d:"cs",p:[],c:"HKU COMP2120"},
+ {id:"ds1",l:"DSA I",d:"cs",p:["py","dm"],c:"HKU COMP2119 · CUHK CSCI2100"},
+ {id:"ds2",l:"DSA II",d:"cs",p:["ds1"],c:"CUHK CSCI3160 · CityU CS4335"},
+ {id:"cpp1",l:"C++ I",d:"cs",p:[],c:"HKUST COMP2011"},
+ {id:"cpp2",l:"C++ II",d:"cs",p:["cpp1","ds1"],c:"HKUST MAFS5240 · HKU FITE7406"},
+ {id:"os",l:"Operating Systems",d:"cs",p:["cpp1","ds1","arch"],c:"HKU COMP3230 · CUHK CSCI3150"},
+ {id:"db",l:"Databases",d:"cs",p:["ds1"],c:"CUHK CSCI3170 · CityU CS3402"},
+ {id:"net",l:"Computer Networks",d:"cs",p:["ds1"],c:"HKU COMP3234"},
+ {id:"sd",l:"Software Engineering & System Design",d:"cs",p:["ds1","db"],c:"HKU COMP3297"},
+ {id:"dist",l:"Distributed Systems",d:"cs",p:["os","net"],c:"HKU COMP3358 · CUHK CSCI4160 · HKU COMP7305"},
+ {id:"ll",l:"Low-latency Programming",d:"cs",p:["cpp2","os"],c:"No university course",s:1}
+];
+const CAR={
+ qr:{l:"Quant Researcher",r:["p3","inf","reg2","ts2","ml","rm","bay","pf2"],b:["hd","ci","np","dl","mc","algo","pz","latex"]},
+ qt:{l:"Quant Trader",r:["p2","gt","ev","pz","mm","ovt","ms2","mm0"],b:["fermi","dv1","ts1","algo","dm"]},
+ dq:{l:"Derivatives Quant",r:["sc","dv2","ir2","num2","mc","sprod","vol"],b:["cr","cpp2","p3","ovt"]},
+ rmg:{l:"Risk Management",r:["risk","cr","oprisk","ts1","mc","inf","dv1"],b:["insur","ts2","reg2","ir1","dv2"]},
+ air:{l:"AI Researcher",r:["p3","opt","la2","dl","nlp","llm","rl","lt","it"],b:["cv","bay","hd","latex"]},
+ mle:{l:"ML Engineer",r:["ml","dl","py","ds2","db","dist","mlops","tools"],b:["cpp2","llm","sd","cv"]},
+ ds:{l:"Data Scientist",r:["inf","reg2","ci","ml","bay","exp","db"],b:["ts1","np","hd","dl","tools","latex"]},
+ swe:{l:"Software Engineer",r:["ds2","cpp2","os","db","dist","net","sd","tools","arch"],b:["ll","py"]}
+};
+const LEC={
+ p1:{s:"The foundations of probability: events, conditioning, discrete random variables and the classical distributions.",o:["Count outcomes and compute probabilities of events", "Use conditioning and Bayes' theorem", "Work with expectation, variance and named discrete distributions"],n:"Follows the 22 topics of HKU SDST2601. Expectation and variance of a single variable move up to lecture 5, because the named distributions need them.",p:"Proofs will be added later.",l:[
+  ["Sample spaces and event operations","Set operations, De Morgan's laws, mutually exclusive and exhaustive events","Simplifying event expressions, counting with permutations and combinations"],
+  ["Probability and its laws","Axioms, addition rule, inclusion-exclusion","Probabilities with equally likely outcomes"],
+  ["Conditional probability","Multiplication rule, law of total probability, Bayes' theorem","Tree diagrams, test accuracy problems"],
+  ["Independence","Pairwise vs mutual independence, conditional independence","Combinations of independent events, system reliability"],
+  ["Discrete random variables","pmf, cdf, expectation, variance, linearity","Computing the cdf, mean and variance from a pmf"],
+  ["Common discrete distributions","Bernoulli, binomial, geometric, Poisson (limit of the binomial)","Distribution probabilities, Poisson approximation"],
+  ["Continuous random variables","pdf, cdf, expectation and variance","Probabilities by integration, quantiles"],
+  ["Exponential, gamma, normal","Memorylessness, standardisation, the gamma-exponential relationship","Normal table lookups, waiting times"],
+  ["Functions of a random variable","cdf method, change of variables","Finding the pdf or pmf of a transformed variable"],
+  ["Joint, marginal, conditional distributions","Discrete and continuous cases, independent random variables","Marginal and conditional distributions from a joint pdf"],
+  ["Functions of jointly distributed variables","Sums, maximum and minimum, convolution","Distribution of a sum of two variables"],
+  ["Expectation, variance, covariance, correlation","Variance of a sum, what correlation means","Variance of a two-asset portfolio"]
+ ]},
+ bay:{s:"Bayesian inference from conjugate models to MCMC, with hierarchical modelling and model checking.",o:["Derive posteriors for standard models", "Implement MCMC samplers", "Compare models and check fit"],n:"Follows HKU SDST4610 (Bayesian learning). Coding questions are graded with a fixed random seed and a statistical tolerance.",p:"Proofs will be added later.",l:[
+  ["Bayesian framework","Likelihood, prior, posterior, posterior predictive","Posterior for a discrete parameter"],
+  ["Conjugate models","Beta-binomial, normal-normal, gamma-Poisson","Posterior updates, shrinkage weights"],
+  ["Posterior summaries","MAP, posterior mean, credible vs HPD vs confidence intervals","A 95% credible interval"],
+  ["Choosing a prior","Elicitation, noninformative and weakly informative priors, sensitivity analysis","Comparing posteriors under different priors"],
+  ["Model evaluation and selection","Posterior predictive checks, Bayes factors, WAIC","Comparing two models"],
+  ["Monte Carlo basics","Law of large numbers, bias and variance, inverse transform sampling","Standard error, required sample size","Inverse transform sampler"],
+  ["Importance sampling","Proposal choice, weights, effective sample size","Computing weights and estimates","Implement importance sampling"],
+  ["MCMC I","Stationary distribution, detailed balance, Metropolis-Hastings","Acceptance rates","Metropolis-Hastings sampler"],
+  ["MCMC II","Gibbs sampling, hierarchical models, burn-in, ESS, R-hat, HMC overview","Diagnostic statistics","Gibbs sampler"],
+  ["Laplace approximation","Normal approximation of the posterior, when it applies","Computing a Laplace approximation"],
+  ["Variational Bayes","ELBO, mean-field, comparison with MCMC","The ELBO of a simple model"],
+  ["Nonparametric Bayes","Dirichlet process, Gaussian process, machine learning applications","A simple Dirichlet process calculation"]
+ ]},
+ mm:{s:"Quoting two-sided markets: spread setting, inventory, adverse selection and risk limits.",o:["Set quotes from a fair value and edge", "Manage inventory and skew", "Judge adverse selection and size risk"],n:"No university course; designed from scratch. No coding: theory, computation and proof only.",p:"Proof candidates: Glosten-Milgrom bid and ask as Bayesian updates (lecture 2), the Avellaneda-Stoikov reservation price (lecture 3), Kelly position sizing (lecture 6), the equilibrium spread in a simple game (lecture 7), the fair value of a binary contract (lecture 8).",l:[
+  ["What a market maker does","Bid-ask spread, inventory, adverse selection, PnL decomposition, order book and queue priority","PnL and position from a sequence of fills"],
+  ["Glosten-Milgrom model","Informed vs uninformed traders, updating fair value from trade direction with Bayes","Computing the bid and the ask"],
+  ["Inventory risk and quoting","Avellaneda-Stoikov reservation price and optimal spread, inventory skew","Reservation price and spread from the formula"],
+  ["Order flow and adverse selection","Order flow toxicity, value of queue position, fill probability","Expected payoff of a queue position"],
+  ["Fair value estimation","Microprice, order book imbalance, combining signals","Microprice and imbalance signals"],
+  ["Risk limits and sizing","Position limits, volatility-scaled quotes, Kelly-style sizing, drawdown","Spread needed to reach a target Sharpe ratio"],
+  ["Competition between market makers","Penny-jumping, spread competition, queue priority games","Equilibrium spread in a simple game"],
+  ["Making markets in binary contracts","Prices between 0 and 1, resolution risk, fees, inventory management","Quoting a binary contract and its expected profit"],
+  ["Backtest bias and performance evaluation","Fill assumption bias, look-ahead bias, effect of latency and fees on PnL","Sharpe ratio, t-statistic of edge per trade, PnL net of adverse selection"],
+  ["Full strategy design","Designing a strategy end to end, PnL attribution, fill rate, inventory half-life","PnL attribution calculations"]
+ ]},
+ dv1:{s:"Forwards, futures, options and no-arbitrage pricing in discrete time, up to Black-Scholes as a limit.",o:["Price forwards and options by no-arbitrage", "Use binomial trees", "Read option payoffs and put-call parity"],n:"Follows the 13 topics of HKU FINA2322, merging only the first two. Black-Scholes is used but not derived; the derivation belongs to Derivatives II.",p:"Proofs will be added later, for example cash-and-carry, put-call parity and replication.",l:[
+  ["Introduction to derivatives, forwards and options","Forward and option payoffs, long and short, hedging vs speculation, the no-arbitrage principle, continuous compounding","Payoff and profit tables, compounding conversions, breakeven points"],
+  ["Insurance, collars and other strategies","Protective put, covered call, collar, spreads, straddle, butterfly","Combined payoffs, maximum profit and loss, breakeven points"],
+  ["Introduction to risk management","Why hedge, costs and limits of hedging","Hedged profit and loss, effective price"],
+  ["Financial forwards and futures","Cost of carry, with and without dividends, currency forwards, cash-and-carry arbitrage, margin and daily settlement","Forward price, arbitrage profit, margin account"],
+  ["Commodity forwards and futures","Storage costs, convenience yield, contango and backwardation","Commodity forward pricing, implied convenience yield"],
+  ["Interest rate forwards and futures","Forward rates, FRAs, Eurodollar and SOFR futures","Forward rates from a zero curve, FRA settlement"],
+  ["Swaps","Interest rate, currency and commodity swaps; a swap as a strip of forwards","Par swap rate, swap valuation"],
+  ["Parity and other option relationships","Put-call parity, price bounds, early exercise of American options","Checking parity, finding arbitrage"],
+  ["Binomial option pricing","Replicating portfolio, risk-neutral probability, multiple periods, American options, calibrating u and d from σ","One- and multi-period pricing, American option trees"],
+  ["The Black-Scholes formula","The formula (used, not derived), Greeks, implied volatility","Pricing with the formula, computing Greeks"],
+  ["Market-making and delta-hedging","Delta hedging, gamma risk, hedging P&L for a market maker","Delta-hedge P&L, delta-gamma approximation"],
+  ["Financial engineering and applications","Structured products, options in corporate finance (convertibles, warrants). HKU marks this as time permitting","Pricing a simple structured product"]
+ ]},
+ calc:{s:"Single-variable calculus: limits, derivatives, integrals and series.",o:["Differentiate and integrate standard functions", "Evaluate limits and series", "Apply calculus to optimisation and approximation"],n:"Follows the topic order of the CUHK MATH1010 tutorials, from sequences to the fundamental theorem of calculus. Applications of derivatives, improper integrals and infinite series are added because that page does not list them.",p:"Proofs will be added later.",l:[
+  ["Sequences and limits","Convergence, limit laws, squeeze theorem, monotone convergence","Limits of sequences"],
+  ["Limits of functions","One-sided limits, limits at infinity, standard limits","Evaluating limits"],
+  ["Continuity","Definition, types of discontinuity, intermediate value theorem","Points of continuity, bracketing a root"],
+  ["Derivatives","Definition, product, quotient and chain rules, implicit differentiation","Derivative values, tangent lines"],
+  ["Applications of derivatives","Curve sketching, optimization, related rates","Optimal values, rates of change"],
+  ["Mean value theorem","Rolle's theorem, the mean value theorem, monotonicity and concavity","The point c in the mean value theorem, intervals of increase"],
+  ["L'Hôpital's rule and Taylor series","Indeterminate forms, Taylor polynomials, remainder terms","Limits by L'Hôpital, Taylor approximations and error bounds"],
+  ["Methods of integration","Substitution, integration by parts, partial fractions, trigonometric substitution","Definite integrals by technique"],
+  ["Integration and the fundamental theorem","Riemann sums, the definite integral, both parts of the fundamental theorem","Areas, derivatives of integral functions"],
+  ["Improper integrals and applications","Convergence of improper integrals, area, volume, average value","Improper integral values, volumes of revolution"],
+  ["Infinite series","Convergence tests, power series, radius of convergence","Sums of series, radius of convergence"]
+ ]},
+ mvc:{s:"Calculus in several variables: partial derivatives, optimisation, multiple integrals and vector calculus.",o:["Compute gradients and Jacobians", "Solve constrained optimisation", "Evaluate multiple and line/surface integrals"],n:"Follows the five topics of HKUST MATH2011. Lagrange multipliers and the Jacobian change of variables are added, because optimization and probability both need them.",p:"Proofs will be added later.",l:[
+  ["Parametric and polar curves","Parametric equations, polar coordinates, calculus in polar coordinates","Slopes, arc lengths and areas in parametric and polar form"],
+  ["Vectors in the plane and in space","Dot and cross products, lines and planes","Angles, projections, plane equations"],
+  ["Vector-valued functions","Curves in space, motion, arc length, curvature and normal vectors","Velocity, acceleration, curvature"],
+  ["Functions of several variables","Surfaces, graphs and level curves, limits and continuity","Level curves, limits in two variables"],
+  ["Partial derivatives and the chain rule","Partial derivatives, higher-order derivatives, the multivariable chain rule","Partial derivatives, chain rule evaluations"],
+  ["Gradient, tangent planes and linear approximation","Directional derivatives, gradient, tangent planes, linearization","Directional derivatives, tangent plane equations"],
+  ["Maxima and minima","Critical points, second derivative test, Lagrange multipliers","Local extrema, constrained optimization"],
+  ["Double integrals","Rectangular and general regions, polar coordinates","Double integrals, areas and volumes"],
+  ["Triple integrals and change of variables","Cylindrical and spherical coordinates, the Jacobian","Triple integrals, Jacobian determinants"],
+  ["Vector fields and line integrals","Vector fields, line integrals, conservative fields, Green's theorem","Line integrals, work, Green's theorem"]
+ ]},
+ la1:{s:"Vectors, matrices, systems of equations, determinants and eigenvalues.",o:["Solve linear systems", "Compute determinants and eigenvalues", "Work with vector spaces and linear maps"],n:"Follows HKU MATH2101 (linear equations and matrices, vector geometry, vector spaces and linear transformations) and the CUHK MATH1030 schedule, which also reaches determinants and eigenvalues. Eigenvalues are introduced here and developed in Linear Algebra II.",p:"Proofs will be added later.",l:[
+  ["Systems of linear equations","Gauss-Jordan elimination, consistency, free variables","Solving systems, parametric solutions"],
+  ["Matrices","Matrix operations, inverses, elementary matrices","Products, inverses, row reduction"],
+  ["Vector geometry","Vectors in R^n, dot and cross products, lines and planes","Angles, projections, distance to a plane"],
+  ["Determinants","Cofactor expansion, properties, determinant and invertibility","Determinant values, area and volume"],
+  ["Vector spaces and subspaces","Axioms, subspaces, examples beyond R^n","Testing subspaces"],
+  ["Spanning and linear independence","Span, dependence and independence","Testing independence, spanning sets"],
+  ["Basis and dimension","Basis, dimension, coordinates, change of basis","Coordinates relative to a basis"],
+  ["Linear transformations","Kernel, image, matrix representation","Matrix of a transformation, kernel and image"],
+  ["Row space, column space and rank","Row, column and null spaces, rank-nullity theorem","Rank, nullity, bases of the fundamental subspaces"],
+  ["Eigenvalues and eigenvectors","Characteristic polynomial, eigenspaces, diagonalization basics","Eigenvalues, eigenvectors, powers of a matrix"]
+ ]},
+ la2:{s:"Inner product spaces, spectral theory, SVD and applications to PCA and data analysis.",o:["Orthogonalise and project", "Apply the spectral theorem and SVD", "Connect linear algebra to PCA and least squares"],n:"Follows CUHK MATH2040A (abstract vector spaces, eigenvalues, inner product spaces, spectral theorems), without Jordan form, plus SVD and PCA for applications. The HKU Linear Algebra II syllabus was not verified.",p:"Proofs will be added later.",l:[
+  ["Abstract vector spaces","Function and polynomial spaces, bases and dimension","Coordinates in function spaces"],
+  ["Linear transformations and change of basis","Kernel, image, matrix representation, change of basis, similarity","Matrix of an operator in a new basis"],
+  ["Eigenvalues and the characteristic polynomial","Eigenvalues and eigenvectors of operators, algebraic and geometric multiplicity","Characteristic polynomials, eigenspaces"],
+  ["Diagonalizability","Conditions for diagonalization, matrix powers","Diagonalizing a matrix, computing A^n"],
+  ["Inner product spaces","Inner products, norms, Cauchy-Schwarz","Inner products, angles, norms"],
+  ["Orthogonality and least squares","Gram-Schmidt, orthogonal projection, least squares","Orthonormal bases, least squares solutions"],
+  ["Adjoint, normal and self-adjoint operators","Adjoint operator, normal and self-adjoint operators","Adjoints, checking normality"],
+  ["Spectral theorems","Real and complex spectral theorems, orthogonal diagonalization","Orthogonally diagonalizing a symmetric matrix"],
+  ["Quadratic forms and definiteness","Quadratic forms, positive definite matrices, covariance matrices","Classifying forms, checking definiteness"],
+  ["Singular value decomposition and PCA","SVD, low-rank approximation, principal components","SVD of a small matrix, PCA directions"]
+ ]},
+ dm:{s:"Logic, sets, counting, graphs and recurrences.",o:["Prove simple statements by induction and contradiction", "Count with permutations, combinations and generating functions", "Solve recurrences and graph problems"],n:"Follows the six topics of HKUST COMP2711 (enumeration, number theory, logic and proofs, recursion, probability, graph theory). The probability lecture is brief; Probability I goes much deeper.",p:"Proofs will be added later.",l:[
+  ["Propositional logic and quantifiers","Connectives, truth tables, quantifiers, negation","Truth tables, logical equivalences"],
+  ["Proof techniques","Direct proof, contradiction, induction, pigeonhole principle","Induction-based sums, pigeonhole bounds"],
+  ["Sets, relations and functions","Set operations, relations, equivalence relations, injective and surjective functions","Counting functions and relations"],
+  ["Enumeration I","Sum and product rules, permutations, combinations","Counting arrangements and selections"],
+  ["Enumeration II","Binomial theorem, inclusion-exclusion, distributions into boxes","Inclusion-exclusion counts, binomial coefficients"],
+  ["Basic number theory","Divisibility, gcd and the Euclidean algorithm, modular arithmetic","gcd, modular inverses, congruences"],
+  ["Recursion and recurrences","Recursive definitions, linear recurrences, characteristic equations","Solving recurrences, closed forms"],
+  ["Discrete probability","Sample spaces, conditional probability, expectation (brief)","Simple probability and expectation calculations"],
+  ["Graph theory I","Graphs, paths, connectivity, trees","Degrees, connected components, spanning trees"],
+  ["Graph theory II","Euler and Hamilton paths, coloring, matching","Chromatic numbers, Euler circuits"]
+ ]},
+ de:{s:"Ordinary differential equations: solution methods, linear systems and stability.",o:["Solve first and second-order ODEs", "Handle linear systems via eigenvalues", "Analyse stability and use Laplace transforms"],n:"Follows the five topics of CityU MA3511: first-order ODEs, higher-order linear ODEs, series solutions, systems with phase portraits, and Fourier series with separation of variables for PDEs.",p:"Proofs will be added later.",l:[
+  ["First-order ODEs I","Separable and linear equations, integrating factors","Solving separable and linear equations"],
+  ["First-order ODEs II","Homogeneous and exact equations, existence and uniqueness","Exact equations, initial value problems"],
+  ["Higher-order linear ODEs","Initial value problems, Wronskian, linear independence, reduction of order","Wronskians, reduction of order"],
+  ["Constant coefficients","Characteristic equations, undetermined coefficients","General and particular solutions"],
+  ["Variation of parameters","Variation of parameters, comparison with undetermined coefficients","Particular solutions by variation of parameters"],
+  ["Series solutions","Power series solutions of second-order linear equations","Series coefficients, recurrence relations"],
+  ["Euler equations and Bessel's equation","Regular singular points, Euler equations, Bessel's equation","Solving Euler equations"],
+  ["Systems of ODEs","Matrix methods, eigenvalues and eigenvectors","Solving linear systems"],
+  ["Phase portraits and stability","Equilibria, phase portraits, stability","Classifying equilibria"],
+  ["Fourier series","Fourier coefficients, convergence, even and odd extensions","Fourier coefficients of simple functions"],
+  ["Separation of variables for PDEs","Heat equation and wave equation by separation of variables","Solutions of the heat equation with boundary conditions"]
+ ]},
+ ra:{s:"Rigorous foundations of calculus: sequences, continuity, differentiation and integration.",o:["Prove convergence and continuity statements", "Work with uniform convergence", "Understand Riemann and basic Lebesgue integration"],n:"Follows the six topics of CityU MA4542: measurable sets, measurable functions, Lebesgue measure, Lebesgue integrals, Lp spaces, integration on measure spaces. This is the measure-theory base for Probability III.",p:"Proofs will be added later.",l:[
+  ["Review of the real line","Countability, open and closed sets, limits of sets","Countability and set-limit exercises"],
+  ["Sigma-algebras and measurable sets","Sigma-algebras, Borel sets, measurable sets","Generating sigma-algebras, set operations"],
+  ["Lebesgue outer measure","Outer measure, covering by intervals, Caratheodory criterion","Outer measures of simple sets"],
+  ["Lebesgue measure","Countable additivity, continuity of measure, null sets","Measures of unions and limits of sets"],
+  ["Measurable functions","Definition, operations, limits of measurable functions","Checking measurability"],
+  ["The Lebesgue integral","Simple functions, integral of nonnegative functions","Integrals of simple functions"],
+  ["Convergence theorems","Monotone convergence, Fatou's lemma, dominated convergence","Limits of integrals"],
+  ["Lebesgue vs Riemann integrals","Riemann integrability, comparison, absolute continuity","Cases where the two integrals agree or differ"],
+  ["Lp spaces","Holder and Minkowski inequalities, completeness of Lp","Lp norms of simple functions"],
+  ["Integration on measure spaces","General measure spaces, product measures, Fubini's theorem","Iterated integrals, applying Fubini"]
+ ]},
+ opt:{s:"Linear, convex and nonlinear optimisation with duality and optimality conditions.",o:["Formulate and solve LPs", "Apply KKT conditions and duality", "Recognise convex problems"],n:"Follows the four parts of CityU MS3601: linear programming, integer programming, convex optimization, and applications such as network flows and portfolio optimization. Computation is by hand on small problems, since Python is not a prerequisite here.",p:"Proofs will be added later.",l:[
+  ["Linear programming models","Formulating problems, feasible regions, the graphical method","Formulations, optimal vertices"],
+  ["Simplex method I","Basic feasible solutions, pivoting, the simplex tableau","One-pivot and full simplex iterations"],
+  ["Simplex method II","Degeneracy, unboundedness, two-phase method","Two-phase problems"],
+  ["Duality","Primal and dual problems, weak and strong duality, complementary slackness","Writing the dual, dual solutions"],
+  ["Sensitivity analysis","Shadow prices, ranging of coefficients and right-hand sides","Shadow prices, allowable ranges"],
+  ["Network flows and applications","Network flow models, foreign exchange, investment decisions","Max flow, min cost flow, arbitrage cycles"],
+  ["Integer programming I","Formulations, branch-and-bound","Branch-and-bound trees"],
+  ["Integer programming II","Cutting planes, complexity","Gomory cuts, bound comparisons"],
+  ["Convex optimization and optimality conditions","Convex sets and functions, Lagrangian duality, KKT conditions","Verifying convexity, solving KKT systems"],
+  ["Quadratic programming and portfolio optimization","Quadratic programs, mean-variance portfolios, clustering","Minimum-variance portfolios"]
+ ]},
+ num1:{s:"Numerical linear algebra and root finding, with Python implementations.",o:["Solve linear systems stably", "Find roots and fit data", "Understand error and conditioning"],n:"No syllabus was available for CUHK MATH3230, so this follows HKUST MATH3312: computer arithmetic, root finding, interpolation, numerical differentiation and integration, Euler's method, and linear systems. Conditioning and splines are added. Python is a prerequisite, so coding questions are included.",p:"Proofs will be added later.",l:[
+  ["Floating-point arithmetic and error","Roundoff, significant digits, cancellation, stability","Roundoff error and relative error calculations"],
+  ["Root finding I","Bisection, fixed-point iteration, convergence conditions","Iterations of bisection and fixed point","Implement bisection and fixed-point iteration"],
+  ["Root finding II","Newton's method, secant method, order of convergence","Newton iterations, convergence order","Implement Newton and secant methods"],
+  ["Interpolation I","Lagrange polynomials, interpolation error","Interpolating polynomials, error bounds","Evaluate a Lagrange interpolant"],
+  ["Interpolation II","Divided differences, Newton form, cubic splines","Divided-difference tables","Build a Newton interpolating polynomial"],
+  ["Numerical differentiation","Forward, backward and central differences, error orders","Finite difference values, error orders","Finite difference with a step-size study"],
+  ["Numerical integration","Trapezoid and Simpson rules, composite rules, error terms","Composite rule approximations, error bounds","Composite Simpson integrator"],
+  ["Linear systems I","Gaussian elimination, partial pivoting, LU factorization","LU factors, solving by substitution","LU factorization with pivoting"],
+  ["Linear systems II","Jacobi, Gauss-Seidel and SOR iterations, condition numbers","Iterations of Jacobi and Gauss-Seidel, condition numbers","Gauss-Seidel solver"],
+  ["Euler's method for ODEs","Euler's method, local and global error","Euler steps, error estimates","Euler solver for an initial value problem"]
+ ]},
+ num2:{s:"Numerical differential equations, quadrature and PDE methods, with Python implementations.",o:["Integrate ODEs numerically", "Discretise simple PDEs", "Analyse stability and convergence"],n:"Follows CityU MA3514 (initial value problems, finite differences for boundary value problems and PDEs, finite elements for boundary value problems). Runge-Kutta, multistep, stability analysis and adaptive step size are filled in. Coding questions are included.",p:"Proofs will be added later.",l:[
+  ["Initial value problems I","Euler's method, local and global truncation error, consistency","Truncation error orders","Euler and improved Euler solvers"],
+  ["Initial value problems II","Runge-Kutta methods, order conditions","Runge-Kutta steps","Fourth-order Runge-Kutta solver"],
+  ["Initial value problems III","Multistep methods, stability regions, stiff equations","Stability regions, step size limits","Adams-Bashforth solver"],
+  ["Systems of ODEs and adaptive steps","Systems of ODEs, adaptive step size, error control","Step size selection","Adaptive Runge-Kutta solver"],
+  ["Finite differences for boundary value problems","Two-point boundary value problems, discretization","Setting up and solving the linear system","Finite difference solver for a boundary value problem"],
+  ["Convergence and stability of schemes","Consistency, stability, convergence, Lax equivalence","Order of accuracy from grid refinement","Convergence study of a scheme"],
+  ["Finite differences for PDEs I","Heat equation: explicit, implicit, Crank-Nicolson","Steps of the explicit and implicit schemes","Crank-Nicolson heat equation solver"],
+  ["Finite differences for PDEs II","Von Neumann stability, wave and Poisson equations","Stability conditions","Solver for the Poisson equation"],
+  ["Finite element method I","Weak form, Galerkin method, piecewise linear basis functions","Weak form and element matrices","Assemble a 1D stiffness matrix"],
+  ["Finite element method II","Assembly, boundary conditions, error estimates","Assembled system, error estimates","1D finite element solver"]
+ ]},
+ it:{s:"Entropy, mutual information, source and channel coding.",o:["Compute entropy and mutual information", "Apply source and channel coding theorems", "Connect information theory to statistics"],n:"Follows the 11 topics of the CUHK information theory course based on Yeung's Information Theory and Network Coding (prerequisite: undergraduate probability).",p:"Proofs will be added later.",l:[
+  ["The science of information","Uncertainty, bits, why entropy measures information","Entropy of simple sources"],
+  ["Information measures","Entropy, joint and conditional entropy, mutual information, KL divergence","Computing the information measures of a joint distribution"],
+  ["The I-measure","Information diagrams, set-theoretic view of information measures","Reading identities from information diagrams"],
+  ["Zero-error data compression","Kraft inequality, Huffman codes, optimal code lengths","Building a Huffman code, expected length"],
+  ["Weak typicality","Asymptotic equipartition property, source coding theorem","Typical set sizes and probabilities"],
+  ["Strong typicality","Strongly typical sequences, joint typicality","Counting typical sequences"],
+  ["Discrete memoryless channels","Channel capacity, channel coding theorem","Capacity of the binary symmetric and erasure channels"],
+  ["Rate-distortion theory","Distortion measures, the rate-distortion function","Rate-distortion function of simple sources"],
+  ["The Blahut-Arimoto algorithms","Alternating optimization for capacity and rate-distortion","Hand iterations of Blahut-Arimoto"],
+  ["Differential entropy","Differential entropy, maximum entropy distributions","Differential entropy of uniform, exponential and normal variables"],
+  ["Continuous-valued channels","Gaussian channel capacity, parallel channels, water-filling","Capacity of a Gaussian channel, water-filling allocation"]
+ ]},
+ p2:{s:"Continuous and multivariate random variables, transformations, conditional expectation, and the limit theorems that underlie all of statistics.",o:["Work with joint, marginal and conditional densities", "Transform random variables and derive their distributions", "Use MGFs, conditioning and the CLT to solve problems"],n:"Follows HKU SDST2602 (multivariate and continuous probability). Assumes the discrete named distributions from Probability I.",p:"Proofs will be added later.",l:[
+  ["Continuous random variables", "pdf, cdf, expectation, variance of continuous variables", "Integrating densities, computing moments"],
+  ["Named continuous distributions", "Uniform, exponential, gamma, beta, normal; memoryless property", "Normal table lookups, exponential waiting times"],
+  ["Joint distributions", "Joint pmf/pdf, marginals, independence", "Double integrals over regions, marginal densities"],
+  ["Conditional distributions", "Conditional pdf, conditional expectation and variance", "E[X", "Y] calculations, law of total expectation and variance"],
+  ["Covariance and correlation", "Covariance, correlation, variance of sums", "Covariance matrices of small vectors"],
+  ["Transformations of variables", "CDF method, Jacobian method, convolution", "Densities of Y=g(X), sums of independent variables"],
+  ["Order statistics", "Distribution of min, max and k-th order statistic", "Min/max of exponential and uniform samples"],
+  ["Moment generating functions", "MGF, uniqueness, sums of independent variables", "Identifying distributions from MGFs"],
+  ["Multivariate normal", "Definition, linear transformations, conditional distribution", "Conditional mean and variance of bivariate normals"],
+  ["Modes of convergence", "In probability, in distribution, almost surely (intuition)", "Checking convergence of simple sequences"],
+  ["Law of large numbers and CLT", "Markov, Chebyshev, WLLN, CLT", "Normal approximations to binomial and sums"]
+ ]},
+ p3:{s:"Probability rebuilt on measure theory: sigma-algebras, expectation as an integral, convergence theorems, conditional expectation and martingales.",o:["State probability in measure-theoretic language", "Apply the convergence theorems and Borel-Cantelli", "Use conditional expectation and martingales"],n:"Measure-theoretic probability, following the HKU MATH3603 / HKUST MAFS5020 style. Requires Real Analysis.",p:"Proofs are the core of this topic, so Proof carries more weight here.",l:[
+  ["Sigma-algebras and probability measures", "Measurable spaces, probability spaces, generated sigma-algebras", "Verifying a collection is a sigma-algebra"],
+  ["Random variables as measurable functions", "Measurability, distribution of a random variable", "Pushforward measures of simple maps"],
+  ["Expectation as a Lebesgue integral", "Simple functions, monotone convergence, Fatou", "Computing expectations via the definition"],
+  ["Convergence theorems", "Dominated convergence, uniform integrability", "Limit-interchange exercises"],
+  ["Independence and Borel-Cantelli", "Independent sigma-algebras, both Borel-Cantelli lemmas", "Probabilities of limsup events"],
+  ["Modes of convergence", "a.s., in probability, L^p, in distribution and their relations", "Classifying convergence of examples"],
+  ["Laws of large numbers", "Weak and strong LLN", "Applications and counter-examples"],
+  ["Characteristic functions", "Definition, inversion, Levy continuity", "Characteristic functions of standard laws"],
+  ["Central limit theorem", "Lindeberg-Feller CLT", "Checking the Lindeberg condition"],
+  ["Conditional expectation", "Definition via Radon-Nikodym, tower property", "Conditional expectations given sigma-algebras"],
+  ["Martingales", "Martingales, stopping times, optional stopping", "Martingale checks, gambler's ruin"]
+ ]},
+ inf:{s:"Estimation, testing and confidence intervals from a unified likelihood-based viewpoint.",o:["Derive and compare estimators", "Construct tests and intervals", "Judge optimality via sufficiency and the Cramer-Rao bound"],n:"Follows HKU STAT3602. Assumes Probability II including MGFs and the CLT.",p:"Proofs will be added later.",l:[
+  ["Samples and sampling distributions", "Statistics, chi-square, t and F distributions", "Distribution of sample mean and variance"],
+  ["Method of moments", "Moment equations, consistency", "Moment estimators for common families"],
+  ["Maximum likelihood", "Likelihood, score, invariance", "Closed-form and numeric MLEs"],
+  ["Properties of estimators", "Bias, MSE, consistency, efficiency", "Comparing estimators by MSE"],
+  ["Sufficiency and completeness", "Factorisation theorem, Rao-Blackwell, Lehmann-Scheffe", "Finding sufficient statistics and UMVUEs"],
+  ["Fisher information and Cramer-Rao", "Information, CR bound, asymptotic normality of MLE", "Computing information and bounds"],
+  ["Confidence intervals", "Pivots, intervals for mean, variance, proportions", "Interval construction and interpretation"],
+  ["Hypothesis testing basics", "Type I/II errors, power, p-values", "Power calculations"],
+  ["Neyman-Pearson and likelihood ratio tests", "NP lemma, LRT, Wilks theorem", "Constructing LRTs, critical regions"],
+  ["Tests for means and variances", "One- and two-sample t, F tests", "Test statistics and decisions from summaries"],
+  ["Chi-square tests", "Goodness of fit, independence", "Contingency table tests"]
+ ]},
+ reg1:{s:"The linear model fitted by least squares, with inference, diagnostics and model selection.",o:["Fit and interpret linear models", "Run inference on coefficients", "Diagnose and repair model violations"],n:"Follows HKU ECON2280 / CUHK STAT3008 content on linear regression.",p:"Proofs will be added later.",l:[
+  ["Simple linear regression", "Model, least squares, interpretation", "Computing slope and intercept from data"],
+  ["Properties of OLS", "Gauss-Markov, unbiasedness, variance of estimators", "Standard errors from summary statistics"],
+  ["Inference in simple regression", "t tests, intervals, prediction intervals", "Testing slopes, building intervals"],
+  ["Matrix formulation", "Normal equations, projection (hat) matrix", "Solving small normal equations by hand"],
+  ["Multiple regression", "Partial effects, R-squared, adjusted R-squared", "Interpreting coefficient tables"],
+  ["F tests and nested models", "Extra sum of squares, general linear hypotheses", "ANOVA table calculations"],
+  ["Dummy variables and interactions", "Categorical predictors, interaction terms", "Reading coefficients with dummies"],
+  ["Residual diagnostics", "Residual plots, leverage, Cook's distance", "Computing leverage and influence"],
+  ["Heteroskedasticity and correlated errors", "Robust SEs, WLS, GLS", "Weighted least squares examples"],
+  ["Multicollinearity and variable selection", "VIF, AIC, BIC, stepwise methods", "Computing VIF, comparing models by AIC"],
+  ["Transformations and prediction", "Box-Cox, log models, cross-validation", "Back-transformed predictions"]
+ ]},
+ reg2:{s:"Extensions of the linear model: GLMs, regularisation, mixed models and robust methods.",o:["Fit logistic, Poisson and other GLMs", "Apply ridge, lasso and elastic net", "Choose between competing regression frameworks"],n:"Follows HKUST MAFS5140 style: generalised and regularised regression.",p:"Proofs will be added later.",l:[
+  ["Exponential family and GLM framework", "Exponential family, link functions", "Identifying canonical links"],
+  ["Logistic regression", "Odds, MLE via IRLS, interpretation", "Odds ratios and predicted probabilities"],
+  ["Inference for GLMs", "Wald, score and deviance tests", "Deviance comparisons"],
+  ["Poisson and count models", "Poisson, overdispersion, negative binomial", "Rate ratios and offsets"],
+  ["Multinomial and ordinal models", "Softmax models, proportional odds", "Class probabilities from fitted models"],
+  ["Ridge regression", "Bias-variance, shrinkage, SVD view", "Ridge solutions on small examples"],
+  ["Lasso and sparsity", "L1 geometry, soft-thresholding, coordinate descent", "Soft-thresholding calculations"],
+  ["Elastic net and tuning", "Combined penalties, cross-validation", "Choosing lambda from CV tables"],
+  ["Splines and nonparametric regression", "Basis expansions, smoothing splines", "Spline basis constructions"],
+  ["Mixed-effects models", "Random effects, BLUPs", "Variance components from small designs"],
+  ["Robust regression", "M-estimators, Huber loss, breakdown point", "Huber estimates on tiny data"]
+ ]},
+ sp:{s:"Random processes: Markov chains, Poisson processes, queues and branching.",o:["Classify Markov chains and compute stationary distributions", "Model arrivals with Poisson processes", "Analyse simple queues and martingale problems"],n:"Follows HKU SDST3603 / CUHK STAT3007. Discrete-time chains first, then continuous time.",p:"Proofs will be added later.",l:[
+  ["Markov chains: basics", "Transition matrices, Chapman-Kolmogorov", "n-step probabilities"],
+  ["Classification of states", "Communication, recurrence, periodicity", "Classifying states from a diagram"],
+  ["Hitting probabilities and times", "First-step analysis", "Solving absorption problems"],
+  ["Stationary distributions", "Existence, uniqueness, limit theorems", "Solving pi P = pi"],
+  ["Random walks and gambler's ruin", "Ruin probabilities, expected duration", "Ruin probability calculations"],
+  ["Poisson process", "Interarrival times, superposition, thinning", "Event probabilities in time windows"],
+  ["Continuous-time Markov chains", "Generators, Kolmogorov equations", "Solving small generator systems"],
+  ["Birth-death processes and queues", "M/M/1, M/M/c, Little's law", "Queue length and waiting time formulas"],
+  ["Renewal theory", "Renewal function, renewal reward theorem", "Long-run average rewards"],
+  ["Branching processes", "Extinction probability, generating functions", "Computing extinction probabilities"],
+  ["Martingales (discrete)", "Definition, optional stopping", "Applying optional stopping"]
+ ]},
+ ts1:{s:"Classical time-series modelling with ARMA/ARIMA models, estimation and forecasting.",o:["Identify stationary and non-stationary series", "Fit ARIMA models", "Produce and evaluate forecasts"],n:"Follows HKU SDST4601 / CityU EF4822 style (ARIMA family).",p:"Proofs will be added later.",l:[
+  ["Time series and stationarity", "Weak stationarity, autocovariance", "Sample ACF by hand"],
+  ["White noise and linear processes", "MA(infinity), Wold decomposition", "Autocovariances of linear filters"],
+  ["MA models", "MA(q), invertibility", "ACF of MA(1), MA(2)"],
+  ["AR models", "AR(p), causality, Yule-Walker", "Solving Yule-Walker equations"],
+  ["ARMA models", "Causal/invertible ARMA, ACF/PACF", "Identifying orders from ACF/PACF"],
+  ["Forecasting", "Best linear prediction, forecast errors", "h-step forecasts and variances"],
+  ["Estimation", "Method of moments, conditional MLE", "Estimating AR(1) parameters"],
+  ["Non-stationarity and differencing", "Unit roots, ARIMA, ADF test", "Differencing and unit-root decisions"],
+  ["Seasonal models", "SARIMA, seasonal differencing", "Reading seasonal ACFs"],
+  ["Model diagnostics", "Residual checks, Ljung-Box, AIC/BIC", "Test statistics from residual ACF"]
+ ]},
+ ts2:{s:"Heteroskedastic, multivariate and state-space models for financial time series.",o:["Fit GARCH-type models", "Model several series jointly", "Use Kalman filtering"],n:"Follows HKUST MAFS5130 / CUHK STAT6204 style (volatility and multivariate series).",p:"Proofs will be added later.",l:[
+  ["Stylised facts of returns", "Heavy tails, volatility clustering", "Computing sample moments of returns"],
+  ["ARCH models", "ARCH(q), conditional variance, estimation", "Conditional variance recursion"],
+  ["GARCH models", "GARCH(1,1), persistence, forecasting", "Variance forecasts, long-run variance"],
+  ["GARCH extensions", "EGARCH, GJR, t-innovations", "Leverage-effect comparisons"],
+  ["Realised volatility", "High-frequency estimators, microstructure noise", "Realised variance from intraday data"],
+  ["VAR models", "VAR(p), stationarity, Granger causality", "Companion matrices, impulse responses"],
+  ["Cointegration", "Engle-Granger, Johansen, VECM", "Constructing spread series, error correction"],
+  ["State-space models", "State-space form, Kalman filter", "One-step Kalman updates"],
+  ["Regime switching", "Markov switching, HMM filtering", "Filtering probabilities"],
+  ["Spectral analysis", "Periodogram, spectral density", "Periodogram of small series"]
+ ]},
+ mc:{s:"Simulation-based computation: random number generation, variance reduction, MCMC and bootstrap.",o:["Generate samples from arbitrary distributions", "Reduce variance of Monte Carlo estimators", "Implement MCMC and bootstrap"],n:"Follows CUHK RMSC4001 style, with coding emphasised.",p:"Proofs will be added later.",l:[
+  ["Random number generation", "LCGs, quality of PRNGs, seeding", "Check a generator's statistics", "Implement an LCG and a seeded sampler"],
+  ["Inverse transform and acceptance-rejection", "Inverse CDF, rejection envelope", "Efficiency of rejection samplers", "Sample from a custom density"],
+  ["Special methods", "Box-Muller, composition, multivariate normal", "Cholesky-based sampling", "Generate correlated normals"],
+  ["Monte Carlo integration", "Estimator, standard error, CLT", "Confidence intervals for MC estimates", "Estimate an integral with error bars"],
+  ["Variance reduction I", "Antithetic variates, control variates", "Variance reduction factors", "Implement antithetic and control variates"],
+  ["Variance reduction II", "Importance sampling, stratification", "Optimal importance densities", "Rare-event estimation"],
+  ["Discretising SDEs", "Euler and Milstein schemes, weak/strong error", "Convergence orders", "Simulate GBM paths"],
+  ["Markov chain Monte Carlo", "Metropolis-Hastings, detailed balance", "Acceptance ratios", "Implement random-walk Metropolis"],
+  ["Gibbs sampling", "Full conditionals, blocking", "Deriving conditionals", "Gibbs sampler for a bivariate normal"],
+  ["MCMC diagnostics", "Burn-in, ESS, R-hat", "Computing ESS", "Diagnose chains from output"],
+  ["Bootstrap and resampling", "Nonparametric bootstrap, percentile intervals", "Bootstrap intervals by hand", "Bootstrap CI for a statistic"]
+ ]},
+ np:{s:"Inference without strong distributional assumptions: rank tests, permutation methods and smoothing.",o:["Choose and run rank-based tests", "Use permutation and bootstrap inference", "Estimate densities and regression curves nonparametrically"],n:"Follows HKU STAT3620 (nonparametric methods). Distribution-free tests first, then smoothing.",p:"Proofs will be added later.",l:[
+  ["Why nonparametric", "Parametric vs distribution-free, efficiency", "Comparing test power"],
+  ["Sign and signed-rank tests", "Sign test, Wilcoxon signed-rank", "Exact and normal-approximation tests"],
+  ["Two-sample rank tests", "Mann-Whitney, Wilcoxon rank-sum", "Computing U and p-values"],
+  ["Multi-sample tests", "Kruskal-Wallis, Friedman", "H statistics from rank sums"],
+  ["Tests of fit", "Kolmogorov-Smirnov, Anderson-Darling", "KS statistic from small samples"],
+  ["Rank correlation", "Spearman, Kendall tau", "Computing rank correlations"],
+  ["Permutation tests", "Exchangeability, exact tests", "Enumerating permutation distributions"],
+  ["Bootstrap and jackknife", "Bootstrap variance, bias, intervals", "Jackknife estimates"],
+  ["Kernel density estimation", "Bias-variance, bandwidth selection", "Density estimates at points"],
+  ["Nonparametric regression", "Nadaraya-Watson, local linear, LOESS", "Kernel regression at a point"]
+ ]},
+ hd:{s:"Statistics when the number of variables rivals or exceeds the sample size: concentration, sparsity and random matrices.",o:["Use concentration inequalities", "Analyse lasso and sparse recovery", "Apply random-matrix intuition to covariance estimation"],n:"Follows CUHK STAT5103 style (high-dimensional statistics). Requires heavy linear algebra.",p:"Proofs are central here, so Proof carries more weight.",l:[
+  ["The high-dimensional regime", "Curse of dimensionality, p>n", "Distance concentration examples"],
+  ["Sub-Gaussian variables", "Sub-Gaussian and sub-exponential tails", "Tail bounds for sums"],
+  ["Concentration inequalities", "Hoeffding, Bernstein, McDiarmid", "Applying bounds to examples"],
+  ["Covariance estimation", "Sample covariance, operator-norm error, shrinkage", "Ledoit-Wolf style shrinkage"],
+  ["Random matrices", "Marchenko-Pastur, Wigner, eigenvalue spread", "MP edges for given p/n"],
+  ["PCA in high dimensions", "Spiked models, BBP transition", "Detecting spikes"],
+  ["Sparse regression", "Lasso oracle inequalities, restricted eigenvalue", "Support recovery conditions"],
+  ["Sparse recovery", "Basis pursuit, compressed sensing, RIP", "Recovery guarantees"],
+  ["Multiple testing", "FWER, Bonferroni, FDR, Benjamini-Hochberg", "BH procedure on p-values"],
+  ["Graphical models", "Graphical lasso, precision matrices", "Partial correlation reading"]
+ ]},
+ ci:{s:"Identifying causal effects from observational and experimental data.",o:["Formulate causal questions with potential outcomes", "Pick an identification strategy", "Estimate effects and check assumptions"],n:"Follows HKU SDST4613 and ECON3284 style (potential outcomes and econometric designs).",p:"Proofs will be added later.",l:[
+  ["Potential outcomes", "Rubin model, ATE, SUTVA", "Computing ATE from a table"],
+  ["Randomised experiments", "Randomisation inference, Neyman estimator", "Difference-in-means with SE"],
+  ["Confounding and DAGs", "Causal graphs, backdoor criterion", "Choosing adjustment sets"],
+  ["Adjustment and matching", "Regression adjustment, matching", "Matched estimates by hand"],
+  ["Propensity scores", "Score theorem, IPW, doubly robust", "IPW estimator calculations"],
+  ["Instrumental variables", "Relevance, exclusion, LATE, 2SLS", "Wald estimator, 2SLS by hand"],
+  ["Regression discontinuity", "Sharp and fuzzy RD", "Local linear estimates at a cutoff"],
+  ["Difference-in-differences", "Parallel trends, event studies", "2x2 DiD estimates"],
+  ["Synthetic control and panel methods", "Synthetic control, fixed effects", "Weights and effect estimates"],
+  ["Sensitivity and heterogeneity", "Rosenbaum bounds, CATE intro", "Bounding effects under confounding"]
+ ]},
+ exp:{s:"Designing experiments and running A/B tests that give trustworthy answers.",o:["Design randomised experiments", "Size tests and analyse results", "Avoid peeking and multiple-testing traps"],n:"Based on CityU DSC4110 for classical design and standard industry A/B practice; no single university course covers online experiments.",p:"Proofs will be added later.",l:[
+  ["Principles of experimentation", "Randomisation, replication, blocking", "Identifying flaws in designs"],
+  ["One-way ANOVA", "Model, F test, multiple comparisons", "ANOVA table calculations"],
+  ["Factorial designs", "Main effects, interactions, 2^k designs", "Effects from 2^2 and 2^3 tables"],
+  ["Blocking and Latin squares", "Randomised blocks, Latin squares", "Block-adjusted comparisons"],
+  ["Fractional factorials", "Aliasing, resolution", "Alias structures"],
+  ["A/B test basics", "Hypotheses, metrics, randomisation units", "Choosing metrics and units"],
+  ["Sample size and power", "MDE, power analysis", "Sample size calculations"],
+  ["Inference for proportions and means", "z/t tests, delta method for ratios", "Test statistics for A/B summaries"],
+  ["Sequential testing and peeking", "Alpha spending, always-valid inference", "Adjusted boundaries"],
+  ["Variance reduction", "CUPED, stratification", "Variance reduction from covariates"],
+  ["Pitfalls and interference", "SRM, novelty effects, network interference", "Diagnosing sample ratio mismatch"]
+ ]},
+ rm:{s:"How to turn an idea into a defensible quantitative result: hypotheses, backtests, validation and reproducibility.",o:["Frame testable hypotheses", "Validate a model out of sample without leakage", "Report results honestly and reproducibly"],n:"No single university course; structure follows quant research practice and partly HKU STAT8020 / HKUST MAFS5310.",p:"Proofs are replaced by written research critiques; Proof = N/A may be considered.",l:[
+  ["From idea to hypothesis", "Hypotheses, effect sizes, null results", "Writing testable hypotheses"],
+  ["Data and leakage", "Look-ahead bias, survivorship bias", "Spotting leakage in setups"],
+  ["Train/validation/test design", "Time-series splits, walk-forward", "Designing splits for given data"],
+  ["Overfitting and multiple testing", "Data snooping, deflated Sharpe", "Adjusting Sharpe for trials"],
+  ["Backtesting", "Costs, slippage, capacity", "PnL net of costs"],
+  ["Performance metrics", "Sharpe, drawdown, information ratio", "Computing metrics from returns"],
+  ["Statistical significance in practice", "Bootstrap for Sharpe, effect vs significance", "Intervals for performance"],
+  ["Model comparison", "Nested tests, information criteria, CV", "Choosing between models"],
+  ["Robustness and sensitivity", "Parameter stability, regime tests", "Sensitivity tables"],
+  ["Reproducibility", "Version control, seeds, pipelines", "Checking a reproducibility checklist"],
+  ["Communicating results", "Paper structure, plots, limitations", "Critiquing a results section"]
+ ]},
+ ml:{s:"Core supervised and unsupervised learning, with emphasis on generalisation and honest evaluation.",o:["Train and evaluate standard models", "Explain bias-variance and regularisation", "Build sound validation pipelines"],n:"Follows CUHK CSCI3320 and HKUST COMP4211 style, with a finance-flavoured final lecture.",p:"Proofs will be added later.",l:[
+  ["Learning problems and generalisation", "Supervised/unsupervised, empirical risk, bias-variance", "Train/test error computations", "Load data and fit a baseline"],
+  ["Linear and logistic models", "Least squares, logistic loss, gradient descent", "Gradient steps by hand", "Implement gradient descent"],
+  ["Regularisation and model selection", "Ridge, lasso, cross-validation", "Choosing lambda from CV output", "Implement k-fold CV"],
+  ["k-NN and kernel methods", "Nearest neighbours, kernels, curse of dimensionality", "Distance-based predictions", "Implement k-NN"],
+  ["Support vector machines", "Margin, hinge loss, dual, kernel trick", "Margins and support vectors from small data", "Fit an SVM"],
+  ["Decision trees", "Impurity, splitting, pruning", "Computing Gini and entropy splits", "Implement a tree split"],
+  ["Ensembles", "Bagging, random forests, boosting", "Bagging variance reduction", "Gradient boosting by hand"],
+  ["Generative models", "Naive Bayes, LDA, Gaussian mixtures", "Posterior class probabilities", "EM for a GMM"],
+  ["Dimensionality reduction", "PCA, SVD, t-SNE intuition", "PCA from covariance matrices", "Implement PCA"],
+  ["Clustering", "k-means, hierarchical, spectral", "k-means iterations", "Implement k-means"],
+  ["Evaluation and finance pitfalls", "ROC/AUC, calibration, purged CV", "Computing AUC and precision-recall", "Leakage-free splits"]
+ ]},
+ dl:{s:"Neural networks from backpropagation to modern architectures and training practice.",o:["Derive backprop", "Train CNNs, RNNs and Transformers", "Diagnose training problems"],n:"Follows HKU COMP3340 / CUHK STAT4012 style, with PyTorch-style coding.",p:"Proofs will be added later.",l:[
+  ["Perceptrons and MLPs", "Neurons, activations, universal approximation", "Forward passes by hand", "Implement an MLP forward pass"],
+  ["Backpropagation", "Chain rule, computational graphs", "Gradients through small networks", "Implement backprop"],
+  ["Optimisation", "SGD, momentum, Adam, learning-rate schedules", "Update-rule calculations", "Implement optimisers"],
+  ["Regularisation", "Weight decay, dropout, early stopping", "Effective weight shrinkage", "Add dropout and weight decay"],
+  ["Initialisation and normalisation", "Xavier/He init, batch/layer norm", "Variance propagation", "Implement layer norm"],
+  ["Convolutional networks", "Convolutions, pooling, receptive fields", "Output size and parameter counts", "Implement convolution"],
+  ["Modern CNNs", "ResNets, skip connections", "Parameter and FLOP counts", "Build a residual block"],
+  ["Recurrent networks", "RNNs, LSTM, GRU, vanishing gradients", "Unrolled gradients", "Implement an RNN cell"],
+  ["Attention and Transformers", "Self-attention, positional encoding", "Attention weights by hand", "Implement scaled dot-product attention"],
+  ["Generative models", "Autoencoders, VAEs, GANs", "ELBO terms", "Train a small autoencoder"],
+  ["Training practice", "Debugging, hyperparameter search, mixed precision", "Diagnosing loss curves", "Overfit-one-batch test"]
+ ]},
+ nlp:{s:"Language modelling and text processing from n-grams to pretrained Transformers.",o:["Build text pipelines", "Understand embeddings and sequence models", "Fine-tune and evaluate pretrained models"],n:"Follows HKU COMP3361 / HKUST COMP4221.",p:"Proofs will be added later.",l:[
+  ["Text processing", "Tokenisation, normalisation, BPE", "Applying BPE merges", "Implement BPE"],
+  ["N-gram language models", "Perplexity, smoothing", "Perplexity calculations", "Bigram model with smoothing"],
+  ["Word embeddings", "Word2vec, GloVe, cosine similarity", "Analogy and similarity calculations", "Train toy embeddings"],
+  ["Text classification", "Bag-of-words, TF-IDF, logistic regression", "TF-IDF by hand", "Sentiment classifier"],
+  ["Sequence labelling", "HMMs, CRFs, Viterbi", "Viterbi decoding", "Implement Viterbi"],
+  ["Neural sequence models", "RNN language models, seq2seq", "Sequence loss calculations", "Seq2seq toy task"],
+  ["Attention and Transformers for text", "Encoder/decoder, masking", "Attention masks", "Masked attention"],
+  ["Pretrained encoders", "BERT, masked LM, fine-tuning", "Fine-tuning parameter counts", "Fine-tune a classifier"],
+  ["Parsing and semantics", "Dependency/constituency parsing, semantic roles", "Parse trees", "Dependency parse features"],
+  ["Evaluation", "BLEU, ROUGE, F1, human eval", "Computing BLEU and F1", "Implement metrics"]
+ ]},
+ llm:{s:"Large language models: pretraining, scaling, alignment, prompting and retrieval.",o:["Explain how LLMs are trained and aligned", "Use prompting, RAG and fine-tuning", "Evaluate risks and limits"],n:"Follows CUHK STAT6209 style, extended with current practice.",p:"Proofs will be added later.",l:[
+  ["Decoder-only Transformers", "Architecture, causal masking, KV cache", "Parameter counts", "Implement a tiny GPT block"],
+  ["Pretraining", "Objectives, data pipelines, tokenisation", "Tokens-seen and cost estimates", "Streaming data loader"],
+  ["Scaling laws", "Compute-optimal scaling", "Scaling-law fits", "Fit a power law"],
+  ["Sampling and decoding", "Temperature, top-k, top-p, beam", "Probabilities under sampling", "Implement sampling"],
+  ["Fine-tuning", "SFT, LoRA, parameter-efficient methods", "LoRA rank and parameter counts", "LoRA layer"],
+  ["Alignment", "RLHF, DPO, reward models", "DPO loss by hand", "DPO loss"],
+  ["Prompting and in-context learning", "Few-shot, chain of thought", "Prompt design cases", "Prompt templates"],
+  ["Retrieval-augmented generation", "Embeddings, vector search, chunking", "Similarity ranking", "Minimal RAG pipeline"],
+  ["Agents and tool use", "Function calling, planning", "Tool-call traces", "Tool-calling loop"],
+  ["Evaluation and safety", "Benchmarks, hallucination, red-teaming", "Metric calculations", "Evaluate a model on a test set"],
+  ["Efficiency", "Quantisation, distillation, serving", "Memory estimates", "Quantise weights"]
+ ]},
+ rl:{s:"Sequential decision making from bandits and MDPs to deep reinforcement learning.",o:["Solve MDPs by dynamic programming", "Implement TD and policy-gradient methods", "Understand RL applications in trading"],n:"Follows HKUST MAFS5370 and the standard Sutton-Barto sequence.",p:"Proofs will be added later.",l:[
+  ["Bandits", "Exploration vs exploitation, UCB, Thompson", "Regret calculations", "Bandit simulator"],
+  ["Markov decision processes", "States, rewards, policies, Bellman equations", "Value computation", "Solve a tiny MDP"],
+  ["Dynamic programming", "Policy/value iteration", "Iterations by hand", "Value iteration"],
+  ["Monte Carlo methods", "First-visit MC, exploration", "MC returns", "MC control"],
+  ["Temporal-difference learning", "TD(0), SARSA, Q-learning", "TD updates by hand", "Tabular Q-learning"],
+  ["n-step and eligibility traces", "TD(lambda)", "Return computations", "TD(lambda)"],
+  ["Function approximation", "Linear approximation, deadly triad", "Semi-gradient updates", "Linear Q-learning"],
+  ["Deep Q-networks", "Replay buffers, target networks", "Target calculations", "DQN on a small task"],
+  ["Policy gradients", "REINFORCE, baselines, actor-critic", "Gradient estimates", "REINFORCE"],
+  ["Modern policy methods", "PPO, TRPO, SAC", "Clipped objective", "PPO objective"],
+  ["RL in finance", "Execution, market making, reward design", "Reward shaping examples", "Trading environment"]
+ ]},
+ cv:{s:"Image understanding with classical methods and deep networks.",o:["Process and transform images", "Build detection and segmentation models", "Understand geometry and generative vision"],n:"Follows HKUST COMP4471 style.",p:"Proofs will be added later.",l:[
+  ["Image formation and filtering", "Pixels, convolution, edges", "Filter outputs", "Convolution filters"],
+  ["Features", "Corners, SIFT, descriptors", "Harris response", "Feature matching"],
+  ["Image classification", "CNN classifiers, augmentation", "Accuracy metrics", "Train a classifier"],
+  ["Modern backbones", "ResNets, ViT", "Receptive fields", "Vision Transformer patching"],
+  ["Object detection", "R-CNN family, YOLO, IoU, NMS", "IoU and NMS by hand", "Implement NMS"],
+  ["Segmentation", "FCN, U-Net, Mask R-CNN", "Dice and IoU", "Dice loss"],
+  ["Geometry", "Camera models, homography, stereo", "Projection calculations", "Homography estimation"],
+  ["Self-supervised learning", "Contrastive learning, CLIP", "Contrastive loss", "InfoNCE loss"],
+  ["Generative vision", "GANs, diffusion models", "Diffusion noise schedule", "Forward diffusion"],
+  ["Video and deployment", "Optical flow, tracking, efficiency", "Flow equations", "Basic tracker"]
+ ]},
+ lt:{s:"Why learning works: PAC learning, complexity measures and generalisation bounds.",o:["State and use PAC bounds", "Compute VC dimension and Rademacher complexity", "Connect theory to practical algorithms"],n:"Follows CUHK CSCI4230. Needs measure-theoretic probability for some proofs.",p:"Proofs are central; Proof carries more weight.",l:[
+  ["PAC learning", "Realisable and agnostic PAC", "Sample complexity for finite classes"],
+  ["Uniform convergence", "Hoeffding and union bound", "Generalisation gaps"],
+  ["VC dimension", "Shattering, Sauer lemma", "VC dimension of simple classes"],
+  ["Rademacher complexity", "Definition, bounds", "Complexity of linear classes"],
+  ["Margin theory", "Margin bounds, SVMs", "Margin-based bounds"],
+  ["Boosting", "AdaBoost, margin explanation", "Training-error bounds"],
+  ["Online learning", "Regret, Perceptron, Hedge", "Regret bounds"],
+  ["Stability and regularisation", "Algorithmic stability", "Stability constants"],
+  ["Convex learning", "Convex Lipschitz bounded problems, SGD", "SGD rates"],
+  ["Bias-variance and modern theory", "Double descent, interpolation", "Interpretation exercises"]
+ ]},
+ mlops:{s:"Shipping, monitoring and maintaining models in production.",o:["Package and deploy models", "Version data, code and experiments", "Monitor drift and failures"],n:"No university course; structure follows industry practice for taking models to production.",p:"Proof = N/A; Complete = pass the hardest set.",l:[
+  ["ML systems overview", "Lifecycle, failure modes", "Identifying pipeline issues", "Project structure"],
+  ["Data pipelines", "Validation, schemas, feature stores", "Schema checks", "Data validation"],
+  ["Experiment tracking", "Metrics, configs, reproducibility", "Comparing runs", "Tracking runs"],
+  ["Containers", "Docker, images, environments", "Dockerfile reading", "Containerise a model"],
+  ["Model serving", "REST/gRPC, batch vs online", "Latency budgets", "Serve a model"],
+  ["CI/CD for ML", "Tests, pipelines, rollouts", "Pipeline design", "Write tests"],
+  ["Orchestration", "DAG schedulers, retries", "Dependency graphs", "Pipeline DAG"],
+  ["Monitoring and drift", "Data and concept drift, alerts", "Drift statistics", "Drift detection"],
+  ["Scaling and cost", "GPUs, batching, cost models", "Cost calculations", "Batching"],
+  ["Governance", "Reproducibility, audit, model risk", "Checklist review", "Model card"]
+ ]},
+ sc:{s:"Ito calculus and its use in pricing: Brownian motion, SDEs, Girsanov and Black-Scholes.",o:["Compute with Ito's formula", "Solve and simulate SDEs", "Derive Black-Scholes by PDE and by change of measure"],n:"Follows HKU FINA3350, HKUST MAFS5010 and CUHK RMSC4005. Builds on Stochastic Processes.",p:"Proofs will be added later.",l:[
+  ["Brownian motion", "Definition, scaling, quadratic variation", "Covariances of Brownian paths"],
+  ["Properties of paths", "Non-differentiability, reflection principle", "Hitting-time probabilities"],
+  ["Ito integral", "Construction, isometry, martingale property", "Moments of Ito integrals"],
+  ["Ito's formula", "One- and multi-dimensional versions", "Applying Ito to functions of BM"],
+  ["Geometric Brownian motion", "Solution, lognormal distribution", "GBM moments and probabilities"],
+  ["SDEs", "Existence, OU process, linear SDEs", "Solving linear SDEs"],
+  ["Feynman-Kac", "PDE-expectation link", "Solving PDEs via expectations"],
+  ["Girsanov and measure change", "Radon-Nikodym, risk-neutral measure", "Drift changes"],
+  ["Black-Scholes derivation", "Self-financing replication, PDE", "Verifying the BS PDE"],
+  ["Martingale representation and numeraires", "Change of numeraire, forward measure", "Computing prices under numeraires"]
+ ]},
+ dv2:{s:"Continuous-time derivative pricing beyond vanilla options: exotics, American options and hedging.",o:["Price options under Black-Scholes", "Handle exotics and early exercise", "Compute and manage Greeks"],n:"Follows HKUST MAFS5030 and CityU EF4820.",p:"Proofs will be added later.",l:[
+  ["Black-Scholes revisited", "PDE and risk-neutral pricing", "Closed-form call/put prices"],
+  ["Greeks", "Delta, gamma, vega, theta, rho", "Greek calculations"],
+  ["Delta-gamma hedging", "Dynamic hedging, hedging error", "Hedge P&L examples"],
+  ["Barrier options", "Reflection, in-out parity", "Barrier prices"],
+  ["Asian and lookback options", "Average-price, lookbacks", "Geometric Asian prices"],
+  ["American options", "Optimal stopping, free boundary", "Early-exercise comparisons"],
+  ["Binomial and trinomial trees", "Convergence to BS", "Tree prices"],
+  ["Finite-difference methods", "Explicit, implicit, Crank-Nicolson", "Stability checks"],
+  ["Currency, dividend and commodity options", "Garman-Kohlhagen, futures options", "Pricing variants"],
+  ["Multi-asset options", "Exchange, basket, spread options", "Margrabe and basket approximations"]
+ ]},
+ vol:{s:"Modelling the implied volatility surface with local, stochastic and parametric models.",o:["Read and arbitrage-check a smile", "Calibrate local and stochastic volatility models", "Hedge with smile models"],n:"No university course; structure follows standard quant literature on smile modelling.",p:"Proofs will be added later.",l:[
+  ["Implied volatility", "Quotes, Newton inversion", "Implied vol from prices", "Implement an IV solver"],
+  ["The smile and surface", "Skew, term structure, no-arbitrage conditions", "Checking butterfly arbitrage", "Arbitrage checks"],
+  ["Local volatility", "Dupire formula", "Local vol from a surface", "Dupire on a grid"],
+  ["Stochastic volatility", "Heston model, CIR variance", "Moments of variance", "Simulate Heston"],
+  ["Heston pricing", "Characteristic function, Fourier pricing", "Characteristic function evaluation", "Fourier pricer"],
+  ["SABR", "SABR model, Hagan expansion", "SABR implied vol", "Implement SABR"],
+  ["SVI and parametrisations", "SVI, no-arbitrage constraints", "SVI fits", "Fit SVI"],
+  ["Calibration", "Least squares, regularisation", "Calibration error", "Calibrate to quotes"],
+  ["Smile dynamics", "Sticky strike vs sticky delta", "Hedge ratios", "Compare smile dynamics"],
+  ["Exotics under smile models", "Local-stochastic mixtures", "Model risk comparison", "Barrier price under two models"]
+ ]},
+ ir1:{s:"Fixed income fundamentals: bonds, yields, duration and the term structure.",o:["Price bonds and swaps", "Compute duration and convexity", "Bootstrap curves"],n:"Follows HKU FINA3323 and HKUST FINA4303.",p:"Proofs will be added later.",l:[
+  ["Time value and bond pricing", "PV, yield to maturity", "Bond prices and yields"],
+  ["Yield curves", "Spot, forward, par rates", "Spot from par"],
+  ["Bootstrapping", "Discount factors from instruments", "Bootstrap a curve"],
+  ["Duration", "Macaulay, modified, DV01", "Duration and DV01"],
+  ["Convexity", "Price-yield curvature", "Price change approximations"],
+  ["Immunisation and hedging", "Duration matching", "Immunising liabilities"],
+  ["Forward rate agreements and futures", "FRAs, Eurodollar futures, convexity adjustment", "FRA pricing"],
+  ["Interest rate swaps", "Fixed vs floating, valuation", "Swap rates and values"],
+  ["Term-structure theories", "Expectations, liquidity premium", "Interpreting curves"],
+  ["Bond options and caps", "Black-76 caps/floors", "Cap prices"]
+ ]},
+ ir2:{s:"Stochastic models for interest rates and the pricing of rate derivatives.",o:["Use short-rate and HJM models", "Price caps, floors and swaptions", "Apply the LIBOR market model"],n:"Follows HKUST MAFS5040 and CityU EF4821.",p:"Proofs will be added later.",l:[
+  ["Short-rate models", "Vasicek, CIR, Hull-White", "Bond prices in Vasicek"],
+  ["Affine term structure", "Affine class, Riccati equations", "Solving affine ODEs"],
+  ["Calibration to the curve", "Hull-White fitting", "Theta(t) fitting"],
+  ["HJM framework", "Drift condition", "HJM drift calculations"],
+  ["Forward measures", "Change of numeraire for rates", "Forward-measure pricing"],
+  ["Caps, floors, swaptions", "Black formulas, annuity measure", "Swaption prices"],
+  ["LIBOR market model", "Lognormal forward rates, drift terms", "LMM drift"],
+  ["Calibration to vols", "Cap/swaption calibration", "Calibration targets"],
+  ["Multi-curve and OIS discounting", "Post-crisis curves, SOFR", "Curve construction"],
+  ["Numerical methods for rates", "Trees and Monte Carlo for rates", "Simulation estimates"]
+ ]},
+ cr:{s:"Credit risk measurement and pricing: default models, spreads and credit derivatives.",o:["Compute default probabilities and expected loss", "Price CDS and bonds with credit risk", "Model portfolio default correlation"],n:"Follows HKU FINA3322 and CUHK RMSC6002.",p:"Proofs will be added later.",l:[
+  ["Credit risk overview", "PD, LGD, EAD, expected loss", "Expected loss calculations"],
+  ["Credit ratings and transition matrices", "Markov rating models", "Multi-year PDs"],
+  ["Structural models", "Merton model, distance to default", "Merton PD"],
+  ["Reduced-form models", "Hazard rates, intensity", "Survival probabilities"],
+  ["Risky bond pricing", "Credit spreads, recovery", "Spread decomposition"],
+  ["Credit default swaps", "CDS valuation, bootstrapping", "CDS spread calculations"],
+  ["Portfolio credit and copulas", "Gaussian copula, correlation", "Joint default probabilities"],
+  ["CDOs", "Tranching, base correlation", "Tranche losses"],
+  ["Counterparty risk", "CVA, DVA, netting", "CVA approximations"],
+  ["Credit scoring", "Logistic scoring, validation", "AUC and cut-off decisions"]
+ ]},
+ risk:{s:"Measuring and managing market risk with VaR, expected shortfall and stress tests.",o:["Calculate VaR and ES under several methods", "Backtest risk models", "Design stress and scenario tests"],n:"Follows HKU FINA4341 and CUHK RMSC5003.",p:"Proofs will be added later.",l:[
+  ["Risk measures", "Volatility, VaR, ES, coherence", "VaR from distributions"],
+  ["Parametric VaR", "Variance-covariance, delta-normal", "Portfolio VaR"],
+  ["Historical simulation", "Empirical VaR, filtered HS", "Empirical VaR"],
+  ["Monte Carlo VaR", "Simulation of risk factors", "Simulated quantiles"],
+  ["Expected shortfall", "ES definition, estimation", "ES calculations"],
+  ["Volatility forecasting for risk", "EWMA, GARCH", "EWMA recursions"],
+  ["Backtesting", "Kupiec, Christoffersen tests", "Exception counts and test stats"],
+  ["Extreme value theory", "POT, GPD tails", "Tail quantiles"],
+  ["Stress testing", "Scenarios, reverse stress tests", "Scenario P&L"],
+  ["Portfolio risk attribution", "Component VaR, marginal risk", "Risk contributions"],
+  ["Liquidity and model risk", "Liquidity-adjusted VaR", "Adjustments"]
+ ]},
+ oprisk:{s:"Operational risk, regulatory capital and the Basel framework.",o:["Compute regulatory capital", "Model loss distributions", "Understand the regulatory landscape"],n:"Follows CUHK RMSC4006 and RMSC3001 (Basel). Course page only partly checked.",p:"Proof = N/A may be considered; assessed through applied problems.",l:[
+  ["Basel framework overview", "Basel I-III, capital pillars", "Capital ratio calculations"],
+  ["Credit risk capital", "Standardised vs IRB", "RWA computations"],
+  ["Market risk capital", "Standardised approach, FRTB", "Capital under FRTB"],
+  ["Operational risk basics", "Event types, loss data", "Classifying events"],
+  ["Loss distribution approach", "Frequency-severity models", "Aggregate loss simulation"],
+  ["Extreme severity modelling", "Heavy tails, scenario analysis", "Tail estimates"],
+  ["Standardised measurement approach", "BIC, loss component", "SMA capital"],
+  ["Liquidity regulation", "LCR, NSFR", "Ratio calculations"],
+  ["Stress testing and ICAAP", "Supervisory stress tests", "Capital projections"],
+  ["Model governance", "Model risk, validation", "Validation case study"]
+ ]},
+ insur:{s:"Risk theory: aggregate claims, ruin and premium principles.",o:["Model claim frequency and severity", "Compute ruin probabilities", "Price insurance premiums"],n:"Based on standard actuarial risk theory topics; CUHK RMSC4004 listed by title only.",p:"Proofs will be added later.",l:[
+  ["Utility and insurance", "Expected utility, risk aversion", "Premium under utility"],
+  ["Individual risk model", "Sums of independent risks", "Distribution of total claims"],
+  ["Collective risk model", "Compound Poisson", "Aggregate claim moments"],
+  ["Claim frequency", "Poisson, negative binomial, (a,b,0) class", "Frequency fits"],
+  ["Claim severity", "Pareto, lognormal, deductibles", "Excess-of-loss calculations"],
+  ["Premium principles", "Expected value, variance, Esscher", "Premium loadings"],
+  ["Reinsurance", "Proportional, stop-loss", "Retained risk"],
+  ["Ruin theory", "Cramer-Lundberg, Lundberg inequality", "Ruin bounds"],
+  ["Credibility theory", "Buhlmann credibility", "Credibility estimates"],
+  ["Generalised linear models in insurance", "Rating factors", "Tariff calculations"]
+ ]},
+ sprod:{s:"Pricing and risk of structured products built from vanillas and exotics.",o:["Decompose a product into components", "Price with Monte Carlo and PDEs", "Identify the dominant risks"],n:"Follows HKU FINA4354 and HKUST MAFS5330.",p:"Proofs will be added later.",l:[
+  ["Structured product landscape", "Notes, payoffs, issuer credit", "Decomposing payoffs"],
+  ["Capital-protected notes", "Zero plus option replication", "Participation rates"],
+  ["Reverse convertibles", "Short put embedded", "Coupon and breakeven"],
+  ["Autocallables", "Barriers, early redemption", "Autocall probabilities"],
+  ["Pricing autocallables", "Monte Carlo and PDE", "Simulated prices"],
+  ["Worst-of products", "Correlation, basket payoffs", "Correlation sensitivity"],
+  ["Rate-linked products", "CMS, range accruals", "Accrual calculations"],
+  ["Hedging structured products", "Pin risk, barrier shifts", "Hedge ratios"],
+  ["Risk factors", "Vega, correlation, skew", "Risk reports"],
+  ["Regulation and suitability", "KID/PRIIPs, mis-selling", "Suitability cases"]
+ ]},
+ pf1:{s:"Mean-variance portfolio theory and the CAPM.",o:["Build efficient portfolios", "Apply the CAPM", "Evaluate portfolio performance"],n:"Follows HKU FINA2320 and CityU EF3320.",p:"Proofs will be added later.",l:[
+  ["Returns and risk", "Simple vs log returns, mean, variance", "Return statistics"],
+  ["Portfolio variance", "Covariance, diversification", "Two-asset portfolios"],
+  ["Efficient frontier", "Minimum variance, frontier", "Frontier weights"],
+  ["Risk-free asset", "Capital allocation line, tangency portfolio", "Tangency weights"],
+  ["CAPM", "Beta, security market line", "Expected returns from beta"],
+  ["Beta estimation", "Market model", "Beta from data"],
+  ["Performance measures", "Sharpe, Treynor, Jensen alpha", "Ratios"],
+  ["Utility and risk aversion", "Mean-variance utility", "Optimal allocations"],
+  ["Constraints and estimation error", "Shorting limits, shrinkage", "Constrained allocations"],
+  ["Market efficiency", "EMH forms, anomalies", "Event study calculation"]
+ ]},
+ pf2:{s:"Multi-factor models, APT and modern portfolio construction.",o:["Estimate factor models", "Construct portfolios with risk models", "Test asset-pricing models"],n:"Follows HKUST MAFS5210 and CUHK RMSC6006.",p:"Proofs will be added later.",l:[
+  ["Multi-factor models", "APT, factor exposures", "Factor-implied returns"],
+  ["Fama-French factors", "Size, value, momentum, profitability", "Factor return construction"],
+  ["Time-series and cross-sectional tests", "Fama-MacBeth, GRS", "Risk premium estimates"],
+  ["Stochastic discount factor", "SDF, no-arbitrage pricing", "SDF-implied prices"],
+  ["Covariance estimation", "Shrinkage, factor covariance", "Risk model covariances"],
+  ["Black-Litterman", "Priors and views", "Posterior returns"],
+  ["Risk parity and robust optimisation", "Equal risk contribution", "ERC weights"],
+  ["Transaction costs and turnover", "Cost-aware optimisation", "Net returns"],
+  ["Factor timing and crowding", "Factor decay", "Decay analysis"],
+  ["Performance attribution", "Brinson, factor attribution", "Attribution tables"]
+ ]},
+ ms1:{s:"How markets actually work: order books, spreads and price formation.",o:["Read order books and trade data", "Decompose spreads", "Understand execution costs"],n:"Follows HKUST FINA4103 and CityU EF4323.",p:"Proofs will be added later.",l:[
+  ["Market structure", "Exchanges, dark pools, venues", "Venue comparison"],
+  ["Order types and the limit order book", "Limit, market, stop, iceberg", "Book walk-through"],
+  ["Matching engines", "Price-time priority, auctions", "Matching examples"],
+  ["Bid-ask spread", "Quoted, effective, realised spread", "Spread calculations"],
+  ["Spread components", "Order-processing, inventory, adverse selection", "Roll estimator"],
+  ["Price impact", "Kyle's lambda, square-root law", "Impact estimates"],
+  ["Information and trading", "Informed trading, PIN", "Informativeness"],
+  ["Transaction cost analysis", "Implementation shortfall, VWAP", "Shortfall calculations"],
+  ["Market quality", "Liquidity, depth, resilience", "Liquidity metrics"],
+  ["High-frequency trading", "Latency, co-location", "Latency arbitrage cases"]
+ ]},
+ ms2:{s:"Mathematical models of market microstructure, optimal execution and market making.",o:["Solve optimal execution problems", "Model order flow", "Derive market-making quotes"],n:"Follows HKUST MAFS5270 style.",p:"Proofs will be added later.",l:[
+  ["Kyle model", "Single-period equilibrium", "Lambda derivation"],
+  ["Glosten-Milgrom", "Sequential trade, Bayesian updating", "Quote updates"],
+  ["Order-flow modelling", "Hawkes processes", "Intensity calculations"],
+  ["Limit-order-book models", "Queue models, Markov LOB", "Fill probabilities"],
+  ["Optimal execution I", "Almgren-Chriss", "Optimal schedules"],
+  ["Optimal execution II", "HJB, stochastic control", "HJB solutions"],
+  ["Market-making models", "Avellaneda-Stoikov", "Optimal quotes"],
+  ["Inventory control", "Risk aversion, reservation price", "Reservation prices"],
+  ["Impact and alpha", "Transient impact, propagator", "Impact kernels"],
+  ["Estimation", "Parameter calibration", "Fit execution models"]
+ ]},
+ algo:{s:"Designing, testing and running systematic trading strategies.",o:["Implement signal research and backtests", "Evaluate strategies with honest statistics", "Manage execution, risk and capacity"],n:"Follows HKU FINA4359, HKU STAT8020 and HKUST FINA4803, with coding emphasised.",p:"Proofs will be added later.",l:[
+  ["Strategy lifecycle", "Alpha, signals, portfolios, execution", "Strategy anatomy", "Load price data"],
+  ["Signal construction", "Momentum, mean reversion, carry", "Signal calculations", "Compute signals"],
+  ["Statistical arbitrage", "Pairs, cointegration", "Spread z-scores", "Pairs strategy"],
+  ["Factor and cross-sectional strategies", "Ranking, long-short", "Portfolio returns", "Long-short backtest"],
+  ["Backtesting engine", "Event-driven vs vectorised", "Biases", "Build a backtester"],
+  ["Transaction costs and slippage", "Cost models", "Net P&L", "Cost model"],
+  ["Performance evaluation", "Sharpe, drawdown, turnover", "Metrics", "Performance report"],
+  ["Overfitting control", "Walk-forward, deflated Sharpe", "Adjusted Sharpe", "Walk-forward test"],
+  ["Portfolio construction and sizing", "Vol targeting, Kelly", "Position sizing", "Vol-targeted sizing"],
+  ["Execution algorithms", "TWAP, VWAP, POV", "Schedule calculations", "TWAP/VWAP"],
+  ["Live trading and monitoring", "Risk limits, kill switches", "Limits", "Monitoring checks"]
+ ]},
+ ovt:{s:"Trading options and volatility: Greeks, vol surfaces, spreads and risk management.",o:["Trade volatility views with options", "Manage Greeks as a book", "Evaluate P&L attribution"],n:"CUHK FINA4370 listed by title only; structure follows desk practice.",p:"Proofs will be added later.",l:[
+  ["Option market basics", "Chains, quoting, conventions", "Reading chains"],
+  ["Greeks in practice", "Delta, gamma, vega, theta, higher Greeks", "Position Greeks"],
+  ["Spreads and combinations", "Straddles, strangles, butterflies", "Payoff diagrams"],
+  ["Volatility as an asset", "Implied vs realised, variance swaps", "Vol P&L"],
+  ["Gamma-theta trade-off", "Breakeven moves", "Breakeven calculations"],
+  ["Delta hedging P&L", "Hedging frequency", "Hedge P&L"],
+  ["Skew and term structure trades", "Risk reversals, calendars", "Skew trade P&L"],
+  ["Event volatility", "Earnings, jumps", "Event vol decomposition"],
+  ["Dispersion and correlation", "Index vs single stock", "Dispersion trades"],
+  ["Portfolio risk", "Greek ladders, scenarios", "Scenario P&L"],
+  ["P&L attribution", "Greeks-based explain", "Attribution"]
+ ]},
+ pz:{s:"Interview-style probability and combinatorics puzzles solved with clean reasoning.",o:["Set up problems quickly", "Use symmetry, recursion and conditioning", "Solve within interview time limits"],n:"No university course; follows the style of quant interview question banks.",p:"Proofs will be added later.",l:[
+  ["Counting tricks", "Bijections, stars and bars, symmetry", "Quick counting problems"],
+  ["Conditioning and recursion", "First-step analysis", "Expected values via recursion"],
+  ["Dice and coin problems", "Waiting times, runs", "Expected rolls and flips"],
+  ["Cards and urns", "Hypergeometric, exchangeability", "Card probabilities"],
+  ["Random walks and ruin", "Reflection, gambler's ruin", "Hitting probabilities"],
+  ["Order statistics and geometric probability", "Uniform spacings, Buffon", "Geometric probabilities"],
+  ["Markov chain puzzles", "Absorbing states", "Hitting time puzzles"],
+  ["Indicator variables and linearity", "Linearity of expectation", "Fixed points, coupon collector"],
+  ["Bayes and information puzzles", "Monty Hall variants", "Posterior calculations"],
+  ["Timed mixed sets", "Speed and accuracy", "Timed problem sets"]
+ ]},
+ ev:{s:"Making decisions under uncertainty by expected value and optimal bet sizing.",o:["Evaluate bets by EV and variance", "Size positions with Kelly", "Understand drawdown and ruin"],n:"No university course; draws on Kelly's paper and Thorp's work, as used in trading interviews.",p:"Proofs will be added later.",l:[
+  ["Expected value basics", "EV of bets and games", "Fair price of games"],
+  ["Utility and risk preference", "Risk aversion, certainty equivalent", "Certainty equivalents"],
+  ["The Kelly criterion", "Log utility, growth rate", "Optimal fraction"],
+  ["Kelly with multiple outcomes", "Multi-outcome Kelly", "Optimal allocations"],
+  ["Fractional Kelly", "Risk-growth trade-off", "Growth rate at fractions"],
+  ["Continuous Kelly", "Gaussian returns, leverage", "Optimal leverage"],
+  ["Drawdowns and ruin", "Probability of drawdown", "Drawdown probabilities"],
+  ["Betting with edge uncertainty", "Estimation error", "Shrunken Kelly"],
+  ["Auctions and pricing games", "Winner's curse", "Optimal bids"],
+  ["Casino and market-style games", "Interview games", "Game EV problems"]
+ ]},
+ gt:{s:"Strategic interaction: equilibria, auctions and information games.",o:["Find Nash equilibria", "Analyse sequential and Bayesian games", "Apply auction theory"],n:"Follows HKU ECON2214 and CUHK ECON3160.",p:"Proofs will be added later.",l:[
+  ["Normal-form games", "Dominance, best response", "Dominance elimination"],
+  ["Nash equilibrium", "Pure and mixed equilibria", "Solving 2x2 mixed equilibria"],
+  ["Zero-sum games", "Minimax theorem", "Game values"],
+  ["Extensive-form games", "Backward induction, subgame perfection", "Solving game trees"],
+  ["Repeated games", "Folk theorem, trigger strategies", "Discounted payoffs"],
+  ["Bayesian games", "Types, Bayesian Nash", "Bayesian equilibria"],
+  ["Auctions I", "First- and second-price", "Equilibrium bids"],
+  ["Auctions II", "Revenue equivalence", "Expected revenue"],
+  ["Signalling and screening", "Separating/pooling equilibria", "Signalling equilibria"],
+  ["Cooperative games and bargaining", "Shapley value, Nash bargaining", "Shapley values"]
+ ]},
+ mm0:{s:"Fast, accurate mental arithmetic.",o:["Compute sums, products and fractions rapidly", "Estimate with controlled error", "Reach target speed and accuracy"],n:"No university course; a drill-based topic.",p:"Proof = N/A; Complete = pass the hardest speed set.",l:[
+  ["Addition and subtraction", "Complements, chunking", "Speed drills"],
+  ["Multiplication I", "Distributive, doubling/halving", "2x2-digit drills"],
+  ["Multiplication II", "Squares, near-base tricks", "Squaring drills"],
+  ["Division and fractions", "Reciprocals, decimal equivalents", "Fraction drills"],
+  ["Percentages and ratios", "Percent shortcuts", "Percent drills"],
+  ["Estimation", "Rounding, error bounds", "Estimation drills"],
+  ["Powers and roots", "Squares/cubes tables, root estimation", "Root drills"],
+  ["Logs and exponentials", "Rule of 72, ln approximations", "Log drills"],
+  ["Probability arithmetic", "Fast binomials", "Quick probability sums"],
+  ["Mixed timed sets", "Speed under pressure", "Timed sets"]
+ ]},
+ fermi:{s:"Estimating unfamiliar quantities from anchors and structure.",o:["Decompose estimation problems", "Choose good anchors", "Bound and sanity-check answers"],n:"No university course; practice-driven.",p:"Proof = N/A; Complete = pass the hardest set.",l:[
+  ["Orders of magnitude", "Powers of 10, anchors", "Magnitude estimates"],
+  ["Decomposition", "Breaking into factors", "Decomposition problems"],
+  ["Population and market sizing", "Demographic anchors", "Market size estimates"],
+  ["Physical estimates", "Energy, mass, distance", "Physical estimates"],
+  ["Financial estimates", "Revenue, volumes, tick counts", "Financial estimates"],
+  ["Error and bounds", "Log-error propagation", "Bound calculations"],
+  ["Sanity checks", "Cross-checking", "Consistency checks"],
+  ["Trading-style estimation", "Volume, spreads, flows", "Trading estimates"],
+  ["Calibration", "Confidence intervals, overconfidence", "Calibration quizzes"],
+  ["Mixed timed sets", "Speed and accuracy", "Timed sets"]
+ ]},
+ tools:{s:"The command line, Git and everyday developer tooling.",o:["Work fluently in a Linux shell", "Use Git for solo and team work", "Automate routine tasks"],n:"No standalone university course; follows common developer curricula.",p:"Proof = N/A; Complete = pass the hardest set.",l:[
+  ["Shell basics", "Files, paths, permissions", "Command exercises", "Shell commands"],
+  ["Text tools", "grep, sed, awk, pipes", "Pipeline puzzles", "Text processing"],
+  ["Shell scripting", "Variables, loops, functions", "Script reading", "Write a script"],
+  ["Processes and environment", "Signals, jobs, env vars", "Process questions", "Process control"],
+  ["Git basics", "Commits, staging, history", "Repository states", "Git exercises"],
+  ["Git branching", "Branch, merge, rebase", "Merge outcomes", "Branch tasks"],
+  ["Collaboration", "Remotes, pull requests, conflicts", "Conflict resolution", "Resolve conflicts"],
+  ["SSH and remote work", "Keys, tunnelling, tmux", "Config reading", "SSH config"],
+  ["Packaging and environments", "venv, pip, containers", "Dependency problems", "Environment setup"],
+  ["Build tools and automation", "Make, CI basics", "Makefile reading", "Write a Makefile"]
+ ]},
+ latex:{s:"Typesetting mathematics and writing research papers in LaTeX.",o:["Typeset equations and documents", "Manage figures and citations", "Structure a research paper"],n:"No university course; follows a standard LaTeX workflow for research papers.",p:"Proof = N/A; Complete = pass the hardest set.",l:[
+  ["Document structure", "Classes, packages, sections", "Compile questions", "Write a document"],
+  ["Mathematical typesetting I", "Inline/display math, symbols", "Equation fixes", "Typeset formulas"],
+  ["Mathematical typesetting II", "align, matrices, theorem environments", "Environment choices", "Aligned derivations"],
+  ["Tables and figures", "tabular, booktabs, includegraphics", "Float placement", "Figures and tables"],
+  ["Plotting", "TikZ, pgfplots, matplotlib export", "Plot specs", "Make a plot"],
+  ["Citations", "BibTeX/BibLaTeX, styles", "Bib entries", "Bibliography"],
+  ["Cross-references and macros", "Labels, custom commands", "Macro design", "Macros"],
+  ["Paper structure", "Abstract, intro, related work", "Structure review", "Outline a paper"],
+  ["Slides and posters", "Beamer", "Slide layout", "Make slides"],
+  ["Collaboration", "Overleaf, Git for LaTeX", "Workflow design", "Version-controlled paper"]
+ ]},
+ py:{s:"Python programming from basics to numerical computing.",o:["Write clear Python programs", "Use NumPy and pandas", "Debug and test code"],n:"Follows HKU COMP1117 style, extended with numerical libraries.",p:"Proof = N/A; Complete = pass the hardest coding set.",l:[
+  ["Syntax and types", "Variables, types, operators", "Expression evaluation", "Basic programs"],
+  ["Control flow", "Conditionals, loops", "Trace outputs", "Loop programs"],
+  ["Functions", "Arguments, scope, recursion", "Trace calls", "Write functions"],
+  ["Data structures", "Lists, dicts, sets, tuples", "Operation outputs", "Collection tasks"],
+  ["Strings and files", "Parsing, text and CSV I/O", "Parsing outputs", "Parse files"],
+  ["Object-oriented programming", "Classes, inheritance", "Class behaviours", "Define classes"],
+  ["Errors and testing", "Exceptions, unit tests", "Exception flow", "Write tests"],
+  ["NumPy", "Arrays, broadcasting", "Shape questions", "Vectorise code"],
+  ["pandas", "DataFrames, groupby, joins", "Query outputs", "Data wrangling"],
+  ["Plotting and performance", "matplotlib, profiling", "Complexity questions", "Plot and optimise"],
+  ["Idiomatic Python", "Comprehensions, generators", "Output tracing", "Refactor code"]
+ ]},
+ arch:{s:"How computers execute programs: data representation, assembly, pipelines and memory.",o:["Represent and manipulate data in binary", "Read assembly", "Reason about caches and pipelines"],n:"Follows HKU COMP2120.",p:"Proofs will be added later.",l:[
+  ["Number systems", "Binary, hex, two's complement", "Conversions"],
+  ["Floating point", "IEEE 754", "Float encodings"],
+  ["Boolean logic", "Gates, combinational circuits", "Truth tables"],
+  ["Sequential logic", "Latches, registers, state machines", "Timing diagrams"],
+  ["Instruction set architecture", "RISC/CISC, registers", "Instruction encoding"],
+  ["Assembly programming", "Control flow, procedures", "Assembly traces"],
+  ["Processor datapath", "Single-cycle design", "Datapath tracing"],
+  ["Pipelining", "Hazards, forwarding", "CPI calculations"],
+  ["Memory hierarchy", "Locality, caches", "Hit/miss analysis"],
+  ["Cache design", "Associativity, replacement", "Cache simulations"],
+  ["Virtual memory", "Page tables, TLB", "Address translation"],
+  ["I/O and parallelism", "Interrupts, multicore", "Speedup calculations"]
+ ]},
+ ds1:{s:"Core data structures and algorithm analysis.",o:["Analyse running time", "Implement core data structures", "Solve standard algorithm problems"],n:"Follows HKU COMP2119 and CUHK CSCI2100, with LeetCode-style practice.",p:"Proofs will be added later.",l:[
+  ["Complexity analysis", "Big-O, recurrences", "Solving recurrences", "Complexity-aware solutions"],
+  ["Arrays, lists, stacks, queues", "Abstract data types", "Operation traces", "Stack and queue tasks"],
+  ["Hashing", "Hash tables, collisions", "Hash table states", "Hash map problems"],
+  ["Trees", "Traversals, BSTs", "Tree traversals", "Tree problems"],
+  ["Balanced trees", "AVL, red-black", "Rotations", "Balanced BST"],
+  ["Heaps and priority queues", "Heap operations, heapsort", "Heap states", "Heap problems"],
+  ["Sorting", "Merge, quick, lower bounds", "Sorting traces", "Sorting tasks"],
+  ["Searching and selection", "Binary search, quickselect", "Search traces", "Binary search problems"],
+  ["Graphs", "Representation, BFS, DFS", "Traversal orders", "Graph traversal"],
+  ["Shortest paths", "Dijkstra, Bellman-Ford", "Distance tables", "Shortest path"],
+  ["Minimum spanning trees", "Kruskal, Prim, union-find", "MST by hand", "MST"],
+  ["Divide and conquer, greedy", "Design paradigms", "Algorithm choices", "Mixed problems"]
+ ]},
+ ds2:{s:"Advanced algorithm design: dynamic programming, flows, NP-completeness and approximation.",o:["Design DP and greedy algorithms", "Model problems as flows", "Prove hardness and design approximations"],n:"Follows CUHK CSCI3160 and CityU CS4335.",p:"Proofs are central here, so Proof carries more weight.",l:[
+  ["Dynamic programming I", "Optimal substructure, memoisation", "DP tables", "DP problems"],
+  ["Dynamic programming II", "Knapsack, sequence alignment", "DP tables", "DP problems"],
+  ["Greedy algorithms", "Exchange arguments, matroids", "Greedy choices", "Greedy problems"],
+  ["Network flow", "Max-flow min-cut, Ford-Fulkerson", "Residual graphs", "Flow problems"],
+  ["Matching and flow applications", "Bipartite matching, assignment", "Matchings", "Matching problems"],
+  ["Linear programming", "Duality, simplex view", "LP formulations", "LP modelling"],
+  ["Amortised analysis", "Aggregate, potential methods", "Amortised costs", "Dynamic arrays"],
+  ["String algorithms", "KMP, suffix arrays", "Pattern matching", "String problems"],
+  ["NP-completeness", "Reductions, SAT", "Reduction steps", "Reduction tasks"],
+  ["Approximation algorithms", "Vertex cover, TSP", "Approximation ratios", "Approximation tasks"],
+  ["Randomised algorithms", "Quicksort, hashing, Monte Carlo", "Expected costs", "Randomised problems"]
+ ]},
+ cpp1:{s:"C++ fundamentals: types, memory and object-oriented programming.",o:["Write correct C++ programs", "Manage memory safely", "Use classes and the STL"],n:"Follows HKUST COMP2011. Coding in C++ is planned for a later release.",p:"Proof = N/A; Complete = pass the hardest set.",l:[
+  ["Types, expressions, control flow", "Syntax, operators", "Program tracing", "Basic programs"],
+  ["Functions and references", "Pass by value/reference", "Call traces", "Function tasks"],
+  ["Arrays and pointers", "Pointer arithmetic", "Memory diagrams", "Pointer tasks"],
+  ["Dynamic memory", "new/delete, leaks", "Lifetime analysis", "Memory tasks"],
+  ["Classes and objects", "Constructors, encapsulation", "Object tracing", "Class design"],
+  ["Inheritance and polymorphism", "Virtual functions", "Dispatch tracing", "Polymorphism tasks"],
+  ["Operator overloading", "Overloads, copy semantics", "Overload semantics", "Overload tasks"],
+  ["Templates", "Function and class templates", "Template deduction", "Template tasks"],
+  ["STL containers", "vector, map, set", "Container operations", "STL tasks"],
+  ["STL algorithms", "Iterators, lambdas", "Algorithm outputs", "STL algorithms"],
+  ["Error handling and I/O", "Exceptions, streams", "Exception flow", "I/O tasks"]
+ ]},
+ cpp2:{s:"Modern C++ for performance-critical numerical and trading code.",o:["Use modern C++ idioms", "Write efficient, safe code", "Implement numerical pricing code"],n:"Follows HKUST MAFS5240 and HKU FITE7406 style (modern C++ for finance).",p:"Proof = N/A; Complete = pass the hardest set.",l:[
+  ["Move semantics", "Rvalues, move constructors", "Ownership reasoning", "Move tasks"],
+  ["Smart pointers and RAII", "unique_ptr, shared_ptr", "Lifetime analysis", "RAII tasks"],
+  ["Modern language features", "auto, constexpr, structured bindings", "Feature usage", "Modern syntax tasks"],
+  ["Advanced templates", "SFINAE, concepts, CRTP", "Template questions", "Template design"],
+  ["Concurrency I", "Threads, mutexes", "Race analysis", "Threaded tasks"],
+  ["Concurrency II", "Atomics, memory model", "Ordering questions", "Atomic tasks"],
+  ["Performance", "Cache behaviour, profiling", "Cost estimates", "Optimisation tasks"],
+  ["Numerical libraries", "Eigen, BLAS", "Complexity of kernels", "Matrix tasks"],
+  ["Pricing library design", "Option pricer with polymorphism", "Design review", "Pricer implementation"],
+  ["Testing and build systems", "CMake, unit tests", "Build reading", "Test and build"]
+ ]},
+ os:{s:"How operating systems manage processes, memory and storage.",o:["Reason about scheduling and concurrency", "Understand virtual memory", "Analyse file systems"],n:"Follows HKU COMP3230 and CUHK CSCI3150.",p:"Proofs will be added later.",l:[
+  ["OS overview", "Kernel, system calls", "System call traces"],
+  ["Processes", "Creation, context switch", "Process tree analysis"],
+  ["Threads", "Threading models, pthreads", "Thread interleavings"],
+  ["CPU scheduling", "FCFS, SJF, RR, MLFQ", "Gantt charts, waiting times"],
+  ["Synchronisation", "Locks, semaphores, monitors", "Race analysis"],
+  ["Deadlocks", "Conditions, banker's algorithm", "Deadlock detection"],
+  ["Memory management", "Paging, segmentation", "Address translation"],
+  ["Virtual memory", "Page replacement, thrashing", "Page-fault counts"],
+  ["File systems", "Inodes, journalling", "Block allocation"],
+  ["I/O and storage", "Disk scheduling, SSD", "Seek calculations"],
+  ["Security and virtualisation", "Isolation, VMs, containers", "Isolation scenarios"]
+ ]},
+ db:{s:"Relational databases, SQL and the basics of transactions and storage.",o:["Design relational schemas", "Write correct SQL", "Reason about transactions and indexes"],n:"Follows CUHK CSCI3170 and CityU CS3402, with SQL judged by hidden tests.",p:"Proofs will be added later.",l:[
+  ["Relational model", "Keys, relational algebra", "Algebra expressions", "Basic SELECT queries"],
+  ["SQL I", "SELECT, WHERE, joins", "Query results", "Join queries"],
+  ["SQL II", "Aggregation, subqueries, windows", "Query results", "Aggregate and window queries"],
+  ["ER modelling", "Entities, relationships", "ER diagrams", "Schema from ER"],
+  ["Normalisation", "Functional dependencies, BCNF", "Normal-form decomposition", "Normalise a schema"],
+  ["Indexing", "B+ trees, hashing", "Index costs", "Index design"],
+  ["Query processing", "Cost-based optimisation", "Plan costs", "Read query plans"],
+  ["Transactions", "ACID, isolation levels", "Anomaly analysis", "Transaction cases"],
+  ["Concurrency control", "Locking, MVCC", "Schedule serialisability", "Lock reasoning"],
+  ["Recovery", "WAL, checkpoints", "Log analysis", "Recovery cases"],
+  ["NoSQL and time-series stores", "Key-value, column stores", "Model choices", "Market-data schemas"]
+ ]},
+ net:{s:"How data moves across networks: protocols, routing and transport.",o:["Explain the layered model", "Analyse TCP and routing", "Reason about latency and throughput"],n:"Follows HKU COMP3234.",p:"Proofs will be added later.",l:[
+  ["Network overview", "Layers, packet switching", "Delay calculations"],
+  ["Application layer", "HTTP, DNS", "Protocol traces"],
+  ["Sockets", "Client/server sockets", "Socket programs"],
+  ["Transport I", "UDP, reliability", "Retransmission analysis"],
+  ["Transport II", "TCP, flow control", "Window dynamics"],
+  ["Congestion control", "Slow start, AIMD", "Congestion windows"],
+  ["Network layer", "IP, addressing, NAT", "Subnet calculations"],
+  ["Routing", "Link-state, distance-vector", "Routing tables"],
+  ["Link layer", "Ethernet, ARP, switches", "Frame handling"],
+  ["Wireless and multicast", "WiFi basics", "Capacity estimates"],
+  ["Network security", "TLS, firewalls", "Handshake analysis"]
+ ]},
+ sd:{s:"Building maintainable software and designing scalable systems.",o:["Apply software engineering practice", "Design scalable systems", "Reason about trade-offs"],n:"Follows HKU COMP3297 plus common system-design practice.",p:"Proof = N/A; Complete = pass the hardest design set.",l:[
+  ["Software process", "Agile, requirements", "Requirement analysis"],
+  ["Design principles", "SOLID, modularity", "Design critique"],
+  ["Design patterns", "Creational, structural, behavioural", "Pattern selection"],
+  ["Testing", "Unit, integration, TDD", "Test design"],
+  ["APIs and services", "REST, versioning", "API design"],
+  ["System design fundamentals", "Latency, throughput, SLAs", "Capacity estimation"],
+  ["Storage and caching", "Sharding, caching", "Cache hit-rate estimates"],
+  ["Messaging and queues", "Pub/sub, streams", "Throughput estimates"],
+  ["Reliability", "Redundancy, failure modes", "Availability calculations"],
+  ["Case study: trading system", "Order management design", "Design walkthrough"],
+  ["Case study: data platform", "Market-data pipeline", "Design walkthrough"]
+ ]},
+ dist:{s:"Building systems that run on many machines and survive failures.",o:["Reason about consistency and failure", "Understand consensus", "Evaluate distributed design trade-offs"],n:"Follows HKU COMP3358 and CUHK CSCI4160.",p:"Proofs will be added later.",l:[
+  ["Distributed systems basics", "Failures, models", "Failure scenarios"],
+  ["Time and ordering", "Logical and vector clocks", "Clock calculations"],
+  ["Remote procedure calls", "RPC semantics", "Call semantics"],
+  ["Replication", "Primary-backup, quorums", "Quorum sizes"],
+  ["Consistency models", "Linearisability, eventual consistency", "Consistency analysis"],
+  ["Consensus I", "Paxos", "Paxos traces"],
+  ["Consensus II", "Raft", "Raft traces"],
+  ["CAP and PACELC", "Trade-offs", "Classifying systems"],
+  ["Distributed storage", "Sharding, consistent hashing", "Hash ring placement"],
+  ["Distributed computation", "MapReduce, stream processing", "Dataflow reasoning"],
+  ["Fault tolerance", "Checkpointing, Byzantine faults", "Failure probabilities"]
+ ]},
+ ll:{s:"Writing code that runs in microseconds: memory, cache, lock-free structures and measurement.",o:["Profile and measure latency", "Design cache-friendly and lock-free code", "Understand the trading hot path"],n:"No university course; follows low-latency trading engineering practice.",p:"Proof = N/A; Complete = pass the hardest set.",l:[
+  ["Latency fundamentals", "Tail latency, percentiles", "Percentile calculations"],
+  ["Measuring performance", "Benchmarking, perf tools", "Benchmark interpretation"],
+  ["CPU and cache", "Cache lines, false sharing", "Cache miss counts"],
+  ["Memory management", "Allocators, pools, NUMA", "Allocation costs"],
+  ["Data layout", "SoA vs AoS, alignment", "Layout analysis"],
+  ["Branching and compilation", "Branch prediction, inlining", "Assembly reading"],
+  ["Lock-free programming", "Atomics, ring buffers", "Memory-order reasoning"],
+  ["Kernel bypass", "DPDK, busy polling", "Latency budgets"],
+  ["Network and market data", "UDP multicast, feed handlers", "Feed decoding"],
+  ["Order gateway design", "Hot path layout", "Hot-path review"],
+  ["Production practice", "Monitoring, determinism", "Jitter analysis"]
+ ]}
+};
+const M={};N.forEach(n=>{M[n.id]=n;n.k=[]});
+N.forEach(n=>n.p.forEach(p=>M[p].k.push(n.id)));
+const dep={};
+function depth(id){if(id in dep)return dep[id];const n=M[id];dep[id]=n.p.length?1+Math.max(...n.p.map(depth)):0;return dep[id]}
+N.forEach(n=>depth(n.id));
+const maxD=Math.max(...Object.values(dep));
+const cols=[...Array(maxD+1)].map(()=>[]);
+N.forEach(n=>cols[dep[n.id]].push(n));
+const W=190,H=30,GX=52,GY=10,PX=20,PY=36;
+const pos={};
+cols.forEach((col,ci)=>{
+  if(ci===0){col.sort((a,b)=>DO.indexOf(a.d)-DO.indexOf(b.d))}
+  else{col.forEach(n=>{n.bc=n.p.reduce((s,p)=>s+pos[p].row,0)/n.p.length});
+    col.sort((a,b)=>a.bc-b.bc||DO.indexOf(a.d)-DO.indexOf(b.d))}
+  col.forEach((n,ri)=>{pos[n.id]={row:ri,x:PX+ci*(W+GX),y:PY+ri*(H+GY)}});
+});
+const maxR=Math.max(...cols.map(c=>c.length));
+const SW=PX*2+(maxD+1)*W+maxD*GX, SH=PY+maxR*(H+GY)+PX;
+const ns="http://www.w3.org/2000/svg";
+function el(t,a){const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);return e}
+const svg=el("svg",{width:SW,height:SH,viewBox:`0 0 ${SW} ${SH}`,role:"img","aria-label":"Prerequisite graph"});
+cols.forEach((c,ci)=>{const t=el("text",{x:PX+ci*(W+GX),y:20,class:"colhead"});t.textContent=`STAGE ${ci+1}`;svg.appendChild(t)});
+const eg=el("g",{}),ng=el("g",{});svg.append(eg,ng);
+const edges=[];
+N.forEach(n=>n.p.forEach(p=>{
+  const a=pos[p],b=pos[n.id],x1=a.x+W,y1=a.y+H/2,x2=b.x,y2=b.y+H/2,dx=Math.max(30,(x2-x1)/2);
+  const path=el("path",{class:"e",d:`M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}`});
+  eg.appendChild(path);edges.push({from:p,to:n.id,path});
+}));
+const nodeEls={};
+N.forEach(n=>{
+  const {x,y}=pos[n.id];
+  const g=el("g",{class:"node"+(n.s?" star":""),transform:`translate(${x},${y})`,tabindex:"0",role:"button","aria-label":n.l});
+  g.appendChild(el("rect",{class:"box",width:W,height:H,rx:5}));
+  g.appendChild(el("rect",{width:5,height:H,rx:2,fill:`var(${D[n.d][1]})`}));
+  const t=el("text",{x:13,y:H/2+4});t.textContent=(n.s?"★ ":"")+n.l;g.appendChild(t);
+  g.addEventListener("click",()=>select(n.id));
+  g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(n.id)}});
+  ng.appendChild(g);nodeEls[n.id]=g;
+});
+document.getElementById("graph").appendChild(svg);
+
+const lg=document.getElementById("legend");
+function legend(mode){
+  const doms=DO.map(k=>`<span><i class="sw" style="background:var(${D[k][1]})"></i>${D[k][0]}</span>`).join("");
+  const m=mode==="career"
+   ?`<span><i class="sw line" style="background:var(--req)"></i>Required</span><span><i class="sw line" style="background:var(--bonus)"></i>Bonus</span><span><i class="sw line" style="background:var(--pre)"></i>Prerequisites of required topics</span>`
+   :`<span><i class="sw line" style="background:var(--pre)"></i>Prerequisites</span><span><i class="sw line" style="background:var(--next)"></i>Unlocks</span>`;
+  lg.innerHTML=doms+m+`<span>★ Not offered by any of the four universities</span>`;
+}
+const pick=document.getElementById("pick"),car=document.getElementById("career");
+pick.innerHTML=`<option value="">—</option>`+DO.map(k=>`<optgroup label="${D[k][0]}">`+N.filter(n=>n.d===k).map(n=>`<option value="${n.id}">${n.l}</option>`).join("")+`</optgroup>`).join("");
+car.innerHTML=`<option value="">—</option>`+Object.entries(CAR).map(([k,v])=>`<option value="${k}">${v.l}</option>`).join("");
+pick.addEventListener("change",()=>{if(pick.value)select(pick.value,true)});
+car.addEventListener("change",()=>{if(car.value)selectCareer(car.value)});
+
+function lecHTML(id){
+  const L=LEC[id];if(!L)return"";
+  const rows=L.l.map((r,i)=>`<div class="lrow"><div class="ln">${i+1}</div><div class="lt">${r[0]}</div><div class="lcell" data-k="Theory">${r[1]}</div><div class="lcell" data-k="Computation">${r[2]}${r[3]?`<div class="lcode"><span class="tag">Coding</span>${r[3]}</div>`:""}</div></div>`).join("");
+  const ob=L.o?`<div class="lecnote"><b>By the end:</b></div><ul class="outs">${L.o.map(x=>`<li>${x}</li>`).join("")}</ul>`:"";
+  return `<div class="lec">${L.s?`<div class="lecnote">${L.s}</div>`:""}${ob}<h3>Course outline · ${L.l.length} lectures × 3 hours</h3><div class="lecnote">${L.n}</div><div class="lrow head"><div></div><div>Topic</div><div>Theory</div><div>Computation</div></div>${rows}${L.p?`<div class="lecnote">${L.p}</div>`:""}</div>`;
+}
+function walk(id,key,set){M[id][key].forEach(x=>{if(!set.has(x)){set.add(x);walk(x,key,set)}});return set}
+function chips(ids,cls){return ids.length?`<div class="chips">${ids.map(i=>`<button class="chip ${cls}" data-id="${i}">${M[i].l}</button>`).join("")}</div>`:`<span class="none">None</span>`}
+function bindChips(){document.querySelectorAll("#panel .chip").forEach(b=>b.addEventListener("click",()=>select(b.dataset.id,true)))}
+function clear(){N.forEach(n=>nodeEls[n.id].classList.remove("sel","anc","desc","dim","req","bonus","path"));edges.forEach(e=>e.path.classList.remove("anc","desc","dim","path"))}
+function select(id,scroll){
+  clear();legend("topic");car.value="";pick.value=id;
+  const anc=walk(id,"p",new Set()),desc=walk(id,"k",new Set());
+  N.forEach(n=>{const g=nodeEls[n.id];
+    if(n.id===id)g.classList.add("sel");else if(anc.has(n.id))g.classList.add("anc");else if(desc.has(n.id))g.classList.add("desc");else g.classList.add("dim")});
+  edges.forEach(e=>{
+    if(anc.has(e.from)&&(anc.has(e.to)||e.to===id))e.path.classList.add("anc");
+    else if(desc.has(e.to)&&(desc.has(e.from)||e.from===id))e.path.classList.add("desc");
+    else e.path.classList.add("dim")});
+  const n=M[id];
+  const used=Object.values(CAR).filter(c=>c.r.includes(id)).map(c=>c.l);
+  const bon=Object.values(CAR).filter(c=>c.b.includes(id)).map(c=>c.l);
+  document.getElementById("panel").innerHTML=`
+   <h2>${n.l}<span class="badge">${D[n.d][0]}</span><span class="badge">Stage ${dep[id]+1}</span>${n.s?'<span class="badge star">★ Original to this app</span>':""}</h2>
+   <div class="row"><div class="k">Matching courses</div><div class="courses">${n.c}</div></div>
+   <div class="row"><div class="k">Learn first</div><div>${chips(n.p,"pre")}</div></div>
+   <div class="row"><div class="k">Unlocks</div><div>${chips(n.k,"next")}</div></div>
+   <div class="row"><div class="k">Career</div><div>${used.length?"Required for: "+used.join(", "):""}${used.length&&bon.length?"<br>":""}${bon.length?"Bonus for: "+bon.join(", "):""}${!used.length&&!bon.length?'<span class="none">Not listed for any career</span>':""}</div></div>
+   <div class="row"><div class="k">Size</div><div class="none stat">${anc.size} prerequisites · leads to ${desc.size} topics</div></div>${lecHTML(id)}`;
+  bindChips();
+  if(scroll){const gEl=document.getElementById("graph"),p=pos[id];gEl.scrollTo({left:Math.max(0,p.x-gEl.clientWidth/2+W/2),top:Math.max(0,p.y-gEl.clientHeight/2),behavior:"smooth"})}
+}
+function selectCareer(k){
+  clear();legend("career");pick.value="";car.value=k;
+  const c=CAR[k],req=new Set(c.r),bon=new Set(c.b),path=new Set();
+  c.r.forEach(id=>walk(id,"p",path));
+  N.forEach(n=>{const g=nodeEls[n.id];
+    if(req.has(n.id))g.classList.add("req");else if(bon.has(n.id))g.classList.add("bonus");else if(path.has(n.id))g.classList.add("path");else g.classList.add("dim")});
+  const on=new Set([...req,...path]);
+  edges.forEach(e=>{if(on.has(e.from)&&on.has(e.to))e.path.classList.add("path");else e.path.classList.add("dim")});
+  const pre=[...path].filter(x=>!req.has(x)).sort((a,b)=>dep[a]-dep[b]);
+  document.getElementById("panel").innerHTML=`
+   <h2>${c.l}<span class="badge">Career</span></h2>
+   <div class="row"><div class="k">Required (${c.r.length})</div><div>${chips(c.r,"req")}</div></div>
+   <div class="row"><div class="k">Bonus (${c.b.length})</div><div>${chips(c.b,"bonus")}</div></div>
+   <div class="row"><div class="k">Prerequisites (${pre.length})</div><div>${chips(pre,"pre")}</div></div>
+   <div class="row"><div class="k">Size</div><div class="none stat">Finishing every required topic means learning ${req.size+pre.length} topics (${N.length} in the full tree)</div></div>`;
+  bindChips();
+}
+selectCareer("qr");
+</script>
+
+</body></html>

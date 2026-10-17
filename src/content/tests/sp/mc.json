@@ -1,0 +1,2498 @@
+[
+ {
+  "id": "sp-1.1",
+  "lecture": 1,
+  "stem": "Which statement expresses the Markov property of a discrete-time process $(X_n)$?",
+  "correct": [
+   "Given $X_n$, the next state $X_{n+1}$ is independent of the earlier states $X_0,\\dots,X_{n-1}$.",
+   "$P(X_{n+1}=j\\mid X_n=i,\\,X_{n-1},\\dots,X_0)=P(X_{n+1}=j\\mid X_n=i)$ for all states and all times."
+  ],
+  "distractors": [
+   {
+    "text": "$X_{n+1}$ is independent of the present state $X_n$ and of all of the earlier states $X_0,\\dots,X_{n-1}$.",
+    "misconception": "confuses a Markov chain with an i.i.d. sequence"
+   },
+   {
+    "text": "$X_{n+1}$ is independent of $X_0,\\dots,X_{n-1}$ even if we do not condition on the present state $X_n$.",
+    "misconception": "forgets that independence of the past holds only given the present"
+   },
+   {
+    "text": "The transition probabilities $P(X_{n+1}=j\\mid X_n=i)$ are the same at every time step $n$.",
+    "misconception": "mixes up the Markov property with time-homogeneity"
+   },
+   {
+    "text": "Every state can be reached from every other state in a finite number of steps.",
+    "misconception": "mixes up the Markov property with irreducibility"
+   },
+   {
+    "text": "The state space is finite, so that the transition probabilities can be written as a matrix.",
+    "misconception": "thinks Markov chains need a finite state space"
+   }
+  ],
+  "explanation": "The Markov property conditions on the present only: the past matters only through $X_n$. Time-homogeneity, irreducibility and finiteness are separate properties some chains have."
+ },
+ {
+  "id": "sp-1.2",
+  "lecture": 1,
+  "stem": "Which property must every transition matrix $P=(p_{ij})$ satisfy?",
+  "correct": [
+   "Each row of $P$ is a probability distribution, so every row sums to 1.",
+   "For each state $i$, $\\sum_j p_{ij}=1$, so the chain always moves somewhere."
+  ],
+  "distractors": [
+   {
+    "text": "Each column of $P$ is a probability distribution, so every column sums to 1.",
+    "misconception": "confuses a stochastic matrix with a doubly stochastic one"
+   },
+   {
+    "text": "Every entry of $P$ is strictly positive, so that any state can be reached in one step.",
+    "misconception": "ignores that transitions can be impossible (zero entries)"
+   },
+   {
+    "text": "$P$ is symmetric, so that $p_{ij}=p_{ji}$ for all states $i$ and $j$.",
+    "misconception": "assumes $p_{ij}=p_{ji}$, which is only true for special chains"
+   },
+   {
+    "text": "The diagonal entries of $P$ are all zero, because the chain must change state at every step.",
+    "misconception": "ignores that a chain can stay in the same state"
+   },
+   {
+    "text": "The determinant of $P$ equals 1, so that $P$ preserves total probability.",
+    "misconception": "treats the matrix like a volume-preserving map"
+   }
+  ],
+  "explanation": "Row $i$ is the distribution of the next state given the current state $i$, so it must sum to 1. Columns need not sum to 1, entries can be 0, and $p_{ii}>0$ is allowed."
+ },
+ {
+  "id": "sp-1.3",
+  "lecture": 1,
+  "stem": "For a time-homogeneous chain with one-step transition matrix $P$, the $n$-step transition matrix is:",
+  "correct": [
+   "$P^n$, the $n$-th power of $P$ under matrix multiplication.",
+   "The product $P\\cdot P\\cdots P$ ($n$ factors), by repeated use of Chapman-Kolmogorov."
+  ],
+  "distractors": [
+   {
+    "text": "$nP$, the matrix $P$ added to itself $n$ times.",
+    "misconception": "confuses repeated multiplication with repeated addition"
+   },
+   {
+    "text": "The matrix whose $(i,j)$ entry is $p_{ij}^{\\,n}$, each entry raised to the $n$-th power.",
+    "misconception": "raises entries to a power instead of taking a matrix power"
+   },
+   {
+    "text": "$P^{1/n}$, the $n$-th root of the one-step matrix.",
+    "misconception": "inverts the direction of the exponent"
+   },
+   {
+    "text": "$(P^{\\top})^{n}$, the $n$-th power of the transpose of $P$.",
+    "misconception": "transposes the matrix, which swaps the roles of $i$ and $j$"
+   },
+   {
+    "text": "$\\frac1n\\,(P+P^2+\\dots+P^n)$, the average of the first $n$ powers of $P$.",
+    "misconception": "uses a long-run average in place of the $n$-step probabilities"
+   }
+  ],
+  "explanation": "Chapman-Kolmogorov: $p^{(m+n)}_{ij}=\\sum_k p^{(m)}_{ik}p^{(n)}_{kj}$, which is exactly matrix multiplication, so $P^{(n)}=P^n$."
+ },
+ {
+  "id": "sp-1.4",
+  "lecture": 1,
+  "stem": "Let $\\mu$ be the row vector giving the distribution of $X_0$. The distribution of $X_n$ is:",
+  "correct": [
+   "The row vector $\\mu P^{n}$, that is $\\mu$ multiplied on the right by the $n$-th power of $P$.",
+   "The row vector whose $j$-th entry is $\\sum_i \\mu_i\\,p^{(n)}_{ij}$, by the law of total probability."
+  ],
+  "distractors": [
+   {
+    "text": "The vector $P^{n}\\mu^{\\top}$, with $\\mu$ written as a column vector and multiplied on the right of $P^n$.",
+    "misconception": "multiplies on the wrong side, which mixes up from-state and to-state"
+   },
+   {
+    "text": "The vector $\\mu^{\\,n}P$, where $\\mu$ is first raised to the $n$-th power entrywise.",
+    "misconception": "raises the distribution to a power instead of the matrix"
+   },
+   {
+    "text": "The vector $\\mu+nP$, adding $n$ copies of $P$ to the initial distribution.",
+    "misconception": "adds instead of multiplies"
+   },
+   {
+    "text": "The vector $\\mu P$ for every $n$, since the distribution is updated only by the first step.",
+    "misconception": "forgets that each step applies $P$ once more"
+   },
+   {
+    "text": "The entrywise product of $\\mu$ with the matrix $P^n$, with each row scaled by the matching $\\mu_i$.",
+    "misconception": "uses an entrywise product instead of vector-matrix multiplication"
+   }
+  ],
+  "explanation": "By the law of total probability, $P(X_n=j)=\\sum_i P(X_0=i)\\,p^{(n)}_{ij}$, i.e. $\\mu P^n$ with $\\mu$ as a row vector on the left."
+ },
+ {
+  "id": "sp-1.5",
+  "lecture": 1,
+  "stem": "Let $\\xi_1,\\xi_2,\\dots$ be i.i.d. integer-valued random variables and $S_n=\\xi_1+\\dots+\\xi_n$. Which statement about $(S_n)$ is correct?",
+  "correct": [
+   "$(S_n)$ is a Markov chain: $S_{n+1}=S_n+\\xi_{n+1}$ and $\\xi_{n+1}$ is independent of the past.",
+   "Given $S_n$, the next value is $S_n$ plus an independent increment, so the Markov property holds."
+  ],
+  "distractors": [
+   {
+    "text": "$(S_n)$ is not a Markov chain, because $S_{n+1}$ depends on $S_n$ and on the past increments.",
+    "misconception": "thinks dependence on the present violates the Markov property"
+   },
+   {
+    "text": "$(S_n)$ is a Markov chain only if the $\\xi_i$ take finitely many values, so that the state space is finite.",
+    "misconception": "believes a finite state space is required"
+   },
+   {
+    "text": "$(S_n)$ is a Markov chain only if $E[\\xi_i]=0$, that is only if it is also a martingale.",
+    "misconception": "mixes up the Markov property with the martingale property"
+   },
+   {
+    "text": "$(S_n)$ is not Markov, because $S_n$ remembers all of $\\xi_1,\\dots,\\xi_n$ and the future depends on them.",
+    "misconception": "confuses the sum containing the history with the future needing the history"
+   },
+   {
+    "text": "$(S_n)$ is not Markov, because its transition probabilities change as $S_n$ grows.",
+    "misconception": "thinks that transitions depending on the current state means time-inhomogeneous"
+   }
+  ],
+  "explanation": "The future increment $\\xi_{n+1}$ is independent of everything before, so the only thing the past contributes is the current value $S_n$. Any mean is allowed."
+ },
+ {
+  "id": "sp-1.6",
+  "lecture": 1,
+  "stem": "A Markov chain is called time-homogeneous when:",
+  "correct": [
+   "$P(X_{n+1}=j\\mid X_n=i)$ does not depend on the time $n$, whatever $i$ and $j$ are.",
+   "The same transition matrix $P$ is used at every step of the chain, at every time."
+  ],
+  "distractors": [
+   {
+    "text": "The chain visits every state equally often in the long run.",
+    "misconception": "confuses homogeneity with uniform occupation"
+   },
+   {
+    "text": "The chain has a stationary distribution, so its distribution stops changing.",
+    "misconception": "mixes up homogeneity with the existence of a stationary distribution"
+   },
+   {
+    "text": "The chain is irreducible, so every state can be reached from every other.",
+    "misconception": "mixes up homogeneity with irreducibility"
+   },
+   {
+    "text": "The initial distribution already equals the stationary distribution.",
+    "misconception": "mixes up homogeneity with being in equilibrium"
+   },
+   {
+    "text": "Each state is revisited at regular time intervals, so the chain is periodic.",
+    "misconception": "mixes up homogeneity with periodicity"
+   }
+  ],
+  "explanation": "Time-homogeneous means the rule for moving from $i$ to $j$ is the same at all times; only then do we write one matrix $P$ and get $P^n$ for $n$ steps."
+ },
+ {
+  "id": "sp-2.1",
+  "lecture": 2,
+  "stem": "States $i$ and $j$ of a Markov chain communicate (write $i\\leftrightarrow j$) when:",
+  "correct": [
+   "$j$ can be reached from $i$ and $i$ can be reached from $j$, each in some finite number of steps.",
+   "There exist $m,n\\ge 0$ with $p^{(m)}_{ij}>0$ and $p^{(n)}_{ji}>0$."
+  ],
+  "distractors": [
+   {
+    "text": "$p_{ij}>0$ and $p_{ji}>0$, so there are direct one-step transitions in both directions.",
+    "misconception": "requires direct transitions instead of paths of any length"
+   },
+   {
+    "text": "$j$ can be reached from $i$, even if $i$ cannot be reached back from $j$.",
+    "misconception": "forgets that communication needs both directions"
+   },
+   {
+    "text": "$i$ and $j$ are both recurrent states, so the chain returns to each of them.",
+    "misconception": "mixes up communication with recurrence"
+   },
+   {
+    "text": "$p_{ii}=p_{jj}$, so both states have the same probability of staying put.",
+    "misconception": "thinks communicating states must have equal self-loop probability"
+   },
+   {
+    "text": "Starting from $i$, the chain reaches $j$ with probability exactly 1, however long it takes.",
+    "misconception": "demands certainty rather than positive probability"
+   }
+  ],
+  "explanation": "Communication is two-way reachability with positive probability, via paths of any finite length. It partitions the state space into communicating classes."
+ },
+ {
+  "id": "sp-2.2",
+  "lecture": 2,
+  "stem": "State $i$ of a Markov chain is recurrent. Which of the following must be true?",
+  "correct": [
+   "Starting from $i$, the chain returns to $i$ with probability 1.",
+   "The probability that the chain ever comes back to $i$, starting from $i$, equals 1."
+  ],
+  "distractors": [
+   {
+    "text": "The expected time for the chain to return to $i$ is finite.",
+    "misconception": "confuses recurrent with positive recurrent"
+   },
+   {
+    "text": "The series $\\sum_{n\\ge1}p^{(n)}_{ii}$ converges, so $i$ is visited only finitely often.",
+    "misconception": "has the transience criterion backwards: for recurrent states this sum is infinite"
+   },
+   {
+    "text": "State $i$ is absorbing, so once the chain enters $i$ it never leaves.",
+    "misconception": "confuses recurrent with absorbing"
+   },
+   {
+    "text": "The chain has a stationary distribution, with positive probability on state $i$.",
+    "misconception": "assumes recurrence guarantees a stationary distribution (false for null recurrent chains)"
+   },
+   {
+    "text": "The chain is irreducible, so every other state is also recurrent.",
+    "misconception": "thinks one recurrent state forces the whole chain to be one class"
+   }
+  ],
+  "explanation": "Recurrent means return probability 1. The expected return time can still be infinite (null recurrent), in which case no stationary distribution exists."
+ },
+ {
+  "id": "sp-2.3",
+  "lecture": 2,
+  "stem": "State $i$ is transient. Which statement is correct?",
+  "correct": [
+   "Starting from $i$, with positive probability the chain never returns to $i$.",
+   "The chain visits $i$ only finitely many times, with probability 1."
+  ],
+  "distractors": [
+   {
+    "text": "$p_{ii}=0$, so the chain can never stay in state $i$ for two consecutive steps.",
+    "misconception": "thinks transient states cannot have a self-loop"
+   },
+   {
+    "text": "State $i$ cannot be reached from any other state, so it is visited at most once.",
+    "misconception": "confuses transience with being unreachable"
+   },
+   {
+    "text": "The expected number of visits to $i$, starting from $i$, is infinite.",
+    "misconception": "swaps the transient and recurrent behaviour of the visit count"
+   },
+   {
+    "text": "State $i$ does not belong to any communicating class, since it is not recurrent.",
+    "misconception": "forgets that every state is in a class (possibly just itself)"
+   },
+   {
+    "text": "State $i$ has period greater than 1, so returns to $i$ are impossible at some times.",
+    "misconception": "mixes up transience with periodicity"
+   }
+  ],
+  "explanation": "Transient means the return probability is below 1, so the number of visits is geometric and finite almost surely. A transient state can have $p_{ii}>0$ and can be reachable from others."
+ },
+ {
+  "id": "sp-2.4",
+  "lecture": 2,
+  "stem": "Which statement is always true for a Markov chain with a finite state space?",
+  "correct": [
+   "At least one state of the chain is recurrent, since it must return somewhere.",
+   "The chain cannot have every state transient; some state is revisited forever."
+  ],
+  "distractors": [
+   {
+    "text": "All states are recurrent, since the chain has only finitely many of them.",
+    "misconception": "forgets that finite chains can have transient states"
+   },
+   {
+    "text": "All states are transient, since a finite chain must eventually leave every state.",
+    "misconception": "believes transience is typical in finite chains"
+   },
+   {
+    "text": "The chain is irreducible, because a finite state space has only one class.",
+    "misconception": "thinks finiteness implies a single communicating class"
+   },
+   {
+    "text": "There is exactly one recurrent class, however the transition probabilities are chosen.",
+    "misconception": "overlooks chains with several closed classes, such as two absorbing states"
+   },
+   {
+    "text": "Every recurrent state has period 1, because the state space is finite.",
+    "misconception": "assumes finiteness removes periodicity"
+   }
+  ],
+  "explanation": "With finitely many states the chain must keep visiting some state infinitely often, which forces a recurrent state. Several recurrent classes, transient states and periodic states are all possible."
+ },
+ {
+  "id": "sp-2.5",
+  "lecture": 2,
+  "stem": "State $i$ is recurrent and $j$ communicates with $i$. Then:",
+  "correct": [
+   "State $j$ is also recurrent: the chain returns to $j$ with probability 1, like $i$ does.",
+   "Recurrence is a class property: every state in the class of $i$ is recurrent as well."
+  ],
+  "distractors": [
+   {
+    "text": "State $j$ must be transient, because it communicates with a different state.",
+    "misconception": "thinks communication flips the type"
+   },
+   {
+    "text": "State $j$ may be recurrent or transient; communication alone does not decide it.",
+    "misconception": "does not know recurrence is a class property"
+   },
+   {
+    "text": "State $j$ is absorbing, since the class of a recurrent state is a single state.",
+    "misconception": "mixes up recurrent with absorbing"
+   },
+   {
+    "text": "State $j$ has the same stationary probability as $i$, as they are in the same class.",
+    "misconception": "assumes classmates have equal long-run probability"
+   },
+   {
+    "text": "$p_{jj}=p_{ii}$, because states in one class have equal self-transition probabilities.",
+    "misconception": "assumes classmates have equal self-loop probability"
+   }
+  ],
+  "explanation": "If $i\\leftrightarrow j$ and $i$ is recurrent, $\\sum_n p^{(n)}_{jj}\\ge c\\sum_n p^{(n)}_{ii}=\\infty$ for some $c>0$, so $j$ is recurrent. The same holds for transience and for the period."
+ },
+ {
+  "id": "sp-2.6",
+  "lecture": 2,
+  "stem": "The period of state $i$ is defined as:",
+  "correct": [
+   "$\\gcd\\{n\\ge 1: p^{(n)}_{ii}>0\\}$, the gcd of the times at which a return is possible.",
+   "The greatest common divisor of all possible return times to state $i$."
+  ],
+  "distractors": [
+   {
+    "text": "The smallest $n\\ge1$ with $p^{(n)}_{ii}>0$, the shortest possible return time.",
+    "misconception": "uses the shortest return time instead of the gcd"
+   },
+   {
+    "text": "The expected return time to $i$, measured in steps.",
+    "misconception": "mixes up the period with the mean return time"
+   },
+   {
+    "text": "The number of states in the communicating class of $i$.",
+    "misconception": "confuses the period with the class size"
+   },
+   {
+    "text": "The largest $n$ with $p^{(n)}_{ii}>0$, the longest possible return time.",
+    "misconception": "uses a maximum, which is unbounded for chains that can wander"
+   },
+   {
+    "text": "$\\lim_{n\\to\\infty}p^{(n)}_{ii}$, the limiting probability of being in state $i$.",
+    "misconception": "mixes up the period with the limiting probability"
+   }
+  ],
+  "explanation": "If return times can be 2 and 3, the gcd is 1 (aperiodic), even though the smallest return time is 2. So the shortest return time is not the period."
+ },
+ {
+  "id": "sp-3.1",
+  "lecture": 3,
+  "stem": "To find the probability $h_i$ of ever hitting a target set $A$ from a state $i\\notin A$, first-step analysis uses:",
+  "correct": [
+   "$h_i=\\sum_j p_{ij}h_j$ for $i\\notin A$, with the boundary value $h_i=1$ for $i\\in A$.",
+   "Condition on the first step: $h_i$ averages $h_j$ over the next state $j$, and $h=1$ on $A$."
+  ],
+  "distractors": [
+   {
+    "text": "$h_i=1+\\sum_j p_{ij}h_j$ for $i\\notin A$, adding one for the step taken, with $h_i=0$ on $A$.",
+    "misconception": "uses the equation for expected times instead of probabilities"
+   },
+   {
+    "text": "$h_i=\\sum_j p_{ji}h_j$ for $i\\notin A$, summing down the column of $P$, with $h_i=1$ on $A$.",
+    "misconception": "swaps from-state and to-state"
+   },
+   {
+    "text": "$h_i=\\max_j p_{ij}$ for $i\\notin A$, the largest one-step probability out of $i$.",
+    "misconception": "replaces the averaging over next states by a maximum of one-step probabilities"
+   },
+   {
+    "text": "$h_i=\\prod_j p_{ij}$ for $i\\notin A$, multiplying the one-step probabilities out of $i$.",
+    "misconception": "multiplies probabilities instead of averaging over outcomes"
+   },
+   {
+    "text": "$h_i=\\sum_j p_{ij}h_j$ for $i\\notin A$, but with the boundary value $h_i=0$ for $i\\in A$.",
+    "misconception": "puts the wrong boundary value on the target set"
+   }
+  ],
+  "explanation": "Law of total probability on the first step: $h_i=\\sum_j p_{ij}h_j$, and a chain that is already in $A$ has hit it, so $h_i=1$ there."
+ },
+ {
+  "id": "sp-3.2",
+  "lecture": 3,
+  "stem": "Let $k_i$ be the expected time to reach $A$ from $i$. Which equations does it satisfy?",
+  "correct": [
+   "$k_i=1+\\sum_j p_{ij}k_j$ for $i\\notin A$, with the boundary value $k_i=0$ for $i\\in A$.",
+   "Each step costs one unit of time: $k_i$ is 1 plus the average of $k_j$, and $k=0$ on $A$."
+  ],
+  "distractors": [
+   {
+    "text": "$k_i=\\sum_j p_{ij}k_j$ for $i\\notin A$ and $k_i=1$ for $i\\in A$, counting the final arrival.",
+    "misconception": "uses the probability equation and boundary instead of the time equation"
+   },
+   {
+    "text": "$k_i=\\sum_j p_{ij}k_j$ for $i\\notin A$ and $k_i=0$ for $i\\in A$, without adding the cost of a step.",
+    "misconception": "forgets the cost of one step, which makes every $k_i$ equal to 0"
+   },
+   {
+    "text": "$k_i=1/h_i$ for $i\\notin A$, the reciprocal of the hitting probability of $A$.",
+    "misconception": "invents a reciprocal relation between expected time and hitting probability"
+   },
+   {
+    "text": "$k_i=1+\\max_j k_j$ for $i\\notin A$, the slowest possible next state.",
+    "misconception": "replaces the average over next states by a maximum"
+   },
+   {
+    "text": "$k_i=1+\\sum_j p_{ij}k_j$ for $i\\notin A$, but with $k_i=1$ for $i\\in A$.",
+    "misconception": "counts a step even when the chain is already in the target set"
+   }
+  ],
+  "explanation": "Each step adds 1 to the time, then we average over the next state. Starting in $A$, no time is needed, so $k_i=0$ there."
+ },
+ {
+  "id": "sp-3.3",
+  "lecture": 3,
+  "stem": "The hitting probabilities $h_i$ satisfy $h_i=\\sum_j p_{ij}h_j$ (with $h=1$ on $A$), but this system can have several solutions. The hitting probabilities are:",
+  "correct": [
+   "The minimal non-negative solution of the system, with $h_i=1$ on $A$.",
+   "The entrywise smallest solution among those with all $h_i\\ge0$."
+  ],
+  "distractors": [
+   {
+    "text": "The maximal solution with $h_i\\le1$, which is the constant solution $h\\equiv1$ when it exists.",
+    "misconception": "picks the largest solution, which is the constant 1 whenever it solves the system"
+   },
+   {
+    "text": "The solution with every $h_i=1$, because the target is always hit eventually.",
+    "misconception": "assumes that the target is always hit"
+   },
+   {
+    "text": "Any of the solutions, since they all describe the same chain.",
+    "misconception": "thinks every solution is equally valid, but only the minimal one is the hitting probability"
+   },
+   {
+    "text": "The solution whose entries sum to 1, so that $h$ is a probability distribution.",
+    "misconception": "confuses hitting probabilities with a probability distribution over states"
+   },
+   {
+    "text": "The solution with $h_i=1/2$ for every $i\\notin A$, by symmetry of the equations.",
+    "misconception": "guesses a symmetric solution without solving"
+   }
+  ],
+  "explanation": "For example, in the gambler's ruin on $\\{0,1,2,\\dots\\}$ with $p>1/2$, both the true ruin probability and the constant 1 solve the equations; the true one is the smaller."
+ },
+ {
+  "id": "sp-3.4",
+  "lecture": 3,
+  "stem": "In a finite chain with two absorbing states $a$ and $b$, where every other state is transient, let $h^a_i$ and $h^b_i$ be the probabilities of eventual absorption in $a$ and $b$ from $i$. Then:",
+  "correct": [
+   "$h^a_i+h^b_i=1$ for every state $i$, as absorption is certain.",
+   "Absorption in $a$ or $b$ is certain, so the two probabilities add up to 1."
+  ],
+  "distractors": [
+   {
+    "text": "$h^a_i=h^b_i$ for every state $i$, because the two targets are symmetric.",
+    "misconception": "assumes a symmetric split regardless of where the chain starts"
+   },
+   {
+    "text": "$h^a_i\\cdot h^b_i=1$ for every transient state $i$, as for complementary events.",
+    "misconception": "multiplies instead of adding complementary probabilities"
+   },
+   {
+    "text": "$h^a_i+h^b_i=1$ only when the chain starts in $a$ or $b$.",
+    "misconception": "thinks absorption is certain only from the absorbing states themselves"
+   },
+   {
+    "text": "$h^a_i+h^b_i<1$ for transient $i$, because the chain may wander among the transient states forever.",
+    "misconception": "thinks a finite chain can avoid absorption forever with positive probability"
+   },
+   {
+    "text": "$h^a_i=h^b_i=1$ for every transient $i$, because both targets are eventually reached.",
+    "misconception": "thinks each target is hit with certainty"
+   }
+  ],
+  "explanation": "In a finite chain the transient states are left eventually, so the chain ends up in $a$ or in $b$, never both: the two probabilities sum to 1."
+ },
+ {
+  "id": "sp-3.5",
+  "lecture": 3,
+  "stem": "If the probability of ever hitting $A$ from state $i$ is strictly less than 1, then the expected hitting time of $A$ from $i$ is:",
+  "correct": [
+   "Infinite, because with positive probability $A$ is never reached.",
+   "$+\\infty$, since the hitting time is infinite with positive probability."
+  ],
+  "distractors": [
+   {
+    "text": "Finite but large, because a rare event cannot make a mean infinite.",
+    "misconception": "forgets that a positive-probability infinite outcome makes the mean infinite"
+   },
+   {
+    "text": "Equal to $1/(1-h_i)$, the mean of a geometric number of attempts.",
+    "misconception": "invents a formula that is finite whenever $h_i<1$"
+   },
+   {
+    "text": "Equal to $h_i$, the probability of hitting $A$.",
+    "misconception": "mixes up a probability with an expected time"
+   },
+   {
+    "text": "Undefined, because expectations exist only for variables that are finite with probability 1.",
+    "misconception": "thinks an expectation cannot be $+\\infty$"
+   },
+   {
+    "text": "Zero, because on the event that the chain never gets there no time passes.",
+    "misconception": "treats failure to hit as time zero"
+   }
+  ],
+  "explanation": "If $P(T_A=\\infty)>0$ then $E[T_A]=\\infty$. Finite expected hitting time needs hitting probability 1 first."
+ },
+ {
+  "id": "sp-4.1",
+  "lecture": 4,
+  "stem": "A probability vector $\\pi$ is a stationary distribution of the chain with transition matrix $P$ when:",
+  "correct": [
+   "$\\pi P=\\pi$, with $\\pi_i\\ge0$ and $\\sum_i\\pi_i=1$.",
+   "If $X_0$ has distribution $\\pi$, then $X_n$ has distribution $\\pi$ for every $n$."
+  ],
+  "distractors": [
+   {
+    "text": "$P\\pi=\\pi$, with $\\pi$ written as a column vector and multiplied on the right of $P$.",
+    "misconception": "multiplies on the wrong side: constants always satisfy this"
+   },
+   {
+    "text": "$\\pi P=0$, so that one step of the chain removes all probability mass.",
+    "misconception": "confuses stationarity of a discrete chain with the generator equation of a continuous chain"
+   },
+   {
+    "text": "$\\pi_i\\,p_{ij}=\\pi_j\\,p_{ji}$ for all $i,j$, and this condition is necessary for stationarity.",
+    "misconception": "treats detailed balance as necessary, but it is only sufficient"
+   },
+   {
+    "text": "$\\pi=\\lim_{n\\to\\infty}P^n$, the limit of the $n$-step matrices taken entrywise.",
+    "misconception": "mixes up a vector with a limiting matrix"
+   },
+   {
+    "text": "$\\pi_i=1/|S|$ for every state $i$, the uniform distribution on the state space.",
+    "misconception": "assumes the stationary distribution is always uniform"
+   }
+  ],
+  "explanation": "$\\pi P=\\pi$ is exactly the statement that one step does not change the distribution. It is uniform only for doubly stochastic matrices, and detailed balance is a stronger condition."
+ },
+ {
+  "id": "sp-4.2",
+  "lecture": 4,
+  "stem": "An irreducible Markov chain on a finite state space has:",
+  "correct": [
+   "Exactly one stationary distribution, and all of its entries are strictly positive.",
+   "A unique stationary distribution $\\pi$, with $\\pi_i>0$ for every state $i$ of the chain."
+  ],
+  "distractors": [
+   {
+    "text": "A stationary distribution only if it is aperiodic, since periodic chains do not settle down.",
+    "misconception": "thinks periodicity prevents a stationary distribution"
+   },
+   {
+    "text": "At least two different stationary distributions, one for each possible starting state.",
+    "misconception": "thinks uniqueness fails for irreducible chains"
+   },
+   {
+    "text": "A stationary distribution only if $P$ is doubly stochastic, so that it is uniform.",
+    "misconception": "confuses existence with the uniform special case"
+   },
+   {
+    "text": "A unique stationary distribution, but some of its entries may be zero.",
+    "misconception": "forgets that every state in a recurrent class is visited"
+   },
+   {
+    "text": "No stationary distribution, because a chain on a finite state space keeps moving forever.",
+    "misconception": "thinks finite chains cannot settle down"
+   }
+  ],
+  "explanation": "Finite and irreducible means positive recurrent, so there is a unique $\\pi$ with $\\pi_i=1/m_i>0$. Periodicity affects convergence of $P^n$, not existence."
+ },
+ {
+  "id": "sp-4.3",
+  "lecture": 4,
+  "stem": "For an irreducible, aperiodic, positive recurrent chain with stationary distribution $\\pi$, the $n$-step probability $p^{(n)}_{ij}$ as $n\\to\\infty$:",
+  "correct": [
+   "Converges to $\\pi_j$, whatever the starting state $i$ is, for every pair of states.",
+   "Approaches the stationary probability of the target state $j$ and forgets the start."
+  ],
+  "distractors": [
+   {
+    "text": "Converges to $1/|S|$ for every pair $(i,j)$, the uniform probability on the state space.",
+    "misconception": "assumes the limit is always uniform"
+   },
+   {
+    "text": "Converges to $\\pi_i$, the stationary probability of the starting state $i$.",
+    "misconception": "mixes up which index the limit depends on"
+   },
+   {
+    "text": "Does not converge, and keeps oscillating between the values $0$ and $1$.",
+    "misconception": "applies the periodic case to an aperiodic chain"
+   },
+   {
+    "text": "Converges to $0$ for every target state $j$, since the chain moves around forever.",
+    "misconception": "applies the null recurrent or transient behaviour"
+   },
+   {
+    "text": "Converges to $\\delta_{ij}$, so that the chain stays at its starting state.",
+    "misconception": "thinks the chain does not move in the long run"
+   }
+  ],
+  "explanation": "Convergence theorem: the rows of $P^n$ all approach $\\pi$, so the limit depends on the target state only."
+ },
+ {
+  "id": "sp-4.4",
+  "lecture": 4,
+  "stem": "A finite irreducible chain has period 2 (for instance it alternates deterministically between two states). Which statement is correct?",
+  "correct": [
+   "$\\lim_n p^{(n)}_{ii}$ does not exist, but a unique stationary distribution still exists.",
+   "$P^n$ does not converge, yet $\\pi P=\\pi$ still has exactly one probability solution."
+  ],
+  "distractors": [
+   {
+    "text": "No stationary distribution exists, since the distribution keeps changing with $n$.",
+    "misconception": "thinks periodicity destroys the stationary distribution"
+   },
+   {
+    "text": "$\\lim_n p^{(n)}_{ii}$ exists and equals $\\pi_i$, as for every irreducible finite chain.",
+    "misconception": "applies the aperiodic convergence theorem to a periodic chain"
+   },
+   {
+    "text": "$\\lim_n p^{(n)}_{ii}$ exists and equals $0$, since the chain can only return at even times.",
+    "misconception": "confuses periodic with transient behaviour"
+   },
+   {
+    "text": "A stationary distribution exists but is not unique, because the two cyclic classes can be mixed.",
+    "misconception": "thinks periodicity breaks uniqueness"
+   },
+   {
+    "text": "The chain is not irreducible, because periodic chains cannot reach every state.",
+    "misconception": "thinks periodic chains cannot be irreducible"
+   }
+  ],
+  "explanation": "For the two-state alternation, $p^{(n)}_{11}$ is $1,0,1,0,\\dots$ so there is no limit, while $\\pi=(1/2,1/2)$ is stationary and unique."
+ },
+ {
+  "id": "sp-4.5",
+  "lecture": 4,
+  "stem": "For an irreducible, positive recurrent chain with stationary distribution $\\pi$, the expected return time to state $i$ is:",
+  "correct": [
+   "$1/\\pi_i$, the reciprocal of its stationary probability.",
+   "The reciprocal of the stationary probability of $i$, namely $m_i=1/\\pi_i$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\pi_i$, the stationary probability of state $i$ itself.",
+    "misconception": "mixes up a probability with a time"
+   },
+   {
+    "text": "$1-\\pi_i$, the stationary probability of not being in state $i$.",
+    "misconception": "uses the complement of the probability"
+   },
+   {
+    "text": "$1/(1-\\pi_i)$, the mean of a geometric number of steps spent away from $i$.",
+    "misconception": "uses the reciprocal of the complement, as for a geometric number of failures"
+   },
+   {
+    "text": "$\\pi_i^{\\,2}$, the probability of being in state $i$ at two successive times.",
+    "misconception": "squares the probability for no reason"
+   },
+   {
+    "text": "$\\sum_j\\pi_j$, which is the total stationary probability of all of the states.",
+    "misconception": "confuses the mean return time with the total mass, which is 1"
+   }
+  ],
+  "explanation": "Visits to $i$ occupy a fraction $\\pi_i$ of time, so the average gap between visits is $1/\\pi_i$ steps."
+ },
+ {
+  "id": "sp-4.6",
+  "lecture": 4,
+  "stem": "Suppose $\\pi$ is a probability vector with $\\pi_i p_{ij}=\\pi_j p_{ji}$ for all states $i,j$. Then:",
+  "correct": [
+   "$\\pi$ is a stationary distribution of the chain.",
+   "Summing the detailed-balance equations over $i$ gives $\\pi P=\\pi$, so $\\pi$ is stationary."
+  ],
+  "distractors": [
+   {
+    "text": "$\\pi$ must be the uniform distribution, because balance forces equal probabilities.",
+    "misconception": "assumes balance implies equal probabilities"
+   },
+   {
+    "text": "$P$ must be symmetric, so that $p_{ij}=p_{ji}$ for all states.",
+    "misconception": "assumes $p_{ij}=p_{ji}$, which holds only when $\\pi$ is uniform"
+   },
+   {
+    "text": "The chain must be periodic, since detailed balance excludes aperiodic behaviour.",
+    "misconception": "invents a link with periodicity"
+   },
+   {
+    "text": "$\\pi$ is stationary only if the chain is also aperiodic, since otherwise $\\pi P\\ne\\pi$.",
+    "misconception": "thinks aperiodicity is needed for stationarity"
+   },
+   {
+    "text": "The chain must have an absorbing state, because balance can only hold at an absorbing state.",
+    "misconception": "confuses balance with absorption"
+   }
+  ],
+  "explanation": "$\\sum_i\\pi_ip_{ij}=\\sum_i\\pi_jp_{ji}=\\pi_j\\sum_ip_{ji}=\\pi_j$. Detailed balance is sufficient for stationarity, not necessary."
+ },
+ {
+  "id": "sp-5.1",
+  "lecture": 5,
+  "stem": "A gambler with fortune $i\\in\\{0,\\dots,N\\}$ bets one unit per round on a fair coin and stops at $0$ or $N$. The probability of reaching $N$ before $0$ is:",
+  "correct": [
+   "$i/N$, his starting fortune as a fraction of the target.",
+   "The ratio of his initial fortune to the target, namely $i/N$."
+  ],
+  "distractors": [
+   {
+    "text": "$1/2$, since the coin is fair and the game is symmetric.",
+    "misconception": "uses symmetry of the coin as if it made the start irrelevant"
+   },
+   {
+    "text": "$(N-i)/N$, the distance to the target as a fraction of the target.",
+    "misconception": "swaps the two boundaries"
+   },
+   {
+    "text": "$i/(N-i)$, the odds of reaching $N$ before $0$.",
+    "misconception": "uses an odds ratio instead of a probability, which can exceed 1"
+   },
+   {
+    "text": "$(i/N)^2$, since he must succeed in two successive stages.",
+    "misconception": "squares the answer with no justification"
+   },
+   {
+    "text": "$1-i/N^{2}$, one minus his fortune scaled by the target squared.",
+    "misconception": "invents a formula with the wrong scaling"
+   }
+  ],
+  "explanation": "The fair walk is a martingale, so $i=E[S_T]=N\\cdot P(\\text{reach }N)$, giving $P=i/N$."
+ },
+ {
+  "id": "sp-5.2",
+  "lecture": 5,
+  "stem": "With win probability $p\\ne\\tfrac12$ and $r=q/p$ where $q=1-p$, the probability of reaching $N$ before $0$ from $i$ is:",
+  "correct": [
+   "$\\dfrac{1-r^{\\,i}}{1-r^{\\,N}}$, a ratio of geometric sums in $r$.",
+   "$\\dfrac{r^{\\,i}-1}{r^{\\,N}-1}$, a ratio of geometric sums in $r$."
+  ],
+  "distractors": [
+   {
+    "text": "$i/N$ for every value of $p$, as in the fair game.",
+    "misconception": "assumes the fair-game answer holds for a biased game"
+   },
+   {
+    "text": "$p\\,i/N$, the fair-game answer scaled by the win probability.",
+    "misconception": "multiplies the fair answer by the win probability"
+   },
+   {
+    "text": "$\\dfrac{1-r^{\\,N}}{1-r^{\\,i}}$, a ratio of geometric sums in $r$.",
+    "misconception": "inverts the ratio, which can exceed 1"
+   },
+   {
+    "text": "$1-p^{\\,i}$, one minus the chance of winning $i$ rounds in a row.",
+    "misconception": "treats the walk as needing $i$ wins in a row"
+   },
+   {
+    "text": "$r^{\\,i-N}$, the power of $r$ given by the distance to the target.",
+    "misconception": "drops the normalisation, so the value is not a probability"
+   }
+  ],
+  "explanation": "Solve $h_i=p\\,h_{i+1}+q\\,h_{i-1}$ with $h_0=0$, $h_N=1$: $h_i=(1-r^i)/(1-r^N)$. As $r\\to1$ this tends to $i/N$."
+ },
+ {
+  "id": "sp-5.3",
+  "lecture": 5,
+  "stem": "For the fair walk on $\\{0,\\dots,N\\}$ started at $i$, the expected time until it hits $0$ or $N$ is:",
+  "correct": [
+   "$i(N-i)$, the product of the distances to the two boundaries.",
+   "The product of the distances from $i$ to the two boundaries."
+  ],
+  "distractors": [
+   {
+    "text": "$i^{2}$, the squared distance to the lower boundary.",
+    "misconception": "uses only the distance to one boundary"
+   },
+   {
+    "text": "$N^{2}$, the squared distance between the two boundaries.",
+    "misconception": "uses the interval length squared, which ignores the start"
+   },
+   {
+    "text": "$i/N$, the probability of reaching the upper boundary first.",
+    "misconception": "gives the ruin probability instead of a time"
+   },
+   {
+    "text": "$N-i$, the distance to the upper boundary.",
+    "misconception": "gives a distance rather than a time"
+   },
+   {
+    "text": "$iN$, the product of the start and the interval length.",
+    "misconception": "multiplies by the interval length instead of the distance to the other end"
+   }
+  ],
+  "explanation": "$D_i=1+\\tfrac12D_{i-1}+\\tfrac12D_{i+1}$ with $D_0=D_N=0$ is solved by $D_i=i(N-i)$."
+ },
+ {
+  "id": "sp-5.4",
+  "lecture": 5,
+  "stem": "The simple symmetric random walk on $\\mathbb Z$ is:",
+  "correct": [
+   "Null recurrent: it returns to the origin with probability 1, with infinite expected return time.",
+   "Recurrent, yet with infinite mean return time, so no stationary distribution exists."
+  ],
+  "distractors": [
+   {
+    "text": "Transient, because the walk wanders further and further from the origin as time passes.",
+    "misconception": "thinks symmetry is not enough to guarantee return in one dimension"
+   },
+   {
+    "text": "Positive recurrent, because it returns to the origin with probability 1, after a finite time.",
+    "misconception": "forgets that the mean return time is infinite"
+   },
+   {
+    "text": "Recurrent with expected return time 2, because it can return to the origin after just two steps.",
+    "misconception": "confuses the shortest possible return with the mean return time"
+   },
+   {
+    "text": "Transient, because the probability of ever returning to the origin is strictly less than $1$.",
+    "misconception": "invents a return probability below 1"
+   },
+   {
+    "text": "Aperiodic and positive recurrent, so it has a unique stationary distribution on $\\mathbb Z$.",
+    "misconception": "gets both the period (it is 2) and the recurrence type wrong"
+   }
+  ],
+  "explanation": "Pólya's theorem: the symmetric walk on $\\mathbb Z$ and $\\mathbb Z^2$ is recurrent. $E[\\text{return time}]=\\infty$, so it is null recurrent and has no stationary distribution."
+ },
+ {
+  "id": "sp-5.5",
+  "lecture": 5,
+  "stem": "A random walk on $\\mathbb Z$ steps $+1$ with probability $p>\\tfrac12$ and $-1$ otherwise. It is:",
+  "correct": [
+   "Transient: it drifts to $+\\infty$, and may never return to its starting point.",
+   "Transient: $S_n/n\\to 2p-1>0$ almost surely, so each state is visited finitely often."
+  ],
+  "distractors": [
+   {
+    "text": "Recurrent, because every state communicates with every other state.",
+    "misconception": "thinks irreducibility implies recurrence"
+   },
+   {
+    "text": "Null recurrent, as for the symmetric walk, but with a drift to the right.",
+    "misconception": "applies the symmetric case to a biased walk"
+   },
+   {
+    "text": "Positive recurrent, because the walk is irreducible and has a drift.",
+    "misconception": "thinks irreducibility implies positive recurrence"
+   },
+   {
+    "text": "Recurrent, but it spends longer on the right of the origin than on the left.",
+    "misconception": "contradicts itself: a drifting walk leaves every finite set for good"
+   },
+   {
+    "text": "Transient only if $p\\ge 3/4$; for $\\tfrac12<p<\\tfrac34$ it is still recurrent.",
+    "misconception": "invents a threshold; any bias makes the walk transient"
+   }
+  ],
+  "explanation": "By the strong law $S_n/n\\to2p-1\\ne0$, so $|S_n|\\to\\infty$ and each state is visited finitely often."
+ },
+ {
+  "id": "sp-6.1",
+  "lecture": 6,
+  "stem": "In a Poisson process of rate $\\lambda$, the times between successive arrivals are:",
+  "correct": [
+   "Independent exponential random variables with rate $\\lambda$ (mean $1/\\lambda$).",
+   "I.i.d. $\\mathrm{Exp}(\\lambda)$ random variables, each with mean $1/\\lambda$."
+  ],
+  "distractors": [
+   {
+    "text": "Poisson distributed with mean $\\lambda$, so they are whole numbers of time units.",
+    "misconception": "mixes up the distribution of counts with that of gaps"
+   },
+   {
+    "text": "Constant and equal to $1/\\lambda$, so that arrivals are evenly spaced.",
+    "misconception": "thinks arrivals are evenly spaced"
+   },
+   {
+    "text": "Uniformly distributed on $[0,1/\\lambda]$, so no gap exceeds the mean.",
+    "misconception": "picks a bounded distribution with the right-looking scale"
+   },
+   {
+    "text": "Exponential with mean $\\lambda$ (rate $1/\\lambda$), independent of one another.",
+    "misconception": "mixes up the rate and the mean"
+   },
+   {
+    "text": "Gamma distributed with shape parameter $\\lambda$, independent of one another.",
+    "misconception": "confuses interarrival times with the time of the $\\lambda$-th arrival"
+   }
+  ],
+  "explanation": "The gaps are i.i.d. $\\mathrm{Exp}(\\lambda)$; the count in $[0,t]$ is Poisson, and the time of the $k$-th arrival is Gamma$(k,\\lambda)$."
+ },
+ {
+  "id": "sp-6.2",
+  "lecture": 6,
+  "stem": "In a Poisson process of rate $\\lambda$, the number of arrivals $N(t)$ in an interval of length $t$ has:",
+  "correct": [
+   "A Poisson distribution with mean $\\lambda t$, where $t$ is the length of the interval.",
+   "$N(t)\\sim\\mathrm{Poisson}(\\lambda t)$, so that its mean and its variance both equal $\\lambda t$."
+  ],
+  "distractors": [
+   {
+    "text": "A Poisson distribution with mean $\\lambda$, whatever the length $t$ of the interval.",
+    "misconception": "ignores the dependence on the interval length"
+   },
+   {
+    "text": "A Poisson distribution with mean $\\lambda/t$, so longer intervals have fewer arrivals.",
+    "misconception": "divides by time instead of multiplying"
+   },
+   {
+    "text": "An exponential distribution with rate $\\lambda t$, as for the first arrival time.",
+    "misconception": "mixes up counts and waiting times"
+   },
+   {
+    "text": "A binomial distribution with $n=t$ trials and success probability $p=\\lambda$.",
+    "misconception": "treats time as a number of trials"
+   },
+   {
+    "text": "A geometric distribution with parameter $\\lambda t$ on the numbers $0,1,2,\\dots$.",
+    "misconception": "mixes up counts with a number of trials until success"
+   }
+  ],
+  "explanation": "Arrivals per unit time are independent with rate $\\lambda$, so the mean count over length $t$ is $\\lambda t$, and the distribution is Poisson."
+ },
+ {
+  "id": "sp-6.3",
+  "lecture": 6,
+  "stem": "A Poisson process has independent increments. This means:",
+  "correct": [
+   "Counts of arrivals in disjoint time intervals are independent.",
+   "Knowing the number of arrivals in $(0,s]$ says nothing about the count in $(s,s+t]$."
+  ],
+  "distractors": [
+   {
+    "text": "Counts in disjoint intervals of equal length are always equal.",
+    "misconception": "confuses independence with identical counts"
+   },
+   {
+    "text": "At most one arrival can occur in any given interval of time.",
+    "misconception": "mixes up independence with ordinariness (no simultaneous arrivals)"
+   },
+   {
+    "text": "All the interarrival times are equal, so arrivals are evenly spaced.",
+    "misconception": "confuses independent increments with regular spacing"
+   },
+   {
+    "text": "Counts in overlapping intervals are also independent of one another.",
+    "misconception": "forgets that overlapping intervals share arrivals"
+   },
+   {
+    "text": "The arrival rate changes independently from one interval to the next.",
+    "misconception": "confuses independent increments with a random rate"
+   }
+  ],
+  "explanation": "Independence is for disjoint intervals only. Overlapping intervals share arrivals, so their counts are dependent."
+ },
+ {
+  "id": "sp-6.4",
+  "lecture": 6,
+  "stem": "Two independent Poisson processes with rates $\\lambda_1$ and $\\lambda_2$ are merged into one stream. The merged process is:",
+  "correct": [
+   "A Poisson process with rate $\\lambda_1+\\lambda_2$.",
+   "A Poisson process whose rate is the sum of the two rates, $\\lambda_1+\\lambda_2$."
+  ],
+  "distractors": [
+   {
+    "text": "A Poisson process with rate $\\lambda_1\\lambda_2$, the product of the two rates.",
+    "misconception": "multiplies rates instead of adding them"
+   },
+   {
+    "text": "A Poisson process with rate $\\max(\\lambda_1,\\lambda_2)$, the faster of the two.",
+    "misconception": "thinks the faster stream dominates"
+   },
+   {
+    "text": "A Poisson process with rate $(\\lambda_1+\\lambda_2)/2$, the average of the two rates.",
+    "misconception": "averages the rates instead of adding"
+   },
+   {
+    "text": "Not a Poisson process, because merging two independent streams creates dependence.",
+    "misconception": "thinks independence prevents the Poisson property"
+   },
+   {
+    "text": "A Poisson process only if the two rates $\\lambda_1$ and $\\lambda_2$ are equal.",
+    "misconception": "thinks the rates must be equal to merge"
+   }
+  ],
+  "explanation": "Superposition: counts add, and the sum of independent Poisson$(\\lambda_1 t)$ and Poisson$(\\lambda_2 t)$ is Poisson$((\\lambda_1+\\lambda_2)t)$."
+ },
+ {
+  "id": "sp-6.5",
+  "lecture": 6,
+  "stem": "Each arrival of a rate-$\\lambda$ Poisson process is independently kept with probability $p$ and otherwise discarded. The kept arrivals form:",
+  "correct": [
+   "A Poisson process with rate $p\\lambda$, independent of the discarded arrivals (rate $(1-p)\\lambda$).",
+   "Two independent Poisson processes: kept with rate $p\\lambda$, discarded with rate $(1-p)\\lambda$."
+  ],
+  "distractors": [
+   {
+    "text": "A Poisson process with rate $\\lambda/p$, independent of the discarded arrivals.",
+    "misconception": "divides by $p$, which would increase the rate"
+   },
+   {
+    "text": "A Poisson process with the original rate $\\lambda$, since deleting at random changes nothing.",
+    "misconception": "thinks random deletion leaves the rate unchanged"
+   },
+   {
+    "text": "Not a Poisson process, because random selection destroys independent increments.",
+    "misconception": "thinks randomness destroys the Poisson property"
+   },
+   {
+    "text": "A Poisson process with rate $p$, independent of the discarded arrivals.",
+    "misconception": "forgets to scale by $\\lambda$"
+   },
+   {
+    "text": "A Poisson process only if $p=\\tfrac12$, so that kept and discarded arrivals are alike.",
+    "misconception": "thinks thinning needs a fair coin"
+   }
+  ],
+  "explanation": "Thinning: the number kept in $[0,t]$ is Poisson$(p\\lambda t)$, the number discarded is Poisson$((1-p)\\lambda t)$, and the two are independent."
+ },
+ {
+  "id": "sp-6.6",
+  "lecture": 6,
+  "stem": "Given that exactly one arrival of a Poisson process occurred in $[0,t]$, the time of that arrival is:",
+  "correct": [
+   "Uniformly distributed on $[0,t]$, whatever the rate $\\lambda$ of the process is.",
+   "Equally likely to be anywhere in $[0,t]$, with no preferred moment in the interval."
+  ],
+  "distractors": [
+   {
+    "text": "Exponential with rate $\\lambda$ restricted to $[0,t]$, so earlier times are more likely.",
+    "misconception": "carries over the unconditional waiting-time law"
+   },
+   {
+    "text": "Concentrated near $0$, because arrivals tend to come early in the interval.",
+    "misconception": "thinks the first arrival is pulled to the start"
+   },
+   {
+    "text": "Concentrated near $t$, because the conditioning pushes the arrival to the end.",
+    "misconception": "thinks the information pushes the arrival to the end"
+   },
+   {
+    "text": "Normally distributed around $t/2$, with a spread that depends on $\\lambda$.",
+    "misconception": "replaces uniform by a bell shape"
+   },
+   {
+    "text": "Exactly $t/2$, the midpoint of the interval, with probability 1.",
+    "misconception": "treats the time as deterministic"
+   }
+  ],
+  "explanation": "Conditional on $N(t)=1$, the arrival time is uniform on $[0,t]$: the process has no preferred moments, because it has stationary independent increments."
+ },
+ {
+  "id": "sp-7.1",
+  "lecture": 7,
+  "stem": "In a continuous-time Markov chain, the time spent in state $i$ before the next jump is:",
+  "correct": [
+   "Exponential with rate $q_i$, the total rate at which the chain leaves state $i$.",
+   "Memoryless: exponentially distributed with mean $1/q_i$, that is with rate $q_i$."
+  ],
+  "distractors": [
+   {
+    "text": "Constant and equal to $1/q_i$, so that jumps happen at regular times.",
+    "misconception": "thinks holding times are deterministic"
+   },
+   {
+    "text": "Poisson distributed with mean $q_i$, counting the jumps out of state $i$.",
+    "misconception": "mixes up a time with a count"
+   },
+   {
+    "text": "Uniform on $[0,1/q_i]$, so that the holding time is never longer than its mean.",
+    "misconception": "picks a bounded distribution; this would break the Markov property"
+   },
+   {
+    "text": "Geometric with success probability $q_i$, as for a discrete-time chain.",
+    "misconception": "uses the discrete-time analogue"
+   },
+   {
+    "text": "Exponential with rate $1/q_i$ (mean $q_i$), independent of the next state.",
+    "misconception": "mixes up the rate and the mean"
+   }
+  ],
+  "explanation": "Memorylessness of the holding time is forced by the Markov property, and the only memoryless continuous law is the exponential."
+ },
+ {
+  "id": "sp-7.2",
+  "lecture": 7,
+  "stem": "The generator matrix $Q=(q_{ij})$ of a continuous-time Markov chain has:",
+  "correct": [
+   "$q_{ij}\\ge0$ for $i\\ne j$, $q_{ii}\\le0$, and every row sums to 0.",
+   "Non-negative off-diagonal rates, with $q_{ii}=-\\sum_{j\\ne i}q_{ij}$ on the diagonal."
+  ],
+  "distractors": [
+   {
+    "text": "Every row summing to 1, as for the transition matrix of a discrete-time chain.",
+    "misconception": "confuses the generator with a transition matrix"
+   },
+   {
+    "text": "All entries non-negative, because every entry is a rate of jumping.",
+    "misconception": "forgets that the diagonal is minus the exit rate"
+   },
+   {
+    "text": "Every column summing to 0 instead of every row, with the same sign pattern.",
+    "misconception": "swaps rows and columns"
+   },
+   {
+    "text": "Diagonal entries equal to 1 and off-diagonal entries equal to the jump probabilities.",
+    "misconception": "mixes up the diagonal with that of the identity"
+   },
+   {
+    "text": "All off-diagonal entries non-positive and all diagonal entries non-negative.",
+    "misconception": "reverses the sign convention"
+   }
+  ],
+  "explanation": "Off-diagonal $q_{ij}$ is the rate of jumping $i\\to j$; the diagonal is $-q_i$, so rows sum to zero."
+ },
+ {
+  "id": "sp-7.3",
+  "lecture": 7,
+  "stem": "For a continuous-time chain with rates $q_{ij}$ and total exit rate $q_i=\\sum_{j\\ne i}q_{ij}>0$, the jump chain has transition probabilities:",
+  "correct": [
+   "$p_{ij}=q_{ij}/q_i$ for $j\\ne i$, and $p_{ii}=0$ for every state $i$.",
+   "The rate of jumping to $j$ divided by the total rate of leaving state $i$."
+  ],
+  "distractors": [
+   {
+    "text": "$p_{ij}=q_{ij}$, the rate of jumping from $i$ to $j$ itself.",
+    "misconception": "treats rates as probabilities, which can exceed 1"
+   },
+   {
+    "text": "$p_{ij}=q_{ij}\\,q_i$, the rate multiplied by the total exit rate.",
+    "misconception": "multiplies by the exit rate instead of dividing"
+   },
+   {
+    "text": "$p_{ij}=q_{ij}/q_j$, the rate divided by the total exit rate of the target $j$.",
+    "misconception": "divides by the exit rate of the wrong state"
+   },
+   {
+    "text": "$p_{ij}=e^{q_{ij}}$, the exponential of the rate of jumping from $i$ to $j$.",
+    "misconception": "confuses rates with log-probabilities"
+   },
+   {
+    "text": "$p_{ij}=1/q_i$ for every $j\\ne i$, whatever the individual rates are.",
+    "misconception": "ignores which state is the target"
+   }
+  ],
+  "explanation": "When the clock rings from state $i$, the next state $j$ is chosen in proportion to the competing rates $q_{ij}$."
+ },
+ {
+  "id": "sp-7.4",
+  "lecture": 7,
+  "stem": "The transition function $P(t)=e^{tQ}$ of a continuous-time chain with generator $Q$ satisfies:",
+  "correct": [
+   "$P'(t)=QP(t)=P(t)Q$, with $P(0)=I$.",
+   "The backward equation $P'(t)=QP(t)$ and the forward equation $P'(t)=P(t)Q$."
+  ],
+  "distractors": [
+   {
+    "text": "$P'(t)=Q+P(t)$ with $P(0)=I$, adding the generator to the current matrix.",
+    "misconception": "adds instead of multiplies"
+   },
+   {
+    "text": "$P(t)=tQ$ for all $t\\ge0$, so that probabilities grow linearly in time.",
+    "misconception": "confuses the matrix exponential with its first-order term"
+   },
+   {
+    "text": "$P'(t)=P(t)^2$ with $P(0)=I$, a nonlinear equation in the transition function.",
+    "misconception": "invents a nonlinear equation"
+   },
+   {
+    "text": "$P(t)=I+tQ$ exactly for every $t\\ge0$, not just for small $t$.",
+    "misconception": "keeps only the first-order term of the exponential series"
+   },
+   {
+    "text": "$P'(t)=Q^{-1}P(t)$ with $P(0)=I$, using the inverse of the generator.",
+    "misconception": "inverts the generator, which is singular"
+   }
+  ],
+  "explanation": "Differentiating $e^{tQ}$ gives $Qe^{tQ}=e^{tQ}Q$. The linear approximation $I+tQ$ holds only for small $t$."
+ },
+ {
+  "id": "sp-7.5",
+  "lecture": 7,
+  "stem": "A probability vector $\\pi$ is stationary for a finite-state continuous-time chain with generator $Q$ if and only if:",
+  "correct": [
+   "$\\pi Q=0$ together with $\\sum_i\\pi_i=1$, with $\\pi$ written as a row vector.",
+   "Global balance: for every state, the probability flow in equals the flow out."
+  ],
+  "distractors": [
+   {
+    "text": "$\\pi Q=\\pi$, the same equation as for a discrete-time chain with matrix $Q$.",
+    "misconception": "uses the discrete-time equation"
+   },
+   {
+    "text": "$\\pi P=\\pi$, where $P$ is the transition matrix of the jump chain.",
+    "misconception": "forgets that this ignores the time spent in each state"
+   },
+   {
+    "text": "$Q\\pi^{\\top}=0$, with $\\pi$ written as a column vector and multiplied on the right.",
+    "misconception": "multiplies on the wrong side: constant vectors always satisfy this"
+   },
+   {
+    "text": "$\\pi_i=q_i$ for every state $i$, so the stationary law is the vector of exit rates.",
+    "misconception": "confuses the stationary probability with the exit rate"
+   },
+   {
+    "text": "$\\pi_i\\propto q_i$, since states that are left faster are visited more often.",
+    "misconception": "assumes faster states are visited more, but long holding times raise occupation"
+   }
+  ],
+  "explanation": "$\\pi$ is stationary when $\\frac{d}{dt}\\pi P(t)=\\pi QP(t)=0$, i.e. $\\pi Q=0$. The jump chain's stationary law must be reweighted by mean holding times $1/q_i$."
+ },
+ {
+  "id": "sp-7.6",
+  "lecture": 7,
+  "stem": "A two-state continuous-time chain leaves state $0$ at rate $a>0$ and leaves state $1$ at rate $b>0$. The long-run fraction of time spent in state $0$ is:",
+  "correct": [
+   "$\\dfrac{b}{a+b}$, where $b$ is the exit rate of state $1$.",
+   "The exit rate of state $1$ divided by the sum of the two exit rates."
+  ],
+  "distractors": [
+   {
+    "text": "$\\dfrac{a}{a+b}$, the exit rate of state $0$ over the sum of the rates.",
+    "misconception": "swaps the roles: a faster exit from 0 should mean less time in 0"
+   },
+   {
+    "text": "$\\dfrac12$, since the chain moves between two states symmetrically.",
+    "misconception": "assumes equal time in the two states"
+   },
+   {
+    "text": "$\\dfrac1a$, the mean holding time in state $0$.",
+    "misconception": "gives the mean holding time, which is not a fraction"
+   },
+   {
+    "text": "$\\dfrac{ab}{a+b}$, the product of the rates over their sum.",
+    "misconception": "uses a harmonic-style combination of the rates"
+   },
+   {
+    "text": "$\\dfrac{a+b}{b}$, the sum of the rates over the exit rate of state $1$.",
+    "misconception": "inverts the correct ratio, giving a value above 1"
+   }
+  ],
+  "explanation": "Balance: $\\pi_0a=\\pi_1b$ and $\\pi_0+\\pi_1=1$ give $\\pi_0=b/(a+b)$."
+ },
+ {
+  "id": "sp-8.1",
+  "lecture": 8,
+  "stem": "In a birth-death process, from a state $n\\ge1$ the possible jumps are:",
+  "correct": [
+   "Only to a neighbouring state: up by one (a birth) or down by one (a death).",
+   "Only to $n+1$ or to $n-1$, never by larger steps."
+  ],
+  "distractors": [
+   {
+    "text": "To any other state, with the rates given by the generator.",
+    "misconception": "describes a general continuous-time chain"
+   },
+   {
+    "text": "Only upward, to $n+1$, because births are the only possible events.",
+    "misconception": "describes a pure birth process"
+   },
+   {
+    "text": "By any integer amount, up or down, as in a batch arrival or departure process.",
+    "misconception": "allows batch arrivals or departures"
+   },
+   {
+    "text": "Only to state $0$ or to state $n+1$, as in a queue that empties completely.",
+    "misconception": "describes a reset process, not a birth-death process"
+   },
+   {
+    "text": "Only to $n+1$ or $n+2$, as when customers arrive singly or in pairs.",
+    "misconception": "mixes up the structure with batch arrivals"
+   }
+  ],
+  "explanation": "Neighbour-only jumps make the chain a skip-free path on the integers, which is why detailed balance can be solved one level at a time."
+ },
+ {
+  "id": "sp-8.2",
+  "lecture": 8,
+  "stem": "A birth-death process has birth rates $\\lambda_n$ (from $n$ to $n+1$) and death rates $\\mu_n$ (from $n$ to $n-1$). Its stationary distribution satisfies:",
+  "correct": [
+   "$\\pi_n\\lambda_n=\\pi_{n+1}\\mu_{n+1}$ for all $n\\ge0$, balancing the flow across each cut.",
+   "The flow up from level $n$ equals the flow down from level $n+1$, for every level $n$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\pi_n\\lambda_n=\\pi_{n+1}\\mu_{n}$ for all $n\\ge0$, using the death rate of level $n$.",
+    "misconception": "uses the death rate of the wrong state"
+   },
+   {
+    "text": "$\\pi_n\\mu_n=\\pi_{n+1}\\mu_{n+1}$ for all $n\\ge1$, balancing deaths against deaths.",
+    "misconception": "balances deaths against deaths"
+   },
+   {
+    "text": "$\\pi_n\\lambda_n=\\pi_n\\mu_n$ for all $n\\ge1$, balancing births with deaths at the same level.",
+    "misconception": "balances birth and death out of the same state"
+   },
+   {
+    "text": "$\\pi_n=\\lambda_n/\\mu_n$ for all $n\\ge1$, without reference to the neighbouring levels.",
+    "misconception": "ignores the neighbouring levels and normalisation"
+   },
+   {
+    "text": "$\\pi_{n+1}=\\pi_n+\\lambda_n/\\mu_{n+1}$ for all $n\\ge0$, a recursion that adds terms.",
+    "misconception": "adds instead of multiplying"
+   }
+  ],
+  "explanation": "Cutting the line between $n$ and $n+1$: the rate of crossing up is $\\pi_n\\lambda_n$, down is $\\pi_{n+1}\\mu_{n+1}$, and in equilibrium they match."
+ },
+ {
+  "id": "sp-8.3",
+  "lecture": 8,
+  "stem": "An M/M/1 queue has arrival rate $\\lambda$ and service rate $\\mu$. It has a stationary distribution if and only if:",
+  "correct": [
+   "$\\lambda<\\mu$: arrivals are slower than the service rate.",
+   "$\\rho=\\lambda/\\mu<1$: the server works faster than customers arrive."
+  ],
+  "distractors": [
+   {
+    "text": "$\\lambda\\le\\mu$: arrivals are no faster than the service rate.",
+    "misconception": "allows equality, where the queue length is null recurrent and has no stationary law"
+   },
+   {
+    "text": "$\\lambda>\\mu$: the queue must be fed faster than it is served to stay non-empty.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "$\\lambda=\\mu$: arrivals and service must balance exactly.",
+    "misconception": "thinks balance of the two rates is what makes it stable"
+   },
+   {
+    "text": "$\\lambda\\mu<1$: the product of the two rates must be small.",
+    "misconception": "multiplies the rates instead of comparing them"
+   },
+   {
+    "text": "$\\mu<1$: the service rate must be below one customer per time unit.",
+    "misconception": "ignores the arrival rate"
+   }
+  ],
+  "explanation": "The normalising sum $\\sum_n\\rho^n$ converges exactly when $\\rho<1$. At $\\rho=1$ the queue is recurrent but with infinite mean return time."
+ },
+ {
+  "id": "sp-8.4",
+  "lecture": 8,
+  "stem": "In equilibrium, the number $N$ of customers in a stable M/M/1 queue with $\\rho=\\lambda/\\mu<1$ has distribution:",
+  "correct": [
+   "Geometric: $P(N=n)=(1-\\rho)\\rho^{\\,n}$ for $n=0,1,2,\\dots$, with mean $\\rho/(1-\\rho)$.",
+   "$P(N=n)=\\rho^{\\,n}(1-\\rho)$ for $n\\ge0$, so in particular $P(N=0)=1-\\rho$."
+  ],
+  "distractors": [
+   {
+    "text": "Poisson with mean $\\rho$, as for the number of arrivals in a unit of time.",
+    "misconception": "mixes up the M/M/1 queue length with the Poisson arrival counts"
+   },
+   {
+    "text": "Uniform on $\\{0,1,\\dots,\\lceil\\rho\\rceil\\}$, since the queue is rarely long.",
+    "misconception": "invents a bounded uniform law"
+   },
+   {
+    "text": "$P(N=n)=\\rho^{\\,n}$ for $n=0,1,2,\\dots$, a geometric sequence that is not normalised.",
+    "misconception": "forgets the factor $1-\\rho$, so the probabilities do not sum to 1"
+   },
+   {
+    "text": "$P(N=n)=(1-\\rho)^{\\,n}\\rho$ for $n=0,1,2,\\dots$, with $\\rho$ and $1-\\rho$ swapped.",
+    "misconception": "swaps the roles of $\\rho$ and $1-\\rho$"
+   },
+   {
+    "text": "Exponential with rate $\\rho$, the continuous analogue of the geometric law.",
+    "misconception": "uses a continuous law for a count"
+   }
+  ],
+  "explanation": "Birth-death balance gives $\\pi_n=\\rho^n\\pi_0$; normalisation $\\sum_n\\pi_n=1$ gives $\\pi_0=1-\\rho$."
+ },
+ {
+  "id": "sp-8.5",
+  "lecture": 8,
+  "stem": "Little's law, for a stable system with long-run arrival rate $\\lambda$, states that:",
+  "correct": [
+   "$L=\\lambda W$: the mean number in the system equals the arrival rate times the mean time in it.",
+   "Mean number in the system = (arrival rate) $\\times$ (mean time a customer spends in it)."
+  ],
+  "distractors": [
+   {
+    "text": "$L=W/\\lambda$: the mean number in the system is the mean time in the system divided by the arrival rate.",
+    "misconception": "inverts the relation"
+   },
+   {
+    "text": "$L=\\lambda+W$: the mean number in the system is the arrival rate plus the mean time in the system.",
+    "misconception": "adds instead of multiplying"
+   },
+   {
+    "text": "$L=\\lambda^{2}W$: the mean number in the system grows with the square of the arrival rate.",
+    "misconception": "squares the arrival rate"
+   },
+   {
+    "text": "$L=\\lambda W$ holds only for M/M/1 queues, because it relies on exponential service times.",
+    "misconception": "thinks the law needs exponential service"
+   },
+   {
+    "text": "$W=\\lambda L$: the mean time in the system is the arrival rate times the mean number in it.",
+    "misconception": "swaps the roles of $L$ and $W$"
+   }
+  ],
+  "explanation": "Little's law needs only stability and long-run averages, no distributional assumptions. In M/M/1: $L=\\rho/(1-\\rho)$ and $W=1/(\\mu-\\lambda)$, and indeed $L=\\lambda W$."
+ },
+ {
+  "id": "sp-8.6",
+  "lecture": 8,
+  "stem": "An M/M/$c$ queue has arrival rate $\\lambda$ and $c$ servers, each with service rate $\\mu$. It is stable (has a stationary distribution) if and only if:",
+  "correct": [
+   "$\\lambda<c\\mu$: the arrival rate is below the total service capacity.",
+   "The arrival rate is below the maximum total departure rate of the $c$ servers."
+  ],
+  "distractors": [
+   {
+    "text": "$\\lambda<\\mu$: the arrival rate is below the rate of a single server.",
+    "misconception": "ignores the extra servers"
+   },
+   {
+    "text": "$\\lambda<\\mu/c$: the arrival rate is below the share of each server.",
+    "misconception": "divides capacity by the number of servers"
+   },
+   {
+    "text": "$c<\\lambda\\mu$: the number of servers is below the product of the two rates.",
+    "misconception": "scrambles the three parameters"
+   },
+   {
+    "text": "$\\lambda c<\\mu$: the arrival rate times the number of servers is below one service rate.",
+    "misconception": "multiplies the arrival rate by the number of servers"
+   },
+   {
+    "text": "$\\lambda<c+\\mu$: the arrival rate is below the number of servers plus the service rate.",
+    "misconception": "adds the number of servers to a rate"
+   }
+  ],
+  "explanation": "When all $c$ servers are busy, the departure rate is $c\\mu$; the queue is stable when the arrival rate is smaller than this maximum departure rate."
+ },
+ {
+  "id": "sp-9.1",
+  "lecture": 9,
+  "stem": "The defining assumption on the interarrival times of a renewal process is that they are:",
+  "correct": [
+   "Independent and identically distributed positive random variables, of any distribution.",
+   "I.i.d. random variables on $(0,\\infty)$, not necessarily exponential."
+  ],
+  "distractors": [
+   {
+    "text": "Exponential random variables only, since otherwise the process cannot be defined.",
+    "misconception": "confuses a renewal process with its Poisson special case"
+   },
+   {
+    "text": "Independent but with different distributions, with the mean growing in $n$.",
+    "misconception": "drops the identical distribution requirement"
+   },
+   {
+    "text": "Constant, equal to a fixed positive number $c$, so that renewals are evenly spaced.",
+    "misconception": "treats the process as deterministic"
+   },
+   {
+    "text": "Dependent, with each gap depending on the gap before it through a Markov chain.",
+    "misconception": "drops independence"
+   },
+   {
+    "text": "Uniformly distributed on a fixed interval $[a,b]$ with $0<a<b$, and nothing else.",
+    "misconception": "thinks a particular distribution is required"
+   }
+  ],
+  "explanation": "Renewal processes generalise the Poisson process by allowing any i.i.d. gap distribution. They are time-homogeneous Markov chains only for exponential gaps."
+ },
+ {
+  "id": "sp-9.2",
+  "lecture": 9,
+  "stem": "For a renewal process with mean interarrival time $\\mu<\\infty$, the number of renewals $N(t)$ satisfies $N(t)/t\\to$ ? as $t\\to\\infty$, almost surely:",
+  "correct": [
+   "$1/\\mu$, the reciprocal of the mean interarrival time.",
+   "One divided by the mean interarrival time."
+  ],
+  "distractors": [
+   {
+    "text": "$\\mu$, the mean interarrival time itself.",
+    "misconception": "uses the mean gap in place of the rate"
+   },
+   {
+    "text": "$\\mu^{2}$, the square of the mean interarrival time.",
+    "misconception": "squares the mean"
+   },
+   {
+    "text": "$1/\\mu^{2}$, the reciprocal of the squared mean.",
+    "misconception": "squares the correct rate"
+   },
+   {
+    "text": "$\\sigma^{2}/\\mu$, the variance of the gaps divided by their mean.",
+    "misconception": "brings in the variance, which does not affect the long-run rate"
+   },
+   {
+    "text": "$0$ for every renewal process, as renewals become rarer over time.",
+    "misconception": "confuses finite mean with infinite mean"
+   }
+  ],
+  "explanation": "If gaps average $\\mu$ time units, renewals arrive at rate $1/\\mu$ per unit time in the long run (strong law for renewal processes)."
+ },
+ {
+  "id": "sp-9.3",
+  "lecture": 9,
+  "stem": "Cycles are i.i.d., with cycle length $T$ and reward $R$ per cycle. By the renewal reward theorem, the long-run average reward per unit time is:",
+  "correct": [
+   "$E[R]/E[T]$, the expected reward per cycle over the expected cycle length.",
+   "Expected reward per cycle divided by expected cycle length."
+  ],
+  "distractors": [
+   {
+    "text": "$E[R/T]$, the expected reward per unit time within one cycle.",
+    "misconception": "averages the ratio instead of taking the ratio of averages"
+   },
+   {
+    "text": "$E[R]\\,E[T]$, the expected reward times the expected cycle length.",
+    "misconception": "multiplies instead of dividing"
+   },
+   {
+    "text": "$E[T]/E[R]$, the expected cycle length per unit of reward.",
+    "misconception": "inverts the ratio"
+   },
+   {
+    "text": "$E[R]/\\mathrm{Var}(T)$, the expected reward over the variance of the cycle length.",
+    "misconception": "uses the variance instead of the mean cycle length"
+   },
+   {
+    "text": "$E[R]$, the expected reward of one cycle, whatever the cycle length is.",
+    "misconception": "ignores cycle length, so long cycles are not penalised"
+   }
+  ],
+  "explanation": "Over $n$ cycles total reward $\\approx nE[R]$ and total time $\\approx nE[T]$, so the rate is $E[R]/E[T]$, which differs from $E[R/T]$ in general."
+ },
+ {
+  "id": "sp-9.4",
+  "lecture": 9,
+  "stem": "In a renewal process with non-degenerate interarrival times, the interval covering a fixed late time $t$ is, on average:",
+  "correct": [
+   "Longer than a typical interval, because long intervals are more likely to contain $t$.",
+   "Stochastically larger than a typical interarrival time (length-biased sampling)."
+  ],
+  "distractors": [
+   {
+    "text": "The same as a typical interval, because the gaps are identically distributed.",
+    "misconception": "ignores that choosing the interval by a time point is a biased selection"
+   },
+   {
+    "text": "Shorter than a typical interval, because short intervals are more frequent in the process.",
+    "misconception": "gets the direction of the bias wrong"
+   },
+   {
+    "text": "Exactly half as long as a typical interval, since $t$ falls in the middle of the interval.",
+    "misconception": "invents a constant factor"
+   },
+   {
+    "text": "Twice as long as a typical interval, whatever the distribution of the gaps is.",
+    "misconception": "generalises the exponential case, where the mean is about doubled"
+   },
+   {
+    "text": "Equal to $1/\\lambda$ in every renewal process, as it is for the Poisson process.",
+    "misconception": "applies a Poisson-specific constant"
+   }
+  ],
+  "explanation": "A fixed time $t$ falls in a long gap with probability proportional to its length. This is the inspection paradox."
+ },
+ {
+  "id": "sp-9.5",
+  "lecture": 9,
+  "stem": "Among renewal counting processes $N(t)$, which are time-homogeneous continuous-time Markov chains?",
+  "correct": [
+   "Those with exponential interarrival times, that is, exactly the Poisson processes.",
+   "Only the Poisson process, whose gaps are exponential and therefore memoryless."
+  ],
+  "distractors": [
+   {
+    "text": "Every renewal process, because the process starts afresh at each renewal.",
+    "misconception": "thinks renewals reset the memory, so all renewal processes are Markov"
+   },
+   {
+    "text": "Those with uniformly distributed interarrival times, since they have a bounded range.",
+    "misconception": "picks a bounded distribution, which remembers elapsed time"
+   },
+   {
+    "text": "Those with constant interarrival times, since the future is then determined by the past.",
+    "misconception": "thinks a deterministic process is time-homogeneous Markov, but the next jump time depends on $t \\bmod c$"
+   },
+   {
+    "text": "Those with Gamma(2) interarrival times, since the Gamma density is smooth.",
+    "misconception": "thinks a smooth density is enough"
+   },
+   {
+    "text": "Those with finite variance, since then the elapsed time has no influence.",
+    "misconception": "confuses a moment condition with memorylessness"
+   }
+  ],
+  "explanation": "$N(t)$ alone forgets how long ago the last renewal was; the future depends on that elapsed time unless the gap is memoryless, i.e. exponential. (With constant gaps $c$, $N(t)=\\lfloor t/c\\rfloor$ is deterministic: Markov only in the time-inhomogeneous sense, since the next jump time depends on $t$.)"
+ },
+ {
+  "id": "sp-10.1",
+  "lecture": 10,
+  "stem": "In a Galton-Watson branching process with $Z_0=1$ and mean offspring number $m$, the expected size of generation $n$ is:",
+  "correct": [
+   "$E[Z_n]=m^{\\,n}$, because $E[Z_{n+1}\\mid Z_n]=mZ_n$.",
+   "The offspring mean $m$ raised to the $n$-th power."
+  ],
+  "distractors": [
+   {
+    "text": "$nm$, growing linearly in the generation number.",
+    "misconception": "grows linearly instead of geometrically"
+   },
+   {
+    "text": "$m/n$, the offspring mean divided by the generation number.",
+    "misconception": "divides by the generation number"
+   },
+   {
+    "text": "$m^{1/n}$, the $n$-th root of the offspring mean.",
+    "misconception": "inverts the exponent"
+   },
+   {
+    "text": "$(1+m)^{n}$, counting parents as well as children in each generation.",
+    "misconception": "counts parents as well as children in each generation"
+   },
+   {
+    "text": "$n!\\,m$, factorial growth driven by the offspring mean.",
+    "misconception": "invents a factorial"
+   }
+  ],
+  "explanation": "$E[Z_{n+1}\\mid Z_n]=mZ_n$, so $E[Z_{n+1}]=mE[Z_n]$ and $E[Z_n]=m^n$."
+ },
+ {
+  "id": "sp-10.2",
+  "lecture": 10,
+  "stem": "For a non-degenerate offspring distribution (not exactly one child with probability 1), the population dies out with probability 1 if and only if:",
+  "correct": [
+   "The mean offspring number satisfies $m\\le1$, critical case included.",
+   "On average each individual has at most one child, even at criticality."
+  ],
+  "distractors": [
+   {
+    "text": "$m<1$ only; at the critical value $m=1$ extinction is no longer certain.",
+    "misconception": "forgets that the critical case $m=1$ also dies out"
+   },
+   {
+    "text": "$m\\ge1$, since a larger mean offspring number makes the line die out.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "$m>1$, since only supercritical populations can reach extinction.",
+    "misconception": "reverses the inequality and also drops the critical case"
+   },
+   {
+    "text": "$m\\le2$, since each individual has at most two children on average.",
+    "misconception": "uses a wrong threshold"
+   },
+   {
+    "text": "$P(\\text{no offspring})>\\tfrac12$, whatever the rest of the offspring law is.",
+    "misconception": "replaces the mean by one probability, which is neither necessary nor sufficient"
+   }
+  ],
+  "explanation": "If $m\\le1$ the smallest root of $G(s)=s$ is 1; if $m>1$ it is strictly below 1."
+ },
+ {
+  "id": "sp-10.3",
+  "lecture": 10,
+  "stem": "With offspring pgf $G$, the extinction probability $\\eta$ is:",
+  "correct": [
+   "The smallest non-negative root of the equation $s=G(s)$.",
+   "The minimal solution in $[0,1]$ of $G(s)=s$."
+  ],
+  "distractors": [
+   {
+    "text": "The largest root of $G(s)=s$ in $[0,1]$, which is always $s=1$.",
+    "misconception": "picks the root $s=1$, which always solves the equation"
+   },
+   {
+    "text": "The root of $G(s)=0$ in the interval $[0,1]$.",
+    "misconception": "solves the wrong equation"
+   },
+   {
+    "text": "$G(1)$, the pgf evaluated at one.",
+    "misconception": "evaluates the pgf at 1, which is always 1"
+   },
+   {
+    "text": "$1-G(0)$, one minus the probability of having no children.",
+    "misconception": "confuses the extinction probability with the survival probability after one generation"
+   },
+   {
+    "text": "The root of $G'(s)=1$, where the pgf has slope one.",
+    "misconception": "mixes up the criticality condition with the fixed-point equation"
+   }
+  ],
+  "explanation": "$\\eta=\\sum_k p_k\\eta^k=G(\\eta)$ by conditioning on the first generation; $s=1$ is always a root, and $\\eta$ is the smallest one."
+ },
+ {
+  "id": "sp-10.4",
+  "lecture": 10,
+  "stem": "A branching process has mean offspring number $m>1$. Then:",
+  "correct": [
+   "The extinction probability is below 1: the population survives with positive probability.",
+   "There is a positive chance of non-extinction, and on that event $Z_n\\to\\infty$."
+  ],
+  "distractors": [
+   {
+    "text": "Extinction is still certain, but it takes longer than in the subcritical case.",
+    "misconception": "applies the subcritical or critical conclusion"
+   },
+   {
+    "text": "The extinction probability is exactly $1/m$, whatever the offspring distribution.",
+    "misconception": "guesses a formula that holds only for special offspring laws"
+   },
+   {
+    "text": "The extinction probability is $m-1$, which is positive exactly when $m>1$.",
+    "misconception": "invents a formula that can exceed 1"
+   },
+   {
+    "text": "The population size grows deterministically as $m^{n}$, with no randomness.",
+    "misconception": "confuses the mean with the random size"
+   },
+   {
+    "text": "The population size stays bounded, although it may fluctuate.",
+    "misconception": "ignores that survival means unbounded growth"
+   }
+  ],
+  "explanation": "Supercritical: $G(s)=s$ has a root $\\eta<1$. Only the mean $E[Z_n]=m^n$ is deterministic; the actual $Z_n$ is random and can be 0."
+ },
+ {
+  "id": "sp-10.5",
+  "lecture": 10,
+  "stem": "Let $G$ be the offspring pgf and $Z_0=1$. The pgf of $Z_2$, the size of generation 2, is:",
+  "correct": [
+   "$G(G(s))$, the offspring pgf composed with itself.",
+   "The composition of the offspring pgf with itself."
+  ],
+  "distractors": [
+   {
+    "text": "$G(s)^{2}$, the square of the offspring pgf at the point $s$.",
+    "misconception": "squares instead of composing"
+   },
+   {
+    "text": "$2G(s)$, twice the offspring pgf at the point $s$.",
+    "misconception": "doubles the pgf"
+   },
+   {
+    "text": "$G(s)+G(s)$, the sum of the pgfs of two generations.",
+    "misconception": "adds the pgf to itself"
+   },
+   {
+    "text": "$G(2s)$, the offspring pgf evaluated at the point $2s$.",
+    "misconception": "rescales the argument instead of composing"
+   },
+   {
+    "text": "$G'(s)$, the derivative of the offspring pgf.",
+    "misconception": "differentiates instead of composing"
+   }
+  ],
+  "explanation": "Each generation-1 individual has an independent $G$-distributed number of children, so the pgf of the total is $G_1(G(s))=G(G(s))$."
+ },
+ {
+  "id": "sp-11.1",
+  "lecture": 11,
+  "stem": "A process $(M_n)$ with $E|M_n|<\\infty$ is a martingale if:",
+  "correct": [
+   "$E[M_{n+1}\\mid M_0,\\dots,M_n]=M_n$ for every $n\\ge0$, almost surely.",
+   "The best prediction of the next value, given the history, is the current value."
+  ],
+  "distractors": [
+   {
+    "text": "$E[M_{n+1}]=0$ for every $n$, so that the process is centred.",
+    "misconception": "mixes up a martingale with a mean-zero process"
+   },
+   {
+    "text": "$M_{n+1}\\ge M_n$ almost surely, so that the process never decreases.",
+    "misconception": "describes a non-decreasing process, not a martingale"
+   },
+   {
+    "text": "The increments $M_{n+1}-M_n$ are independent of one another.",
+    "misconception": "thinks independent increments are enough, but a mean-zero condition is also needed"
+   },
+   {
+    "text": "$E[M_{n+1}\\mid M_n]=E[M_n]$, the average of the current value.",
+    "misconception": "replaces the current value by its average"
+   },
+   {
+    "text": "$\\mathrm{Var}(M_{n+1})=\\mathrm{Var}(M_n)$ for every $n$, so the spread stays constant.",
+    "misconception": "confuses the martingale property with constant variance"
+   }
+  ],
+  "explanation": "Martingale means a fair game: conditionally on what has happened, the expected next value is the current value."
+ },
+ {
+  "id": "sp-11.2",
+  "lecture": 11,
+  "stem": "For a martingale $(M_n)$, the expectation $E[M_n]$ is:",
+  "correct": [
+   "Constant in $n$ and equal to $E[M_0]$, by the tower property.",
+   "The same for every $n$, because $E[M_{n+1}]=E[M_n]$ at each step."
+  ],
+  "distractors": [
+   {
+    "text": "Increasing in $n$, because a fair game accumulates winnings.",
+    "misconception": "describes a submartingale"
+   },
+   {
+    "text": "Equal to $0$ for every $n$, since the process is a fair game.",
+    "misconception": "assumes the martingale starts at zero"
+   },
+   {
+    "text": "Decreasing in $n$, because randomness tends to lose value.",
+    "misconception": "describes a supermartingale"
+   },
+   {
+    "text": "Equal to $n\\,E[M_0]$, growing linearly with the number of steps.",
+    "misconception": "makes the mean grow with time"
+   },
+   {
+    "text": "Infinite, because the process can reach arbitrarily large values.",
+    "misconception": "ignores the integrability condition"
+   }
+  ],
+  "explanation": "Taking expectations of $E[M_{n+1}\\mid\\mathcal F_n]=M_n$ gives $E[M_{n+1}]=E[M_n]$ (tower property)."
+ },
+ {
+  "id": "sp-11.3",
+  "lecture": 11,
+  "stem": "For the simple symmetric random walk $S_n$ with $S_0=0$, which of the following is a martingale?",
+  "correct": [
+   "$S_n^{2}-n$, the squared position minus the number of steps.",
+   "The squared position $S_n^{2}$ with its mean growth $n$ subtracted."
+  ],
+  "distractors": [
+   {
+    "text": "$S_n^{2}$, the squared position by itself.",
+    "misconception": "forgets that the square grows on average (submartingale)"
+   },
+   {
+    "text": "$S_n^{2}+n$, the squared position plus the number of steps.",
+    "misconception": "gets the sign of the compensator wrong"
+   },
+   {
+    "text": "$S_n^{2}-n^{2}$, the squared position minus the squared number of steps.",
+    "misconception": "subtracts $n^2$ instead of $n$"
+   },
+   {
+    "text": "$|S_n|$, the absolute value of the position.",
+    "misconception": "thinks absolute value preserves the fair-game property (it is a submartingale)"
+   },
+   {
+    "text": "$S_n^{3}$, the cubed position of the walk.",
+    "misconception": "assumes any odd power is a martingale"
+   }
+  ],
+  "explanation": "$E[S_{n+1}^2\\mid S_n]=S_n^2+1$, so $S_n^2-n$ is a martingale. $E[S_{n+1}^3\\mid S_n]=S_n^3+3S_n$, so $S_n^3$ is not."
+ },
+ {
+  "id": "sp-11.4",
+  "lecture": 11,
+  "stem": "The optional stopping theorem gives $E[M_T]=E[M_0]$ for a martingale under suitable conditions. Which of the following guarantees it?",
+  "correct": [
+   "$T$ is a stopping time and is bounded by a fixed constant $K$.",
+   "$T$ is a stopping time with $T\\le K$ almost surely for some constant $K$."
+  ],
+  "distractors": [
+   {
+    "text": "$T$ is any random time, for example the time at which the path attains its maximum.",
+    "misconception": "forgets that $T$ must be decided using only information available so far"
+   },
+   {
+    "text": "$M$ is a non-negative martingale and $T$ is any stopping time, bounded or not.",
+    "misconception": "thinks non-negativity alone is enough, though stopping can still lose mass"
+   },
+   {
+    "text": "$T<\\infty$ almost surely, with no other condition on $T$ or on $M$.",
+    "misconception": "forgets the doubling strategy: finite stopping time but $E[M_T]\\ne E[M_0]$"
+   },
+   {
+    "text": "$E|M_n|<\\infty$ for each $n$, and nothing else is required.",
+    "misconception": "confuses the condition for being a martingale with conditions for stopping"
+   },
+   {
+    "text": "$T$ is the first time that $M$ exceeds its eventual maximum.",
+    "misconception": "uses future information, so $T$ is not a stopping time"
+   }
+  ],
+  "explanation": "A bounded stopping time is the simplest sufficient condition. For unbounded $T$ one needs extra conditions such as bounded increments with $E[T]<\\infty$, or uniform integrability."
+ },
+ {
+  "id": "sp-11.5",
+  "lecture": 11,
+  "stem": "Consider the fair walk $S_n$ started at $i\\in\\{0,\\dots,N\\}$, stopped at the first time $T$ it hits $0$ or $N$. Why does optional stopping give $P(S_T=N)=i/N$?",
+  "correct": [
+   "$S_n$ is a martingale, so $i=E[S_T]=N\\cdot P(S_T=N)$, since $S_T\\in\\{0,N\\}$.",
+   "By optional stopping $E[S_T]=i$, and $S_T\\in\\{0,N\\}$, hence $P(S_T=N)=i/N$."
+  ],
+  "distractors": [
+   {
+    "text": "$S_n^{2}$ is a martingale, so $E[S_T^2]=i^2$ and $P(S_T=N)=i^{2}/N^{2}$.",
+    "misconception": "treats $S_n^2$ as a martingale, but its compensator is $S_n^2-n$"
+   },
+   {
+    "text": "By symmetry $E[S_T]=N/2$ whatever the start, so $P(S_T=N)=\\tfrac12$.",
+    "misconception": "applies symmetry while ignoring the starting point"
+   },
+   {
+    "text": "$S_n$ drifts upward, so $E[S_T]>i$ and the probability exceeds $i/N$.",
+    "misconception": "thinks the fair walk has a positive drift"
+   },
+   {
+    "text": "$T$ is bounded by $N$, so Wald's identity applies directly to give the answer.",
+    "misconception": "claims a false bound on $T$; the stopped martingale is bounded instead"
+   },
+   {
+    "text": "Because $S_T=N$ with probability 1 for a walk that keeps going until it stops.",
+    "misconception": "ignores that the walk can also hit $0$"
+   }
+  ],
+  "explanation": "$T$ is not bounded, but the stopped walk $S_{n\\wedge T}$ stays in $[0,N]$, so optional stopping applies. Then $i=E[S_T]=N\\,P(S_T=N)$."
+ },
+ {
+  "id": "sp-1.7",
+  "lecture": 1,
+  "stem": "$(X_n)$ is a Markov chain and $f$ is a function on its state space. Is $Y_n=f(X_n)$ necessarily a Markov chain?",
+  "correct": [
+   "No: $f(X_n)$ can lose information, and then $(Y_n)$ need not have the Markov property.",
+   "Not in general. Merging states can destroy the Markov property unless a special lumping condition holds."
+  ],
+  "distractors": [
+   {
+    "text": "Yes: $Y_{n+1}=f(X_{n+1})$ depends on the past only through $X_n$, and hence only through $Y_n$.",
+    "misconception": "assumes that depending on the past only through $X_n$ means depending on it only through $f(X_n)$"
+   },
+   {
+    "text": "Yes: any deterministic function of a Markov chain is again a Markov chain, with a transition matrix obtained by applying $f$ to $P$.",
+    "misconception": "thinks a function of a Markov chain inherits the property automatically"
+   },
+   {
+    "text": "Yes if the chain is irreducible, since then every function of the state is determined by the stationary law.",
+    "misconception": "invents a role for irreducibility and the stationary law"
+   },
+   {
+    "text": "No unless $f$ is the identity map, because any other $f$ changes the state space.",
+    "misconception": "forgets that a relabelling (injective $f$) keeps the Markov property"
+   },
+   {
+    "text": "Yes if $f$ is non-constant, since only a constant $f$ could break the Markov property.",
+    "misconception": "thinks only trivial functions can fail"
+   }
+  ],
+  "explanation": "Lumping states can create memory: the future of $Y$ can depend on which underlying state produced the current value, which $Y$ alone does not reveal. An injective $f$ (a relabelling) does preserve the Markov property, and so does a lumping that satisfies the 'strong lumpability' condition."
+ },
+ {
+  "id": "sp-2.7",
+  "lecture": 2,
+  "stem": "A finite Markov chain has a closed communicating class $C$ (once the chain is in $C$ it never leaves). Which statement is correct?",
+  "correct": [
+   "Every state of $C$ is recurrent, because the chain stays in a finite set and must keep returning.",
+   "The chain restricted to $C$ is finite and irreducible, so all of its states are positive recurrent."
+  ],
+  "distractors": [
+   {
+    "text": "States of $C$ are recurrent only if $C$ is aperiodic, since periodic classes cannot be recurrent.",
+    "misconception": "mixes up periodicity with transience"
+   },
+   {
+    "text": "$C$ contains at least one transient state whenever it has more than one state.",
+    "misconception": "thinks closed classes with several states must contain transient states"
+   },
+   {
+    "text": "States of $C$ are transient if some state outside $C$ can reach $C$, since the chain may never return.",
+    "misconception": "lets entry from outside decide the type of the states inside"
+   },
+   {
+    "text": "A closed class can contain both recurrent and transient states if its transition probabilities are unequal.",
+    "misconception": "forgets that recurrence is a class property"
+   },
+   {
+    "text": "States of $C$ are recurrent only if the whole chain is irreducible, so that every state is reachable.",
+    "misconception": "thinks recurrence of a class needs irreducibility of the whole chain"
+   }
+  ],
+  "explanation": "A finite closed class cannot be left and cannot be avoided forever, so every state in it is revisited infinitely often: it is recurrent (indeed positive recurrent). Periodicity and states outside $C$ do not matter."
+ },
+ {
+  "id": "sp-3.6",
+  "lecture": 3,
+  "stem": "In an irreducible positive recurrent Markov chain, the expected hitting time $E_i[T_j]$ of a state $j$, starting from a state $i$, is:",
+  "correct": [
+   "Finite for every pair of states $i$ and $j$.",
+   "Finite whichever starting state $i$ and target state $j$ are chosen."
+  ],
+  "distractors": [
+   {
+    "text": "Finite only when $i=j$, and infinite when $i\\ne j$.",
+    "misconception": "mixes up the return time with the hitting time of a different state"
+   },
+   {
+    "text": "Equal to $1/\\pi_j$ for every starting state $i$, including $i\\ne j$.",
+    "misconception": "applies the formula for the mean return time to hitting times from other states"
+   },
+   {
+    "text": "Finite only if the chain is aperiodic, since periodic chains avoid some states at some times.",
+    "misconception": "thinks periodicity can make hitting times infinite"
+   },
+   {
+    "text": "Finite only if the state space is finite, since infinite chains can wander away.",
+    "misconception": "thinks positive recurrence needs a finite state space"
+   },
+   {
+    "text": "Infinite for at least one pair $i\\ne j$ whenever the chain has more than two states.",
+    "misconception": "invents infinite hitting times in a positive recurrent chain"
+   }
+  ],
+  "explanation": "Irreducible plus positive recurrent gives finite mean hitting times between every pair of states: from $i$ the chain reaches $j$ in finite expected time and then also returns in finite expected time. Periodicity and the size of the state space do not change this."
+ },
+ {
+  "id": "sp-4.7",
+  "lecture": 4,
+  "stem": "A chain has exactly two closed communicating classes, each positive recurrent, with stationary distributions $\\pi^{(1)}$ and $\\pi^{(2)}$ (each supported on its own class). Which statement is correct?",
+  "correct": [
+   "Every mixture $\\alpha\\pi^{(1)}+(1-\\alpha)\\pi^{(2)}$ with $0\\le\\alpha\\le1$ is stationary, so the stationary distribution is not unique.",
+   "There are infinitely many stationary distributions, namely all convex combinations of $\\pi^{(1)}$ and $\\pi^{(2)}$."
+  ],
+  "distractors": [
+   {
+    "text": "The stationary distribution is unique, because each closed class has its own unique stationary distribution.",
+    "misconception": "assumes uniqueness within a class gives uniqueness for the whole chain"
+   },
+   {
+    "text": "There are exactly two stationary distributions, $\\pi^{(1)}$ and $\\pi^{(2)}$, and no others.",
+    "misconception": "forgets that mixtures of stationary distributions are stationary"
+   },
+   {
+    "text": "There is no stationary distribution, because the chain is not irreducible.",
+    "misconception": "thinks irreducibility is needed for existence"
+   },
+   {
+    "text": "The only stationary distribution is the equal mixture $\\tfrac12\\pi^{(1)}+\\tfrac12\\pi^{(2)}$.",
+    "misconception": "singles out one mixture without a reason"
+   },
+   {
+    "text": "Only the distribution supported on the larger class is stationary, because the chain eventually settles there.",
+    "misconception": "confuses stationarity with where the chain ends up"
+   }
+  ],
+  "explanation": "If $\\pi^{(1)}P=\\pi^{(1)}$ and $\\pi^{(2)}P=\\pi^{(2)}$, then any convex combination also satisfies $\\pi P=\\pi$. Uniqueness needs a single closed class."
+ },
+ {
+  "id": "sp-5.6",
+  "lecture": 5,
+  "stem": "A gambler starts with $i\\ge1$ units and wins each round with probability $p>\\tfrac12$ (loses with probability $q=1-p$). There is no upper target. With $r=q/p$, the probability that he is eventually ruined is:",
+  "correct": [
+   "$r^{\\,i}=(q/p)^{i}$, which is less than 1.",
+   "$(q/p)^{i}$: the chance that the walk ever goes down by $i$ levels."
+  ],
+  "distractors": [
+   {
+    "text": "$1$, because a game with no target continues until the gambler is ruined.",
+    "misconception": "assumes ruin is certain when there is no upper barrier"
+   },
+   {
+    "text": "$q^{\\,i}$, the probability of losing $i$ rounds in a row.",
+    "misconception": "counts only the direct path of $i$ consecutive losses"
+   },
+   {
+    "text": "$1-(q/p)^{i}$, the probability that he is never ruined.",
+    "misconception": "reports the survival probability instead of the ruin probability"
+   },
+   {
+    "text": "$i\\,q/p$, growing linearly with the starting fortune.",
+    "misconception": "makes the ruin probability grow with the fortune, and it can exceed 1"
+   },
+   {
+    "text": "$q/p$, whatever the starting fortune $i$ is.",
+    "misconception": "ignores the dependence on the starting fortune"
+   }
+  ],
+  "explanation": "Ruin from $i$ means reaching $0$ before $\\infty$, the limit $N\\to\\infty$ of $1-(1-r^i)/(1-r^N)$ with $r<1$, giving $r^i$."
+ },
+ {
+  "id": "sp-6.7",
+  "lecture": 6,
+  "stem": "$X\\sim\\mathrm{Exp}(a)$ and $Y\\sim\\mathrm{Exp}(b)$ are independent. Which statement about $\\min(X,Y)$ is correct?",
+  "correct": [
+   "$\\min(X,Y)\\sim\\mathrm{Exp}(a+b)$, and the minimum is independent of which of $X$ and $Y$ is smaller.",
+   "It is $\\mathrm{Exp}(a+b)$, and $P(X<Y)=a/(a+b)$ whatever the value of the minimum happens to be."
+  ],
+  "distractors": [
+   {
+    "text": "It is $\\mathrm{Exp}\\big(ab/(a+b)\\big)$, a harmonic-type combination of the two rates, independent of $\\{X<Y\\}$.",
+    "misconception": "combines the rates with a product over a sum instead of adding them"
+   },
+   {
+    "text": "It is $\\mathrm{Exp}(\\max(a,b))$, because the faster clock always rings first, and so decides the race.",
+    "misconception": "thinks the faster clock always wins"
+   },
+   {
+    "text": "It is $\\mathrm{Exp}\\big((a+b)/2\\big)$, the average of the two rates, and independent of $\\{X<Y\\}$.",
+    "misconception": "averages the rates instead of adding them"
+   },
+   {
+    "text": "It is $\\mathrm{Exp}(a+b)$, but $X$ is more likely to be the smaller one when the minimum is small.",
+    "misconception": "thinks the identity of the winner depends on the time of the first ring"
+   },
+   {
+    "text": "It is a Gamma random variable with shape 2, being the first of two exponential waiting times.",
+    "misconception": "mixes up a minimum of two clocks with a sum of two waiting times"
+   }
+  ],
+  "explanation": "$P(\\min>t)=P(X>t)P(Y>t)=e^{-(a+b)t}$, so the minimum is $\\mathrm{Exp}(a+b)$. Also $P(X<Y\\mid\\min=t)=a/(a+b)$ for all $t$."
+ },
+ {
+  "id": "sp-6.8",
+  "lecture": 6,
+  "stem": "Given $N(t)=n$ in a Poisson process, the $n$ arrival times in $[0,t]$ are distributed as:",
+  "correct": [
+   "The order statistics of $n$ independent $\\mathrm{Uniform}(0,t)$ random variables.",
+   "The sorted values of $n$ independent random points chosen uniformly in $[0,t]$."
+  ],
+  "distractors": [
+   {
+    "text": "$n$ independent $\\mathrm{Exp}(\\lambda)$ random variables, sorted into increasing order.",
+    "misconception": "carries over the interarrival law to the arrival times"
+   },
+   {
+    "text": "Equally spaced points $t/(n+1),\\,2t/(n+1),\\dots,nt/(n+1)$, with no randomness left.",
+    "misconception": "thinks conditioning on the count removes all randomness"
+   },
+   {
+    "text": "The first $n$ partial sums of independent $\\mathrm{Exp}(\\lambda)$ gaps, without any conditioning on $t$.",
+    "misconception": "forgets that the conditioning changes the joint law"
+   },
+   {
+    "text": "$n$ independent $\\mathrm{Uniform}(0,t)$ variables, but with the largest one fixed equal to $t$.",
+    "misconception": "pins the last arrival to the end of the interval"
+   },
+   {
+    "text": "A random set whose joint law depends on the rate $\\lambda$ through the factor $\\lambda^{n}$.",
+    "misconception": "thinks the conditional law still depends on the rate"
+   }
+  ],
+  "explanation": "Given the number of points, a Poisson process places them like independent uniform points; the rate $\\lambda$ drops out."
+ },
+ {
+  "id": "sp-6.9",
+  "lecture": 6,
+  "stem": "For a Poisson process of rate $\\lambda$, times $s<t$ and counts $m\\le n$, $P\\big(N(t)=n\\mid N(s)=m\\big)$ equals:",
+  "correct": [
+   "$e^{-\\lambda(t-s)}\\dfrac{\\big(\\lambda(t-s)\\big)^{n-m}}{(n-m)!}$.",
+   "The $\\mathrm{Poisson}\\big(\\lambda(t-s)\\big)$ probability of exactly $n-m$ arrivals in $(s,t]$."
+  ],
+  "distractors": [
+   {
+    "text": "$e^{-\\lambda t}\\dfrac{(\\lambda t)^{n}}{n!}$, the unconditional probability that $N(t)=n$.",
+    "misconception": "ignores the information that $N(s)=m$"
+   },
+   {
+    "text": "$e^{-\\lambda t}\\dfrac{(\\lambda t)^{n-m}}{(n-m)!}$, with the mean based on the whole interval $(0,t]$.",
+    "misconception": "uses the wrong interval length for the remaining arrivals"
+   },
+   {
+    "text": "$e^{-\\lambda(t-s)}\\dfrac{\\big(\\lambda(t-s)\\big)^{n}}{n!}$, ignoring the $m$ arrivals already seen.",
+    "misconception": "forgets that only $n-m$ more arrivals are needed"
+   },
+   {
+    "text": "$\\binom{n}{m}(s/t)^{m}(1-s/t)^{n-m}$, the binomial probability of the split.",
+    "misconception": "gives the reversed conditional probability $P(N(s)=m\\mid N(t)=n)$"
+   },
+   {
+    "text": "$1$ if $n=m+1$ and $0$ otherwise, since arrivals occur one at a time.",
+    "misconception": "confuses ordinary arrivals with a single arrival per interval"
+   }
+  ],
+  "explanation": "Independent stationary increments: given $N(s)=m$, the count in $(s,t]$ is still $\\mathrm{Poisson}(\\lambda(t-s))$, and we need exactly $n-m$ of them."
+ },
+ {
+  "id": "sp-7.7",
+  "lecture": 7,
+  "stem": "A finite continuous-time chain has an absorbing state that can be reached from every other state. The time until absorption, starting from a transient state, is:",
+  "correct": [
+   "Finite with probability 1, and a sum of exponential holding times along a random path of states.",
+   "A phase-type random variable: a random sum of independent exponential holding times."
+  ],
+  "distractors": [
+   {
+    "text": "Exponential with rate equal to the exit rate of the starting state.",
+    "misconception": "takes the first holding time for the whole time to absorption"
+   },
+   {
+    "text": "Gamma distributed, because each visited state contributes one exponential holding time.",
+    "misconception": "forgets that the rates and the number of steps are random"
+   },
+   {
+    "text": "Geometric, since the chain either gets absorbed or does not at each jump.",
+    "misconception": "mixes up continuous time with a discrete number of jumps"
+   },
+   {
+    "text": "Infinite with positive probability, because the chain may keep moving among the transient states forever.",
+    "misconception": "thinks a finite chain can avoid absorption forever"
+   },
+   {
+    "text": "Uniformly distributed between the shortest and the longest possible holding times.",
+    "misconception": "replaces a sum of exponentials by a uniform law"
+   }
+  ],
+  "explanation": "Each visit contributes an independent exponential holding time, and the number and identity of visited states is random. Absorption is certain in a finite chain with an accessible absorbing state."
+ },
+ {
+  "id": "sp-8.7",
+  "lecture": 8,
+  "stem": "In equilibrium, an M/M/1 queue with arrival rate $\\lambda$ and service rate $\\mu>\\lambda$ has a departure process that is:",
+  "correct": [
+   "A Poisson process with rate $\\lambda$, the same as the arrival rate (Burke's theorem).",
+   "Poisson with the same rate $\\lambda$ as the arrival process, whatever $\\mu>\\lambda$ is."
+  ],
+  "distractors": [
+   {
+    "text": "A Poisson process with rate $\\mu$, the rate at which the server works.",
+    "misconception": "uses the service rate, though the server is idle part of the time"
+   },
+   {
+    "text": "A Poisson process with rate $\\mu-\\lambda$, the spare capacity of the server.",
+    "misconception": "uses the spare capacity as the departure rate"
+   },
+   {
+    "text": "Periodic, with departures spaced $1/\\mu$ apart, since the server always works at full speed.",
+    "misconception": "thinks departures are regular because service is exponential"
+   },
+   {
+    "text": "Not a Poisson process, because the service times are exponential rather than the arrivals.",
+    "misconception": "thinks a Poisson input cannot give a Poisson output"
+   },
+   {
+    "text": "A Poisson process with rate $\\lambda\\mu/(\\lambda+\\mu)$, a compromise between the two rates.",
+    "misconception": "invents a harmonic-type combination of the rates"
+   }
+  ],
+  "explanation": "Burke: the stationary M/M/1 queue is reversible, so its departure process has the same law as its arrival process, namely Poisson($\\lambda$), whatever $\\mu>\\lambda$ is."
+ },
+ {
+  "id": "sp-9.6",
+  "lecture": 9,
+  "stem": "Let $F$ be the distribution function of the interarrival times of a renewal process and $m(t)=E[N(t)]$. Conditioning on the first renewal gives:",
+  "correct": [
+   "$m(t)=F(t)+\\displaystyle\\int_0^t m(t-s)\\,dF(s)$, the renewal equation.",
+   "$m(t)=F(t)+E\\big[m(t-S_1);\\,S_1\\le t\\big]$, with $S_1$ the first renewal time."
+  ],
+  "distractors": [
+   {
+    "text": "$m(t)=t/\\mu$ for every $t\\ge0$, exactly, whatever the gap distribution.",
+    "misconception": "uses the asymptotic rate as an exact formula"
+   },
+   {
+    "text": "$m(t)=F(t)^{2}$, the probability that two renewals occur by time $t$.",
+    "misconception": "confuses the mean with the probability of two renewals"
+   },
+   {
+    "text": "$m(t)=\\displaystyle\\int_0^t m(t-s)\\,dF(s)$, without the term for the first renewal itself.",
+    "misconception": "forgets to count the first renewal"
+   },
+   {
+    "text": "$m(t)=1-F(t)$, the probability that no renewal has happened by time $t$.",
+    "misconception": "gives the probability of no renewal instead of the mean count"
+   },
+   {
+    "text": "$m(t)=F(t)+m(t)$, since after the first renewal the process restarts.",
+    "misconception": "writes a tautology and cannot be solved"
+   }
+  ],
+  "explanation": "If the first renewal is at $s\\le t$, we count it (1) and then expect $m(t-s)$ more; otherwise there are none. Averaging over $S_1\\sim F$ gives $m(t)=\\int_0^t(1+m(t-s))\\,dF(s)=F(t)+\\int_0^tm(t-s)\\,dF(s)$."
+ },
+ {
+  "id": "sp-10.6",
+  "lecture": 10,
+  "stem": "In a subcritical branching process ($m<1$, $Z_0=1$), the expected total number of individuals ever born, $E\\big[\\sum_{n\\ge0}Z_n\\big]$, is:",
+  "correct": [
+   "$1/(1-m)$, the sum of the geometric series $\\sum_n m^{\\,n}$, root included, for $m<1$.",
+   "$\\sum_{n\\ge0}m^{\\,n}=1/(1-m)$, which is finite because $m<1$ for a subcritical process."
+  ],
+  "distractors": [
+   {
+    "text": "$m/(1-m)$, which leaves out the initial individual from the total count of the population.",
+    "misconception": "forgets the initial individual"
+   },
+   {
+    "text": "Infinite, because the line may continue for many generations before it dies out.",
+    "misconception": "thinks a subcritical population can have infinite expected progeny"
+   },
+   {
+    "text": "$1/m$, the reciprocal of the offspring mean, which exceeds 1 when $m<1$.",
+    "misconception": "inverts the offspring mean"
+   },
+   {
+    "text": "$1+m+m^{2}$, the sum over the first three generations only, and nothing after that.",
+    "misconception": "truncates the geometric series"
+   },
+   {
+    "text": "$(1-m)^{-2}$, the square of the reciprocal of $1-m$, as for a double series.",
+    "misconception": "squares the sum of the geometric series"
+   }
+  ],
+  "explanation": "$E[Z_n]=m^n$, so the expected total is the geometric series $\\sum_n m^n=1/(1-m)$ for $m<1$ (it counts the root)."
+ },
+ {
+  "id": "sp-10.7",
+  "lecture": 10,
+  "stem": "Let $m>1$ and assume the offspring law has finite variance. The martingale $W_n=Z_n/m^{n}$ then:",
+  "correct": [
+   "Converges almost surely to a limit $W$ that is positive exactly on the event that the population survives.",
+   "Has a limit $W$ with $E[W]=1$ and $W=0$ on extinction, so $Z_n$ grows like $m^{n}$ on survival."
+  ],
+  "distractors": [
+   {
+    "text": "Converges to $1$ almost surely, so $Z_n\\approx m^{n}$ on every sample path.",
+    "misconception": "ignores randomness and extinction"
+   },
+   {
+    "text": "Converges to $0$ almost surely, because $Z_n$ is eventually smaller than $m^{n}$.",
+    "misconception": "confuses a martingale with mean 1 with a process that dies out"
+   },
+   {
+    "text": "Does not converge, because the fluctuations of $Z_n$ are of the same order as $m^{n}$.",
+    "misconception": "thinks the relative fluctuations never settle down"
+   },
+   {
+    "text": "Converges to a limit $W$ that is positive with probability 1, since a supercritical population cannot die out.",
+    "misconception": "forgets that extinction has positive probability"
+   },
+   {
+    "text": "Converges to $m$ almost surely, since each individual has $m$ children on average.",
+    "misconception": "mixes up the limit with the offspring mean"
+   }
+  ],
+  "explanation": "$W_n$ is a non-negative martingale bounded in $L^2$ when the variance is finite, so $W_n\\to W$ with $E[W]=1$. On extinction $W=0$; on survival $W>0$ (Kesten-Stigum)."
+ },
+ {
+  "id": "sp-11.6",
+  "lecture": 11,
+  "stem": "For the simple symmetric random walk $S_n$ started at $0$, let $T$ be the first time $|S_n|=a$. Applying optional stopping to the martingale $S_n^2-n$ gives $E[T]=$:",
+  "correct": [
+   "$a^{2}$, the square of the distance to the boundary.",
+   "$a^2$, because $E[S_T^2]=a^2$ and $E[S_T^2-T]=0$."
+  ],
+  "distractors": [
+   {
+    "text": "$a$, the distance to the boundary.",
+    "misconception": "mixes up a distance with a time"
+   },
+   {
+    "text": "$2a$, the width of the interval $[-a,a]$.",
+    "misconception": "uses the width of the interval"
+   },
+   {
+    "text": "$a^{2}/2$, half of the squared distance.",
+    "misconception": "introduces a spurious factor of one half"
+   },
+   {
+    "text": "$a^{2}+a$, the squared distance plus the distance.",
+    "misconception": "adds an unjustified term"
+   },
+   {
+    "text": "$\\infty$, because the symmetric walk is recurrent.",
+    "misconception": "thinks recurrence makes the exit time infinite"
+   }
+  ],
+  "explanation": "$S_T^2=a^2$ always, and $E[S_T^2-T]=0$ by optional stopping (justified since $T$ has finite mean and the increments are bounded), so $E[T]=a^2$."
+ },
+ {
+  "id": "sp-11.7",
+  "lecture": 11,
+  "stem": "A non-negative martingale $(M_n)$ is given. Which statement is correct?",
+  "correct": [
+   "It converges almost surely to a finite limit $M_\\infty$, but $E[M_\\infty]$ may be smaller than $E[M_0]$.",
+   "Almost sure convergence always holds, yet convergence in $L^1$ can fail."
+  ],
+  "distractors": [
+   {
+    "text": "It converges in $L^1$ as well, so $E[M_\\infty]=E[M_0]$ always.",
+    "misconception": "assumes convergence in mean from almost sure convergence"
+   },
+   {
+    "text": "It converges to $0$ almost surely, since non-negative fair games are eventually ruined.",
+    "misconception": "forgets that a constant is a non-negative martingale"
+   },
+   {
+    "text": "It need not converge, because martingales are allowed to oscillate indefinitely.",
+    "misconception": "forgets Doob's convergence theorem for non-negative martingales"
+   },
+   {
+    "text": "It is bounded, because a non-negative fair game cannot grow without limit.",
+    "misconception": "thinks a fair game is bounded"
+   },
+   {
+    "text": "It converges almost surely only if it is bounded in $L^2$, and not otherwise.",
+    "misconception": "treats a sufficient condition as necessary"
+   }
+  ],
+  "explanation": "Doob: non-negative martingales converge a.s. For $M_n=\\prod_{k\\le n}\\xi_k$ with i.i.d. $\\xi_k\\in\\{0,2\\}$ equally likely, $M_n\\to0$ a.s. while $E[M_n]=1$, so $L^1$ convergence fails."
+ },
+ {
+  "id": "sp-11.8",
+  "lecture": 11,
+  "stem": "For the simple symmetric walk $S_n$ from $0$, let $T=\\min\\{n: S_n=1\\}$. Then $T<\\infty$ almost surely and $S_T=1$, yet $E[S_T]=1\\ne0=E[S_0]$. Why does optional stopping not apply?",
+  "correct": [
+   "$T$ is not bounded and the stopped martingale is not uniformly integrable; indeed $E[T]=\\infty$.",
+   "The conditions fail: $T$ has infinite mean and $(S_{n\\wedge T})$ is not uniformly integrable."
+  ],
+  "distractors": [
+   {
+    "text": "$S_n$ is not a martingale, because its increments are $\\pm1$.",
+    "misconception": "thinks bounded increments rule out the martingale property"
+   },
+   {
+    "text": "$T$ is not a stopping time, since it depends on the whole future of the walk.",
+    "misconception": "forgets that the event $\\{T\\le n\\}$ is decided by the path up to time $n$"
+   },
+   {
+    "text": "$T$ is infinite with positive probability, so $S_T$ is not defined on a set of positive probability.",
+    "misconception": "contradicts the premise that $T<\\infty$ almost surely"
+   },
+   {
+    "text": "Optional stopping applies, so $E[S_T]=0$, and the value $1$ must come from an error in the argument.",
+    "misconception": "believes the theorem holds without conditions"
+   },
+   {
+    "text": "The theorem requires $M$ to be non-negative, and the walk $S_n$ takes negative values.",
+    "misconception": "invents non-negativity as the missing condition"
+   }
+  ],
+  "explanation": "The stopped walk $S_{n\\wedge T}$ has $E=0$ for every $n$ but converges to $1$ a.s.: mass escapes to $-\\infty$ with vanishing probability, so it is not uniformly integrable and $E[T]=\\infty$."
+ },
+ {
+  "id": "sp-11.9",
+  "lecture": 11,
+  "stem": "Let $(X_n)$ be a Markov chain on a finite state space with transition matrix $P$, and $h$ a function on the states. The process $h(X_n)$ is a martingale exactly when:",
+  "correct": [
+   "$h(i)=\\sum_j p_{ij}h(j)$ for every state $i$, so that one step of the chain leaves $h$ unchanged on average.",
+   "$h$ is harmonic for the chain: $Ph=h$, with $h$ written as a column vector."
+  ],
+  "distractors": [
+   {
+    "text": "$\\sum_i h(i)=1$ and $h(i)\\ge0$ for every state $i$.",
+    "misconception": "confuses a harmonic function with a probability vector"
+   },
+   {
+    "text": "$h(i)\\ge\\sum_j p_{ij}h(j)$ for every state $i$, with strict inequality somewhere.",
+    "misconception": "describes a strict supermartingale"
+   },
+   {
+    "text": "$hP=h$, with $h$ written as a row vector, that is $h$ is a stationary distribution.",
+    "misconception": "multiplies on the wrong side, confusing harmonic functions with stationary vectors"
+   },
+   {
+    "text": "$h$ is constant on each communicating class, and nowhere else is the condition met.",
+    "misconception": "thinks harmonic functions are always constant on classes"
+   },
+   {
+    "text": "The chain is symmetric, so that $p_{ij}=p_{ji}$ for all pairs of states.",
+    "misconception": "adds a symmetry condition that is not needed"
+   }
+  ],
+  "explanation": "$E[h(X_{n+1})\\mid X_n=i]=\\sum_jp_{ij}h(j)$, so $h(X_n)$ is a martingale iff this equals $h(i)$ for every $i$. Hitting probabilities are the standard non-constant examples."
+ }
+]

@@ -1,0 +1,5478 @@
+[
+ {
+  "id": "calc",
+  "label": "Calculus",
+  "domain": "math",
+  "prerequisites": [],
+  "courses": "HKU MATH1013 · CUHK MATH1010 · CityU MA1200/1201",
+  "starred": false,
+  "summary": "Single-variable calculus: limits, derivatives, integrals and series.",
+  "outcomes": [
+   "Differentiate and integrate standard functions",
+   "Evaluate limits and series",
+   "Apply calculus to optimisation and approximation"
+  ],
+  "note": "Follows the topic order of the CUHK MATH1010 tutorials, from sequences to the fundamental theorem of calculus. Applications of derivatives, improper integrals and infinite series are added because that page does not list them.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Sequences and limits",
+    "theory": "Convergence, limit laws, squeeze theorem, monotone convergence",
+    "computation": "Limits of sequences"
+   },
+   {
+    "title": "Limits of functions",
+    "theory": "One-sided limits, limits at infinity, standard limits",
+    "computation": "Evaluating limits"
+   },
+   {
+    "title": "Continuity",
+    "theory": "Definition, types of discontinuity, intermediate value theorem",
+    "computation": "Points of continuity, bracketing a root"
+   },
+   {
+    "title": "Derivatives",
+    "theory": "Definition, product, quotient and chain rules, implicit differentiation",
+    "computation": "Derivative values, tangent lines"
+   },
+   {
+    "title": "Applications of derivatives",
+    "theory": "Curve sketching, optimization, related rates",
+    "computation": "Optimal values, rates of change"
+   },
+   {
+    "title": "Mean value theorem",
+    "theory": "Rolle's theorem, the mean value theorem, monotonicity and concavity",
+    "computation": "The point c in the mean value theorem, intervals of increase"
+   },
+   {
+    "title": "L'Hôpital's rule and Taylor series",
+    "theory": "Indeterminate forms, Taylor polynomials, remainder terms",
+    "computation": "Limits by L'Hôpital, Taylor approximations and error bounds"
+   },
+   {
+    "title": "Methods of integration",
+    "theory": "Substitution, integration by parts, partial fractions, trigonometric substitution",
+    "computation": "Definite integrals by technique"
+   },
+   {
+    "title": "Integration and the fundamental theorem",
+    "theory": "Riemann sums, the definite integral, both parts of the fundamental theorem",
+    "computation": "Areas, derivatives of integral functions"
+   },
+   {
+    "title": "Improper integrals and applications",
+    "theory": "Convergence of improper integrals, area, volume, average value",
+    "computation": "Improper integral values, volumes of revolution"
+   },
+   {
+    "title": "Infinite series",
+    "theory": "Convergence tests, power series, radius of convergence",
+    "computation": "Sums of series, radius of convergence"
+   }
+  ]
+ },
+ {
+  "id": "mvc",
+  "label": "Multivariable Calculus",
+  "domain": "math",
+  "prerequisites": [
+   "calc"
+  ],
+  "courses": "HKU MATH2014 · CUHK MATH2010 · HKUST MATH2011 · CityU MA2001",
+  "starred": false,
+  "summary": "Calculus in several variables: partial derivatives, optimisation, multiple integrals and vector calculus.",
+  "outcomes": [
+   "Compute gradients and Jacobians",
+   "Solve constrained optimisation",
+   "Evaluate multiple and line/surface integrals"
+  ],
+  "note": "Follows the five topics of HKUST MATH2011. Lagrange multipliers and the Jacobian change of variables are added, because optimization and probability both need them.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Parametric and polar curves",
+    "theory": "Parametric equations, polar coordinates, calculus in polar coordinates",
+    "computation": "Slopes, arc lengths and areas in parametric and polar form"
+   },
+   {
+    "title": "Vectors in the plane and in space",
+    "theory": "Dot and cross products, lines and planes",
+    "computation": "Angles, projections, plane equations"
+   },
+   {
+    "title": "Vector-valued functions",
+    "theory": "Curves in space, motion, arc length, curvature and normal vectors",
+    "computation": "Velocity, acceleration, curvature"
+   },
+   {
+    "title": "Functions of several variables",
+    "theory": "Surfaces, graphs and level curves, limits and continuity",
+    "computation": "Level curves, limits in two variables"
+   },
+   {
+    "title": "Partial derivatives and the chain rule",
+    "theory": "Partial derivatives, higher-order derivatives, the multivariable chain rule",
+    "computation": "Partial derivatives, chain rule evaluations"
+   },
+   {
+    "title": "Gradient, tangent planes and linear approximation",
+    "theory": "Directional derivatives, gradient, tangent planes, linearization",
+    "computation": "Directional derivatives, tangent plane equations"
+   },
+   {
+    "title": "Maxima and minima",
+    "theory": "Critical points, second derivative test, Lagrange multipliers",
+    "computation": "Local extrema, constrained optimization"
+   },
+   {
+    "title": "Double integrals",
+    "theory": "Rectangular and general regions, polar coordinates",
+    "computation": "Double integrals, areas and volumes"
+   },
+   {
+    "title": "Triple integrals and change of variables",
+    "theory": "Cylindrical and spherical coordinates, the Jacobian",
+    "computation": "Triple integrals, Jacobian determinants"
+   },
+   {
+    "title": "Vector fields and line integrals",
+    "theory": "Vector fields, line integrals, conservative fields, Green's theorem",
+    "computation": "Line integrals, work, Green's theorem"
+   }
+  ]
+ },
+ {
+  "id": "la1",
+  "label": "Linear Algebra I",
+  "domain": "math",
+  "prerequisites": [],
+  "courses": "HKU MATH2101 · CUHK MATH1030 · HKUST MATH2121",
+  "starred": false,
+  "summary": "Vectors, matrices, systems of equations, determinants and eigenvalues.",
+  "outcomes": [
+   "Solve linear systems",
+   "Compute determinants and eigenvalues",
+   "Work with vector spaces and linear maps"
+  ],
+  "note": "Follows HKU MATH2101 (linear equations and matrices, vector geometry, vector spaces and linear transformations) and the CUHK MATH1030 schedule, which also reaches determinants and eigenvalues. Eigenvalues are introduced here and developed in Linear Algebra II.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Systems of linear equations",
+    "theory": "Gauss-Jordan elimination, consistency, free variables",
+    "computation": "Solving systems, parametric solutions"
+   },
+   {
+    "title": "Matrices",
+    "theory": "Matrix operations, inverses, elementary matrices",
+    "computation": "Products, inverses, row reduction"
+   },
+   {
+    "title": "Vector geometry",
+    "theory": "Vectors in R^n, dot and cross products, lines and planes",
+    "computation": "Angles, projections, distance to a plane"
+   },
+   {
+    "title": "Determinants",
+    "theory": "Cofactor expansion, properties, determinant and invertibility",
+    "computation": "Determinant values, area and volume"
+   },
+   {
+    "title": "Vector spaces and subspaces",
+    "theory": "Axioms, subspaces, examples beyond R^n",
+    "computation": "Testing subspaces"
+   },
+   {
+    "title": "Spanning and linear independence",
+    "theory": "Span, dependence and independence",
+    "computation": "Testing independence, spanning sets"
+   },
+   {
+    "title": "Basis and dimension",
+    "theory": "Basis, dimension, coordinates, change of basis",
+    "computation": "Coordinates relative to a basis"
+   },
+   {
+    "title": "Linear transformations",
+    "theory": "Kernel, image, matrix representation",
+    "computation": "Matrix of a transformation, kernel and image"
+   },
+   {
+    "title": "Row space, column space and rank",
+    "theory": "Row, column and null spaces, rank-nullity theorem",
+    "computation": "Rank, nullity, bases of the fundamental subspaces"
+   },
+   {
+    "title": "Eigenvalues and eigenvectors",
+    "theory": "Characteristic polynomial, eigenspaces, diagonalization basics",
+    "computation": "Eigenvalues, eigenvectors, powers of a matrix"
+   }
+  ]
+ },
+ {
+  "id": "la2",
+  "label": "Linear Algebra II",
+  "domain": "math",
+  "prerequisites": [
+   "la1"
+  ],
+  "courses": "CUHK MATH2040A · HKU Linear Algebra II (syllabus not verified); plus SVD / PCA applications",
+  "starred": false,
+  "summary": "Inner product spaces, spectral theory, SVD and applications to PCA and data analysis.",
+  "outcomes": [
+   "Orthogonalise and project",
+   "Apply the spectral theorem and SVD",
+   "Connect linear algebra to PCA and least squares"
+  ],
+  "note": "Follows CUHK MATH2040A (abstract vector spaces, eigenvalues, inner product spaces, spectral theorems), without Jordan form, plus SVD and PCA for applications. The HKU Linear Algebra II syllabus was not verified.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Abstract vector spaces",
+    "theory": "Function and polynomial spaces, bases and dimension",
+    "computation": "Coordinates in function spaces"
+   },
+   {
+    "title": "Linear transformations and change of basis",
+    "theory": "Kernel, image, matrix representation, change of basis, similarity",
+    "computation": "Matrix of an operator in a new basis"
+   },
+   {
+    "title": "Eigenvalues and the characteristic polynomial",
+    "theory": "Eigenvalues and eigenvectors of operators, algebraic and geometric multiplicity",
+    "computation": "Characteristic polynomials, eigenspaces"
+   },
+   {
+    "title": "Diagonalizability",
+    "theory": "Conditions for diagonalization, matrix powers",
+    "computation": "Diagonalizing a matrix, computing A^n"
+   },
+   {
+    "title": "Inner product spaces",
+    "theory": "Inner products, norms, Cauchy-Schwarz",
+    "computation": "Inner products, angles, norms"
+   },
+   {
+    "title": "Orthogonality and least squares",
+    "theory": "Gram-Schmidt, orthogonal projection, least squares",
+    "computation": "Orthonormal bases, least squares solutions"
+   },
+   {
+    "title": "Adjoint, normal and self-adjoint operators",
+    "theory": "Adjoint operator, normal and self-adjoint operators",
+    "computation": "Adjoints, checking normality"
+   },
+   {
+    "title": "Spectral theorems",
+    "theory": "Real and complex spectral theorems, orthogonal diagonalization",
+    "computation": "Orthogonally diagonalizing a symmetric matrix"
+   },
+   {
+    "title": "Quadratic forms and definiteness",
+    "theory": "Quadratic forms, positive definite matrices, covariance matrices",
+    "computation": "Classifying forms, checking definiteness"
+   },
+   {
+    "title": "Singular value decomposition and PCA",
+    "theory": "SVD, low-rank approximation, principal components",
+    "computation": "SVD of a small matrix, PCA directions"
+   }
+  ]
+ },
+ {
+  "id": "dm",
+  "label": "Discrete Math & Combinatorics",
+  "domain": "math",
+  "prerequisites": [],
+  "courses": "HKU COMP2121 · HKUST COMP2711",
+  "starred": false,
+  "summary": "Logic, sets, counting, graphs and recurrences.",
+  "outcomes": [
+   "Prove simple statements by induction and contradiction",
+   "Count with permutations, combinations and generating functions",
+   "Solve recurrences and graph problems"
+  ],
+  "note": "Follows the six topics of HKUST COMP2711 (enumeration, number theory, logic and proofs, recursion, probability, graph theory). The probability lecture is brief; Probability I goes much deeper.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Propositional logic and quantifiers",
+    "theory": "Connectives, truth tables, quantifiers, negation",
+    "computation": "Truth tables, logical equivalences"
+   },
+   {
+    "title": "Proof techniques",
+    "theory": "Direct proof, contradiction, induction, pigeonhole principle",
+    "computation": "Induction-based sums, pigeonhole bounds"
+   },
+   {
+    "title": "Sets, relations and functions",
+    "theory": "Set operations, relations, equivalence relations, injective and surjective functions",
+    "computation": "Counting functions and relations"
+   },
+   {
+    "title": "Enumeration I",
+    "theory": "Sum and product rules, permutations, combinations",
+    "computation": "Counting arrangements and selections"
+   },
+   {
+    "title": "Enumeration II",
+    "theory": "Binomial theorem, inclusion-exclusion, distributions into boxes",
+    "computation": "Inclusion-exclusion counts, binomial coefficients"
+   },
+   {
+    "title": "Basic number theory",
+    "theory": "Divisibility, gcd and the Euclidean algorithm, modular arithmetic",
+    "computation": "gcd, modular inverses, congruences"
+   },
+   {
+    "title": "Recursion and recurrences",
+    "theory": "Recursive definitions, linear recurrences, characteristic equations",
+    "computation": "Solving recurrences, closed forms"
+   },
+   {
+    "title": "Discrete probability",
+    "theory": "Sample spaces, conditional probability, expectation (brief)",
+    "computation": "Simple probability and expectation calculations"
+   },
+   {
+    "title": "Graph theory I",
+    "theory": "Graphs, paths, connectivity, trees",
+    "computation": "Degrees, connected components, spanning trees"
+   },
+   {
+    "title": "Graph theory II",
+    "theory": "Euler and Hamilton paths, coloring, matching",
+    "computation": "Chromatic numbers, Euler circuits"
+   }
+  ]
+ },
+ {
+  "id": "de",
+  "label": "Differential Equations",
+  "domain": "math",
+  "prerequisites": [
+   "calc",
+   "la1"
+  ],
+  "courses": "HKU MATH3405 · CityU MA3511",
+  "starred": false,
+  "summary": "Ordinary differential equations: solution methods, linear systems and stability.",
+  "outcomes": [
+   "Solve first and second-order ODEs",
+   "Handle linear systems via eigenvalues",
+   "Analyse stability and use Laplace transforms"
+  ],
+  "note": "Follows the five topics of CityU MA3511: first-order ODEs, higher-order linear ODEs, series solutions, systems with phase portraits, and Fourier series with separation of variables for PDEs.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "First-order ODEs I",
+    "theory": "Separable and linear equations, integrating factors",
+    "computation": "Solving separable and linear equations"
+   },
+   {
+    "title": "First-order ODEs II",
+    "theory": "Homogeneous and exact equations, existence and uniqueness",
+    "computation": "Exact equations, initial value problems"
+   },
+   {
+    "title": "Higher-order linear ODEs",
+    "theory": "Initial value problems, Wronskian, linear independence, reduction of order",
+    "computation": "Wronskians, reduction of order"
+   },
+   {
+    "title": "Constant coefficients",
+    "theory": "Characteristic equations, undetermined coefficients",
+    "computation": "General and particular solutions"
+   },
+   {
+    "title": "Variation of parameters",
+    "theory": "Variation of parameters, comparison with undetermined coefficients",
+    "computation": "Particular solutions by variation of parameters"
+   },
+   {
+    "title": "Series solutions",
+    "theory": "Power series solutions of second-order linear equations",
+    "computation": "Series coefficients, recurrence relations"
+   },
+   {
+    "title": "Euler equations and Bessel's equation",
+    "theory": "Regular singular points, Euler equations, Bessel's equation",
+    "computation": "Solving Euler equations"
+   },
+   {
+    "title": "Systems of ODEs",
+    "theory": "Matrix methods, eigenvalues and eigenvectors",
+    "computation": "Solving linear systems"
+   },
+   {
+    "title": "Phase portraits and stability",
+    "theory": "Equilibria, phase portraits, stability",
+    "computation": "Classifying equilibria"
+   },
+   {
+    "title": "Fourier series",
+    "theory": "Fourier coefficients, convergence, even and odd extensions",
+    "computation": "Fourier coefficients of simple functions"
+   },
+   {
+    "title": "Separation of variables for PDEs",
+    "theory": "Heat equation and wave equation by separation of variables",
+    "computation": "Solutions of the heat equation with boundary conditions"
+   }
+  ]
+ },
+ {
+  "id": "ra",
+  "label": "Real Analysis",
+  "domain": "math",
+  "prerequisites": [
+   "calc"
+  ],
+  "courses": "CityU MA4542",
+  "starred": false,
+  "summary": "Rigorous foundations of calculus: sequences, continuity, differentiation and integration.",
+  "outcomes": [
+   "Prove convergence and continuity statements",
+   "Work with uniform convergence",
+   "Understand Riemann and basic Lebesgue integration"
+  ],
+  "note": "Follows the six topics of CityU MA4542: measurable sets, measurable functions, Lebesgue measure, Lebesgue integrals, Lp spaces, integration on measure spaces. This is the measure-theory base for Probability III.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Review of the real line",
+    "theory": "Countability, open and closed sets, limits of sets",
+    "computation": "Countability and set-limit exercises"
+   },
+   {
+    "title": "Sigma-algebras and measurable sets",
+    "theory": "Sigma-algebras, Borel sets, measurable sets",
+    "computation": "Generating sigma-algebras, set operations"
+   },
+   {
+    "title": "Lebesgue outer measure",
+    "theory": "Outer measure, covering by intervals, Caratheodory criterion",
+    "computation": "Outer measures of simple sets"
+   },
+   {
+    "title": "Lebesgue measure",
+    "theory": "Countable additivity, continuity of measure, null sets",
+    "computation": "Measures of unions and limits of sets"
+   },
+   {
+    "title": "Measurable functions",
+    "theory": "Definition, operations, limits of measurable functions",
+    "computation": "Checking measurability"
+   },
+   {
+    "title": "The Lebesgue integral",
+    "theory": "Simple functions, integral of nonnegative functions",
+    "computation": "Integrals of simple functions"
+   },
+   {
+    "title": "Convergence theorems",
+    "theory": "Monotone convergence, Fatou's lemma, dominated convergence",
+    "computation": "Limits of integrals"
+   },
+   {
+    "title": "Lebesgue vs Riemann integrals",
+    "theory": "Riemann integrability, comparison, absolute continuity",
+    "computation": "Cases where the two integrals agree or differ"
+   },
+   {
+    "title": "Lp spaces",
+    "theory": "Holder and Minkowski inequalities, completeness of Lp",
+    "computation": "Lp norms of simple functions"
+   },
+   {
+    "title": "Integration on measure spaces",
+    "theory": "General measure spaces, product measures, Fubini's theorem",
+    "computation": "Iterated integrals, applying Fubini"
+   }
+  ]
+ },
+ {
+  "id": "opt",
+  "label": "Optimization",
+  "domain": "math",
+  "prerequisites": [
+   "mvc",
+   "la1"
+  ],
+  "courses": "CityU MS3601 · CUHK MATH3215",
+  "starred": false,
+  "summary": "Linear, convex and nonlinear optimisation with duality and optimality conditions.",
+  "outcomes": [
+   "Formulate and solve LPs",
+   "Apply KKT conditions and duality",
+   "Recognise convex problems"
+  ],
+  "note": "Follows the four parts of CityU MS3601: linear programming, integer programming, convex optimization, and applications such as network flows and portfolio optimization. Computation is by hand on small problems, since Python is not a prerequisite here.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Linear programming models",
+    "theory": "Formulating problems, feasible regions, the graphical method",
+    "computation": "Formulations, optimal vertices"
+   },
+   {
+    "title": "Simplex method I",
+    "theory": "Basic feasible solutions, pivoting, the simplex tableau",
+    "computation": "One-pivot and full simplex iterations"
+   },
+   {
+    "title": "Simplex method II",
+    "theory": "Degeneracy, unboundedness, two-phase method",
+    "computation": "Two-phase problems"
+   },
+   {
+    "title": "Duality",
+    "theory": "Primal and dual problems, weak and strong duality, complementary slackness",
+    "computation": "Writing the dual, dual solutions"
+   },
+   {
+    "title": "Sensitivity analysis",
+    "theory": "Shadow prices, ranging of coefficients and right-hand sides",
+    "computation": "Shadow prices, allowable ranges"
+   },
+   {
+    "title": "Network flows and applications",
+    "theory": "Network flow models, foreign exchange, investment decisions",
+    "computation": "Max flow, min cost flow, arbitrage cycles"
+   },
+   {
+    "title": "Integer programming I",
+    "theory": "Formulations, branch-and-bound",
+    "computation": "Branch-and-bound trees"
+   },
+   {
+    "title": "Integer programming II",
+    "theory": "Cutting planes, complexity",
+    "computation": "Gomory cuts, bound comparisons"
+   },
+   {
+    "title": "Convex optimization and optimality conditions",
+    "theory": "Convex sets and functions, Lagrangian duality, KKT conditions",
+    "computation": "Verifying convexity, solving KKT systems"
+   },
+   {
+    "title": "Quadratic programming and portfolio optimization",
+    "theory": "Quadratic programs, mean-variance portfolios, clustering",
+    "computation": "Minimum-variance portfolios"
+   }
+  ]
+ },
+ {
+  "id": "num1",
+  "label": "Numerical Methods I",
+  "domain": "math",
+  "prerequisites": [
+   "calc",
+   "la1",
+   "py"
+  ],
+  "courses": "CUHK MATH3230",
+  "starred": false,
+  "summary": "Numerical linear algebra and root finding, with Python implementations.",
+  "outcomes": [
+   "Solve linear systems stably",
+   "Find roots and fit data",
+   "Understand error and conditioning"
+  ],
+  "note": "No syllabus was available for CUHK MATH3230, so this follows HKUST MATH3312: computer arithmetic, root finding, interpolation, numerical differentiation and integration, Euler's method, and linear systems. Conditioning and splines are added. Python is a prerequisite, so coding questions are included.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Floating-point arithmetic and error",
+    "theory": "Roundoff, significant digits, cancellation, stability",
+    "computation": "Roundoff error and relative error calculations"
+   },
+   {
+    "title": "Root finding I",
+    "theory": "Bisection, fixed-point iteration, convergence conditions",
+    "computation": "Iterations of bisection and fixed point",
+    "coding": "Implement bisection and fixed-point iteration"
+   },
+   {
+    "title": "Root finding II",
+    "theory": "Newton's method, secant method, order of convergence",
+    "computation": "Newton iterations, convergence order",
+    "coding": "Implement Newton and secant methods"
+   },
+   {
+    "title": "Interpolation I",
+    "theory": "Lagrange polynomials, interpolation error",
+    "computation": "Interpolating polynomials, error bounds",
+    "coding": "Evaluate a Lagrange interpolant"
+   },
+   {
+    "title": "Interpolation II",
+    "theory": "Divided differences, Newton form, cubic splines",
+    "computation": "Divided-difference tables",
+    "coding": "Build a Newton interpolating polynomial"
+   },
+   {
+    "title": "Numerical differentiation",
+    "theory": "Forward, backward and central differences, error orders",
+    "computation": "Finite difference values, error orders",
+    "coding": "Finite difference with a step-size study"
+   },
+   {
+    "title": "Numerical integration",
+    "theory": "Trapezoid and Simpson rules, composite rules, error terms",
+    "computation": "Composite rule approximations, error bounds",
+    "coding": "Composite Simpson integrator"
+   },
+   {
+    "title": "Linear systems I",
+    "theory": "Gaussian elimination, partial pivoting, LU factorization",
+    "computation": "LU factors, solving by substitution",
+    "coding": "LU factorization with pivoting"
+   },
+   {
+    "title": "Linear systems II",
+    "theory": "Jacobi, Gauss-Seidel and SOR iterations, condition numbers",
+    "computation": "Iterations of Jacobi and Gauss-Seidel, condition numbers",
+    "coding": "Gauss-Seidel solver"
+   },
+   {
+    "title": "Euler's method for ODEs",
+    "theory": "Euler's method, local and global error",
+    "computation": "Euler steps, error estimates",
+    "coding": "Euler solver for an initial value problem"
+   }
+  ]
+ },
+ {
+  "id": "num2",
+  "label": "Numerical Methods II",
+  "domain": "math",
+  "prerequisites": [
+   "num1",
+   "de"
+  ],
+  "courses": "CUHK MATH3240 · CityU MA3514",
+  "starred": false,
+  "summary": "Numerical differential equations, quadrature and PDE methods, with Python implementations.",
+  "outcomes": [
+   "Integrate ODEs numerically",
+   "Discretise simple PDEs",
+   "Analyse stability and convergence"
+  ],
+  "note": "Follows CityU MA3514 (initial value problems, finite differences for boundary value problems and PDEs, finite elements for boundary value problems). Runge-Kutta, multistep, stability analysis and adaptive step size are filled in. Coding questions are included.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Initial value problems I",
+    "theory": "Euler's method, local and global truncation error, consistency",
+    "computation": "Truncation error orders",
+    "coding": "Euler and improved Euler solvers"
+   },
+   {
+    "title": "Initial value problems II",
+    "theory": "Runge-Kutta methods, order conditions",
+    "computation": "Runge-Kutta steps",
+    "coding": "Fourth-order Runge-Kutta solver"
+   },
+   {
+    "title": "Initial value problems III",
+    "theory": "Multistep methods, stability regions, stiff equations",
+    "computation": "Stability regions, step size limits",
+    "coding": "Adams-Bashforth solver"
+   },
+   {
+    "title": "Systems of ODEs and adaptive steps",
+    "theory": "Systems of ODEs, adaptive step size, error control",
+    "computation": "Step size selection",
+    "coding": "Adaptive Runge-Kutta solver"
+   },
+   {
+    "title": "Finite differences for boundary value problems",
+    "theory": "Two-point boundary value problems, discretization",
+    "computation": "Setting up and solving the linear system",
+    "coding": "Finite difference solver for a boundary value problem"
+   },
+   {
+    "title": "Convergence and stability of schemes",
+    "theory": "Consistency, stability, convergence, Lax equivalence",
+    "computation": "Order of accuracy from grid refinement",
+    "coding": "Convergence study of a scheme"
+   },
+   {
+    "title": "Finite differences for PDEs I",
+    "theory": "Heat equation: explicit, implicit, Crank-Nicolson",
+    "computation": "Steps of the explicit and implicit schemes",
+    "coding": "Crank-Nicolson heat equation solver"
+   },
+   {
+    "title": "Finite differences for PDEs II",
+    "theory": "Von Neumann stability, wave and Poisson equations",
+    "computation": "Stability conditions",
+    "coding": "Solver for the Poisson equation"
+   },
+   {
+    "title": "Finite element method I",
+    "theory": "Weak form, Galerkin method, piecewise linear basis functions",
+    "computation": "Weak form and element matrices",
+    "coding": "Assemble a 1D stiffness matrix"
+   },
+   {
+    "title": "Finite element method II",
+    "theory": "Assembly, boundary conditions, error estimates",
+    "computation": "Assembled system, error estimates",
+    "coding": "1D finite element solver"
+   }
+  ]
+ },
+ {
+  "id": "it",
+  "label": "Information Theory",
+  "domain": "math",
+  "prerequisites": [
+   "p2"
+  ],
+  "courses": "CUHK Information Theory (Institute of Network Coding; course code not found)",
+  "starred": false,
+  "summary": "Entropy, mutual information, source and channel coding.",
+  "outcomes": [
+   "Compute entropy and mutual information",
+   "Apply source and channel coding theorems",
+   "Connect information theory to statistics"
+  ],
+  "note": "Follows the 11 topics of the CUHK information theory course based on Yeung's Information Theory and Network Coding (prerequisite: undergraduate probability).",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "The science of information",
+    "theory": "Uncertainty, bits, why entropy measures information",
+    "computation": "Entropy of simple sources"
+   },
+   {
+    "title": "Information measures",
+    "theory": "Entropy, joint and conditional entropy, mutual information, KL divergence",
+    "computation": "Computing the information measures of a joint distribution"
+   },
+   {
+    "title": "The I-measure",
+    "theory": "Information diagrams, set-theoretic view of information measures",
+    "computation": "Reading identities from information diagrams"
+   },
+   {
+    "title": "Zero-error data compression",
+    "theory": "Kraft inequality, Huffman codes, optimal code lengths",
+    "computation": "Building a Huffman code, expected length"
+   },
+   {
+    "title": "Weak typicality",
+    "theory": "Asymptotic equipartition property, source coding theorem",
+    "computation": "Typical set sizes and probabilities"
+   },
+   {
+    "title": "Strong typicality",
+    "theory": "Strongly typical sequences, joint typicality",
+    "computation": "Counting typical sequences"
+   },
+   {
+    "title": "Discrete memoryless channels",
+    "theory": "Channel capacity, channel coding theorem",
+    "computation": "Capacity of the binary symmetric and erasure channels"
+   },
+   {
+    "title": "Rate-distortion theory",
+    "theory": "Distortion measures, the rate-distortion function",
+    "computation": "Rate-distortion function of simple sources"
+   },
+   {
+    "title": "The Blahut-Arimoto algorithms",
+    "theory": "Alternating optimization for capacity and rate-distortion",
+    "computation": "Hand iterations of Blahut-Arimoto"
+   },
+   {
+    "title": "Differential entropy",
+    "theory": "Differential entropy, maximum entropy distributions",
+    "computation": "Differential entropy of uniform, exponential and normal variables"
+   },
+   {
+    "title": "Continuous-valued channels",
+    "theory": "Gaussian channel capacity, parallel channels, water-filling",
+    "computation": "Capacity of a Gaussian channel, water-filling allocation"
+   }
+  ]
+ },
+ {
+  "id": "p1",
+  "label": "Probability I",
+  "domain": "stat",
+  "prerequisites": [
+   "calc"
+  ],
+  "courses": "HKU SDST2601 · HKUST MATH2421 · CityU MA2510",
+  "starred": false,
+  "summary": "The foundations of probability: events, conditioning, discrete random variables and the classical distributions.",
+  "outcomes": [
+   "Count outcomes and compute probabilities of events",
+   "Use conditioning and Bayes' theorem",
+   "Work with expectation, variance and named discrete distributions"
+  ],
+  "note": "Follows the 22 topics of HKU SDST2601. Expectation and variance of a single variable move up to lecture 5, because the named distributions need them.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Sample spaces and event operations",
+    "theory": "Set operations, De Morgan's laws, mutually exclusive and exhaustive events",
+    "computation": "Simplifying event expressions, counting with permutations and combinations"
+   },
+   {
+    "title": "Probability and its laws",
+    "theory": "Axioms, addition rule, inclusion-exclusion",
+    "computation": "Probabilities with equally likely outcomes"
+   },
+   {
+    "title": "Conditional probability",
+    "theory": "Multiplication rule, law of total probability, Bayes' theorem",
+    "computation": "Tree diagrams, test accuracy problems"
+   },
+   {
+    "title": "Independence",
+    "theory": "Pairwise vs mutual independence, conditional independence",
+    "computation": "Combinations of independent events, system reliability"
+   },
+   {
+    "title": "Discrete random variables",
+    "theory": "pmf, cdf, expectation, variance, linearity",
+    "computation": "Computing the cdf, mean and variance from a pmf"
+   },
+   {
+    "title": "Common discrete distributions",
+    "theory": "Bernoulli, binomial, geometric, Poisson (limit of the binomial)",
+    "computation": "Distribution probabilities, Poisson approximation"
+   },
+   {
+    "title": "Continuous random variables",
+    "theory": "pdf, cdf, expectation and variance",
+    "computation": "Probabilities by integration, quantiles"
+   },
+   {
+    "title": "Exponential, gamma, normal",
+    "theory": "Memorylessness, standardisation, the gamma-exponential relationship",
+    "computation": "Normal table lookups, waiting times"
+   },
+   {
+    "title": "Functions of a random variable",
+    "theory": "cdf method, change of variables",
+    "computation": "Finding the pdf or pmf of a transformed variable"
+   },
+   {
+    "title": "Joint, marginal, conditional distributions",
+    "theory": "Discrete and continuous cases, independent random variables",
+    "computation": "Marginal and conditional distributions from a joint pdf"
+   },
+   {
+    "title": "Functions of jointly distributed variables",
+    "theory": "Sums, maximum and minimum, convolution",
+    "computation": "Distribution of a sum of two variables"
+   },
+   {
+    "title": "Expectation, variance, covariance, correlation",
+    "theory": "Variance of a sum, what correlation means",
+    "computation": "Variance of a two-asset portfolio"
+   }
+  ]
+ },
+ {
+  "id": "p2",
+  "label": "Probability II",
+  "domain": "stat",
+  "prerequisites": [
+   "p1",
+   "mvc"
+  ],
+  "courses": "HKU SDST2602 · CUHK STAT2006",
+  "starred": false,
+  "summary": "Continuous and multivariate random variables, transformations, conditional expectation, and the limit theorems that underlie all of statistics.",
+  "outcomes": [
+   "Work with joint, marginal and conditional densities",
+   "Transform random variables and derive their distributions",
+   "Use MGFs, conditioning and the CLT to solve problems"
+  ],
+  "note": "Follows HKU SDST2602 (multivariate and continuous probability). Assumes the discrete named distributions from Probability I.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Continuous random variables",
+    "theory": "pdf, cdf, expectation, variance of continuous variables",
+    "computation": "Integrating densities, computing moments"
+   },
+   {
+    "title": "Named continuous distributions",
+    "theory": "Uniform, exponential, gamma, beta, normal; memoryless property",
+    "computation": "Normal table lookups, exponential waiting times"
+   },
+   {
+    "title": "Joint distributions",
+    "theory": "Joint pmf/pdf, marginals, independence",
+    "computation": "Double integrals over regions, marginal densities"
+   },
+   {
+    "title": "Conditional distributions",
+    "theory": "Conditional pdf, conditional expectation and variance",
+    "computation": "E[X",
+    "coding": "Y] calculations, law of total expectation and variance"
+   },
+   {
+    "title": "Covariance and correlation",
+    "theory": "Covariance, correlation, variance of sums",
+    "computation": "Covariance matrices of small vectors"
+   },
+   {
+    "title": "Transformations of variables",
+    "theory": "CDF method, Jacobian method, convolution",
+    "computation": "Densities of Y=g(X), sums of independent variables"
+   },
+   {
+    "title": "Order statistics",
+    "theory": "Distribution of min, max and k-th order statistic",
+    "computation": "Min/max of exponential and uniform samples"
+   },
+   {
+    "title": "Moment generating functions",
+    "theory": "MGF, uniqueness, sums of independent variables",
+    "computation": "Identifying distributions from MGFs"
+   },
+   {
+    "title": "Multivariate normal",
+    "theory": "Definition, linear transformations, conditional distribution",
+    "computation": "Conditional mean and variance of bivariate normals"
+   },
+   {
+    "title": "Modes of convergence",
+    "theory": "In probability, in distribution, almost surely (intuition)",
+    "computation": "Checking convergence of simple sequences"
+   },
+   {
+    "title": "Law of large numbers and CLT",
+    "theory": "Markov, Chebyshev, WLLN, CLT",
+    "computation": "Normal approximations to binomial and sums"
+   }
+  ]
+ },
+ {
+  "id": "p3",
+  "label": "Probability III",
+  "domain": "stat",
+  "prerequisites": [
+   "p2",
+   "ra"
+  ],
+  "courses": "HKU MATH3603 · HKUST MAFS5020",
+  "starred": false,
+  "summary": "Probability rebuilt on measure theory: sigma-algebras, expectation as an integral, convergence theorems, conditional expectation and martingales.",
+  "outcomes": [
+   "State probability in measure-theoretic language",
+   "Apply the convergence theorems and Borel-Cantelli",
+   "Use conditional expectation and martingales"
+  ],
+  "note": "Measure-theoretic probability, following the HKU MATH3603 / HKUST MAFS5020 style. Requires Real Analysis.",
+  "proofsNote": "Proofs are the core of this topic, so Proof carries more weight here.",
+  "lectures": [
+   {
+    "title": "Sigma-algebras and probability measures",
+    "theory": "Measurable spaces, probability spaces, generated sigma-algebras",
+    "computation": "Verifying a collection is a sigma-algebra"
+   },
+   {
+    "title": "Random variables as measurable functions",
+    "theory": "Measurability, distribution of a random variable",
+    "computation": "Pushforward measures of simple maps"
+   },
+   {
+    "title": "Expectation as a Lebesgue integral",
+    "theory": "Simple functions, monotone convergence, Fatou",
+    "computation": "Computing expectations via the definition"
+   },
+   {
+    "title": "Convergence theorems",
+    "theory": "Dominated convergence, uniform integrability",
+    "computation": "Limit-interchange exercises"
+   },
+   {
+    "title": "Independence and Borel-Cantelli",
+    "theory": "Independent sigma-algebras, both Borel-Cantelli lemmas",
+    "computation": "Probabilities of limsup events"
+   },
+   {
+    "title": "Modes of convergence",
+    "theory": "a.s., in probability, L^p, in distribution and their relations",
+    "computation": "Classifying convergence of examples"
+   },
+   {
+    "title": "Laws of large numbers",
+    "theory": "Weak and strong LLN",
+    "computation": "Applications and counter-examples"
+   },
+   {
+    "title": "Characteristic functions",
+    "theory": "Definition, inversion, Levy continuity",
+    "computation": "Characteristic functions of standard laws"
+   },
+   {
+    "title": "Central limit theorem",
+    "theory": "Lindeberg-Feller CLT",
+    "computation": "Checking the Lindeberg condition"
+   },
+   {
+    "title": "Conditional expectation",
+    "theory": "Definition via Radon-Nikodym, tower property",
+    "computation": "Conditional expectations given sigma-algebras"
+   },
+   {
+    "title": "Martingales",
+    "theory": "Martingales, stopping times, optional stopping",
+    "computation": "Martingale checks, gambler's ruin"
+   }
+  ]
+ },
+ {
+  "id": "inf",
+  "label": "Statistical Inference",
+  "domain": "stat",
+  "prerequisites": [
+   "p2"
+  ],
+  "courses": "HKU STAT3602 · HKUST MATH3423 · CityU MS2602",
+  "starred": false,
+  "summary": "Estimation, testing and confidence intervals from a unified likelihood-based viewpoint.",
+  "outcomes": [
+   "Derive and compare estimators",
+   "Construct tests and intervals",
+   "Judge optimality via sufficiency and the Cramer-Rao bound"
+  ],
+  "note": "Follows HKU STAT3602. Assumes Probability II including MGFs and the CLT.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Samples and sampling distributions",
+    "theory": "Statistics, chi-square, t and F distributions",
+    "computation": "Distribution of sample mean and variance"
+   },
+   {
+    "title": "Method of moments",
+    "theory": "Moment equations, consistency",
+    "computation": "Moment estimators for common families"
+   },
+   {
+    "title": "Maximum likelihood",
+    "theory": "Likelihood, score, invariance",
+    "computation": "Closed-form and numeric MLEs"
+   },
+   {
+    "title": "Properties of estimators",
+    "theory": "Bias, MSE, consistency, efficiency",
+    "computation": "Comparing estimators by MSE"
+   },
+   {
+    "title": "Sufficiency and completeness",
+    "theory": "Factorisation theorem, Rao-Blackwell, Lehmann-Scheffe",
+    "computation": "Finding sufficient statistics and UMVUEs"
+   },
+   {
+    "title": "Fisher information and Cramer-Rao",
+    "theory": "Information, CR bound, asymptotic normality of MLE",
+    "computation": "Computing information and bounds"
+   },
+   {
+    "title": "Confidence intervals",
+    "theory": "Pivots, intervals for mean, variance, proportions",
+    "computation": "Interval construction and interpretation"
+   },
+   {
+    "title": "Hypothesis testing basics",
+    "theory": "Type I/II errors, power, p-values",
+    "computation": "Power calculations"
+   },
+   {
+    "title": "Neyman-Pearson and likelihood ratio tests",
+    "theory": "NP lemma, LRT, Wilks theorem",
+    "computation": "Constructing LRTs, critical regions"
+   },
+   {
+    "title": "Tests for means and variances",
+    "theory": "One- and two-sample t, F tests",
+    "computation": "Test statistics and decisions from summaries"
+   },
+   {
+    "title": "Chi-square tests",
+    "theory": "Goodness of fit, independence",
+    "computation": "Contingency table tests"
+   }
+  ]
+ },
+ {
+  "id": "reg1",
+  "label": "Regression I",
+  "domain": "stat",
+  "prerequisites": [
+   "p1",
+   "la1"
+  ],
+  "courses": "HKU ECON2280 · CUHK STAT3008 · CityU MS3252",
+  "starred": false,
+  "summary": "The linear model fitted by least squares, with inference, diagnostics and model selection.",
+  "outcomes": [
+   "Fit and interpret linear models",
+   "Run inference on coefficients",
+   "Diagnose and repair model violations"
+  ],
+  "note": "Follows HKU ECON2280 / CUHK STAT3008 content on linear regression.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Simple linear regression",
+    "theory": "Model, least squares, interpretation",
+    "computation": "Computing slope and intercept from data"
+   },
+   {
+    "title": "Properties of OLS",
+    "theory": "Gauss-Markov, unbiasedness, variance of estimators",
+    "computation": "Standard errors from summary statistics"
+   },
+   {
+    "title": "Inference in simple regression",
+    "theory": "t tests, intervals, prediction intervals",
+    "computation": "Testing slopes, building intervals"
+   },
+   {
+    "title": "Matrix formulation",
+    "theory": "Normal equations, projection (hat) matrix",
+    "computation": "Solving small normal equations by hand"
+   },
+   {
+    "title": "Multiple regression",
+    "theory": "Partial effects, R-squared, adjusted R-squared",
+    "computation": "Interpreting coefficient tables"
+   },
+   {
+    "title": "F tests and nested models",
+    "theory": "Extra sum of squares, general linear hypotheses",
+    "computation": "ANOVA table calculations"
+   },
+   {
+    "title": "Dummy variables and interactions",
+    "theory": "Categorical predictors, interaction terms",
+    "computation": "Reading coefficients with dummies"
+   },
+   {
+    "title": "Residual diagnostics",
+    "theory": "Residual plots, leverage, Cook's distance",
+    "computation": "Computing leverage and influence"
+   },
+   {
+    "title": "Heteroskedasticity and correlated errors",
+    "theory": "Robust SEs, WLS, GLS",
+    "computation": "Weighted least squares examples"
+   },
+   {
+    "title": "Multicollinearity and variable selection",
+    "theory": "VIF, AIC, BIC, stepwise methods",
+    "computation": "Computing VIF, comparing models by AIC"
+   },
+   {
+    "title": "Transformations and prediction",
+    "theory": "Box-Cox, log models, cross-validation",
+    "computation": "Back-transformed predictions"
+   }
+  ]
+ },
+ {
+  "id": "reg2",
+  "label": "Regression II",
+  "domain": "stat",
+  "prerequisites": [
+   "reg1",
+   "inf",
+   "la2"
+  ],
+  "courses": "HKUST MAFS5140",
+  "starred": false,
+  "summary": "Extensions of the linear model: GLMs, regularisation, mixed models and robust methods.",
+  "outcomes": [
+   "Fit logistic, Poisson and other GLMs",
+   "Apply ridge, lasso and elastic net",
+   "Choose between competing regression frameworks"
+  ],
+  "note": "Follows HKUST MAFS5140 style: generalised and regularised regression.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Exponential family and GLM framework",
+    "theory": "Exponential family, link functions",
+    "computation": "Identifying canonical links"
+   },
+   {
+    "title": "Logistic regression",
+    "theory": "Odds, MLE via IRLS, interpretation",
+    "computation": "Odds ratios and predicted probabilities"
+   },
+   {
+    "title": "Inference for GLMs",
+    "theory": "Wald, score and deviance tests",
+    "computation": "Deviance comparisons"
+   },
+   {
+    "title": "Poisson and count models",
+    "theory": "Poisson, overdispersion, negative binomial",
+    "computation": "Rate ratios and offsets"
+   },
+   {
+    "title": "Multinomial and ordinal models",
+    "theory": "Softmax models, proportional odds",
+    "computation": "Class probabilities from fitted models"
+   },
+   {
+    "title": "Ridge regression",
+    "theory": "Bias-variance, shrinkage, SVD view",
+    "computation": "Ridge solutions on small examples"
+   },
+   {
+    "title": "Lasso and sparsity",
+    "theory": "L1 geometry, soft-thresholding, coordinate descent",
+    "computation": "Soft-thresholding calculations"
+   },
+   {
+    "title": "Elastic net and tuning",
+    "theory": "Combined penalties, cross-validation",
+    "computation": "Choosing lambda from CV tables"
+   },
+   {
+    "title": "Splines and nonparametric regression",
+    "theory": "Basis expansions, smoothing splines",
+    "computation": "Spline basis constructions"
+   },
+   {
+    "title": "Mixed-effects models",
+    "theory": "Random effects, BLUPs",
+    "computation": "Variance components from small designs"
+   },
+   {
+    "title": "Robust regression",
+    "theory": "M-estimators, Huber loss, breakdown point",
+    "computation": "Huber estimates on tiny data"
+   }
+  ]
+ },
+ {
+  "id": "sp",
+  "label": "Stochastic Processes",
+  "domain": "stat",
+  "prerequisites": [
+   "p2"
+  ],
+  "courses": "HKU SDST3603 · CUHK STAT3007 · HKUST ISOM3540",
+  "starred": false,
+  "summary": "Random processes: Markov chains, Poisson processes, queues and branching.",
+  "outcomes": [
+   "Classify Markov chains and compute stationary distributions",
+   "Model arrivals with Poisson processes",
+   "Analyse simple queues and martingale problems"
+  ],
+  "note": "Follows HKU SDST3603 / CUHK STAT3007. Discrete-time chains first, then continuous time.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Markov chains: basics",
+    "theory": "Transition matrices, Chapman-Kolmogorov",
+    "computation": "n-step probabilities"
+   },
+   {
+    "title": "Classification of states",
+    "theory": "Communication, recurrence, periodicity",
+    "computation": "Classifying states from a diagram"
+   },
+   {
+    "title": "Hitting probabilities and times",
+    "theory": "First-step analysis",
+    "computation": "Solving absorption problems"
+   },
+   {
+    "title": "Stationary distributions",
+    "theory": "Existence, uniqueness, limit theorems",
+    "computation": "Solving pi P = pi"
+   },
+   {
+    "title": "Random walks and gambler's ruin",
+    "theory": "Ruin probabilities, expected duration",
+    "computation": "Ruin probability calculations"
+   },
+   {
+    "title": "Poisson process",
+    "theory": "Interarrival times, superposition, thinning",
+    "computation": "Event probabilities in time windows"
+   },
+   {
+    "title": "Continuous-time Markov chains",
+    "theory": "Generators, Kolmogorov equations",
+    "computation": "Solving small generator systems"
+   },
+   {
+    "title": "Birth-death processes and queues",
+    "theory": "M/M/1, M/M/c, Little's law",
+    "computation": "Queue length and waiting time formulas"
+   },
+   {
+    "title": "Renewal theory",
+    "theory": "Renewal function, renewal reward theorem",
+    "computation": "Long-run average rewards"
+   },
+   {
+    "title": "Branching processes",
+    "theory": "Extinction probability, generating functions",
+    "computation": "Computing extinction probabilities"
+   },
+   {
+    "title": "Martingales (discrete)",
+    "theory": "Definition, optional stopping",
+    "computation": "Applying optional stopping"
+   }
+  ]
+ },
+ {
+  "id": "ts1",
+  "label": "Time Series I",
+  "domain": "stat",
+  "prerequisites": [
+   "reg1",
+   "sp"
+  ],
+  "courses": "HKU SDST4601 · CityU EF4822",
+  "starred": false,
+  "summary": "Classical time-series modelling with ARMA/ARIMA models, estimation and forecasting.",
+  "outcomes": [
+   "Identify stationary and non-stationary series",
+   "Fit ARIMA models",
+   "Produce and evaluate forecasts"
+  ],
+  "note": "Follows HKU SDST4601 / CityU EF4822 style (ARIMA family).",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Time series and stationarity",
+    "theory": "Weak stationarity, autocovariance",
+    "computation": "Sample ACF by hand"
+   },
+   {
+    "title": "White noise and linear processes",
+    "theory": "MA(infinity), Wold decomposition",
+    "computation": "Autocovariances of linear filters"
+   },
+   {
+    "title": "MA models",
+    "theory": "MA(q), invertibility",
+    "computation": "ACF of MA(1), MA(2)"
+   },
+   {
+    "title": "AR models",
+    "theory": "AR(p), causality, Yule-Walker",
+    "computation": "Solving Yule-Walker equations"
+   },
+   {
+    "title": "ARMA models",
+    "theory": "Causal/invertible ARMA, ACF/PACF",
+    "computation": "Identifying orders from ACF/PACF"
+   },
+   {
+    "title": "Forecasting",
+    "theory": "Best linear prediction, forecast errors",
+    "computation": "h-step forecasts and variances"
+   },
+   {
+    "title": "Estimation",
+    "theory": "Method of moments, conditional MLE",
+    "computation": "Estimating AR(1) parameters"
+   },
+   {
+    "title": "Non-stationarity and differencing",
+    "theory": "Unit roots, ARIMA, ADF test",
+    "computation": "Differencing and unit-root decisions"
+   },
+   {
+    "title": "Seasonal models",
+    "theory": "SARIMA, seasonal differencing",
+    "computation": "Reading seasonal ACFs"
+   },
+   {
+    "title": "Model diagnostics",
+    "theory": "Residual checks, Ljung-Box, AIC/BIC",
+    "computation": "Test statistics from residual ACF"
+   }
+  ]
+ },
+ {
+  "id": "ts2",
+  "label": "Time Series II",
+  "domain": "stat",
+  "prerequisites": [
+   "ts1",
+   "inf"
+  ],
+  "courses": "HKUST MAFS5130 · CUHK STAT6204",
+  "starred": false,
+  "summary": "Heteroskedastic, multivariate and state-space models for financial time series.",
+  "outcomes": [
+   "Fit GARCH-type models",
+   "Model several series jointly",
+   "Use Kalman filtering"
+  ],
+  "note": "Follows HKUST MAFS5130 / CUHK STAT6204 style (volatility and multivariate series).",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Stylised facts of returns",
+    "theory": "Heavy tails, volatility clustering",
+    "computation": "Computing sample moments of returns"
+   },
+   {
+    "title": "ARCH models",
+    "theory": "ARCH(q), conditional variance, estimation",
+    "computation": "Conditional variance recursion"
+   },
+   {
+    "title": "GARCH models",
+    "theory": "GARCH(1,1), persistence, forecasting",
+    "computation": "Variance forecasts, long-run variance"
+   },
+   {
+    "title": "GARCH extensions",
+    "theory": "EGARCH, GJR, t-innovations",
+    "computation": "Leverage-effect comparisons"
+   },
+   {
+    "title": "Realised volatility",
+    "theory": "High-frequency estimators, microstructure noise",
+    "computation": "Realised variance from intraday data"
+   },
+   {
+    "title": "VAR models",
+    "theory": "VAR(p), stationarity, Granger causality",
+    "computation": "Companion matrices, impulse responses"
+   },
+   {
+    "title": "Cointegration",
+    "theory": "Engle-Granger, Johansen, VECM",
+    "computation": "Constructing spread series, error correction"
+   },
+   {
+    "title": "State-space models",
+    "theory": "State-space form, Kalman filter",
+    "computation": "One-step Kalman updates"
+   },
+   {
+    "title": "Regime switching",
+    "theory": "Markov switching, HMM filtering",
+    "computation": "Filtering probabilities"
+   },
+   {
+    "title": "Spectral analysis",
+    "theory": "Periodogram, spectral density",
+    "computation": "Periodogram of small series"
+   }
+  ]
+ },
+ {
+  "id": "bay",
+  "label": "Bayesian",
+  "domain": "stat",
+  "prerequisites": [
+   "inf",
+   "py"
+  ],
+  "courses": "HKU STAT4610 · CUHK STAT4010",
+  "starred": false,
+  "summary": "Bayesian inference from conjugate models to MCMC, with hierarchical modelling and model checking.",
+  "outcomes": [
+   "Derive posteriors for standard models",
+   "Implement MCMC samplers",
+   "Compare models and check fit"
+  ],
+  "note": "Follows HKU SDST4610 (Bayesian learning). Coding questions are graded with a fixed random seed and a statistical tolerance.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Bayesian framework",
+    "theory": "Likelihood, prior, posterior, posterior predictive",
+    "computation": "Posterior for a discrete parameter"
+   },
+   {
+    "title": "Conjugate models",
+    "theory": "Beta-binomial, normal-normal, gamma-Poisson",
+    "computation": "Posterior updates, shrinkage weights"
+   },
+   {
+    "title": "Posterior summaries",
+    "theory": "MAP, posterior mean, credible vs HPD vs confidence intervals",
+    "computation": "A 95% credible interval"
+   },
+   {
+    "title": "Choosing a prior",
+    "theory": "Elicitation, noninformative and weakly informative priors, sensitivity analysis",
+    "computation": "Comparing posteriors under different priors"
+   },
+   {
+    "title": "Model evaluation and selection",
+    "theory": "Posterior predictive checks, Bayes factors, WAIC",
+    "computation": "Comparing two models"
+   },
+   {
+    "title": "Monte Carlo basics",
+    "theory": "Law of large numbers, bias and variance, inverse transform sampling",
+    "computation": "Standard error, required sample size",
+    "coding": "Inverse transform sampler"
+   },
+   {
+    "title": "Importance sampling",
+    "theory": "Proposal choice, weights, effective sample size",
+    "computation": "Computing weights and estimates",
+    "coding": "Implement importance sampling"
+   },
+   {
+    "title": "MCMC I",
+    "theory": "Stationary distribution, detailed balance, Metropolis-Hastings",
+    "computation": "Acceptance rates",
+    "coding": "Metropolis-Hastings sampler"
+   },
+   {
+    "title": "MCMC II",
+    "theory": "Gibbs sampling, hierarchical models, burn-in, ESS, R-hat, HMC overview",
+    "computation": "Diagnostic statistics",
+    "coding": "Gibbs sampler"
+   },
+   {
+    "title": "Laplace approximation",
+    "theory": "Normal approximation of the posterior, when it applies",
+    "computation": "Computing a Laplace approximation"
+   },
+   {
+    "title": "Variational Bayes",
+    "theory": "ELBO, mean-field, comparison with MCMC",
+    "computation": "The ELBO of a simple model"
+   },
+   {
+    "title": "Nonparametric Bayes",
+    "theory": "Dirichlet process, Gaussian process, machine learning applications",
+    "computation": "A simple Dirichlet process calculation"
+   }
+  ]
+ },
+ {
+  "id": "mc",
+  "label": "Monte Carlo",
+  "domain": "stat",
+  "prerequisites": [
+   "p2",
+   "py"
+  ],
+  "courses": "CUHK RMSC4001 · HKU STAT8309",
+  "starred": false,
+  "summary": "Simulation-based computation: random number generation, variance reduction, MCMC and bootstrap.",
+  "outcomes": [
+   "Generate samples from arbitrary distributions",
+   "Reduce variance of Monte Carlo estimators",
+   "Implement MCMC and bootstrap"
+  ],
+  "note": "Follows CUHK RMSC4001 style, with coding emphasised.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Random number generation",
+    "theory": "LCGs, quality of PRNGs, seeding",
+    "computation": "Check a generator's statistics",
+    "coding": "Implement an LCG and a seeded sampler"
+   },
+   {
+    "title": "Inverse transform and acceptance-rejection",
+    "theory": "Inverse CDF, rejection envelope",
+    "computation": "Efficiency of rejection samplers",
+    "coding": "Sample from a custom density"
+   },
+   {
+    "title": "Special methods",
+    "theory": "Box-Muller, composition, multivariate normal",
+    "computation": "Cholesky-based sampling",
+    "coding": "Generate correlated normals"
+   },
+   {
+    "title": "Monte Carlo integration",
+    "theory": "Estimator, standard error, CLT",
+    "computation": "Confidence intervals for MC estimates",
+    "coding": "Estimate an integral with error bars"
+   },
+   {
+    "title": "Variance reduction I",
+    "theory": "Antithetic variates, control variates",
+    "computation": "Variance reduction factors",
+    "coding": "Implement antithetic and control variates"
+   },
+   {
+    "title": "Variance reduction II",
+    "theory": "Importance sampling, stratification",
+    "computation": "Optimal importance densities",
+    "coding": "Rare-event estimation"
+   },
+   {
+    "title": "Discretising SDEs",
+    "theory": "Euler and Milstein schemes, weak/strong error",
+    "computation": "Convergence orders",
+    "coding": "Simulate GBM paths"
+   },
+   {
+    "title": "Markov chain Monte Carlo",
+    "theory": "Metropolis-Hastings, detailed balance",
+    "computation": "Acceptance ratios",
+    "coding": "Implement random-walk Metropolis"
+   },
+   {
+    "title": "Gibbs sampling",
+    "theory": "Full conditionals, blocking",
+    "computation": "Deriving conditionals",
+    "coding": "Gibbs sampler for a bivariate normal"
+   },
+   {
+    "title": "MCMC diagnostics",
+    "theory": "Burn-in, ESS, R-hat",
+    "computation": "Computing ESS",
+    "coding": "Diagnose chains from output"
+   },
+   {
+    "title": "Bootstrap and resampling",
+    "theory": "Nonparametric bootstrap, percentile intervals",
+    "computation": "Bootstrap intervals by hand",
+    "coding": "Bootstrap CI for a statistic"
+   }
+  ]
+ },
+ {
+  "id": "np",
+  "label": "Nonparametric",
+  "domain": "stat",
+  "prerequisites": [
+   "inf"
+  ],
+  "courses": "HKU STAT3620",
+  "starred": false,
+  "summary": "Inference without strong distributional assumptions: rank tests, permutation methods and smoothing.",
+  "outcomes": [
+   "Choose and run rank-based tests",
+   "Use permutation and bootstrap inference",
+   "Estimate densities and regression curves nonparametrically"
+  ],
+  "note": "Follows HKU STAT3620 (nonparametric methods). Distribution-free tests first, then smoothing.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Why nonparametric",
+    "theory": "Parametric vs distribution-free, efficiency",
+    "computation": "Comparing test power"
+   },
+   {
+    "title": "Sign and signed-rank tests",
+    "theory": "Sign test, Wilcoxon signed-rank",
+    "computation": "Exact and normal-approximation tests"
+   },
+   {
+    "title": "Two-sample rank tests",
+    "theory": "Mann-Whitney, Wilcoxon rank-sum",
+    "computation": "Computing U and p-values"
+   },
+   {
+    "title": "Multi-sample tests",
+    "theory": "Kruskal-Wallis, Friedman",
+    "computation": "H statistics from rank sums"
+   },
+   {
+    "title": "Tests of fit",
+    "theory": "Kolmogorov-Smirnov, Anderson-Darling",
+    "computation": "KS statistic from small samples"
+   },
+   {
+    "title": "Rank correlation",
+    "theory": "Spearman, Kendall tau",
+    "computation": "Computing rank correlations"
+   },
+   {
+    "title": "Permutation tests",
+    "theory": "Exchangeability, exact tests",
+    "computation": "Enumerating permutation distributions"
+   },
+   {
+    "title": "Bootstrap and jackknife",
+    "theory": "Bootstrap variance, bias, intervals",
+    "computation": "Jackknife estimates"
+   },
+   {
+    "title": "Kernel density estimation",
+    "theory": "Bias-variance, bandwidth selection",
+    "computation": "Density estimates at points"
+   },
+   {
+    "title": "Nonparametric regression",
+    "theory": "Nadaraya-Watson, local linear, LOESS",
+    "computation": "Kernel regression at a point"
+   }
+  ]
+ },
+ {
+  "id": "hd",
+  "label": "High-dimensional Stats",
+  "domain": "stat",
+  "prerequisites": [
+   "reg2",
+   "la2"
+  ],
+  "courses": "CUHK STAT5103",
+  "starred": false,
+  "summary": "Statistics when the number of variables rivals or exceeds the sample size: concentration, sparsity and random matrices.",
+  "outcomes": [
+   "Use concentration inequalities",
+   "Analyse lasso and sparse recovery",
+   "Apply random-matrix intuition to covariance estimation"
+  ],
+  "note": "Follows CUHK STAT5103 style (high-dimensional statistics). Requires heavy linear algebra.",
+  "proofsNote": "Proofs are central here, so Proof carries more weight.",
+  "lectures": [
+   {
+    "title": "The high-dimensional regime",
+    "theory": "Curse of dimensionality, p>n",
+    "computation": "Distance concentration examples"
+   },
+   {
+    "title": "Sub-Gaussian variables",
+    "theory": "Sub-Gaussian and sub-exponential tails",
+    "computation": "Tail bounds for sums"
+   },
+   {
+    "title": "Concentration inequalities",
+    "theory": "Hoeffding, Bernstein, McDiarmid",
+    "computation": "Applying bounds to examples"
+   },
+   {
+    "title": "Covariance estimation",
+    "theory": "Sample covariance, operator-norm error, shrinkage",
+    "computation": "Ledoit-Wolf style shrinkage"
+   },
+   {
+    "title": "Random matrices",
+    "theory": "Marchenko-Pastur, Wigner, eigenvalue spread",
+    "computation": "MP edges for given p/n"
+   },
+   {
+    "title": "PCA in high dimensions",
+    "theory": "Spiked models, BBP transition",
+    "computation": "Detecting spikes"
+   },
+   {
+    "title": "Sparse regression",
+    "theory": "Lasso oracle inequalities, restricted eigenvalue",
+    "computation": "Support recovery conditions"
+   },
+   {
+    "title": "Sparse recovery",
+    "theory": "Basis pursuit, compressed sensing, RIP",
+    "computation": "Recovery guarantees"
+   },
+   {
+    "title": "Multiple testing",
+    "theory": "FWER, Bonferroni, FDR, Benjamini-Hochberg",
+    "computation": "BH procedure on p-values"
+   },
+   {
+    "title": "Graphical models",
+    "theory": "Graphical lasso, precision matrices",
+    "computation": "Partial correlation reading"
+   }
+  ]
+ },
+ {
+  "id": "ci",
+  "label": "Causal Inference",
+  "domain": "stat",
+  "prerequisites": [
+   "reg1",
+   "inf"
+  ],
+  "courses": "HKU SDST4613 · HKU ECON3284 · HKUST IEDA4000D",
+  "starred": false,
+  "summary": "Identifying causal effects from observational and experimental data.",
+  "outcomes": [
+   "Formulate causal questions with potential outcomes",
+   "Pick an identification strategy",
+   "Estimate effects and check assumptions"
+  ],
+  "note": "Follows HKU SDST4613 and ECON3284 style (potential outcomes and econometric designs).",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Potential outcomes",
+    "theory": "Rubin model, ATE, SUTVA",
+    "computation": "Computing ATE from a table"
+   },
+   {
+    "title": "Randomised experiments",
+    "theory": "Randomisation inference, Neyman estimator",
+    "computation": "Difference-in-means with SE"
+   },
+   {
+    "title": "Confounding and DAGs",
+    "theory": "Causal graphs, backdoor criterion",
+    "computation": "Choosing adjustment sets"
+   },
+   {
+    "title": "Adjustment and matching",
+    "theory": "Regression adjustment, matching",
+    "computation": "Matched estimates by hand"
+   },
+   {
+    "title": "Propensity scores",
+    "theory": "Score theorem, IPW, doubly robust",
+    "computation": "IPW estimator calculations"
+   },
+   {
+    "title": "Instrumental variables",
+    "theory": "Relevance, exclusion, LATE, 2SLS",
+    "computation": "Wald estimator, 2SLS by hand"
+   },
+   {
+    "title": "Regression discontinuity",
+    "theory": "Sharp and fuzzy RD",
+    "computation": "Local linear estimates at a cutoff"
+   },
+   {
+    "title": "Difference-in-differences",
+    "theory": "Parallel trends, event studies",
+    "computation": "2x2 DiD estimates"
+   },
+   {
+    "title": "Synthetic control and panel methods",
+    "theory": "Synthetic control, fixed effects",
+    "computation": "Weights and effect estimates"
+   },
+   {
+    "title": "Sensitivity and heterogeneity",
+    "theory": "Rosenbaum bounds, CATE intro",
+    "computation": "Bounding effects under confounding"
+   }
+  ]
+ },
+ {
+  "id": "exp",
+  "label": "Experimental Design / A/B Testing",
+  "domain": "stat",
+  "prerequisites": [
+   "inf",
+   "reg1"
+  ],
+  "courses": "CityU DSC4110 (mostly industrial experimental design; no university course covers the A/B testing part)",
+  "starred": false,
+  "summary": "Designing experiments and running A/B tests that give trustworthy answers.",
+  "outcomes": [
+   "Design randomised experiments",
+   "Size tests and analyse results",
+   "Avoid peeking and multiple-testing traps"
+  ],
+  "note": "Based on CityU DSC4110 for classical design and standard industry A/B practice; no single university course covers online experiments.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Principles of experimentation",
+    "theory": "Randomisation, replication, blocking",
+    "computation": "Identifying flaws in designs"
+   },
+   {
+    "title": "One-way ANOVA",
+    "theory": "Model, F test, multiple comparisons",
+    "computation": "ANOVA table calculations"
+   },
+   {
+    "title": "Factorial designs",
+    "theory": "Main effects, interactions, 2^k designs",
+    "computation": "Effects from 2^2 and 2^3 tables"
+   },
+   {
+    "title": "Blocking and Latin squares",
+    "theory": "Randomised blocks, Latin squares",
+    "computation": "Block-adjusted comparisons"
+   },
+   {
+    "title": "Fractional factorials",
+    "theory": "Aliasing, resolution",
+    "computation": "Alias structures"
+   },
+   {
+    "title": "A/B test basics",
+    "theory": "Hypotheses, metrics, randomisation units",
+    "computation": "Choosing metrics and units"
+   },
+   {
+    "title": "Sample size and power",
+    "theory": "MDE, power analysis",
+    "computation": "Sample size calculations"
+   },
+   {
+    "title": "Inference for proportions and means",
+    "theory": "z/t tests, delta method for ratios",
+    "computation": "Test statistics for A/B summaries"
+   },
+   {
+    "title": "Sequential testing and peeking",
+    "theory": "Alpha spending, always-valid inference",
+    "computation": "Adjusted boundaries"
+   },
+   {
+    "title": "Variance reduction",
+    "theory": "CUPED, stratification",
+    "computation": "Variance reduction from covariates"
+   },
+   {
+    "title": "Pitfalls and interference",
+    "theory": "SRM, novelty effects, network interference",
+    "computation": "Diagnosing sample ratio mismatch"
+   }
+  ]
+ },
+ {
+  "id": "rm",
+  "label": "Research Methods",
+  "domain": "stat",
+  "prerequisites": [
+   "reg1",
+   "ml"
+  ],
+  "courses": "No standalone course; partly covered in HKU STAT8020 · HKUST MAFS5310",
+  "starred": true,
+  "summary": "How to turn an idea into a defensible quantitative result: hypotheses, backtests, validation and reproducibility.",
+  "outcomes": [
+   "Frame testable hypotheses",
+   "Validate a model out of sample without leakage",
+   "Report results honestly and reproducibly"
+  ],
+  "note": "No single university course; structure follows quant research practice and partly HKU STAT8020 / HKUST MAFS5310.",
+  "proofsNote": "Proofs are replaced by written research critiques; Proof = N/A may be considered.",
+  "lectures": [
+   {
+    "title": "From idea to hypothesis",
+    "theory": "Hypotheses, effect sizes, null results",
+    "computation": "Writing testable hypotheses"
+   },
+   {
+    "title": "Data and leakage",
+    "theory": "Look-ahead bias, survivorship bias",
+    "computation": "Spotting leakage in setups"
+   },
+   {
+    "title": "Train/validation/test design",
+    "theory": "Time-series splits, walk-forward",
+    "computation": "Designing splits for given data"
+   },
+   {
+    "title": "Overfitting and multiple testing",
+    "theory": "Data snooping, deflated Sharpe",
+    "computation": "Adjusting Sharpe for trials"
+   },
+   {
+    "title": "Backtesting",
+    "theory": "Costs, slippage, capacity",
+    "computation": "PnL net of costs"
+   },
+   {
+    "title": "Performance metrics",
+    "theory": "Sharpe, drawdown, information ratio",
+    "computation": "Computing metrics from returns"
+   },
+   {
+    "title": "Statistical significance in practice",
+    "theory": "Bootstrap for Sharpe, effect vs significance",
+    "computation": "Intervals for performance"
+   },
+   {
+    "title": "Model comparison",
+    "theory": "Nested tests, information criteria, CV",
+    "computation": "Choosing between models"
+   },
+   {
+    "title": "Robustness and sensitivity",
+    "theory": "Parameter stability, regime tests",
+    "computation": "Sensitivity tables"
+   },
+   {
+    "title": "Reproducibility",
+    "theory": "Version control, seeds, pipelines",
+    "computation": "Checking a reproducibility checklist"
+   },
+   {
+    "title": "Communicating results",
+    "theory": "Paper structure, plots, limitations",
+    "computation": "Critiquing a results section"
+   }
+  ]
+ },
+ {
+  "id": "ml",
+  "label": "Machine Learning",
+  "domain": "ai",
+  "prerequisites": [
+   "reg1",
+   "opt",
+   "py"
+  ],
+  "courses": "CUHK CSCI3320 · HKUST COMP4211 · HKUST MAFS5340 · HKU COMP7409 · CUHK RMSC4002",
+  "starred": false,
+  "summary": "Core supervised and unsupervised learning, with emphasis on generalisation and honest evaluation.",
+  "outcomes": [
+   "Train and evaluate standard models",
+   "Explain bias-variance and regularisation",
+   "Build sound validation pipelines"
+  ],
+  "note": "Follows CUHK CSCI3320 and HKUST COMP4211 style, with a finance-flavoured final lecture.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Learning problems and generalisation",
+    "theory": "Supervised/unsupervised, empirical risk, bias-variance",
+    "computation": "Train/test error computations",
+    "coding": "Load data and fit a baseline"
+   },
+   {
+    "title": "Linear and logistic models",
+    "theory": "Least squares, logistic loss, gradient descent",
+    "computation": "Gradient steps by hand",
+    "coding": "Implement gradient descent"
+   },
+   {
+    "title": "Regularisation and model selection",
+    "theory": "Ridge, lasso, cross-validation",
+    "computation": "Choosing lambda from CV output",
+    "coding": "Implement k-fold CV"
+   },
+   {
+    "title": "k-NN and kernel methods",
+    "theory": "Nearest neighbours, kernels, curse of dimensionality",
+    "computation": "Distance-based predictions",
+    "coding": "Implement k-NN"
+   },
+   {
+    "title": "Support vector machines",
+    "theory": "Margin, hinge loss, dual, kernel trick",
+    "computation": "Margins and support vectors from small data",
+    "coding": "Fit an SVM"
+   },
+   {
+    "title": "Decision trees",
+    "theory": "Impurity, splitting, pruning",
+    "computation": "Computing Gini and entropy splits",
+    "coding": "Implement a tree split"
+   },
+   {
+    "title": "Ensembles",
+    "theory": "Bagging, random forests, boosting",
+    "computation": "Bagging variance reduction",
+    "coding": "Gradient boosting by hand"
+   },
+   {
+    "title": "Generative models",
+    "theory": "Naive Bayes, LDA, Gaussian mixtures",
+    "computation": "Posterior class probabilities",
+    "coding": "EM for a GMM"
+   },
+   {
+    "title": "Dimensionality reduction",
+    "theory": "PCA, SVD, t-SNE intuition",
+    "computation": "PCA from covariance matrices",
+    "coding": "Implement PCA"
+   },
+   {
+    "title": "Clustering",
+    "theory": "k-means, hierarchical, spectral",
+    "computation": "k-means iterations",
+    "coding": "Implement k-means"
+   },
+   {
+    "title": "Evaluation and finance pitfalls",
+    "theory": "ROC/AUC, calibration, purged CV",
+    "computation": "Computing AUC and precision-recall",
+    "coding": "Leakage-free splits"
+   }
+  ]
+ },
+ {
+  "id": "dl",
+  "label": "Deep Learning",
+  "domain": "ai",
+  "prerequisites": [
+   "ml"
+  ],
+  "courses": "HKU COMP3340 · CUHK STAT4012 · HKU DASC7606",
+  "starred": false,
+  "summary": "Neural networks from backpropagation to modern architectures and training practice.",
+  "outcomes": [
+   "Derive backprop",
+   "Train CNNs, RNNs and Transformers",
+   "Diagnose training problems"
+  ],
+  "note": "Follows HKU COMP3340 / CUHK STAT4012 style, with PyTorch-style coding.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Perceptrons and MLPs",
+    "theory": "Neurons, activations, universal approximation",
+    "computation": "Forward passes by hand",
+    "coding": "Implement an MLP forward pass"
+   },
+   {
+    "title": "Backpropagation",
+    "theory": "Chain rule, computational graphs",
+    "computation": "Gradients through small networks",
+    "coding": "Implement backprop"
+   },
+   {
+    "title": "Optimisation",
+    "theory": "SGD, momentum, Adam, learning-rate schedules",
+    "computation": "Update-rule calculations",
+    "coding": "Implement optimisers"
+   },
+   {
+    "title": "Regularisation",
+    "theory": "Weight decay, dropout, early stopping",
+    "computation": "Effective weight shrinkage",
+    "coding": "Add dropout and weight decay"
+   },
+   {
+    "title": "Initialisation and normalisation",
+    "theory": "Xavier/He init, batch/layer norm",
+    "computation": "Variance propagation",
+    "coding": "Implement layer norm"
+   },
+   {
+    "title": "Convolutional networks",
+    "theory": "Convolutions, pooling, receptive fields",
+    "computation": "Output size and parameter counts",
+    "coding": "Implement convolution"
+   },
+   {
+    "title": "Modern CNNs",
+    "theory": "ResNets, skip connections",
+    "computation": "Parameter and FLOP counts",
+    "coding": "Build a residual block"
+   },
+   {
+    "title": "Recurrent networks",
+    "theory": "RNNs, LSTM, GRU, vanishing gradients",
+    "computation": "Unrolled gradients",
+    "coding": "Implement an RNN cell"
+   },
+   {
+    "title": "Attention and Transformers",
+    "theory": "Self-attention, positional encoding",
+    "computation": "Attention weights by hand",
+    "coding": "Implement scaled dot-product attention"
+   },
+   {
+    "title": "Generative models",
+    "theory": "Autoencoders, VAEs, GANs",
+    "computation": "ELBO terms",
+    "coding": "Train a small autoencoder"
+   },
+   {
+    "title": "Training practice",
+    "theory": "Debugging, hyperparameter search, mixed precision",
+    "computation": "Diagnosing loss curves",
+    "coding": "Overfit-one-batch test"
+   }
+  ]
+ },
+ {
+  "id": "nlp",
+  "label": "NLP",
+  "domain": "ai",
+  "prerequisites": [
+   "dl"
+  ],
+  "courses": "HKU COMP3361 · HKUST COMP4221",
+  "starred": false,
+  "summary": "Language modelling and text processing from n-grams to pretrained Transformers.",
+  "outcomes": [
+   "Build text pipelines",
+   "Understand embeddings and sequence models",
+   "Fine-tune and evaluate pretrained models"
+  ],
+  "note": "Follows HKU COMP3361 / HKUST COMP4221.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Text processing",
+    "theory": "Tokenisation, normalisation, BPE",
+    "computation": "Applying BPE merges",
+    "coding": "Implement BPE"
+   },
+   {
+    "title": "N-gram language models",
+    "theory": "Perplexity, smoothing",
+    "computation": "Perplexity calculations",
+    "coding": "Bigram model with smoothing"
+   },
+   {
+    "title": "Word embeddings",
+    "theory": "Word2vec, GloVe, cosine similarity",
+    "computation": "Analogy and similarity calculations",
+    "coding": "Train toy embeddings"
+   },
+   {
+    "title": "Text classification",
+    "theory": "Bag-of-words, TF-IDF, logistic regression",
+    "computation": "TF-IDF by hand",
+    "coding": "Sentiment classifier"
+   },
+   {
+    "title": "Sequence labelling",
+    "theory": "HMMs, CRFs, Viterbi",
+    "computation": "Viterbi decoding",
+    "coding": "Implement Viterbi"
+   },
+   {
+    "title": "Neural sequence models",
+    "theory": "RNN language models, seq2seq",
+    "computation": "Sequence loss calculations",
+    "coding": "Seq2seq toy task"
+   },
+   {
+    "title": "Attention and Transformers for text",
+    "theory": "Encoder/decoder, masking",
+    "computation": "Attention masks",
+    "coding": "Masked attention"
+   },
+   {
+    "title": "Pretrained encoders",
+    "theory": "BERT, masked LM, fine-tuning",
+    "computation": "Fine-tuning parameter counts",
+    "coding": "Fine-tune a classifier"
+   },
+   {
+    "title": "Parsing and semantics",
+    "theory": "Dependency/constituency parsing, semantic roles",
+    "computation": "Parse trees",
+    "coding": "Dependency parse features"
+   },
+   {
+    "title": "Evaluation",
+    "theory": "BLEU, ROUGE, F1, human eval",
+    "computation": "Computing BLEU and F1",
+    "coding": "Implement metrics"
+   }
+  ]
+ },
+ {
+  "id": "llm",
+  "label": "LLM / Generative AI",
+  "domain": "ai",
+  "prerequisites": [
+   "nlp"
+  ],
+  "courses": "CUHK STAT6209",
+  "starred": false,
+  "summary": "Large language models: pretraining, scaling, alignment, prompting and retrieval.",
+  "outcomes": [
+   "Explain how LLMs are trained and aligned",
+   "Use prompting, RAG and fine-tuning",
+   "Evaluate risks and limits"
+  ],
+  "note": "Follows CUHK STAT6209 style, extended with current practice.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Decoder-only Transformers",
+    "theory": "Architecture, causal masking, KV cache",
+    "computation": "Parameter counts",
+    "coding": "Implement a tiny GPT block"
+   },
+   {
+    "title": "Pretraining",
+    "theory": "Objectives, data pipelines, tokenisation",
+    "computation": "Tokens-seen and cost estimates",
+    "coding": "Streaming data loader"
+   },
+   {
+    "title": "Scaling laws",
+    "theory": "Compute-optimal scaling",
+    "computation": "Scaling-law fits",
+    "coding": "Fit a power law"
+   },
+   {
+    "title": "Sampling and decoding",
+    "theory": "Temperature, top-k, top-p, beam",
+    "computation": "Probabilities under sampling",
+    "coding": "Implement sampling"
+   },
+   {
+    "title": "Fine-tuning",
+    "theory": "SFT, LoRA, parameter-efficient methods",
+    "computation": "LoRA rank and parameter counts",
+    "coding": "LoRA layer"
+   },
+   {
+    "title": "Alignment",
+    "theory": "RLHF, DPO, reward models",
+    "computation": "DPO loss by hand",
+    "coding": "DPO loss"
+   },
+   {
+    "title": "Prompting and in-context learning",
+    "theory": "Few-shot, chain of thought",
+    "computation": "Prompt design cases",
+    "coding": "Prompt templates"
+   },
+   {
+    "title": "Retrieval-augmented generation",
+    "theory": "Embeddings, vector search, chunking",
+    "computation": "Similarity ranking",
+    "coding": "Minimal RAG pipeline"
+   },
+   {
+    "title": "Agents and tool use",
+    "theory": "Function calling, planning",
+    "computation": "Tool-call traces",
+    "coding": "Tool-calling loop"
+   },
+   {
+    "title": "Evaluation and safety",
+    "theory": "Benchmarks, hallucination, red-teaming",
+    "computation": "Metric calculations",
+    "coding": "Evaluate a model on a test set"
+   },
+   {
+    "title": "Efficiency",
+    "theory": "Quantisation, distillation, serving",
+    "computation": "Memory estimates",
+    "coding": "Quantise weights"
+   }
+  ]
+ },
+ {
+  "id": "rl",
+  "label": "Reinforcement Learning",
+  "domain": "ai",
+  "prerequisites": [
+   "ml",
+   "sp"
+  ],
+  "courses": "HKUST MAFS5370",
+  "starred": false,
+  "summary": "Sequential decision making from bandits and MDPs to deep reinforcement learning.",
+  "outcomes": [
+   "Solve MDPs by dynamic programming",
+   "Implement TD and policy-gradient methods",
+   "Understand RL applications in trading"
+  ],
+  "note": "Follows HKUST MAFS5370 and the standard Sutton-Barto sequence.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Bandits",
+    "theory": "Exploration vs exploitation, UCB, Thompson",
+    "computation": "Regret calculations",
+    "coding": "Bandit simulator"
+   },
+   {
+    "title": "Markov decision processes",
+    "theory": "States, rewards, policies, Bellman equations",
+    "computation": "Value computation",
+    "coding": "Solve a tiny MDP"
+   },
+   {
+    "title": "Dynamic programming",
+    "theory": "Policy/value iteration",
+    "computation": "Iterations by hand",
+    "coding": "Value iteration"
+   },
+   {
+    "title": "Monte Carlo methods",
+    "theory": "First-visit MC, exploration",
+    "computation": "MC returns",
+    "coding": "MC control"
+   },
+   {
+    "title": "Temporal-difference learning",
+    "theory": "TD(0), SARSA, Q-learning",
+    "computation": "TD updates by hand",
+    "coding": "Tabular Q-learning"
+   },
+   {
+    "title": "n-step and eligibility traces",
+    "theory": "TD(lambda)",
+    "computation": "Return computations",
+    "coding": "TD(lambda)"
+   },
+   {
+    "title": "Function approximation",
+    "theory": "Linear approximation, deadly triad",
+    "computation": "Semi-gradient updates",
+    "coding": "Linear Q-learning"
+   },
+   {
+    "title": "Deep Q-networks",
+    "theory": "Replay buffers, target networks",
+    "computation": "Target calculations",
+    "coding": "DQN on a small task"
+   },
+   {
+    "title": "Policy gradients",
+    "theory": "REINFORCE, baselines, actor-critic",
+    "computation": "Gradient estimates",
+    "coding": "REINFORCE"
+   },
+   {
+    "title": "Modern policy methods",
+    "theory": "PPO, TRPO, SAC",
+    "computation": "Clipped objective",
+    "coding": "PPO objective"
+   },
+   {
+    "title": "RL in finance",
+    "theory": "Execution, market making, reward design",
+    "computation": "Reward shaping examples",
+    "coding": "Trading environment"
+   }
+  ]
+ },
+ {
+  "id": "cv",
+  "label": "Computer Vision",
+  "domain": "ai",
+  "prerequisites": [
+   "dl"
+  ],
+  "courses": "HKUST COMP4471",
+  "starred": false,
+  "summary": "Image understanding with classical methods and deep networks.",
+  "outcomes": [
+   "Process and transform images",
+   "Build detection and segmentation models",
+   "Understand geometry and generative vision"
+  ],
+  "note": "Follows HKUST COMP4471 style.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Image formation and filtering",
+    "theory": "Pixels, convolution, edges",
+    "computation": "Filter outputs",
+    "coding": "Convolution filters"
+   },
+   {
+    "title": "Features",
+    "theory": "Corners, SIFT, descriptors",
+    "computation": "Harris response",
+    "coding": "Feature matching"
+   },
+   {
+    "title": "Image classification",
+    "theory": "CNN classifiers, augmentation",
+    "computation": "Accuracy metrics",
+    "coding": "Train a classifier"
+   },
+   {
+    "title": "Modern backbones",
+    "theory": "ResNets, ViT",
+    "computation": "Receptive fields",
+    "coding": "Vision Transformer patching"
+   },
+   {
+    "title": "Object detection",
+    "theory": "R-CNN family, YOLO, IoU, NMS",
+    "computation": "IoU and NMS by hand",
+    "coding": "Implement NMS"
+   },
+   {
+    "title": "Segmentation",
+    "theory": "FCN, U-Net, Mask R-CNN",
+    "computation": "Dice and IoU",
+    "coding": "Dice loss"
+   },
+   {
+    "title": "Geometry",
+    "theory": "Camera models, homography, stereo",
+    "computation": "Projection calculations",
+    "coding": "Homography estimation"
+   },
+   {
+    "title": "Self-supervised learning",
+    "theory": "Contrastive learning, CLIP",
+    "computation": "Contrastive loss",
+    "coding": "InfoNCE loss"
+   },
+   {
+    "title": "Generative vision",
+    "theory": "GANs, diffusion models",
+    "computation": "Diffusion noise schedule",
+    "coding": "Forward diffusion"
+   },
+   {
+    "title": "Video and deployment",
+    "theory": "Optical flow, tracking, efficiency",
+    "computation": "Flow equations",
+    "coding": "Basic tracker"
+   }
+  ]
+ },
+ {
+  "id": "lt",
+  "label": "Learning Theory",
+  "domain": "ai",
+  "prerequisites": [
+   "ml",
+   "p3"
+  ],
+  "courses": "CUHK CSCI4230",
+  "starred": false,
+  "summary": "Why learning works: PAC learning, complexity measures and generalisation bounds.",
+  "outcomes": [
+   "State and use PAC bounds",
+   "Compute VC dimension and Rademacher complexity",
+   "Connect theory to practical algorithms"
+  ],
+  "note": "Follows CUHK CSCI4230. Needs measure-theoretic probability for some proofs.",
+  "proofsNote": "Proofs are central; Proof carries more weight.",
+  "lectures": [
+   {
+    "title": "PAC learning",
+    "theory": "Realisable and agnostic PAC",
+    "computation": "Sample complexity for finite classes"
+   },
+   {
+    "title": "Uniform convergence",
+    "theory": "Hoeffding and union bound",
+    "computation": "Generalisation gaps"
+   },
+   {
+    "title": "VC dimension",
+    "theory": "Shattering, Sauer lemma",
+    "computation": "VC dimension of simple classes"
+   },
+   {
+    "title": "Rademacher complexity",
+    "theory": "Definition, bounds",
+    "computation": "Complexity of linear classes"
+   },
+   {
+    "title": "Margin theory",
+    "theory": "Margin bounds, SVMs",
+    "computation": "Margin-based bounds"
+   },
+   {
+    "title": "Boosting",
+    "theory": "AdaBoost, margin explanation",
+    "computation": "Training-error bounds"
+   },
+   {
+    "title": "Online learning",
+    "theory": "Regret, Perceptron, Hedge",
+    "computation": "Regret bounds"
+   },
+   {
+    "title": "Stability and regularisation",
+    "theory": "Algorithmic stability",
+    "computation": "Stability constants"
+   },
+   {
+    "title": "Convex learning",
+    "theory": "Convex Lipschitz bounded problems, SGD",
+    "computation": "SGD rates"
+   },
+   {
+    "title": "Bias-variance and modern theory",
+    "theory": "Double descent, interpolation",
+    "computation": "Interpretation exercises"
+   }
+  ]
+ },
+ {
+  "id": "mlops",
+  "label": "MLOps",
+  "domain": "ai",
+  "prerequisites": [
+   "ml",
+   "db",
+   "tools"
+  ],
+  "courses": "No university course",
+  "starred": true,
+  "summary": "Shipping, monitoring and maintaining models in production.",
+  "outcomes": [
+   "Package and deploy models",
+   "Version data, code and experiments",
+   "Monitor drift and failures"
+  ],
+  "note": "No university course; structure follows industry practice for taking models to production.",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest set.",
+  "lectures": [
+   {
+    "title": "ML systems overview",
+    "theory": "Lifecycle, failure modes",
+    "computation": "Identifying pipeline issues",
+    "coding": "Project structure"
+   },
+   {
+    "title": "Data pipelines",
+    "theory": "Validation, schemas, feature stores",
+    "computation": "Schema checks",
+    "coding": "Data validation"
+   },
+   {
+    "title": "Experiment tracking",
+    "theory": "Metrics, configs, reproducibility",
+    "computation": "Comparing runs",
+    "coding": "Tracking runs"
+   },
+   {
+    "title": "Containers",
+    "theory": "Docker, images, environments",
+    "computation": "Dockerfile reading",
+    "coding": "Containerise a model"
+   },
+   {
+    "title": "Model serving",
+    "theory": "REST/gRPC, batch vs online",
+    "computation": "Latency budgets",
+    "coding": "Serve a model"
+   },
+   {
+    "title": "CI/CD for ML",
+    "theory": "Tests, pipelines, rollouts",
+    "computation": "Pipeline design",
+    "coding": "Write tests"
+   },
+   {
+    "title": "Orchestration",
+    "theory": "DAG schedulers, retries",
+    "computation": "Dependency graphs",
+    "coding": "Pipeline DAG"
+   },
+   {
+    "title": "Monitoring and drift",
+    "theory": "Data and concept drift, alerts",
+    "computation": "Drift statistics",
+    "coding": "Drift detection"
+   },
+   {
+    "title": "Scaling and cost",
+    "theory": "GPUs, batching, cost models",
+    "computation": "Cost calculations",
+    "coding": "Batching"
+   },
+   {
+    "title": "Governance",
+    "theory": "Reproducibility, audit, model risk",
+    "computation": "Checklist review",
+    "coding": "Model card"
+   }
+  ]
+ },
+ {
+  "id": "sc",
+  "label": "Stochastic Calculus",
+  "domain": "deriv",
+  "prerequisites": [
+   "sp",
+   "mvc"
+  ],
+  "courses": "HKU FINA3350 · CityU EF3520 · HKUST MAFS5010 · CUHK RMSC4005",
+  "starred": false,
+  "summary": "Ito calculus and its use in pricing: Brownian motion, SDEs, Girsanov and Black-Scholes.",
+  "outcomes": [
+   "Compute with Ito's formula",
+   "Solve and simulate SDEs",
+   "Derive Black-Scholes by PDE and by change of measure"
+  ],
+  "note": "Follows HKU FINA3350, HKUST MAFS5010 and CUHK RMSC4005. Builds on Stochastic Processes.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Brownian motion",
+    "theory": "Definition, scaling, quadratic variation",
+    "computation": "Covariances of Brownian paths"
+   },
+   {
+    "title": "Properties of paths",
+    "theory": "Non-differentiability, reflection principle",
+    "computation": "Hitting-time probabilities"
+   },
+   {
+    "title": "Ito integral",
+    "theory": "Construction, isometry, martingale property",
+    "computation": "Moments of Ito integrals"
+   },
+   {
+    "title": "Ito's formula",
+    "theory": "One- and multi-dimensional versions",
+    "computation": "Applying Ito to functions of BM"
+   },
+   {
+    "title": "Geometric Brownian motion",
+    "theory": "Solution, lognormal distribution",
+    "computation": "GBM moments and probabilities"
+   },
+   {
+    "title": "SDEs",
+    "theory": "Existence, OU process, linear SDEs",
+    "computation": "Solving linear SDEs"
+   },
+   {
+    "title": "Feynman-Kac",
+    "theory": "PDE-expectation link",
+    "computation": "Solving PDEs via expectations"
+   },
+   {
+    "title": "Girsanov and measure change",
+    "theory": "Radon-Nikodym, risk-neutral measure",
+    "computation": "Drift changes"
+   },
+   {
+    "title": "Black-Scholes derivation",
+    "theory": "Self-financing replication, PDE",
+    "computation": "Verifying the BS PDE"
+   },
+   {
+    "title": "Martingale representation and numeraires",
+    "theory": "Change of numeraire, forward measure",
+    "computation": "Computing prices under numeraires"
+   }
+  ]
+ },
+ {
+  "id": "dv1",
+  "label": "Derivatives I",
+  "domain": "deriv",
+  "prerequisites": [
+   "p1"
+  ],
+  "courses": "HKU FINA2322 · HKUST FINA3203",
+  "starred": false,
+  "summary": "Forwards, futures, options and no-arbitrage pricing in discrete time, up to Black-Scholes as a limit.",
+  "outcomes": [
+   "Price forwards and options by no-arbitrage",
+   "Use binomial trees",
+   "Read option payoffs and put-call parity"
+  ],
+  "note": "Follows the 13 topics of HKU FINA2322, merging only the first two. Black-Scholes is used but not derived; the derivation belongs to Derivatives II.",
+  "proofsNote": "Proofs will be added later, for example cash-and-carry, put-call parity and replication.",
+  "lectures": [
+   {
+    "title": "Introduction to derivatives, forwards and options",
+    "theory": "Forward and option payoffs, long and short, hedging vs speculation, the no-arbitrage principle, continuous compounding",
+    "computation": "Payoff and profit tables, compounding conversions, breakeven points"
+   },
+   {
+    "title": "Insurance, collars and other strategies",
+    "theory": "Protective put, covered call, collar, spreads, straddle, butterfly",
+    "computation": "Combined payoffs, maximum profit and loss, breakeven points"
+   },
+   {
+    "title": "Introduction to risk management",
+    "theory": "Why hedge, costs and limits of hedging",
+    "computation": "Hedged profit and loss, effective price"
+   },
+   {
+    "title": "Financial forwards and futures",
+    "theory": "Cost of carry, with and without dividends, currency forwards, cash-and-carry arbitrage, margin and daily settlement",
+    "computation": "Forward price, arbitrage profit, margin account"
+   },
+   {
+    "title": "Commodity forwards and futures",
+    "theory": "Storage costs, convenience yield, contango and backwardation",
+    "computation": "Commodity forward pricing, implied convenience yield"
+   },
+   {
+    "title": "Interest rate forwards and futures",
+    "theory": "Forward rates, FRAs, Eurodollar and SOFR futures",
+    "computation": "Forward rates from a zero curve, FRA settlement"
+   },
+   {
+    "title": "Swaps",
+    "theory": "Interest rate, currency and commodity swaps; a swap as a strip of forwards",
+    "computation": "Par swap rate, swap valuation"
+   },
+   {
+    "title": "Parity and other option relationships",
+    "theory": "Put-call parity, price bounds, early exercise of American options",
+    "computation": "Checking parity, finding arbitrage"
+   },
+   {
+    "title": "Binomial option pricing",
+    "theory": "Replicating portfolio, risk-neutral probability, multiple periods, American options, calibrating u and d from σ",
+    "computation": "One- and multi-period pricing, American option trees"
+   },
+   {
+    "title": "The Black-Scholes formula",
+    "theory": "The formula (used, not derived), Greeks, implied volatility",
+    "computation": "Pricing with the formula, computing Greeks"
+   },
+   {
+    "title": "Market-making and delta-hedging",
+    "theory": "Delta hedging, gamma risk, hedging P&L for a market maker",
+    "computation": "Delta-hedge P&L, delta-gamma approximation"
+   },
+   {
+    "title": "Financial engineering and applications",
+    "theory": "Structured products, options in corporate finance (convertibles, warrants). HKU marks this as time permitting",
+    "computation": "Pricing a simple structured product"
+   }
+  ]
+ },
+ {
+  "id": "dv2",
+  "label": "Derivatives II",
+  "domain": "deriv",
+  "prerequisites": [
+   "dv1",
+   "sc"
+  ],
+  "courses": "CityU EF4820 · HKUST MAFS5030",
+  "starred": false,
+  "summary": "Continuous-time derivative pricing beyond vanilla options: exotics, American options and hedging.",
+  "outcomes": [
+   "Price options under Black-Scholes",
+   "Handle exotics and early exercise",
+   "Compute and manage Greeks"
+  ],
+  "note": "Follows HKUST MAFS5030 and CityU EF4820.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Black-Scholes revisited",
+    "theory": "PDE and risk-neutral pricing",
+    "computation": "Closed-form call/put prices"
+   },
+   {
+    "title": "Greeks",
+    "theory": "Delta, gamma, vega, theta, rho",
+    "computation": "Greek calculations"
+   },
+   {
+    "title": "Delta-gamma hedging",
+    "theory": "Dynamic hedging, hedging error",
+    "computation": "Hedge P&L examples"
+   },
+   {
+    "title": "Barrier options",
+    "theory": "Reflection, in-out parity",
+    "computation": "Barrier prices"
+   },
+   {
+    "title": "Asian and lookback options",
+    "theory": "Average-price, lookbacks",
+    "computation": "Geometric Asian prices"
+   },
+   {
+    "title": "American options",
+    "theory": "Optimal stopping, free boundary",
+    "computation": "Early-exercise comparisons"
+   },
+   {
+    "title": "Binomial and trinomial trees",
+    "theory": "Convergence to BS",
+    "computation": "Tree prices"
+   },
+   {
+    "title": "Finite-difference methods",
+    "theory": "Explicit, implicit, Crank-Nicolson",
+    "computation": "Stability checks"
+   },
+   {
+    "title": "Currency, dividend and commodity options",
+    "theory": "Garman-Kohlhagen, futures options",
+    "computation": "Pricing variants"
+   },
+   {
+    "title": "Multi-asset options",
+    "theory": "Exchange, basket, spread options",
+    "computation": "Margrabe and basket approximations"
+   }
+  ]
+ },
+ {
+  "id": "vol",
+  "label": "Volatility Models",
+  "domain": "deriv",
+  "prerequisites": [
+   "dv2",
+   "num1"
+  ],
+  "courses": "No university course (local vol, Heston, SABR)",
+  "starred": true,
+  "summary": "Modelling the implied volatility surface with local, stochastic and parametric models.",
+  "outcomes": [
+   "Read and arbitrage-check a smile",
+   "Calibrate local and stochastic volatility models",
+   "Hedge with smile models"
+  ],
+  "note": "No university course; structure follows standard quant literature on smile modelling.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Implied volatility",
+    "theory": "Quotes, Newton inversion",
+    "computation": "Implied vol from prices",
+    "coding": "Implement an IV solver"
+   },
+   {
+    "title": "The smile and surface",
+    "theory": "Skew, term structure, no-arbitrage conditions",
+    "computation": "Checking butterfly arbitrage",
+    "coding": "Arbitrage checks"
+   },
+   {
+    "title": "Local volatility",
+    "theory": "Dupire formula",
+    "computation": "Local vol from a surface",
+    "coding": "Dupire on a grid"
+   },
+   {
+    "title": "Stochastic volatility",
+    "theory": "Heston model, CIR variance",
+    "computation": "Moments of variance",
+    "coding": "Simulate Heston"
+   },
+   {
+    "title": "Heston pricing",
+    "theory": "Characteristic function, Fourier pricing",
+    "computation": "Characteristic function evaluation",
+    "coding": "Fourier pricer"
+   },
+   {
+    "title": "SABR",
+    "theory": "SABR model, Hagan expansion",
+    "computation": "SABR implied vol",
+    "coding": "Implement SABR"
+   },
+   {
+    "title": "SVI and parametrisations",
+    "theory": "SVI, no-arbitrage constraints",
+    "computation": "SVI fits",
+    "coding": "Fit SVI"
+   },
+   {
+    "title": "Calibration",
+    "theory": "Least squares, regularisation",
+    "computation": "Calibration error",
+    "coding": "Calibrate to quotes"
+   },
+   {
+    "title": "Smile dynamics",
+    "theory": "Sticky strike vs sticky delta",
+    "computation": "Hedge ratios",
+    "coding": "Compare smile dynamics"
+   },
+   {
+    "title": "Exotics under smile models",
+    "theory": "Local-stochastic mixtures",
+    "computation": "Model risk comparison",
+    "coding": "Barrier price under two models"
+   }
+  ]
+ },
+ {
+  "id": "ir1",
+  "label": "Interest Rate I",
+  "domain": "deriv",
+  "prerequisites": [
+   "dv1"
+  ],
+  "courses": "HKU FINA3323 · HKUST FINA4303",
+  "starred": false,
+  "summary": "Fixed income fundamentals: bonds, yields, duration and the term structure.",
+  "outcomes": [
+   "Price bonds and swaps",
+   "Compute duration and convexity",
+   "Bootstrap curves"
+  ],
+  "note": "Follows HKU FINA3323 and HKUST FINA4303.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Time value and bond pricing",
+    "theory": "PV, yield to maturity",
+    "computation": "Bond prices and yields"
+   },
+   {
+    "title": "Yield curves",
+    "theory": "Spot, forward, par rates",
+    "computation": "Spot from par"
+   },
+   {
+    "title": "Bootstrapping",
+    "theory": "Discount factors from instruments",
+    "computation": "Bootstrap a curve"
+   },
+   {
+    "title": "Duration",
+    "theory": "Macaulay, modified, DV01",
+    "computation": "Duration and DV01"
+   },
+   {
+    "title": "Convexity",
+    "theory": "Price-yield curvature",
+    "computation": "Price change approximations"
+   },
+   {
+    "title": "Immunisation and hedging",
+    "theory": "Duration matching",
+    "computation": "Immunising liabilities"
+   },
+   {
+    "title": "Forward rate agreements and futures",
+    "theory": "FRAs, Eurodollar futures, convexity adjustment",
+    "computation": "FRA pricing"
+   },
+   {
+    "title": "Interest rate swaps",
+    "theory": "Fixed vs floating, valuation",
+    "computation": "Swap rates and values"
+   },
+   {
+    "title": "Term-structure theories",
+    "theory": "Expectations, liquidity premium",
+    "computation": "Interpreting curves"
+   },
+   {
+    "title": "Bond options and caps",
+    "theory": "Black-76 caps/floors",
+    "computation": "Cap prices"
+   }
+  ]
+ },
+ {
+  "id": "ir2",
+  "label": "Interest Rate II",
+  "domain": "deriv",
+  "prerequisites": [
+   "ir1",
+   "sc"
+  ],
+  "courses": "CityU EF4821 · HKUST MAFS5040 · CUHK RMSC6001",
+  "starred": false,
+  "summary": "Stochastic models for interest rates and the pricing of rate derivatives.",
+  "outcomes": [
+   "Use short-rate and HJM models",
+   "Price caps, floors and swaptions",
+   "Apply the LIBOR market model"
+  ],
+  "note": "Follows HKUST MAFS5040 and CityU EF4821.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Short-rate models",
+    "theory": "Vasicek, CIR, Hull-White",
+    "computation": "Bond prices in Vasicek"
+   },
+   {
+    "title": "Affine term structure",
+    "theory": "Affine class, Riccati equations",
+    "computation": "Solving affine ODEs"
+   },
+   {
+    "title": "Calibration to the curve",
+    "theory": "Hull-White fitting",
+    "computation": "Theta(t) fitting"
+   },
+   {
+    "title": "HJM framework",
+    "theory": "Drift condition",
+    "computation": "HJM drift calculations"
+   },
+   {
+    "title": "Forward measures",
+    "theory": "Change of numeraire for rates",
+    "computation": "Forward-measure pricing"
+   },
+   {
+    "title": "Caps, floors, swaptions",
+    "theory": "Black formulas, annuity measure",
+    "computation": "Swaption prices"
+   },
+   {
+    "title": "LIBOR market model",
+    "theory": "Lognormal forward rates, drift terms",
+    "computation": "LMM drift"
+   },
+   {
+    "title": "Calibration to vols",
+    "theory": "Cap/swaption calibration",
+    "computation": "Calibration targets"
+   },
+   {
+    "title": "Multi-curve and OIS discounting",
+    "theory": "Post-crisis curves, SOFR",
+    "computation": "Curve construction"
+   },
+   {
+    "title": "Numerical methods for rates",
+    "theory": "Trees and Monte Carlo for rates",
+    "computation": "Simulation estimates"
+   }
+  ]
+ },
+ {
+  "id": "cr",
+  "label": "Credit Risk",
+  "domain": "deriv",
+  "prerequisites": [
+   "dv1",
+   "p2"
+  ],
+  "courses": "HKU FINA3322 · CUHK RMSC6002 · HKUST MAFS5220",
+  "starred": false,
+  "summary": "Credit risk measurement and pricing: default models, spreads and credit derivatives.",
+  "outcomes": [
+   "Compute default probabilities and expected loss",
+   "Price CDS and bonds with credit risk",
+   "Model portfolio default correlation"
+  ],
+  "note": "Follows HKU FINA3322 and CUHK RMSC6002.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Credit risk overview",
+    "theory": "PD, LGD, EAD, expected loss",
+    "computation": "Expected loss calculations"
+   },
+   {
+    "title": "Credit ratings and transition matrices",
+    "theory": "Markov rating models",
+    "computation": "Multi-year PDs"
+   },
+   {
+    "title": "Structural models",
+    "theory": "Merton model, distance to default",
+    "computation": "Merton PD"
+   },
+   {
+    "title": "Reduced-form models",
+    "theory": "Hazard rates, intensity",
+    "computation": "Survival probabilities"
+   },
+   {
+    "title": "Risky bond pricing",
+    "theory": "Credit spreads, recovery",
+    "computation": "Spread decomposition"
+   },
+   {
+    "title": "Credit default swaps",
+    "theory": "CDS valuation, bootstrapping",
+    "computation": "CDS spread calculations"
+   },
+   {
+    "title": "Portfolio credit and copulas",
+    "theory": "Gaussian copula, correlation",
+    "computation": "Joint default probabilities"
+   },
+   {
+    "title": "CDOs",
+    "theory": "Tranching, base correlation",
+    "computation": "Tranche losses"
+   },
+   {
+    "title": "Counterparty risk",
+    "theory": "CVA, DVA, netting",
+    "computation": "CVA approximations"
+   },
+   {
+    "title": "Credit scoring",
+    "theory": "Logistic scoring, validation",
+    "computation": "AUC and cut-off decisions"
+   }
+  ]
+ },
+ {
+  "id": "risk",
+  "label": "Risk Management / VaR",
+  "domain": "deriv",
+  "prerequisites": [
+   "pf1",
+   "p2"
+  ],
+  "courses": "HKU FINA4341 · CUHK RMSC5003",
+  "starred": false,
+  "summary": "Measuring and managing market risk with VaR, expected shortfall and stress tests.",
+  "outcomes": [
+   "Calculate VaR and ES under several methods",
+   "Backtest risk models",
+   "Design stress and scenario tests"
+  ],
+  "note": "Follows HKU FINA4341 and CUHK RMSC5003.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Risk measures",
+    "theory": "Volatility, VaR, ES, coherence",
+    "computation": "VaR from distributions"
+   },
+   {
+    "title": "Parametric VaR",
+    "theory": "Variance-covariance, delta-normal",
+    "computation": "Portfolio VaR"
+   },
+   {
+    "title": "Historical simulation",
+    "theory": "Empirical VaR, filtered HS",
+    "computation": "Empirical VaR"
+   },
+   {
+    "title": "Monte Carlo VaR",
+    "theory": "Simulation of risk factors",
+    "computation": "Simulated quantiles"
+   },
+   {
+    "title": "Expected shortfall",
+    "theory": "ES definition, estimation",
+    "computation": "ES calculations"
+   },
+   {
+    "title": "Volatility forecasting for risk",
+    "theory": "EWMA, GARCH",
+    "computation": "EWMA recursions"
+   },
+   {
+    "title": "Backtesting",
+    "theory": "Kupiec, Christoffersen tests",
+    "computation": "Exception counts and test stats"
+   },
+   {
+    "title": "Extreme value theory",
+    "theory": "POT, GPD tails",
+    "computation": "Tail quantiles"
+   },
+   {
+    "title": "Stress testing",
+    "theory": "Scenarios, reverse stress tests",
+    "computation": "Scenario P&L"
+   },
+   {
+    "title": "Portfolio risk attribution",
+    "theory": "Component VaR, marginal risk",
+    "computation": "Risk contributions"
+   },
+   {
+    "title": "Liquidity and model risk",
+    "theory": "Liquidity-adjusted VaR",
+    "computation": "Adjustments"
+   }
+  ]
+ },
+ {
+  "id": "oprisk",
+  "label": "Operational Risk & Regulation",
+  "domain": "deriv",
+  "prerequisites": [
+   "risk"
+  ],
+  "courses": "CUHK RMSC4006 · CUHK RMSC3001 (Basel)",
+  "starred": false,
+  "summary": "Operational risk, regulatory capital and the Basel framework.",
+  "outcomes": [
+   "Compute regulatory capital",
+   "Model loss distributions",
+   "Understand the regulatory landscape"
+  ],
+  "note": "Follows CUHK RMSC4006 and RMSC3001 (Basel). Course page only partly checked.",
+  "proofsNote": "Proof = N/A may be considered; assessed through applied problems.",
+  "lectures": [
+   {
+    "title": "Basel framework overview",
+    "theory": "Basel I-III, capital pillars",
+    "computation": "Capital ratio calculations"
+   },
+   {
+    "title": "Credit risk capital",
+    "theory": "Standardised vs IRB",
+    "computation": "RWA computations"
+   },
+   {
+    "title": "Market risk capital",
+    "theory": "Standardised approach, FRTB",
+    "computation": "Capital under FRTB"
+   },
+   {
+    "title": "Operational risk basics",
+    "theory": "Event types, loss data",
+    "computation": "Classifying events"
+   },
+   {
+    "title": "Loss distribution approach",
+    "theory": "Frequency-severity models",
+    "computation": "Aggregate loss simulation"
+   },
+   {
+    "title": "Extreme severity modelling",
+    "theory": "Heavy tails, scenario analysis",
+    "computation": "Tail estimates"
+   },
+   {
+    "title": "Standardised measurement approach",
+    "theory": "BIC, loss component",
+    "computation": "SMA capital"
+   },
+   {
+    "title": "Liquidity regulation",
+    "theory": "LCR, NSFR",
+    "computation": "Ratio calculations"
+   },
+   {
+    "title": "Stress testing and ICAAP",
+    "theory": "Supervisory stress tests",
+    "computation": "Capital projections"
+   },
+   {
+    "title": "Model governance",
+    "theory": "Model risk, validation",
+    "computation": "Validation case study"
+   }
+  ]
+ },
+ {
+  "id": "insur",
+  "label": "Risk Theory & Insurance",
+  "domain": "deriv",
+  "prerequisites": [
+   "p2"
+  ],
+  "courses": "CUHK RMSC4004 (course title only)",
+  "starred": false,
+  "summary": "Risk theory: aggregate claims, ruin and premium principles.",
+  "outcomes": [
+   "Model claim frequency and severity",
+   "Compute ruin probabilities",
+   "Price insurance premiums"
+  ],
+  "note": "Based on standard actuarial risk theory topics; CUHK RMSC4004 listed by title only.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Utility and insurance",
+    "theory": "Expected utility, risk aversion",
+    "computation": "Premium under utility"
+   },
+   {
+    "title": "Individual risk model",
+    "theory": "Sums of independent risks",
+    "computation": "Distribution of total claims"
+   },
+   {
+    "title": "Collective risk model",
+    "theory": "Compound Poisson",
+    "computation": "Aggregate claim moments"
+   },
+   {
+    "title": "Claim frequency",
+    "theory": "Poisson, negative binomial, (a,b,0) class",
+    "computation": "Frequency fits"
+   },
+   {
+    "title": "Claim severity",
+    "theory": "Pareto, lognormal, deductibles",
+    "computation": "Excess-of-loss calculations"
+   },
+   {
+    "title": "Premium principles",
+    "theory": "Expected value, variance, Esscher",
+    "computation": "Premium loadings"
+   },
+   {
+    "title": "Reinsurance",
+    "theory": "Proportional, stop-loss",
+    "computation": "Retained risk"
+   },
+   {
+    "title": "Ruin theory",
+    "theory": "Cramer-Lundberg, Lundberg inequality",
+    "computation": "Ruin bounds"
+   },
+   {
+    "title": "Credibility theory",
+    "theory": "Buhlmann credibility",
+    "computation": "Credibility estimates"
+   },
+   {
+    "title": "Generalised linear models in insurance",
+    "theory": "Rating factors",
+    "computation": "Tariff calculations"
+   }
+  ]
+ },
+ {
+  "id": "sprod",
+  "label": "Structured Products",
+  "domain": "deriv",
+  "prerequisites": [
+   "dv2",
+   "mc"
+  ],
+  "courses": "HKU FINA4354 · HKUST MAFS5330",
+  "starred": false,
+  "summary": "Pricing and risk of structured products built from vanillas and exotics.",
+  "outcomes": [
+   "Decompose a product into components",
+   "Price with Monte Carlo and PDEs",
+   "Identify the dominant risks"
+  ],
+  "note": "Follows HKU FINA4354 and HKUST MAFS5330.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Structured product landscape",
+    "theory": "Notes, payoffs, issuer credit",
+    "computation": "Decomposing payoffs"
+   },
+   {
+    "title": "Capital-protected notes",
+    "theory": "Zero plus option replication",
+    "computation": "Participation rates"
+   },
+   {
+    "title": "Reverse convertibles",
+    "theory": "Short put embedded",
+    "computation": "Coupon and breakeven"
+   },
+   {
+    "title": "Autocallables",
+    "theory": "Barriers, early redemption",
+    "computation": "Autocall probabilities"
+   },
+   {
+    "title": "Pricing autocallables",
+    "theory": "Monte Carlo and PDE",
+    "computation": "Simulated prices"
+   },
+   {
+    "title": "Worst-of products",
+    "theory": "Correlation, basket payoffs",
+    "computation": "Correlation sensitivity"
+   },
+   {
+    "title": "Rate-linked products",
+    "theory": "CMS, range accruals",
+    "computation": "Accrual calculations"
+   },
+   {
+    "title": "Hedging structured products",
+    "theory": "Pin risk, barrier shifts",
+    "computation": "Hedge ratios"
+   },
+   {
+    "title": "Risk factors",
+    "theory": "Vega, correlation, skew",
+    "computation": "Risk reports"
+   },
+   {
+    "title": "Regulation and suitability",
+    "theory": "KID/PRIIPs, mis-selling",
+    "computation": "Suitability cases"
+   }
+  ]
+ },
+ {
+  "id": "pf1",
+  "label": "Portfolio & Asset Pricing I",
+  "domain": "mkt",
+  "prerequisites": [
+   "p1",
+   "mvc"
+  ],
+  "courses": "HKU FINA2320 · CityU EF3320",
+  "starred": false,
+  "summary": "Mean-variance portfolio theory and the CAPM.",
+  "outcomes": [
+   "Build efficient portfolios",
+   "Apply the CAPM",
+   "Evaluate portfolio performance"
+  ],
+  "note": "Follows HKU FINA2320 and CityU EF3320.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Returns and risk",
+    "theory": "Simple vs log returns, mean, variance",
+    "computation": "Return statistics"
+   },
+   {
+    "title": "Portfolio variance",
+    "theory": "Covariance, diversification",
+    "computation": "Two-asset portfolios"
+   },
+   {
+    "title": "Efficient frontier",
+    "theory": "Minimum variance, frontier",
+    "computation": "Frontier weights"
+   },
+   {
+    "title": "Risk-free asset",
+    "theory": "Capital allocation line, tangency portfolio",
+    "computation": "Tangency weights"
+   },
+   {
+    "title": "CAPM",
+    "theory": "Beta, security market line",
+    "computation": "Expected returns from beta"
+   },
+   {
+    "title": "Beta estimation",
+    "theory": "Market model",
+    "computation": "Beta from data"
+   },
+   {
+    "title": "Performance measures",
+    "theory": "Sharpe, Treynor, Jensen alpha",
+    "computation": "Ratios"
+   },
+   {
+    "title": "Utility and risk aversion",
+    "theory": "Mean-variance utility",
+    "computation": "Optimal allocations"
+   },
+   {
+    "title": "Constraints and estimation error",
+    "theory": "Shorting limits, shrinkage",
+    "computation": "Constrained allocations"
+   },
+   {
+    "title": "Market efficiency",
+    "theory": "EMH forms, anomalies",
+    "computation": "Event study calculation"
+   }
+  ]
+ },
+ {
+  "id": "pf2",
+  "label": "Portfolio & Asset Pricing II",
+  "domain": "mkt",
+  "prerequisites": [
+   "pf1",
+   "opt",
+   "reg1"
+  ],
+  "courses": "HKUST MAFS5210 · CUHK RMSC6006",
+  "starred": false,
+  "summary": "Multi-factor models, APT and modern portfolio construction.",
+  "outcomes": [
+   "Estimate factor models",
+   "Construct portfolios with risk models",
+   "Test asset-pricing models"
+  ],
+  "note": "Follows HKUST MAFS5210 and CUHK RMSC6006.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Multi-factor models",
+    "theory": "APT, factor exposures",
+    "computation": "Factor-implied returns"
+   },
+   {
+    "title": "Fama-French factors",
+    "theory": "Size, value, momentum, profitability",
+    "computation": "Factor return construction"
+   },
+   {
+    "title": "Time-series and cross-sectional tests",
+    "theory": "Fama-MacBeth, GRS",
+    "computation": "Risk premium estimates"
+   },
+   {
+    "title": "Stochastic discount factor",
+    "theory": "SDF, no-arbitrage pricing",
+    "computation": "SDF-implied prices"
+   },
+   {
+    "title": "Covariance estimation",
+    "theory": "Shrinkage, factor covariance",
+    "computation": "Risk model covariances"
+   },
+   {
+    "title": "Black-Litterman",
+    "theory": "Priors and views",
+    "computation": "Posterior returns"
+   },
+   {
+    "title": "Risk parity and robust optimisation",
+    "theory": "Equal risk contribution",
+    "computation": "ERC weights"
+   },
+   {
+    "title": "Transaction costs and turnover",
+    "theory": "Cost-aware optimisation",
+    "computation": "Net returns"
+   },
+   {
+    "title": "Factor timing and crowding",
+    "theory": "Factor decay",
+    "computation": "Decay analysis"
+   },
+   {
+    "title": "Performance attribution",
+    "theory": "Brinson, factor attribution",
+    "computation": "Attribution tables"
+   }
+  ]
+ },
+ {
+  "id": "ms1",
+  "label": "Microstructure I",
+  "domain": "mkt",
+  "prerequisites": [
+   "p1"
+  ],
+  "courses": "HKUST FINA4103 · CityU EF4323",
+  "starred": false,
+  "summary": "How markets actually work: order books, spreads and price formation.",
+  "outcomes": [
+   "Read order books and trade data",
+   "Decompose spreads",
+   "Understand execution costs"
+  ],
+  "note": "Follows HKUST FINA4103 and CityU EF4323.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Market structure",
+    "theory": "Exchanges, dark pools, venues",
+    "computation": "Venue comparison"
+   },
+   {
+    "title": "Order types and the limit order book",
+    "theory": "Limit, market, stop, iceberg",
+    "computation": "Book walk-through"
+   },
+   {
+    "title": "Matching engines",
+    "theory": "Price-time priority, auctions",
+    "computation": "Matching examples"
+   },
+   {
+    "title": "Bid-ask spread",
+    "theory": "Quoted, effective, realised spread",
+    "computation": "Spread calculations"
+   },
+   {
+    "title": "Spread components",
+    "theory": "Order-processing, inventory, adverse selection",
+    "computation": "Roll estimator"
+   },
+   {
+    "title": "Price impact",
+    "theory": "Kyle's lambda, square-root law",
+    "computation": "Impact estimates"
+   },
+   {
+    "title": "Information and trading",
+    "theory": "Informed trading, PIN",
+    "computation": "Informativeness"
+   },
+   {
+    "title": "Transaction cost analysis",
+    "theory": "Implementation shortfall, VWAP",
+    "computation": "Shortfall calculations"
+   },
+   {
+    "title": "Market quality",
+    "theory": "Liquidity, depth, resilience",
+    "computation": "Liquidity metrics"
+   },
+   {
+    "title": "High-frequency trading",
+    "theory": "Latency, co-location",
+    "computation": "Latency arbitrage cases"
+   }
+  ]
+ },
+ {
+  "id": "ms2",
+  "label": "Microstructure II",
+  "domain": "mkt",
+  "prerequisites": [
+   "ms1",
+   "sp",
+   "opt"
+  ],
+  "courses": "HKUST MAFS5270",
+  "starred": false,
+  "summary": "Mathematical models of market microstructure, optimal execution and market making.",
+  "outcomes": [
+   "Solve optimal execution problems",
+   "Model order flow",
+   "Derive market-making quotes"
+  ],
+  "note": "Follows HKUST MAFS5270 style.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Kyle model",
+    "theory": "Single-period equilibrium",
+    "computation": "Lambda derivation"
+   },
+   {
+    "title": "Glosten-Milgrom",
+    "theory": "Sequential trade, Bayesian updating",
+    "computation": "Quote updates"
+   },
+   {
+    "title": "Order-flow modelling",
+    "theory": "Hawkes processes",
+    "computation": "Intensity calculations"
+   },
+   {
+    "title": "Limit-order-book models",
+    "theory": "Queue models, Markov LOB",
+    "computation": "Fill probabilities"
+   },
+   {
+    "title": "Optimal execution I",
+    "theory": "Almgren-Chriss",
+    "computation": "Optimal schedules"
+   },
+   {
+    "title": "Optimal execution II",
+    "theory": "HJB, stochastic control",
+    "computation": "HJB solutions"
+   },
+   {
+    "title": "Market-making models",
+    "theory": "Avellaneda-Stoikov",
+    "computation": "Optimal quotes"
+   },
+   {
+    "title": "Inventory control",
+    "theory": "Risk aversion, reservation price",
+    "computation": "Reservation prices"
+   },
+   {
+    "title": "Impact and alpha",
+    "theory": "Transient impact, propagator",
+    "computation": "Impact kernels"
+   },
+   {
+    "title": "Estimation",
+    "theory": "Parameter calibration",
+    "computation": "Fit execution models"
+   }
+  ]
+ },
+ {
+  "id": "algo",
+  "label": "Algo / Quant Trading",
+  "domain": "mkt",
+  "prerequisites": [
+   "reg1",
+   "ts1",
+   "py",
+   "ms1"
+  ],
+  "courses": "HKU FINA4359 · HKU STAT8020 · HKUST FINA4803",
+  "starred": false,
+  "summary": "Designing, testing and running systematic trading strategies.",
+  "outcomes": [
+   "Implement signal research and backtests",
+   "Evaluate strategies with honest statistics",
+   "Manage execution, risk and capacity"
+  ],
+  "note": "Follows HKU FINA4359, HKU STAT8020 and HKUST FINA4803, with coding emphasised.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Strategy lifecycle",
+    "theory": "Alpha, signals, portfolios, execution",
+    "computation": "Strategy anatomy",
+    "coding": "Load price data"
+   },
+   {
+    "title": "Signal construction",
+    "theory": "Momentum, mean reversion, carry",
+    "computation": "Signal calculations",
+    "coding": "Compute signals"
+   },
+   {
+    "title": "Statistical arbitrage",
+    "theory": "Pairs, cointegration",
+    "computation": "Spread z-scores",
+    "coding": "Pairs strategy"
+   },
+   {
+    "title": "Factor and cross-sectional strategies",
+    "theory": "Ranking, long-short",
+    "computation": "Portfolio returns",
+    "coding": "Long-short backtest"
+   },
+   {
+    "title": "Backtesting engine",
+    "theory": "Event-driven vs vectorised",
+    "computation": "Biases",
+    "coding": "Build a backtester"
+   },
+   {
+    "title": "Transaction costs and slippage",
+    "theory": "Cost models",
+    "computation": "Net P&L",
+    "coding": "Cost model"
+   },
+   {
+    "title": "Performance evaluation",
+    "theory": "Sharpe, drawdown, turnover",
+    "computation": "Metrics",
+    "coding": "Performance report"
+   },
+   {
+    "title": "Overfitting control",
+    "theory": "Walk-forward, deflated Sharpe",
+    "computation": "Adjusted Sharpe",
+    "coding": "Walk-forward test"
+   },
+   {
+    "title": "Portfolio construction and sizing",
+    "theory": "Vol targeting, Kelly",
+    "computation": "Position sizing",
+    "coding": "Vol-targeted sizing"
+   },
+   {
+    "title": "Execution algorithms",
+    "theory": "TWAP, VWAP, POV",
+    "computation": "Schedule calculations",
+    "coding": "TWAP/VWAP"
+   },
+   {
+    "title": "Live trading and monitoring",
+    "theory": "Risk limits, kill switches",
+    "computation": "Limits",
+    "coding": "Monitoring checks"
+   }
+  ]
+ },
+ {
+  "id": "ovt",
+  "label": "Options & Vol Trading",
+  "domain": "mkt",
+  "prerequisites": [
+   "dv1",
+   "ev"
+  ],
+  "courses": "CUHK FINA4370 (course title only)",
+  "starred": false,
+  "summary": "Trading options and volatility: Greeks, vol surfaces, spreads and risk management.",
+  "outcomes": [
+   "Trade volatility views with options",
+   "Manage Greeks as a book",
+   "Evaluate P&L attribution"
+  ],
+  "note": "CUHK FINA4370 listed by title only; structure follows desk practice.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Option market basics",
+    "theory": "Chains, quoting, conventions",
+    "computation": "Reading chains"
+   },
+   {
+    "title": "Greeks in practice",
+    "theory": "Delta, gamma, vega, theta, higher Greeks",
+    "computation": "Position Greeks"
+   },
+   {
+    "title": "Spreads and combinations",
+    "theory": "Straddles, strangles, butterflies",
+    "computation": "Payoff diagrams"
+   },
+   {
+    "title": "Volatility as an asset",
+    "theory": "Implied vs realised, variance swaps",
+    "computation": "Vol P&L"
+   },
+   {
+    "title": "Gamma-theta trade-off",
+    "theory": "Breakeven moves",
+    "computation": "Breakeven calculations"
+   },
+   {
+    "title": "Delta hedging P&L",
+    "theory": "Hedging frequency",
+    "computation": "Hedge P&L"
+   },
+   {
+    "title": "Skew and term structure trades",
+    "theory": "Risk reversals, calendars",
+    "computation": "Skew trade P&L"
+   },
+   {
+    "title": "Event volatility",
+    "theory": "Earnings, jumps",
+    "computation": "Event vol decomposition"
+   },
+   {
+    "title": "Dispersion and correlation",
+    "theory": "Index vs single stock",
+    "computation": "Dispersion trades"
+   },
+   {
+    "title": "Portfolio risk",
+    "theory": "Greek ladders, scenarios",
+    "computation": "Scenario P&L"
+   },
+   {
+    "title": "P&L attribution",
+    "theory": "Greeks-based explain",
+    "computation": "Attribution"
+   }
+  ]
+ },
+ {
+  "id": "mm",
+  "label": "Market Making",
+  "domain": "mkt",
+  "prerequisites": [
+   "ms1",
+   "ev",
+   "gt"
+  ],
+  "courses": "No university course",
+  "starred": true,
+  "summary": "Quoting two-sided markets: spread setting, inventory, adverse selection and risk limits.",
+  "outcomes": [
+   "Set quotes from a fair value and edge",
+   "Manage inventory and skew",
+   "Judge adverse selection and size risk"
+  ],
+  "note": "No university course; designed from scratch. No coding: theory, computation and proof only.",
+  "proofsNote": "Proof candidates: Glosten-Milgrom bid and ask as Bayesian updates (lecture 2), the Avellaneda-Stoikov reservation price (lecture 3), Kelly position sizing (lecture 6), the equilibrium spread in a simple game (lecture 7), the fair value of a binary contract (lecture 8).",
+  "lectures": [
+   {
+    "title": "What a market maker does",
+    "theory": "Bid-ask spread, inventory, adverse selection, PnL decomposition, order book and queue priority",
+    "computation": "PnL and position from a sequence of fills"
+   },
+   {
+    "title": "Glosten-Milgrom model",
+    "theory": "Informed vs uninformed traders, updating fair value from trade direction with Bayes",
+    "computation": "Computing the bid and the ask"
+   },
+   {
+    "title": "Inventory risk and quoting",
+    "theory": "Avellaneda-Stoikov reservation price and optimal spread, inventory skew",
+    "computation": "Reservation price and spread from the formula"
+   },
+   {
+    "title": "Order flow and adverse selection",
+    "theory": "Order flow toxicity, value of queue position, fill probability",
+    "computation": "Expected payoff of a queue position"
+   },
+   {
+    "title": "Fair value estimation",
+    "theory": "Microprice, order book imbalance, combining signals",
+    "computation": "Microprice and imbalance signals"
+   },
+   {
+    "title": "Risk limits and sizing",
+    "theory": "Position limits, volatility-scaled quotes, Kelly-style sizing, drawdown",
+    "computation": "Spread needed to reach a target Sharpe ratio"
+   },
+   {
+    "title": "Competition between market makers",
+    "theory": "Penny-jumping, spread competition, queue priority games",
+    "computation": "Equilibrium spread in a simple game"
+   },
+   {
+    "title": "Making markets in binary contracts",
+    "theory": "Prices between 0 and 1, resolution risk, fees, inventory management",
+    "computation": "Quoting a binary contract and its expected profit"
+   },
+   {
+    "title": "Backtest bias and performance evaluation",
+    "theory": "Fill assumption bias, look-ahead bias, effect of latency and fees on PnL",
+    "computation": "Sharpe ratio, t-statistic of edge per trade, PnL net of adverse selection"
+   },
+   {
+    "title": "Full strategy design",
+    "theory": "Designing a strategy end to end, PnL attribution, fill rate, inventory half-life",
+    "computation": "PnL attribution calculations"
+   }
+  ]
+ },
+ {
+  "id": "pz",
+  "label": "Probability Puzzles",
+  "domain": "puzzle",
+  "prerequisites": [
+   "p1",
+   "dm"
+  ],
+  "courses": "No university course",
+  "starred": true,
+  "summary": "Interview-style probability and combinatorics puzzles solved with clean reasoning.",
+  "outcomes": [
+   "Set up problems quickly",
+   "Use symmetry, recursion and conditioning",
+   "Solve within interview time limits"
+  ],
+  "note": "No university course; follows the style of quant interview question banks.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Counting tricks",
+    "theory": "Bijections, stars and bars, symmetry",
+    "computation": "Quick counting problems"
+   },
+   {
+    "title": "Conditioning and recursion",
+    "theory": "First-step analysis",
+    "computation": "Expected values via recursion"
+   },
+   {
+    "title": "Dice and coin problems",
+    "theory": "Waiting times, runs",
+    "computation": "Expected rolls and flips"
+   },
+   {
+    "title": "Cards and urns",
+    "theory": "Hypergeometric, exchangeability",
+    "computation": "Card probabilities"
+   },
+   {
+    "title": "Random walks and ruin",
+    "theory": "Reflection, gambler's ruin",
+    "computation": "Hitting probabilities"
+   },
+   {
+    "title": "Order statistics and geometric probability",
+    "theory": "Uniform spacings, Buffon",
+    "computation": "Geometric probabilities"
+   },
+   {
+    "title": "Markov chain puzzles",
+    "theory": "Absorbing states",
+    "computation": "Hitting time puzzles"
+   },
+   {
+    "title": "Indicator variables and linearity",
+    "theory": "Linearity of expectation",
+    "computation": "Fixed points, coupon collector"
+   },
+   {
+    "title": "Bayes and information puzzles",
+    "theory": "Monty Hall variants",
+    "computation": "Posterior calculations"
+   },
+   {
+    "title": "Timed mixed sets",
+    "theory": "Speed and accuracy",
+    "computation": "Timed problem sets"
+   }
+  ]
+ },
+ {
+  "id": "ev",
+  "label": "EV & Kelly",
+  "domain": "puzzle",
+  "prerequisites": [
+   "p1"
+  ],
+  "courses": "No university course",
+  "starred": true,
+  "summary": "Making decisions under uncertainty by expected value and optimal bet sizing.",
+  "outcomes": [
+   "Evaluate bets by EV and variance",
+   "Size positions with Kelly",
+   "Understand drawdown and ruin"
+  ],
+  "note": "No university course; draws on Kelly's paper and Thorp's work, as used in trading interviews.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Expected value basics",
+    "theory": "EV of bets and games",
+    "computation": "Fair price of games"
+   },
+   {
+    "title": "Utility and risk preference",
+    "theory": "Risk aversion, certainty equivalent",
+    "computation": "Certainty equivalents"
+   },
+   {
+    "title": "The Kelly criterion",
+    "theory": "Log utility, growth rate",
+    "computation": "Optimal fraction"
+   },
+   {
+    "title": "Kelly with multiple outcomes",
+    "theory": "Multi-outcome Kelly",
+    "computation": "Optimal allocations"
+   },
+   {
+    "title": "Fractional Kelly",
+    "theory": "Risk-growth trade-off",
+    "computation": "Growth rate at fractions"
+   },
+   {
+    "title": "Continuous Kelly",
+    "theory": "Gaussian returns, leverage",
+    "computation": "Optimal leverage"
+   },
+   {
+    "title": "Drawdowns and ruin",
+    "theory": "Probability of drawdown",
+    "computation": "Drawdown probabilities"
+   },
+   {
+    "title": "Betting with edge uncertainty",
+    "theory": "Estimation error",
+    "computation": "Shrunken Kelly"
+   },
+   {
+    "title": "Auctions and pricing games",
+    "theory": "Winner's curse",
+    "computation": "Optimal bids"
+   },
+   {
+    "title": "Casino and market-style games",
+    "theory": "Interview games",
+    "computation": "Game EV problems"
+   }
+  ]
+ },
+ {
+  "id": "gt",
+  "label": "Game Theory",
+  "domain": "puzzle",
+  "prerequisites": [
+   "p1"
+  ],
+  "courses": "HKU ECON2214 · CUHK ECON3160 · CityU EF4484",
+  "starred": false,
+  "summary": "Strategic interaction: equilibria, auctions and information games.",
+  "outcomes": [
+   "Find Nash equilibria",
+   "Analyse sequential and Bayesian games",
+   "Apply auction theory"
+  ],
+  "note": "Follows HKU ECON2214 and CUHK ECON3160.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Normal-form games",
+    "theory": "Dominance, best response",
+    "computation": "Dominance elimination"
+   },
+   {
+    "title": "Nash equilibrium",
+    "theory": "Pure and mixed equilibria",
+    "computation": "Solving 2x2 mixed equilibria"
+   },
+   {
+    "title": "Zero-sum games",
+    "theory": "Minimax theorem",
+    "computation": "Game values"
+   },
+   {
+    "title": "Extensive-form games",
+    "theory": "Backward induction, subgame perfection",
+    "computation": "Solving game trees"
+   },
+   {
+    "title": "Repeated games",
+    "theory": "Folk theorem, trigger strategies",
+    "computation": "Discounted payoffs"
+   },
+   {
+    "title": "Bayesian games",
+    "theory": "Types, Bayesian Nash",
+    "computation": "Bayesian equilibria"
+   },
+   {
+    "title": "Auctions I",
+    "theory": "First- and second-price",
+    "computation": "Equilibrium bids"
+   },
+   {
+    "title": "Auctions II",
+    "theory": "Revenue equivalence",
+    "computation": "Expected revenue"
+   },
+   {
+    "title": "Signalling and screening",
+    "theory": "Separating/pooling equilibria",
+    "computation": "Signalling equilibria"
+   },
+   {
+    "title": "Cooperative games and bargaining",
+    "theory": "Shapley value, Nash bargaining",
+    "computation": "Shapley values"
+   }
+  ]
+ },
+ {
+  "id": "mm0",
+  "label": "Mental Math",
+  "domain": "puzzle",
+  "prerequisites": [],
+  "courses": "No university course",
+  "starred": true,
+  "summary": "Fast, accurate mental arithmetic.",
+  "outcomes": [
+   "Compute sums, products and fractions rapidly",
+   "Estimate with controlled error",
+   "Reach target speed and accuracy"
+  ],
+  "note": "No university course; a drill-based topic.",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest speed set.",
+  "lectures": [
+   {
+    "title": "Addition and subtraction",
+    "theory": "Complements, chunking",
+    "computation": "Speed drills"
+   },
+   {
+    "title": "Multiplication I",
+    "theory": "Distributive, doubling/halving",
+    "computation": "2x2-digit drills"
+   },
+   {
+    "title": "Multiplication II",
+    "theory": "Squares, near-base tricks",
+    "computation": "Squaring drills"
+   },
+   {
+    "title": "Division and fractions",
+    "theory": "Reciprocals, decimal equivalents",
+    "computation": "Fraction drills"
+   },
+   {
+    "title": "Percentages and ratios",
+    "theory": "Percent shortcuts",
+    "computation": "Percent drills"
+   },
+   {
+    "title": "Estimation",
+    "theory": "Rounding, error bounds",
+    "computation": "Estimation drills"
+   },
+   {
+    "title": "Powers and roots",
+    "theory": "Squares/cubes tables, root estimation",
+    "computation": "Root drills"
+   },
+   {
+    "title": "Logs and exponentials",
+    "theory": "Rule of 72, ln approximations",
+    "computation": "Log drills"
+   },
+   {
+    "title": "Probability arithmetic",
+    "theory": "Fast binomials",
+    "computation": "Quick probability sums"
+   },
+   {
+    "title": "Mixed timed sets",
+    "theory": "Speed under pressure",
+    "computation": "Timed sets"
+   }
+  ]
+ },
+ {
+  "id": "fermi",
+  "label": "Fermi Estimation",
+  "domain": "puzzle",
+  "prerequisites": [],
+  "courses": "No university course",
+  "starred": true,
+  "summary": "Estimating unfamiliar quantities from anchors and structure.",
+  "outcomes": [
+   "Decompose estimation problems",
+   "Choose good anchors",
+   "Bound and sanity-check answers"
+  ],
+  "note": "No university course; practice-driven.",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest set.",
+  "lectures": [
+   {
+    "title": "Orders of magnitude",
+    "theory": "Powers of 10, anchors",
+    "computation": "Magnitude estimates"
+   },
+   {
+    "title": "Decomposition",
+    "theory": "Breaking into factors",
+    "computation": "Decomposition problems"
+   },
+   {
+    "title": "Population and market sizing",
+    "theory": "Demographic anchors",
+    "computation": "Market size estimates"
+   },
+   {
+    "title": "Physical estimates",
+    "theory": "Energy, mass, distance",
+    "computation": "Physical estimates"
+   },
+   {
+    "title": "Financial estimates",
+    "theory": "Revenue, volumes, tick counts",
+    "computation": "Financial estimates"
+   },
+   {
+    "title": "Error and bounds",
+    "theory": "Log-error propagation",
+    "computation": "Bound calculations"
+   },
+   {
+    "title": "Sanity checks",
+    "theory": "Cross-checking",
+    "computation": "Consistency checks"
+   },
+   {
+    "title": "Trading-style estimation",
+    "theory": "Volume, spreads, flows",
+    "computation": "Trading estimates"
+   },
+   {
+    "title": "Calibration",
+    "theory": "Confidence intervals, overconfidence",
+    "computation": "Calibration quizzes"
+   },
+   {
+    "title": "Mixed timed sets",
+    "theory": "Speed and accuracy",
+    "computation": "Timed sets"
+   }
+  ]
+ },
+ {
+  "id": "tools",
+  "label": "Dev Tools (Linux · Git)",
+  "domain": "cs",
+  "prerequisites": [],
+  "courses": "No standalone university course",
+  "starred": true,
+  "summary": "The command line, Git and everyday developer tooling.",
+  "outcomes": [
+   "Work fluently in a Linux shell",
+   "Use Git for solo and team work",
+   "Automate routine tasks"
+  ],
+  "note": "No standalone university course; follows common developer curricula.",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest set.",
+  "lectures": [
+   {
+    "title": "Shell basics",
+    "theory": "Files, paths, permissions",
+    "computation": "Command exercises",
+    "coding": "Shell commands"
+   },
+   {
+    "title": "Text tools",
+    "theory": "grep, sed, awk, pipes",
+    "computation": "Pipeline puzzles",
+    "coding": "Text processing"
+   },
+   {
+    "title": "Shell scripting",
+    "theory": "Variables, loops, functions",
+    "computation": "Script reading",
+    "coding": "Write a script"
+   },
+   {
+    "title": "Processes and environment",
+    "theory": "Signals, jobs, env vars",
+    "computation": "Process questions",
+    "coding": "Process control"
+   },
+   {
+    "title": "Git basics",
+    "theory": "Commits, staging, history",
+    "computation": "Repository states",
+    "coding": "Git exercises"
+   },
+   {
+    "title": "Git branching",
+    "theory": "Branch, merge, rebase",
+    "computation": "Merge outcomes",
+    "coding": "Branch tasks"
+   },
+   {
+    "title": "Collaboration",
+    "theory": "Remotes, pull requests, conflicts",
+    "computation": "Conflict resolution",
+    "coding": "Resolve conflicts"
+   },
+   {
+    "title": "SSH and remote work",
+    "theory": "Keys, tunnelling, tmux",
+    "computation": "Config reading",
+    "coding": "SSH config"
+   },
+   {
+    "title": "Packaging and environments",
+    "theory": "venv, pip, containers",
+    "computation": "Dependency problems",
+    "coding": "Environment setup"
+   },
+   {
+    "title": "Build tools and automation",
+    "theory": "Make, CI basics",
+    "computation": "Makefile reading",
+    "coding": "Write a Makefile"
+   }
+  ]
+ },
+ {
+  "id": "latex",
+  "label": "LaTeX & Research Writing",
+  "domain": "cs",
+  "prerequisites": [],
+  "courses": "No university course (math typesetting, figures, BibTeX citations, paper structure)",
+  "starred": true,
+  "summary": "Typesetting mathematics and writing research papers in LaTeX.",
+  "outcomes": [
+   "Typeset equations and documents",
+   "Manage figures and citations",
+   "Structure a research paper"
+  ],
+  "note": "No university course; follows a standard LaTeX workflow for research papers.",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest set.",
+  "lectures": [
+   {
+    "title": "Document structure",
+    "theory": "Classes, packages, sections",
+    "computation": "Compile questions",
+    "coding": "Write a document"
+   },
+   {
+    "title": "Mathematical typesetting I",
+    "theory": "Inline/display math, symbols",
+    "computation": "Equation fixes",
+    "coding": "Typeset formulas"
+   },
+   {
+    "title": "Mathematical typesetting II",
+    "theory": "align, matrices, theorem environments",
+    "computation": "Environment choices",
+    "coding": "Aligned derivations"
+   },
+   {
+    "title": "Tables and figures",
+    "theory": "tabular, booktabs, includegraphics",
+    "computation": "Float placement",
+    "coding": "Figures and tables"
+   },
+   {
+    "title": "Plotting",
+    "theory": "TikZ, pgfplots, matplotlib export",
+    "computation": "Plot specs",
+    "coding": "Make a plot"
+   },
+   {
+    "title": "Citations",
+    "theory": "BibTeX/BibLaTeX, styles",
+    "computation": "Bib entries",
+    "coding": "Bibliography"
+   },
+   {
+    "title": "Cross-references and macros",
+    "theory": "Labels, custom commands",
+    "computation": "Macro design",
+    "coding": "Macros"
+   },
+   {
+    "title": "Paper structure",
+    "theory": "Abstract, intro, related work",
+    "computation": "Structure review",
+    "coding": "Outline a paper"
+   },
+   {
+    "title": "Slides and posters",
+    "theory": "Beamer",
+    "computation": "Slide layout",
+    "coding": "Make slides"
+   },
+   {
+    "title": "Collaboration",
+    "theory": "Overleaf, Git for LaTeX",
+    "computation": "Workflow design",
+    "coding": "Version-controlled paper"
+   }
+  ]
+ },
+ {
+  "id": "py",
+  "label": "Python",
+  "domain": "cs",
+  "prerequisites": [],
+  "courses": "HKU COMP1117 · HKUST MAFS5360",
+  "starred": false,
+  "summary": "Python programming from basics to numerical computing.",
+  "outcomes": [
+   "Write clear Python programs",
+   "Use NumPy and pandas",
+   "Debug and test code"
+  ],
+  "note": "Follows HKU COMP1117 style, extended with numerical libraries.",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest coding set.",
+  "lectures": [
+   {
+    "title": "Syntax and types",
+    "theory": "Variables, types, operators",
+    "computation": "Expression evaluation",
+    "coding": "Basic programs"
+   },
+   {
+    "title": "Control flow",
+    "theory": "Conditionals, loops",
+    "computation": "Trace outputs",
+    "coding": "Loop programs"
+   },
+   {
+    "title": "Functions",
+    "theory": "Arguments, scope, recursion",
+    "computation": "Trace calls",
+    "coding": "Write functions"
+   },
+   {
+    "title": "Data structures",
+    "theory": "Lists, dicts, sets, tuples",
+    "computation": "Operation outputs",
+    "coding": "Collection tasks"
+   },
+   {
+    "title": "Strings and files",
+    "theory": "Parsing, text and CSV I/O",
+    "computation": "Parsing outputs",
+    "coding": "Parse files"
+   },
+   {
+    "title": "Object-oriented programming",
+    "theory": "Classes, inheritance",
+    "computation": "Class behaviours",
+    "coding": "Define classes"
+   },
+   {
+    "title": "Errors and testing",
+    "theory": "Exceptions, unit tests",
+    "computation": "Exception flow",
+    "coding": "Write tests"
+   },
+   {
+    "title": "NumPy",
+    "theory": "Arrays, broadcasting",
+    "computation": "Shape questions",
+    "coding": "Vectorise code"
+   },
+   {
+    "title": "pandas",
+    "theory": "DataFrames, groupby, joins",
+    "computation": "Query outputs",
+    "coding": "Data wrangling"
+   },
+   {
+    "title": "Plotting and performance",
+    "theory": "matplotlib, profiling",
+    "computation": "Complexity questions",
+    "coding": "Plot and optimise"
+   },
+   {
+    "title": "Idiomatic Python",
+    "theory": "Comprehensions, generators",
+    "computation": "Output tracing",
+    "coding": "Refactor code"
+   }
+  ]
+ },
+ {
+  "id": "arch",
+  "label": "Computer Architecture",
+  "domain": "cs",
+  "prerequisites": [],
+  "courses": "HKU COMP2120",
+  "starred": false,
+  "summary": "How computers execute programs: data representation, assembly, pipelines and memory.",
+  "outcomes": [
+   "Represent and manipulate data in binary",
+   "Read assembly",
+   "Reason about caches and pipelines"
+  ],
+  "note": "Follows HKU COMP2120.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Number systems",
+    "theory": "Binary, hex, two's complement",
+    "computation": "Conversions"
+   },
+   {
+    "title": "Floating point",
+    "theory": "IEEE 754",
+    "computation": "Float encodings"
+   },
+   {
+    "title": "Boolean logic",
+    "theory": "Gates, combinational circuits",
+    "computation": "Truth tables"
+   },
+   {
+    "title": "Sequential logic",
+    "theory": "Latches, registers, state machines",
+    "computation": "Timing diagrams"
+   },
+   {
+    "title": "Instruction set architecture",
+    "theory": "RISC/CISC, registers",
+    "computation": "Instruction encoding"
+   },
+   {
+    "title": "Assembly programming",
+    "theory": "Control flow, procedures",
+    "computation": "Assembly traces"
+   },
+   {
+    "title": "Processor datapath",
+    "theory": "Single-cycle design",
+    "computation": "Datapath tracing"
+   },
+   {
+    "title": "Pipelining",
+    "theory": "Hazards, forwarding",
+    "computation": "CPI calculations"
+   },
+   {
+    "title": "Memory hierarchy",
+    "theory": "Locality, caches",
+    "computation": "Hit/miss analysis"
+   },
+   {
+    "title": "Cache design",
+    "theory": "Associativity, replacement",
+    "computation": "Cache simulations"
+   },
+   {
+    "title": "Virtual memory",
+    "theory": "Page tables, TLB",
+    "computation": "Address translation"
+   },
+   {
+    "title": "I/O and parallelism",
+    "theory": "Interrupts, multicore",
+    "computation": "Speedup calculations"
+   }
+  ]
+ },
+ {
+  "id": "ds1",
+  "label": "DSA I",
+  "domain": "cs",
+  "prerequisites": [
+   "py",
+   "dm"
+  ],
+  "courses": "HKU COMP2119 · CUHK CSCI2100",
+  "starred": false,
+  "summary": "Core data structures and algorithm analysis.",
+  "outcomes": [
+   "Analyse running time",
+   "Implement core data structures",
+   "Solve standard algorithm problems"
+  ],
+  "note": "Follows HKU COMP2119 and CUHK CSCI2100, with LeetCode-style practice.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Complexity analysis",
+    "theory": "Big-O, recurrences",
+    "computation": "Solving recurrences",
+    "coding": "Complexity-aware solutions"
+   },
+   {
+    "title": "Arrays, lists, stacks, queues",
+    "theory": "Abstract data types",
+    "computation": "Operation traces",
+    "coding": "Stack and queue tasks"
+   },
+   {
+    "title": "Hashing",
+    "theory": "Hash tables, collisions",
+    "computation": "Hash table states",
+    "coding": "Hash map problems"
+   },
+   {
+    "title": "Trees",
+    "theory": "Traversals, BSTs",
+    "computation": "Tree traversals",
+    "coding": "Tree problems"
+   },
+   {
+    "title": "Balanced trees",
+    "theory": "AVL, red-black",
+    "computation": "Rotations",
+    "coding": "Balanced BST"
+   },
+   {
+    "title": "Heaps and priority queues",
+    "theory": "Heap operations, heapsort",
+    "computation": "Heap states",
+    "coding": "Heap problems"
+   },
+   {
+    "title": "Sorting",
+    "theory": "Merge, quick, lower bounds",
+    "computation": "Sorting traces",
+    "coding": "Sorting tasks"
+   },
+   {
+    "title": "Searching and selection",
+    "theory": "Binary search, quickselect",
+    "computation": "Search traces",
+    "coding": "Binary search problems"
+   },
+   {
+    "title": "Graphs",
+    "theory": "Representation, BFS, DFS",
+    "computation": "Traversal orders",
+    "coding": "Graph traversal"
+   },
+   {
+    "title": "Shortest paths",
+    "theory": "Dijkstra, Bellman-Ford",
+    "computation": "Distance tables",
+    "coding": "Shortest path"
+   },
+   {
+    "title": "Minimum spanning trees",
+    "theory": "Kruskal, Prim, union-find",
+    "computation": "MST by hand",
+    "coding": "MST"
+   },
+   {
+    "title": "Divide and conquer, greedy",
+    "theory": "Design paradigms",
+    "computation": "Algorithm choices",
+    "coding": "Mixed problems"
+   }
+  ]
+ },
+ {
+  "id": "ds2",
+  "label": "DSA II",
+  "domain": "cs",
+  "prerequisites": [
+   "ds1"
+  ],
+  "courses": "CUHK CSCI3160 · CityU CS4335",
+  "starred": false,
+  "summary": "Advanced algorithm design: dynamic programming, flows, NP-completeness and approximation.",
+  "outcomes": [
+   "Design DP and greedy algorithms",
+   "Model problems as flows",
+   "Prove hardness and design approximations"
+  ],
+  "note": "Follows CUHK CSCI3160 and CityU CS4335.",
+  "proofsNote": "Proofs are central here, so Proof carries more weight.",
+  "lectures": [
+   {
+    "title": "Dynamic programming I",
+    "theory": "Optimal substructure, memoisation",
+    "computation": "DP tables",
+    "coding": "DP problems"
+   },
+   {
+    "title": "Dynamic programming II",
+    "theory": "Knapsack, sequence alignment",
+    "computation": "DP tables",
+    "coding": "DP problems"
+   },
+   {
+    "title": "Greedy algorithms",
+    "theory": "Exchange arguments, matroids",
+    "computation": "Greedy choices",
+    "coding": "Greedy problems"
+   },
+   {
+    "title": "Network flow",
+    "theory": "Max-flow min-cut, Ford-Fulkerson",
+    "computation": "Residual graphs",
+    "coding": "Flow problems"
+   },
+   {
+    "title": "Matching and flow applications",
+    "theory": "Bipartite matching, assignment",
+    "computation": "Matchings",
+    "coding": "Matching problems"
+   },
+   {
+    "title": "Linear programming",
+    "theory": "Duality, simplex view",
+    "computation": "LP formulations",
+    "coding": "LP modelling"
+   },
+   {
+    "title": "Amortised analysis",
+    "theory": "Aggregate, potential methods",
+    "computation": "Amortised costs",
+    "coding": "Dynamic arrays"
+   },
+   {
+    "title": "String algorithms",
+    "theory": "KMP, suffix arrays",
+    "computation": "Pattern matching",
+    "coding": "String problems"
+   },
+   {
+    "title": "NP-completeness",
+    "theory": "Reductions, SAT",
+    "computation": "Reduction steps",
+    "coding": "Reduction tasks"
+   },
+   {
+    "title": "Approximation algorithms",
+    "theory": "Vertex cover, TSP",
+    "computation": "Approximation ratios",
+    "coding": "Approximation tasks"
+   },
+   {
+    "title": "Randomised algorithms",
+    "theory": "Quicksort, hashing, Monte Carlo",
+    "computation": "Expected costs",
+    "coding": "Randomised problems"
+   }
+  ]
+ },
+ {
+  "id": "cpp1",
+  "label": "C++ I",
+  "domain": "cs",
+  "prerequisites": [],
+  "courses": "HKUST COMP2011",
+  "starred": false,
+  "summary": "C++ fundamentals: types, memory and object-oriented programming.",
+  "outcomes": [
+   "Write correct C++ programs",
+   "Manage memory safely",
+   "Use classes and the STL"
+  ],
+  "note": "Follows HKUST COMP2011. Coding in C++ is planned for a later release.",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest set.",
+  "lectures": [
+   {
+    "title": "Types, expressions, control flow",
+    "theory": "Syntax, operators",
+    "computation": "Program tracing",
+    "coding": "Basic programs"
+   },
+   {
+    "title": "Functions and references",
+    "theory": "Pass by value/reference",
+    "computation": "Call traces",
+    "coding": "Function tasks"
+   },
+   {
+    "title": "Arrays and pointers",
+    "theory": "Pointer arithmetic",
+    "computation": "Memory diagrams",
+    "coding": "Pointer tasks"
+   },
+   {
+    "title": "Dynamic memory",
+    "theory": "new/delete, leaks",
+    "computation": "Lifetime analysis",
+    "coding": "Memory tasks"
+   },
+   {
+    "title": "Classes and objects",
+    "theory": "Constructors, encapsulation",
+    "computation": "Object tracing",
+    "coding": "Class design"
+   },
+   {
+    "title": "Inheritance and polymorphism",
+    "theory": "Virtual functions",
+    "computation": "Dispatch tracing",
+    "coding": "Polymorphism tasks"
+   },
+   {
+    "title": "Operator overloading",
+    "theory": "Overloads, copy semantics",
+    "computation": "Overload semantics",
+    "coding": "Overload tasks"
+   },
+   {
+    "title": "Templates",
+    "theory": "Function and class templates",
+    "computation": "Template deduction",
+    "coding": "Template tasks"
+   },
+   {
+    "title": "STL containers",
+    "theory": "vector, map, set",
+    "computation": "Container operations",
+    "coding": "STL tasks"
+   },
+   {
+    "title": "STL algorithms",
+    "theory": "Iterators, lambdas",
+    "computation": "Algorithm outputs",
+    "coding": "STL algorithms"
+   },
+   {
+    "title": "Error handling and I/O",
+    "theory": "Exceptions, streams",
+    "computation": "Exception flow",
+    "coding": "I/O tasks"
+   }
+  ]
+ },
+ {
+  "id": "cpp2",
+  "label": "C++ II",
+  "domain": "cs",
+  "prerequisites": [
+   "cpp1",
+   "ds1"
+  ],
+  "courses": "HKUST MAFS5240 · HKU FITE7406",
+  "starred": false,
+  "summary": "Modern C++ for performance-critical numerical and trading code.",
+  "outcomes": [
+   "Use modern C++ idioms",
+   "Write efficient, safe code",
+   "Implement numerical pricing code"
+  ],
+  "note": "Follows HKUST MAFS5240 and HKU FITE7406 style (modern C++ for finance).",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest set.",
+  "lectures": [
+   {
+    "title": "Move semantics",
+    "theory": "Rvalues, move constructors",
+    "computation": "Ownership reasoning",
+    "coding": "Move tasks"
+   },
+   {
+    "title": "Smart pointers and RAII",
+    "theory": "unique_ptr, shared_ptr",
+    "computation": "Lifetime analysis",
+    "coding": "RAII tasks"
+   },
+   {
+    "title": "Modern language features",
+    "theory": "auto, constexpr, structured bindings",
+    "computation": "Feature usage",
+    "coding": "Modern syntax tasks"
+   },
+   {
+    "title": "Advanced templates",
+    "theory": "SFINAE, concepts, CRTP",
+    "computation": "Template questions",
+    "coding": "Template design"
+   },
+   {
+    "title": "Concurrency I",
+    "theory": "Threads, mutexes",
+    "computation": "Race analysis",
+    "coding": "Threaded tasks"
+   },
+   {
+    "title": "Concurrency II",
+    "theory": "Atomics, memory model",
+    "computation": "Ordering questions",
+    "coding": "Atomic tasks"
+   },
+   {
+    "title": "Performance",
+    "theory": "Cache behaviour, profiling",
+    "computation": "Cost estimates",
+    "coding": "Optimisation tasks"
+   },
+   {
+    "title": "Numerical libraries",
+    "theory": "Eigen, BLAS",
+    "computation": "Complexity of kernels",
+    "coding": "Matrix tasks"
+   },
+   {
+    "title": "Pricing library design",
+    "theory": "Option pricer with polymorphism",
+    "computation": "Design review",
+    "coding": "Pricer implementation"
+   },
+   {
+    "title": "Testing and build systems",
+    "theory": "CMake, unit tests",
+    "computation": "Build reading",
+    "coding": "Test and build"
+   }
+  ]
+ },
+ {
+  "id": "os",
+  "label": "Operating Systems",
+  "domain": "cs",
+  "prerequisites": [
+   "cpp1",
+   "ds1",
+   "arch"
+  ],
+  "courses": "HKU COMP3230 · CUHK CSCI3150",
+  "starred": false,
+  "summary": "How operating systems manage processes, memory and storage.",
+  "outcomes": [
+   "Reason about scheduling and concurrency",
+   "Understand virtual memory",
+   "Analyse file systems"
+  ],
+  "note": "Follows HKU COMP3230 and CUHK CSCI3150.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "OS overview",
+    "theory": "Kernel, system calls",
+    "computation": "System call traces"
+   },
+   {
+    "title": "Processes",
+    "theory": "Creation, context switch",
+    "computation": "Process tree analysis"
+   },
+   {
+    "title": "Threads",
+    "theory": "Threading models, pthreads",
+    "computation": "Thread interleavings"
+   },
+   {
+    "title": "CPU scheduling",
+    "theory": "FCFS, SJF, RR, MLFQ",
+    "computation": "Gantt charts, waiting times"
+   },
+   {
+    "title": "Synchronisation",
+    "theory": "Locks, semaphores, monitors",
+    "computation": "Race analysis"
+   },
+   {
+    "title": "Deadlocks",
+    "theory": "Conditions, banker's algorithm",
+    "computation": "Deadlock detection"
+   },
+   {
+    "title": "Memory management",
+    "theory": "Paging, segmentation",
+    "computation": "Address translation"
+   },
+   {
+    "title": "Virtual memory",
+    "theory": "Page replacement, thrashing",
+    "computation": "Page-fault counts"
+   },
+   {
+    "title": "File systems",
+    "theory": "Inodes, journalling",
+    "computation": "Block allocation"
+   },
+   {
+    "title": "I/O and storage",
+    "theory": "Disk scheduling, SSD",
+    "computation": "Seek calculations"
+   },
+   {
+    "title": "Security and virtualisation",
+    "theory": "Isolation, VMs, containers",
+    "computation": "Isolation scenarios"
+   }
+  ]
+ },
+ {
+  "id": "db",
+  "label": "Databases",
+  "domain": "cs",
+  "prerequisites": [
+   "ds1"
+  ],
+  "courses": "CUHK CSCI3170 · CityU CS3402",
+  "starred": false,
+  "summary": "Relational databases, SQL and the basics of transactions and storage.",
+  "outcomes": [
+   "Design relational schemas",
+   "Write correct SQL",
+   "Reason about transactions and indexes"
+  ],
+  "note": "Follows CUHK CSCI3170 and CityU CS3402, with SQL judged by hidden tests.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Relational model",
+    "theory": "Keys, relational algebra",
+    "computation": "Algebra expressions",
+    "coding": "Basic SELECT queries"
+   },
+   {
+    "title": "SQL I",
+    "theory": "SELECT, WHERE, joins",
+    "computation": "Query results",
+    "coding": "Join queries"
+   },
+   {
+    "title": "SQL II",
+    "theory": "Aggregation, subqueries, windows",
+    "computation": "Query results",
+    "coding": "Aggregate and window queries"
+   },
+   {
+    "title": "ER modelling",
+    "theory": "Entities, relationships",
+    "computation": "ER diagrams",
+    "coding": "Schema from ER"
+   },
+   {
+    "title": "Normalisation",
+    "theory": "Functional dependencies, BCNF",
+    "computation": "Normal-form decomposition",
+    "coding": "Normalise a schema"
+   },
+   {
+    "title": "Indexing",
+    "theory": "B+ trees, hashing",
+    "computation": "Index costs",
+    "coding": "Index design"
+   },
+   {
+    "title": "Query processing",
+    "theory": "Cost-based optimisation",
+    "computation": "Plan costs",
+    "coding": "Read query plans"
+   },
+   {
+    "title": "Transactions",
+    "theory": "ACID, isolation levels",
+    "computation": "Anomaly analysis",
+    "coding": "Transaction cases"
+   },
+   {
+    "title": "Concurrency control",
+    "theory": "Locking, MVCC",
+    "computation": "Schedule serialisability",
+    "coding": "Lock reasoning"
+   },
+   {
+    "title": "Recovery",
+    "theory": "WAL, checkpoints",
+    "computation": "Log analysis",
+    "coding": "Recovery cases"
+   },
+   {
+    "title": "NoSQL and time-series stores",
+    "theory": "Key-value, column stores",
+    "computation": "Model choices",
+    "coding": "Market-data schemas"
+   }
+  ]
+ },
+ {
+  "id": "net",
+  "label": "Computer Networks",
+  "domain": "cs",
+  "prerequisites": [
+   "ds1"
+  ],
+  "courses": "HKU COMP3234",
+  "starred": false,
+  "summary": "How data moves across networks: protocols, routing and transport.",
+  "outcomes": [
+   "Explain the layered model",
+   "Analyse TCP and routing",
+   "Reason about latency and throughput"
+  ],
+  "note": "Follows HKU COMP3234.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Network overview",
+    "theory": "Layers, packet switching",
+    "computation": "Delay calculations"
+   },
+   {
+    "title": "Application layer",
+    "theory": "HTTP, DNS",
+    "computation": "Protocol traces"
+   },
+   {
+    "title": "Sockets",
+    "theory": "Client/server sockets",
+    "computation": "Socket programs"
+   },
+   {
+    "title": "Transport I",
+    "theory": "UDP, reliability",
+    "computation": "Retransmission analysis"
+   },
+   {
+    "title": "Transport II",
+    "theory": "TCP, flow control",
+    "computation": "Window dynamics"
+   },
+   {
+    "title": "Congestion control",
+    "theory": "Slow start, AIMD",
+    "computation": "Congestion windows"
+   },
+   {
+    "title": "Network layer",
+    "theory": "IP, addressing, NAT",
+    "computation": "Subnet calculations"
+   },
+   {
+    "title": "Routing",
+    "theory": "Link-state, distance-vector",
+    "computation": "Routing tables"
+   },
+   {
+    "title": "Link layer",
+    "theory": "Ethernet, ARP, switches",
+    "computation": "Frame handling"
+   },
+   {
+    "title": "Wireless and multicast",
+    "theory": "WiFi basics",
+    "computation": "Capacity estimates"
+   },
+   {
+    "title": "Network security",
+    "theory": "TLS, firewalls",
+    "computation": "Handshake analysis"
+   }
+  ]
+ },
+ {
+  "id": "sd",
+  "label": "Software Engineering & System Design",
+  "domain": "cs",
+  "prerequisites": [
+   "ds1",
+   "db"
+  ],
+  "courses": "HKU COMP3297",
+  "starred": false,
+  "summary": "Building maintainable software and designing scalable systems.",
+  "outcomes": [
+   "Apply software engineering practice",
+   "Design scalable systems",
+   "Reason about trade-offs"
+  ],
+  "note": "Follows HKU COMP3297 plus common system-design practice.",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest design set.",
+  "lectures": [
+   {
+    "title": "Software process",
+    "theory": "Agile, requirements",
+    "computation": "Requirement analysis"
+   },
+   {
+    "title": "Design principles",
+    "theory": "SOLID, modularity",
+    "computation": "Design critique"
+   },
+   {
+    "title": "Design patterns",
+    "theory": "Creational, structural, behavioural",
+    "computation": "Pattern selection"
+   },
+   {
+    "title": "Testing",
+    "theory": "Unit, integration, TDD",
+    "computation": "Test design"
+   },
+   {
+    "title": "APIs and services",
+    "theory": "REST, versioning",
+    "computation": "API design"
+   },
+   {
+    "title": "System design fundamentals",
+    "theory": "Latency, throughput, SLAs",
+    "computation": "Capacity estimation"
+   },
+   {
+    "title": "Storage and caching",
+    "theory": "Sharding, caching",
+    "computation": "Cache hit-rate estimates"
+   },
+   {
+    "title": "Messaging and queues",
+    "theory": "Pub/sub, streams",
+    "computation": "Throughput estimates"
+   },
+   {
+    "title": "Reliability",
+    "theory": "Redundancy, failure modes",
+    "computation": "Availability calculations"
+   },
+   {
+    "title": "Case study: trading system",
+    "theory": "Order management design",
+    "computation": "Design walkthrough"
+   },
+   {
+    "title": "Case study: data platform",
+    "theory": "Market-data pipeline",
+    "computation": "Design walkthrough"
+   }
+  ]
+ },
+ {
+  "id": "dist",
+  "label": "Distributed Systems",
+  "domain": "cs",
+  "prerequisites": [
+   "os",
+   "net"
+  ],
+  "courses": "HKU COMP3358 · CUHK CSCI4160 · HKU COMP7305",
+  "starred": false,
+  "summary": "Building systems that run on many machines and survive failures.",
+  "outcomes": [
+   "Reason about consistency and failure",
+   "Understand consensus",
+   "Evaluate distributed design trade-offs"
+  ],
+  "note": "Follows HKU COMP3358 and CUHK CSCI4160.",
+  "proofsNote": "Proofs will be added later.",
+  "lectures": [
+   {
+    "title": "Distributed systems basics",
+    "theory": "Failures, models",
+    "computation": "Failure scenarios"
+   },
+   {
+    "title": "Time and ordering",
+    "theory": "Logical and vector clocks",
+    "computation": "Clock calculations"
+   },
+   {
+    "title": "Remote procedure calls",
+    "theory": "RPC semantics",
+    "computation": "Call semantics"
+   },
+   {
+    "title": "Replication",
+    "theory": "Primary-backup, quorums",
+    "computation": "Quorum sizes"
+   },
+   {
+    "title": "Consistency models",
+    "theory": "Linearisability, eventual consistency",
+    "computation": "Consistency analysis"
+   },
+   {
+    "title": "Consensus I",
+    "theory": "Paxos",
+    "computation": "Paxos traces"
+   },
+   {
+    "title": "Consensus II",
+    "theory": "Raft",
+    "computation": "Raft traces"
+   },
+   {
+    "title": "CAP and PACELC",
+    "theory": "Trade-offs",
+    "computation": "Classifying systems"
+   },
+   {
+    "title": "Distributed storage",
+    "theory": "Sharding, consistent hashing",
+    "computation": "Hash ring placement"
+   },
+   {
+    "title": "Distributed computation",
+    "theory": "MapReduce, stream processing",
+    "computation": "Dataflow reasoning"
+   },
+   {
+    "title": "Fault tolerance",
+    "theory": "Checkpointing, Byzantine faults",
+    "computation": "Failure probabilities"
+   }
+  ]
+ },
+ {
+  "id": "ll",
+  "label": "Low-latency Programming",
+  "domain": "cs",
+  "prerequisites": [
+   "cpp2",
+   "os"
+  ],
+  "courses": "No university course",
+  "starred": true,
+  "summary": "Writing code that runs in microseconds: memory, cache, lock-free structures and measurement.",
+  "outcomes": [
+   "Profile and measure latency",
+   "Design cache-friendly and lock-free code",
+   "Understand the trading hot path"
+  ],
+  "note": "No university course; follows low-latency trading engineering practice.",
+  "proofsNote": "Proof = N/A; Complete = pass the hardest set.",
+  "lectures": [
+   {
+    "title": "Latency fundamentals",
+    "theory": "Tail latency, percentiles",
+    "computation": "Percentile calculations"
+   },
+   {
+    "title": "Measuring performance",
+    "theory": "Benchmarking, perf tools",
+    "computation": "Benchmark interpretation"
+   },
+   {
+    "title": "CPU and cache",
+    "theory": "Cache lines, false sharing",
+    "computation": "Cache miss counts"
+   },
+   {
+    "title": "Memory management",
+    "theory": "Allocators, pools, NUMA",
+    "computation": "Allocation costs"
+   },
+   {
+    "title": "Data layout",
+    "theory": "SoA vs AoS, alignment",
+    "computation": "Layout analysis"
+   },
+   {
+    "title": "Branching and compilation",
+    "theory": "Branch prediction, inlining",
+    "computation": "Assembly reading"
+   },
+   {
+    "title": "Lock-free programming",
+    "theory": "Atomics, ring buffers",
+    "computation": "Memory-order reasoning"
+   },
+   {
+    "title": "Kernel bypass",
+    "theory": "DPDK, busy polling",
+    "computation": "Latency budgets"
+   },
+   {
+    "title": "Network and market data",
+    "theory": "UDP multicast, feed handlers",
+    "computation": "Feed decoding"
+   },
+   {
+    "title": "Order gateway design",
+    "theory": "Hot path layout",
+    "computation": "Hot-path review"
+   },
+   {
+    "title": "Production practice",
+    "theory": "Monitoring, determinism",
+    "computation": "Jitter analysis"
+   }
+  ]
+ }
+]
