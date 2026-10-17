@@ -1192,7 +1192,7 @@
   "domain": "stat",
   "prerequisites": [
    "reg1",
-   "inf",
+   "p2",
    "la2"
   ],
   "courses": "HKUST MAFS5140",
@@ -1415,7 +1415,7 @@
   "domain": "stat",
   "prerequisites": [
    "ts1",
-   "inf"
+   "p2"
   ],
   "courses": "HKUST MAFS5130 · CUHK STAT6204",
   "starred": false,
@@ -1485,7 +1485,7 @@
   "label": "Bayesian",
   "domain": "stat",
   "prerequisites": [
-   "inf",
+   "p2",
    "py"
   ],
   "courses": "HKU STAT4610 · CUHK STAT4010",
@@ -1799,7 +1799,7 @@
   "domain": "stat",
   "prerequisites": [
    "reg1",
-   "inf"
+   "p2"
   ],
   "courses": "HKU SDST4613 · HKU ECON3284 · HKUST IEDA4000D",
   "starred": false,
@@ -1869,7 +1869,7 @@
   "label": "Experimental Design / A/B Testing",
   "domain": "stat",
   "prerequisites": [
-   "inf",
+   "p2",
    "reg1"
   ],
   "courses": "CityU DSC4110 (mostly industrial experimental design; no university course covers the A/B testing part)",
