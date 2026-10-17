@@ -1,0 +1,1698 @@
+[
+ {
+  "id": "ms2-1.1",
+  "lecture": 1,
+  "stem": "In the one-period Kyle model, what does the competitive market maker observe, and how does she set the price?",
+  "correct": [
+   "She sees only total order flow $y=x+u$ and sets the price $p=E[v\\mid y]$, linear in $y$.",
+   "The price is the expected value given pooled flow."
+  ],
+  "distractors": [
+   {
+    "text": "She observes the insider's order $x$ separately from the noise orders and prices on $x$ alone.",
+    "misconception": "ignores that orders arrive pooled"
+   },
+   {
+    "text": "She learns the true value $v$ once trading has finished and sets the price equal to it.",
+    "misconception": "confuses the price rule with full revelation"
+   },
+   {
+    "text": "She picks the price that maximises her own expected profit, charging a monopoly mark-up.",
+    "misconception": "ignores competition among market makers"
+   },
+   {
+    "text": "She adds a fixed spread to the previous price whatever the order flow turns out to be.",
+    "misconception": "ignores learning from order flow"
+   },
+   {
+    "text": "She sees only the sign of each order and applies Bayes' rule to the signs.",
+    "misconception": "mixes up Kyle with Glosten-Milgrom"
+   }
+  ],
+  "explanation": "The market maker only sees the sum $x+u$. Competition forces zero expected profit, so $p=E[v\\mid y]$, and for jointly normal variables this is linear in $y$."
+ },
+ {
+  "id": "ms2-1.2",
+  "lecture": 1,
+  "stem": "In Kyle's equilibrium, how does the price-impact coefficient $\\lambda=\\sqrt{\\Sigma_0}/(2\\sigma_u)$ respond when noise trading becomes more volatile?",
+  "correct": [
+   "It falls: more noise hides the insider, so a unit of order flow carries less information.",
+   "Price impact per unit of flow decreases, as $\\lambda\\propto1/\\sigma_u$."
+  ],
+  "distractors": [
+   {
+    "text": "It rises, because the insider trades more aggressively and so order flow becomes more informative.",
+    "misconception": "right premise (insider scales up) but wrong conclusion"
+   },
+   {
+    "text": "It stays the same, because it depends only on the variance of the asset value.",
+    "misconception": "ignores the noise level in the formula"
+   },
+   {
+    "text": "It rises, because market makers must be compensated for the extra risk from noise traders.",
+    "misconception": "treats noise traders as a risk to the market maker"
+   },
+   {
+    "text": "It grows without bound as noise trading grows, since liquidity needs a larger premium.",
+    "misconception": "reverses the direction of the dependence"
+   },
+   {
+    "text": "It always equals one half, since the insider gives up half of her profit.",
+    "misconception": "confuses $\\lambda$ with the product $\\lambda\\beta$"
+   }
+  ],
+  "explanation": "Noise trading gives the insider cover. Her order size $\\beta=\\sigma_u/\\sqrt{\\Sigma_0}$ grows in proportion, so informativeness is unchanged, while price impact $\\lambda$ per unit of flow shrinks."
+ },
+ {
+  "id": "ms2-1.3",
+  "lecture": 1,
+  "stem": "How does the amount of information revealed by the equilibrium price in Kyle's model depend on the volatility $\\sigma_u$ of noise trading?",
+  "correct": [
+   "It does not depend on $\\sigma_u$, since the insider scales her trades with the noise.",
+   "Informativeness is invariant to noise volume."
+  ],
+  "distractors": [
+   {
+    "text": "More noise hides the insider better, so less information is revealed.",
+    "misconception": "forgets that the insider scales her trades up with the noise"
+   },
+   {
+    "text": "More noise trading makes prices more informative because total volume rises.",
+    "misconception": "confuses volume with information content"
+   },
+   {
+    "text": "The price becomes fully revealing once noise trading is large enough.",
+    "misconception": "thinks hiding disappears with large noise"
+   },
+   {
+    "text": "No information is revealed unless noise trading is smaller than the insider's position.",
+    "misconception": "invents a threshold that does not exist"
+   },
+   {
+    "text": "Information revealed depends on the insider's risk aversion rather than on noise.",
+    "misconception": "the Kyle insider is risk neutral"
+   }
+  ],
+  "explanation": "The insider's order size $\\beta=\\sigma_u/\\sqrt{\\Sigma_0}$ grows with $\\sigma_u$, which exactly offsets the extra noise. The signal-to-noise ratio in the order flow is constant and the posterior variance is $\\Sigma_0/2$."
+ },
+ {
+  "id": "ms2-1.4",
+  "lecture": 1,
+  "stem": "Why does the Kyle insider choose a finite order size rather than trading as much as possible?",
+  "correct": [
+   "Her own order moves the price against her, so profit is concave in size.",
+   "Price impact makes profit per share fall with size."
+  ],
+  "distractors": [
+   {
+    "text": "She is risk averse and wants to limit the variance of her profit.",
+    "misconception": "the insider is risk neutral in the model"
+   },
+   {
+    "text": "Regulators cap the size of orders, so the optimum lies on the position limit.",
+    "misconception": "introduces a constraint that the model does not have"
+   },
+   {
+    "text": "Noise traders refuse to trade when the insider's order is too large.",
+    "misconception": "noise orders are exogenous"
+   },
+   {
+    "text": "The market maker only fills orders up to the noise-trader volume.",
+    "misconception": "the market maker clears any net order flow"
+   },
+   {
+    "text": "She wants to avoid revealing her information before the market closes.",
+    "misconception": "the price is set in a single round, so there is no later period to protect"
+   }
+  ],
+  "explanation": "With $p=p_0+\\lambda y$, the expected profit is $\\beta(1-\\lambda\\beta)\\Sigma_0$, which is concave in $\\beta$ and is maximised at $\\beta=1/(2\\lambda)$."
+ },
+ {
+  "id": "ms2-1.5",
+  "lecture": 1,
+  "stem": "In Kyle's equilibrium, who pays for the insider's expected profit, and what does the market maker earn?",
+  "correct": [
+   "Noise traders lose on average what the insider gains; the market maker breaks even.",
+   "Competition leaves the market maker nothing."
+  ],
+  "distractors": [
+   {
+    "text": "The market maker pays for it and is left with a negative expected profit.",
+    "misconception": "a competitive market maker would not accept losses"
+   },
+   {
+    "text": "Noise traders break even on average because their orders are uncorrelated with the value.",
+    "misconception": "ignores the price impact cost they bear"
+   },
+   {
+    "text": "The market maker earns a positive profit from the bid-ask spread and shares it with the insider.",
+    "misconception": "Kyle has no spread and no profit sharing"
+   },
+   {
+    "text": "The insider earns nothing, because the price already reveals $v$ completely.",
+    "misconception": "confuses partial with full revelation"
+   },
+   {
+    "text": "The profit is paid by other informed traders who trade in the opposite direction.",
+    "misconception": "the model has only one informed trader"
+   }
+  ],
+  "explanation": "The market maker sets $p=E[v\\mid y]$, so her expected profit is zero. Noise traders pay $\\lambda\\sigma_u^2$ on average, which equals the insider's expected profit $\\tfrac12\\sigma_u\\sqrt{\\Sigma_0}$."
+ },
+ {
+  "id": "ms2-2.1",
+  "lecture": 2,
+  "stem": "Why does the Glosten-Milgrom model produce a positive bid-ask spread although market makers are risk neutral and competitive?",
+  "correct": [
+   "A trade may be informed, so the ask lies above and the bid below the expected value.",
+   "Quotes are expected values given the trade direction."
+  ],
+  "distractors": [
+   {
+    "text": "Market makers must cover fixed order-processing costs.",
+    "misconception": "the model has no such costs"
+   },
+   {
+    "text": "Market makers demand compensation for the risk of carrying inventory.",
+    "misconception": "market makers are risk neutral here"
+   },
+   {
+    "text": "Market makers act as monopolists and charge a mark-up.",
+    "misconception": "competition gives zero expected profit"
+   },
+   {
+    "text": "The tick size forces prices onto a grid wider than the true value.",
+    "misconception": "the spread arises without any tick size"
+   },
+   {
+    "text": "Uninformed traders are charged a fee for trading in the market.",
+    "misconception": "no fees exist in the model"
+   }
+  ],
+  "explanation": "With zero expected profit, the ask is $E[V\\mid\\text{buy}]$ and the bid is $E[V\\mid\\text{sell}]$. A buy is more likely when the value is high, so the ask exceeds $E[V]$ and the bid lies below it."
+ },
+ {
+  "id": "ms2-2.2",
+  "lecture": 2,
+  "stem": "In Glosten-Milgrom, what happens to the quotes when nobody is informed (the informed fraction is zero)?",
+  "correct": [
+   "Bid and ask coincide with the expected value, so the spread is zero.",
+   "Trades carry no information, so quotes do not move."
+  ],
+  "distractors": [
+   {
+    "text": "The spread is at its widest, since uninformed trades are unpredictable.",
+    "misconception": "confuses noise with information"
+   },
+   {
+    "text": "The ask still rises after every buy because buys signal good news.",
+    "misconception": "ignores that uninformed buys carry no information"
+   },
+   {
+    "text": "The spread stays positive because the true value is uncertain.",
+    "misconception": "confuses uncertainty with adverse selection"
+   },
+   {
+    "text": "Quotes freeze at the last transaction price even if that price was an outlier.",
+    "misconception": "quotes are always conditional expectations"
+   },
+   {
+    "text": "The bid rises above the ask, which creates a profit opportunity.",
+    "misconception": "nonsensical crossed quotes"
+   }
+  ],
+  "explanation": "When $\\mu=0$, $P(\\text{buy}\\mid V_H)=P(\\text{buy}\\mid V_L)=1/2$, so the posterior equals the prior and $E[V\\mid\\text{buy}]=E[V\\mid\\text{sell}]=E[V]$."
+ },
+ {
+  "id": "ms2-2.3",
+  "lecture": 2,
+  "stem": "In Glosten-Milgrom with symmetric uninformed trading, how does the market maker's belief change after a buy followed by a sell?",
+  "correct": [
+   "It returns to the prior, because the likelihood ratios cancel out.",
+   "Opposite trades offset each other exactly."
+  ],
+  "distractors": [
+   {
+    "text": "It moves further towards the high value, since each trade reveals information.",
+    "misconception": "treats every trade as informative in the same direction"
+   },
+   {
+    "text": "It depends on the order: a buy then a sell differs from a sell then a buy.",
+    "misconception": "posterior odds multiply, so order does not matter"
+   },
+   {
+    "text": "Only the most recent trade matters, so it ends at the post-sell belief.",
+    "misconception": "ignores that the belief accumulates evidence"
+   },
+   {
+    "text": "It becomes more extreme because informed traders trade twice.",
+    "misconception": "invents repeated informed trading"
+   },
+   {
+    "text": "The belief is undefined until the true value is revealed.",
+    "misconception": "Bayes' rule needs no revelation"
+   }
+  ],
+  "explanation": "The odds of $V_H$ are multiplied by $\\frac{1+\\mu}{1-\\mu}$ at a buy and by its inverse at a sell. Only the net number of buys minus sells matters."
+ },
+ {
+  "id": "ms2-2.4",
+  "lecture": 2,
+  "stem": "How do the mid-quotes behave over time in the Glosten-Milgrom model?",
+  "correct": [
+   "The expected value given the public history is a martingale, so quote changes are unpredictable.",
+   "Mid-quotes are a martingale in the trade history."
+  ],
+  "distractors": [
+   {
+    "text": "Prices revert after a buy because the market maker rebalances inventory.",
+    "misconception": "imports inventory effects that the model lacks"
+   },
+   {
+    "text": "Prices drift upward after a buy because buys tend to follow buys.",
+    "misconception": "confuses serial dependence of trades with predictability of the price"
+   },
+   {
+    "text": "Quotes converge to the unconditional prior mean as trades accumulate.",
+    "misconception": "they converge to the true value instead"
+   },
+   {
+    "text": "Quotes follow a random walk with a positive drift equal to the informed fraction.",
+    "misconception": "invents a drift"
+   },
+   {
+    "text": "Quotes are deterministic functions of time, given the model parameters.",
+    "misconception": "ignores that trades are random"
+   }
+  ],
+  "explanation": "By iterated expectations, $E[V\\mid\\mathcal F_{t+1}]$ averages back to $E[V\\mid\\mathcal F_t]$. Trades are positively correlated, yet the best estimate of $V$ is still a martingale."
+ },
+ {
+  "id": "ms2-2.5",
+  "lecture": 2,
+  "stem": "As more trades are observed in Glosten-Milgrom (with some informed traders), what happens to beliefs and the spread?",
+  "correct": [
+   "Beliefs converge to the true value, and the spread shrinks towards zero over time.",
+   "Learning resolves the uncertainty, so quotes converge."
+  ],
+  "distractors": [
+   {
+    "text": "The spread stays constant, because each trade is as informative as the first.",
+    "misconception": "ignores the shrinking uncertainty"
+   },
+   {
+    "text": "The spread widens over time as informed traders accumulate a bigger advantage.",
+    "misconception": "reverses the effect of learning"
+   },
+   {
+    "text": "Beliefs return to the prior mean once enough noise trades have been seen.",
+    "misconception": "confuses noise with erasing information"
+   },
+   {
+    "text": "Beliefs stay random forever because informed traders randomise their trades.",
+    "misconception": "informed traders trade deterministically on their signal here"
+   },
+   {
+    "text": "The spread falls only if trade sizes are observed, not with direction alone.",
+    "misconception": "the direction of trades already carries the information"
+   }
+  ],
+  "explanation": "Conditional on the true value, the trade sequence is i.i.d. with different buy probabilities for $V_H$ and $V_L$, so the likelihood ratio drifts to 0 or $\\infty$ and the posterior converges."
+ },
+ {
+  "id": "ms2-2.6",
+  "lecture": 2,
+  "stem": "What is a key structural difference between the Glosten-Milgrom and Kyle models?",
+  "correct": [
+   "Glosten-Milgrom posts quotes before the direction of a unit trade is known; Kyle prices net flow.",
+   "Sequential unit trades, against one batch of flow."
+  ],
+  "distractors": [
+   {
+    "text": "Kyle has a bid-ask spread and Glosten-Milgrom has a single price.",
+    "misconception": "reverses the two models"
+   },
+   {
+    "text": "Glosten-Milgrom has a strategic insider who chooses her trade size optimally.",
+    "misconception": "the informed trader there is non-strategic about size"
+   },
+   {
+    "text": "In Kyle, the market maker is risk averse; in Glosten-Milgrom she is risk neutral.",
+    "misconception": "both market makers are risk neutral"
+   },
+   {
+    "text": "Glosten-Milgrom needs normal distributions, while Kyle works with two values.",
+    "misconception": "swaps the distributional assumptions"
+   },
+   {
+    "text": "Only Kyle features adverse selection; Glosten-Milgrom spreads come from inventory costs.",
+    "misconception": "adverse selection drives the spread in Glosten-Milgrom"
+   }
+  ],
+  "explanation": "Glosten-Milgrom: each arrival trades one unit at the posted bid or ask, so the spread appears. Kyle: a strategic insider chooses a continuous size and the market maker sets one price after seeing total flow."
+ },
+ {
+  "id": "ms2-3.1",
+  "lecture": 3,
+  "stem": "What can a Hawkes process capture that a Poisson process cannot?",
+  "correct": [
+   "Self-excitation: each event raises the rate, so events cluster.",
+   "Clustering, since past events feed the intensity."
+  ],
+  "distractors": [
+   {
+    "text": "Seasonal patterns in the arrival rate across the trading day.",
+    "misconception": "a deterministic baseline handles seasonality, not self-excitation"
+   },
+   {
+    "text": "Events that make later events less likely, as in a refractory period.",
+    "misconception": "a positive kernel excites rather than inhibits"
+   },
+   {
+    "text": "Arrival times that are exactly regular.",
+    "misconception": "regularity is the opposite of clustering"
+   },
+   {
+    "text": "Dependence of the arrival rate on the price level only.",
+    "misconception": "the intensity depends on past events"
+   },
+   {
+    "text": "Memory that always decays as a power law.",
+    "misconception": "the exponential kernel has short memory"
+   }
+  ],
+  "explanation": "The Hawkes intensity is $\\mu+\\sum_{t_i<t}\\phi(t-t_i)$ with $\\phi\\ge0$, so every event temporarily raises the rate. A Poisson intensity ignores the past."
+ },
+ {
+  "id": "ms2-3.2",
+  "lecture": 3,
+  "stem": "For a Hawkes process with baseline $\\mu>0$ and kernel $\\alpha e^{-\\beta t}$, which condition makes it stationary?",
+  "correct": [
+   "The branching ratio $n=\\alpha/\\beta$ is below one, so cascades die out.",
+   "The kernel integrates to less than one."
+  ],
+  "distractors": [
+   {
+    "text": "The jump size satisfies $\\alpha<\\mu$, so the baseline dominates.",
+    "misconception": "compares the wrong quantities"
+   },
+   {
+    "text": "The decay rate satisfies $\\beta<1$, so the memory is long.",
+    "misconception": "the units of $\\beta$ do not fix stationarity"
+   },
+   {
+    "text": "The baseline is smaller than the decay rate, $\\mu<\\beta$.",
+    "misconception": "the baseline does not enter the condition"
+   },
+   {
+    "text": "The jump exceeds the decay rate, $\\alpha>\\beta$, so intensity keeps being refreshed.",
+    "misconception": "reverses the inequality; this is the explosive case"
+   },
+   {
+    "text": "No condition is needed, because the baseline pulls the intensity back.",
+    "misconception": "with $n\\ge1$ the process explodes"
+   }
+  ],
+  "explanation": "Stationarity needs $\\int_0^\\infty\\alpha e^{-\\beta t}dt=\\alpha/\\beta<1$. If $n\\ge1$ the expected number of descendants is infinite and the process explodes."
+ },
+ {
+  "id": "ms2-3.3",
+  "lecture": 3,
+  "stem": "How should the branching ratio $n=\\alpha/\\beta$ of a Hawkes process be interpreted?",
+  "correct": [
+   "The expected number of direct offspring of a single event.",
+   "Mean events directly caused by one event."
+  ],
+  "distractors": [
+   {
+    "text": "The proportion of events that come from the exogenous baseline.",
+    "misconception": "that proportion is $1-n$"
+   },
+   {
+    "text": "The expected waiting time between two successive events.",
+    "misconception": "confuses it with an interarrival time"
+   },
+   {
+    "text": "The ratio of baseline to current intensity.",
+    "misconception": "mixes up with intensity ratios"
+   },
+   {
+    "text": "The long-run mean intensity of the process.",
+    "misconception": "the mean intensity is $\\mu/(1-n)$"
+   },
+   {
+    "text": "The probability that the next event arrives within one unit of time.",
+    "misconception": "confuses it with a probability of arrival"
+   }
+  ],
+  "explanation": "Each event triggers a Poisson number of children with mean $\\int\\phi=n$. In the stationary regime a fraction $n$ of events is endogenous and $1-n$ is exogenous."
+ },
+ {
+  "id": "ms2-3.4",
+  "lecture": 3,
+  "stem": "What is the stationary mean intensity of a Hawkes process with baseline $\\mu$ and branching ratio $n<1$?",
+  "correct": [
+   "$\\mu/(1-n)$, the baseline amplified by cascades of triggered events.",
+   "Baseline times cluster size $1/(1-n)$."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $\\mu n$, because only triggered events remain.",
+    "misconception": "drops the exogenous events"
+   },
+   {
+    "text": "It equals $\\mu$, since the excitation averages out.",
+    "misconception": "ignores the cascade of offspring"
+   },
+   {
+    "text": "It equals $\\mu(1+n)$, because only the first generation of offspring counts.",
+    "misconception": "truncates the geometric series"
+   },
+   {
+    "text": "It equals $\\mu/n$, which is large for weak excitation.",
+    "misconception": "inverts the wrong quantity"
+   },
+   {
+    "text": "It is infinite, because every event triggers further events forever.",
+    "misconception": "the series converges for $n<1$"
+   }
+  ],
+  "explanation": "Each exogenous event starts a cluster of expected size $1+n+n^2+\\dots=1/(1-n)$, so $E[\\lambda]=\\mu/(1-n)$."
+ },
+ {
+  "id": "ms2-3.5",
+  "lecture": 3,
+  "stem": "In a Hawkes process with exponential kernel, what happens to the intensity immediately after an event?",
+  "correct": [
+   "It jumps by $\\alpha$, then relaxes to the baseline.",
+   "A jump of $\\alpha$, then exponential decay."
+  ],
+  "distractors": [
+   {
+    "text": "It stays elevated forever, since memory is never lost.",
+    "misconception": "confuses with a permanent effect"
+   },
+   {
+    "text": "It jumps up and then decays linearly to zero.",
+    "misconception": "it decays towards the baseline, not to zero"
+   },
+   {
+    "text": "It resets to the baseline $\\mu$ at once.",
+    "misconception": "ignores the memory in the kernel"
+   },
+   {
+    "text": "It dips below the baseline before recovering.",
+    "misconception": "a positive kernel never lowers the intensity"
+   },
+   {
+    "text": "It jumps by $\\alpha\\beta$ and decays at rate $\\alpha$.",
+    "misconception": "swaps the roles of the two parameters"
+   }
+  ],
+  "explanation": "$\\lambda(t)=\\mu+\\sum_{t_i<t}\\alpha e^{-\\beta(t-t_i)}$: each term is $\\alpha$ at the event time and decays at rate $\\beta$. Excitations from several events add up."
+ },
+ {
+  "id": "ms2-3.6",
+  "lecture": 3,
+  "stem": "Empirical Hawkes fits to order flow often give a branching ratio close to one. What does this suggest?",
+  "correct": [
+   "Most events are triggered by earlier events, not by outside news.",
+   "Much order flow is endogenous."
+  ],
+  "distractors": [
+   {
+    "text": "The market is easy to arbitrage, because order flow is predictable at zero cost.",
+    "misconception": "draws an efficiency conclusion from clustering"
+   },
+   {
+    "text": "Exogenous news dominates, with few triggered events.",
+    "misconception": "the opposite: $1-n$ is the exogenous fraction"
+   },
+   {
+    "text": "The process behaves like a Poisson process.",
+    "misconception": "self-excitation is strong, not absent"
+   },
+   {
+    "text": "The fitted model is certainly misspecified and should be rejected.",
+    "misconception": "near-critical fits are common and informative"
+   },
+   {
+    "text": "Events are almost deterministic in their timing.",
+    "misconception": "near-critical Hawkes processes are very bursty"
+   }
+  ],
+  "explanation": "In the stationary regime a fraction $n$ of events is triggered by others, so $n\\approx1$ means mostly endogenous activity. The process is near-critical, with long bursts."
+ },
+ {
+  "id": "ms2-4.1",
+  "lecture": 4,
+  "stem": "In a Markov queue model of one side of the book, limit orders arrive at rate $\\lambda$ and orders leave at total rate $\\mu$. When is the queue length stable?",
+  "correct": [
+   "When arrivals are slower than departures, $\\lambda<\\mu$.",
+   "Departures must outpace arrivals in the long run."
+  ],
+  "distractors": [
+   {
+    "text": "When $\\lambda>\\mu$, since a longer queue attracts more traders.",
+    "misconception": "reverses the stability condition"
+   },
+   {
+    "text": "Whenever $\\lambda\\le\\mu$, since equal rates balance out exactly.",
+    "misconception": "at equality the queue is not positive recurrent"
+   },
+   {
+    "text": "Always, because the book has finitely many price levels.",
+    "misconception": "the queue at a price level is unbounded in this model"
+   },
+   {
+    "text": "Only if the cancellation rate is zero.",
+    "misconception": "cancellations help stability"
+   },
+   {
+    "text": "When the arrival rate exceeds the cancellation rate alone, ignoring market orders.",
+    "misconception": "leaves out market orders as departures"
+   }
+  ],
+  "explanation": "The queue is a birth-death chain with up-rate $\\lambda$ and down-rate $\\mu$, positive recurrent iff $\\lambda<\\mu$, with stationary law geometric with ratio $\\lambda/\\mu$."
+ },
+ {
+  "id": "ms2-4.2",
+  "lecture": 4,
+  "stem": "Under price-time priority, how does a limit order's position in the queue affect its execution prospects?",
+  "correct": [
+   "The further forward it stands, the likelier it fills before the price moves.",
+   "Joining behind a long queue makes an early fill unlikely."
+  ],
+  "distractors": [
+   {
+    "text": "Position is irrelevant once the order rests at the best price.",
+    "misconception": "ignores time priority"
+   },
+   {
+    "text": "The last order to join is filled first.",
+    "misconception": "describes a last-in-first-out rule"
+   },
+   {
+    "text": "Orders at the same price are filled in proportion to their size, whatever their arrival time.",
+    "misconception": "describes pro-rata matching"
+   },
+   {
+    "text": "Only the order size matters, not the arrival time.",
+    "misconception": "ignores time priority"
+   },
+   {
+    "text": "Later arrivals are filled earlier because they are better informed.",
+    "misconception": "invents an information priority"
+   }
+  ],
+  "explanation": "With price-time priority, a market order consumes the queue from the front. Fewer orders ahead means a shorter wait and a higher fill probability before the price moves."
+ },
+ {
+  "id": "ms2-4.3",
+  "lecture": 4,
+  "stem": "In Markov limit-order-book models, which feature mainly decides the direction of the next mid-price move?",
+  "correct": [
+   "The sizes of the best queues: whichever empties first moves the price.",
+   "The relative depletion of the two queues."
+  ],
+  "distractors": [
+   {
+    "text": "The price of the last trade, regardless of queue sizes.",
+    "misconception": "confuses trade price with the book state"
+   },
+   {
+    "text": "The number of orders resting several ticks away from the best quotes.",
+    "misconception": "deep orders do not set the next move"
+   },
+   {
+    "text": "The time of day alone.",
+    "misconception": "time of day affects rates, not the mechanism"
+   },
+   {
+    "text": "The sign of the previous mid-price move alone.",
+    "misconception": "ignores the current queue state"
+   },
+   {
+    "text": "The total volume on the bid side, whatever the ask queue holds.",
+    "misconception": "looks at one side only"
+   }
+  ],
+  "explanation": "The mid-price changes when a best queue is depleted. The first to empty determines the direction, which is why queue sizes are the state variables."
+ },
+ {
+  "id": "ms2-4.4",
+  "lecture": 4,
+  "stem": "Why does queue imbalance $I=(Q^b-Q^a)/(Q^b+Q^a)$ help to predict price moves in queue models?",
+  "correct": [
+   "A big bid queue means the thin ask empties first, so an up move is likelier.",
+   "Positive imbalance signals pressure upwards."
+  ],
+  "distractors": [
+   {
+    "text": "A large bid queue means more sellers, so the price falls.",
+    "misconception": "misreads the sign of the imbalance"
+   },
+   {
+    "text": "It predicts only volatility, not direction.",
+    "misconception": "imbalance is directional"
+   },
+   {
+    "text": "It has no predictive power in an efficient market.",
+    "misconception": "mechanical queue depletion makes it informative at short horizons"
+   },
+   {
+    "text": "A large bid queue is more likely to be depleted first.",
+    "misconception": "larger queues take longer to empty"
+   },
+   {
+    "text": "It matters only after a trade has occurred.",
+    "misconception": "the imbalance is a state variable at any time"
+   }
+  ],
+  "explanation": "Larger queues take longer to deplete. With $Q^b>Q^a$ the ask is more likely to be consumed first, so the mid-price is more likely to move up next."
+ },
+ {
+  "id": "ms2-4.5",
+  "lecture": 4,
+  "stem": "How do cancellations of orders ahead in the queue affect the fill probability of a resting limit order?",
+  "correct": [
+   "They move the order forward, so its chance of filling rises.",
+   "Cancellations ahead shorten the wait."
+  ],
+  "distractors": [
+   {
+    "text": "They lower the fill probability, because liquidity is leaving the book.",
+    "misconception": "ignores that it is the orders ahead that cancel"
+   },
+   {
+    "text": "They have no effect on it, because only market orders fill orders.",
+    "misconception": "cancellations change the position"
+   },
+   {
+    "text": "They help only when the cancelled orders sit behind it.",
+    "misconception": "orders behind do not affect its position"
+   },
+   {
+    "text": "They raise the fill probability only for the first order in the queue.",
+    "misconception": "the benefit applies to every position behind the cancelled order"
+   },
+   {
+    "text": "They convert the order into a market order.",
+    "misconception": "invents a mechanism"
+   }
+  ],
+  "explanation": "The order's position equals the orders still ahead of it. Each cancellation ahead reduces that number, so fewer market orders are needed to reach it."
+ },
+ {
+  "id": "ms2-4.6",
+  "lecture": 4,
+  "stem": "Why is a limit order that gets filled exposed to adverse selection?",
+  "correct": [
+   "Being filled is likelier just before the price moves against the order.",
+   "Fills come when the price is about to move away."
+  ],
+  "distractors": [
+   {
+    "text": "Fills occur just before the price improves in favour of the order.",
+    "misconception": "reverses the sign of the effect"
+   },
+   {
+    "text": "Fills are unrelated to later price changes.",
+    "misconception": "ignores the information in being hit"
+   },
+   {
+    "text": "Adverse selection hits only market orders.",
+    "misconception": "passive orders bear it"
+   },
+   {
+    "text": "Fills are more likely in calm markets, where they are safe.",
+    "misconception": "fills occur when the queue is consumed, not only in calm markets"
+   },
+   {
+    "text": "A filled order always earns the spread.",
+    "misconception": "ignores the later price move"
+   }
+  ],
+  "explanation": "A buy limit order is filled when sellers hit the bid, often because the price is falling or about to fall. The spread earned on a fill is offset by the expected adverse move."
+ },
+ {
+  "id": "ms2-5.1",
+  "lecture": 5,
+  "stem": "In the Almgren-Chriss framework, which two costs does the trader trade off?",
+  "correct": [
+   "Impact, which rises with speed, against price risk from holding inventory longer.",
+   "Fast selling costs impact; slow selling leaves exposure."
+  ],
+  "distractors": [
+   {
+    "text": "The bid-ask spread against brokerage commissions.",
+    "misconception": "these are fixed costs, not a trade-off in speed"
+   },
+   {
+    "text": "Impact that grows with slow trading against risk that grows with fast trading.",
+    "misconception": "reverses which side each cost sits on"
+   },
+   {
+    "text": "Permanent impact against temporary impact, both of which penalise speed.",
+    "misconception": "both impact types punish fast trading, so they do not oppose each other"
+   },
+   {
+    "text": "Opportunity cost of unfilled orders against the cost of information leakage.",
+    "misconception": "different trade-off than the model's"
+   },
+   {
+    "text": "Risk of price falling against the risk of price rising.",
+    "misconception": "symmetric price risk is one cost, not a trade-off"
+   }
+  ],
+  "explanation": "Selling quickly makes the temporary impact large; selling slowly leaves the position exposed to price changes, so the variance of the cost grows. The objective is mean cost plus $\\lambda\\times$ variance."
+ },
+ {
+  "id": "ms2-5.2",
+  "lecture": 5,
+  "stem": "With linear temporary impact, no drift, and a risk-neutral trader, what is the optimal liquidation schedule?",
+  "correct": [
+   "Trade at a constant rate (TWAP) throughout the whole horizon.",
+   "Equal amounts in equal intervals."
+  ],
+  "distractors": [
+   {
+    "text": "Sell everything immediately to avoid any exposure.",
+    "misconception": "ignores the convex temporary impact cost"
+   },
+   {
+    "text": "Sell most of the position at the end, to wait for a better price.",
+    "misconception": "without drift there is no reason to wait"
+   },
+   {
+    "text": "Sell at an exponentially decaying rate, front-loaded.",
+    "misconception": "this arises only with risk aversion"
+   },
+   {
+    "text": "Trade in proportion to the volatility at each moment.",
+    "misconception": "volatility enters only through the risk term"
+   },
+   {
+    "text": "Sell the whole position at a randomly chosen time.",
+    "misconception": "randomising does not minimise the expected cost"
+   }
+  ],
+  "explanation": "Minimising $\\eta\\int\\dot x^2dt$ over paths from $X$ to $0$ is a convex problem. Jensen's inequality gives the straight line, so the rate is constant."
+ },
+ {
+  "id": "ms2-5.3",
+  "lecture": 5,
+  "stem": "How does a higher risk aversion change the Almgren-Chriss optimal schedule?",
+  "correct": [
+   "The schedule is more front-loaded: she sells faster at the start.",
+   "Selling is accelerated early in the horizon."
+  ],
+  "distractors": [
+   {
+    "text": "The schedule slows down so that the trader can spread the impact.",
+    "misconception": "confuses risk aversion with impact aversion"
+   },
+   {
+    "text": "Nothing changes, because the expected cost does not depend on risk aversion.",
+    "misconception": "ignores the variance term in the objective"
+   },
+   {
+    "text": "The schedule becomes linear.",
+    "misconception": "linear is the risk-neutral case"
+   },
+   {
+    "text": "The trader holds off selling until just before the deadline.",
+    "misconception": "delay raises variance"
+   },
+   {
+    "text": "Only the final trade is affected.",
+    "misconception": "the whole trajectory changes"
+   }
+  ],
+  "explanation": "The optimal path is $x(t)=X\\sinh(\\kappa(T-t))/\\sinh(\\kappa T)$ with $\\kappa=\\sqrt{\\lambda\\sigma^2/\\eta}$. A larger $\\lambda$ increases $\\kappa$, so the path is more convex and front-loaded."
+ },
+ {
+  "id": "ms2-5.4",
+  "lecture": 5,
+  "stem": "In Almgren-Chriss with linear permanent impact, how does the permanent impact enter the optimal schedule?",
+  "correct": [
+   "Its total cost is the same for every schedule, so the path is unchanged.",
+   "It adds a schedule-independent term."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the optimal path more front-loaded.",
+    "misconception": "confuses permanent with temporary impact"
+   },
+   {
+    "text": "It makes the TWAP schedule optimal for any risk aversion.",
+    "misconception": "mixes up the roles of the cost components"
+   },
+   {
+    "text": "It disappears once trading stops, so it carries no cost.",
+    "misconception": "that describes transient impact"
+   },
+   {
+    "text": "It scales with the square of the trading rate.",
+    "misconception": "that describes temporary impact"
+   },
+   {
+    "text": "It acts as an additional risk-aversion parameter.",
+    "misconception": "invents a link to the variance term"
+   }
+  ],
+  "explanation": "With linear permanent impact $\\gamma$, each share moves the price by $\\gamma$ times the shares traded before it. The cost is $\\gamma X^2/2$ whatever the schedule, so only temporary impact and risk shape the path."
+ },
+ {
+  "id": "ms2-5.5",
+  "lecture": 5,
+  "stem": "With an arithmetic Brownian price and linear impact, how does the Almgren-Chriss optimal strategy depend on the price path realised so far?",
+  "correct": [
+   "It does not: the optimal schedule is deterministic and fixed in advance.",
+   "A static schedule is optimal, so reacting gains nothing."
+  ],
+  "distractors": [
+   {
+    "text": "The trader should sell faster after price falls, to avoid further losses.",
+    "misconception": "confuses a fixed schedule with a stop-loss rule"
+   },
+   {
+    "text": "The trader should sell more after price rises, to lock in gains.",
+    "misconception": "assumes mean reversion that the model lacks"
+   },
+   {
+    "text": "The schedule is random because price shocks are random.",
+    "misconception": "randomness of the price does not make the optimal control random"
+   },
+   {
+    "text": "The schedule depends on the entire path, so it can only be found by simulation.",
+    "misconception": "the solution has a closed form"
+   },
+   {
+    "text": "It depends on the price level but not on time.",
+    "misconception": "the schedule is a function of time only"
+   }
+  ],
+  "explanation": "Price increments are independent and the impact is linear, so the problem has no feedback from the price: the mean-variance optimum is the deterministic sinh path."
+ },
+ {
+  "id": "ms2-6.1",
+  "lecture": 6,
+  "stem": "What is the Hamilton-Jacobi-Bellman equation for a stochastic control problem?",
+  "correct": [
+   "A backward PDE for the value function that expresses dynamic programming over controls.",
+   "The equation for the optimal value, with an optimisation inside."
+  ],
+  "distractors": [
+   {
+    "text": "A forward ODE for the optimal control path.",
+    "misconception": "the HJB is a PDE for the value, not an ODE for the control"
+   },
+   {
+    "text": "The forward equation that gives the density of the state.",
+    "misconception": "that is the Fokker-Planck equation"
+   },
+   {
+    "text": "An algebraic equation for the optimal control at one instant.",
+    "misconception": "it involves derivatives of the value function"
+   },
+   {
+    "text": "The equation for the stationary distribution of the controlled process.",
+    "misconception": "confuses with invariant measures"
+   },
+   {
+    "text": "The Euler-Lagrange condition, which applies only to deterministic problems.",
+    "misconception": "the HJB covers the stochastic case"
+   }
+  ],
+  "explanation": "Dynamic programming over $[t,t+dt]$ gives $0=V_t+\\mathcal L V+\\sup_a\\{\\dots\\}$ with a terminal condition at $T$. The optimal control is the maximiser inside."
+ },
+ {
+  "id": "ms2-6.2",
+  "lecture": 6,
+  "stem": "How are the terminal condition and the time direction set up when solving the HJB equation of a liquidation problem?",
+  "correct": [
+   "The value at the final time equals the terminal penalty, and the PDE is solved backwards.",
+   "A boundary value at $T$ is propagated back to the start."
+  ],
+  "distractors": [
+   {
+    "text": "An initial condition at time zero is given, and the equation is solved forwards.",
+    "misconception": "confuses HJB with a forward equation"
+   },
+   {
+    "text": "No condition is needed because the optimal control determines the value.",
+    "misconception": "the PDE needs a terminal condition"
+   },
+   {
+    "text": "The terminal condition is on the control, which must equal zero.",
+    "misconception": "conditions apply to the value function"
+   },
+   {
+    "text": "The value at the final time is always zero.",
+    "misconception": "ignores terminal inventory penalties"
+   },
+   {
+    "text": "The condition is the optimal path, found by simulating forwards.",
+    "misconception": "gets the logic backwards"
+   }
+  ],
+  "explanation": "At $T$ the problem is over and only the terminal payoff or penalty remains, say $V(T,q)=-\\alpha q^2$. Dynamic programming then determines $V$ at earlier times."
+ },
+ {
+  "id": "ms2-6.3",
+  "lecture": 6,
+  "stem": "In a liquidation problem with quadratic impact cost, how is the optimal selling rate determined?",
+  "correct": [
+   "By a first-order condition in current inventory, time and $V_q$.",
+   "It is a feedback control on the current state."
+  ],
+  "distractors": [
+   {
+    "text": "It depends only on time, not on the state.",
+    "misconception": "the control is a feedback on inventory"
+   },
+   {
+    "text": "It depends on the entire future path of the noise.",
+    "misconception": "the control uses only current information"
+   },
+   {
+    "text": "It is fixed by the terminal penalty and does not depend on the value function.",
+    "misconception": "the value function carries the terminal penalty into the rate"
+   },
+   {
+    "text": "It depends on the current price level.",
+    "misconception": "price level does not enter the cost in this setting"
+   },
+   {
+    "text": "It maximises the instantaneous profit, ignoring future states.",
+    "misconception": "ignores the dynamic programming structure"
+   }
+  ],
+  "explanation": "The minimisation of $kv^2-vV_q$ over $v$ gives $v^*=V_q/(2k)$. With $V=h(t)q^2$ this is $v^*=hq/k$, a function of the state and time."
+ },
+ {
+  "id": "ms2-6.4",
+  "lecture": 6,
+  "stem": "In a linear-quadratic liquidation problem, what shape does the value function take?",
+  "correct": [
+   "Quadratic in inventory, with a time-dependent coefficient solving a Riccati ODE.",
+   "$V=h(t)q^2$ with $h$ from a Riccati equation."
+  ],
+  "distractors": [
+   {
+    "text": "Linear in inventory, with a coefficient that depends on the time to maturity.",
+    "misconception": "quadratic costs give a quadratic value"
+   },
+   {
+    "text": "Exponential in inventory, as for an investor with exponential utility over wealth.",
+    "misconception": "exponential value functions belong to utility problems"
+   },
+   {
+    "text": "Independent of inventory, because only the price path matters for the cost.",
+    "misconception": "inventory is the state variable"
+   },
+   {
+    "text": "Quadratic in inventory with a constant coefficient.",
+    "misconception": "the coefficient varies in time"
+   },
+   {
+    "text": "Logarithmic in inventory, as for an investor with logarithmic utility.",
+    "misconception": "logarithmic value functions belong to log utility"
+   }
+  ],
+  "explanation": "A quadratic running cost and a linear control make the HJB equation consistent with $V=h(t)q^2$. Substituting yields $h'=h^2/k-\\phi$ with $h(T)=\\alpha$."
+ },
+ {
+  "id": "ms2-6.5",
+  "lecture": 6,
+  "stem": "What does a running inventory penalty add to a liquidation problem with quadratic impact?",
+  "correct": [
+   "The rate is proportional to inventory, and she sells faster early than TWAP.",
+   "She front-loads, trading fastest when inventory is large."
+  ],
+  "distractors": [
+   {
+    "text": "The trader slows down, since holding inventory becomes less costly.",
+    "misconception": "the penalty makes holding more costly"
+   },
+   {
+    "text": "The schedule stays TWAP, whatever the penalty.",
+    "misconception": "the penalty bends the schedule"
+   },
+   {
+    "text": "The trader sells only at the end.",
+    "misconception": "delay increases the penalty"
+   },
+   {
+    "text": "The penalty has no effect on the schedule, only on the value.",
+    "misconception": "the control depends on $h$, which depends on $\\phi$"
+   },
+   {
+    "text": "The rate is constant and equals the penalty rate.",
+    "misconception": "the rate falls as inventory falls"
+   }
+  ],
+  "explanation": "The feedback rate is $v^*=h(t)q/k$ with $h$ solving the Riccati equation. A positive $\\phi$ gives a $\\tanh/\\sinh$-type path that decays faster than a straight line."
+ },
+ {
+  "id": "ms2-7.1",
+  "lecture": 7,
+  "stem": "In Avellaneda-Stoikov, around which price are the market maker's optimal bid and ask centred?",
+  "correct": [
+   "Around the reservation price, which is shifted from the mid-price.",
+   "Around her inventory-adjusted valuation."
+  ],
+  "distractors": [
+   {
+    "text": "Around the mid-price, whatever the inventory.",
+    "misconception": "ignores inventory risk"
+   },
+   {
+    "text": "Around the best quote of the competing market makers.",
+    "misconception": "the model has no competitors"
+   },
+   {
+    "text": "Around the last transaction price.",
+    "misconception": "prices are anchored to the mid-price process"
+   },
+   {
+    "text": "Around the volume-weighted average price of the day.",
+    "misconception": "not part of the model"
+   },
+   {
+    "text": "Around a price set by the order-flow imbalance.",
+    "misconception": "AS arrivals are independent of imbalance"
+   }
+  ],
+  "explanation": "The bid and ask are $r\\mp\\Delta/2$ with $r=s-q\\gamma\\sigma^2(T-t)$. Inventory moves the reservation price, so both quotes skew away from the position."
+ },
+ {
+  "id": "ms2-7.2",
+  "lecture": 7,
+  "stem": "In Avellaneda-Stoikov, market orders hit a quote at distance $\\delta$ with intensity $Ae^{-k\\delta}$. What trade-off does this create?",
+  "correct": [
+   "Wider quotes earn more per fill but are filled less often.",
+   "Further quotes raise the margin and lower the arrival rate."
+  ],
+  "distractors": [
+   {
+    "text": "Wider quotes are filled more often because they are more attractive.",
+    "misconception": "wider quotes are less attractive to traders"
+   },
+   {
+    "text": "Fill rates do not depend on the distance from the mid-price.",
+    "misconception": "ignores the intensity function"
+   },
+   {
+    "text": "Narrow quotes earn more per fill.",
+    "misconception": "margin grows with distance"
+   },
+   {
+    "text": "Quotes are filled with a rate that declines linearly and reaches zero at a finite distance.",
+    "misconception": "the decay is exponential and never reaches zero"
+   },
+   {
+    "text": "Wide quotes avoid inventory risk altogether.",
+    "misconception": "any fill creates inventory"
+   }
+  ],
+  "explanation": "Expected profit rate per side is $\\delta Ae^{-k\\delta}$-type: margin $\\delta$ increases linearly while the arrival rate decays exponentially, which leads to an interior optimum."
+ },
+ {
+  "id": "ms2-7.3",
+  "lecture": 7,
+  "stem": "How does the optimal total spread of an Avellaneda-Stoikov market maker depend on the inventory?",
+  "correct": [
+   "It does not: inventory shifts both quotes together and the spread is unchanged.",
+   "Only the centre moves, not the width of the quotes."
+  ],
+  "distractors": [
+   {
+    "text": "It widens as the absolute inventory grows.",
+    "misconception": "confuses a shift in the centre with a wider spread"
+   },
+   {
+    "text": "It narrows when the inventory is large, to attract offsetting orders.",
+    "misconception": "the inventory moves the centre instead"
+   },
+   {
+    "text": "It depends on inventory only through the sign.",
+    "misconception": "the sign shifts the centre"
+   },
+   {
+    "text": "It widens for long and narrows for short inventories.",
+    "misconception": "shifts treated as asymmetry of the spread"
+   },
+   {
+    "text": "It is a multiple of the inventory times the volatility.",
+    "misconception": "that is the shift of the reservation price"
+   }
+  ],
+  "explanation": "The spread is $\\gamma\\sigma^2(T-t)+\\frac2\\gamma\\ln(1+\\gamma/k)$, with no $q$. Inventory enters only through $r=s-q\\gamma\\sigma^2(T-t)$."
+ },
+ {
+  "id": "ms2-7.4",
+  "lecture": 7,
+  "stem": "What does the Avellaneda-Stoikov spread formula imply for a risk-neutral market maker ($\\gamma\\to0$)?",
+  "correct": [
+   "The spread stays positive, because distance still trades margin against fill rate.",
+   "The optimal spread does not vanish."
+  ],
+  "distractors": [
+   {
+    "text": "The spread goes to zero, since there is no risk to compensate.",
+    "misconception": "ignores the fill-rate trade-off"
+   },
+   {
+    "text": "The spread becomes infinite.",
+    "misconception": "the limit is finite"
+   },
+   {
+    "text": "The market maker quotes at the mid-price.",
+    "misconception": "would give zero margin"
+   },
+   {
+    "text": "The spread equals the volatility.",
+    "misconception": "the limit does not involve $\\sigma$"
+   },
+   {
+    "text": "Quotes remain centred on a reservation price that moves with inventory.",
+    "misconception": "the inventory skew vanishes as $\\gamma\\to0$"
+   }
+  ],
+  "explanation": "As $\\gamma\\to0$, $\\frac2\\gamma\\ln(1+\\gamma/k)\\to2/k>0$. The risk term vanishes, but the fill-rate trade-off alone gives a positive spread."
+ },
+ {
+  "id": "ms2-7.5",
+  "lecture": 7,
+  "stem": "How do the Avellaneda-Stoikov quotes behave as the horizon $T$ is approached?",
+  "correct": [
+   "The inventory skew fades, as $\\gamma\\sigma^2(T-t)$ goes to zero.",
+   "The reservation price converges to the mid-price."
+  ],
+  "distractors": [
+   {
+    "text": "The skew grows, because less time remains to unwind.",
+    "misconception": "the inventory risk shrinks with remaining time"
+   },
+   {
+    "text": "The spread widens without limit.",
+    "misconception": "the spread has a positive floor"
+   },
+   {
+    "text": "The quotes collapse to the mid-price with zero spread.",
+    "misconception": "the spread stays positive"
+   },
+   {
+    "text": "Nothing changes, since the model is stationary.",
+    "misconception": "the finite horizon makes it time-dependent"
+   },
+   {
+    "text": "The market maker stops quoting on the side of her inventory.",
+    "misconception": "the model does not switch off a side"
+   }
+  ],
+  "explanation": "The skew term is proportional to $T-t$. At $T$ inventory risk disappears, $r=s$, though the spread keeps its floor $\\frac2\\gamma\\ln(1+\\gamma/k)$."
+ },
+ {
+  "id": "ms2-8.1",
+  "lecture": 8,
+  "stem": "What is the reservation price of a market maker?",
+  "correct": [
+   "The price that makes her indifferent to one more unit, adjusted for inventory risk.",
+   "Her own inventory-adjusted valuation of the asset."
+  ],
+  "distractors": [
+   {
+    "text": "The price at which supply equals demand in the market.",
+    "misconception": "confuses a personal valuation with equilibrium"
+   },
+   {
+    "text": "The current mid-price of the best bid and ask quotes.",
+    "misconception": "ignores that inventory moves the valuation"
+   },
+   {
+    "text": "The price of the most recent transaction in the market.",
+    "misconception": "a historical price, not a valuation"
+   },
+   {
+    "text": "The price at which she would reduce her inventory to zero.",
+    "misconception": "the reservation price is an indifference level, not a target"
+   },
+   {
+    "text": "The expected terminal price of the asset.",
+    "misconception": "ignores the risk adjustment"
+   }
+  ],
+  "explanation": "Exponential-utility indifference pricing gives $r=s-q\\gamma\\sigma^2(T-t)$, the mid-price minus a risk penalty proportional to the position."
+ },
+ {
+  "id": "ms2-8.2",
+  "lecture": 8,
+  "stem": "A market maker is long the asset. Where does her reservation price lie relative to the mid-price, and how does she quote?",
+  "correct": [
+   "Below the mid-price, so she lowers both quotes to favour selling.",
+   "Her quotes shift down to encourage selling."
+  ],
+  "distractors": [
+   {
+    "text": "Above the mid-price, so she raises her bid to buy more.",
+    "misconception": "reverses the effect of inventory risk"
+   },
+   {
+    "text": "At the mid-price, because inventory does not change value.",
+    "misconception": "ignores the risk penalty"
+   },
+   {
+    "text": "She widens only the ask.",
+    "misconception": "the whole quote pair shifts"
+   },
+   {
+    "text": "She stops quoting on both sides until the position is flat.",
+    "misconception": "the model keeps quoting"
+   },
+   {
+    "text": "She sets the bid above the mid-price to buy back at lower cost.",
+    "misconception": "confuses direction of trades needed"
+   }
+  ],
+  "explanation": "With $q>0$, $r=s-q\\gamma\\sigma^2(T-t)<s$. Lowering both quotes raises the arrival rate of buyers who lift her ask and lowers that of sellers, so inventory falls."
+ },
+ {
+  "id": "ms2-8.3",
+  "lecture": 8,
+  "stem": "How does a larger risk aversion $\\gamma$ change the inventory skew of the quotes?",
+  "correct": [
+   "Each unit of inventory moves the reservation price further.",
+   "A more risk-averse maker flattens her position harder."
+  ],
+  "distractors": [
+   {
+    "text": "The skew shrinks, because she accepts larger positions.",
+    "misconception": "risk aversion makes inventory costlier"
+   },
+   {
+    "text": "The skew is unchanged, since it depends only on the inventory.",
+    "misconception": "the formula multiplies inventory by $\\gamma$"
+   },
+   {
+    "text": "The skew vanishes for large $\\gamma$.",
+    "misconception": "it grows with $\\gamma$"
+   },
+   {
+    "text": "The skew changes only when volatility changes.",
+    "misconception": "ignores the factor $\\gamma$ in the formula"
+   },
+   {
+    "text": "The maker quotes only on the side that reduces inventory.",
+    "misconception": "the model quotes both sides"
+   }
+  ],
+  "explanation": "The skew is $q\\gamma\\sigma^2(T-t)$, linear in $\\gamma$. A higher $\\gamma$ penalises each share of inventory more."
+ },
+ {
+  "id": "ms2-8.4",
+  "lecture": 8,
+  "stem": "Why does higher volatility strengthen the inventory skew of a market maker?",
+  "correct": [
+   "A position of $q$ shares has variance proportional to $q^2\\sigma^2$.",
+   "Position risk grows with volatility, so inventory costs more."
+  ],
+  "distractors": [
+   {
+    "text": "High volatility makes the price unlikely to move far, so inventory matters less.",
+    "misconception": "confuses volatility with predictability"
+   },
+   {
+    "text": "Volatility affects only the arrival of orders.",
+    "misconception": "volatility enters the risk term"
+   },
+   {
+    "text": "Volatility changes the spread but not the skew.",
+    "misconception": "it enters both"
+   },
+   {
+    "text": "Higher volatility attracts informed traders who ask for inventory skew.",
+    "misconception": "invents an adverse-selection channel"
+   },
+   {
+    "text": "Volatility matters only for the terminal inventory penalty.",
+    "misconception": "it affects the running risk"
+   }
+  ],
+  "explanation": "The risk penalty is $\\tfrac12\\gamma q^2\\sigma^2(T-t)$, with marginal cost $q\\gamma\\sigma^2(T-t)$. This marginal cost is the skew, so it is proportional to $\\sigma^2$."
+ },
+ {
+  "id": "ms2-8.5",
+  "lecture": 8,
+  "stem": "In exponential-utility indifference pricing, why does the reservation price not depend on the agent's cash wealth?",
+  "correct": [
+   "With constant absolute risk aversion, wealth factors out of the utility.",
+   "Exponential utility has no wealth effect."
+  ],
+  "distractors": [
+   {
+    "text": "Because wealth is assumed to be zero.",
+    "misconception": "the result holds for any wealth level"
+   },
+   {
+    "text": "Because the agent is risk neutral.",
+    "misconception": "risk aversion $\\gamma$ drives the formula"
+   },
+   {
+    "text": "Because richer agents are less risk averse and exactly offset the effect.",
+    "misconception": "describes decreasing absolute risk aversion"
+   },
+   {
+    "text": "Because wealth is perfectly hedged in the model.",
+    "misconception": "the independence is algebraic, not due to hedging"
+   },
+   {
+    "text": "Because the reservation bid and ask coincide.",
+    "misconception": "they differ by the inventory term"
+   }
+  ],
+  "explanation": "$-e^{-\\gamma(x+\\cdot)}=-e^{-\\gamma x}e^{-\\gamma(\\cdot)}$, so cash $x$ multiplies the utility and cancels in the indifference condition."
+ },
+ {
+  "id": "ms2-9.1",
+  "lecture": 9,
+  "stem": "What distinguishes transient from permanent price impact?",
+  "correct": [
+   "Transient impact decays after trading stops, while permanent impact stays.",
+   "With transient impact, the price partly reverts afterwards."
+  ],
+  "distractors": [
+   {
+    "text": "Transient impact applies only to small orders.",
+    "misconception": "the distinction is about decay, not size"
+   },
+   {
+    "text": "Permanent impact reverts once the order is complete.",
+    "misconception": "reverses the two concepts"
+   },
+   {
+    "text": "With transient impact, the price returns at once to its old level.",
+    "misconception": "decay takes time"
+   },
+   {
+    "text": "Transient impact is costless to the trader.",
+    "misconception": "the trader pays it while trading"
+   },
+   {
+    "text": "Impact is permanent only when market makers see no information.",
+    "misconception": "confuses permanence with informational content"
+   }
+  ],
+  "explanation": "In a propagator model $I_t=\\sum G(t-s)q_s$, $G$ decays to zero for transient impact. A permanent component would correspond to a constant lower bound of $G$."
+ },
+ {
+  "id": "ms2-9.2",
+  "lecture": 9,
+  "stem": "In a propagator model of the price, what does the kernel $G(\\tau)$ describe?",
+  "correct": [
+   "How much of a trade's impact remains after a delay $\\tau$.",
+   "The decay profile of a trade's impact."
+  ],
+  "distractors": [
+   {
+    "text": "The probability that an order is filled after delay $\\tau$.",
+    "misconception": "confuses it with fill probabilities"
+   },
+   {
+    "text": "The autocorrelation function of the order signs.",
+    "misconception": "the signs enter the model as input"
+   },
+   {
+    "text": "The profile of trading volume during the day.",
+    "misconception": "unrelated to impact"
+   },
+   {
+    "text": "The bid-ask spread at lag $\\tau$.",
+    "misconception": "the spread is not what $G$ describes"
+   },
+   {
+    "text": "The volatility of the price over horizon $\\tau$.",
+    "misconception": "volatility is a separate component"
+   }
+  ],
+  "explanation": "The price is $p_t=p_0+\\sum_{s<t}G(t-s)q_s+\\text{noise}$. Each trade adds $G(0)q_s$ at once and the contribution decays following $G$."
+ },
+ {
+  "id": "ms2-9.3",
+  "lecture": 9,
+  "stem": "Why are conditions such as monotonicity and convexity placed on the decay kernel of a transient-impact model?",
+  "correct": [
+   "Without them, round trips could profit on average, allowing manipulation.",
+   "To rule out round-trip arbitrage in the model."
+  ],
+  "distractors": [
+   {
+    "text": "To guarantee that the price is a martingale.",
+    "misconception": "the conditions concern costs of round trips, not martingales"
+   },
+   {
+    "text": "They are needed only to ensure that the integral converges.",
+    "misconception": "the reason is economic, not technical"
+   },
+   {
+    "text": "To make the impact permanent in the long run.",
+    "misconception": "the kernel may decay to zero"
+   },
+   {
+    "text": "Because the kernel must increase with the delay.",
+    "misconception": "the sensible kernels decrease"
+   },
+   {
+    "text": "Because positive impact is needed for the market to clear.",
+    "misconception": "confuses the sign of impact with arbitrage"
+   }
+  ],
+  "explanation": "Gatheral showed that kernels that decay in a non-convex way can make round trips profitable. Non-negative, non-increasing and convex $G$ avoid such price manipulation."
+ },
+ {
+  "id": "ms2-9.4",
+  "lecture": 9,
+  "stem": "What does the square-root law of price impact say about a large order?",
+  "correct": [
+   "Impact grows roughly with the square root of size relative to volume.",
+   "Impact is concave in order size, not linear."
+  ],
+  "distractors": [
+   {
+    "text": "The impact is proportional to the order size.",
+    "misconception": "describes linear impact"
+   },
+   {
+    "text": "The impact grows with the logarithm of size.",
+    "misconception": "not the empirical form"
+   },
+   {
+    "text": "The impact grows with the square of the size.",
+    "misconception": "describes quadratic cost, not the empirical law"
+   },
+   {
+    "text": "The impact is independent of the volatility.",
+    "misconception": "volatility sets the scale"
+   },
+   {
+    "text": "The law holds only for orders that are tiny relative to the daily volume.",
+    "misconception": "it is typically observed for large metaorders"
+   }
+  ],
+  "explanation": "Empirically $\\Delta p\\approx Y\\sigma\\sqrt{Q/V}$ for metaorders of size $Q$, daily volume $V$ and a constant $Y$ of order one."
+ },
+ {
+  "id": "ms2-9.5",
+  "lecture": 9,
+  "stem": "A trader has a short-lived alpha signal and faces market impact. Why is the optimal strategy not to trade everything at once?",
+  "correct": [
+   "Impact costs grow with speed, so she balances alpha captured against impact paid.",
+   "Speed is costly, so the trade is spread over time."
+  ],
+  "distractors": [
+   {
+    "text": "Trading everything at once is optimal, because alpha decays.",
+    "misconception": "ignores the convex impact cost"
+   },
+   {
+    "text": "She should wait until the alpha has gone, to avoid impact.",
+    "misconception": "then no alpha is captured"
+   },
+   {
+    "text": "The decay of the signal is irrelevant to the optimal speed.",
+    "misconception": "faster decay calls for faster trading"
+   },
+   {
+    "text": "Impact matters only if the signal has the wrong sign.",
+    "misconception": "impact is paid in either case"
+   },
+   {
+    "text": "Trading at once is optimal, because the transient impact decays anyway.",
+    "misconception": "the cost is paid on the trade, before decay"
+   }
+  ],
+  "explanation": "The optimal speed rises with the strength and fast decay of the signal and falls with the impact cost. A higher impact cost or longer-lived alpha slows trading."
+ },
+ {
+  "id": "ms2-10.1",
+  "lecture": 10,
+  "stem": "Why can Kyle's $\\lambda$ be estimated by regressing price changes on signed order flow?",
+  "correct": [
+   "The price change is $\\lambda$ times net flow, so the slope estimates $\\lambda$.",
+   "The OLS slope on net flow is the impact."
+  ],
+  "distractors": [
+   {
+    "text": "The regression intercept is the estimate of $\\lambda$.",
+    "misconception": "confuses slope and intercept"
+   },
+   {
+    "text": "The $R^2$ of the regression equals $\\lambda$.",
+    "misconception": "confuses fit and impact"
+   },
+   {
+    "text": "$\\lambda$ equals the volatility of the price divided by volume.",
+    "misconception": "not the definition of the estimator"
+   },
+   {
+    "text": "The slope of volume on absolute returns estimates $\\lambda$.",
+    "misconception": "reverses the regression"
+   },
+   {
+    "text": "The slope estimates the bid-ask spread.",
+    "misconception": "spread and impact are different"
+   }
+  ],
+  "explanation": "Kyle's price rule is $\\Delta p=\\lambda y$. Regressing price changes on signed volume gives $\\hat\\lambda$ as the slope, and the residual variance reflects other news."
+ },
+ {
+  "id": "ms2-10.2",
+  "lecture": 10,
+  "stem": "How can the parameters $A$ and $k$ of the fill-rate curve $Ae^{-k\\delta}$ be calibrated?",
+  "correct": [
+   "Regress the log fill rate on distance: slope $-k$, intercept $\\ln A$.",
+   "A log-linear regression on the distance."
+  ],
+  "distractors": [
+   {
+    "text": "Regress the fill rate itself on the distance in a straight line.",
+    "misconception": "ignores the exponential form"
+   },
+   {
+    "text": "Match $A$ to the average spread and $k$ to the volatility.",
+    "misconception": "no such link"
+   },
+   {
+    "text": "Fit $k$ to the autocorrelation of the price changes.",
+    "misconception": "the curve describes fills, not price dynamics"
+   },
+   {
+    "text": "Choose $k$ to maximise profit without using any data.",
+    "misconception": "calibration needs observed fills"
+   },
+   {
+    "text": "Set $A$ equal to the number of trades per day.",
+    "misconception": "$A$ is an intensity at distance zero"
+   }
+  ],
+  "explanation": "$\\ln\\lambda=\\ln A-k\\delta$ is linear in $\\delta$. Ordinary least squares on $(\\delta_i,\\ln\\lambda_i)$ gives $\\hat k=-$slope and $\\hat A=e^{\\text{intercept}}$."
+ },
+ {
+  "id": "ms2-10.3",
+  "lecture": 10,
+  "stem": "What makes maximum likelihood estimation of a Hawkes process practical from event data?",
+  "correct": [
+   "The log-likelihood is the sum of log intensities at events minus the integral of the intensity.",
+   "Log intensities at events, less the compensator."
+  ],
+  "distractors": [
+   {
+    "text": "It needs only the number of events, not their times.",
+    "misconception": "discards the clustering information"
+   },
+   {
+    "text": "It adds the integral of the intensity to the sum of log intensities.",
+    "misconception": "sign error in the compensator"
+   },
+   {
+    "text": "It requires independent increments.",
+    "misconception": "the process is self-exciting"
+   },
+   {
+    "text": "It reduces to least squares on binned counts.",
+    "misconception": "not equivalent in general"
+   },
+   {
+    "text": "It is feasible only for Poisson processes.",
+    "misconception": "Hawkes likelihoods are tractable"
+   }
+  ],
+  "explanation": "For a point process with intensity $\\lambda$, $\\ln L=\\sum_i\\ln\\lambda(t_i)-\\int_0^T\\lambda(u)du$. With an exponential kernel $\\lambda$ and the integral are computable recursively."
+ },
+ {
+  "id": "ms2-10.4",
+  "lecture": 10,
+  "stem": "Why should a fitted execution model be checked on out-of-sample data?",
+  "correct": [
+   "A flexible fit can match the sample by chance, so estimates must hold on new data.",
+   "To guard against overfitting to the sample."
+  ],
+  "distractors": [
+   {
+    "text": "Because maximum likelihood estimates are only valid out of sample.",
+    "misconception": "misstates how likelihood works"
+   },
+   {
+    "text": "Because in-sample and out-of-sample errors are equal for a correct model.",
+    "misconception": "the in-sample error is optimistic"
+   },
+   {
+    "text": "It is needed only for machine-learning models.",
+    "misconception": "any fitted model can overfit"
+   },
+   {
+    "text": "Because parameters are unbiased once the sample is large.",
+    "misconception": "ignores regime change and misspecification"
+   },
+   {
+    "text": "Because market regimes never change over time.",
+    "misconception": "regimes change, which is why out-of-sample checks matter"
+   }
+  ],
+  "explanation": "Parameters tuned to a sample look better there than on new data. Out-of-sample error, preferably across market regimes, shows whether the fit generalises."
+ },
+ {
+  "id": "ms2-10.5",
+  "lecture": 10,
+  "stem": "Why is estimating the impact of one's own orders from execution records difficult?",
+  "correct": [
+   "Orders are sent when a move is expected, so alpha and impact are confounded.",
+   "Order sizes respond to predictions of the price."
+  ],
+  "distractors": [
+   {
+    "text": "Impact is not causal, so it cannot be estimated at all.",
+    "misconception": "it can be estimated with care"
+   },
+   {
+    "text": "There is no bias, because the orders are exogenous.",
+    "misconception": "trades are chosen using a signal"
+   },
+   {
+    "text": "Selection matters only for passive orders.",
+    "misconception": "it affects aggressive orders too"
+   },
+   {
+    "text": "Dividing by volume removes the bias.",
+    "misconception": "scaling does not remove endogeneity"
+   },
+   {
+    "text": "The bias disappears as the sample grows.",
+    "misconception": "endogeneity is not removed by more data"
+   }
+  ],
+  "explanation": "A buy order is sent because the price is expected to rise, so the later price rise mixes alpha with impact. Controls for signals or randomised executions are needed."
+ }
+]
