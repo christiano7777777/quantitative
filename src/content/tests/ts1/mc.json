@@ -1,0 +1,1762 @@
+[
+ {
+  "id": "ts1-1.1",
+  "lecture": 1,
+  "stem": "Which set of conditions defines weak (second-order) stationarity of $\\{X_t\\}$?",
+  "correct": [
+   "The mean is constant and finite, the variance is finite, and $\\mathrm{Cov}(X_t,X_{t+h})$ depends on the lag $h$ only.",
+   "A constant mean, finite variance, and an autocovariance that depends on the lag alone."
+  ],
+  "distractors": [
+   {
+    "text": "The joint distribution of any finite set of values is unchanged when all the time points are shifted.",
+    "misconception": "describes strict stationarity, which is stronger than needed"
+   },
+   {
+    "text": "The mean is zero and the variance equals one at every time point, after standardising the series.",
+    "misconception": "confuses stationarity with standardisation"
+   },
+   {
+    "text": "All autocovariances at non-zero lags are zero, so that the values are pairwise uncorrelated.",
+    "misconception": "confuses stationarity with white noise"
+   },
+   {
+    "text": "The plot shows no visible trend, whatever happens to the variance and the covariances over time.",
+    "misconception": "replaces the moment conditions by a visual impression"
+   },
+   {
+    "text": "The observations are independent and identically distributed with a finite variance.",
+    "misconception": "treats independence as required, but stationary series may be dependent"
+   }
+  ],
+  "explanation": "Weak stationarity asks only for a constant mean, finite variance and an autocovariance that is a function of the lag. Strict stationarity (shift-invariant joint law) is a different, stronger condition, and i.i.d. noise is just one example."
+ },
+ {
+  "id": "ts1-1.2",
+  "lecture": 1,
+  "stem": "Which property holds for the autocovariance function $\\gamma(h)$ of every weakly stationary series?",
+  "correct": [
+   "It is symmetric, $\\gamma(h)=\\gamma(-h)$, and bounded in absolute value by the variance $\\gamma(0)$.",
+   "It is symmetric in the lag and bounded by the variance."
+  ],
+  "distractors": [
+   {
+    "text": "It is non-negative at every lag, because covariances of a stationary series cannot be negative.",
+    "misconception": "confuses stationarity with positive dependence"
+   },
+   {
+    "text": "It decreases monotonically in $|h|$ and eventually reaches zero, whatever the model.",
+    "misconception": "assumes monotone decay, but AR(2) models oscillate"
+   },
+   {
+    "text": "It is antisymmetric, $\\gamma(-h)=-\\gamma(h)$, since reversing time reverses the covariance.",
+    "misconception": "gets the symmetry wrong"
+   },
+   {
+    "text": "It tends to zero as $|h|\\to\\infty$ for every stationary series, with no extra assumption.",
+    "misconception": "a stationary series with a random constant level has constant gamma"
+   },
+   {
+    "text": "It can exceed $\\gamma(0)$ at some lag when the series oscillates strongly.",
+    "misconception": "ignores the Cauchy-Schwarz bound"
+   }
+  ],
+  "explanation": "$\\mathrm{Cov}(X_t,X_{t+h})=\\mathrm{Cov}(X_{t-h},X_t)$ gives the symmetry, and Cauchy-Schwarz gives $|\\gamma(h)|\\le\\gamma(0)$. Neither positivity, monotonicity nor decay to zero is guaranteed."
+ },
+ {
+  "id": "ts1-1.3",
+  "lecture": 1,
+  "stem": "Which statement about the autocorrelation function $\\rho(h)=\\gamma(h)/\\gamma(0)$ of a stationary series is correct?",
+  "correct": [
+   "It has $\\rho(0)=1$ and $|\\rho(h)|\\le1$, and it is unchanged by rescaling the series.",
+   "It is scale-free and always lies between $-1$ and $1$."
+  ],
+  "distractors": [
+   {
+    "text": "Multiplying the series by 10 multiplies every $\\rho(h)$ by 10 as well.",
+    "misconception": "forgets that the division by the variance removes the scale"
+   },
+   {
+    "text": "It can exceed 1 when the variance is small and the covariance at that lag is large.",
+    "misconception": "ignores the Cauchy-Schwarz bound"
+   },
+   {
+    "text": "It equals $\\gamma(h)/\\gamma(h-1)$, the ratio of two successive autocovariances.",
+    "misconception": "uses the wrong normalisation"
+   },
+   {
+    "text": "It is defined only for non-negative lags and generally differs from $\\rho(-h)$.",
+    "misconception": "misses the symmetry of the ACF"
+   },
+   {
+    "text": "Adding a constant to the series shifts every $\\rho(h)$ by that same constant.",
+    "misconception": "confuses location changes with the correlation structure"
+   }
+  ],
+  "explanation": "The ACF is a normalised autocovariance, so it is invariant to scale and location and bounded by Cauchy-Schwarz; it is also symmetric in $h$."
+ },
+ {
+  "id": "ts1-1.4",
+  "lecture": 1,
+  "stem": "The sample autocovariance is $\\hat\\gamma(h)=\\frac1n\\sum_{t=1}^{n-h}(x_t-\\bar x)(x_{t+h}-\\bar x)$. Why is the divisor $n$ used rather than $n-h$?",
+  "correct": [
+   "Divisor $n$ keeps $\\hat\\gamma(0),\\hat\\gamma(1),\\dots$ non-negative definite, a valid autocovariance.",
+   "It keeps the estimated autocovariance matrices positive semi-definite."
+  ],
+  "distractors": [
+   {
+    "text": "It makes $\\hat\\gamma(h)$ an exactly unbiased estimator of $\\gamma(h)$ at every lag.",
+    "misconception": "believes the divisor removes the bias, but the estimator is biased towards zero"
+   },
+   {
+    "text": "Because exactly $n$ products $(x_t-\\bar x)(x_{t+h}-\\bar x)$ are available at every lag.",
+    "misconception": "miscounts the products, of which only $n-h$ exist"
+   },
+   {
+    "text": "It forces $\\hat\\rho(h)$ to vanish at large lags, which matches every stationary series.",
+    "misconception": "invents a shrinkage property"
+   },
+   {
+    "text": "Divisor $n-h$ would give an inconsistent estimator, whereas divisor $n$ is consistent.",
+    "misconception": "both versions are consistent for a fixed lag"
+   },
+   {
+    "text": "The true mean is known, so no degrees of freedom are lost in the sum.",
+    "misconception": "the sample mean is estimated from the same data"
+   }
+  ],
+  "explanation": "Divisor $n$ guarantees non-negative definiteness (a valid ACF), at the price of a small bias towards zero at large lags. Divisor $n-h$ can produce sequences that are not valid autocovariances."
+ },
+ {
+  "id": "ts1-1.5",
+  "lecture": 1,
+  "stem": "For a long i.i.d. sample of size $n$ with finite variance, what is the approximate behaviour of the sample autocorrelations $\\hat\\rho(h)$ at lags $h\\ge1$?",
+  "correct": [
+   "They are roughly independent $N(0,1/n)$ variables, which gives the band $\\pm1.96/\\sqrt n$.",
+   "Roughly normal with mean zero and variance $1/n$ at each lag, nearly independent across lags."
+  ],
+  "distractors": [
+   {
+    "text": "They are approximately $N(0,1)$, so the band is $\\pm1.96$ for every sample size.",
+    "misconception": "forgets the scaling by the sample size"
+   },
+   {
+    "text": "They are normal with variance $1/\\sqrt n$, so the band shrinks only like $n^{-1/4}$.",
+    "misconception": "confuses the variance with the standard deviation"
+   },
+   {
+    "text": "They are uniform on $[-1,1]$, because with no dependence every value is equally likely.",
+    "misconception": "confuses zero dependence with a flat distribution"
+   },
+   {
+    "text": "They are strongly correlated across neighbouring lags, so only the first lag can be tested.",
+    "misconception": "ignores the approximate independence across lags"
+   },
+   {
+    "text": "They follow an exact $t$ distribution with $n-1$ degrees of freedom for every $n$.",
+    "misconception": "confuses the exact small-sample $t$ law with an asymptotic normal result"
+   }
+  ],
+  "explanation": "Bartlett's result: under i.i.d. noise the $\\hat\\rho(h)$ are asymptotically independent $N(0,1/n)$, so about 5% of them fall outside $\\pm1.96/\\sqrt n$ by chance."
+ },
+ {
+  "id": "ts1-2.1",
+  "lecture": 2,
+  "stem": "What defines a white noise process $\\{Z_t\\}\\sim WN(0,\\sigma^2)$?",
+  "correct": [
+   "The $Z_t$ have mean zero, the same finite variance $\\sigma^2$, and are pairwise uncorrelated.",
+   "Uncorrelated values with zero mean, constant variance, and $\\gamma(h)=0$ for $h\\ne0$."
+  ],
+  "distractors": [
+   {
+    "text": "The $Z_t$ are independent normal variables, since uncorrelated noise must be Gaussian.",
+    "misconception": "white noise needs neither independence nor normality"
+   },
+   {
+    "text": "The $Z_t$ have constant mean and variance, but neighbouring values may be correlated.",
+    "misconception": "drops the uncorrelatedness"
+   },
+   {
+    "text": "The $Z_t$ are independent with variance $\\sigma^2$ and a common non-zero mean $\\mu$.",
+    "misconception": "the mean of white noise must be zero"
+   },
+   {
+    "text": "The $Z_t$ are uncorrelated with mean zero, and their variance may grow with $t$.",
+    "misconception": "white noise requires a constant variance"
+   },
+   {
+    "text": "The $Z_t$ are zero apart from a few random jumps, so the ACF is almost always zero.",
+    "misconception": "confuses white noise with sparse jump processes"
+   }
+  ],
+  "explanation": "White noise is defined by its first two moments only: mean zero, variance $\\sigma^2$, zero autocovariance at non-zero lags. Independent normal noise is one special case."
+ },
+ {
+  "id": "ts1-2.2",
+  "lecture": 2,
+  "stem": "A linear process is $X_t=\\sum_{j\\ge0}\\psi_jZ_{t-j}$ with $Z_t\\sim WN(0,\\sigma^2)$. What condition makes it well defined in mean square, and what is then its autocovariance?",
+  "correct": [
+   "Square-summable weights, $\\sum_j\\psi_j^2<\\infty$, and then $\\gamma(h)=\\sigma^2\\sum_{j}\\psi_j\\psi_{j+|h|}$.",
+   "Square-summable weights; the covariance sums products of weights."
+  ],
+  "distractors": [
+   {
+    "text": "Only $\\psi_j\\to0$ is needed, with no summability condition, and then $\\gamma(h)=\\sigma^2\\psi_h$.",
+    "misconception": "weights tending to zero are not enough and gamma is a sum over weights"
+   },
+   {
+    "text": "$\\sum_j\\psi_j=0$, so the weights cancel, and $\\gamma(h)=\\sigma^2\\sum_j\\psi_j^2$ at every lag.",
+    "misconception": "invents a cancellation condition and loses the dependence on the lag"
+   },
+   {
+    "text": "The weights must be non-negative, and then $\\gamma(h)=\\sigma^2\\sum_j\\psi_j$.",
+    "misconception": "replaces products of weights by a plain sum"
+   },
+   {
+    "text": "Only finitely many weights may be non-zero, because an infinite sum of noise never converges.",
+    "misconception": "confuses linear processes with finite moving averages"
+   },
+   {
+    "text": "$\\psi_j=\\phi^j$ with $|\\phi|<1$, the only form that gives a stationary linear process.",
+    "misconception": "treats the AR(1) weights as the only example"
+   }
+  ],
+  "explanation": "Mean-square convergence needs $\\sum\\psi_j^2<\\infty$. Because the $Z$'s are uncorrelated, only matching noise terms survive in the covariance, giving $\\sigma^2\\sum\\psi_j\\psi_{j+|h|}$."
+ },
+ {
+  "id": "ts1-2.3",
+  "lecture": 2,
+  "stem": "What does the Wold decomposition say about a weakly stationary series with no deterministic component?",
+  "correct": [
+   "A one-sided moving average of uncorrelated one-step prediction errors, with $\\sum\\psi_j^2<\\infty$.",
+   "The series is a causal linear filter of its own prediction errors."
+  ],
+  "distractors": [
+   {
+    "text": "It is a finite moving average of independent normal variables.",
+    "misconception": "confuses the infinite representation with a finite Gaussian moving average"
+   },
+   {
+    "text": "The result needs the series to be Gaussian, so that the innovations are independent.",
+    "misconception": "Wold needs only second-order stationarity, and the innovations are merely uncorrelated"
+   },
+   {
+    "text": "The innovations are the earlier values $X_{t-1},X_{t-2},\\dots$ of the series itself.",
+    "misconception": "confuses innovations with past observations"
+   },
+   {
+    "text": "It shows that every stationary series is an AR(1) process with some parameter.",
+    "misconception": "over-reads a representation theorem as a model choice"
+   },
+   {
+    "text": "It applies only to non-stationary series, which it turns into stationary ones by differencing.",
+    "misconception": "confuses Wold with differencing"
+   }
+  ],
+  "explanation": "Wold: a purely non-deterministic weakly stationary series equals $\\sum\\psi_jZ_{t-j}$ where $Z_t$ is the one-step prediction error, white noise with $\\psi_0=1$. No Gaussianity is needed."
+ },
+ {
+  "id": "ts1-2.4",
+  "lecture": 2,
+  "stem": "In $X_t=\\sum_j\\psi_jZ_{t-j}$ with white noise $Z_t$, which terms contribute to $\\mathrm{Cov}(X_t,X_{t+h})$ for $h>0$?",
+  "correct": [
+   "Only the noise variables in both sums, each giving $\\sigma^2$ times a product of two weights.",
+   "Matching noise terms pair up, since different $Z$'s are uncorrelated."
+  ],
+  "distractors": [
+   {
+    "text": "Every pair of noise terms contributes, because all the $Z_i$ in the two sums are correlated.",
+    "misconception": "forgets that white noise terms are uncorrelated"
+   },
+   {
+    "text": "Only noise terms with equal weights contribute, whatever the lag.",
+    "misconception": "invents a condition on the weights"
+   },
+   {
+    "text": "The weights add up, giving $\\sigma^2\\sum_j\\psi_j$, with no product of two weights.",
+    "misconception": "replaces the product by a sum"
+   },
+   {
+    "text": "The covariance depends on $t$, since the two sums use different noise variables.",
+    "misconception": "misses that the result depends on the lag only"
+   },
+   {
+    "text": "The covariance equals the variance $\\sigma^2\\sum_j\\psi_j^2$ at every lag $h$.",
+    "misconception": "confuses the lag $h$ with lag zero"
+   }
+  ],
+  "explanation": "$\\mathrm{Cov}(Z_i,Z_k)=0$ unless $i=k$, so the double sum collapses to the common noise terms: $X_t$ weights $\\psi_j$ on $Z_{t-j}$ and $X_{t+h}$ weights $\\psi_{j+h}$ on the same $Z_{t-j}$."
+ },
+ {
+  "id": "ts1-2.5",
+  "lecture": 2,
+  "stem": "A stationary series $X_t$ with autocovariance $\\gamma_X$ is passed through a filter $Y_t=\\sum_ja_jX_{t-j}$ with $\\sum_j|a_j|<\\infty$. Which statement is correct?",
+  "correct": [
+   "$Y_t$ is again weakly stationary, with $\\gamma_Y(h)=\\sum_{j,k}a_ja_k\\gamma_X(h+k-j)$.",
+   "The output is stationary, with an autocovariance given by a double sum."
+  ],
+  "distractors": [
+   {
+    "text": "$Y_t$ is stationary only if the input is white noise.",
+    "misconception": "believes filtering preserves stationarity only for white noise"
+   },
+   {
+    "text": "$\\gamma_Y(h)=(\\sum_ja_j)^2\\gamma_X(h)$, so the filter only rescales the ACF.",
+    "misconception": "ignores the mixing of different lags"
+   },
+   {
+    "text": "Differencing, with $a=(1,-1)$, turns a stationary input into a non-stationary output.",
+    "misconception": "differencing a stationary series leaves it stationary"
+   },
+   {
+    "text": "The output has the same autocovariance as the input whenever $\\sum_ja_j=1$.",
+    "misconception": "a unit gain at frequency zero does not preserve the ACF"
+   },
+   {
+    "text": "The output has mean $\\mu$, the input mean, for any filter weights.",
+    "misconception": "forgets that the mean is multiplied by $\\sum_ja_j$"
+   }
+  ],
+  "explanation": "A summable linear filter of a stationary series is stationary; the covariance of $Y_t$ and $Y_{t+h}$ expands into $\\sum_{j,k}a_ja_k\\mathrm{Cov}(X_{t-j},X_{t+h-k})$."
+ },
+ {
+  "id": "ts1-3.1",
+  "lecture": 3,
+  "stem": "What is the signature of the autocorrelation function of an MA($q$) process $X_t=Z_t+\\theta_1Z_{t-1}+\\dots+\\theta_qZ_{t-q}$ with $\\theta_q\\ne0$?",
+  "correct": [
+   "$\\rho(h)=0$ for every $|h|>q$ while $\\rho(q)\\ne0$, so the ACF cuts off after lag $q$.",
+   "The autocorrelations vanish beyond lag $q$ and are non-zero at lag $q$."
+  ],
+  "distractors": [
+   {
+    "text": "It decays geometrically towards zero without ever vanishing.",
+    "misconception": "describes the AR pattern"
+   },
+   {
+    "text": "It vanishes at lag $q$ itself and is non-zero at lags $1,\\dots,q-1$.",
+    "misconception": "makes an off-by-one error in the cut-off lag"
+   },
+   {
+    "text": "It equals the coefficient $\\theta_h$ at each lag $h\\le q$.",
+    "misconception": "confuses the autocorrelation with the coefficient, ignoring the normalisation"
+   },
+   {
+    "text": "It oscillates with period $q$ and does not decay.",
+    "misconception": "invents a periodic ACF"
+   },
+   {
+    "text": "It cuts off after lag $q$ only when the partial autocorrelations also cut off.",
+    "misconception": "the PACF of an MA does not cut off"
+   }
+  ],
+  "explanation": "$X_t$ and $X_{t+h}$ share no noise term once $h>q$, so $\\gamma(h)=0$. At $h=q$ they share $Z_{t}$ with weights $\\theta_q$ and $1$, so $\\gamma(q)=\\sigma^2\\theta_q\\ne0$."
+ },
+ {
+  "id": "ts1-3.2",
+  "lecture": 3,
+  "stem": "For an MA(1) process $X_t=Z_t+\\theta Z_{t-1}$, what is the largest possible value of $|\\rho(1)|$ as $\\theta$ varies?",
+  "correct": [
+   "It is $1/2$, reached at $\\theta=\\pm1$.",
+   "No choice of $\\theta$ gives a lag-1 correlation beyond one half."
+  ],
+  "distractors": [
+   {
+    "text": "It approaches 1 as $|\\theta|\\to\\infty$, since the lagged term then dominates the sum.",
+    "misconception": "forgets that the variance grows too, so rho tends to zero"
+   },
+   {
+    "text": "It equals $|\\theta|$, so any value below 1 can be attained.",
+    "misconception": "confuses rho with the coefficient"
+   },
+   {
+    "text": "It is $1/\\sqrt2$, reached at $\\theta=\\pm\\sqrt2$.",
+    "misconception": "miscomputes the maximum of $\\theta/(1+\\theta^2)$"
+   },
+   {
+    "text": "It is $1/2$ but never attained, since $|\\theta|<1$ is needed for the model to exist.",
+    "misconception": "MA(1) models exist for every theta and the maximum is reached at $\\pm1$"
+   },
+   {
+    "text": "There is no bound, because $\\rho(1)$ keeps growing with $\\theta$ for non-invertible models.",
+    "misconception": "ignores that rho is bounded by Cauchy-Schwarz"
+   }
+  ],
+  "explanation": "$\\rho(1)=\\theta/(1+\\theta^2)$, and $1+\\theta^2\\ge2|\\theta|$ with equality at $|\\theta|=1$, so $|\\rho(1)|\\le1/2$."
+ },
+ {
+  "id": "ts1-3.3",
+  "lecture": 3,
+  "stem": "Take an MA(1) with parameter $\\theta$, $|\\theta|<1$, noise variance $\\sigma^2$, and an MA(1) with parameter $1/\\theta$ and noise variance $\\sigma^2\\theta^2$. Which statement is correct?",
+  "correct": [
+   "They have the same autocovariances, but only the one with $|\\theta|<1$ is invertible.",
+   "The ACF cannot tell them apart; invertibility picks the root outside the unit circle."
+  ],
+  "distractors": [
+   {
+    "text": "Their autocorrelations differ, since the two coefficients are different numbers.",
+    "misconception": "misses that rho(1) is the same for theta and 1/theta"
+   },
+   {
+    "text": "Both are invertible, because inverting the coefficient keeps the root outside the unit circle.",
+    "misconception": "inverting the coefficient moves the root inside"
+   },
+   {
+    "text": "Only the one with $|\\theta|>1$ is stationary.",
+    "misconception": "every MA process is stationary"
+   },
+   {
+    "text": "Their variances differ, so the two processes cannot share an autocovariance function.",
+    "misconception": "ignores the rescaled noise variance that equalises them"
+   },
+   {
+    "text": "Only the non-invertible one can be fitted to data by least squares.",
+    "misconception": "invents an estimation restriction"
+   }
+  ],
+  "explanation": "$\\gamma(0)=\\sigma^2(1+\\theta^2)=\\sigma^2\\theta^2(1+\\theta^{-2})$ and $\\gamma(1)=\\sigma^2\\theta=\\sigma^2\\theta^2\\cdot\\theta^{-1}$ agree, so the ACF is identical. Invertibility requires the root of $1+\\theta z$ to be outside the unit circle."
+ },
+ {
+  "id": "ts1-3.4",
+  "lecture": 3,
+  "stem": "What does invertibility of an MA($q$) process mean?",
+  "correct": [
+   "The roots of $\\theta(z)$ lie outside the unit circle, so $Z_t$ is a convergent function of past $X$.",
+   "The noise is recoverable from past data via an AR($\\infty$) form."
+  ],
+  "distractors": [
+   {
+    "text": "The roots of $\\theta(z)$ lie inside the unit circle, which gives the AR($\\infty$) representation.",
+    "misconception": "reverses the location of the roots"
+   },
+   {
+    "text": "The process has finite variance and constant mean, so it is weakly stationary.",
+    "misconception": "confuses invertibility with stationarity, which holds for every MA"
+   },
+   {
+    "text": "The noise variables must be independent instead of merely uncorrelated.",
+    "misconception": "confuses invertibility with a distributional assumption"
+   },
+   {
+    "text": "The autocorrelations decay geometrically instead of cutting off.",
+    "misconception": "describes the ACF of an AR"
+   },
+   {
+    "text": "The coefficients satisfy $|\\theta_j|<1$ for each $j$.",
+    "misconception": "individual bounds are neither necessary nor sufficient for $q\\ge2$"
+   }
+  ],
+  "explanation": "If all roots of $\\theta(z)$ lie outside the unit circle, $\\theta(B)^{-1}$ expands in non-negative powers of $B$ and $Z_t=\\theta(B)^{-1}X_t$ is a convergent function of past values."
+ },
+ {
+  "id": "ts1-3.5",
+  "lecture": 3,
+  "stem": "How does the PACF of an invertible MA(1) process with $\\theta\\ne0$ behave?",
+  "correct": [
+   "It tails off, non-zero at all lags, like an AR($\\infty$).",
+   "It decays gradually and never cuts off."
+  ],
+  "distractors": [
+   {
+    "text": "It cuts off after lag 1, like the PACF of an AR(1).",
+    "misconception": "swaps the roles of AR and MA models"
+   },
+   {
+    "text": "It is zero at every lag, since MA terms are uncorrelated with the past.",
+    "misconception": "confuses an MA process with white noise"
+   },
+   {
+    "text": "It equals the ACF at every lag.",
+    "misconception": "confuses partial and ordinary autocorrelations"
+   },
+   {
+    "text": "It cuts off after lag $q=1$ together with the ACF.",
+    "misconception": "a cut-off in both functions does not occur for MA models"
+   },
+   {
+    "text": "It grows in magnitude with the lag until it reaches $\\pm1$.",
+    "misconception": "invents growth in the partial autocorrelations"
+   }
+  ],
+  "explanation": "An invertible MA(1) equals an AR($\\infty$), so the PACF tails off geometrically while the ACF cuts off after lag 1; AR models behave the other way round."
+ },
+ {
+  "id": "ts1-3.6",
+  "lecture": 3,
+  "stem": "Two MA(1) models, with $|\\theta|<1$ and $|\\theta|>1$, share the same ACF. Why is the invertible one used in practice?",
+  "correct": [
+   "It is the unique choice with its root outside the unit circle, so the noise is recoverable.",
+   "It identifies the model and makes the innovations computable."
+  ],
+  "distractors": [
+   {
+    "text": "Its coefficient is smaller, and the other choice always fits the data worse.",
+    "misconception": "both give the same likelihood because they share the autocovariances"
+   },
+   {
+    "text": "The non-invertible model is non-stationary, so it cannot describe data.",
+    "misconception": "every MA model is stationary"
+   },
+   {
+    "text": "The non-invertible model has a different ACF, and only the invertible one matches the data.",
+    "misconception": "both models have the same ACF"
+   },
+   {
+    "text": "The invertible model has the larger noise variance, which gives conservative prediction intervals.",
+    "misconception": "the invertible representation has the smaller noise variance"
+   },
+   {
+    "text": "The invertible model has a root on the unit circle, which fixes the parameter uniquely.",
+    "misconception": "confuses unit-circle roots with the identifying root outside it"
+   }
+  ],
+  "explanation": "Autocovariances determine the MA model only up to root reflection. Choosing roots outside the unit circle gives a unique representation in which $Z_t$ is a function of the past of $X$."
+ },
+ {
+  "id": "ts1-4.1",
+  "lecture": 4,
+  "stem": "When does the AR($p$) equation $\\phi(B)X_t=Z_t$, with $\\phi(z)=1-\\phi_1z-\\dots-\\phi_pz^p$, have a causal stationary solution?",
+  "correct": [
+   "Every root of $\\phi(z)$ lies outside the unit circle.",
+   "All roots of the AR polynomial have modulus above 1."
+  ],
+  "distractors": [
+   {
+    "text": "When every root of $\\phi(z)$ lies inside the unit circle.",
+    "misconception": "reverses the location of the roots"
+   },
+   {
+    "text": "When each coefficient satisfies $|\\phi_i|<1$.",
+    "misconception": "small individual coefficients are not sufficient, as with $\\phi_1=\\phi_2=0.9$"
+   },
+   {
+    "text": "When the coefficients satisfy $\\phi_1+\\dots+\\phi_p<1$.",
+    "misconception": "a sum below one is necessary but not sufficient"
+   },
+   {
+    "text": "When the roots of the MA polynomial $\\theta(z)$ lie outside the unit circle.",
+    "misconception": "confuses causality with invertibility"
+   },
+   {
+    "text": "When the roots of $\\phi(z)$ are all real and distinct.",
+    "misconception": "the reality of the roots is irrelevant to causality"
+   }
+  ],
+  "explanation": "Causality is a root condition: $\\phi(z)\\ne0$ for $|z|\\le1$. Then $1/\\phi(z)$ has a power series with summable coefficients. Coefficient bounds like $|\\phi_i|<1$ do not imply it."
+ },
+ {
+  "id": "ts1-4.2",
+  "lecture": 4,
+  "stem": "How does the ACF of a causal AR($p$) process behave at large lags?",
+  "correct": [
+   "It tails off as damped exponentials and sinusoids.",
+   "It decays and does not cut off."
+  ],
+  "distractors": [
+   {
+    "text": "It cuts off after lag $p$ and is exactly zero beyond.",
+    "misconception": "describes the MA pattern"
+   },
+   {
+    "text": "It stays constant at its lag-$p$ value for all later lags.",
+    "misconception": "invents a plateau"
+   },
+   {
+    "text": "It grows until lag $p$ and then decays to zero after lag $2p$.",
+    "misconception": "invents a hump with finite support"
+   },
+   {
+    "text": "It oscillates forever with constant amplitude for any stationary AR model.",
+    "misconception": "ignores the damping implied by causality"
+   },
+   {
+    "text": "It equals the partial autocorrelation at every lag.",
+    "misconception": "confuses ACF with PACF"
+   }
+  ],
+  "explanation": "The autocorrelations satisfy the homogeneous recursion $\\rho(h)=\\sum_i\\phi_i\\rho(h-i)$, whose solutions are sums of terms $r^{-h}$ over the roots $r$ of $\\phi(z)$ with $|r|>1$: decaying but never exactly zero."
+ },
+ {
+  "id": "ts1-4.3",
+  "lecture": 4,
+  "stem": "What is the partial autocorrelation function of a causal AR($p$) process with $\\phi_p\\ne0$?",
+  "correct": [
+   "It cuts off: $\\phi_{hh}=0$ for $h>p$, and $\\phi_{pp}=\\phi_p$.",
+   "It is zero beyond lag $p$."
+  ],
+  "distractors": [
+   {
+    "text": "It tails off geometrically and is non-zero at all lags.",
+    "misconception": "describes the PACF of an MA process"
+   },
+   {
+    "text": "It cuts off after lag $p$, but the value at lag $p$ equals $\\rho(p)$.",
+    "misconception": "confuses partial and ordinary autocorrelation at lag $p$"
+   },
+   {
+    "text": "It is non-zero only at lags $1,\\dots,p-1$.",
+    "misconception": "makes an off-by-one error in the cut-off"
+   },
+   {
+    "text": "It equals $\\phi_h$ at every lag $h\\le p$.",
+    "misconception": "only the lag-$p$ value is guaranteed to equal the coefficient"
+   },
+   {
+    "text": "It cuts off after lag $p$ and then reappears at multiples of $p$.",
+    "misconception": "invents periodic reappearance"
+   }
+  ],
+  "explanation": "The best linear predictor of $X_t$ from the previous $h\\ge p$ values uses just $X_{t-1},\\dots,X_{t-p}$ with coefficients $\\phi_i$, so the last coefficient $\\phi_{hh}$ is $\\phi_p$ at $h=p$ and 0 beyond."
+ },
+ {
+  "id": "ts1-4.4",
+  "lecture": 4,
+  "stem": "What do the Yule-Walker equations of a causal AR($p$) with noise variance $\\sigma^2$ state?",
+  "correct": [
+   "$\\gamma(h)=\\sum_{i=1}^p\\phi_i\\gamma(h-i)$ for $h\\ge1$, plus $\\sigma^2$ at $h=0$.",
+   "The AR recursion holds at positive lags, plus $\\sigma^2$ at lag zero."
+  ],
+  "distractors": [
+   {
+    "text": "$\\gamma(h)=\\sum_i\\phi_i\\gamma(h-i)+\\sigma^2$ at every lag $h\\ge0$.",
+    "misconception": "the noise variance enters at lag zero only"
+   },
+   {
+    "text": "$\\rho(h)=\\phi_h$ for $h=1,\\dots,p$, so autocorrelations equal coefficients.",
+    "misconception": "confuses autocorrelations with coefficients"
+   },
+   {
+    "text": "$\\gamma(h)=\\sigma^2\\phi_h$ for $h\\le p$ and zero beyond.",
+    "misconception": "confuses AR with a cut-off pattern"
+   },
+   {
+    "text": "They hold only for an AR(1); higher orders need the roots of $\\phi(z)$.",
+    "misconception": "the equations hold for every order"
+   },
+   {
+    "text": "They hold only at lags $h\\le p$ and say nothing about larger lags.",
+    "misconception": "the recursion holds at all positive lags"
+   }
+  ],
+  "explanation": "Multiply $X_t=\\sum\\phi_iX_{t-i}+Z_t$ by $X_{t-h}$ and take expectations: $Z_t$ is uncorrelated with $X_{t-h}$ for $h\\ge1$, but $\\mathrm{Cov}(Z_t,X_t)=\\sigma^2$ at $h=0$."
+ },
+ {
+  "id": "ts1-4.5",
+  "lecture": 4,
+  "stem": "How are the AR($p$) coefficients obtained from the first $p$ autocorrelations through the Yule-Walker equations?",
+  "correct": [
+   "By solving the $p\\times p$ linear system $R\\boldsymbol\\phi=\\boldsymbol\\rho$, with $R$ non-singular and built from $\\rho(i-j)$.",
+   "It is a linear system of $p$ equations in the $p$ unknown coefficients."
+  ],
+  "distractors": [
+   {
+    "text": "The equations are nonlinear in $\\phi$, so only iterative optimisation can solve them.",
+    "misconception": "they are linear in the coefficients"
+   },
+   {
+    "text": "They need the noise variance $\\sigma^2$ first, as the coefficients depend on it.",
+    "misconception": "the coefficients follow from the autocorrelations alone"
+   },
+   {
+    "text": "They fix the coefficients only up to sign, and the sign comes from the sample mean.",
+    "misconception": "invents a sign ambiguity"
+   },
+   {
+    "text": "They require autocorrelations up to lag $2p$ rather than lag $p$.",
+    "misconception": "overstates the data needed"
+   },
+   {
+    "text": "A unique solution exists only if all roots of $\\phi(z)$ lie inside the unit circle.",
+    "misconception": "reverses the causality condition"
+   }
+  ],
+  "explanation": "With $\\rho(h)=\\sum_i\\phi_i\\rho(h-i)$ for $h=1,\\dots,p$ one gets $R\\boldsymbol\\phi=\\boldsymbol\\rho$; $R$ is the Toeplitz autocorrelation matrix, invertible for a non-degenerate stationary series. Then $\\sigma^2$ follows from the lag-0 equation."
+ },
+ {
+  "id": "ts1-4.6",
+  "lecture": 4,
+  "stem": "The equation $X_t=\\phi X_{t-1}+Z_t$ with $|\\phi|>1$ and white noise $Z_t$ is considered. What can be said about its stationary solutions?",
+  "correct": [
+   "A stationary solution $-\\sum_{j\\ge1}\\phi^{-j}Z_{t+j}$ exists, but it uses future noise and is not causal.",
+   "There is a stationary solution built from future shocks, hence non-causal."
+  ],
+  "distractors": [
+   {
+    "text": "No stationary solution exists, because the variance diverges when $|\\phi|>1$.",
+    "misconception": "confuses the causal series with the stationary one"
+   },
+   {
+    "text": "The causal series $\\sum_{j\\ge0}\\phi^jZ_{t-j}$ is a stationary solution with larger variance.",
+    "misconception": "that series does not converge"
+   },
+   {
+    "text": "The solution is stationary but explodes, with $|X_t|\\to\\infty$ in probability.",
+    "misconception": "a stationary solution cannot explode"
+   },
+   {
+    "text": "Two different stationary solutions exist, one causal and one non-causal.",
+    "misconception": "the causal one does not exist for $|\\phi|>1$"
+   },
+   {
+    "text": "The stationary solution is the same as the one for $1/\\phi$ with the same noise variable.",
+    "misconception": "the noise differs and the solution depends on the future"
+   }
+  ],
+  "explanation": "Rewrite as $X_{t}=\\phi^{-1}X_{t+1}-\\phi^{-1}Z_{t+1}$ and iterate forward; the series in $Z_{t+j}$ converges. It has the ACF of an AR(1) with coefficient $1/\\phi$, but it is not causal."
+ },
+ {
+  "id": "ts1-5.1",
+  "lecture": 5,
+  "stem": "What conditions make the ARMA($p,q$) model $\\phi(B)X_t=\\theta(B)Z_t$ causal, invertible and non-redundant?",
+  "correct": [
+   "All roots of $\\phi(z)$ and $\\theta(z)$ lie outside the unit circle, with no common root.",
+   "AR roots outside the unit circle for causality, MA roots outside for invertibility."
+  ],
+  "distractors": [
+   {
+    "text": "All roots of $\\phi(z)$ lie outside the unit circle and all roots of $\\theta(z)$ lie inside it.",
+    "misconception": "reverses the invertibility condition"
+   },
+   {
+    "text": "Only the roots of $\\phi(z)$ matter, since $\\theta(z)$ affects the variance alone.",
+    "misconception": "ignores the invertibility condition"
+   },
+   {
+    "text": "The two polynomials must share a factor, which gives a parsimonious representation.",
+    "misconception": "a common factor cancels and means the model is redundant"
+   },
+   {
+    "text": "Both coefficient vectors must sum to less than one in absolute value.",
+    "misconception": "coefficient sums do not characterise root locations"
+   },
+   {
+    "text": "All roots of both polynomials lie inside the unit circle.",
+    "misconception": "reverses both root conditions"
+   }
+  ],
+  "explanation": "Causality needs $\\phi(z)\\ne0$ on $|z|\\le1$, invertibility $\\theta(z)\\ne0$ on $|z|\\le1$, and common factors would cancel and make the orders ambiguous."
+ },
+ {
+  "id": "ts1-5.2",
+  "lecture": 5,
+  "stem": "For a causal invertible ARMA($p,q$) with $p\\ge1$ and $q\\ge1$, how do the ACF and PACF behave?",
+  "correct": [
+   "Both tail off, so the orders cannot be read from a cut-off.",
+   "Neither function cuts off; both decay gradually."
+  ],
+  "distractors": [
+   {
+    "text": "The ACF cuts off after lag $q$ while the PACF tails off.",
+    "misconception": "describes a pure MA model"
+   },
+   {
+    "text": "The ACF tails off while the PACF cuts off after lag $p$.",
+    "misconception": "describes a pure AR model"
+   },
+   {
+    "text": "The ACF cuts off after lag $q$ and the PACF cuts off after lag $p$.",
+    "misconception": "mixes the two cut-off rules"
+   },
+   {
+    "text": "Both are exactly zero beyond lag $p+q$.",
+    "misconception": "invents a joint cut-off lag"
+   },
+   {
+    "text": "The ACF cuts off after lag $\\max(p,q)$ and the PACF tails off.",
+    "misconception": "invents a cut-off at the larger order"
+   }
+  ],
+  "explanation": "An ARMA process with both parts non-trivial has infinite AR and MA representations, so neither the ACF nor the PACF has a finite cut-off; this is why AIC or BIC are used to choose the orders."
+ },
+ {
+  "id": "ts1-5.3",
+  "lecture": 5,
+  "stem": "A long series has a sample ACF significant at lags 1 and 2 only, and a sample PACF that decays gradually. Which model does this suggest?",
+  "correct": [
+   "An MA(2), since the ACF cuts off after lag 2.",
+   "A moving average of order two."
+  ],
+  "distractors": [
+   {
+    "text": "An AR(2), since two lags are significant.",
+    "misconception": "confuses the ACF cut-off of an MA with AR order"
+   },
+   {
+    "text": "An ARMA(2,2), because lags 1 and 2 are both significant.",
+    "misconception": "reads each significant lag as both an AR and an MA term"
+   },
+   {
+    "text": "White noise, since the ACF is zero beyond lag 2.",
+    "misconception": "ignores the significant autocorrelations at lags 1 and 2"
+   },
+   {
+    "text": "An AR(1) with a negative coefficient.",
+    "misconception": "the ACF of an AR(1) does not cut off"
+   },
+   {
+    "text": "An MA(1), because the PACF decays slowly.",
+    "misconception": "ignores the significant autocorrelation at lag 2"
+   }
+  ],
+  "explanation": "An ACF that cuts off after $q$ with a tailing-off PACF is the MA($q$) fingerprint; the reverse pattern indicates an AR model."
+ },
+ {
+  "id": "ts1-5.4",
+  "lecture": 5,
+  "stem": "In the ARMA(1,1) model $(1-\\phi B)X_t=(1+\\theta B)Z_t$ the coefficients satisfy $\\theta=-\\phi$ with $|\\phi|<1$. What follows?",
+  "correct": [
+   "The factors cancel, so $X_t=Z_t$ and the model is over-parameterised.",
+   "The polynomials share a root: white noise."
+  ],
+  "distractors": [
+   {
+    "text": "The process is non-stationary because the two roots coincide.",
+    "misconception": "coinciding roots do not remove stationarity"
+   },
+   {
+    "text": "The process is an AR(1) with parameter $\\phi+\\theta$.",
+    "misconception": "confuses the cancelling case with a sum of coefficients"
+   },
+   {
+    "text": "The process is non-invertible, with a root on the unit circle.",
+    "misconception": "the root sits at $1/\\phi$, outside the unit circle"
+   },
+   {
+    "text": "The ACF equals that of an MA(1) with parameter $2\\theta$.",
+    "misconception": "invents a doubling of the coefficient"
+   },
+   {
+    "text": "The process is a genuine ARMA(1,1) with $\\rho(1)=1$.",
+    "misconception": "ignores the cancellation and bounds on rho"
+   }
+  ],
+  "explanation": "$(1-\\phi B)X_t=(1-\\phi B)Z_t$, and dividing by the common factor (allowed since $|\\phi|<1$) gives $X_t=Z_t$. Common roots signal redundant parameters."
+ },
+ {
+  "id": "ts1-5.5",
+  "lecture": 5,
+  "stem": "Why can an ARMA model describe a dependence structure with fewer parameters than a pure AR or pure MA model?",
+  "correct": [
+   "The ratio $\\theta(z)/\\phi(z)$ of short polynomials reproduces a long sequence of weights.",
+   "A rational function of $B$ mimics a long expansion."
+  ],
+  "distractors": [
+   {
+    "text": "ARMA models need no stationarity or invertibility conditions, so more shapes are allowed.",
+    "misconception": "the root conditions still apply"
+   },
+   {
+    "text": "The AR and MA parts are uncorrelated, so each can be fitted separately.",
+    "misconception": "the two parts are estimated jointly"
+   },
+   {
+    "text": "ARMA models fit any autocorrelation function exactly once $p+q\\ge2$.",
+    "misconception": "overstates the flexibility of low orders"
+   },
+   {
+    "text": "The noise variance is absorbed by the AR part, which removes one parameter.",
+    "misconception": "the noise variance remains a parameter"
+   },
+   {
+    "text": "An ARMA($p,q$) always has fewer autocorrelations to estimate than an AR($p+q$).",
+    "misconception": "confuses the number of coefficients with the number of autocorrelations"
+   }
+  ],
+  "explanation": "An AR($\\infty$) or MA($\\infty$) with geometrically decaying weights is a ratio of low-degree polynomials in $B$; this is the parsimony principle behind ARMA modelling."
+ },
+ {
+  "id": "ts1-5.6",
+  "lecture": 5,
+  "stem": "For the causal ARMA(1,1) process $X_t=\\phi X_{t-1}+Z_t+\\theta Z_{t-1}$, what are the MA($\\infty$) weights?",
+  "correct": [
+   "$\\psi_0=1$ and $\\psi_j=\\phi^{j-1}(\\phi+\\theta)$ for $j\\ge1$.",
+   "Weights $\\phi+\\theta$, then decay at rate $\\phi$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\psi_j=\\phi^j+\\theta^j$ for every $j\\ge1$.",
+    "misconception": "adds powers instead of expanding the rational function"
+   },
+   {
+    "text": "$\\psi_j=\\phi^j\\theta$ for $j\\ge1$.",
+    "misconception": "drops the term coming from $\\phi\\psi_{j-1}$"
+   },
+   {
+    "text": "$\\psi_1=\\phi\\theta$ and $\\psi_j=\\phi^j$ afterwards.",
+    "misconception": "multiplies instead of adding the coefficients"
+   },
+   {
+    "text": "$\\psi_j=(\\phi+\\theta)^j$ for all $j\\ge1$.",
+    "misconception": "raises the sum to the power $j$"
+   },
+   {
+    "text": "$\\psi_j=\\phi^j$ for all $j$, with $\\theta$ affecting only the noise variance.",
+    "misconception": "ignores the effect of the MA coefficient on the weights"
+   }
+  ],
+  "explanation": "$(1+\\theta B)/(1-\\phi B)=1+(\\phi+\\theta)B+\\phi(\\phi+\\theta)B^2+\\cdots$, so $\\psi_1=\\phi+\\theta$ and $\\psi_j=\\phi\\psi_{j-1}$ afterwards."
+ },
+ {
+  "id": "ts1-6.1",
+  "lecture": 6,
+  "stem": "What characterises the best linear predictor $\\hat X_{T+h}$ of $X_{T+h}$ from $X_1,\\dots,X_T$?",
+  "correct": [
+   "It minimises mean squared error among linear predictors, with error uncorrelated with the data.",
+   "It is the orthogonal projection onto the observed values."
+  ],
+  "distractors": [
+   {
+    "text": "It minimises the mean absolute error among all functions of the data.",
+    "misconception": "confuses the squared-error criterion with absolute error"
+   },
+   {
+    "text": "It equals the conditional expectation $E[X_{T+h}\\mid X_1,\\dots,X_T]$ for every stationary series.",
+    "misconception": "this holds for Gaussian series but not in general"
+   },
+   {
+    "text": "It is chosen so that the forecast error is positively correlated with the data.",
+    "misconception": "the error is orthogonal to the data"
+   },
+   {
+    "text": "It requires a Gaussian series, otherwise no best linear predictor exists.",
+    "misconception": "the predictor needs only second moments"
+   },
+   {
+    "text": "It uses only the last observation $X_T$, since earlier values carry no further information.",
+    "misconception": "true for AR(1) only"
+   }
+  ],
+  "explanation": "The prediction equations make the error orthogonal to $X_1,\\dots,X_T$, which minimises the mean squared error among linear predictors using only second-order moments."
+ },
+ {
+  "id": "ts1-6.2",
+  "lecture": 6,
+  "stem": "For a causal stationary ARMA process with mean $\\mu$, what happens to the $h$-step forecast and its error variance as $h\\to\\infty$?",
+  "correct": [
+   "The forecast tends to $\\mu$ and the error variance rises to $\\gamma(0)$.",
+   "Forecasts revert to the mean; uncertainty nears the unconditional variance."
+  ],
+  "distractors": [
+   {
+    "text": "The forecast tends to the last observation and the error variance stays at $\\sigma^2$.",
+    "misconception": "confuses a stationary model with a random walk"
+   },
+   {
+    "text": "The forecast tends to $\\mu$ but the error variance grows without bound.",
+    "misconception": "applies the unit-root behaviour to a stationary model"
+   },
+   {
+    "text": "The forecast oscillates with growing amplitude and the error variance tends to $\\sigma^2$.",
+    "misconception": "ignores the decay of the weights"
+   },
+   {
+    "text": "The forecast tends to zero whatever $\\mu$ is, and the variance tends to $\\gamma(0)$.",
+    "misconception": "forgets to add back the mean"
+   },
+   {
+    "text": "The error variance tends to $\\sigma^2\\psi_1^2$, the contribution of the first weight.",
+    "misconception": "keeps only one term of the sum"
+   }
+  ],
+  "explanation": "As $h$ grows the dependence on the data dies out: the forecast tends to $\\mu$ and $\\sigma^2\\sum_{j<h}\\psi_j^2\\to\\sigma^2\\sum_j\\psi_j^2=\\gamma(0)$."
+ },
+ {
+  "id": "ts1-6.3",
+  "lecture": 6,
+  "stem": "For a causal invertible ARMA model, what is the one-step prediction error of the best linear predictor?",
+  "correct": [
+   "It equals the innovation $Z_{T+1}$, so its variance is $\\sigma^2$.",
+   "The one-step error is the white-noise shock, with variance exactly $\\sigma^2$."
+  ],
+  "distractors": [
+   {
+    "text": "It has variance $\\gamma(0)$, the unconditional variance of the series.",
+    "misconception": "confuses the one-step error with the marginal variance"
+   },
+   {
+    "text": "It has variance $\\sigma^2(1+\\psi_1^2)$, since two shocks have entered.",
+    "misconception": "gives the two-step formula"
+   },
+   {
+    "text": "It is zero, because the past determines the next value exactly.",
+    "misconception": "ignores the new shock"
+   },
+   {
+    "text": "Successive one-step errors are correlated whenever the model has an MA part.",
+    "misconception": "one-step errors are white noise for any invertible model"
+   },
+   {
+    "text": "Its variance depends on the observed values, being larger after extreme observations.",
+    "misconception": "error variances in linear models do not depend on the data"
+   }
+  ],
+  "explanation": "$X_{T+1}=\\hat X_T(1)+Z_{T+1}$ where the prediction is a function of the past only and $Z_{T+1}$ is the new shock with variance $\\sigma^2$."
+ },
+ {
+  "id": "ts1-6.4",
+  "lecture": 6,
+  "stem": "For a mean-zero MA($q$) process, what is the best linear forecast at horizons $h>q$?",
+  "correct": [
+   "It equals the mean, $0$, and the forecast error variance equals $\\gamma(0)$.",
+   "Beyond $q$ steps no information is usable, so the forecast is the mean."
+  ],
+  "distractors": [
+   {
+    "text": "It equals the last observation $X_T$, since the process has short memory.",
+    "misconception": "applies the random walk forecast"
+   },
+   {
+    "text": "It decays geometrically towards zero from the last forecast.",
+    "misconception": "describes AR behaviour"
+   },
+   {
+    "text": "It still depends on the last $q$ innovations, with weights that shrink slowly.",
+    "misconception": "ignores that the MA memory ends after $q$ steps"
+   },
+   {
+    "text": "It equals the mean only if $\\theta_q=0$; otherwise it never settles.",
+    "misconception": "misses that the memory is finite"
+   },
+   {
+    "text": "The error variance equals $\\sigma^2$, because only one shock is unknown.",
+    "misconception": "many future shocks are unknown at long horizons"
+   }
+  ],
+  "explanation": "$X_{T+h}=Z_{T+h}+\\dots+\\theta_qZ_{T+h-q}$ involves only shocks after $T$ when $h>q$; these are uncorrelated with the data, so the predictor is the mean and the error is $X_{T+h}$ itself."
+ },
+ {
+  "id": "ts1-6.5",
+  "lecture": 6,
+  "stem": "The $h$-step forecast error variance of a causal ARMA process is $\\sigma^2\\sum_{j=0}^{h-1}\\psi_j^2$. How does it depend on $h$?",
+  "correct": [
+   "It is non-decreasing in $h$ and bounded by $\\gamma(0)$.",
+   "It rises with the horizon and levels off at the process variance."
+  ],
+  "distractors": [
+   {
+    "text": "It decreases with $h$, since far-ahead forecasts are close to the mean.",
+    "misconception": "confuses the forecast with its error variance"
+   },
+   {
+    "text": "It is constant at $\\sigma^2$ for all horizons.",
+    "misconception": "uses the one-step variance at every horizon"
+   },
+   {
+    "text": "It grows linearly in $h$ for every ARMA process.",
+    "misconception": "applies the random walk result to stationary models"
+   },
+   {
+    "text": "It depends on the data and is larger when $X_T$ is far from the mean.",
+    "misconception": "forecast error variances in linear models do not depend on the data"
+   },
+   {
+    "text": "It is bounded by $\\sigma^2$ since later shocks have smaller weights.",
+    "misconception": "the weights add up beyond the first one"
+   }
+  ],
+  "explanation": "Each extra step adds the non-negative term $\\sigma^2\\psi_{h-1}^2$, and the sum converges for a causal stationary model to $\\gamma(0)$."
+ },
+ {
+  "id": "ts1-7.1",
+  "lecture": 7,
+  "stem": "How does the method of moments estimate the coefficients of an AR($p$) model?",
+  "correct": [
+   "It plugs sample autocovariances into the Yule-Walker equations and solves the linear system.",
+   "Sample autocorrelations replace the true ones in the Yule-Walker system."
+  ],
+  "distractors": [
+   {
+    "text": "It maximises the likelihood by an iterative numerical search over the coefficients.",
+    "misconception": "describes maximum likelihood, not moments"
+   },
+   {
+    "text": "It sets each coefficient equal to the sample autocorrelation at the same lag, $\\hat\\phi_h=\\hat\\rho(h)$.",
+    "misconception": "true only for $p=1$"
+   },
+   {
+    "text": "It matches the sample mean and variance only, and ignores the lagged covariances.",
+    "misconception": "ignores the information in the autocorrelations"
+   },
+   {
+    "text": "It chooses the coefficients that minimise the sum of squared one-step residuals.",
+    "misconception": "describes least squares"
+   },
+   {
+    "text": "It works for MA models only, since AR models have no moment equations.",
+    "misconception": "the Yule-Walker equations are the AR moment equations"
+   }
+  ],
+  "explanation": "The moment equations of an AR($p$) are the Yule-Walker equations; replacing $\\gamma$ by $\\hat\\gamma$ gives linear equations for $\\hat\\phi_1,\\dots,\\hat\\phi_p$ and then $\\hat\\sigma^2$."
+ },
+ {
+  "id": "ts1-7.2",
+  "lecture": 7,
+  "stem": "Why is the method of moments rarely used for MA and ARMA models?",
+  "correct": [
+   "The equations are nonlinear and the estimators inefficient.",
+   "Nonlinear equations and a large variance make it a poor choice."
+  ],
+  "distractors": [
+   {
+    "text": "The autocovariances of MA models are all zero, so no equations remain.",
+    "misconception": "MA autocovariances are non-zero up to lag $q$"
+   },
+   {
+    "text": "The estimators are inconsistent because sample autocovariances do not converge.",
+    "misconception": "sample autocovariances are consistent"
+   },
+   {
+    "text": "It needs normal data, whereas MA models are not normal.",
+    "misconception": "moment methods do not require normality"
+   },
+   {
+    "text": "It always returns non-invertible estimates.",
+    "misconception": "invertible solutions exist and can be selected"
+   },
+   {
+    "text": "The equations are linear but have infinitely many solutions.",
+    "misconception": "the equations are nonlinear with finitely many solutions"
+   }
+  ],
+  "explanation": "For an MA(1), $\\rho(1)=\\theta/(1+\\theta^2)$ is nonlinear in $\\theta$ with two roots, and the resulting estimator has much higher variance than maximum likelihood, particularly when $|\\theta|$ is near one."
+ },
+ {
+  "id": "ts1-7.3",
+  "lecture": 7,
+  "stem": "For a Gaussian AR(1) process, what is the conditional maximum likelihood estimate that conditions on $X_1$?",
+  "correct": [
+   "It minimises $\\sum_{t=2}^n(x_t-\\phi x_{t-1})^2$, the least squares regression of $x_t$ on $x_{t-1}$.",
+   "Treating $x_1$ as fixed, maximum likelihood reduces to least squares."
+  ],
+  "distractors": [
+   {
+    "text": "It equals the Yule-Walker estimate exactly in every sample.",
+    "misconception": "the two differ in their end-effect terms"
+   },
+   {
+    "text": "It maximises a likelihood that includes the marginal density of $x_1$.",
+    "misconception": "that is the exact likelihood, not the conditional one"
+   },
+   {
+    "text": "It needs non-Gaussian noise, since least squares is unrelated to the likelihood.",
+    "misconception": "least squares is the Gaussian conditional likelihood"
+   },
+   {
+    "text": "It minimises the sum of absolute residuals, which is robust to outliers.",
+    "misconception": "confuses least squares with least absolute deviations"
+   },
+   {
+    "text": "It uses all $n$ squared residuals, including one for $x_1$ built from the sample mean.",
+    "misconception": "the first observation has no predecessor to condition on"
+   }
+  ],
+  "explanation": "With $x_1$ fixed, the Gaussian log-likelihood is $-\\frac{n-1}2\\log\\sigma^2-\\frac1{2\\sigma^2}\\sum_{t\\ge2}(x_t-\\phi x_{t-1})^2$, maximised in $\\phi$ by least squares. The estimates differ from Yule-Walker only in end-effects."
+ },
+ {
+  "id": "ts1-7.4",
+  "lecture": 7,
+  "stem": "For a causal Gaussian AR(1) with $|\\phi|<1$, what is the approximate distribution of the Yule-Walker estimate $\\hat\\phi$ in a long series of length $n$?",
+  "correct": [
+   "Approximately $N(\\phi,(1-\\phi^2)/n)$, so estimation is more precise when $|\\phi|$ is near 1.",
+   "Normal, centred at $\\phi$, with variance $(1-\\phi^2)/n$, small when $|\\phi|$ is near 1."
+  ],
+  "distractors": [
+   {
+    "text": "Approximately $N(\\phi,1/n)$ for every $\\phi$, as for a white-noise autocorrelation.",
+    "misconception": "applies the white noise variance to a dependent series"
+   },
+   {
+    "text": "Approximately $N(\\phi,\\phi^2/n)$, so the variance is largest near $|\\phi|=1$.",
+    "misconception": "gets the variance formula wrong"
+   },
+   {
+    "text": "Approximately $N(\\phi,(1-\\phi^2)/n)$, and the approximation stays valid at $\\phi=1$.",
+    "misconception": "extends the normal result to the unit root, where the limit is non-standard"
+   },
+   {
+    "text": "Exactly normal for every $n$, since the noise is Gaussian.",
+    "misconception": "confuses the exact law of the data with that of the estimator"
+   },
+   {
+    "text": "A distribution with variance $1-\\phi^2$ that does not shrink as $n$ grows.",
+    "misconception": "misses the $1/n$ rate"
+   }
+  ],
+  "explanation": "The asymptotic variance $(1-\\phi^2)/n$ comes from $\\sqrt n(\\hat\\phi-\\phi)\\to N(0,1-\\phi^2)$. At $\\phi=1$ the limit is the non-standard Dickey-Fuller law."
+ },
+ {
+  "id": "ts1-7.5",
+  "lecture": 7,
+  "stem": "A stationary series has positive autocorrelations at several lags. What is the effect on the sample mean $\\bar x$?",
+  "correct": [
+   "$\\mathrm{Var}(\\bar x)\\approx\\frac1n\\sum_h\\gamma(h)$ exceeds $\\gamma(0)/n$, so the usual standard error $s/\\sqrt n$ is too small.",
+   "Positive dependence reduces the effective sample size."
+  ],
+  "distractors": [
+   {
+    "text": "The variance of $\\bar x$ is smaller than $\\gamma(0)/n$, since dependent values average out.",
+    "misconception": "reverses the effect of positive dependence"
+   },
+   {
+    "text": "The sample mean becomes biased, with a bias proportional to the first autocorrelation.",
+    "misconception": "the sample mean stays unbiased under stationarity"
+   },
+   {
+    "text": "The variance equals $\\gamma(0)/n$ for every stationary series.",
+    "misconception": "holds only for uncorrelated data"
+   },
+   {
+    "text": "The sample mean is inconsistent for every ARMA process.",
+    "misconception": "the sample mean is consistent for causal ARMA"
+   },
+   {
+    "text": "Positive and negative autocorrelations have the same effect on $\\mathrm{Var}(\\bar x)$.",
+    "misconception": "ignores that the signs of the covariances matter"
+   }
+  ],
+  "explanation": "$\\mathrm{Var}(\\bar x)=\\frac1n\\sum_{|h|<n}(1-|h|/n)\\gamma(h)$; with positive $\\gamma(h)$ this exceeds $\\gamma(0)/n$, so ignoring dependence gives intervals that are too narrow."
+ },
+ {
+  "id": "ts1-8.1",
+  "lecture": 8,
+  "stem": "Which statement about the random walk $X_t=X_{t-1}+Z_t$, $X_0=0$, with $Z_t\\sim WN(0,\\sigma^2)$ is correct?",
+  "correct": [
+   "$\\mathrm{Var}(X_t)=t\\sigma^2$ grows with $t$, so it is not stationary, but $\\nabla X_t=Z_t$ is.",
+   "Its variance grows linearly in time, and differencing returns white noise."
+  ],
+  "distractors": [
+   {
+    "text": "It is stationary with variance $\\sigma^2/(1-\\phi^2)$ evaluated at $\\phi=1$.",
+    "misconception": "applies the AR(1) formula outside its range"
+   },
+   {
+    "text": "It is mean reverting: after a shock it returns to zero over time.",
+    "misconception": "confuses a random walk with a stationary AR(1)"
+   },
+   {
+    "text": "Its variance is constant, but its mean grows linearly in $t$.",
+    "misconception": "mixes up the variance and mean behaviour"
+   },
+   {
+    "text": "Its sample ACF decays quickly towards zero, which is how to recognise it.",
+    "misconception": "the sample ACF of a random walk decays slowly"
+   },
+   {
+    "text": "Differencing a random walk makes it a random walk with smaller variance.",
+    "misconception": "differencing gives white noise"
+   }
+  ],
+  "explanation": "$X_t=\\sum_{s\\le t}Z_s$ has variance $t\\sigma^2$ and covariance $\\min(s,t)\\sigma^2$, so it is non-stationary; its first difference is white noise."
+ },
+ {
+  "id": "ts1-8.2",
+  "lecture": 8,
+  "stem": "What does the sample ACF of a series with a unit root typically look like?",
+  "correct": [
+   "It starts near 1 and decays very slowly across many lags.",
+   "Large autocorrelations persist to long lags."
+  ],
+  "distractors": [
+   {
+    "text": "It cuts off sharply after the first lag.",
+    "misconception": "describes an MA(1) pattern"
+   },
+   {
+    "text": "It decays geometrically and is negligible after a few lags.",
+    "misconception": "describes a stationary AR with moderate coefficient"
+   },
+   {
+    "text": "It alternates in sign with a slowly shrinking amplitude.",
+    "misconception": "describes a negative AR(1) coefficient"
+   },
+   {
+    "text": "It is close to zero at all lags, as for white noise.",
+    "misconception": "describes white noise"
+   },
+   {
+    "text": "It shows spikes only at multiples of the seasonal period.",
+    "misconception": "describes a purely seasonal pattern"
+   }
+  ],
+  "explanation": "For a random walk, $\\mathrm{Corr}(X_t,X_{t+h})=\\sqrt{t/(t+h)}$, close to one for small $h$ relative to $t$, so the sample ACF decays slowly and linearly; this pattern suggests differencing."
+ },
+ {
+  "id": "ts1-8.3",
+  "lecture": 8,
+  "stem": "In the Dickey-Fuller test based on $\\nabla X_t=\\gamma X_{t-1}+e_t$, what is tested and how?",
+  "correct": [
+   "$H_0:\\gamma=0$, with the $t$-ratio compared with Dickey-Fuller values.",
+   "A unit root is the null, and the statistic is non-standard."
+  ],
+  "distractors": [
+   {
+    "text": "The null is stationarity, and a large $t$-ratio rejects it.",
+    "misconception": "describes a stationarity test such as KPSS"
+   },
+   {
+    "text": "The $t$-ratio is compared with standard normal values such as $-1.645$.",
+    "misconception": "ignores that the null law is non-standard"
+   },
+   {
+    "text": "Rejecting the null shows that the series has a unit root.",
+    "misconception": "reverses the meaning of rejection"
+   },
+   {
+    "text": "The null is that the drift is zero, so only the intercept is tested.",
+    "misconception": "confuses the unit root test with a test on the drift"
+   },
+   {
+    "text": "It tests whether the residuals are autocorrelated.",
+    "misconception": "confuses the unit root test with a residual diagnostic"
+   }
+  ],
+  "explanation": "Under $H_0:\\gamma=0$ the regression statistic follows the Dickey-Fuller law (a functional of Brownian motion), whose 5% critical value is about $-1.95$ without constant and $-2.86$ with constant. Rejection indicates stationarity."
+ },
+ {
+  "id": "ts1-8.4",
+  "lecture": 8,
+  "stem": "What happens if an already stationary series is differenced once?",
+  "correct": [
+   "The result is stationary but non-invertible, with a unit root in the MA polynomial.",
+   "An MA unit root appears, so the series is over-differenced."
+  ],
+  "distractors": [
+   {
+    "text": "The result becomes non-stationary, because differencing always removes stationarity.",
+    "misconception": "differencing a stationary series keeps it stationary"
+   },
+   {
+    "text": "The result is a random walk with the same variance as before.",
+    "misconception": "confuses over-differencing with integration"
+   },
+   {
+    "text": "Nothing changes, since differencing a stationary series returns the series.",
+    "misconception": "differencing changes the dependence structure"
+   },
+   {
+    "text": "A unit root appears in the AR polynomial instead.",
+    "misconception": "puts the unit root in the wrong polynomial"
+   },
+   {
+    "text": "The result always has smaller variance, because differencing removes variation.",
+    "misconception": "differencing can increase the variance, for instance of white noise"
+   }
+  ],
+  "explanation": "If $X_t=\\theta(B)Z_t$ then $\\nabla X_t=(1-B)\\theta(B)Z_t$, whose MA polynomial has a root at $z=1$: stationary but not invertible. For white noise, $\\mathrm{Var}(\\nabla X_t)=2\\sigma^2$."
+ },
+ {
+  "id": "ts1-8.5",
+  "lecture": 8,
+  "stem": "What is meant by an ARIMA($p,d,q$) process $\\{X_t\\}$?",
+  "correct": [
+   "The $d$-th difference $(1-B)^dX_t$ is a causal invertible ARMA($p,q$) process.",
+   "It becomes a stationary ARMA($p,q$) after $d$ differences."
+  ],
+  "distractors": [
+   {
+    "text": "A stationary ARMA($p+d,q$) process whose AR polynomial has $d$ extra roots outside the unit circle.",
+    "misconception": "differenced models have roots on the unit circle, so they are non-stationary"
+   },
+   {
+    "text": "A process with $d$ seasonal lags added to an ARMA($p,q$).",
+    "misconception": "confuses the order of integration with seasonality"
+   },
+   {
+    "text": "An ARMA($p,q$) process after removing $d$ outliers.",
+    "misconception": "confuses differencing with outlier removal"
+   },
+   {
+    "text": "A process with $d$ moving-average terms of order one.",
+    "misconception": "confuses differencing with MA terms"
+   },
+   {
+    "text": "A process whose AR polynomial has $d$ roots inside the unit circle.",
+    "misconception": "the extra roots lie on the unit circle, not inside"
+   }
+  ],
+  "explanation": "The factor $(1-B)^d$ puts $d$ unit roots into the AR side, so the process is non-stationary, but its $d$-th difference is a stationary ARMA($p,q$)."
+ },
+ {
+  "id": "ts1-8.6",
+  "lecture": 8,
+  "stem": "How does forecast uncertainty at long horizons compare for a trend-stationary series and a difference-stationary (unit-root) series?",
+  "correct": [
+   "It stays bounded with a deterministic trend but grows without limit with a unit root.",
+   "A unit root gives ever wider prediction intervals; a trend does not."
+  ],
+  "distractors": [
+   {
+    "text": "It is unbounded for the trend-stationary series and bounded for the unit-root series.",
+    "misconception": "reverses the two cases"
+   },
+   {
+    "text": "It is bounded in both cases, since forecasts always revert to a trend line.",
+    "misconception": "forgets that shocks to a random walk are permanent"
+   },
+   {
+    "text": "It grows without limit in both cases, because the trend adds uncertainty.",
+    "misconception": "treats the deterministic trend as random"
+   },
+   {
+    "text": "It is the same in both cases, since the point forecasts follow the same line.",
+    "misconception": "ignores the difference in forecast error variance"
+   },
+   {
+    "text": "It is zero for the trend-stationary series, since the trend is known.",
+    "misconception": "the stationary noise around the trend remains"
+   }
+  ],
+  "explanation": "The trend-stationary error variance tends to the noise variance, while a unit root accumulates shocks, so the variance grows like $h\\sigma^2$ for a random walk."
+ },
+ {
+  "id": "ts1-9.1",
+  "lecture": 9,
+  "stem": "What does seasonal differencing $\\nabla_sX_t=X_t-X_{t-s}$ do?",
+  "correct": [
+   "It removes a stable seasonal pattern by comparing equal seasons.",
+   "It cancels a repeating seasonal component of period $s$."
+  ],
+  "distractors": [
+   {
+    "text": "It removes a linear trend, in the same way as ordinary differencing.",
+    "misconception": "seasonal differencing turns a linear trend into a constant, not into zero"
+   },
+   {
+    "text": "It averages the $s$ most recent values, which smooths out the seasonality.",
+    "misconception": "confuses differencing with moving average smoothing"
+   },
+   {
+    "text": "It subtracts the overall seasonal mean from each observation.",
+    "misconception": "describes seasonal dummies, not differencing"
+   },
+   {
+    "text": "It converts the series into white noise whenever the period is $s$.",
+    "misconception": "differencing does not guarantee white noise"
+   },
+   {
+    "text": "It shortens the series by one observation only.",
+    "misconception": "it loses $s$ observations"
+   }
+  ],
+  "explanation": "A pattern with $x_t=x_{t-s}$ is annihilated by $1-B^s$; a linear trend becomes a constant $s\\beta$, so an additional ordinary difference may be needed. The series shortens by $s$ values."
+ },
+ {
+  "id": "ts1-9.2",
+  "lecture": 9,
+  "stem": "How is the multiplicative SARIMA$(p,d,q)(P,D,Q)_s$ model written?",
+  "correct": [
+   "$\\phi(B)\\Phi(B^s)\\nabla^d\\nabla_s^DX_t=\\theta(B)\\Theta(B^s)Z_t$, with multiplicative polynomials.",
+   "Regular and seasonal ARMA polynomials multiply after differencing."
+  ],
+  "distractors": [
+   {
+    "text": "$\\phi(B)+\\Phi(B^s)$ on the left and $\\theta(B)+\\Theta(B^s)$ on the right, so the parts add.",
+    "misconception": "replaces the product of polynomials by a sum"
+   },
+   {
+    "text": "Two separate series, the seasonal and non-seasonal parts, are fitted and then averaged.",
+    "misconception": "the model is one process with multiplicative operators"
+   },
+   {
+    "text": "$P$, $D$ and $Q$ count the number of seasons present in the data.",
+    "misconception": "misreads the seasonal orders"
+   },
+   {
+    "text": "$s$ is the number of seasonal parameters, which equals $P+Q$.",
+    "misconception": "confuses the period with a parameter count"
+   },
+   {
+    "text": "The seasonal polynomials use $B$ instead of $B^s$, and only the differencing differs.",
+    "misconception": "the seasonal polynomials act at seasonal lags"
+   }
+  ],
+  "explanation": "$\\Phi(B^s)$ and $\\Theta(B^s)$ are polynomials in $B^s$; multiplying with the regular polynomials produces cross terms at lags such as $s\\pm1$ in the ACF."
+ },
+ {
+  "id": "ts1-9.3",
+  "lecture": 9,
+  "stem": "For the seasonal MA process $X_t=Z_t+\\Theta Z_{t-s}$ with $\\Theta\\ne0$, where is the autocorrelation non-zero?",
+  "correct": [
+   "Only at lag $s$, where $\\rho(s)=\\Theta/(1+\\Theta^2)$.",
+   "A single spike at the seasonal lag."
+  ],
+  "distractors": [
+   {
+    "text": "At every multiple of $s$, decaying geometrically.",
+    "misconception": "describes the seasonal AR pattern"
+   },
+   {
+    "text": "At lags $s-1$, $s$ and $s+1$ equally.",
+    "misconception": "side spikes arise only when a regular MA factor is also present"
+   },
+   {
+    "text": "At every lag between 1 and $s$.",
+    "misconception": "treats the seasonal term as a short-lag effect"
+   },
+   {
+    "text": "At lag $s$ and again at lag $2s$ with half the size.",
+    "misconception": "an MA(1) in $B^s$ has no second spike"
+   },
+   {
+    "text": "Only at lag 1, since MA terms are short-lived.",
+    "misconception": "the seasonal term acts at lag $s$"
+   }
+  ],
+  "explanation": "$X_t$ and $X_{t+h}$ share a noise term only when $h=s$, so $\\rho(h)=0$ for $h\\notin\\{0,\\pm s\\}$ and $\\rho(s)=\\Theta/(1+\\Theta^2)$."
+ },
+ {
+  "id": "ts1-9.4",
+  "lecture": 9,
+  "stem": "For $X_t=(1+\\theta B)(1+\\Theta B^s)Z_t$, besides the spikes at lags 1 and $s$, which other lags have non-zero autocorrelation?",
+  "correct": [
+   "Lags $s\\pm1$, each equal to $\\rho(1)\\rho(s)$.",
+   "Equal side spikes by the seasonal lag."
+  ],
+  "distractors": [
+   {
+    "text": "None: the regular and seasonal parts act separately.",
+    "misconception": "ignores the cross term in the product of polynomials"
+   },
+   {
+    "text": "Lag $2s$, with value $\\rho(s)^2$.",
+    "misconception": "confuses the MA with a seasonal AR"
+   },
+   {
+    "text": "Only at lag $s-1$, not at lag $s+1$.",
+    "misconception": "misses the symmetry of the side lobes"
+   },
+   {
+    "text": "Lag $s/2$, the half-period.",
+    "misconception": "invents a half-period effect"
+   },
+   {
+    "text": "Every lag from 1 to $s+1$.",
+    "misconception": "treats the product as a long MA"
+   }
+  ],
+  "explanation": "Expanding gives $Z_t+\\theta Z_{t-1}+\\Theta Z_{t-s}+\\theta\\Theta Z_{t-s-1}$, so lags 1, $s-1$, $s$, $s+1$ share noise terms, and $\\rho(s\\pm1)=\\theta\\Theta/\\{(1+\\theta^2)(1+\\Theta^2)\\}=\\rho(1)\\rho(s)$."
+ },
+ {
+  "id": "ts1-9.5",
+  "lecture": 9,
+  "stem": "For $X_t=\\Phi X_{t-s}+Z_t$ with $|\\Phi|<1$, what is the ACF?",
+  "correct": [
+   "Non-zero only at multiples of $s$, with $\\rho(ks)=\\Phi^k$.",
+   "Geometric decay at the seasonal lags only."
+  ],
+  "distractors": [
+   {
+    "text": "It decays geometrically at every lag, as $\\Phi^h$.",
+    "misconception": "ignores that the process links only values $s$ apart"
+   },
+   {
+    "text": "It has one spike at lag $s$ and is zero afterwards.",
+    "misconception": "describes the seasonal MA"
+   },
+   {
+    "text": "$\\rho(ks)=k\\Phi$ at multiples of $s$.",
+    "misconception": "replaces the power by a product"
+   },
+   {
+    "text": "It has spikes at lags $1,\\dots,s$ and then decays.",
+    "misconception": "invents a short-lag pattern"
+   },
+   {
+    "text": "The process is non-stationary for $0<\\Phi<1$.",
+    "misconception": "stationarity only needs $|\\Phi|<1$"
+   }
+  ],
+  "explanation": "The process splits into $s$ interleaved AR(1) processes with coefficient $\\Phi$ on lag steps of $s$, so $\\rho(ks)=\\Phi^k$ and other correlations vanish."
+ },
+ {
+  "id": "ts1-10.1",
+  "lecture": 10,
+  "stem": "What should the residuals of an adequate ARMA model look like?",
+  "correct": [
+   "Approximately white noise with no significant autocorrelation.",
+   "Uncorrelated noise with constant variance."
+  ],
+  "distractors": [
+   {
+    "text": "Exactly zero autocorrelation at every lag, with no sampling variation.",
+    "misconception": "ignores sampling variability of the sample ACF"
+   },
+   {
+    "text": "Strongly autocorrelated, so that the model has captured the dependence.",
+    "misconception": "reverses the aim"
+   },
+   {
+    "text": "They should reproduce the ACF of the original series.",
+    "misconception": "residuals should have removed the dependence"
+   },
+   {
+    "text": "All residuals should be exactly zero.",
+    "misconception": "confuses fit with an exact interpolation"
+   },
+   {
+    "text": "Their variance should increase over time to show that the model adapts.",
+    "misconception": "non-constant variance signals misspecification"
+   }
+  ],
+  "explanation": "If the model is right, the residuals estimate the innovations $Z_t$, which are white noise. Remaining autocorrelation, trending variance or heavy tails signal misspecification."
+ },
+ {
+  "id": "ts1-10.2",
+  "lecture": 10,
+  "stem": "What does the Ljung-Box test examine, and what is its reference distribution?",
+  "correct": [
+   "It tests that the first $m$ residual autocorrelations vanish, using $\\chi^2_{m-p-q}$.",
+   "A joint whiteness test with degrees of freedom $m-p-q$."
+  ],
+  "distractors": [
+   {
+    "text": "It tests the normality of the residuals, with $m$ degrees of freedom.",
+    "misconception": "confuses a whiteness test with a normality test"
+   },
+   {
+    "text": "A large value of $Q$ supports the adequacy of the model.",
+    "misconception": "reverses the direction of the test"
+   },
+   {
+    "text": "It compares the fit of two nested models, with one degree of freedom per added term.",
+    "misconception": "confuses it with a likelihood ratio test"
+   },
+   {
+    "text": "The degrees of freedom are $n-m$, since $n$ observations are used.",
+    "misconception": "confuses the sample size with the number of lags"
+   },
+   {
+    "text": "It tests only the autocorrelation at lag $m$, ignoring the earlier lags.",
+    "misconception": "the statistic is cumulative over lags $1,\\dots,m$"
+   }
+  ],
+  "explanation": "$Q=n(n+2)\\sum_{k=1}^m\\hat\\rho_k^2/(n-k)$ is approximately $\\chi^2_{m-p-q}$ under the hypothesis of white-noise residuals; large values reject adequacy."
+ },
+ {
+  "id": "ts1-10.3",
+  "lecture": 10,
+  "stem": "Why is the Ljung-Box statistic usually preferred to the Box-Pierce statistic $n\\sum\\hat\\rho_k^2$?",
+  "correct": [
+   "Its weights $(n+2)/(n-k)$ bring the small-sample law closer to the chi-square.",
+   "It corrects the small-sample bias of the Box-Pierce statistic."
+  ],
+  "distractors": [
+   {
+    "text": "It uses squared residuals, so it also detects changing variance.",
+    "misconception": "confuses it with the squared-residual (McLeod-Li) test"
+   },
+   {
+    "text": "It needs no reduction of the degrees of freedom for fitted coefficients.",
+    "misconception": "both versions reduce the degrees of freedom"
+   },
+   {
+    "text": "It has more power against an autocorrelation at a single lag.",
+    "misconception": "the gain concerns the null distribution, not single-lag power"
+   },
+   {
+    "text": "It tests a different null hypothesis, namely that the residual mean is zero.",
+    "misconception": "both test the same null of no autocorrelation"
+   },
+   {
+    "text": "The two statistics are identical for all sample sizes.",
+    "misconception": "the weights differ and matter for small $n$"
+   }
+  ],
+  "explanation": "Box-Pierce underestimates the variance of low-order sample autocorrelations in short samples; the factor $(n+2)/(n-k)$ inflates each term, and gives a better $\\chi^2$ approximation."
+ },
+ {
+  "id": "ts1-10.4",
+  "lecture": 10,
+  "stem": "How do AIC and BIC differ when comparing ARMA models fitted to the same data?",
+  "correct": [
+   "BIC charges $\\ln n$ per parameter, not 2, favouring smaller models.",
+   "BIC penalises complexity more once $n>7$ and is consistent."
+  ],
+  "distractors": [
+   {
+    "text": "AIC is consistent for the true order, whereas BIC is not.",
+    "misconception": "reverses which criterion is consistent"
+   },
+   {
+    "text": "BIC always penalises less than AIC, because it uses the sample size.",
+    "misconception": "the BIC penalty exceeds the AIC penalty once $n>7$"
+   },
+   {
+    "text": "Both use the same penalty per parameter and differ only in the scale.",
+    "misconception": "the penalties differ"
+   },
+   {
+    "text": "AIC picks smaller models than BIC for large $n$.",
+    "misconception": "reverses the order of parsimony"
+   },
+   {
+    "text": "Both criteria always increase when parameters are added.",
+    "misconception": "the fit term falls when parameters are added"
+   }
+  ],
+  "explanation": "$\\mathrm{AIC}=n\\ln\\hat\\sigma^2+2k$ and $\\mathrm{BIC}=n\\ln\\hat\\sigma^2+k\\ln n$. Since $\\ln n>2$ for $n\\ge8$, BIC penalises more. BIC is consistent (if the true model is among the candidates); AIC aims at prediction and tends to overfit."
+ },
+ {
+  "id": "ts1-10.5",
+  "lecture": 10,
+  "stem": "Which comparison of AIC values is legitimate?",
+  "correct": [
+   "An ARMA(1,1) against an ARMA(2,0) fitted to the same differenced series.",
+   "Two models fitted to exactly the same observations of the same variable."
+  ],
+  "distractors": [
+   {
+    "text": "An ARIMA(1,0,1) against an ARIMA(1,1,1) fitted to the same raw series.",
+    "misconception": "the differenced model is fitted to a different series"
+   },
+   {
+    "text": "Two models fitted to samples of different lengths from the same process.",
+    "misconception": "the criteria depend on the number of observations used"
+   },
+   {
+    "text": "A model for the original series against a model for its logarithm.",
+    "misconception": "the likelihoods refer to different variables"
+   },
+   {
+    "text": "A model fitted to a training sample against one fitted to a validation sample.",
+    "misconception": "the criteria require the same data"
+   },
+   {
+    "text": "Any two models, whatever data they use, since the criteria are scale-free.",
+    "misconception": "the criteria are not scale-free"
+   }
+  ],
+  "explanation": "AIC and BIC compare likelihood-based fits of the same response with the same observations. Models with different differencing, transformations or samples are not comparable without adjustment."
+ },
+ {
+  "id": "ts1-10.6",
+  "lecture": 10,
+  "stem": "In a monthly series, the residual ACF of an ARMA fit has one value far outside the band at lag 12 and all other lags inside. What is the most likely conclusion?",
+  "correct": [
+   "Seasonal structure was neglected; add a seasonal term.",
+   "Dependence at the yearly lag remains in the residuals."
+  ],
+  "distractors": [
+   {
+    "text": "The ARMA coefficients are too large, so the AR order should be reduced.",
+    "misconception": "the pattern points to seasonality and not to the regular orders"
+   },
+   {
+    "text": "Nothing: one spike always appears among many lags.",
+    "misconception": "a spike far outside the band at the seasonal lag is not an ordinary chance fluctuation"
+   },
+   {
+    "text": "The variance is not constant, so a transformation is needed.",
+    "misconception": "residual variance is examined by plots or squared residuals, not by a single spike"
+   },
+   {
+    "text": "The mean is wrong, so a constant should be added.",
+    "misconception": "a mean error shows up across all lags"
+   },
+   {
+    "text": "The series is a random walk, so it should be differenced regularly.",
+    "misconception": "a regular unit root gives slowly decaying residual ACF at all lags"
+   }
+  ],
+  "explanation": "A single large spike at the seasonal lag is the typical sign of an unmodelled annual pattern. Adding a seasonal AR or MA term (or seasonal differencing) removes it."
+ }
+]
