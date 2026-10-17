@@ -65,3 +65,11 @@ li.right { border-left: 3px solid var(--ok); padding-left: 10px; } li.wrong { bo
 code { font-family: var(--mono); }
 .dev { font-size: .85rem; color: var(--muted); display: inline-flex; gap: 6px; align-items: center; }
 @media (max-width: 640px) { .facts { grid-template-columns: 1fr; } }
+
+.careers { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; margin: 12px 0; }
+.career { text-align: left; font: inherit; color: inherit; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
+.career.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.career .ctitle { display: flex; justify-content: space-between; }
+.career .bar { display: block; height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; }
+.career .fill { display: block; height: 100%; background: var(--ok); transition: width .3s; }
+.career .csub { font-size: .78rem; color: var(--muted); }

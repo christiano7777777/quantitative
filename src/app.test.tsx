@@ -36,6 +36,17 @@ describe('skill tree', () => {
     expect(screen.getByText(/topics needed/).textContent).toMatch(/21.*topics needed.*672.*h/)
   })
 
+  it('shows a progress bar for every career, which moves when topics are passed', () => {
+    seedPassed('calc')
+    render(<App />)
+    const bars = screen.getAllByRole('progressbar')
+    expect(bars).toHaveLength(8)
+    const qr = screen.getByRole('progressbar', { name: /Quant Researcher progress/ })
+    expect(Number(qr.getAttribute('aria-valuenow'))).toBeGreaterThan(0)
+    const swe = screen.getByRole('progressbar', { name: /Software Engineer progress/ })
+    expect(swe.getAttribute('aria-valuenow')).toBe('0') // calculus is not on the software engineer path
+  })
+
   it('passing prerequisites opens Stochastic Processes without dev mode; passing it marks it passed', () => {
     seedPassed('calc', 'mvc', 'p1', 'p2')
     render(<App />)

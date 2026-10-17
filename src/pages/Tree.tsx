@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { careers, domainLabels, domainOrder, topics } from '../data'
 import { useApp } from '../context'
-import { careerSummary, layout, statusOf } from '../lib/graph'
+import { careerProgress, careerSummary, layout, statusOf } from '../lib/graph'
 import { hasTest } from '../lib/content'
 
 const W = 190, H = 30, GX = 52, GY = 10, PX = 20, PY = 36
@@ -55,6 +55,25 @@ export function Tree() {
           {counts.passed} passed · {counts.open} open · {counts.locked} locked
         </span>
       </div>
+      <section className="careers" aria-label="Career progress">
+        {careers.map((c) => {
+          const p = careerProgress(graph, c, passed, hasTest)
+          return (
+            <button key={c.id} type="button" className={`career${c.id === careerId ? ' on' : ''}`}
+              onClick={() => setCareerId(c.id === careerId ? '' : c.id)} aria-pressed={c.id === careerId}>
+              <span className="ctitle"><b>{c.label}</b><span>{p.percent}%</span></span>
+              <span className="bar" role="progressbar" aria-label={`${c.label} progress`}
+                aria-valuemin={0} aria-valuemax={100} aria-valuenow={p.percent}>
+                <span className="fill" style={{ width: `${p.percent}%` }} />
+              </span>
+              <span className="csub">
+                {p.required.passed}/{p.required.total} required · {p.path.passed}/{p.path.total} on path · {p.bonus.passed}/{p.bonus.total} bonus
+              </span>
+              <span className="csub">{p.hours.passed}/{p.hours.total} h · tests ready for {p.testable}/{p.path.total} path topics</span>
+            </button>
+          )
+        })}
+      </section>
       <div className="legend">
         {domainOrder.map((d) => (
           <span key={d}><i className="sw" style={{ background: `var(--d-${d})` }} />{domainLabels[d]}</span>
