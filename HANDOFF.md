@@ -31,7 +31,8 @@ prerequisites have tests; use Dev mode to try them.
 |---|---|
 | `sp` Stochastic Processes | done, MC bank rewritten after an external AI review |
 | `p3` Probability III | done (pilot): 55 MC, 5 LQ generators, slots `[A] [B,C] [D,E]`. **MC content not yet reviewed by a human or a second AI** |
-| the other 15 scope topics | not started |
+| `inf` Statistical Inference | done: 55 MC, 6 LQ generators, slots `[A,B] [D,E] [F,G]`. MC not yet reviewed by a human or second AI |
+| the other 14 scope topics | not started |
 
 ## Workflow that worked (per topic)
 1. Read the topic's lectures in `src/data/topics.json` (use UTF-8 when printing; the Windows console chokes on accents).
@@ -57,3 +58,11 @@ prerequisites have tests; use Dev mode to try them.
   phone width.
 - A retake picks repeated questions only from recent attempts rather than the oldest ones; worth reading
   `selectPaper` in `src/lib/test-builder.ts` to see whether least-recently-seen should be preferred.
+
+## Items for a human or second-AI reviewer, per topic
+- `inf`: (1) `inf-11.1` assumes the MLE is taken from the grouped counts; with MLE from ungrouped data the df lie between k-1-m and k-1
+  (Chernoff-Lehmann). (2) `inf-4.5` (MSE-optimal divisor n+1 for normal data) and `inf-6.4` (Cramer-Rao fails for U(0,theta)) are the
+  subtlest statements. (3) The LQ t table (`e-twosample.ts`, df 8-11) is printed in the question; the test checks it by integrating the t density.
+  (4) Chained LQ answers (F, E) tell students not to round intermediate values and use 2-3 d.p. tolerances.
+- Authoring tip that saved time: write each true wording at about the length of the average distractor (not longer). Starting from
+  full-sentence true wordings gave 64% longest and needed a rewrite of 45 questions.
