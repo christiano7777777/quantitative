@@ -1,0 +1,1602 @@
+[
+ {
+  "id": "lt-1.1",
+  "lecture": 1,
+  "stem": "In the realisable PAC setting with a finite hypothesis class $\\mathcal H$, what does a PAC guarantee for an empirical risk minimiser say?",
+  "correct": [
+   "With probability at least $1-\\delta$ over the sample, the true error is at most $\\varepsilon$.",
+   "Except on a fraction $\\delta$ of samples, the learned hypothesis has error below $\\varepsilon$."
+  ],
+  "distractors": [
+   {
+    "text": "The returned hypothesis has true error exactly zero for every possible sample.",
+    "misconception": "confuses PAC with exact learning"
+   },
+   {
+    "text": "The true error is at most $\\varepsilon$ for every sample, with no failure probability.",
+    "misconception": "drops the confidence parameter $\\delta$"
+   },
+   {
+    "text": "The returned hypothesis equals the target concept as a function on the whole domain.",
+    "misconception": "confuses small error with identification"
+   },
+   {
+    "text": "The training error is at most $\\varepsilon$, whatever the true error is.",
+    "misconception": "confuses empirical and true error"
+   },
+   {
+    "text": "The guarantee holds only when the sample is drawn from the uniform distribution.",
+    "misconception": "believes PAC needs a specific distribution"
+   }
+  ],
+  "explanation": "PAC means probably (probability $1-\\delta$ over the sample) approximately (error at most $\\varepsilon$) correct, for every distribution."
+ },
+ {
+  "id": "lt-1.2",
+  "lecture": 1,
+  "stem": "What distinguishes the agnostic PAC model from the realisable one?",
+  "correct": [
+   "The learner must come within $\\varepsilon$ of the best hypothesis in the class.",
+   "Error close to $\\min_h L_D(h)$ is the goal, whatever that minimum is."
+  ],
+  "distractors": [
+   {
+    "text": "The learner may use unlabelled data only, since labels are not reliable.",
+    "misconception": "confuses agnostic with unsupervised"
+   },
+   {
+    "text": "The required error is zero, but the labels are allowed to be noisy.",
+    "misconception": "keeps the zero-error goal under noise"
+   },
+   {
+    "text": "The sample is drawn from a distribution chosen by the learner.",
+    "misconception": "confuses who chooses the distribution"
+   },
+   {
+    "text": "The hypothesis class is allowed to be infinite, and then every class is learnable.",
+    "misconception": "confuses agnostic with unrestricted classes"
+   },
+   {
+    "text": "The learner must output a hypothesis with training error zero.",
+    "misconception": "keeps the realisable criterion"
+   }
+  ],
+  "explanation": "In the agnostic model the benchmark is $\\min_{h\\in\\mathcal H}L_D(h)$, which may be positive; the realisable model assumes this minimum is zero."
+ },
+ {
+  "id": "lt-1.3",
+  "lecture": 1,
+  "stem": "For a finite class in the realisable setting, how does the sample size needed for error $\\varepsilon$ and confidence $1-\\delta$ depend on $|\\mathcal H|$?",
+  "correct": [
+   "Only logarithmically, about $\\{\\ln|\\mathcal H|+\\ln(1/\\delta)\\}/\\varepsilon$.",
+   "Logarithmic in class size, linear in $1/\\varepsilon$."
+  ],
+  "distractors": [
+   {
+    "text": "It grows linearly with $|\\mathcal H|$, since every hypothesis needs its own examples.",
+    "misconception": "treats each hypothesis as costing a fixed number of samples"
+   },
+   {
+    "text": "It does not depend on $|\\mathcal H|$ at all, only on $\\varepsilon$ and $\\delta$.",
+    "misconception": "ignores the union bound over hypotheses"
+   },
+   {
+    "text": "It grows with $|\\mathcal H|^2$, because pairs of hypotheses must be compared.",
+    "misconception": "invents a quadratic cost"
+   },
+   {
+    "text": "It grows with $1/\\varepsilon^2$ and is independent of $\\delta$.",
+    "misconception": "mixes up the agnostic rate and drops the confidence term"
+   },
+   {
+    "text": "It grows with the VC dimension of the class and not with $|\\mathcal H|$.",
+    "misconception": "applies the infinite-class tool to a finite class"
+   }
+  ],
+  "explanation": "A bad hypothesis (error above $\\varepsilon$) survives $m$ samples with probability at most $e^{-\\varepsilon m}$, and the union bound over at most $|\\mathcal H|$ bad hypotheses gives $|\\mathcal H|e^{-\\varepsilon m}\\le\\delta$."
+ },
+ {
+  "id": "lt-1.4",
+  "lecture": 1,
+  "stem": "Why is the union bound used in the finite-class realisable PAC proof?",
+  "correct": [
+   "A bad hypothesis may fit the sample by chance, and any of them must be ruled out.",
+   "To bound the chance that some bad hypothesis is consistent."
+  ],
+  "distractors": [
+   {
+    "text": "To show that the sample examples are independent of each other.",
+    "misconception": "confuses the union bound with independence"
+   },
+   {
+    "text": "To prove that the true error of the target concept is zero.",
+    "misconception": "misreads what is being bounded"
+   },
+   {
+    "text": "To make the bound hold for every distribution simultaneously.",
+    "misconception": "confuses distribution-free with the union bound"
+   },
+   {
+    "text": "To replace the true error by the training error in the final statement.",
+    "misconception": "confuses the union bound with uniform convergence"
+   },
+   {
+    "text": "To bound the variance of the training error of the target concept.",
+    "misconception": "confuses the union bound with a variance computation"
+   }
+  ],
+  "explanation": "Each bad hypothesis is consistent with probability at most $(1-\\varepsilon)^m\\le e^{-\\varepsilon m}$; the union bound sums these over the bad hypotheses."
+ },
+ {
+  "id": "lt-1.5",
+  "lecture": 1,
+  "stem": "Passing from the realisable to the agnostic setting changes the dependence of the sample complexity on $\\varepsilon$ roughly as follows.",
+  "correct": [
+   "It changes from order $1/\\varepsilon$ to order $1/\\varepsilon^2$.",
+   "The rate worsens to $1/\\varepsilon^{2}$."
+  ],
+  "distractors": [
+   {
+    "text": "It improves, because the labels carry more information when they are noisy.",
+    "misconception": "believes noise helps learning"
+   },
+   {
+    "text": "It stays at order $1/\\varepsilon$, since the same ERM argument applies.",
+    "misconception": "ignores that the realisable argument uses a zero-error benchmark"
+   },
+   {
+    "text": "It changes from $1/\\varepsilon$ to $\\ln(1/\\varepsilon)$.",
+    "misconception": "confuses the rate with a logarithmic one"
+   },
+   {
+    "text": "It becomes independent of $\\varepsilon$ and depends only on $|\\mathcal H|$.",
+    "misconception": "drops the accuracy dependence"
+   },
+   {
+    "text": "It grows from order $1/\\varepsilon$ to order $1/\\varepsilon^{3}$.",
+    "misconception": "invents a cubic rate"
+   }
+  ],
+  "explanation": "Realisable: a bad hypothesis is simply never consistent, probability $e^{-\\varepsilon m}$. Agnostic: we must estimate each risk to accuracy $\\varepsilon/2$ with Hoeffding, giving $m\\sim\\ln(|\\mathcal H|/\\delta)/\\varepsilon^2$."
+ },
+ {
+  "id": "lt-2.1",
+  "lecture": 2,
+  "stem": "What does Hoeffding's inequality give for a fixed hypothesis $h$ and losses in $[0,1]$?",
+  "correct": [
+   "Deviation of size $t$ has probability at most $2e^{-2mt^2}$.",
+   "Empirical risk is within $t$ of true risk except with chance $2e^{-2mt^2}$."
+  ],
+  "distractors": [
+   {
+    "text": "The deviation probability is at most $2e^{-mt}$, decaying only exponentially in $t$.",
+    "misconception": "misremembers the exponent as linear in $t$"
+   },
+   {
+    "text": "The deviation probability is at most $1/(mt^2)$.",
+    "misconception": "confuses with Chebyshev"
+   },
+   {
+    "text": "The bound holds only after $h$ has been chosen by looking at the sample.",
+    "misconception": "ignores that $h$ must be fixed in advance"
+   },
+   {
+    "text": "The empirical risk equals the true risk once $m$ is large enough.",
+    "misconception": "confuses concentration with equality"
+   },
+   {
+    "text": "The deviation probability is at most $2e^{-2mt^2}$ for every hypothesis in an infinite class at once.",
+    "misconception": "forgets that the bound is for one fixed hypothesis"
+   }
+  ],
+  "explanation": "Hoeffding applies to the average of $m$ independent bounded variables, so $h$ must not depend on the sample; the deviation tail is sub-Gaussian in $t\\sqrt m$."
+ },
+ {
+  "id": "lt-2.2",
+  "lecture": 2,
+  "stem": "Why can Hoeffding not be applied directly to the hypothesis returned by ERM?",
+  "correct": [
+   "The returned hypothesis depends on the sample, so the losses are not independent.",
+   "Choosing $h$ after seeing data breaks independence."
+  ],
+  "distractors": [
+   {
+    "text": "ERM outputs hypotheses with unbounded loss, so Hoeffding does not apply.",
+    "misconception": "confuses selection effects with boundedness"
+   },
+   {
+    "text": "The losses of ERM are always zero, so there is nothing to bound.",
+    "misconception": "confuses ERM with a perfect fit"
+   },
+   {
+    "text": "Hoeffding holds only for finite samples of size one.",
+    "misconception": "misstates the inequality"
+   },
+   {
+    "text": "ERM is a randomised procedure and Hoeffding needs a deterministic one.",
+    "misconception": "confuses the source of dependence"
+   },
+   {
+    "text": "Hoeffding only controls losses in $\\{0,1\\}$, and ERM can have real-valued losses.",
+    "misconception": "restricts Hoeffding to Bernoulli variables"
+   }
+  ],
+  "explanation": "Uniform convergence repairs this: control $\\sup_h|L_S(h)-L_D(h)|$ so the guarantee holds for whichever hypothesis is selected."
+ },
+ {
+  "id": "lt-2.3",
+  "lecture": 2,
+  "stem": "A class has uniform convergence at accuracy $\\varepsilon/2$. What follows for ERM?",
+  "correct": [
+   "Its true risk is within $\\varepsilon$ of the best risk in the class.",
+   "Excess risk over the best hypothesis is at most $\\varepsilon$."
+  ],
+  "distractors": [
+   {
+    "text": "Its true risk is exactly equal to the training risk.",
+    "misconception": "confuses uniform closeness with equality"
+   },
+   {
+    "text": "Its true risk is at most $\\varepsilon/2$, whatever the best in-class risk is.",
+    "misconception": "forgets the best in-class risk is the benchmark"
+   },
+   {
+    "text": "Its true risk is zero when the class is finite.",
+    "misconception": "applies the realisable result to the agnostic case"
+   },
+   {
+    "text": "Its training risk exceeds the training risk of other hypotheses.",
+    "misconception": "reverses the minimisation"
+   },
+   {
+    "text": "Its true risk is at most the training risk of any other hypothesis.",
+    "misconception": "confuses a risk comparison on the sample with the true risk"
+   }
+  ],
+  "explanation": "If all gaps are at most $\\varepsilon/2$: $L_D(\\hat h)\\le L_S(\\hat h)+\\varepsilon/2\\le L_S(h^*)+\\varepsilon/2\\le L_D(h^*)+\\varepsilon$."
+ },
+ {
+  "id": "lt-2.4",
+  "lecture": 2,
+  "stem": "With a finite class, the generalisation gap bound obtained from Hoeffding and the union bound behaves as follows when the sample size is multiplied by four.",
+  "correct": [
+   "It halves, since the bound scales like $1/\\sqrt m$ in the sample size.",
+   "The gap is cut by a factor of two, not four."
+  ],
+  "distractors": [
+   {
+    "text": "It falls by a factor of four, since it is proportional to $1/m$.",
+    "misconception": "confuses the $1/\\sqrt m$ rate with $1/m$"
+   },
+   {
+    "text": "It is unchanged, since the class size is what controls it.",
+    "misconception": "ignores the dependence on $m$"
+   },
+   {
+    "text": "It falls by a factor of sixteen, as the bound is proportional to $1/m^2$.",
+    "misconception": "squares the rate"
+   },
+   {
+    "text": "It doubles, because more data allows more overfitting.",
+    "misconception": "reverses the effect of data"
+   },
+   {
+    "text": "It grows by a factor of two, since the sample is four times larger.",
+    "misconception": "believes more data enlarges the gap"
+   }
+  ],
+  "explanation": "The gap bound is $\\sqrt{\\ln(2|\\mathcal H|/\\delta)/(2m)}$, so multiplying $m$ by 4 divides it by 2."
+ },
+ {
+  "id": "lt-2.5",
+  "lecture": 2,
+  "stem": "How does doubling a finite class $|\\mathcal H|$ affect the uniform-convergence generalisation bound?",
+  "correct": [
+   "The bound rises only slightly, because $|\\mathcal H|$ enters through a logarithm.",
+   "Only an additive $\\ln 2$ appears inside the root."
+  ],
+  "distractors": [
+   {
+    "text": "It doubles the bound, since the bound is proportional to $|\\mathcal H|$.",
+    "misconception": "believes the bound is linear in class size"
+   },
+   {
+    "text": "It multiplies the bound by $\\sqrt2$, since $|\\mathcal H|$ is under the square root.",
+    "misconception": "puts $|\\mathcal H|$ rather than its log under the root"
+   },
+   {
+    "text": "It leaves the bound exactly unchanged.",
+    "misconception": "ignores the dependence on class size"
+   },
+   {
+    "text": "It squares the bound.",
+    "misconception": "invents a dependence"
+   },
+   {
+    "text": "It is multiplied by four, since the bound is proportional to $|\\mathcal H|^{2}$.",
+    "misconception": "invents a quadratic dependence"
+   }
+  ],
+  "explanation": "The gap is $\\sqrt{\\ln(2|\\mathcal H|/\\delta)/(2m)}$: doubling the class adds $\\ln 2$ inside the root, a small change once $m$ is moderate."
+ },
+ {
+  "id": "lt-3.1",
+  "lecture": 3,
+  "stem": "What does it mean for a hypothesis class to shatter a set of points $\\{x_1,\\dots,x_k\\}$?",
+  "correct": [
+   "All $2^k$ labellings of those points are realised by hypotheses in the class.",
+   "The class reproduces every labelling of this set."
+  ],
+  "distractors": [
+   {
+    "text": "Some hypothesis in the class labels all the points correctly for one fixed labelling.",
+    "misconception": "confuses shattering with consistency"
+   },
+   {
+    "text": "The class contains at most $2^k$ hypotheses.",
+    "misconception": "confuses the class size with realised labellings"
+   },
+   {
+    "text": "Every hypothesis in the class labels these points differently.",
+    "misconception": "confuses labellings with hypotheses"
+   },
+   {
+    "text": "Any $k$ points can be labelled in every way by the class.",
+    "misconception": "turns an existence statement into a statement for all sets"
+   },
+   {
+    "text": "The class labels every one of the $k$ points as positive.",
+    "misconception": "confuses shattering with a single labelling"
+   }
+  ],
+  "explanation": "The VC dimension is the largest $k$ for which some set of $k$ points is shattered."
+ },
+ {
+  "id": "lt-3.2",
+  "lecture": 3,
+  "stem": "To show that a class has VC dimension exactly $d$, which two facts must be established?",
+  "correct": [
+   "Some $d$-set is shattered, and no $(d+1)$-set is shattered.",
+   "One shattered $d$-set exists, and every larger set fails."
+  ],
+  "distractors": [
+   {
+    "text": "Every set of $d$ points is shattered, and some set of $d+1$ points is not.",
+    "misconception": "confuses exists and for all"
+   },
+   {
+    "text": "Some set of $d+1$ points is shattered, and no set of $d$ points is.",
+    "misconception": "shifts the dimension by one"
+   },
+   {
+    "text": "Some $d$-set is shattered, and one particular $(d+1)$-set is not shattered.",
+    "misconception": "checks only one larger set"
+   },
+   {
+    "text": "The class has exactly $2^d$ hypotheses.",
+    "misconception": "confuses VC dimension with class size"
+   },
+   {
+    "text": "The class has at least $2^{d}$ hypotheses and fewer than $2^{d+1}$.",
+    "misconception": "counts hypotheses instead of testing configurations"
+   }
+  ],
+  "explanation": "The lower bound needs only one good configuration; the upper bound must handle all configurations of $d+1$ points."
+ },
+ {
+  "id": "lt-3.3",
+  "lecture": 3,
+  "stem": "What does Sauer's lemma say about a class with VC dimension $d$?",
+  "correct": [
+   "At most $\\sum_{i\\le d}\\binom mi$ labellings, polynomial in $m$.",
+   "Past $d$ points the growth is only polynomial."
+  ],
+  "distractors": [
+   {
+    "text": "The number of labellings on $m$ points is exactly $2^m$ for all $m$.",
+    "misconception": "ignores that shattering fails beyond $d$"
+   },
+   {
+    "text": "The growth function is at most $d^m$.",
+    "misconception": "swaps the base and exponent"
+   },
+   {
+    "text": "The class has at most $d$ hypotheses.",
+    "misconception": "confuses VC dimension with class size"
+   },
+   {
+    "text": "The growth function is exponential in $m$ with rate proportional to $d$.",
+    "misconception": "misses the polynomial growth"
+   },
+   {
+    "text": "The class has VC dimension $d$ if and only if every set of $d$ points is shattered.",
+    "misconception": "states Sauer's lemma as a statement about every set"
+   }
+  ],
+  "explanation": "Sauer's lemma turns finite VC dimension into a polynomial growth function, which makes uniform convergence possible for infinite classes."
+ },
+ {
+  "id": "lt-3.4",
+  "lecture": 3,
+  "stem": "The class of affine halfspaces $x\\mapsto\\mathrm{sign}(\\langle w,x\\rangle+b)$ on $\\mathbb R^n$ has VC dimension",
+  "correct": [
+   "It is $n+1$, one more than the dimension of the space.",
+   "One above the ambient dimension."
+  ],
+  "distractors": [
+   {
+    "text": "$n$, whether or not a bias term is allowed.",
+    "misconception": "ignores the extra degree of freedom from the bias"
+   },
+   {
+    "text": "Infinite, since there are infinitely many halfspaces.",
+    "misconception": "confuses class size with VC dimension"
+   },
+   {
+    "text": "$2^n$, since the points are in $n$ coordinates.",
+    "misconception": "confuses with counting labellings"
+   },
+   {
+    "text": "$n+2$, since a bias adds two parameters.",
+    "misconception": "miscounts parameters"
+   },
+   {
+    "text": "$2n$, since each coordinate can be positive or negative.",
+    "misconception": "counts sign patterns"
+   }
+  ],
+  "explanation": "$n+1$ points in general position can be shattered, but no $n+2$ points can; the number of parameters here matches the VC dimension."
+ },
+ {
+  "id": "lt-3.5",
+  "lecture": 3,
+  "stem": "Which statement relates VC dimension to learnability in the binary classification setting?",
+  "correct": [
+   "A class is PAC learnable exactly when its VC dimension is finite.",
+   "Learnability is equivalent to finite VC dimension."
+  ],
+  "distractors": [
+   {
+    "text": "Every class with infinitely many hypotheses has infinite VC dimension.",
+    "misconception": "confuses cardinality with VC dimension"
+   },
+   {
+    "text": "Learnability needs the class to be finite.",
+    "misconception": "overlooks infinite classes such as thresholds"
+   },
+   {
+    "text": "A larger VC dimension always means a smaller sample complexity.",
+    "misconception": "reverses the monotonicity"
+   },
+   {
+    "text": "Finite VC dimension suffices for learnability only in the realisable setting.",
+    "misconception": "restricts the fundamental theorem wrongly"
+   },
+   {
+    "text": "A class is learnable if and only if its VC dimension is at most the sample size.",
+    "misconception": "confuses the dimension with the sample size"
+   }
+  ],
+  "explanation": "The fundamental theorem of PAC learning says finite VC dimension is equivalent to uniform convergence and to agnostic PAC learnability."
+ },
+ {
+  "id": "lt-4.1",
+  "lecture": 4,
+  "stem": "What does the empirical Rademacher complexity of a class on a sample measure?",
+  "correct": [
+   "How well the class can fit random $\\pm1$ labels on the sample.",
+   "Its ability to fit noise, averaged over random signs."
+  ],
+  "distractors": [
+   {
+    "text": "The maximum training accuracy of the class on the true labels.",
+    "misconception": "uses the real labels instead of random ones"
+   },
+   {
+    "text": "The number of distinct labellings of the sample.",
+    "misconception": "confuses with the growth function"
+   },
+   {
+    "text": "The variance of the training error of a single hypothesis.",
+    "misconception": "confuses with variance of risk estimates"
+   },
+   {
+    "text": "The largest margin that separates the sample.",
+    "misconception": "confuses with margin"
+   },
+   {
+    "text": "The expected value of the best hypothesis' loss on the sample.",
+    "misconception": "confuses with expected risk"
+   }
+  ],
+  "explanation": "$\\hat{\\mathfrak R}_S(\\mathcal H)=\\mathbb E_\\sigma\\sup_h\\frac1m\\sum_i\\sigma_i h(x_i)$; a rich class can fit random signs and has large complexity."
+ },
+ {
+  "id": "lt-4.2",
+  "lecture": 4,
+  "stem": "Which form does the standard Rademacher generalisation bound take for losses in $[0,1]$?",
+  "correct": [
+   "Risk is at most training risk $+\\,2\\mathfrak R_m+\\sqrt{\\ln(1/\\delta)/(2m)}$.",
+   "Training risk, twice the complexity and a confidence term."
+  ],
+  "distractors": [
+   {
+    "text": "True risk $\\le$ empirical risk $\\times\\,\\mathfrak R_m$.",
+    "misconception": "makes the bound multiplicative"
+   },
+   {
+    "text": "True risk $\\le$ empirical risk $-\\,\\mathfrak R_m$.",
+    "misconception": "gets the sign of the complexity term wrong"
+   },
+   {
+    "text": "True risk $\\le 2\\mathfrak R_m$, with no empirical term.",
+    "misconception": "drops the training error"
+   },
+   {
+    "text": "True risk equals empirical risk plus the number of parameters divided by $m$.",
+    "misconception": "replaces complexity by parameter counting"
+   },
+   {
+    "text": "True risk $\\le$ empirical risk $+\\,\\mathfrak R_m$, with no confidence term.",
+    "misconception": "drops the factor two and the deviation term"
+   }
+  ],
+  "explanation": "The complexity term is the price of selecting $h$ from $\\mathcal H$ using the sample; the last term comes from McDiarmid's inequality."
+ },
+ {
+  "id": "lt-4.3",
+  "lecture": 4,
+  "stem": "For linear predictors $x\\mapsto\\langle w,x\\rangle$ with $\\|w\\|_2\\le B$ and $\\|x\\|_2\\le R$, the Rademacher complexity is bounded by",
+  "correct": [
+   "$BR/\\sqrt m$, independent of the dimension.",
+   "Order $1/\\sqrt m$ scaled by $B$ and $R$ only."
+  ],
+  "distractors": [
+   {
+    "text": "$BR\\sqrt{n/m}$, which grows with the dimension $n$.",
+    "misconception": "confuses with dimension-based bounds"
+   },
+   {
+    "text": "$BR/m$, decaying faster than $1/\\sqrt m$.",
+    "misconception": "gets the rate wrong"
+   },
+   {
+    "text": "$BR\\,m^{-1/4}$.",
+    "misconception": "invents a slower rate"
+   },
+   {
+    "text": "$\\sqrt{n}\\,BR$, independent of $m$.",
+    "misconception": "forgets the sample size"
+   },
+   {
+    "text": "$BR\\sqrt{\\ln n/m}$, which grows with the logarithm of the dimension.",
+    "misconception": "borrows the form of the $\\ell_1$-ball bound"
+   }
+  ],
+  "explanation": "By Cauchy-Schwarz and Jensen, $\\hat{\\mathfrak R}\\le\\frac Bm\\sqrt{\\sum\\|x_i\\|^2}\\le BR/\\sqrt m$; the bound is dimension-free."
+ },
+ {
+  "id": "lt-4.4",
+  "lecture": 4,
+  "stem": "What is the Rademacher complexity bound for a finite class of $\\pm1$ valued functions?",
+  "correct": [
+   "At most $\\sqrt{2\\ln|\\mathcal H|/m}$, by Massart's lemma.",
+   "Growing like $\\sqrt{\\ln|\\mathcal H|}$ and shrinking like $1/\\sqrt m$."
+  ],
+  "distractors": [
+   {
+    "text": "At most $|\\mathcal H|/\\sqrt m$, linear in the class size.",
+    "misconception": "believes dependence on class size is linear"
+   },
+   {
+    "text": "At most $\\sqrt{|\\mathcal H|/m}$.",
+    "misconception": "drops the logarithm"
+   },
+   {
+    "text": "At most $\\ln|\\mathcal H|/m$.",
+    "misconception": "gets the rate wrong"
+   },
+   {
+    "text": "Exactly zero, since a finite class cannot fit noise.",
+    "misconception": "believes finite classes cannot fit noise"
+   },
+   {
+    "text": "At most $\\ln|\\mathcal H|$, independent of the sample size.",
+    "misconception": "forgets the dependence on $m$"
+   }
+  ],
+  "explanation": "Massart's lemma: $\\mathbb E\\max_h\\langle\\sigma,h(S)\\rangle\\le\\sqrt{m}\\sqrt{2\\ln|\\mathcal H|}$ for $\\pm1$ vectors of length $m$, so dividing by $m$ gives the stated bound."
+ },
+ {
+  "id": "lt-4.5",
+  "lecture": 4,
+  "stem": "A class contains a single function. What is its Rademacher complexity?",
+  "correct": [
+   "Zero, since random signs average out without a choice of function.",
+   "It vanishes, as nothing is selected."
+  ],
+  "distractors": [
+   {
+    "text": "One, since the single function fits its own labels.",
+    "misconception": "confuses with fit to true labels"
+   },
+   {
+    "text": "It equals the variance of the function.",
+    "misconception": "confuses with variance"
+   },
+   {
+    "text": "It is $1/\\sqrt m$ for any single function.",
+    "misconception": "uses the rate for a rich class"
+   },
+   {
+    "text": "It is undefined, since the supremum is over an empty set.",
+    "misconception": "misreads the supremum"
+   },
+   {
+    "text": "It equals the sample size $m$, since any function fits its own labels.",
+    "misconception": "confuses with the complexity of the class of all functions"
+   }
+  ],
+  "explanation": "Without a supremum there is nothing to select, and $\\mathbb E\\sigma_i=0$; complexity measures the extra fit gained from choosing among hypotheses."
+ },
+ {
+  "id": "lt-5.1",
+  "lecture": 5,
+  "stem": "Why can margin-based bounds be informative in very high-dimensional feature spaces?",
+  "correct": [
+   "They depend on the margin and radius, not on the dimension.",
+   "The bound is governed by radius over margin only."
+  ],
+  "distractors": [
+   {
+    "text": "High-dimensional spaces always have larger margins.",
+    "misconception": "believes dimension automatically enlarges the margin"
+   },
+   {
+    "text": "The bound uses the number of support vectors only, not the margin.",
+    "misconception": "replaces the margin by the support-vector count"
+   },
+   {
+    "text": "Margin bounds assume the data are one-dimensional.",
+    "misconception": "misstates the assumption"
+   },
+   {
+    "text": "Any data set is separable with a large margin in high dimension.",
+    "misconception": "confuses separability with margin"
+   },
+   {
+    "text": "They hold for every classifier, whether or not it has any margin on the data.",
+    "misconception": "ignores that the margin is the key quantity"
+   }
+  ],
+  "explanation": "The Rademacher complexity of a norm-bounded linear class is $BR/\\sqrt m$ with $B=1/\\gamma$, giving a bound in $R/(\\gamma\\sqrt m)$."
+ },
+ {
+  "id": "lt-5.2",
+  "lecture": 5,
+  "stem": "In the hard-margin SVM with constraints $y_i(\\langle w,x_i\\rangle+b)\\ge1$, what is the geometric margin of the solution?",
+  "correct": [
+   "It equals $1/\\|w\\|$, so minimising $\\|w\\|$ maximises it.",
+   "The distance to the closest points, $1/\\|w\\|$."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $\\|w\\|$, so maximising $\\|w\\|$ maximises the margin.",
+    "misconception": "inverts the relationship"
+   },
+   {
+    "text": "It equals $1$, because the constraints force unit margin.",
+    "misconception": "confuses functional and geometric margin"
+   },
+   {
+    "text": "It equals $b/\\|w\\|$.",
+    "misconception": "confuses the margin with the offset"
+   },
+   {
+    "text": "It equals $2\\|w\\|$.",
+    "misconception": "mixes the full width $2/\\|w\\|$ with the norm"
+   },
+   {
+    "text": "It equals $\\|w\\|^{2}$, so maximising the margin means making $w$ longer.",
+    "misconception": "squares the norm and inverts the relation"
+   }
+  ],
+  "explanation": "The functional margin is fixed to 1 on the closest points; dividing by $\\|w\\|$ gives the geometric distance $1/\\|w\\|$ (the full band has width $2/\\|w\\|$)."
+ },
+ {
+  "id": "lt-5.3",
+  "lecture": 5,
+  "stem": "Why must the margin of a linear classifier be normalised by $\\|w\\|$?",
+  "correct": [
+   "Rescaling $(w,b)$ does not change the classifier but changes functional margins.",
+   "Multiplying $(w,b)$ by a constant gives the same rule."
+  ],
+  "distractors": [
+   {
+    "text": "Because the margin must always lie between $0$ and $1$.",
+    "misconception": "invents a range restriction"
+   },
+   {
+    "text": "Because $b$ and $w$ must be orthogonal.",
+    "misconception": "invents an orthogonality condition"
+   },
+   {
+    "text": "Because normalised vectors always separate the data.",
+    "misconception": "confuses normalisation with separability"
+   },
+   {
+    "text": "Because the data are assumed to have unit variance.",
+    "misconception": "confuses with data standardisation"
+   },
+   {
+    "text": "Because the classifier is defined only for unit-length data points.",
+    "misconception": "confuses the normalisation of $w$ with that of $x$"
+   }
+  ],
+  "explanation": "The geometric margin $y(\\langle w,x\\rangle+b)/\\|w\\|$ is invariant to rescaling and equals the signed distance to the hyperplane."
+ },
+ {
+  "id": "lt-5.4",
+  "lecture": 5,
+  "stem": "In a hard-margin SVM, what are the support vectors?",
+  "correct": [
+   "Training points exactly on the margin hyperplanes, which determine the solution.",
+   "Points with positive dual weight."
+  ],
+  "distractors": [
+   {
+    "text": "All points of the minority class.",
+    "misconception": "confuses with class imbalance"
+   },
+   {
+    "text": "The points farthest from the separating hyperplane.",
+    "misconception": "reverses closeness and influence"
+   },
+   {
+    "text": "All misclassified training points.",
+    "misconception": "confuses with errors"
+   },
+   {
+    "text": "The points whose removal always increases the margin.",
+    "misconception": "misses that removing them can change the solution"
+   },
+   {
+    "text": "Points whose dual weight is zero, since those are the most informative.",
+    "misconception": "reverses the meaning of the dual weights"
+   }
+  ],
+  "explanation": "Removing the other points leaves the solution unchanged, which also yields the leave-one-out error bound (number of support vectors)/$m$."
+ },
+ {
+  "id": "lt-5.5",
+  "lecture": 5,
+  "stem": "Why can the margin bound beat a VC bound for a linear class in a very large feature space?",
+  "correct": [
+   "The VC bound grows with the dimension, the margin bound does not.",
+   "A large margin keeps the margin bound small in any dimension."
+  ],
+  "distractors": [
+   {
+    "text": "The VC dimension of halfspaces is infinite in high dimension.",
+    "misconception": "misstates the VC dimension"
+   },
+   {
+    "text": "Margin bounds hold only for finite data sets.",
+    "misconception": "confuses with finite-sample statements"
+   },
+   {
+    "text": "The margin bound is always smaller than the VC bound.",
+    "misconception": "overgeneralises"
+   },
+   {
+    "text": "Margin bounds assume the training error is exactly zero.",
+    "misconception": "ignores margin-loss versions of the bound"
+   },
+   {
+    "text": "Margin bounds need the margin to equal one, which fails for most data sets.",
+    "misconception": "confuses normalisation with an assumption"
+   }
+  ],
+  "explanation": "The VC dimension $n+1$ is large when $n$ is; a large margin relative to the radius gives a small bound, and nothing is assumed about $n$."
+ },
+ {
+  "id": "lt-6.1",
+  "lecture": 6,
+  "stem": "How does AdaBoost update the example weights after round $t$?",
+  "correct": [
+   "It raises weights of misclassified points, lowers the others, and renormalises.",
+   "Examples the weak learner got wrong gain weight."
+  ],
+  "distractors": [
+   {
+    "text": "It decreases the weight of misclassified points to avoid fitting noise.",
+    "misconception": "reverses the update"
+   },
+   {
+    "text": "It keeps the weights fixed and changes the weak learner class.",
+    "misconception": "confuses with other ensembles"
+   },
+   {
+    "text": "It resamples the data uniformly at random each round.",
+    "misconception": "confuses with bagging"
+   },
+   {
+    "text": "It gives the largest weight to the points classified correctly with the largest margin.",
+    "misconception": "rewards easy points"
+   },
+   {
+    "text": "It fits each weak learner to the residuals of the previous ones using squared error.",
+    "misconception": "describes gradient boosting for regression"
+   }
+  ],
+  "explanation": "Weights are multiplied by $e^{\\mp\\alpha_t}$ for correct/incorrect examples, with $\\alpha_t=\\tfrac12\\ln\\frac{1-\\epsilon_t}{\\epsilon_t}$, then normalised."
+ },
+ {
+  "id": "lt-6.2",
+  "lecture": 6,
+  "stem": "What assumption is made about the weak learner in the AdaBoost training-error analysis?",
+  "correct": [
+   "In every round its weighted error is at most $1/2-\\gamma$, for some $\\gamma>0$.",
+   "It beats random guessing under the current weights."
+  ],
+  "distractors": [
+   {
+    "text": "It achieves zero weighted training error in every round.",
+    "misconception": "confuses weak with perfect"
+   },
+   {
+    "text": "It is a deep model with low bias.",
+    "misconception": "confuses weak with strong"
+   },
+   {
+    "text": "It has weighted error at most $1/2$, possibly equal to $1/2$.",
+    "misconception": "allows no edge, which stalls boosting"
+   },
+   {
+    "text": "It needs to be correct on a majority of the original unweighted points.",
+    "misconception": "uses unweighted error"
+   },
+   {
+    "text": "In each round it correctly classifies at least a fraction $1-\\delta$ of the points, for the confidence $\\delta$.",
+    "misconception": "mixes up $\\delta$ with the edge"
+   }
+  ],
+  "explanation": "Only the weighted error matters. If $\\epsilon_t=1/2$, then $\\alpha_t=0$ and nothing changes, so a strictly positive edge is needed."
+ },
+ {
+  "id": "lt-6.3",
+  "lecture": 6,
+  "stem": "What is the AdaBoost bound on the training error after $T$ rounds with edges $\\gamma_t=\\tfrac12-\\epsilon_t$?",
+  "correct": [
+   "It is at most $\\exp(-2\\sum_t\\gamma_t^2)$, decaying exponentially in $T$.",
+   "Exponentially small in $T$ when the edges stay away from zero."
+  ],
+  "distractors": [
+   {
+    "text": "It is at most $1/T$ in general.",
+    "misconception": "gives a polynomial rate"
+   },
+   {
+    "text": "It is exactly $\\prod_t\\epsilon_t$.",
+    "misconception": "confuses with a plain product of errors"
+   },
+   {
+    "text": "It is at most $\\sum_t\\epsilon_t/T$, the average weak error.",
+    "misconception": "confuses with the average weak learner error"
+   },
+   {
+    "text": "It does not decrease with $T$ since each learner is weak.",
+    "misconception": "misses the effect of reweighting"
+   },
+   {
+    "text": "It is at most $\\exp(2\\sum_t\\gamma_t^2)$, which grows with the number of rounds.",
+    "misconception": "gets the sign of the exponent wrong"
+   }
+  ],
+  "explanation": "The final training error is at most the product of the normalisers $Z_t=2\\sqrt{\\epsilon_t(1-\\epsilon_t)}\\le e^{-2\\gamma_t^2}$."
+ },
+ {
+  "id": "lt-6.4",
+  "lecture": 6,
+  "stem": "AdaBoost often continues to lower test error after the training error has reached zero. What is the margin explanation?",
+  "correct": [
+   "Further rounds keep increasing the training margins, tightening margin bounds.",
+   "The margin distribution keeps improving while training error stays at zero."
+  ],
+  "distractors": [
+   {
+    "text": "Further rounds add weak learners that are fitted on the test data.",
+    "misconception": "believes test data are used"
+   },
+   {
+    "text": "The training error is reduced further by changing labels.",
+    "misconception": "misreads the claim"
+   },
+   {
+    "text": "The complexity of the combined classifier shrinks with each round.",
+    "misconception": "believes boosting simplifies the classifier"
+   },
+   {
+    "text": "Test error always falls while rounds are added, with no overfitting possible.",
+    "misconception": "overgeneralises"
+   },
+   {
+    "text": "Each round re-fits the earlier learners on the test data.",
+    "misconception": "imagines the test data being used"
+   }
+  ],
+  "explanation": "Normalised margins $y\\sum_t\\alpha_th_t(x)/\\sum_t\\alpha_t$ keep growing, and margin bounds depend on the margin rather than on the number of rounds."
+ },
+ {
+  "id": "lt-6.5",
+  "lecture": 6,
+  "stem": "What is the role of $\\alpha_t=\\tfrac12\\ln\\{(1-\\epsilon_t)/\\epsilon_t\\}$ in AdaBoost?",
+  "correct": [
+   "It is the vote weight of learner $t$, large for small weighted error.",
+   "How strongly learner $t$ counts in the final vote."
+  ],
+  "distractors": [
+   {
+    "text": "It is the probability that the weak learner is correct.",
+    "misconception": "confuses with a probability"
+   },
+   {
+    "text": "It is the learning rate of gradient descent on the weights.",
+    "misconception": "confuses with a gradient step size"
+   },
+   {
+    "text": "It is largest when the weighted error equals $1/2$.",
+    "misconception": "reverses the monotonicity"
+   },
+   {
+    "text": "It is always equal to $1$ for a normalised ensemble.",
+    "misconception": "ignores its dependence on error"
+   },
+   {
+    "text": "It is the probability that the final ensemble classifies a new point correctly.",
+    "misconception": "confuses a vote weight with a probability of success"
+   }
+  ],
+  "explanation": "It minimises the normaliser $Z_t$; a learner with error near $1/2$ gets almost no weight, one with error near $0$ gets a large weight."
+ },
+ {
+  "id": "lt-7.1",
+  "lecture": 7,
+  "stem": "How is regret defined in online learning with a comparison class of experts?",
+  "correct": [
+   "Cumulative loss of the learner minus that of the best fixed expert.",
+   "Extra total loss compared with the best single expert."
+  ],
+  "distractors": [
+   {
+    "text": "The loss of the learner on the last round only.",
+    "misconception": "confuses cumulative with one-round loss"
+   },
+   {
+    "text": "The learner's cumulative loss divided by the number of rounds.",
+    "misconception": "confuses with average loss"
+   },
+   {
+    "text": "The loss of the best expert chosen separately at each round.",
+    "misconception": "uses a changing comparator"
+   },
+   {
+    "text": "The difference between the learner's training and test losses.",
+    "misconception": "confuses with generalisation gap"
+   },
+   {
+    "text": "The largest loss the learner suffers in any single round.",
+    "misconception": "confuses regret with worst-case loss"
+   }
+  ],
+  "explanation": "Sublinear regret means the average loss per round approaches that of the best expert."
+ },
+ {
+  "id": "lt-7.2",
+  "lecture": 7,
+  "stem": "What does the Perceptron mistake bound say for data separable with margin $\\gamma$ and radius $R$?",
+  "correct": [
+   "At most $(R/\\gamma)^2$ mistakes, whatever the number of examples.",
+   "A bound depending only on radius and margin."
+  ],
+  "distractors": [
+   {
+    "text": "The number of mistakes is at most $R/\\gamma$, linear in the ratio.",
+    "misconception": "forgets to square"
+   },
+   {
+    "text": "The number of mistakes grows with the number of examples seen.",
+    "misconception": "misses the finite bound"
+   },
+   {
+    "text": "The number of mistakes is bounded by the dimension of the space.",
+    "misconception": "confuses with dimension-based bounds"
+   },
+   {
+    "text": "The bound holds only if the examples are presented in a favourable order.",
+    "misconception": "believes order matters for the bound"
+   },
+   {
+    "text": "The number of mistakes is at most $R^{2}/\\gamma$, after rescaling the data to unit radius.",
+    "misconception": "garbles the ratio"
+   }
+  ],
+  "explanation": "Novikoff: each mistake raises $\\langle w,u\\rangle$ by at least $\\gamma$ while $\\|w\\|^2$ grows by at most $R^2$, giving $M\\le(R/\\gamma)^2$ for any order."
+ },
+ {
+  "id": "lt-7.3",
+  "lecture": 7,
+  "stem": "The Hedge (exponential weights) algorithm over $N$ experts with losses in $[0,1]$ and a tuned learning rate guarantees regret of order",
+  "correct": [
+   "Order $\\sqrt{T\\ln N}$, so average regret per round vanishes.",
+   "Sublinear in $T$ and logarithmic in the number of experts."
+  ],
+  "distractors": [
+   {
+    "text": "$T\\ln N$, so the average regret does not vanish.",
+    "misconception": "confuses with linear regret"
+   },
+   {
+    "text": "$N\\sqrt T$, linear in the number of experts.",
+    "misconception": "believes cost is linear in experts"
+   },
+   {
+    "text": "$\\ln T$, independent of the number of experts.",
+    "misconception": "drops the dependence on $N$"
+   },
+   {
+    "text": "$\\sqrt{T}N$, for losses bounded by one.",
+    "misconception": "mixes the number of experts into the rate"
+   },
+   {
+    "text": "$T$, for any algorithm, because the adversary chooses the losses.",
+    "misconception": "believes regret is always linear"
+   }
+  ],
+  "explanation": "With $\\eta\\approx\\sqrt{8\\ln N/T}$, the regret is at most $\\sqrt{T\\ln N/2}$."
+ },
+ {
+  "id": "lt-7.4",
+  "lecture": 7,
+  "stem": "Why do online learners over experts need randomisation to obtain sublinear regret?",
+  "correct": [
+   "An adversary can make a deterministic rule lose every round.",
+   "A deterministic learner can be forced to err each round."
+  ],
+  "distractors": [
+   {
+    "text": "Randomisation makes the experts independent of each other.",
+    "misconception": "misunderstands the role of randomness"
+   },
+   {
+    "text": "Randomisation is required to estimate the loss of each expert.",
+    "misconception": "confuses with estimation"
+   },
+   {
+    "text": "Without randomisation the best expert cannot be identified.",
+    "misconception": "confuses identification with regret"
+   },
+   {
+    "text": "Deterministic learners always have constant regret.",
+    "misconception": "states the opposite of the truth"
+   },
+   {
+    "text": "Randomisation lowers the loss of the best expert so that the gap closes.",
+    "misconception": "misreads who benefits from randomness"
+   }
+  ],
+  "explanation": "With 0-1 loss, an adversary picks the label opposite to the learner's prediction each round, so the learner makes $T$ mistakes while the best expert makes about $T/2$ or fewer."
+ },
+ {
+  "id": "lt-7.5",
+  "lecture": 7,
+  "stem": "What is an online-to-batch conversion?",
+  "correct": [
+   "Averaging the iterates gives a predictor whose risk is bounded by the average regret.",
+   "It turns a low-regret algorithm into a learner for i.i.d. data."
+  ],
+  "distractors": [
+   {
+    "text": "Running the learner on the test set to adapt it.",
+    "misconception": "confuses with test-time adaptation"
+   },
+   {
+    "text": "Storing all past examples and retraining from scratch each round.",
+    "misconception": "confuses with batch retraining"
+   },
+   {
+    "text": "Converting a deterministic algorithm to a randomised one.",
+    "misconception": "confuses with randomisation"
+   },
+   {
+    "text": "Choosing the final hypothesis as the last iterate always.",
+    "misconception": "misses the averaging"
+   },
+   {
+    "text": "It is a way to bound the test error of the Perceptron by its training error alone.",
+    "misconception": "confuses with a training-error argument"
+   }
+  ],
+  "explanation": "For convex losses and i.i.d. data, the average of the iterates has excess risk at most the average regret plus a deviation term."
+ },
+ {
+  "id": "lt-8.1",
+  "lecture": 8,
+  "stem": "What does uniform stability of a learning algorithm with parameter $\\beta$ require?",
+  "correct": [
+   "Changing one training example changes the loss anywhere by at most $\\beta$.",
+   "Replacing a single example moves any test loss by at most $\\beta$."
+  ],
+  "distractors": [
+   {
+    "text": "The algorithm gives the same output for every training set.",
+    "misconception": "confuses stability with constancy"
+   },
+   {
+    "text": "The output is robust to changes in the test distribution.",
+    "misconception": "confuses with distribution shift"
+   },
+   {
+    "text": "The training error is at most $\\beta$.",
+    "misconception": "confuses with training error"
+   },
+   {
+    "text": "The hypothesis class has at most $1/\\beta$ elements.",
+    "misconception": "confuses with class size"
+   },
+   {
+    "text": "The learned hypothesis is the same for any two training sets of equal size.",
+    "misconception": "states constancy rather than sensitivity"
+   }
+  ],
+  "explanation": "Stability is a property of the algorithm, not of the hypothesis class, and it is measured in the loss values."
+ },
+ {
+  "id": "lt-8.2",
+  "lecture": 8,
+  "stem": "How does uniform stability imply generalisation?",
+  "correct": [
+   "The expected gap between true and empirical risk is at most $\\beta$.",
+   "A $\\beta$-stable algorithm overfits by at most $\\beta$ on average."
+  ],
+  "distractors": [
+   {
+    "text": "A stable algorithm has zero training error.",
+    "misconception": "confuses stability with interpolation"
+   },
+   {
+    "text": "A stable algorithm has small hypothesis class complexity.",
+    "misconception": "believes stability needs a small class"
+   },
+   {
+    "text": "Stability implies the algorithm is deterministic.",
+    "misconception": "confuses with determinism"
+   },
+   {
+    "text": "A stable algorithm has test error below training error.",
+    "misconception": "reverses the sign of the gap"
+   },
+   {
+    "text": "Stable algorithms attain a training error not exceeding the Bayes error.",
+    "misconception": "confuses stability with optimality"
+   }
+  ],
+  "explanation": "Replacing a point changes the risk and the empirical risk by at most $\\beta$ each, which bounds the expected gap without any VC or Rademacher argument."
+ },
+ {
+  "id": "lt-8.3",
+  "lecture": 8,
+  "stem": "Regularised empirical risk with a $\\lambda\\|w\\|^2$ penalty and a Lipschitz convex loss has stability of order",
+  "correct": [
+   "Order $\\rho^2/(\\lambda m)$, shrinking with more data or stronger penalty.",
+   "Inversely proportional to $\\lambda$ and to $m$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\lambda\\rho^2 m$, which grows with the sample size.",
+    "misconception": "inverts the dependence"
+   },
+   {
+    "text": "$\\rho/\\sqrt{m}$, independent of $\\lambda$.",
+    "misconception": "ignores the strong convexity"
+   },
+   {
+    "text": "$\\rho^2\\lambda/m$, which improves as $\\lambda$ decreases.",
+    "misconception": "reverses the role of $\\lambda$"
+   },
+   {
+    "text": "$\\rho^2$, with no dependence on $\\lambda$ or $m$.",
+    "misconception": "drops both"
+   },
+   {
+    "text": "$\\rho^2/(\\lambda m)^2$, so doubling the sample size reduces it fourfold.",
+    "misconception": "squares the denominator"
+   }
+  ],
+  "explanation": "The penalty makes the objective $2\\lambda$-strongly convex, so one changed example moves the minimiser by at most $O(\\rho/(\\lambda m))$."
+ },
+ {
+  "id": "lt-8.4",
+  "lecture": 8,
+  "stem": "What is the cost of increasing the regularisation parameter $\\lambda$ in regularised empirical risk minimisation?",
+  "correct": [
+   "Stability improves, but the bias term grows as the solution is pulled to zero.",
+   "A smaller gap at the price of larger training error."
+  ],
+  "distractors": [
+   {
+    "text": "The generalisation gap grows with $\\lambda$, while the bias term is unchanged.",
+    "misconception": "reverses the effect on the gap"
+   },
+   {
+    "text": "Both the generalisation gap and the bias term shrink.",
+    "misconception": "believes the trade-off is free"
+   },
+   {
+    "text": "Nothing, because the regularised solution is always the best.",
+    "misconception": "ignores the trade-off"
+   },
+   {
+    "text": "The algorithm ceases to be stable above a certain value of $\\lambda$.",
+    "misconception": "invents a threshold"
+   },
+   {
+    "text": "The stability parameter grows, but the bias term is unchanged.",
+    "misconception": "gets the stability direction wrong"
+   }
+  ],
+  "explanation": "The optimal $\\lambda$ balances the stability term $\\propto1/(\\lambda m)$ against the shrinkage bias term."
+ },
+ {
+  "id": "lt-8.5",
+  "lecture": 8,
+  "stem": "Why can stability-based bounds hold for algorithms whose hypothesis class has infinite VC dimension?",
+  "correct": [
+   "They use the algorithm's sensitivity, not class capacity.",
+   "Only sensitivity to one example matters here."
+  ],
+  "distractors": [
+   {
+    "text": "Stability bounds hold only for finite classes.",
+    "misconception": "confuses with class-based bounds"
+   },
+   {
+    "text": "Infinite VC classes are stable by definition.",
+    "misconception": "confuses capacity with stability"
+   },
+   {
+    "text": "Stable algorithms use only a finite subset of the sample.",
+    "misconception": "confuses stability with sparsity"
+   },
+   {
+    "text": "Stability makes the VC dimension finite after training.",
+    "misconception": "confuses what stability controls"
+   },
+   {
+    "text": "They hold only when the algorithm has zero training error.",
+    "misconception": "confuses stability with interpolation"
+   }
+  ],
+  "explanation": "A strongly regularised kernel method can have infinite VC dimension yet be highly stable, because its output barely depends on any single point."
+ },
+ {
+  "id": "lt-9.1",
+  "lecture": 9,
+  "stem": "For convex $\\rho$-Lipschitz losses and $\\|w^*\\|\\le B$, what does SGD with suitable step size guarantee after $T$ steps?",
+  "correct": [
+   "The averaged iterate has expected excess risk at most $B\\rho/\\sqrt T$.",
+   "Suboptimality shrinking like $1/\\sqrt T$, scaled by $B\\rho$."
+  ],
+  "distractors": [
+   {
+    "text": "The final iterate attains exactly zero excess risk.",
+    "misconception": "confuses convergence with exact solution"
+   },
+   {
+    "text": "Excess risk at most $B\\rho/T$.",
+    "misconception": "gives the rate for a strongly convex setting"
+   },
+   {
+    "text": "Excess risk growing with the dimension of $w$.",
+    "misconception": "believes the rate depends on dimension"
+   },
+   {
+    "text": "Excess risk at most $B\\rho/T^2$.",
+    "misconception": "gives an accelerated rate"
+   },
+   {
+    "text": "Excess risk at most $B\\rho\\,\\sqrt T$, growing with the number of steps.",
+    "misconception": "inverts the dependence on $T$"
+   }
+  ],
+  "explanation": "With $\\eta=B/(\\rho\\sqrt T)$, SGD on the true risk using one fresh example per step has $\\mathbb E[L(\\bar w)]-L(w^*)\\le B\\rho/\\sqrt T$."
+ },
+ {
+  "id": "lt-9.2",
+  "lecture": 9,
+  "stem": "What are the sample complexity conclusions for convex Lipschitz bounded problems?",
+  "correct": [
+   "Order $B^2\\rho^2/\\varepsilon^2$ samples, with no dependence on the dimension.",
+   "Only the norm bound, Lipschitz constant and $\\varepsilon$ matter."
+  ],
+  "distractors": [
+   {
+    "text": "The sample complexity grows linearly with the dimension of $w$.",
+    "misconception": "believes the rate depends on dimension"
+   },
+   {
+    "text": "The problems are unlearnable unless the loss is strongly convex.",
+    "misconception": "confuses with strong convexity"
+   },
+   {
+    "text": "The sample complexity is $B\\rho/\\varepsilon$.",
+    "misconception": "forgets to square"
+   },
+   {
+    "text": "The sample complexity depends on the VC dimension of the loss class.",
+    "misconception": "applies a binary classification notion"
+   },
+   {
+    "text": "The sample complexity is exponential in $1/\\varepsilon$.",
+    "misconception": "gives an exponential rate"
+   }
+  ],
+  "explanation": "Convexity, Lipschitzness and boundedness together ensure learnability, whereas dropping boundedness or Lipschitzness can destroy it."
+ },
+ {
+  "id": "lt-9.3",
+  "lecture": 9,
+  "stem": "How does the SGD convergence rate improve when the objective is also $\\lambda$-strongly convex?",
+  "correct": [
+   "The rate becomes order $\\ln T/(\\lambda T)$.",
+   "It improves from $1/\\sqrt T$ to nearly $1/T$."
+  ],
+  "distractors": [
+   {
+    "text": "The rate stays $1/\\sqrt T$, since strong convexity does not help.",
+    "misconception": "ignores the benefit of curvature"
+   },
+   {
+    "text": "The rate becomes exponential in $T$ with a constant step size.",
+    "misconception": "confuses with the deterministic strongly convex case"
+   },
+   {
+    "text": "The rate is $1/T^2$.",
+    "misconception": "mixes with accelerated rates"
+   },
+   {
+    "text": "The rate becomes independent of $\\lambda$.",
+    "misconception": "ignores the dependence on curvature"
+   },
+   {
+    "text": "The rate stays at $1/\\sqrt T$, but the constant becomes smaller.",
+    "misconception": "misses that the exponent improves"
+   }
+  ],
+  "explanation": "Strong convexity allows step sizes $\\eta_t=1/(\\lambda t)$, and the stochastic noise limits the rate to about $1/T$."
+ },
+ {
+  "id": "lt-9.4",
+  "lecture": 9,
+  "stem": "What is the role of the subgradient in SGD for the hinge loss?",
+  "correct": [
+   "Any subdifferential element works as the update at the kink.",
+   "It stands in for the gradient where the loss has a kink."
+  ],
+  "distractors": [
+   {
+    "text": "It is the Hessian, used for a second-order update.",
+    "misconception": "confuses with Newton's method"
+   },
+   {
+    "text": "It is the gradient of the training error.",
+    "misconception": "confuses with the 0-1 loss"
+   },
+   {
+    "text": "It must be zero at the optimum, so SGD stops there.",
+    "misconception": "ignores the noise of stochastic updates"
+   },
+   {
+    "text": "It is not defined for convex functions.",
+    "misconception": "believes convexity requires differentiability"
+   },
+   {
+    "text": "A subgradient exists only for strictly convex functions.",
+    "misconception": "misstates when subgradients exist"
+   }
+  ],
+  "explanation": "For a convex function, any subgradient satisfies $f(u)\\ge f(w)+\\langle g,u-w\\rangle$, which is what the SGD analysis uses."
+ },
+ {
+  "id": "lt-9.5",
+  "lecture": 9,
+  "stem": "Why does the SGD analysis return the average of the iterates?",
+  "correct": [
+   "Averaging controls the noise, and the proof bounds the loss of the average.",
+   "The standard proof controls the averaged iterate."
+  ],
+  "distractors": [
+   {
+    "text": "The average always has lower empirical risk than every single iterate.",
+    "misconception": "believes averaging always wins"
+   },
+   {
+    "text": "Individual iterates are not defined for non-differentiable losses.",
+    "misconception": "confuses with subgradients"
+   },
+   {
+    "text": "Averaging makes the algorithm deterministic.",
+    "misconception": "confuses with randomness"
+   },
+   {
+    "text": "Only the first iterate is a good predictor.",
+    "misconception": "states the opposite"
+   },
+   {
+    "text": "Averaging is needed because each SGD step is computed with the exact full gradient.",
+    "misconception": "confuses SGD with full-batch descent"
+   }
+  ],
+  "explanation": "Convexity and Jensen's inequality give $f(\\bar w)\\le\\frac1T\\sum f(w_t)$, so the average inherits the bound on the average loss."
+ },
+ {
+  "id": "lt-10.1",
+  "lecture": 10,
+  "stem": "What is the main feature of the double descent curve?",
+  "correct": [
+   "Test risk peaks near the interpolation threshold, then falls again as capacity grows.",
+   "A second decrease follows the classical U-shape."
+  ],
+  "distractors": [
+   {
+    "text": "Test risk rises monotonically with model size.",
+    "misconception": "states the classical overfitting story"
+   },
+   {
+    "text": "Training error rises at the interpolation threshold.",
+    "misconception": "confuses training and test error"
+   },
+   {
+    "text": "Test risk falls to zero at the interpolation threshold.",
+    "misconception": "confuses fitting with generalising"
+   },
+   {
+    "text": "The curve occurs only for linear models with exactly one feature.",
+    "misconception": "restricts the phenomenon wrongly"
+   },
+   {
+    "text": "Test risk is lowest at the interpolation threshold and rises afterwards.",
+    "misconception": "keeps the classical picture"
+   }
+  ],
+  "explanation": "The peak occurs where the number of parameters is about the number of examples; beyond it, the minimum-norm interpolator can generalise well."
+ },
+ {
+  "id": "lt-10.2",
+  "lecture": 10,
+  "stem": "Which statement about interpolating the training data is correct in modern theory?",
+  "correct": [
+   "Interpolation need not hurt; some interpolators generalise well.",
+   "Zero training error can coexist with low test error."
+  ],
+  "distractors": [
+   {
+    "text": "Zero training error implies the model has overfitted and generalises poorly.",
+    "misconception": "states the classical belief"
+   },
+   {
+    "text": "Interpolators always generalise as well as the Bayes classifier.",
+    "misconception": "overgeneralises the benign case"
+   },
+   {
+    "text": "Interpolation is impossible for noisy labels.",
+    "misconception": "believes noise rules out fitting"
+   },
+   {
+    "text": "Only models with fewer parameters than examples can interpolate.",
+    "misconception": "gets the counting backwards"
+   },
+   {
+    "text": "Interpolating the training set is possible only if the labels have no noise.",
+    "misconception": "believes noise blocks interpolation"
+   }
+  ],
+  "explanation": "In the overparameterised regime, minimum-norm solutions can be benign; classical complexity bounds are only upper bounds and may be too loose."
+ },
+ {
+  "id": "lt-10.3",
+  "lecture": 10,
+  "stem": "In the bias-variance decomposition of expected squared error at a point $x$, which terms appear?",
+  "correct": [
+   "Squared bias, variance of the predictor, and irreducible noise variance.",
+   "Noise level plus squared bias plus variance."
+  ],
+  "distractors": [
+   {
+    "text": "Bias and variance only, because noise averages out.",
+    "misconception": "forgets irreducible noise"
+   },
+   {
+    "text": "Bias, variance and the training error.",
+    "misconception": "mixes in the training error"
+   },
+   {
+    "text": "The product of bias and variance.",
+    "misconception": "makes the decomposition multiplicative"
+   },
+   {
+    "text": "Variance and squared bias, with noise included in the bias.",
+    "misconception": "merges noise with bias"
+   },
+   {
+    "text": "Bias, variance, and the noise, each multiplied by the model's number of parameters.",
+    "misconception": "invents a scaling by parameters"
+   }
+  ],
+  "explanation": "$\\mathbb E(\\hat f(x)-y)^2=(\\mathbb E\\hat f(x)-f(x))^2+\\mathrm{Var}(\\hat f(x))+\\sigma^2$."
+ },
+ {
+  "id": "lt-10.4",
+  "lecture": 10,
+  "stem": "Uniform-convergence bounds over the entire hypothesis class can fail to explain deep networks because",
+  "correct": [
+   "They can be vacuous for classes that fit random labels, though networks generalise.",
+   "Class-wide bounds are loose even when the learned network is fine."
+  ],
+  "distractors": [
+   {
+    "text": "Deep networks cannot be trained to zero training error.",
+    "misconception": "misstates empirical fact"
+   },
+   {
+    "text": "The bounds require more labelled data than was ever collected, but they hold.",
+    "misconception": "ignores that the problem is looseness"
+   },
+   {
+    "text": "Neural networks violate Hoeffding's inequality.",
+    "misconception": "believes probabilistic inequalities fail"
+   },
+   {
+    "text": "Uniform convergence is only valid for linear models.",
+    "misconception": "restricts the concept wrongly"
+   },
+   {
+    "text": "Hoeffding's inequality requires the number of parameters to be below the sample size.",
+    "misconception": "invents an assumption"
+   }
+  ],
+  "explanation": "The set of functions that SGD actually finds may be much smaller than the whole class, so bounds on the learned function (norms, margins, stability) can be sharper."
+ },
+ {
+  "id": "lt-10.5",
+  "lecture": 10,
+  "stem": "Why is the noise variance called irreducible in the bias-variance decomposition?",
+  "correct": [
+   "No predictor can predict label noise, so it floors the squared error.",
+   "It comes from randomness of the target given $x$."
+  ],
+  "distractors": [
+   {
+    "text": "It disappears with enough training data.",
+    "misconception": "believes more data removes noise"
+   },
+   {
+    "text": "It decreases when model complexity increases.",
+    "misconception": "confuses with bias"
+   },
+   {
+    "text": "It is zero for the Bayes optimal predictor.",
+    "misconception": "misses that Bayes still has noise"
+   },
+   {
+    "text": "It is the same as the variance of the estimator.",
+    "misconception": "confuses noise with estimator variance"
+   },
+   {
+    "text": "It is the part of the error that more flexible models remove, so it falls with complexity.",
+    "misconception": "confuses noise with bias"
+   }
+  ],
+  "explanation": "Even the Bayes predictor $f(x)$ incurs expected squared error $\\sigma^2(x)$; only bias and variance depend on the learner."
+ }
+]
