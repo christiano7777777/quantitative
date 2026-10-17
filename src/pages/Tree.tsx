@@ -67,7 +67,7 @@ export function Tree() {
                 <span className="fill" style={{ width: `${p.percent}%` }} />
               </span>
               <span className="csub">
-                {p.required.passed}/{p.required.total} required · {p.path.passed}/{p.path.total} on path · {p.bonus.passed}/{p.bonus.total} bonus
+                {p.required.passed}/{p.required.total} required · {p.path.passed}/{p.path.total} on path · {p.bonusNeeded.passed}/{p.bonusNeeded.total} bonus needed ({p.bonus.total} to choose from, {c.bonus.filter(hasTest).length} with tests)
               </span>
               <span className="csub">{p.hours.passed}/{p.hours.total} h · tests ready for {p.testable}/{p.path.total} path topics</span>
             </button>

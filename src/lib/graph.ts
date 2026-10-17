@@ -1,6 +1,8 @@
 import type { Career, Topic } from './types'
 
 export const HOURS_PER_LECTURE = 3
+/** a career is complete when its path is passed and this many of its bonus topics are too */
+export const BONUS_NEEDED = 5
 
 export type Status = 'passed' | 'open' | 'locked'
 
@@ -67,7 +69,10 @@ export interface CareerProgress {
   bonus: { passed: number; total: number }
   /** hours of the path already passed, weighted by lectures; percent is 0-100 */
   hours: { passed: number; total: number }
+  /** 0-100: path hours plus BONUS_NEEDED bonus topics (valued at the mean bonus topic's hours) */
   percent: number
+  /** bonus topics passed (capped) / needed for completion */
+  bonusNeeded: { passed: number; total: number }
   /** topics on the path whose test exists in the app */
   testable: number
 }
@@ -80,9 +85,14 @@ export function careerProgress(
   const count = (list: readonly string[]) => ({ passed: list.filter((i) => passed.has(i)).length, total: list.length })
   const total = ids.reduce((n, id) => n + lect(id), 0)
   const done = ids.filter((i) => passed.has(i)).reduce((n, id) => n + lect(id), 0)
+  const need = Math.min(BONUS_NEEDED, c.bonus.length)
+  const meanBonus = c.bonus.length ? c.bonus.reduce((n, id) => n + lect(id), 0) / c.bonus.length : 0
+  const bonusTotal = need * meanBonus
+  const bonusDone = Math.min(bonusTotal, c.bonus.filter((i) => passed.has(i)).reduce((n, id) => n + lect(id), 0))
   return {
     path: count(ids), required: count(c.required), bonus: count(c.bonus),
-    hours: { passed: done, total }, percent: total ? Math.round((100 * done) / total) : 0,
+    hours: { passed: done, total }, percent: total ? Math.round((100 * (done + bonusDone)) / (total + bonusTotal)) : 0,
+    bonusNeeded: { passed: Math.min(need, count(c.bonus).passed), total: need },
     testable: ids.filter(hasTest).length,
   }
 }
