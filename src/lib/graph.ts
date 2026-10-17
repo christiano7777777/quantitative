@@ -60,6 +60,33 @@ export function careerSummary(g: Graph, c: Career) {
   return { topics: ids.size, lectures, hours: lectures * HOURS_PER_LECTURE, ids }
 }
 
+export interface CareerProgress {
+  /** topics passed / needed, counting the required topics and all their prerequisites */
+  path: { passed: number; total: number }
+  required: { passed: number; total: number }
+  bonus: { passed: number; total: number }
+  /** hours of the path already passed, weighted by lectures; percent is 0-100 */
+  hours: { passed: number; total: number }
+  percent: number
+  /** topics on the path whose test exists in the app */
+  testable: number
+}
+
+export function careerProgress(
+  g: Graph, c: Career, passed: ReadonlySet<string>, hasTest: (id: string) => boolean = () => true,
+): CareerProgress {
+  const ids = [...careerClosure(g, c)]
+  const lect = (id: string) => g.byId.get(id)!.lectures.length * HOURS_PER_LECTURE
+  const count = (list: readonly string[]) => ({ passed: list.filter((i) => passed.has(i)).length, total: list.length })
+  const total = ids.reduce((n, id) => n + lect(id), 0)
+  const done = ids.filter((i) => passed.has(i)).reduce((n, id) => n + lect(id), 0)
+  return {
+    path: count(ids), required: count(c.required), bonus: count(c.bonus),
+    hours: { passed: done, total }, percent: total ? Math.round((100 * done) / total) : 0,
+    testable: ids.filter(hasTest).length,
+  }
+}
+
 export function isUnlocked(g: Graph, id: string, passed: ReadonlySet<string>, dev: boolean): boolean {
   return dev || g.byId.get(id)!.prerequisites.every((p) => passed.has(p))
 }

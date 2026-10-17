@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { careers, domainOrder, topics } from '../data'
-import { ancestors, buildGraph, careerSummary, descendants, layout, statusOf } from './graph'
+import { ancestors, buildGraph, careerProgress, careerSummary, descendants, layout, statusOf } from './graph'
 
 const g = buildGraph(topics)
 
@@ -60,5 +60,34 @@ describe('statusOf', () => {
   it('passing sp unlocks ts1 only once reg1 is also passed', () => {
     expect(statusOf(g, 'ts1', new Set(['sp']), false)).toBe('locked')
     expect(statusOf(g, 'ts1', new Set(['sp', 'reg1']), false)).toBe('open')
+  })
+})
+
+describe('careerProgress', () => {
+  const qr = careers.find((c) => c.id === 'qr')!
+  it('is empty when nothing is passed', () => {
+    const p = careerProgress(g, qr, new Set())
+    expect(p.percent).toBe(0)
+    expect(p.path).toEqual({ passed: 0, total: 21 })
+    expect(p.required).toEqual({ passed: 0, total: qr.required.length })
+    expect(p.hours).toEqual({ passed: 0, total: 672 })
+  })
+  it('counts passed topics and weights hours by lectures', () => {
+    const p = careerProgress(g, qr, new Set(['calc', 'p3', 'zzz-not-on-path']))
+    const h = (id: string) => g.byId.get(id)!.lectures.length * 3
+    expect(p.path.passed).toBe(2)
+    expect(p.required.passed).toBe(1)
+    expect(p.hours.passed).toBe(h('calc') + h('p3'))
+    expect(p.percent).toBe(Math.round((100 * (h('calc') + h('p3'))) / 672))
+  })
+  it('reaches 100% when the whole path is passed, bonus topics do not count', () => {
+    const all = careerSummary(g, qr).ids
+    const p = careerProgress(g, qr, new Set(all))
+    expect(p.percent).toBe(100)
+    expect(p.path.passed).toBe(p.path.total)
+    expect(p.bonus.passed).toBe(qr.bonus.filter((b) => all.has(b)).length)
+  })
+  it('counts topics with a test via the hasTest callback', () => {
+    expect(careerProgress(g, qr, new Set(), (id) => id === 'p3').testable).toBe(1)
   })
 })
