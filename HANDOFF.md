@@ -34,7 +34,19 @@ prerequisites have tests; use Dev mode to try them.
 | `inf` Statistical Inference | done: 55 MC, 6 LQ generators, slots `[A,B] [D,E] [F,G]`. MC not yet reviewed by a human or second AI |
 | `reg2` Regression II | done: 56 MC (6 in lecture 8), 7 LQ generators, slots `[A,B] [D,E] [F,G,H]`. MC not yet reviewed |
 | `ts2` Time Series II | done: 50 MC, 8 LQ generators, slots `[A,B] [D,E,F] [G,H,I]`. MC not yet reviewed |
-| the other 12 scope topics | not started |
+| `ml` Machine Learning | done: 55 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. Theory plus hand computation only; LQ-A part 5 is a short "read this gradient-descent procedure" item. MC not yet reviewed |
+| `rm` Research Methods | done: 56 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `bay` Bayesian | done: 54 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]` (theory and hand computation only, no coding). MC not yet reviewed |
+| `pf2` Portfolio & Asset Pricing II | done: 49 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `hd` High-dimensional Stats | done: 50 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `ci` Causal Inference | done: 49 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `np` Nonparametric | done: 50 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `dl` Deep Learning | done: 55 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]` (no coding). MC not yet reviewed |
+| `mc` Monte Carlo | done: 45 MC (4 per lecture, 5 in lecture 11, below the usual 55), 7 LQ generators, slots `[A,B] [C,D,E] [F,G]`. MC not yet reviewed |
+| `algo` Algo / Quant Trading | done: 55 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]` (no coding). MC not yet reviewed |
+| `pz` Probability Puzzles | done: 52 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `latex` LaTeX & Research Writing | **not built, waiting for the owner**: see "Proposal for `latex`" below |
+| the other topics (prerequisites) | not started |
 
 ## Workflow that worked (per topic)
 1. Read the topic's lectures in `src/data/topics.json` (use UTF-8 when printing; the Windows console chokes on accents).
@@ -68,5 +80,28 @@ prerequisites have tests; use Dev mode to try them.
   (4) Chained LQ answers (F, E) tell students not to round intermediate values and use 2-3 d.p. tolerances.
 - `reg2`: `reg2-8.5`/`8.6` (selection bias of the minimum CV error, leakage in screening) and `reg2-7.5` (at most n nonzero lasso coefficients when p>n holds for a solution, not necessarily every solution under ties) are the subtler ones. The sign convention in `reg2-5.4` is stated in the stem. LQ-E's one-SE rule picks the largest lambda within one SE *at the minimum*; some texts use other conventions, and the question states this one.
 - `ts2`: `ts2-4.5` says the LR test of gamma=0 is valid; if gamma is constrained to be nonnegative the null is on the boundary and the limit is a chi-square mixture, so check the wording. The MC bank has 50 questions (5 per lecture), a little below the usual 55. LQ-F's half-life and LQ-H's densities assume exactly the stated models.
+- `ml`: `ml-4.5` says the 1-NN error is asymptotically at most twice the Bayes error (the sharper bound is `2R*(1-R*)`). `ml-7.3`'s "mainly reduces bias" is the usual heuristic, not a theorem. LQ-A part 5 (the gradient-descent procedure) is the only code-reading style item; LQ-G avoids ties in both k-means iterations.
+- `rm`: `rm-8.2` (BIC penalises more than AIC once `n > e^2`, about 7.4) and `rm-6.6` (the square-root rule fails under serial correlation of either sign). LQ-E uses the standard error for a Sharpe ratio estimated from monthly returns, `sqrt((1+SR^2/24)/years)` for i.i.d. returns; the first draft used the annual-frequency formula and the Monte Carlo test caught it.
+- `bay`: `bay-3.3` (credible versus confidence interval), `bay-11.4` (the "reverse KL" naming for `KL(q||p)`) and `bay-4.2` (improper flat priors) deserve a second read. Theory and hand computation only; the coding lines of the syllabus are left for the advanced part.
+- `pf2`: `pf2-4.4` states the fundamental theorem in its finite-state form; `pf2-9.1` states the post-publication decline of anomaly returns as a general tendency. LQ-E treats asset 1 on its own (one absolute view), as the question says.
+- `hd`: the Marchenko-Pastur edges and the BBP threshold (`hd-5.2`, `hd-6.1`) assume unit noise variance; `hd-2.2` relies on the Poisson and chi-square variables not being sub-Gaussian. The Wishart Monte Carlo test uses a finite-size tolerance for the smallest eigenvalue.
+- `ci`: `ci-5.5` (doubly robust) needs overlap and regularity conditions that the wording leaves implicit; `ci-9.5` states the fixed-effects assumption informally.
+- `np`: `np-1.2` quotes the Pitman efficiency 3/pi of the signed-rank test against the t test under normality; `np-6.5` says Spearman's rho is usually larger than Kendall's tau (about 1.5 times for moderate normal dependence).
+- `pz`: `pz-9.1` and `pz-9.2` assume the standard Monty Hall host protocols; numeric puzzle answers were turned into conceptual questions (why the answer is what it is). LQ-C and LQ-H use plain "dollars" wording because a `\$` inside math breaks the `$` balance check.
+- `mc`: only 45 MC questions (4 per lecture); `mc-6.2` is qualified to proportional allocation. LQ-D uses `exp(cU)` throughout so that every moment has a closed form, and the Euler strong-order test is a simulation.
+- `dl`: LQ-C uses the usual Adam constants (0.9, 0.999, 1e-8). LQ-H's KL term is for a one-dimensional latent. The syllabus coding lines are not examined.
+- `algo`: `algo-6.2` (square-root impact: per-share impact grows with the square root of size, so total cost grows faster than size). LQ-F's t-statistic uses `SR x sqrt(years)`, an approximation that ignores non-normality.
 - Authoring tip that saved time: write each true wording at about the length of the average distractor (not longer). Starting from
   full-sentence true wordings gave 64% longest and needed a rewrite of 45 questions.
+
+## Proposal for `latex` (needs the owner's decision before any build)
+The syllabus lectures are about typesetting and workflow, not mathematics, so the "computation" lines are not hand-computable
+numbers. The format needs a numeric final answer and independent recomputation, which does not fit most lectures. Proposal:
+1. MC (conceptual, 2 correct and 5 distractors, about 55 questions) covers all ten lectures in the normal way.
+2. LQ generators with a numeric answer are possible for a few lectures only: count the compiled pages or columns, the value of a
+   counter after a sequence of commands (section/equation numbering, `\setcounter`, `\addtocounter`), the number of
+   references after a bibliography key list, or lengths in a `tabular` column spec. A "read this LaTeX snippet and give the
+   number" item would fit the "code reading" allowance, with an independent re-implementation of the counter rules in the test.
+3. Lectures 8-10 (paper structure, slides, collaboration) have no numeric reading; they would rely on the MC only, or on counting
+   items (frames, authors, merge conflicts) in a short described scenario.
+Tell me whether you want (a) MC only, (b) MC plus the counter-style LQ generators above, or (c) something else.
