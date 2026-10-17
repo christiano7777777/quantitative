@@ -73,3 +73,6 @@ code { font-family: var(--mono); }
 .career .bar { display: block; height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; }
 .career .fill { display: block; height: 100%; background: var(--ok); transition: width .3s; }
 .career .csub { font-size: .78rem; color: var(--muted); }
+
+.login { display: flex; gap: 6px; align-items: center; }
+.login input { width: 110px; }

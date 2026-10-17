@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { App } from './App'
 import { createLocalProgress } from './lib/progress'
+import { applySavedProgress, checkCredentials, SAVED_TOPICS } from './lib/testLogin'
 import type { GradeResult } from './lib/types'
 
 const pass = { mcScore: 20, lqScore: 30, total: 50, max: 50, passed: true } as GradeResult
@@ -111,4 +112,25 @@ describe('topic and test flow', () => {
     }
     expect(seen.size).toBeGreaterThan(1)
   }, 60000)
+
+  it('test login rejects wrong credentials and leaves progress alone', async () => {
+    render(<App />)
+    await userEvent.click(screen.getByRole('button', { name: /^log in$/i }))
+    await userEvent.type(screen.getByLabelText('Username'), 'chrisccthz')
+    await userEvent.type(screen.getByLabelText('Password'), 'wrong')
+    await userEvent.click(screen.getByRole('button', { name: /^log in$/i }))
+    expect(await screen.findByText(/wrong username or password/i)).toBeTruthy()
+    expect(createLocalProgress(window.localStorage).passedIds().size).toBe(0)
+    expect(await checkCredentials('someone', 'x')).toBe(false)
+  })
+
+  it('applySavedProgress passes the saved topics once and keeps real attempts', () => {
+    const store = createLocalProgress(window.localStorage)
+    store.record('calc', { seed: 'real', mcIds: [], lqIds: [] }, { mc: [], lq: [] }, { ...pass, passed: false })
+    applySavedProgress(store)
+    applySavedProgress(store)
+    expect([...store.passedIds()].sort()).toEqual([...SAVED_TOPICS].sort())
+    expect(store.attempts('calc')).toHaveLength(2)
+    expect(store.attempts('la1')).toHaveLength(1)
+  })
 })
