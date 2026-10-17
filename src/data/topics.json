@@ -890,72 +890,71 @@
    "p1",
    "mvc"
   ],
-  "courses": "CUHK STAT2006 · HKU SDST2601 (joint distributions) and SDST2602 (LLN, CLT)",
+  "courses": "HKU SDST2602 · CUHK STAT2006 · HKUST MATH3423 (first half)",
   "starred": false,
-  "summary": "Continuous and multivariate random variables, transformations, conditional expectation, and the limit theorems that underlie all of statistics.",
+  "summary": "Probability and statistics II: sampling distributions, large-sample theory, estimation, confidence intervals and hypothesis tests.",
   "outcomes": [
-   "Work with joint, marginal and conditional densities",
-   "Transform random variables and derive their distributions",
-   "Use MGFs, conditioning and the CLT to solve problems"
+   "Derive and compare estimators by method of moments and maximum likelihood",
+   "Build confidence intervals and tests for means, variances and proportions",
+   "Apply the Neyman-Pearson lemma, likelihood ratio and chi-square tests"
   ],
-  "note": "Not a copy of one HKU course. HKU SDST2602 is estimation and hypothesis testing (our Statistical Inference), so this topic collects the multivariate and continuous probability that HKU spreads over SDST2601 and the start of SDST2602, plus MGFs, order statistics and the multivariate normal needed for inference. Assumes the discrete named distributions from Probability I.",
+  "note": "Follows HKU SDST2602 (Probability and statistics II): estimation and hypothesis testing, building on SDST2601. The multivariate-probability material of the earlier draft (MGFs, order statistics, multivariate normal) is no longer a separate course here.",
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
-    "title": "Continuous random variables",
-    "theory": "pdf, cdf, expectation, variance of continuous variables",
-    "computation": "Integrating densities, computing moments"
+    "title": "Samples and sampling distributions",
+    "theory": "Statistics, chi-square, t and F distributions, sampling distribution of the mean and variance",
+    "computation": "Distribution of the sample mean and variance"
    },
    {
-    "title": "Named continuous distributions",
-    "theory": "Uniform, exponential, gamma, beta, normal; memoryless property",
-    "computation": "Normal table lookups, exponential waiting times"
+    "title": "Large-sample theory",
+    "theory": "Markov and Chebyshev inequalities, weak law of large numbers, central limit theorem, modes of convergence (intuition)",
+    "computation": "Normal approximations, sample sizes from the CLT"
    },
    {
-    "title": "Joint distributions",
-    "theory": "Joint pmf/pdf, marginals, independence",
-    "computation": "Double integrals over regions, marginal densities"
+    "title": "Method of moments",
+    "theory": "Moment equations, consistency",
+    "computation": "Moment estimators for common families"
    },
    {
-    "title": "Conditional distributions",
-    "theory": "Conditional pdf, conditional expectation and variance",
-    "computation": "E[X",
-    "coding": "Y] calculations, law of total expectation and variance"
+    "title": "Maximum likelihood",
+    "theory": "Likelihood, score, invariance",
+    "computation": "Closed-form and numeric MLEs"
    },
    {
-    "title": "Covariance and correlation",
-    "theory": "Covariance, correlation, variance of sums",
-    "computation": "Covariance matrices of small vectors"
+    "title": "Properties of estimators",
+    "theory": "Bias, MSE, consistency, efficiency",
+    "computation": "Comparing estimators by MSE"
    },
    {
-    "title": "Transformations of variables",
-    "theory": "CDF method, Jacobian method, convolution",
-    "computation": "Densities of Y=g(X), sums of independent variables"
+    "title": "Sufficiency",
+    "theory": "Sufficient statistics, factorisation theorem, Rao-Blackwell idea",
+    "computation": "Finding sufficient statistics"
    },
    {
-    "title": "Order statistics",
-    "theory": "Distribution of min, max and k-th order statistic",
-    "computation": "Min/max of exponential and uniform samples"
+    "title": "Confidence intervals",
+    "theory": "Pivots, intervals for mean, variance, proportions",
+    "computation": "Interval construction and interpretation"
    },
    {
-    "title": "Moment generating functions",
-    "theory": "MGF, uniqueness, sums of independent variables",
-    "computation": "Identifying distributions from MGFs"
+    "title": "Hypothesis testing basics",
+    "theory": "Type I/II errors, power, p-values",
+    "computation": "Power calculations"
    },
    {
-    "title": "Multivariate normal",
-    "theory": "Definition, linear transformations, conditional distribution",
-    "computation": "Conditional mean and variance of bivariate normals"
+    "title": "Neyman-Pearson and likelihood ratio tests",
+    "theory": "NP lemma, LRT, Wilks theorem",
+    "computation": "Constructing LRTs, critical regions"
    },
    {
-    "title": "Modes of convergence",
-    "theory": "In probability, in distribution, almost surely (intuition)",
-    "computation": "Checking convergence of simple sequences"
+    "title": "Tests for means and variances",
+    "theory": "One- and two-sample t, F tests, Wald test",
+    "computation": "Test statistics and decisions from summaries"
    },
    {
-    "title": "Law of large numbers and CLT",
-    "theory": "Markov, Chebyshev, WLLN, CLT",
-    "computation": "Normal approximations to binomial and sums"
+    "title": "Chi-square tests",
+    "theory": "Pearson goodness of fit, independence",
+    "computation": "Contingency table tests"
    }
   ]
  },
@@ -1042,71 +1041,71 @@
   "prerequisites": [
    "p2"
   ],
-  "courses": "HKU SDST2602 (+ SDST3602 in part) · HKUST MATH3423 · CityU MS2602",
+  "courses": "HKU SDST3602 · HKUST MATH3423 (second half) · CityU MS2602",
   "starred": false,
-  "summary": "Estimation, testing and confidence intervals from a unified likelihood-based viewpoint.",
+  "summary": "Rigorous theory of estimation and testing: exponential families, UMVUE, information inequality, decision theory, UMP tests and the bootstrap.",
   "outcomes": [
-   "Derive and compare estimators",
-   "Construct tests and intervals",
-   "Judge optimality via sufficiency and the Cramer-Rao bound"
+   "Find UMVU estimators using completeness and the information inequality",
+   "State and apply decision-theoretic ideas: risk, admissibility, Bayes and minimax rules",
+   "Construct UMP and UMP unbiased tests and the matching confidence sets"
   ],
-  "note": "Closest to HKU SDST2602 (sampling distributions, MLE and method of moments, bias and efficiency, LRT, Neyman-Pearson, chi-square tests, confidence intervals). Sufficiency, UMVUE and Cramer-Rao come from the more advanced HKU SDST3602, which also covers decision theory, UMP and monotone-likelihood-ratio tests, exponential families and bootstrap; those last items are not in this topic. Assumes Probability II including MGFs and the CLT.",
+  "note": "Follows HKU SDST3602 (Statistical inference), the rigorous follow-up to SDST2602: estimation theory, decision theory, hypothesis testing and bootstrap. Assumes Probability II.",
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
-    "title": "Samples and sampling distributions",
-    "theory": "Statistics, chi-square, t and F distributions",
-    "computation": "Distribution of sample mean and variance"
+    "title": "Exponential families and sufficiency",
+    "theory": "Exponential families, minimal sufficiency, ancillarity",
+    "computation": "Identifying natural parameters and sufficient statistics"
    },
    {
-    "title": "Method of moments",
-    "theory": "Moment equations, consistency",
-    "computation": "Moment estimators for common families"
+    "title": "Completeness and UMVU estimation",
+    "theory": "Completeness, Rao-Blackwell, Lehmann-Scheffe, Basu theorem",
+    "computation": "Finding UMVUEs"
    },
    {
-    "title": "Maximum likelihood",
-    "theory": "Likelihood, score, invariance",
-    "computation": "Closed-form and numeric MLEs"
-   },
-   {
-    "title": "Properties of estimators",
-    "theory": "Bias, MSE, consistency, efficiency",
-    "computation": "Comparing estimators by MSE"
-   },
-   {
-    "title": "Sufficiency and completeness",
-    "theory": "Factorisation theorem, Rao-Blackwell, Lehmann-Scheffe",
-    "computation": "Finding sufficient statistics and UMVUEs"
-   },
-   {
-    "title": "Fisher information and Cramer-Rao",
-    "theory": "Information, CR bound, asymptotic normality of MLE",
+    "title": "Information inequality",
+    "theory": "Fisher information, Cramer-Rao bound, attainment",
     "computation": "Computing information and bounds"
    },
    {
-    "title": "Confidence intervals",
-    "theory": "Pivots, intervals for mean, variance, proportions",
-    "computation": "Interval construction and interpretation"
+    "title": "Likelihood and large-sample theory of the MLE",
+    "theory": "Consistency, asymptotic normality, efficiency, Wald and score statistics",
+    "computation": "Asymptotic variances and standard errors"
    },
    {
-    "title": "Hypothesis testing basics",
-    "theory": "Type I/II errors, power, p-values",
-    "computation": "Power calculations"
+    "title": "Decision theory",
+    "theory": "Loss, risk, admissibility, randomised rules",
+    "computation": "Risk functions and comparing rules"
    },
    {
-    "title": "Neyman-Pearson and likelihood ratio tests",
-    "theory": "NP lemma, LRT, Wilks theorem",
-    "computation": "Constructing LRTs, critical regions"
+    "title": "Bayes and minimax rules",
+    "theory": "Bayes risk, posterior expected loss, minimax and least favourable priors",
+    "computation": "Bayes estimators under squared and absolute loss"
    },
    {
-    "title": "Tests for means and variances",
-    "theory": "One- and two-sample t, F tests",
-    "computation": "Test statistics and decisions from summaries"
+    "title": "Prior and posterior inference",
+    "theory": "Conjugate priors, credible sets, Bayes versus frequentist",
+    "computation": "Posterior means and intervals"
    },
    {
-    "title": "Chi-square tests",
-    "theory": "Goodness of fit, independence",
-    "computation": "Contingency table tests"
+    "title": "Uniformly most powerful tests",
+    "theory": "Neyman-Pearson revisited, monotone likelihood ratio, Karlin-Rubin",
+    "computation": "Constructing UMP tests"
+   },
+   {
+    "title": "UMP unbiased and conditional tests",
+    "theory": "Unbiased tests, two-sided tests in exponential families, conditional tests",
+    "computation": "Two-sided and conditional tests"
+   },
+   {
+    "title": "Confidence sets and duality",
+    "theory": "Inversion of tests, optimal and unbiased confidence sets",
+    "computation": "Confidence sets from tests"
+   },
+   {
+    "title": "Bootstrap",
+    "theory": "Plug-in principle, bootstrap standard errors and intervals, consistency",
+    "computation": "Bootstrap bias and standard error"
    }
   ]
  },
