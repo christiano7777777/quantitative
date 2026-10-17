@@ -32,7 +32,9 @@ prerequisites have tests; use Dev mode to try them.
 | `sp` Stochastic Processes | done, MC bank rewritten after an external AI review |
 | `p3` Probability III | done (pilot): 55 MC, 5 LQ generators, slots `[A] [B,C] [D,E]`. **MC content not yet reviewed by a human or a second AI** |
 | `inf` Statistical Inference | done: 55 MC, 6 LQ generators, slots `[A,B] [D,E] [F,G]`. MC not yet reviewed by a human or second AI |
-| the other 14 scope topics | not started |
+| `reg2` Regression II | done: 56 MC (6 in lecture 8), 7 LQ generators, slots `[A,B] [D,E] [F,G,H]`. MC not yet reviewed |
+| `ts2` Time Series II | done: 50 MC, 8 LQ generators, slots `[A,B] [D,E,F] [G,H,I]`. MC not yet reviewed |
+| the other 12 scope topics | not started |
 
 ## Workflow that worked (per topic)
 1. Read the topic's lectures in `src/data/topics.json` (use UTF-8 when printing; the Windows console chokes on accents).
@@ -64,5 +66,7 @@ prerequisites have tests; use Dev mode to try them.
   (Chernoff-Lehmann). (2) `inf-4.5` (MSE-optimal divisor n+1 for normal data) and `inf-6.4` (Cramer-Rao fails for U(0,theta)) are the
   subtlest statements. (3) The LQ t table (`e-twosample.ts`, df 8-11) is printed in the question; the test checks it by integrating the t density.
   (4) Chained LQ answers (F, E) tell students not to round intermediate values and use 2-3 d.p. tolerances.
+- `reg2`: `reg2-8.5`/`8.6` (selection bias of the minimum CV error, leakage in screening) and `reg2-7.5` (at most n nonzero lasso coefficients when p>n holds for a solution, not necessarily every solution under ties) are the subtler ones. The sign convention in `reg2-5.4` is stated in the stem. LQ-E's one-SE rule picks the largest lambda within one SE *at the minimum*; some texts use other conventions, and the question states this one.
+- `ts2`: `ts2-4.5` says the LR test of gamma=0 is valid; if gamma is constrained to be nonnegative the null is on the boundary and the limit is a chi-square mixture, so check the wording. The MC bank has 50 questions (5 per lecture), a little below the usual 55. LQ-F's half-life and LQ-H's densities assume exactly the stated models.
 - Authoring tip that saved time: write each true wording at about the length of the average distractor (not longer). Starting from
   full-sentence true wordings gave 64% longest and needed a rewrite of 45 questions.

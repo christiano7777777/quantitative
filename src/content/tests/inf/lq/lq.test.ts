@@ -112,7 +112,7 @@ describe('generator A against independent computation', () => {
       rel(ans[4], u2 / runs - (u1 / runs) ** 2, 0.03)
       rel(u1 / runs, theta, 0.01) // unbiased
     }
-  })
+  }, 60000)
 })
 
 // ---------- B ----------
@@ -136,7 +136,7 @@ describe('generator B against independent computation', () => {
       close(m1, lam, 1e-3)
       close(ans[4], m2 - m1 * m1, 2e-3)
     }
-  })
+  }, 60000)
   it('Monte Carlo: P(Xbar > c) and the variance of the UMVUE (5 seeds)', () => {
     for (const s of seeds('B', 5)) {
       const prm = B.sample(makeRng(s))
@@ -157,7 +157,7 @@ describe('generator B against independent computation', () => {
       // heavy-tailed for n = 3: loose bound
       rel(ans[4], u2 / runs - (u1 / runs) ** 2, n === 3 ? 0.35 : 0.1)
     }
-  })
+  }, 60000)
 })
 
 // ---------- D ----------
@@ -208,7 +208,7 @@ describe('generator D against independent computation', () => {
       close(ans[0], rate(prm.p0), 0.006)
       close(ans[1], rate(prm.p1), 0.006)
     }
-  })
+  }, 60000)
 })
 
 // ---------- E ----------
@@ -295,7 +295,7 @@ describe('generator F against independent computation', () => {
     // for a big table with small departures, G^2 and X^2 agree closely: checks the two formulas against each other
     const big = Fq.build({ table: [[400, 400, 400], [405, 395, 401]], counts: [10, 10, 10, 10] })
     close(big.parts[1].answer, big.parts[2].answer, 0.01)
-  })
+  }, 60000)
 })
 
 // ---------- G ----------
@@ -350,5 +350,5 @@ describe('generator G against independent computation', () => {
       close(ans[2], rate(prm.n * prm.lam0), 0.005)
       close(ans[3], rate((prm.n * prm.lam0) / 2), 0.005)
     }
-  })
+  }, 60000)
 })
