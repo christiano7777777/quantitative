@@ -1,0 +1,1922 @@
+[
+ {
+  "id": "sc-1.1",
+  "lecture": 1,
+  "stem": "Which list of properties characterises a standard Brownian motion $W$?",
+  "correct": [
+   "$W_0=0$, continuous paths, and independent increments with $W_t-W_s\\sim N(0,t-s)$ for $s<t$.",
+   "Zero start, continuous paths, and independent normal increments with variance $t-s$."
+  ],
+  "distractors": [
+   {
+    "text": "$W_0=0$, continuous paths, and independent increments with $W_t-W_s\\sim N(0,(t-s)^2)$.",
+    "misconception": "takes the variance to grow like the square of the elapsed time"
+   },
+   {
+    "text": "$W_0=0$, continuous paths, and increments $W_t-W_s\\sim N(0,1)$ whatever the gap $t-s$.",
+    "misconception": "forgets that the increment variance grows with the gap"
+   },
+   {
+    "text": "$W_0=0$, differentiable paths, and independent increments with $W_t-W_s\\sim N(0,t-s)$.",
+    "misconception": "believes Brownian paths are smooth"
+   },
+   {
+    "text": "$W_0=0$, continuous paths, and increments over adjacent intervals that are positively correlated.",
+    "misconception": "confuses independent increments with positive dependence"
+   },
+   {
+    "text": "$W_0=0$, continuous paths, and increments $W_t-W_s\\sim N(t-s,t-s)$ with a unit drift.",
+    "misconception": "gives the increments a nonzero mean"
+   }
+  ],
+  "explanation": "The defining properties are start at zero, continuity, and independent stationary Gaussian increments with variance equal to the time gap."
+ },
+ {
+  "id": "sc-1.2",
+  "lecture": 1,
+  "stem": "For a standard Brownian motion and times $s<t$, what is $\\operatorname{Cov}(W_s,W_t)$?",
+  "correct": [
+   "It equals $\\min(s,t)=s$, the variance at the earlier time.",
+   "The variance at the earlier of the two times, $s$."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $st$, the product of the two times.",
+    "misconception": "treats the covariance as multiplicative like a product of variances"
+   },
+   {
+    "text": "It equals $t-s$, the variance of the increment between the two times.",
+    "misconception": "confuses the covariance with the increment variance"
+   },
+   {
+    "text": "It equals $\\max(s,t)=t$, the variance at the later time.",
+    "misconception": "picks the later time instead of the earlier one"
+   },
+   {
+    "text": "It equals $\\sqrt{st}$, the geometric mean of the two times.",
+    "misconception": "guesses a symmetric formula in the times"
+   },
+   {
+    "text": "It equals $0$, because the increments are independent.",
+    "misconception": "forgets that the two values share the early path"
+   }
+  ],
+  "explanation": "Write $W_t=W_s+(W_t-W_s)$; the increment is independent of $W_s$, so $\\operatorname{Cov}(W_s,W_t)=\\operatorname{Var}(W_s)=s$."
+ },
+ {
+  "id": "sc-1.3",
+  "lecture": 1,
+  "stem": "Which transformation of a standard Brownian motion $W$ and a constant $c>0$ is again a standard Brownian motion?",
+  "correct": [
+   "The process $c\\,W_{t/c^2}$, by the scaling property.",
+   "Space is stretched by $c$ and time is compressed by $c^2$."
+  ],
+  "distractors": [
+   {
+    "text": "The process $c\\,W_{t/c}$, with time compressed by only a factor $c$.",
+    "misconception": "gets the variance wrong, since it equals ct"
+   },
+   {
+    "text": "The process $W_{ct}$ with no rescaling of the space variable.",
+    "misconception": "forgets that its variance becomes ct"
+   },
+   {
+    "text": "The process $\\sqrt{c}\\,W_{ct}$, which stretches space and also speeds up time.",
+    "misconception": "multiplies the variance by c squared"
+   },
+   {
+    "text": "The process $W_{t^2}$, which speeds the clock up quadratically.",
+    "misconception": "confuses a nonlinear time change with scaling"
+   },
+   {
+    "text": "The process $c\\,W_t$ for every fixed $c>0$.",
+    "misconception": "believes any constant multiple is again standard"
+   }
+  ],
+  "explanation": "A scaling must keep $\\operatorname{Var}=t$: $\\operatorname{Var}(cW_{t/c^2})=c^2t/c^2=t$, and the other candidates give a different variance."
+ },
+ {
+  "id": "sc-1.4",
+  "lecture": 1,
+  "stem": "What is the quadratic variation $[W]_t$ of a standard Brownian motion on $[0,t]$?",
+  "correct": [
+   "It equals $t$, the limit of squared increment sums as the mesh shrinks.",
+   "Deterministic and equal to the elapsed time $t$."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $0$, as for any continuous path of finite variation.",
+    "misconception": "applies the rule for smooth paths to a path of infinite variation"
+   },
+   {
+    "text": "It equals $\\sqrt{t}$, because the increments scale like the square root of time.",
+    "misconception": "confuses the size of an increment with its square"
+   },
+   {
+    "text": "It is infinite, because the paths are not differentiable.",
+    "misconception": "confuses roughness with an explosion of the squared sum"
+   },
+   {
+    "text": "It is a random variable whose value depends on the path that occurred.",
+    "misconception": "forgets that the limit is deterministic"
+   },
+   {
+    "text": "It equals $t^2$, since each squared increment is of order $(\\Delta t)^2$.",
+    "misconception": "mistakes the order of a squared increment"
+   }
+  ],
+  "explanation": "Each $(\\Delta W)^2$ has mean $\\Delta t$ and variance $2(\\Delta t)^2$, so the sum converges in $L^2$ to $t$. This is the heart of the Ito correction."
+ },
+ {
+  "id": "sc-1.5",
+  "lecture": 1,
+  "stem": "Which of the following processes built from a standard Brownian motion $W$ is again a standard Brownian motion?",
+  "correct": [
+   "The restart $W_{T+t}-W_T$ at fixed $T$.",
+   "The reflection $-W_t$."
+  ],
+  "distractors": [
+   {
+    "text": "The absolute value $|W_t|$ of the path.",
+    "misconception": "forgets that it is nonnegative with positive mean"
+   },
+   {
+    "text": "The square $W_t^2$ of the path.",
+    "misconception": "forgets that it is nonnegative and not centred"
+   },
+   {
+    "text": "The time-sped process $W_{2t}$.",
+    "misconception": "gets the variance of the increments wrong, 2 per unit time"
+   },
+   {
+    "text": "The drifted process $W_t-t$.",
+    "misconception": "thinks subtracting a drift preserves the law"
+   },
+   {
+    "text": "The process $\\sqrt{t}\\,W_1$ for all $t\\ge0$.",
+    "misconception": "is not a process with independent increments, though its marginals match"
+   }
+  ],
+  "explanation": "Restarting at a fixed time and reflecting both keep the defining properties. $|W|$ and $W^2$ are not centred, and a drifted or sped-up process has the wrong increment law."
+ },
+ {
+  "id": "sc-2.1",
+  "lecture": 2,
+  "stem": "What is true of almost every Brownian sample path?",
+  "correct": [
+   "It is continuous everywhere but differentiable at no point of its domain.",
+   "At no time $t$ does the path have a derivative, although it is continuous."
+  ],
+  "distractors": [
+   {
+    "text": "It is differentiable everywhere except at countably many points.",
+    "misconception": "underestimates the roughness"
+   },
+   {
+    "text": "It is differentiable at almost every time, as for any continuous function.",
+    "misconception": "applies the Lebesgue theorem for monotone functions"
+   },
+   {
+    "text": "It is differentiable, with a bounded derivative, on every interval $[a,b]$ with $a>0$.",
+    "misconception": "believes that restricting away from zero smooths the path"
+   },
+   {
+    "text": "It has a derivative at every time, but the derivative is discontinuous.",
+    "misconception": "confuses a rough derivative with a rough path"
+   },
+   {
+    "text": "It is of bounded variation, which is why Riemann-Stieltjes integration works.",
+    "misconception": "forgets that the total variation is infinite"
+   }
+  ],
+  "explanation": "Brownian paths are nowhere differentiable and of infinite total variation on every interval, which is why a new integral (Ito) is needed."
+ },
+ {
+  "id": "sc-2.2",
+  "lecture": 2,
+  "stem": "For which Holder exponents are Brownian sample paths Holder continuous on $[0,1]$ with probability one?",
+  "correct": [
+   "Every exponent $\\alpha<1/2$, but no exponent above $1/2$.",
+   "Holder for every $\\alpha<1/2$, so continuous but not Lipschitz."
+  ],
+  "distractors": [
+   {
+    "text": "Every exponent $\\alpha<1$, including nearly Lipschitz paths.",
+    "misconception": "confuses Brownian paths with smoother processes"
+   },
+   {
+    "text": "Every exponent $\\alpha\\le 1$, so the paths are Lipschitz.",
+    "misconception": "believes the paths have bounded slope"
+   },
+   {
+    "text": "Only the exponent $\\alpha=1/2$, with a uniform constant.",
+    "misconception": "overlooks the logarithmic factor in the exact modulus of continuity"
+   },
+   {
+    "text": "Every exponent $\\alpha>1/2$, since the increments are small.",
+    "misconception": "reverses the direction of the inequality"
+   },
+   {
+    "text": "Exactly the exponents $\\alpha\\le 1/2$, with a uniform constant at $1/2$.",
+    "misconception": "ignores the logarithmic correction at the critical exponent"
+   }
+  ],
+  "explanation": "Increments are of size $\\sqrt{h}$, so exponents below $1/2$ work; Levy's modulus $\\sqrt{2h\\log(1/h)}$ shows $1/2$ itself fails and no larger exponent works."
+ },
+ {
+  "id": "sc-2.3",
+  "lecture": 2,
+  "stem": "Let $M_t=\\max_{0\\le s\\le t}W_s$ and $a>0$. What does the reflection principle say about $P(M_t\\ge a)$?",
+  "correct": [
+   "It equals $2P(W_t\\ge a)$, twice the probability that the endpoint exceeds $a$.",
+   "Twice the probability that the endpoint $W_t$ is at least $a$."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $P(W_t\\ge a)$, because reaching the level is no more likely than ending above it.",
+    "misconception": "ignores paths that hit the level and fall back"
+   },
+   {
+    "text": "It equals $\\tfrac12P(W_t\\ge a)$, the chance that the path finishes beyond $a$ after a hit.",
+    "misconception": "halves instead of doubles"
+   },
+   {
+    "text": "It equals $2P(W_t\\ge 2a)$, since reflecting a path doubles the level.",
+    "misconception": "reflects the level instead of the path"
+   },
+   {
+    "text": "It equals $P(W_t\\ge a)^2$, since the path must exceed $a$ twice.",
+    "misconception": "squares the probability instead of doubling it"
+   },
+   {
+    "text": "It equals $P(W_t\\ge a)+P(W_t\\le -a)$ restricted to paths that stay positive.",
+    "misconception": "invents a restriction instead of reflecting the path"
+   }
+  ],
+  "explanation": "A path that hits $a$ is, after the hit, equally likely to end above or below $a$, so reflecting the part after the hit gives $P(M_t\\ge a)=2P(W_t\\ge a)$."
+ },
+ {
+  "id": "sc-2.4",
+  "lecture": 2,
+  "stem": "What is the distribution of $M_t=\\max_{0\\le s\\le t}W_s$ for a fixed time $t$?",
+  "correct": [
+   "The same as that of $|W_t|$, a half-normal distribution.",
+   "It has the law of the absolute value of a $N(0,t)$ variable."
+  ],
+  "distractors": [
+   {
+    "text": "The same as that of $W_t$, a $N(0,t)$ distribution.",
+    "misconception": "forgets the maximum is nonnegative and exceeds the endpoint"
+   },
+   {
+    "text": "A normal distribution with positive mean $\\sqrt{2t/\\pi}$.",
+    "misconception": "matches the mean of the half-normal but not its shape"
+   },
+   {
+    "text": "The same as that of $W_t^2$, a scaled chi-square distribution.",
+    "misconception": "confuses the absolute value with its square"
+   },
+   {
+    "text": "The same as that of $2W_t$, a normal with variance $4t$.",
+    "misconception": "confuses doubling the probability with doubling the variable"
+   },
+   {
+    "text": "An exponential distribution with mean $t$.",
+    "misconception": "guesses a waiting-time law for a maximum"
+   }
+  ],
+  "explanation": "From the reflection principle, $P(M_t\\ge a)=2P(W_t\\ge a)=P(|W_t|\\ge a)$, so $M_t$ and $|W_t|$ have the same law."
+ },
+ {
+  "id": "sc-2.5",
+  "lecture": 2,
+  "stem": "Let $\\tau_a=\\inf\\{t:W_t=a\\}$ be the first hitting time of a level $a>0$. Which statement is correct?",
+  "correct": [
+   "$\\tau_a$ is finite with probability one, yet its mean $E[\\tau_a]$ is infinite.",
+   "The level is hit for sure, yet the mean waiting time is infinite."
+  ],
+  "distractors": [
+   {
+    "text": "$\\tau_a$ is finite with probability one and $E[\\tau_a]=a^2$.",
+    "misconception": "borrows the exit time of a symmetric interval"
+   },
+   {
+    "text": "With positive probability the path never reaches $a$.",
+    "misconception": "ignores recurrence of one-dimensional Brownian motion"
+   },
+   {
+    "text": "$\\tau_a$ is exponentially distributed, so its mean is finite.",
+    "misconception": "confuses a hitting time with a Poisson waiting time"
+   },
+   {
+    "text": "$E[\\tau_a]=a/\\mu$ for a drift $\\mu$, which tends to infinity only as $\\mu\\to0$.",
+    "misconception": "applies the formula for Brownian motion with drift to the driftless case"
+   },
+   {
+    "text": "$\\tau_a<\\infty$ almost surely and $E[\\tau_a]=a$, as time and space scale together.",
+    "misconception": "ignores that time scales as space squared"
+   }
+  ],
+  "explanation": "$P(\\tau_a\\le t)=2P(W_t\\ge a)\\to1$ so $\\tau_a<\\infty$ a.s., but $P(\\tau_a>t)\\sim a\\sqrt{2/(\\pi t)}$ has a non-summable tail, so the mean is infinite."
+ },
+ {
+  "id": "sc-2.6",
+  "lecture": 2,
+  "stem": "Which property of Brownian motion justifies reflecting the path after the hitting time $\\tau_a$ in the reflection argument?",
+  "correct": [
+   "The strong Markov property: the path after $\\tau_a$ is a fresh Brownian motion.",
+   "Independent restart at a stopping time."
+  ],
+  "distractors": [
+   {
+    "text": "The Markov property at fixed deterministic times only.",
+    "misconception": "forgets that the hitting time is random"
+   },
+   {
+    "text": "The martingale property of $W$, which gives $E[W_{\\tau_a}]=0$.",
+    "misconception": "confuses optional stopping with restarting"
+   },
+   {
+    "text": "The scaling property $c\\,W_{t/c^2}\\overset{d}{=}W_t$.",
+    "misconception": "uses the wrong symmetry of the process"
+   },
+   {
+    "text": "The fact that Brownian paths are continuous, so the path crosses the level.",
+    "misconception": "uses continuity, which only gives that the level is hit"
+   },
+   {
+    "text": "The independence of the increments over disjoint intervals of fixed length.",
+    "misconception": "forgets that the restart time is random"
+   }
+  ],
+  "explanation": "The reflected process has the same law because $W_{\\tau_a+s}-a$ is a Brownian motion independent of the path up to $\\tau_a$ and symmetric in law."
+ },
+ {
+  "id": "sc-2.7",
+  "lecture": 2,
+  "stem": "What does the set of zeros $\\{t\\ge0: W_t=0\\}$ of a Brownian path look like?",
+  "correct": [
+   "It is closed, has no isolated points, and has Lebesgue measure zero.",
+   "An uncountable closed set with no isolated points and zero length."
+  ],
+  "distractors": [
+   {
+    "text": "It consists of finitely many isolated points on any bounded interval.",
+    "misconception": "assumes a continuous path can only cross zero a few times"
+   },
+   {
+    "text": "It is a countable set of isolated points, like the zeros of a smooth function.",
+    "misconception": "transfers the picture from smooth paths"
+   },
+   {
+    "text": "It has positive Lebesgue measure, because the path spends time at zero.",
+    "misconception": "confuses recurrence with time spent at the origin"
+   },
+   {
+    "text": "It is empty after the first return, by the strong Markov property.",
+    "misconception": "reverses the effect of restarting at a zero"
+   },
+   {
+    "text": "It is a bounded set, since the path drifts away from zero.",
+    "misconception": "forgets that Brownian motion is recurrent"
+   }
+  ],
+  "explanation": "At each zero the path restarts and immediately returns to zero infinitely often, so zeros accumulate at each of their points; yet $E|\\{t\\le T:W_t=0\\}|=\\int P(W_t=0)dt=0$."
+ },
+ {
+  "id": "sc-3.1",
+  "lecture": 3,
+  "stem": "How is the Ito integral $\\int_0^T H_t\\,dW_t$ of an adapted process $H$ constructed?",
+  "correct": [
+   "The $L^2$ limit of sums $\\sum H_{t_i}(W_{t_{i+1}}-W_{t_i})$ with $H$ at the left end.",
+   "A mean-square limit of left-endpoint Riemann sums against the increments."
+  ],
+  "distractors": [
+   {
+    "text": "As the pathwise Riemann-Stieltjes limit, which exists for every continuous path.",
+    "misconception": "ignores the infinite variation of Brownian paths"
+   },
+   {
+    "text": "As the limit of sums with $H$ evaluated at the midpoint of each interval.",
+    "misconception": "describes the Stratonovich integral"
+   },
+   {
+    "text": "As the limit of sums with $H$ evaluated at the right end of each interval.",
+    "misconception": "gives an anticipating integral, not the Ito integral"
+   },
+   {
+    "text": "As the almost sure limit of the same sums for every partition sequence.",
+    "misconception": "overlooks that the convergence is in mean square"
+   },
+   {
+    "text": "As $\\int_0^T H_t\\,\\dot W_t\\,dt$ with the derivative of the path.",
+    "misconception": "uses a derivative that does not exist"
+   }
+  ],
+  "explanation": "Taking $H$ at the left endpoint keeps the integrand non-anticipating, which makes the integral a martingale; the limit is in $L^2$."
+ },
+ {
+  "id": "sc-3.2",
+  "lecture": 3,
+  "stem": "For an adapted process $H$ with $E\\int_0^TH_t^2dt<\\infty$, what does the Ito isometry state?",
+  "correct": [
+   "$E\\left[\\left(\\int_0^T H_t\\,dW_t\\right)^2\\right]=E\\int_0^T H_t^2\\,dt$.",
+   "The second moment of the integral equals expected $\\int H^2dt$."
+  ],
+  "distractors": [
+   {
+    "text": "$E\\left[\\left(\\int_0^T H_t\\,dW_t\\right)^2\\right]=\\left(E\\int_0^T H_t\\,dt\\right)^2$.",
+    "misconception": "moves the square outside the expectation"
+   },
+   {
+    "text": "$E\\left[\\left(\\int_0^T H_t\\,dW_t\\right)^2\\right]=E\\int_0^T|H_t|\\,dt$.",
+    "misconception": "drops the square of the integrand"
+   },
+   {
+    "text": "$E\\left[\\int_0^T H_t\\,dW_t\\right]=E\\int_0^T H_t^2\\,dt$.",
+    "misconception": "confuses the mean with the second moment"
+   },
+   {
+    "text": "$E\\left[\\left(\\int_0^T H_t\\,dW_t\\right)^2\\right]=T\\,E[H_T^2]$.",
+    "misconception": "replaces the time average by the final value"
+   },
+   {
+    "text": "$E\\left[\\left(\\int_0^T H_t\\,dW_t\\right)^2\\right]=\\int_0^T\\left(E[H_t]\\right)^2dt$.",
+    "misconception": "puts the square outside the expectation"
+   }
+  ],
+  "explanation": "The isometry maps $L^2$ of integrands to $L^2$ of random variables: the variance of the integral is the expected integral of the squared integrand."
+ },
+ {
+  "id": "sc-3.3",
+  "lecture": 3,
+  "stem": "Let $H$ be adapted with $E\\int_0^TH_t^2dt<\\infty$. Which statement about $I_t=\\int_0^tH_s\\,dW_s$ is correct?",
+  "correct": [
+   "$I$ is a martingale starting at $0$, so its mean is zero.",
+   "Constant expectation $0$ and fair-game increments."
+  ],
+  "distractors": [
+   {
+    "text": "$I$ is a submartingale, because of the quadratic variation $\\int H^2ds$.",
+    "misconception": "confuses the quadratic variation with a compensator of $I$"
+   },
+   {
+    "text": "$I$ has expectation $E\\int_0^tH_s\\,ds$.",
+    "misconception": "treats the Ito integral like an ordinary integral"
+   },
+   {
+    "text": "$I$ is a process of bounded variation with $I_t=\\int_0^t H_s\\,dW_s$ pathwise.",
+    "misconception": "ignores that it has quadratic variation"
+   },
+   {
+    "text": "$I$ has expectation $\\tfrac12E\\int_0^tH_s^2\\,ds$.",
+    "misconception": "imports the Ito correction into the mean"
+   },
+   {
+    "text": "$I$ is a supermartingale, since its variance grows over time.",
+    "misconception": "confuses growing variance with drift"
+   }
+  ],
+  "explanation": "Conditional on the past, each increment $H_{t_i}\\Delta W_i$ has mean zero since $H_{t_i}$ is known and $\\Delta W_i$ is independent of it."
+ },
+ {
+  "id": "sc-3.4",
+  "lecture": 3,
+  "stem": "How is the quantity $\\int_0^TW_t\\,dW_t$ evaluated by Ito calculus?",
+  "correct": [
+   "It equals $\\tfrac12(W_T^2-T)$, half the squared endpoint less the time.",
+   "Half of $W_T^2$ minus half of $T$."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $\\tfrac12W_T^2$, as for smooth functions with $\\int x\\,dx=x^2/2$.",
+    "misconception": "ignores the Ito correction term"
+   },
+   {
+    "text": "It equals $\\tfrac12W_T^2+\\tfrac12T$, with the correction added.",
+    "misconception": "gets the sign of the Ito correction wrong"
+   },
+   {
+    "text": "It equals $W_T^2-T$, the martingale itself.",
+    "misconception": "forgets the factor one half"
+   },
+   {
+    "text": "It equals $\\tfrac12W_T^2-\\tfrac14T$, a half-strength correction.",
+    "misconception": "halves the correction a second time"
+   },
+   {
+    "text": "It equals $\\tfrac12 T$, because $W_T^2$ averages to $T$.",
+    "misconception": "replaces the random variable by its expectation"
+   }
+  ],
+  "explanation": "By Ito's formula $d(W^2)=2W\\,dW+dt$, so $\\int_0^TW\\,dW=\\tfrac12(W_T^2-T)$. The Stratonovich integral would give $\\tfrac12W_T^2$."
+ },
+ {
+  "id": "sc-3.5",
+  "lecture": 3,
+  "stem": "For a deterministic square-integrable function $f$, what is the law of $\\int_0^Tf(t)\\,dW_t$?",
+  "correct": [
+   "Normal with mean $0$ and variance $\\int_0^Tf(t)^2dt$.",
+   "A centred Gaussian variable whose variance is the integral of $f^2$."
+  ],
+  "distractors": [
+   {
+    "text": "Normal with mean $0$ and variance $\\left(\\int_0^Tf(t)\\,dt\\right)^2$.",
+    "misconception": "squares after integrating, instead of before"
+   },
+   {
+    "text": "Normal with mean $\\int_0^Tf(t)\\,dt$ and variance $\\int_0^Tf(t)^2dt$.",
+    "misconception": "gives the Ito integral an ordinary-integral mean"
+   },
+   {
+    "text": "Lognormal, with log-variance $\\int_0^Tf(t)^2dt$.",
+    "misconception": "confuses a stochastic integral with an exponential"
+   },
+   {
+    "text": "Not Gaussian in general, since $f$ may vary with time.",
+    "misconception": "fears a time-varying integrand breaks normality"
+   },
+   {
+    "text": "Normal with mean $0$ and variance $\\int_0^T|f(t)|\\,dt$.",
+    "misconception": "drops the square of the integrand"
+   }
+  ],
+  "explanation": "A Wiener integral is a limit of linear combinations of independent normal increments, hence Gaussian; the isometry gives its variance."
+ },
+ {
+  "id": "sc-3.6",
+  "lecture": 3,
+  "stem": "Let $H$ be adapted and square integrable. What is the quadratic variation of $I_t=\\int_0^tH_s\\,dW_s$?",
+  "correct": [
+   "$[I]_t=\\int_0^tH_s^2\\,ds$, the integrated square.",
+   "The integral of $H_s^2$ over $[0,t]$."
+  ],
+  "distractors": [
+   {
+    "text": "$[I]_t=\\int_0^tH_s\\,ds$.",
+    "misconception": "drops the square of the integrand"
+   },
+   {
+    "text": "$[I]_t=0$, since an integral is smoother than its integrator.",
+    "misconception": "thinks integration removes the roughness"
+   },
+   {
+    "text": "$[I]_t=t$, the same as that of $W$.",
+    "misconception": "forgets the integrand multiplies the increments"
+   },
+   {
+    "text": "$[I]_t=\\left(\\int_0^tH_s\\,dW_s\\right)^2$.",
+    "misconception": "confuses quadratic variation with the squared process"
+   },
+   {
+    "text": "$[I]_t=E\\int_0^tH_s^2\\,ds$, a deterministic number.",
+    "misconception": "takes the expectation, but the variation is path-dependent"
+   }
+  ],
+  "explanation": "Since $dI=H\\,dW$, $(dI)^2=H^2(dW)^2=H^2dt$, so $[I]_t=\\int_0^tH_s^2ds$, which is random when $H$ is."
+ },
+ {
+  "id": "sc-4.1",
+  "lecture": 4,
+  "stem": "What is Ito's formula for $f(W_t)$ with $f\\in C^2$?",
+  "correct": [
+   "$df(W_t)=f'(W_t)\\,dW_t+\\tfrac12f''(W_t)\\,dt$.",
+   "Classical chain rule plus the drift $\\tfrac12f''(W_t)\\,dt$."
+  ],
+  "distractors": [
+   {
+    "text": "$df(W_t)=f'(W_t)\\,dW_t$, as in the ordinary chain rule.",
+    "misconception": "ignores the Ito correction"
+   },
+   {
+    "text": "$df(W_t)=f'(W_t)\\,dW_t+f''(W_t)\\,dt$.",
+    "misconception": "forgets the factor one half in the correction"
+   },
+   {
+    "text": "$df(W_t)=f'(W_t)\\,dW_t+\\tfrac12f'(W_t)^2\\,dt$.",
+    "misconception": "uses the first derivative squared in the correction"
+   },
+   {
+    "text": "$df(W_t)=\\left(f'(W_t)+\\tfrac12f''(W_t)\\right)dW_t$.",
+    "misconception": "puts the second-derivative term on the noise"
+   },
+   {
+    "text": "$df(W_t)=f'(W_t)\\,dt+\\tfrac12f''(W_t)\\,dW_t$.",
+    "misconception": "swaps the roles of the two differentials"
+   }
+  ],
+  "explanation": "A second-order Taylor expansion with $(\\Delta W)^2\\approx\\Delta t$ keeps one extra term, $\\tfrac12f''\\,dt$, which is absent from the ordinary chain rule."
+ },
+ {
+  "id": "sc-4.2",
+  "lecture": 4,
+  "stem": "Which rules of the Ito multiplication table are used to derive Ito's formula?",
+  "correct": [
+   "$(dW)^2=dt$, while $dt\\,dW=0$ and $(dt)^2=0$.",
+   "Only the squared increment survives, as $dt$."
+  ],
+  "distractors": [
+   {
+    "text": "$(dW)^2=0$, $dt\\,dW=0$ and $(dt)^2=0$.",
+    "misconception": "treats the squared increment as negligible"
+   },
+   {
+    "text": "$(dW)^2=dt$, $dt\\,dW=dt$ and $(dt)^2=0$.",
+    "misconception": "keeps a cross term that is of smaller order"
+   },
+   {
+    "text": "$(dW)^2=dt$, $dt\\,dW=0$ and $(dt)^2=dt$.",
+    "misconception": "treats the square of a time step as a first-order term"
+   },
+   {
+    "text": "$(dW)^2=\\sqrt{dt}$, since the increment has standard deviation $\\sqrt{dt}$.",
+    "misconception": "forgets to square the standard deviation"
+   },
+   {
+    "text": "$(dW)^2=dt$ but $dt\\,dW=\\sqrt{dt}$.",
+    "misconception": "misjudges the order of the cross term"
+   }
+  ],
+  "explanation": "An increment is of order $\\sqrt{dt}$, so $(dW)^2\\approx dt$ survives, whereas $dt\\,dW\\sim dt^{3/2}$ and $(dt)^2$ are of higher order."
+ },
+ {
+  "id": "sc-4.3",
+  "lecture": 4,
+  "stem": "For Ito processes $X$ and $Y$, what is the product rule?",
+  "correct": [
+   "$d(XY)=X\\,dY+Y\\,dX+dX\\,dY$.",
+   "Leibniz rule plus the covariation $d[X,Y]$."
+  ],
+  "distractors": [
+   {
+    "text": "$d(XY)=X\\,dY+Y\\,dX$, exactly as in ordinary calculus.",
+    "misconception": "drops the covariation term"
+   },
+   {
+    "text": "$d(XY)=X\\,dY+Y\\,dX+2\\,dX\\,dY$.",
+    "misconception": "doubles the covariation term"
+   },
+   {
+    "text": "$d(XY)=X\\,dY+Y\\,dX+XY\\,dt$.",
+    "misconception": "invents a term not involving the covariation"
+   },
+   {
+    "text": "$d(XY)=X\\,dY+Y\\,dX+\\tfrac12\\,dX\\,dY$.",
+    "misconception": "halves the cross term by analogy with the one-variable correction"
+   },
+   {
+    "text": "$d(XY)=dX\\,dY+XY$.",
+    "misconception": "replaces products of differentials by a product of values"
+   }
+  ],
+  "explanation": "Apply Ito's formula to $f(x,y)=xy$; $f_{xy}=1$, so the cross term $dX\\,dY$ appears once. For $X=Y=W$ this gives $d(W^2)=2W\\,dW+dt$."
+ },
+ {
+  "id": "sc-4.4",
+  "lecture": 4,
+  "stem": "Let $W^1,W^2$ be Brownian motions with correlation $\\rho$. What is $dW^1_t\\,dW^2_t$ in the Ito multiplication table?",
+  "correct": [
+   "It equals $\\rho\\,dt$, the correlation rate.",
+   "The correlation $\\rho$ times $dt$."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $\\rho$, a number with no time differential.",
+    "misconception": "forgets the factor $dt$"
+   },
+   {
+    "text": "It equals $\\rho^2\\,dt$.",
+    "misconception": "squares the correlation"
+   },
+   {
+    "text": "It equals $dt$ for any correlation.",
+    "misconception": "treats all Brownian motions as identical"
+   },
+   {
+    "text": "It equals $0$ for any correlation, because the two motions are different processes.",
+    "misconception": "confuses different with independent"
+   },
+   {
+    "text": "It equals $\\sqrt{\\rho}\\,dt$.",
+    "misconception": "takes the square root of the correlation"
+   }
+  ],
+  "explanation": "$\\operatorname{Cov}(\\Delta W^1,\\Delta W^2)=\\rho\\,\\Delta t$, so the cross variation is $\\rho\\,t$. For $\\rho=0$ the cross term vanishes; for $\\rho=1$ we recover $(dW)^2=dt$."
+ },
+ {
+  "id": "sc-4.5",
+  "lecture": 4,
+  "stem": "Let $f(t,x)$ be $C^{1,2}$. When is $f(t,W_t)$ a local martingale?",
+  "correct": [
+   "When $f_t+\\tfrac12f_{xx}=0$.",
+   "When the drift term vanishes."
+  ],
+  "distractors": [
+   {
+    "text": "When $f_t+f_{xx}=0$.",
+    "misconception": "drops the factor one half"
+   },
+   {
+    "text": "When $f_x=0$, so that no noise remains.",
+    "misconception": "confuses a martingale with a deterministic process"
+   },
+   {
+    "text": "When $f_t=\\tfrac12f_x$.",
+    "misconception": "uses the wrong derivative in the drift"
+   },
+   {
+    "text": "When $f_{xx}=0$, so that $f$ is linear in $x$.",
+    "misconception": "ignores the time dependence of $f$ in the drift"
+   },
+   {
+    "text": "When $f_t-\\tfrac12f_{xx}=0$.",
+    "misconception": "gets the sign of the drift wrong"
+   }
+  ],
+  "explanation": "Ito gives $df=(f_t+\\tfrac12f_{xx})dt+f_x\\,dW$; the process is a local martingale exactly when the $dt$ coefficient is zero."
+ },
+ {
+  "id": "sc-4.6",
+  "lecture": 4,
+  "stem": "Which of the following processes is a martingale?",
+  "correct": [
+   "$W_t^3-3tW_t$, the cube less $3t$ times $W_t$.",
+   "The product $W_t\\,(W_t^2-3t)$."
+  ],
+  "distractors": [
+   {
+    "text": "$W_t^3-3t$, a cube minus three times the elapsed time.",
+    "misconception": "subtracts a deterministic quantity instead of one proportional to W"
+   },
+   {
+    "text": "$W_t^3$, the cube of the path.",
+    "misconception": "has an uncompensated drift of 3W per unit time"
+   },
+   {
+    "text": "$W_t^3-t$, the cube minus the elapsed time.",
+    "misconception": "subtracts the wrong multiple of the time"
+   },
+   {
+    "text": "$W_t^3-3tW_t^2$, with the square instead of the path.",
+    "misconception": "uses the wrong power"
+   },
+   {
+    "text": "$e^{W_t-t}$, the exponential of the path minus the time.",
+    "misconception": "forgets that the compensator is $t/2$, not $t$"
+   }
+  ],
+  "explanation": "Ito gives $d(W^3)=3W^2dW+3W\\,dt$ and $d(tW)=t\\,dW+W\\,dt$, so $d(W^3-3tW)=(3W^2-3t)dW$ has no drift."
+ },
+ {
+  "id": "sc-5.1",
+  "lecture": 5,
+  "stem": "What is the solution of $dS_t=\\mu S_t\\,dt+\\sigma S_t\\,dW_t$ with $S_0>0$?",
+  "correct": [
+   "$S_t=S_0\\exp\\{(\\mu-\\tfrac12\\sigma^2)t+\\sigma W_t\\}$.",
+   "$S_0e^{(\\mu-\\sigma^2/2)t+\\sigma W_t}$."
+  ],
+  "distractors": [
+   {
+    "text": "$S_t=S_0\\exp\\{\\mu t+\\sigma W_t\\}$.",
+    "misconception": "omits the Ito correction"
+   },
+   {
+    "text": "$S_t=S_0\\exp\\{(\\mu+\\tfrac12\\sigma^2)t+\\sigma W_t\\}$.",
+    "misconception": "gets the sign of the correction wrong"
+   },
+   {
+    "text": "$S_t=S_0\\exp\\{(\\mu-\\sigma^2)t+\\sigma W_t\\}$.",
+    "misconception": "forgets the factor one half in the correction"
+   },
+   {
+    "text": "$S_t=S_0\\,e^{\\mu t}\\left(1+\\sigma W_t\\right)$.",
+    "misconception": "confuses the exponential with a first-order expansion"
+   },
+   {
+    "text": "$S_t=S_0\\exp\\{(\\mu-\\tfrac12\\sigma^2)t\\}+\\sigma W_t$.",
+    "misconception": "puts the noise outside the exponential"
+   }
+  ],
+  "explanation": "Apply Ito to $\\log S$: $d\\log S=(\\mu-\\tfrac12\\sigma^2)dt+\\sigma\\,dW$. The $-\\tfrac12\\sigma^2$ comes from the second-order term $-\\tfrac12(dS/S)^2$."
+ },
+ {
+  "id": "sc-5.2",
+  "lecture": 5,
+  "stem": "What is the distribution of $\\log S_t$ for geometric Brownian motion $dS=\\mu S\\,dt+\\sigma S\\,dW$?",
+  "correct": [
+   "Normal with mean $\\log S_0+(\\mu-\\tfrac12\\sigma^2)t$ and variance $\\sigma^2t$.",
+   "Gaussian with drift $\\mu-\\sigma^2/2$ and variance $\\sigma^2t$."
+  ],
+  "distractors": [
+   {
+    "text": "Normal with mean $\\log S_0+\\mu t$ and variance $\\sigma^2t$.",
+    "misconception": "forgets the Ito correction in the mean"
+   },
+   {
+    "text": "Normal with mean $\\log S_0+(\\mu-\\tfrac12\\sigma^2)t$ and variance $\\sigma t$.",
+    "misconception": "confuses the variance with the standard deviation"
+   },
+   {
+    "text": "Normal with mean $\\log S_0+(\\mu-\\tfrac12\\sigma^2)t$ and variance $\\sigma^2t^2$.",
+    "misconception": "lets the variance grow quadratically in time"
+   },
+   {
+    "text": "Normal with mean $S_0e^{\\mu t}$ and variance $\\sigma^2t$.",
+    "misconception": "applies the log to the moment instead of the variable"
+   },
+   {
+    "text": "Normal with mean $\\log S_0+(\\mu+\\tfrac12\\sigma^2)t$ and variance $\\sigma^2t$.",
+    "misconception": "gets the sign of the correction wrong"
+   }
+  ],
+  "explanation": "$\\log S_t=\\log S_0+(\\mu-\\tfrac12\\sigma^2)t+\\sigma W_t$ is a constant plus a $N(0,\\sigma^2t)$ variable, so $S_t$ is lognormal."
+ },
+ {
+  "id": "sc-5.3",
+  "lecture": 5,
+  "stem": "Under geometric Brownian motion with $S_0>0$, which statement about $E[S_t]$ is correct?",
+  "correct": [
+   "$E[S_t]=S_0e^{\\mu t}$, so the mean grows at rate $\\mu$.",
+   "Only the drift $\\mu$ matters for the mean, not the volatility."
+  ],
+  "distractors": [
+   {
+    "text": "$E[S_t]=S_0e^{(\\mu-\\sigma^2/2)t}$, the exponential of the mean of $\\log S_t$.",
+    "misconception": "confuses the median with the mean"
+   },
+   {
+    "text": "$E[S_t]=S_0e^{(\\mu+\\sigma^2/2)t}$, because of Jensen's inequality.",
+    "misconception": "adds the variance correction twice"
+   },
+   {
+    "text": "$E[S_t]=S_0(1+\\mu t)$, linear growth in time.",
+    "misconception": "replaces the exponential by a first-order expansion"
+   },
+   {
+    "text": "$E[S_t]=S_0e^{\\mu t}\\sqrt{\\sigma^2t}$, scaling with the volatility.",
+    "misconception": "mixes a standard deviation into the mean"
+   },
+   {
+    "text": "$E[S_t]$ depends on $\\sigma$, increasing in $\\sigma$ at fixed $\\mu$.",
+    "misconception": "forgets that the lognormal's mean exponent combines both corrections"
+   }
+  ],
+  "explanation": "$E[e^{\\sigma W_t}]=e^{\\sigma^2t/2}$ cancels the $-\\sigma^2t/2$ in the exponent. The median $S_0e^{(\\mu-\\sigma^2/2)t}$ lies below the mean."
+ },
+ {
+  "id": "sc-5.4",
+  "lecture": 5,
+  "stem": "Geometric Brownian motion has $\\mu>0$ but $\\mu<\\sigma^2/2$. What happens to $S_t$ as $t\\to\\infty$?",
+  "correct": [
+   "$S_t\\to0$ almost surely, even though $E[S_t]$ grows.",
+   "Paths vanish while the mean explodes."
+  ],
+  "distractors": [
+   {
+    "text": "$S_t\\to\\infty$ almost surely, since the drift $\\mu$ is positive.",
+    "misconception": "identifies the almost sure behaviour with that of the mean"
+   },
+   {
+    "text": "$S_t\\to0$ almost surely and $E[S_t]\\to0$ as well.",
+    "misconception": "forgets that the mean grows at rate $\\mu$"
+   },
+   {
+    "text": "$S_t$ converges to a positive random limit.",
+    "misconception": "forgets that the exponent drifts to minus infinity"
+   },
+   {
+    "text": "$S_t\\to0$ almost surely only when $\\mu<0$.",
+    "misconception": "overlooks the Ito correction in the long-run growth rate"
+   },
+   {
+    "text": "$S_t$ oscillates between $0$ and $\\infty$, as $W_t$ itself does.",
+    "misconception": "forgets that the linear term in the exponent dominates $W_t$"
+   }
+  ],
+  "explanation": "$\\log S_t/t\\to\\mu-\\sigma^2/2<0$ a.s. by the law of large numbers for $W_t/t\\to0$, while $E[S_t]=S_0e^{\\mu t}$ grows."
+ },
+ {
+  "id": "sc-5.5",
+  "lecture": 5,
+  "stem": "Let $S$ be geometric Brownian motion and $s<t$. What can be said about the ratio $S_t/S_s$?",
+  "correct": [
+   "It is lognormal and independent of the path up to time $s$.",
+   "Independent of the past and lognormally distributed."
+  ],
+  "distractors": [
+   {
+    "text": "It is normal and independent of the past.",
+    "misconception": "confuses the ratio with the log-ratio"
+   },
+   {
+    "text": "It is lognormal but its distribution depends on $S_s$.",
+    "misconception": "forgets that the ratio removes the level"
+   },
+   {
+    "text": "It is lognormal, but positively correlated with the past path.",
+    "misconception": "forgets the independence of increments"
+   },
+   {
+    "text": "The difference $S_t-S_s$, not the ratio, is independent of the past.",
+    "misconception": "believes the additive increments are independent"
+   },
+   {
+    "text": "It is lognormal with a log-variance that equals $\\sigma^2 t$ and does not depend on $s$.",
+    "misconception": "forgets that only the gap $t-s$ matters"
+   }
+  ],
+  "explanation": "$S_t/S_s=\\exp\\{(\\mu-\\tfrac12\\sigma^2)(t-s)+\\sigma(W_t-W_s)\\}$ depends only on the Brownian increment, which is independent of the past."
+ },
+ {
+  "id": "sc-5.6",
+  "lecture": 5,
+  "stem": "Which statement about $\\operatorname{Var}(S_t)$ for geometric Brownian motion is correct?",
+  "correct": [
+   "$\\operatorname{Var}(S_t)=S_0^2e^{2\\mu t}\\left(e^{\\sigma^2t}-1\\right)$.",
+   "Squared mean times $e^{\\sigma^2t}-1$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\operatorname{Var}(S_t)=S_0^2e^{2\\mu t}\\sigma^2t$.",
+    "misconception": "expands the exponential to first order"
+   },
+   {
+    "text": "$\\operatorname{Var}(S_t)=S_0^2e^{2\\mu t}e^{\\sigma^2t}$.",
+    "misconception": "forgets to subtract the squared mean"
+   },
+   {
+    "text": "$\\operatorname{Var}(S_t)=S_0^2\\left(e^{\\sigma^2t}-1\\right)$.",
+    "misconception": "drops the drift factor of the squared mean"
+   },
+   {
+    "text": "$\\operatorname{Var}(S_t)=S_0^2e^{2(\\mu-\\sigma^2/2)t}\\left(e^{\\sigma^2t}-1\\right)$.",
+    "misconception": "uses the median instead of the mean"
+   },
+   {
+    "text": "$\\operatorname{Var}(S_t)=S_0^2e^{2\\mu t}\\left(e^{\\sigma t}-1\\right)$.",
+    "misconception": "confuses the log-variance with the log standard deviation"
+   }
+  ],
+  "explanation": "$E[S_t^2]=S_0^2e^{(2\\mu+\\sigma^2)t}$ and $E[S_t]^2=S_0^2e^{2\\mu t}$; subtract."
+ },
+ {
+  "id": "sc-6.1",
+  "lecture": 6,
+  "stem": "Which condition on the coefficients of $dX=b(X)dt+\\sigma(X)dW$ guarantees a unique strong solution?",
+  "correct": [
+   "Lipschitz $b$ and $\\sigma$, hence linear growth.",
+   "A global Lipschitz condition on both coefficients."
+  ],
+  "distractors": [
+   {
+    "text": "Continuity of $b$ and $\\sigma$ alone.",
+    "misconception": "confuses existence with uniqueness"
+   },
+   {
+    "text": "Lipschitz continuity of $\\sigma$ alone, with $b$ merely continuous.",
+    "misconception": "forgets the drift"
+   },
+   {
+    "text": "Boundedness of $b$ and $\\sigma$ without any regularity.",
+    "misconception": "forgets that continuity in $x$ is needed"
+   },
+   {
+    "text": "Superlinear growth of $b$, such as $b(x)=x^2$.",
+    "misconception": "ignores explosion in finite time"
+   },
+   {
+    "text": "Differentiability of $b$ and $\\sigma$ at the starting point only.",
+    "misconception": "asks only for a local condition at a single point"
+   }
+  ],
+  "explanation": "The Picard iteration converges under Lipschitz conditions. Failing linear growth can cause explosion ($dX=X^2dt$), and merely continuous coefficients may allow non-uniqueness."
+ },
+ {
+  "id": "sc-6.2",
+  "lecture": 6,
+  "stem": "For the Ornstein-Uhlenbeck process $dX=\\theta(\\mu-X)dt+\\sigma\\,dW$ with $\\theta>0$, what is its stationary distribution?",
+  "correct": [
+   "Normal with mean $\\mu$ and variance $\\sigma^2/(2\\theta)$.",
+   "Gaussian, centred at $\\mu$, variance $\\sigma^2/(2\\theta)$."
+  ],
+  "distractors": [
+   {
+    "text": "Normal with mean $\\mu$ and variance $\\sigma^2/\\theta$.",
+    "misconception": "drops the factor two"
+   },
+   {
+    "text": "Normal with mean $\\mu$ and variance $\\sigma^2$.",
+    "misconception": "ignores the damping by mean reversion"
+   },
+   {
+    "text": "Normal with mean $0$ and variance $\\sigma^2/(2\\theta)$.",
+    "misconception": "forgets the centring at the long-run mean"
+   },
+   {
+    "text": "Normal with mean $\\mu$ and variance $\\sigma^2 t$, growing without bound.",
+    "misconception": "treats the process as a Brownian motion"
+   },
+   {
+    "text": "Lognormal with median $\\mu$.",
+    "misconception": "confuses it with geometric Brownian motion"
+   }
+  ],
+  "explanation": "Solve $\\operatorname{Var}'=-2\\theta\\operatorname{Var}+\\sigma^2$; the stationary variance is $\\sigma^2/(2\\theta)$."
+ },
+ {
+  "id": "sc-6.3",
+  "lecture": 6,
+  "stem": "What is $E[X_t]$ for the Ornstein-Uhlenbeck process $dX=\\theta(\\mu-X)dt+\\sigma\\,dW$ started at $X_0$?",
+  "correct": [
+   "It equals $\\mu+(X_0-\\mu)e^{-\\theta t}$, decaying toward $\\mu$.",
+   "The gap to $\\mu$ decays exponentially at rate $\\theta$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\mu+(X_0-\\mu)e^{\\theta t}$, the gap grows exponentially.",
+    "misconception": "gets the sign of the exponent wrong"
+   },
+   {
+    "text": "$X_0e^{-\\theta t}$, which decays to zero.",
+    "misconception": "forgets the pull toward the long-run mean"
+   },
+   {
+    "text": "$\\mu+(X_0-\\mu)e^{-\\theta^2t}$.",
+    "misconception": "squares the reversion speed"
+   },
+   {
+    "text": "$\\mu+(X_0-\\mu)e^{-\\sigma^2t/2}$, set by the noise strength.",
+    "misconception": "thinks the volatility controls the mean reversion"
+   },
+   {
+    "text": "$\\mu+(X_0-\\mu)/(1+\\theta t)$, a hyperbolic decay.",
+    "misconception": "guesses a slower decay law"
+   }
+  ],
+  "explanation": "Taking expectations gives $m'=\\theta(\\mu-m)$, a linear ODE with solution $\\mu+(X_0-\\mu)e^{-\\theta t}$."
+ },
+ {
+  "id": "sc-6.4",
+  "lecture": 6,
+  "stem": "Why is the Ornstein-Uhlenbeck process $X_t=e^{-\\theta t}X_0+\\mu(1-e^{-\\theta t})+\\sigma\\int_0^te^{-\\theta(t-s)}dW_s$ normally distributed when $X_0$ is constant?",
+  "correct": [
+   "The stochastic integral has a deterministic integrand, so it is Gaussian.",
+   "Deterministic integrand gives a Wiener integral."
+  ],
+  "distractors": [
+   {
+    "text": "Because the drift is linear, any linear SDE has a normal solution.",
+    "misconception": "ignores that multiplicative noise gives a lognormal law"
+   },
+   {
+    "text": "Because mean reversion forces the process into its stationary law at once.",
+    "misconception": "confuses the transient law with the stationary one"
+   },
+   {
+    "text": "Because the central limit theorem applies as $t\\to\\infty$.",
+    "misconception": "confuses an exact property with an asymptotic one"
+   },
+   {
+    "text": "Because the integrand depends on the path of $X$ in a Lipschitz way.",
+    "misconception": "uses a regularity property that does not determine the law"
+   },
+   {
+    "text": "Because the integral is a martingale and every martingale is normal.",
+    "misconception": "confuses the martingale property with Gaussianity"
+   }
+  ],
+  "explanation": "With a deterministic integrand $e^{-\\theta(t-s)}$, the integral is a limit of normal variables. Compare GBM, where noise multiplies $S$ and the law is lognormal."
+ },
+ {
+  "id": "sc-6.5",
+  "lecture": 6,
+  "stem": "Which statement distinguishes a strong solution from a weak solution of an SDE?",
+  "correct": [
+   "Strong: a functional of the given $W$. Weak: some pair $(X,W)$ with the right law.",
+   "Strong uses the given noise; weak may build its own."
+  ],
+  "distractors": [
+   {
+    "text": "A strong solution has finite variance; a weak solution may have infinite variance.",
+    "misconception": "confuses solution type with moment integrability"
+   },
+   {
+    "text": "A strong solution needs bounded coefficients; a weak solution needs none.",
+    "misconception": "replaces a structural distinction by a boundedness condition"
+   },
+   {
+    "text": "A strong solution is deterministic; a weak solution is random.",
+    "misconception": "confuses notions of solution with randomness of the answer"
+   },
+   {
+    "text": "A strong solution uses the Ito integral; a weak solution uses the Stratonovich one.",
+    "misconception": "confuses solution notion with integral convention"
+   },
+   {
+    "text": "A strong solution exists only for linear equations.",
+    "misconception": "restricts strong solutions to the linear case"
+   }
+  ],
+  "explanation": "Strong solutions are adapted to the filtration of the given $W$ (pathwise uniqueness gives them); weak solutions concern only the law. Tanaka's equation has a weak but no strong solution."
+ },
+ {
+  "id": "sc-6.6",
+  "lecture": 6,
+  "stem": "What does the drift $-X_t/(1-t)$ do in the Brownian bridge SDE $dX_t=-\\dfrac{X_t}{1-t}\\,dt+dW_t$ on $[0,1)$?",
+  "correct": [
+   "It pulls the process back to $0$ ever more strongly as $t\\to1$, so $X_t\\to0$.",
+   "A time-dependent restoring force diverging at $t=1$."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the process stationary with a constant variance.",
+    "misconception": "confuses a bridge with an Ornstein-Uhlenbeck process"
+   },
+   {
+    "text": "It makes the variance grow linearly, as for Brownian motion.",
+    "misconception": "ignores the restoring force"
+   },
+   {
+    "text": "It leaves the process unchanged in law, because the drift has mean zero.",
+    "misconception": "treats a state-dependent drift as noise with mean zero"
+   },
+   {
+    "text": "It forces the process to $0$ at time $1/2$ and then releases it.",
+    "misconception": "misplaces the pinning time"
+   },
+   {
+    "text": "It makes the process explode at $t=1$.",
+    "misconception": "takes the diverging coefficient as a blow-up of the path"
+   }
+  ],
+  "explanation": "The drift strength $1/(1-t)$ blows up at $t=1$, which pins $X_1=0$; the variance of $X_t$ is $t(1-t)$."
+ },
+ {
+  "id": "sc-7.1",
+  "lecture": 7,
+  "stem": "Let $X$ solve $dX=\\mu(X)dt+\\sigma(X)dW$ and $u(t,x)=E[g(X_T)\\mid X_t=x]$. What PDE does $u$ satisfy by Feynman-Kac?",
+  "correct": [
+   "$u_t+\\mu u_x+\\tfrac12\\sigma^2u_{xx}=0$, with $u(T,x)=g(x)$.",
+   "The backward Kolmogorov equation, with terminal payoff data."
+  ],
+  "distractors": [
+   {
+    "text": "$u_t+\\mu u_x+\\sigma^2u_{xx}=0$, with $u(T,x)=g(x)$.",
+    "misconception": "drops the factor one half"
+   },
+   {
+    "text": "$u_t=\\mu u_x+\\tfrac12\\sigma^2u_{xx}$ with $u(0,x)=g(x)$.",
+    "misconception": "uses the initial condition and a forward direction"
+   },
+   {
+    "text": "$u_t-\\mu u_x-\\tfrac12\\sigma^2u_{xx}=0$, with $u(T,x)=g(x)$.",
+    "misconception": "gets the signs of the spatial terms wrong"
+   },
+   {
+    "text": "$u_t+\\mu u_x+\\tfrac12\\sigma u_{xx}=0$, with $u(T,x)=g(x)$.",
+    "misconception": "uses sigma instead of sigma squared"
+   },
+   {
+    "text": "$u_x+\\mu u_t+\\tfrac12\\sigma^2u_{tt}=0$, with $u(T,x)=g(x)$.",
+    "misconception": "swaps the roles of the time and space derivatives"
+   }
+  ],
+  "explanation": "Ito applied to $u(t,X_t)$ shows $u(t,X_t)$ is a martingale iff the drift $u_t+\\mu u_x+\\tfrac12\\sigma^2u_{xx}$ vanishes; $u(T,\\cdot)=g$ comes from conditioning at $T$."
+ },
+ {
+  "id": "sc-7.2",
+  "lecture": 7,
+  "stem": "How does the PDE change when the expectation is discounted, $u(t,x)=E[e^{-\\int_t^Tr\\,ds}g(X_T)\\mid X_t=x]$ with a constant rate $r$?",
+  "correct": [
+   "A term $-ru$ is added to the left side: $u_t+\\mu u_x+\\tfrac12\\sigma^2u_{xx}-ru=0$.",
+   "Discounting adds the zero-order term $-ru$."
+  ],
+  "distractors": [
+   {
+    "text": "A term $+ru$ is added, since discounting increases the value.",
+    "misconception": "gets the sign of the zero-order term wrong"
+   },
+   {
+    "text": "A term $-ru_x$ is added, since discounting acts like a drift.",
+    "misconception": "turns a zero-order term into a derivative"
+   },
+   {
+    "text": "Only the terminal condition changes, to $u(T,x)=e^{-rT}g(x)$.",
+    "misconception": "puts all discounting into the boundary condition"
+   },
+   {
+    "text": "The coefficient of $u_{xx}$ changes to $\\tfrac12\\sigma^2e^{-rt}$.",
+    "misconception": "attaches the discount factor to the second-order term"
+   },
+   {
+    "text": "Nothing changes, since the discount factor is deterministic.",
+    "misconception": "ignores that deterministic factors still enter the PDE"
+   }
+  ],
+  "explanation": "$e^{-r(s-t)}u(s,X_s)$ must be a martingale, so Ito gives the extra $-ru$."
+ },
+ {
+  "id": "sc-7.3",
+  "lecture": 7,
+  "stem": "Which expectation solves the heat equation $u_t=\\tfrac12u_{xx}$ with $u(0,x)=g(x)$?",
+  "correct": [
+   "$u(t,x)=E[g(x+W_t)]$, a Brownian average.",
+   "Mean of $g$ over Brownian paths from $x$."
+  ],
+  "distractors": [
+   {
+    "text": "$u(t,x)=E[g(x+2W_t)]$.",
+    "misconception": "doubles the noise, which corresponds to a different diffusion constant"
+   },
+   {
+    "text": "$u(t,x)=g(x+E[W_t])=g(x)$.",
+    "misconception": "puts the expectation inside the function"
+   },
+   {
+    "text": "$u(t,x)=E[g(W_t)]$, independent of the starting point.",
+    "misconception": "forgets to start at $x$"
+   },
+   {
+    "text": "$u(t,x)=E[g(x)+W_t]=g(x)$.",
+    "misconception": "puts the noise outside the function"
+   },
+   {
+    "text": "$u(t,x)=E[g(x+W_{t^2})]$.",
+    "misconception": "applies a wrong time change"
+   }
+  ],
+  "explanation": "The generator of Brownian motion is $\\tfrac12\\partial_{xx}$, so $E[g(x+W_t)]$ solves the equation. With $u_t=u_{xx}$ the time scale would double."
+ },
+ {
+  "id": "sc-7.4",
+  "lecture": 7,
+  "stem": "Let $p(t,x)$ be the density of $X_t$ for $dX=\\mu(X)dt+\\sigma(X)dW$. Which equation does $p$ satisfy?",
+  "correct": [
+   "The forward equation $p_t=-(\\mu p)_x+\\tfrac12(\\sigma^2p)_{xx}$.",
+   "The Fokker-Planck equation."
+  ],
+  "distractors": [
+   {
+    "text": "The backward equation $p_t=\\mu p_x+\\tfrac12\\sigma^2p_{xx}$.",
+    "misconception": "confuses the density equation with the one for expectations"
+   },
+   {
+    "text": "$p_t=-\\mu p_x+\\tfrac12\\sigma^2p_{xx}$.",
+    "misconception": "differentiates the coefficients' products incorrectly"
+   },
+   {
+    "text": "$p_t=-(\\mu p)_x-\\tfrac12(\\sigma^2p)_{xx}$.",
+    "misconception": "gets the sign of the diffusion term wrong"
+   },
+   {
+    "text": "$p_t=-(\\mu p)_x+\\tfrac12(\\sigma p)_{xx}$.",
+    "misconception": "uses sigma instead of sigma squared"
+   },
+   {
+    "text": "$p_t=\\tfrac12 p_{xx}$ for every diffusion.",
+    "misconception": "ignores the coefficients"
+   }
+  ],
+  "explanation": "Both equations come from the same generator; the forward equation is its adjoint, which is why the derivatives fall on $\\mu p$ and $\\sigma^2p$."
+ },
+ {
+  "id": "sc-7.5",
+  "lecture": 7,
+  "stem": "Which statement about solving PDEs by Feynman-Kac representations is correct?",
+  "correct": [
+   "Paths estimate the solution at a point with no grid, whatever the dimension.",
+   "Monte Carlo needs no grid, so it suits high dimensions."
+  ],
+  "distractors": [
+   {
+    "text": "Simulated paths give the PDE solution at every point exactly, with no sampling error.",
+    "misconception": "forgets that the average is only an estimate"
+   },
+   {
+    "text": "The method applies to every nonlinear PDE as well.",
+    "misconception": "extends a linear representation to nonlinear equations"
+   },
+   {
+    "text": "The method needs a grid in the state space whose size grows with the dimension.",
+    "misconception": "confuses it with finite-difference schemes"
+   },
+   {
+    "text": "The method works only for the heat equation with constant coefficients.",
+    "misconception": "restricts the representation to the simplest case"
+   },
+   {
+    "text": "The method needs the terminal data $g$ to be smooth.",
+    "misconception": "requires smoothness that is not necessary for an expectation"
+   }
+  ],
+  "explanation": "The representation $u(t,x)=E[g(X_T)\\mid X_t=x]$ holds for linear equations; the Monte Carlo error is $O(N^{-1/2})$ whatever the dimension."
+ },
+ {
+  "id": "sc-7.6",
+  "lecture": 7,
+  "stem": "How does a running cost $f$ enter the Feynman-Kac representation $u(t,x)=E[\\int_t^Tf(X_s)ds+g(X_T)\\mid X_t=x]$?",
+  "correct": [
+   "As a source term $+f$: $u_t+\\mu u_x+\\tfrac12\\sigma^2u_{xx}+f=0$, with $u(T,x)=g(x)$.",
+   "Through a forcing term $f$ added to the backward equation."
+  ],
+  "distractors": [
+   {
+    "text": "As a source term of the opposite sign, $u_t+\\mu u_x+\\tfrac12\\sigma^2u_{xx}-f=0$.",
+    "misconception": "gets the sign of the forcing wrong"
+   },
+   {
+    "text": "As a modification of the terminal condition, $u(T,x)=g(x)+f(x)$.",
+    "misconception": "puts the running cost into the boundary"
+   },
+   {
+    "text": "As a discount rate, $u_t+\\mu u_x+\\tfrac12\\sigma^2u_{xx}-fu=0$.",
+    "misconception": "confuses forcing with discounting"
+   },
+   {
+    "text": "As a change of the diffusion coefficient to $\\sigma^2f$.",
+    "misconception": "lets the cost multiply the volatility"
+   },
+   {
+    "text": "It does not enter the PDE, since the running cost is integrated out.",
+    "misconception": "believes integration removes the cost"
+   }
+  ],
+  "explanation": "$u(t,X_t)+\\int_t^s f(X_r)dr$ must be a martingale, so the drift of $u(t,X_t)$ must equal $-f$."
+ },
+ {
+  "id": "sc-8.1",
+  "lecture": 8,
+  "stem": "Under which measure is $\\tilde W_t=W_t+\\int_0^t\\theta_s\\,ds$ a Brownian motion, with $\\theta$ adapted and Novikov holding?",
+  "correct": [
+   "Under $Q$ with $\\dfrac{dQ}{dP}=\\exp\\left\\{-\\int_0^T\\theta\\,dW-\\tfrac12\\int_0^T\\theta^2ds\\right\\}$.",
+   "The stochastic exponential of $-\\int\\theta\\,dW$."
+  ],
+  "distractors": [
+   {
+    "text": "Under $Q$ with $\\dfrac{dQ}{dP}=\\exp\\left\\{\\int_0^T\\theta\\,dW\\right\\}$.",
+    "misconception": "omits the compensating term in the exponent"
+   },
+   {
+    "text": "Under $Q$ with $\\dfrac{dQ}{dP}=\\exp\\left\\{\\int_0^T\\theta\\,dW+\\tfrac12\\int_0^T\\theta^2ds\\right\\}$.",
+    "misconception": "gets the sign of the compensator wrong"
+   },
+   {
+    "text": "Under $P$ itself, because adding a drift does not alter the law.",
+    "misconception": "forgets that the drift changes the law"
+   },
+   {
+    "text": "Under $Q$ with $\\dfrac{dQ}{dP}=\\exp\\left\\{-\\int_0^T\\theta^2ds\\right\\}$.",
+    "misconception": "drops the stochastic integral"
+   },
+   {
+    "text": "Under $Q$ with $\\dfrac{dQ}{dP}=-\\int_0^T\\theta\\,dW$, which has mean zero.",
+    "misconception": "uses a non-positive quantity as a density"
+   }
+  ],
+  "explanation": "The density $Z_t=\\exp\\{-\\int\\theta dW-\\tfrac12\\int\\theta^2ds\\}$ is a positive martingale with mean 1. Under $Q$, $W+\\int\\theta ds$ has no drift."
+ },
+ {
+  "id": "sc-8.2",
+  "lecture": 8,
+  "stem": "What can an equivalent change of measure (Girsanov) do to a diffusion $dX=\\mu\\,dt+\\sigma\\,dW$?",
+  "correct": [
+   "It can change the drift, but never the diffusion coefficient $\\sigma$.",
+   "Drift can change, volatility cannot."
+  ],
+  "distractors": [
+   {
+    "text": "It can change both the drift and the volatility.",
+    "misconception": "believes volatility is not a pathwise property"
+   },
+   {
+    "text": "It can change the volatility, but never the drift.",
+    "misconception": "reverses the roles of drift and volatility"
+   },
+   {
+    "text": "It cannot change anything, because the paths are the same.",
+    "misconception": "forgets that probabilities of events change"
+   },
+   {
+    "text": "It can change the drift only by a constant, not by an adapted process.",
+    "misconception": "restricts Girsanov to deterministic constants"
+   },
+   {
+    "text": "It changes the diffusion coefficient by the factor $dQ/dP$.",
+    "misconception": "confuses the density with a scaling of noise"
+   }
+  ],
+  "explanation": "Quadratic variation is determined by the path, so equivalent measures share it. Drift is a statement about probabilities, which the density modifies."
+ },
+ {
+  "id": "sc-8.3",
+  "lecture": 8,
+  "stem": "What does the Novikov condition $E\\left[\\exp\\left(\\tfrac12\\int_0^T\\theta_s^2ds\\right)\\right]<\\infty$ ensure?",
+  "correct": [
+   "$Z_T$ is a true martingale, so $E[Z_T]=1$.",
+   "$Z$ is a genuine density."
+  ],
+  "distractors": [
+   {
+    "text": "That $\\theta$ is bounded by a constant.",
+    "misconception": "confuses an integrability condition with a bound"
+   },
+   {
+    "text": "That the market is complete.",
+    "misconception": "confuses measure change with completeness"
+   },
+   {
+    "text": "That $Q$ and $P$ are mutually singular.",
+    "misconception": "reverses the role of the condition"
+   },
+   {
+    "text": "That $W$ itself is a martingale under $P$.",
+    "misconception": "confuses the condition with a property that always holds"
+   },
+   {
+    "text": "That $\\theta$ is deterministic.",
+    "misconception": "restricts the market price of risk to constants"
+   }
+  ],
+  "explanation": "In general $Z$ is only a positive local martingale and hence a supermartingale; Novikov rules out the loss of mass, $E[Z_T]<1$."
+ },
+ {
+  "id": "sc-8.4",
+  "lecture": 8,
+  "stem": "In a Black-Scholes market $dS=\\mu S\\,dt+\\sigma S\\,dW$ with interest rate $r$, what is the market price of risk used for the measure change?",
+  "correct": [
+   "$\\theta=(\\mu-r)/\\sigma$, the excess return per unit of volatility.",
+   "The Sharpe ratio $(\\mu-r)/\\sigma$ of the stock."
+  ],
+  "distractors": [
+   {
+    "text": "$\\theta=(\\mu-r)\\sigma$, the excess return times the volatility.",
+    "misconception": "multiplies by volatility instead of dividing"
+   },
+   {
+    "text": "$\\theta=(\\mu-r)/\\sigma^2$, the excess return per unit of variance.",
+    "misconception": "divides by the variance"
+   },
+   {
+    "text": "$\\theta=\\mu/\\sigma$, the raw return per unit of volatility.",
+    "misconception": "forgets to subtract the risk-free rate"
+   },
+   {
+    "text": "$\\theta=\\mu-r$, the excess return with no scaling.",
+    "misconception": "forgets to scale by the volatility"
+   },
+   {
+    "text": "$\\theta=(\\mu+r)/\\sigma$, the total return per unit of volatility.",
+    "misconception": "adds the rate instead of subtracting"
+   }
+  ],
+  "explanation": "Under $Q$, $dS=rS\\,dt+\\sigma S\\,d\\tilde W$ with $\\tilde W=W+\\theta t$, which requires $\\mu-\\sigma\\theta=r$."
+ },
+ {
+  "id": "sc-8.5",
+  "lecture": 8,
+  "stem": "Two measures $P$ and $Q$ are equivalent. Which statement holds?",
+  "correct": [
+   "They have exactly the same null sets: $P(A)=0$ iff $Q(A)=0$.",
+   "Impossible under one means impossible under the other."
+  ],
+  "distractors": [
+   {
+    "text": "They assign the same probability to every event.",
+    "misconception": "confuses equivalence with equality"
+   },
+   {
+    "text": "Every random variable has the same expectation under both.",
+    "misconception": "treats equivalent as identical in law"
+   },
+   {
+    "text": "The density $dQ/dP$ is bounded.",
+    "misconception": "adds a boundedness condition"
+   },
+   {
+    "text": "They are mutually singular.",
+    "misconception": "reverses the definition"
+   },
+   {
+    "text": "A strategy is an arbitrage under $P$ only if it is under $Q$ with the same probability.",
+    "misconception": "confuses the null-set statement with equal probabilities"
+   }
+  ],
+  "explanation": "The density $dQ/dP$ is strictly positive, so the measures agree on the events of probability zero and one; probabilities in between can differ. This is why no-arbitrage is preserved."
+ },
+ {
+  "id": "sc-8.6",
+  "lecture": 8,
+  "stem": "Which pair of laws on path space cannot be linked by a Girsanov change of measure on $[0,T]$?",
+  "correct": [
+   "Brownian motion with volatility $1$ and Brownian motion with volatility $2$.",
+   "Different volatilities, hence singular laws."
+  ],
+  "distractors": [
+   {
+    "text": "Brownian motion with drift $0$ and Brownian motion with drift $3$.",
+    "misconception": "believes a drift change cannot be done by Girsanov"
+   },
+   {
+    "text": "Brownian motion with a drift that depends on the current position.",
+    "misconception": "doubts Girsanov for state-dependent drift"
+   },
+   {
+    "text": "Brownian motion with drift $\\mu$ and the same process with a drift $-\\mu$.",
+    "misconception": "believes opposite drifts are incompatible"
+   },
+   {
+    "text": "A time-dependent deterministic drift and zero drift.",
+    "misconception": "believes the drift must be constant"
+   },
+   {
+    "text": "A drifted Brownian motion with a bounded adapted drift and a driftless one.",
+    "misconception": "believes a random drift cannot be removed"
+   }
+  ],
+  "explanation": "Quadratic variation is $\\sigma^2t$ almost surely, so laws with different $\\sigma$ live on disjoint sets of paths (they are singular). Drift changes are absolutely continuous on $[0,T]$."
+ },
+ {
+  "id": "sc-9.1",
+  "lecture": 9,
+  "stem": "What does it mean for a trading strategy $(\\Delta_t,\\beta_t)$ in the stock and the bank account to be self-financing?",
+  "correct": [
+   "Value changes come only from price changes: $dV=\\Delta\\,dS+\\beta\\,dB$.",
+   "All value change is gains on holdings."
+  ],
+  "distractors": [
+   {
+    "text": "The portfolio is rebalanced only at time $0$.",
+    "misconception": "confuses self-financing with buy-and-hold"
+   },
+   {
+    "text": "$dV=\\Delta\\,dS+S\\,d\\Delta+\\beta\\,dB+B\\,d\\beta$, with the rebalancing cost counted as value change.",
+    "misconception": "treats the cost of rebalancing as a gain"
+   },
+   {
+    "text": "The number of shares $\\Delta_t$ stays constant over time.",
+    "misconception": "requires static holdings"
+   },
+   {
+    "text": "The portfolio value $V_t$ is constant over time.",
+    "misconception": "confuses it with a riskless portfolio"
+   },
+   {
+    "text": "The portfolio contains no cash position.",
+    "misconception": "confuses self-financing with holding only the stock"
+   }
+  ],
+  "explanation": "Self-financing means $V=\\Delta S+\\beta B$ and $dV=\\Delta dS+\\beta dB$; adjustments of holdings are paid by selling the other asset."
+ },
+ {
+  "id": "sc-9.2",
+  "lecture": 9,
+  "stem": "Which equation is the Black-Scholes PDE for a derivative price $V(t,S)$?",
+  "correct": [
+   "$V_t+\\tfrac12\\sigma^2S^2V_{SS}+rSV_S-rV=0$.",
+   "$\\Theta+rS\\Delta+\\tfrac12\\sigma^2S^2\\Gamma=rV$."
+  ],
+  "distractors": [
+   {
+    "text": "$V_t+\\tfrac12\\sigma^2S^2V_{SS}+\\mu SV_S-rV=0$.",
+    "misconception": "uses the real-world drift in place of the risk-free rate"
+   },
+   {
+    "text": "$V_t+\\tfrac12\\sigma^2S^2V_{SS}+rSV_S+rV=0$.",
+    "misconception": "gets the sign of the discounting term wrong"
+   },
+   {
+    "text": "$V_t+\\sigma^2S^2V_{SS}+rSV_S-rV=0$.",
+    "misconception": "drops the factor one half"
+   },
+   {
+    "text": "$V_t+\\tfrac12\\sigma^2V_{SS}+rSV_S-rV=0$.",
+    "misconception": "drops the factor S squared"
+   },
+   {
+    "text": "$V_t+\\tfrac12\\sigma^2S^2V_{SS}+rV_S-rV=0$.",
+    "misconception": "drops the factor S in the delta term"
+   }
+  ],
+  "explanation": "Delta hedging cancels the $dW$ term. The remaining riskless portfolio must earn $r$, giving $V_t+\\tfrac12\\sigma^2S^2V_{SS}=r(V-SV_S)$."
+ },
+ {
+  "id": "sc-9.3",
+  "lecture": 9,
+  "stem": "What role does the stock's real-world expected return $\\mu$ play in the Black-Scholes price of a European option?",
+  "correct": [
+   "None: $\\mu$ does not enter the PDE, so the price is independent of it.",
+   "Investors who disagree on $\\mu$ agree on the price."
+  ],
+  "distractors": [
+   {
+    "text": "Prices rise with $\\mu$, because a faster-growing stock is more likely to finish in the money.",
+    "misconception": "confuses the real-world probability with the pricing measure"
+   },
+   {
+    "text": "It enters through the term $\\mu S V_S$ of the PDE.",
+    "misconception": "writes the PDE with the wrong drift"
+   },
+   {
+    "text": "It enters through the discount rate applied to the payoff.",
+    "misconception": "confuses the risk-free and the physical discount rate"
+   },
+   {
+    "text": "It matters only for put options.",
+    "misconception": "invents a distinction between calls and puts"
+   },
+   {
+    "text": "It determines the hedge ratio $\\Delta$ through $\\mu/\\sigma$.",
+    "misconception": "makes the replicating portfolio depend on views about the return"
+   }
+  ],
+  "explanation": "The hedge removes the randomness, so the portfolio is riskless; no-arbitrage then forces the risk-free rate, and $\\mu$ cancels."
+ },
+ {
+  "id": "sc-9.4",
+  "lecture": 9,
+  "stem": "In the replicating portfolio for a derivative $V(t,S)$, how many shares of the stock are held at time $t$?",
+  "correct": [
+   "$\\Delta_t=\\partial V/\\partial S$ evaluated at $(t,S_t)$.",
+   "Sensitivity of the option price to $S$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\partial^2V/\\partial S^2$, the gamma of the option.",
+    "misconception": "confuses delta with gamma"
+   },
+   {
+    "text": "$\\partial V/\\partial t$, the theta of the option.",
+    "misconception": "confuses delta with theta"
+   },
+   {
+    "text": "$V/S$, the option price per unit of stock.",
+    "misconception": "takes a ratio instead of a derivative"
+   },
+   {
+    "text": "$V-S\\,\\partial V/\\partial S$, the bank-account holding.",
+    "misconception": "confuses the share holding with the cash holding"
+   },
+   {
+    "text": "$\\sigma S\\,\\partial V/\\partial S$, the volatility of the holding.",
+    "misconception": "confuses the number of shares with the dollar volatility"
+   }
+  ],
+  "explanation": "The $dW$ terms of $dV=V_S\\,dS+\\dots$ and $\\Delta\\,dS$ cancel only if $\\Delta=V_S$; the rest, $V-SV_S$, is held in the bank account."
+ },
+ {
+  "id": "sc-9.5",
+  "lecture": 9,
+  "stem": "For a delta-hedged option in a Black-Scholes market with value $V$, theta $\\Theta$ and gamma $\\Gamma$, which relation holds?",
+  "correct": [
+   "$\\Theta+\\tfrac12\\sigma^2S^2\\Gamma=r\\left(V-S\\Delta\\right)$, a riskless return on the cash.",
+   "$\\Theta+\\tfrac12\\sigma^2S^2\\Gamma+rS\\Delta-rV=0$, the PDE in Greeks."
+  ],
+  "distractors": [
+   {
+    "text": "$\\Theta+\\tfrac12\\sigma^2S^2\\Gamma=0$, for every delta-hedged position.",
+    "misconception": "forgets the return on the cash part of the hedge"
+   },
+   {
+    "text": "$\\Theta-\\tfrac12\\sigma^2S^2\\Gamma=r(V-S\\Delta)$, with a minus on the gamma term.",
+    "misconception": "gets the sign of the gamma term wrong"
+   },
+   {
+    "text": "$\\Theta+\\sigma^2S^2\\Gamma=r(V-S\\Delta)$, with no factor one half.",
+    "misconception": "drops the factor one half"
+   },
+   {
+    "text": "$\\Theta+\\tfrac12\\sigma^2S^2\\Gamma=rV$, with no delta term.",
+    "misconception": "forgets the delta term"
+   },
+   {
+    "text": "$\\Theta+\\tfrac12\\sigma^2\\Gamma=r(V-S\\Delta)$, without the squared price.",
+    "misconception": "drops the factor S squared"
+   }
+  ],
+  "explanation": "This is the Black-Scholes PDE rewritten with Greeks: $\\Theta+rS\\Delta+\\tfrac12\\sigma^2S^2\\Gamma=rV$."
+ },
+ {
+  "id": "sc-9.6",
+  "lecture": 9,
+  "stem": "Why is the no-arbitrage price of an option equal to the initial cost of the replicating portfolio?",
+  "correct": [
+   "Any other price lets a trader lock in riskless profit against the portfolio.",
+   "Equal payoffs require equal values to avoid arbitrage."
+  ],
+  "distractors": [
+   {
+    "text": "Because investors are risk neutral and hence price at the expected discounted payoff under $P$.",
+    "misconception": "confuses the pricing argument with risk-neutral preferences"
+   },
+   {
+    "text": "Because the option market is competitive and quotes the expected payoff.",
+    "misconception": "argues from market structure and not from replication"
+   },
+   {
+    "text": "Because the replicating portfolio has the same expected return as the option.",
+    "misconception": "requires equal expected returns, which is not sufficient"
+   },
+   {
+    "text": "Because the option is priced at the market's average view of the volatility.",
+    "misconception": "confuses a price with an average opinion"
+   },
+   {
+    "text": "Because the hedge has no cost over time for any option.",
+    "misconception": "believes self-financing implies the hedge is free"
+   }
+  ],
+  "explanation": "The argument is replication plus the law of one price: equal payoffs in every state, hence equal value."
+ },
+ {
+  "id": "sc-10.1",
+  "lecture": 10,
+  "stem": "What does the martingale representation theorem say in the filtration of a Brownian motion?",
+  "correct": [
+   "Every square-integrable martingale equals $M_0$ plus an Ito integral.",
+   "Martingales are constants plus integrals $\\int H\\,dW$."
+  ],
+  "distractors": [
+   {
+    "text": "Every martingale is continuous and has bounded variation.",
+    "misconception": "confuses it with a statement about path regularity"
+   },
+   {
+    "text": "The result holds in every filtration, including those generated by jumps.",
+    "misconception": "forgets that the filtration must be generated by the Brownian motion"
+   },
+   {
+    "text": "The integrand $H$ must be deterministic.",
+    "misconception": "restricts the integrand to deterministic functions"
+   },
+   {
+    "text": "Every martingale equals a stochastic integral of $W$ with $M_0=0$.",
+    "misconception": "forgets the constant"
+   },
+   {
+    "text": "Every martingale is a function of $W_t$ alone.",
+    "misconception": "confuses a path-functional with a function of the current value"
+   }
+  ],
+  "explanation": "In the Brownian filtration, all martingales are generated by the driving noise, with integrand $H$ adapted. With additional noise sources, the property fails."
+ },
+ {
+  "id": "sc-10.2",
+  "lecture": 10,
+  "stem": "How is martingale representation linked to market completeness in a Black-Scholes market with one Brownian motion?",
+  "correct": [
+   "The integrand in the claim's martingale representation is the hedge.",
+   "Claims are replicable, hedge from the integrand."
+  ],
+  "distractors": [
+   {
+    "text": "It shows that the market is incomplete, since the integrand is random.",
+    "misconception": "reverses the conclusion"
+   },
+   {
+    "text": "It shows that claims can be replicated only if the integrand is deterministic.",
+    "misconception": "restricts the integrand"
+   },
+   {
+    "text": "It shows that the hedge needs a second source of risk.",
+    "misconception": "confuses it with a market that has more noise than assets"
+   },
+   {
+    "text": "It shows that the claim is priced at its $P$-expectation.",
+    "misconception": "uses the physical measure, not the pricing measure"
+   },
+   {
+    "text": "It applies only to European calls and puts.",
+    "misconception": "restricts the result to simple payoffs"
+   }
+  ],
+  "explanation": "With $M_t=E^Q[e^{-rT}X\\mid\\mathcal F_t]=M_0+\\int H\\,d\\tilde W$ and the discounted stock $\\propto\\int\\sigma\\tilde S\\,d\\tilde W$, the hedge is $H/(\\text{stock vol})$."
+ },
+ {
+  "id": "sc-10.3",
+  "lecture": 10,
+  "stem": "Let $N$ be a numeraire (a strictly positive traded asset). What defines the associated measure $Q^N$?",
+  "correct": [
+   "Traded prices divided by $N$ are martingales under $Q^N$.",
+   "Prices in units of $N$ have no drift."
+  ],
+  "distractors": [
+   {
+    "text": "Under $Q^N$, every traded asset price in dollars is a martingale.",
+    "misconception": "confuses it with the real-world or undiscounted prices"
+   },
+   {
+    "text": "Under $Q^N$, only the numeraire $N$ itself is a martingale.",
+    "misconception": "restricts the martingale property to the numeraire alone"
+   },
+   {
+    "text": "$Q^N$ is defined only for the bank account.",
+    "misconception": "restricts numeraires to the money-market account"
+   },
+   {
+    "text": "$Q^N$ makes $N$ a deterministic function of time.",
+    "misconception": "confuses the measure with a change of the asset"
+   },
+   {
+    "text": "$Q^N$ is the physical measure whenever $N$ is risky.",
+    "misconception": "confuses a numeraire measure with the real-world one"
+   }
+  ],
+  "explanation": "With $N=B$ one gets the risk-neutral measure. Other numeraires give other measures, and the price of any traded asset in units of $N$ is a $Q^N$-martingale."
+ },
+ {
+  "id": "sc-10.4",
+  "lecture": 10,
+  "stem": "Which statement about the forward measure $Q^T$, whose numeraire is the zero-coupon bond $P(t,T)$, is correct?",
+  "correct": [
+   "The forward price for delivery at $T$ is a martingale under $Q^T$.",
+   "The forward price for delivery at $T$ is a $Q^T$-martingale, with no drift."
+  ],
+  "distractors": [
+   {
+    "text": "The forward price is a martingale under $Q^T$ only if interest rates are deterministic.",
+    "misconception": "confuses the special case with the general one"
+   },
+   {
+    "text": "The forward price is a martingale under the risk-neutral measure $Q$ even when rates are stochastic.",
+    "misconception": "forgets that the bank-account numeraire gives a covariance correction"
+   },
+   {
+    "text": "Under $Q^T$ the spot price of the stock is a martingale.",
+    "misconception": "forgets the numeraire division"
+   },
+   {
+    "text": "$Q^T$ coincides with $Q$ whenever the stock is risky.",
+    "misconception": "ties the equality to the wrong condition"
+   },
+   {
+    "text": "$Q^T$ is defined by discounting at the realised short rate.",
+    "misconception": "confuses the bond numeraire with the bank account"
+   }
+  ],
+  "explanation": "$F(t,T)=S_t/P(t,T)$ is a traded asset divided by the numeraire. The measures $Q$ and $Q^T$ agree when the rates are deterministic."
+ },
+ {
+  "id": "sc-10.5",
+  "lecture": 10,
+  "stem": "What is the density of $Q^N$ with respect to the risk-neutral measure $Q$ (bank account $B$) on $\\mathcal F_T$?",
+  "correct": [
+   "$\\dfrac{dQ^N}{dQ}=\\dfrac{N_T/B_T}{N_0/B_0}$.",
+   "The normalised $N/B$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\dfrac{dQ^N}{dQ}=\\dfrac{N_T}{N_0}$.",
+    "misconception": "forgets to discount by the bank account"
+   },
+   {
+    "text": "$\\dfrac{dQ^N}{dQ}=\\dfrac{B_T/N_T}{B_0/N_0}$.",
+    "misconception": "inverts the ratio"
+   },
+   {
+    "text": "$\\dfrac{dQ^N}{dQ}=N_T\\,B_T$.",
+    "misconception": "multiplies instead of dividing"
+   },
+   {
+    "text": "$\\dfrac{dQ^N}{dQ}=\\dfrac{N_T}{B_T}$, without normalising by the initial values.",
+    "misconception": "forgets that the density must have mean one"
+   },
+   {
+    "text": "$\\dfrac{dQ^N}{dQ}=\\dfrac{N_0}{N_T}$.",
+    "misconception": "inverts the terminal ratio"
+   }
+  ],
+  "explanation": "The discounted numeraire $N/B$ is a positive $Q$-martingale; normalised to start at $1$ it is a density."
+ },
+ {
+  "id": "sc-10.6",
+  "lecture": 10,
+  "stem": "Why does choosing one of two assets as the numeraire simplify the price of an option to exchange asset 2 for asset 1 at maturity?",
+  "correct": [
+   "The payoff becomes an option on the ratio $S^1/S^2$, a single martingale.",
+   "The exchange option reduces to a call on the ratio with strike $1$."
+  ],
+  "distractors": [
+   {
+    "text": "The interest rate disappears because it is deterministic.",
+    "misconception": "confuses the numeraire choice with an assumption on the rate"
+   },
+   {
+    "text": "The price depends on each volatility separately and not on their combination.",
+    "misconception": "overlooks that only the ratio volatility matters"
+   },
+   {
+    "text": "The option becomes worthless as the prices are equal.",
+    "misconception": "confuses an exchange option with a forward"
+   },
+   {
+    "text": "The correlation between the assets no longer matters.",
+    "misconception": "overlooks that the ratio's volatility involves the correlation"
+   },
+   {
+    "text": "The price must then be computed under the physical measure.",
+    "misconception": "confuses the numeraire change with the measure of real-world views"
+   }
+  ],
+  "explanation": "Under the measure with numeraire $S^2$, $S^1/S^2$ is a martingale with volatility $\\sqrt{\\sigma_1^2+\\sigma_2^2-2\\rho\\sigma_1\\sigma_2}$ (Margrabe), so the price has a Black formula without $r$."
+ }
+]

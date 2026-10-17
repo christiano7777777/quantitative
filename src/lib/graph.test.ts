@@ -78,14 +78,21 @@ describe('careerProgress', () => {
     expect(p.path.passed).toBe(2)
     expect(p.required.passed).toBe(1)
     expect(p.hours.passed).toBe(h('calc') + h('p3'))
-    expect(p.percent).toBe(Math.round((100 * (h('calc') + h('p3'))) / 672))
+    const bonusTotal = 5 * (qr.bonus.reduce((n, b) => n + h(b), 0) / qr.bonus.length)
+    expect(p.percent).toBe(Math.round((100 * (h('calc') + h('p3'))) / (672 + bonusTotal)))
   })
-  it('reaches 100% when the whole path is passed, bonus topics do not count', () => {
+  it('needs 5 bonus topics on top of the path to reach 100%', () => {
     const all = careerSummary(g, qr).ids
-    const p = careerProgress(g, qr, new Set(all))
-    expect(p.percent).toBe(100)
-    expect(p.path.passed).toBe(p.path.total)
-    expect(p.bonus.passed).toBe(qr.bonus.filter((b) => all.has(b)).length)
+    const pathOnly = careerProgress(g, qr, new Set(all))
+    expect(pathOnly.percent).toBeLessThan(100)
+    expect(pathOnly.path.passed).toBe(pathOnly.path.total)
+    expect(pathOnly.bonusNeeded).toEqual({ passed: 0, total: 5 })
+    const five = careerProgress(g, qr, new Set([...all, ...qr.bonus.slice(0, 5)]))
+    expect(five.percent).toBe(100)
+    expect(five.bonusNeeded).toEqual({ passed: 5, total: 5 })
+    const all8 = careerProgress(g, qr, new Set([...all, ...qr.bonus]))
+    expect(all8.percent).toBe(100) // extra bonus topics do not push past 100
+    expect(all8.bonusNeeded.passed).toBe(5)
   })
   it('counts topics with a test via the hasTest callback', () => {
     expect(careerProgress(g, qr, new Set(), (id) => id === 'p3').testable).toBe(1)

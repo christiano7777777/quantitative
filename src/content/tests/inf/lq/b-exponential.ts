@@ -1,72 +1,53 @@
-// LQ-B: an exponential sample: the sampling distribution of the mean, MLE, UMVUE, Cramer-Rao bound and variance of the UMVUE.
-// Lectures 1 (sampling distributions), 3 (MLE), 5 (UMVUE via the sufficient statistic), 6 (Fisher information, Cramer-Rao).
+// LQ-B: exponential sample with mean theta: Cramer-Rao bound, efficiency of a UMVUE, and large-sample theory of the MLE (Wald and score statistics).
+// Lectures 2 (UMVU estimation), 3 (information inequality) and 4 (large-sample theory of the MLE).
 import type { Rng } from '../../../../lib/rng'
 import type { LQGenerator, LQInstance } from '../../../../lib/types'
-import { dec, tex, tol3, tol4 } from '../../../shared/format'
+import { dec, tex, tol2, tol4 } from '../../../shared/format'
 
-export interface Params {
-  n: number
-  lam: number // true rate used in parts (a), (d), (e)
-  c: number // threshold for the sample mean
-  tenths: number[] // observations in units of 0.1
-}
+export interface Params { n: number; xbar: number; th0: number; th1: number }
 
 export function sample(rng: Rng): Params {
-  const n = rng.pick([3, 4, 5])
-  const lam = rng.pick([0.5, 1, 2])
-  let c: number
-  do c = rng.pick([0.5, 1, 1.5, 2, 2.5, 3])
-  while (lam * n * c < 1.5 || lam * n * c > 8)
-  const tenths = Array.from({ length: n }, () => rng.int(2, 40))
-  return { n, lam, c, tenths }
+  const n = rng.int(8, 20)
+  const th0 = rng.pick([1.5, 2, 2.5, 3])
+  const th1 = rng.pick([1, 1.5, 2, 2.5, 3, 3.5, 4])
+  return { n, th0, th1, xbar: rng.pick([1.2, 1.6, 2.1, 2.4, 2.8, 3.3, 3.7]) }
 }
 
-export function build({ n, lam, c, tenths }: Params): LQInstance {
-  const xs = tenths.map((t) => t / 10)
-  const total = xs.reduce((s, x) => s + x, 0)
-  const m = lam * n * c
-  // P(Xbar > c) = P(Gamma(n, lam) > n c) = P(Poisson(lam n c) <= n - 1)
-  let tail = 0
-  let term = Math.exp(-m)
-  for (let k = 0; k < n; k++) {
-    tail += term
-    term *= m / (k + 1)
-  }
-  const mle = n / total
-  const umvue = (n - 1) / total
-  const crb = (lam * lam) / n
-  const varU = (lam * lam) / (n - 2)
-  const L = tex('\\lambda')
+export function build({ n, xbar, th0, th1 }: Params): LQInstance {
+  const crlb = (4 * th1 ** 4) / n
+  const eff = (4 * (n + 1)) / (4 * n + 6)
+  const se = xbar / Math.sqrt(n)
+  const half = 1.96 * se
+  const wald = (n * (xbar - th0) ** 2) / xbar ** 2
+  const score = (n * (xbar - th0) ** 2) / th0 ** 2
 
   return {
-    intro:
-      tex('X_1,\\dots,X_n') + ' are i.i.d. exponential with rate ' + L + ' (density ' + tex('\\lambda e^{-\\lambda x}') + ', mean ' + tex('1/\\lambda') + '). The observed sample of size ' + tex(n) + ' is ' + xs.map(dec).join(', ') +
-      '. Give decimal answers to 4 decimal places unless told otherwise.',
+    intro: 'Let ' + tex('X_1,\\dots,X_{' + n + '}') + ' be i.i.d. exponential with mean ' + tex('\\theta') + ', density ' + tex('\\theta^{-1}e^{-x/\\theta}') + '. The Fisher information in the sample is ' + tex('I_n(\\theta)=n/\\theta^2') + ', and the observed sample mean is ' + tex('\\bar x=' + xbar) + '. Give answers to 4 decimal places unless told otherwise.',
     parts: [
       {
-        prompt: 'Suppose the true rate is ' + tex('\\lambda=' + dec(lam)) + '. The sum of ' + tex(n) + ' such variables has a Gamma distribution, and ' + tex('P(\\mathrm{Gamma}(n,\\lambda)>t)=e^{-\\lambda t}\\sum_{k=0}^{n-1}(\\lambda t)^k/k!') + ' for integer ' + tex('n') + '. Find ' + tex('P(\\bar X>' + dec(c) + ')') + ' for a sample of size ' + tex(n) + '.',
-        answer: tail, tolerance: tol4, lecture: 1,
-        explanation: tex('\\bar X>c') + ' means the sum exceeds ' + tex('nc=' + dec(n * c)) + ', so with ' + tex('\\lambda nc=' + dec(m)) + ' the probability is ' + tex('e^{-' + dec(m) + '}\\sum_{k=0}^{' + (n - 1) + '}' + dec(m) + '^k/k!') + ' = ' + dec(tail) + '.',
+        prompt: 'Find the Cramer-Rao lower bound for the variance of an unbiased estimator of ' + tex('\\theta^2') + ' at ' + tex('\\theta=' + th1) + ' (2 decimal places).',
+        answer: crlb, tolerance: tol2, lecture: 3,
+        explanation: tex('g(\\theta)=\\theta^2') + ' has ' + tex('g\'(\\theta)=2\\theta') + ', so the bound is ' + tex('(2\\theta)^2\\theta^2/n=4\\theta^4/n=4(' + th1 + ')^4/' + n + '=' + dec(crlb)) + '.',
       },
       {
-        prompt: 'Find the maximum likelihood estimate of ' + L + ' from the observed sample.',
-        answer: mle, tolerance: tol4, lecture: 3,
-        explanation: tex('\\ell(\\lambda)=n\\log\\lambda-\\lambda\\sum x_i') + ' has score ' + tex('n/\\lambda-\\sum x_i') + ', so ' + tex('\\hat\\lambda=n/\\sum x_i=' + n + '/' + dec(total)) + ' = ' + dec(mle) + '.',
+        prompt: 'With ' + tex('T=\\sum X_i\\sim\\mathrm{Gamma}(n,\\theta)') + ', the UMVUE of ' + tex('\\theta^2') + ' is ' + tex('T^2/\\{n(n+1)\\}') + ' with variance ' + tex('\\theta^4(4n+6)/\\{n(n+1)\\}') + '. Find its efficiency, the ratio of the Cramer-Rao bound ' + tex('4\\theta^4/n') + ' to this variance.',
+        answer: eff, tolerance: tol4, lecture: 2,
+        explanation: tex('\\dfrac{4/n}{(4n+6)/(n(n+1))}=\\dfrac{4(n+1)}{4n+6}=\\dfrac{' + 4 * (n + 1) + '}{' + (4 * n + 6) + '}=' + dec(eff)) + ', so the UMVUE is below the bound but close to it.',
       },
       {
-        prompt: tex('T=\\sum X_i') + ' is complete and sufficient and ' + tex('E[1/T]=\\lambda/(n-1)') + '. Find the UMVUE of ' + L + ' evaluated on the observed sample.',
-        answer: umvue, tolerance: tol4, lecture: 5,
-        explanation: 'Since ' + tex('E\\big[\\tfrac{n-1}{T}\\big]=\\lambda') + ' and it is a function of the complete sufficient ' + tex('T') + ', the UMVUE is ' + tex('(n-1)/T=' + (n - 1) + '/' + dec(total)) + ' = ' + dec(umvue) + '. The MLE is biased upward.',
+        prompt: 'The MLE of ' + tex('\\theta') + ' is ' + tex('\\bar X') + '. Using the information at the MLE, find the standard error ' + tex('1/\\sqrt{I_n(\\hat\\theta)}') + ' for the observed ' + tex('\\bar x=' + xbar) + '.',
+        answer: se, tolerance: tol4, lecture: 4,
+        explanation: tex('I_n(\\hat\\theta)=n/\\bar x^2') + ', so the standard error is ' + tex('\\bar x/\\sqrt n=' + xbar + '/\\sqrt{' + n + '}=' + dec(se)) + '.',
       },
       {
-        prompt: 'The Fisher information of one observation is ' + tex('I(\\lambda)=1/\\lambda^2') + '. For ' + tex('\\lambda=' + dec(lam)) + ', what is the Cramer-Rao lower bound for the variance of an unbiased estimator of ' + L + ' from ' + tex(n) + ' observations?',
-        answer: crb, tolerance: tol4, lecture: 6,
-        explanation: tex('1/\\{nI(\\lambda)\\}=\\lambda^2/n=' + dec(lam * lam) + '/' + n) + ' = ' + dec(crb) + '.',
+        prompt: 'The Wald statistic for ' + tex('H_0:\\theta=' + th0) + ' is ' + tex('(\\hat\\theta-\\theta_0)^2I_n(\\hat\\theta)') + '. Find its value.',
+        answer: wald, tolerance: tol4, lecture: 4,
+        explanation: tex('n(\\bar x-\\theta_0)^2/\\bar x^2=' + n + '(' + dec(xbar - th0) + ')^2/' + dec(xbar ** 2) + '=' + dec(wald)) + ', to be compared with a ' + tex('\\chi^2_1') + ' distribution.',
       },
       {
-        prompt: 'For the UMVUE ' + tex('(n-1)/T') + ' of part (c), use ' + tex('E[1/T^2]=\\dfrac{\\lambda^2}{(n-1)(n-2)}') + ' to find its variance when ' + tex('\\lambda=' + dec(lam)) + '. (It exceeds the bound in part (d).)',
-        answer: varU, tolerance: tol4, lecture: 5,
-        explanation: tex('\\operatorname{Var}=(n-1)^2\\Big[\\dfrac{\\lambda^2}{(n-1)(n-2)}-\\dfrac{\\lambda^2}{(n-1)^2}\\Big]=\\dfrac{\\lambda^2}{n-2}=\\dfrac{' + dec(lam * lam) + '}{' + (n - 2) + '}') + ' = ' + dec(varU) + ', larger than ' + dec(crb) + ': the UMVUE does not attain the bound.',
+        prompt: 'The score statistic for the same hypothesis is ' + tex('U(\\theta_0)^2/I_n(\\theta_0)') + ', with score ' + tex('U(\\theta)=n(\\bar x-\\theta)/\\theta^2') + '. Find its value.',
+        answer: score, tolerance: tol4, lecture: 4,
+        explanation: tex('U(\\theta_0)^2/I_n(\\theta_0)=n(\\bar x-\\theta_0)^2/\\theta_0^2=' + n + '(' + dec(xbar - th0) + ')^2/' + dec(th0 ** 2) + '=' + dec(score)) + '. It uses information at the null value, so it differs from the Wald statistic. (A 95% Wald interval would be ' + tex('\\bar x\\pm' + dec(half)) + '.)',
       },
     ],
   }

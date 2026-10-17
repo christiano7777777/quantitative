@@ -1,35 +1,50 @@
 // Every LQ answer is recomputed by a DIFFERENT method from the generator's own:
-//  A: Simpson integration of the density of the sample maximum, and Monte Carlo of the three estimators.
-//  B: numerical integration of the Gamma density, Monte Carlo, exact fractions for the estimates.
-//  D: enumeration of all 2^n outcome sequences with exact fractions, and a brute-force search for the sample size.
-//  E: exact fractions from the raw data (two-pass variance), and the t table checked by numerical integration of the t density.
-//  F: exact fractions for Pearson statistics; G^2 from a different algebraic identity.
-//  G: log-likelihood maximised numerically, the pmf products computed directly, exact Poisson sums, Monte Carlo.
+//  A: the natural-parameter MLE by golden-section search of the log-likelihood; the UMVUEs as conditional expectations given the total, computed from Poisson pmf ratios and Binomial sums; the variance of the UMVUE by summing over the Poisson law of T.
+//  B: Fisher information as the variance of a finite-difference score integrated over the density; efficiency from numerical integration over the Gamma density; Wald and score statistics from finite-difference derivatives of the log-likelihood.
+//  C: risks by numerical integration over the normal law of the sample mean; crossing point by bisection; minimax linear rule by golden-section search of the maximum risk.
+//  D: posterior moments by numerical integration; Bayes risk by exact enumeration of the beta-binomial marginal; constant risk of the minimax estimator by enumeration over the binomial law at several theta.
+//  E: posterior by numerical integration of likelihood times prior on a grid.
+//  F: the test as the Neyman-Pearson knapsack (outcomes sorted by likelihood ratio, budget alpha) in exact fractions.
+//  G: conditional probabilities from Poisson pmf ratios; Fisher's p-value by enumerating all subsets of the margins.
+//  H: coverage and expected length of the uniform interval by simulation and integration; the median interval by enumerating sign patterns; the bootstrap by enumerating all n^n resamples.
 import { describe, expect, it } from 'vitest'
 import { makeRng } from '../../../../lib/rng'
 import { topics } from '../../../../data'
 import type { LQGenerator, LQInstance } from '../../../../lib/types'
 import { F, Fr } from '../../../shared/fraction'
-import * as A from './a-uniform'
+import * as A from './a-poisson'
 import * as B from './b-exponential'
-import * as D from './d-binomial'
-import * as E from './e-twosample'
-import * as Fq from './f-chisq'
-import * as G from './g-poisson'
+import * as C from './c-risk'
+import * as D from './d-bayes-minimax'
+import * as E from './e-gamma-poisson'
+import * as Ff from './f-ump'
+import * as G from './g-conditional'
+import * as H from './h-confidence-bootstrap'
 
 const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => `${prefix}${i}`)
 const answers = (inst: LQInstance) => inst.parts.map((p) => p.answer)
 const close = (got: number, want: number, tol = 1e-9) => expect(Math.abs(got - want), `got ${got}, want ${want}`).toBeLessThan(tol)
-const rel = (got: number, want: number, r: number) => expect(Math.abs(got - want), `got ${got}, want ${want}`).toBeLessThan(r * Math.abs(want))
 const lectures = topics.find((t) => t.id === 'inf')!.lectures.length
+const simpson = (f: (x: number) => number, a: number, b: number, n = 6000) => { const h = (b - a) / n; let s = f(a) + f(b); for (let i = 1; i < n; i++) s += f(a + i * h) * (i % 2 ? 4 : 2); return (s * h) / 3 }
+const lgam = (x: number) => { let s = 0; for (let i = 2; i < x; i++) s += Math.log(i); return s } // log (x-1)! for integer x
+const logFact = (k: number) => { let s = 0; for (let i = 2; i <= k; i++) s += Math.log(i); return s }
+const poisPmf = (mu: number, k: number) => Math.exp(-mu + k * Math.log(mu) - logFact(k))
+const golden = (f: (x: number) => number, lo: number, hi: number, maximise: boolean) => {
+  const g = (x: number) => (maximise ? -f(x) : f(x)); const phi = (Math.sqrt(5) - 1) / 2
+  let a = lo, b = hi, c = b - phi * (b - a), d = a + phi * (b - a)
+  for (let i = 0; i < 120; i++) { if (g(c) < g(d)) b = d; else a = c; c = b - phi * (b - a); d = a + phi * (b - a) }
+  return (a + b) / 2
+}
 
 const gens: [string, LQGenerator, number][] = [
   ['A', { id: 'A', generate: (r) => A.build(A.sample(r)) }, 5],
   ['B', { id: 'B', generate: (r) => B.build(B.sample(r)) }, 5],
+  ['C', { id: 'C', generate: (r) => C.build(C.sample(r)) }, 5],
   ['D', { id: 'D', generate: (r) => D.build(D.sample(r)) }, 5],
   ['E', { id: 'E', generate: (r) => E.build(E.sample(r)) }, 5],
-  ['F', { id: 'F', generate: (r) => Fq.build(Fq.sample(r)) }, 5],
+  ['F', { id: 'F', generate: (r) => Ff.build(Ff.sample(r)) }, 5],
   ['G', { id: 'G', generate: (r) => G.build(G.sample(r)) }, 5],
+  ['H', { id: 'H', generate: (r) => H.build(H.sample(r)) }, 5],
 ]
 
 describe.each(gens)('generator %s: generic rules', (name, gen, nParts) => {
@@ -46,7 +61,7 @@ describe.each(gens)('generator %s: generic rules', (name, gen, nParts) => {
         expect(Number.isFinite(p.answer), s).toBe(true)
         expect(p.lecture).toBeGreaterThanOrEqual(1)
         expect(p.lecture).toBeLessThanOrEqual(lectures)
-        expect(p.tolerance?.abs).toBeGreaterThan(0)
+        expect((p.tolerance?.abs ?? 0) + (p.tolerance?.rel ?? 0)).toBeGreaterThan(0)
       }
     }
   })
@@ -63,292 +78,265 @@ it('the LQ bank touches all lectures', () => {
   expect([...seen].sort((a, b) => a - b)).toEqual(Array.from({ length: lectures }, (_, i) => i + 1))
 })
 
-/** Composite Simpson rule. */
-function simpson(f: (x: number) => number, a: number, b: number, n = 4000): number {
-  const h = (b - a) / n
-  let s = f(a) + f(b)
-  for (let i = 1; i < n; i++) s += f(a + i * h) * (i % 2 ? 4 : 2)
-  return (s * h) / 3
-}
-
 // ---------- A ----------
 describe('generator A against independent computation', () => {
-  it('estimates exactly, MSEs and variance by integrating the density of the maximum (300 seeds)', () => {
+  it('MLE of eta by search; UMVUEs as conditional expectations; variance by summing over T (300 seeds)', () => {
     for (const s of seeds('A', 300)) {
-      const prm = A.sample(makeRng(s))
-      const ans = answers(A.build(prm))
-      const { theta, n, tenths } = prm
-      const sum = tenths.reduce((a, b) => a.add(F(b, 10)), F(0))
-      close(ans[0], sum.div(F(n)).mul(F(2)).num)
-      close(ans[1], [...tenths].sort((a, b) => b - a)[0] / 10)
-      // density of the maximum: n x^(n-1) / theta^n on (0, theta)
-      const dens = (x: number) => (n * x ** (n - 1)) / theta ** n
-      const mean = simpson((x) => x * dens(x), 0, theta)
-      const mse = simpson((x) => (x - theta) ** 2 * dens(x), 0, theta)
-      const v = simpson((x) => (((n + 1) / n) * x - theta) ** 2 * dens(x), 0, theta)
-      close(ans[3], mse, 1e-6)
-      close(ans[4], v, 1e-6)
-      close(mean, (n * theta) / (n + 1), 1e-6)
+      const p = A.sample(makeRng(s))
+      const ans = answers(A.build(p))
+      const { n, total: t, lam0 } = p
+      // 1: maximise the log-likelihood t*eta - n*exp(eta) over eta
+      close(ans[0], golden((e) => t * e - n * Math.exp(e), -6, 6, true), 1e-6)
+      // 2: E[X1(X1-1) | T=t] with X1 | T=t binomial (computed from Poisson pmf ratios)
+      const lam = 1.3
+      const cond = (k: number) => (poisPmf(lam, k) * poisPmf((n - 1) * lam, t - k)) / poisPmf(n * lam, t)
+      let e2 = 0
+      for (let k = 0; k <= t; k++) e2 += cond(k) * k * (k - 1)
+      close(ans[1], e2, 1e-9)
+      // 3, 4: P(X1=0 | T=t), P(X1=1 | T=t)
+      close(ans[2], cond(0), 1e-9)
+      close(ans[3], cond(1), 1e-9)
+      // 5: variance of T(T-1)/n^2 under Poisson(n lam0)
+      const mu = n * lam0
+      let m1 = 0, m2 = 0
+      for (let k = 0; k < 500; k++) { const u = (k * (k - 1)) / (n * n); const w = poisPmf(mu, k); m1 += w * u; m2 += w * u * u }
+      close(m1, lam0 * lam0, 1e-9) // unbiasedness of the estimator
+      close(ans[4], m2 - m1 * m1, 1e-7)
     }
   })
-  it('Monte Carlo: the moment estimator MSE, the MLE MSE and the UMVUE variance (6 seeds)', () => {
-    for (const s of seeds('A', 6)) {
-      const prm = A.sample(makeRng(s))
-      const ans = answers(A.build(prm))
-      const { theta, n } = prm
-      const rng = makeRng('sim' + s)
-      const runs = 200000
-      let e1 = 0, e2 = 0, u1 = 0, u2 = 0
-      for (let r = 0; r < runs; r++) {
-        let sm = 0, mx = 0
-        for (let i = 0; i < n; i++) { const x = theta * rng.next(); sm += x; mx = Math.max(mx, x) }
-        e1 += (2 * (sm / n) - theta) ** 2
-        e2 += (mx - theta) ** 2
-        const u = ((n + 1) / n) * mx
-        u1 += u; u2 += u * u
-      }
-      rel(ans[2], e1 / runs, 0.02)
-      rel(ans[3], e2 / runs, 0.03)
-      rel(ans[4], u2 / runs - (u1 / runs) ** 2, 0.03)
-      rel(u1 / runs, theta, 0.01) // unbiased
-    }
-  }, 60000)
 })
 
 // ---------- B ----------
 describe('generator B against independent computation', () => {
-  it('Gamma tail by numerical integration, exact estimates, E[1/T^2] by integration (300 seeds)', () => {
+  it('information by integrating the squared score; efficiency by integrating the Gamma law; Wald and score from log-likelihood derivatives (300 seeds)', () => {
     for (const s of seeds('B', 300)) {
-      const prm = B.sample(makeRng(s))
-      const ans = answers(B.build(prm))
-      const { n, lam, c, tenths } = prm
-      const fact = (k: number): number => (k <= 1 ? 1 : k * fact(k - 1))
-      const gam = (t: number) => (lam ** n * t ** (n - 1) * Math.exp(-lam * t)) / fact(n - 1)
-      const tail = simpson(gam, n * c, n * c + 80 / lam, 20000)
-      close(ans[0], tail, 1e-6)
-      const T = tenths.reduce((a, b) => a.add(F(b, 10)), F(0))
-      close(ans[1], F(n).div(T).num)
-      close(ans[2], F(n - 1).div(T).num)
-      close(ans[3], (lam * lam) / n)
-      // variance of (n-1)/T by integrating against the Gamma density
-      const m1 = simpson((t) => ((n - 1) / t) * gam(t), 1e-9, 80 / lam, 40000)
-      const m2 = simpson((t) => (((n - 1) / t) ** 2) * gam(t), 1e-9, 80 / lam, 40000)
-      close(m1, lam, 1e-3)
-      close(ans[4], m2 - m1 * m1, 2e-3)
+      const p = B.sample(makeRng(s))
+      const ans = answers(B.build(p))
+      const { n, xbar, th0, th1 } = p
+      const logf = (x: number, th: number) => -Math.log(th) - x / th
+      // 1: I_1 = integral of (d/dtheta log f)^2 f, by central differences; bound = g'^2 / (n I_1)
+      const h = 1e-5
+      const I1 = simpson((x) => ((logf(x, th1 + h) - logf(x, th1 - h)) / (2 * h)) ** 2 * Math.exp(logf(x, th1)), 0, 80 * th1, 20000)
+      close(ans[0], (2 * th1) ** 2 / (n * I1), 2e-3)
+      // 2: efficiency of the UMVUE T^2/(n(n+1)); T ~ Gamma(n, theta), theta = 1.7 (the ratio does not depend on theta)
+      const th = 1.7
+      const dens = (x: number) => Math.exp((n - 1) * Math.log(x) - x / th - n * Math.log(th) - lgam(n))
+      const Eu = simpson((x) => (x * x) / (n * (n + 1)) * dens(x), 1e-12, 12 * n * th, 30000)
+      const Eu2 = simpson((x) => ((x * x) / (n * (n + 1))) ** 2 * dens(x), 1e-12, 12 * n * th, 30000)
+      close(Eu, th * th, 1e-5)
+      close(ans[1], ((4 * th ** 4) / n) / (Eu2 - Eu * Eu), 2e-4)
+      // 3, 4: observed information at the MLE by a second difference of the log-likelihood
+      const ll = (t: number) => -n * Math.log(t) - (n * xbar) / t
+      const d = 1e-3
+      const obs = -(ll(xbar + d) - 2 * ll(xbar) + ll(xbar - d)) / (d * d)
+      close(ans[2], 1 / Math.sqrt(obs), 1e-4)
+      close(ans[3], (xbar - th0) ** 2 * obs, 2e-3)
+      // 5: score at theta0 by a first difference; expected information as the variance of the score over S ~ Gamma(n, th0)
+      const score0 = (ll(th0 + 1e-5) - ll(th0 - 1e-5)) / 2e-5
+      const sc = (S: number) => -n / th0 + S / (th0 * th0)
+      const densS = (x: number) => Math.exp((n - 1) * Math.log(x) - x / th0 - n * Math.log(th0) - lgam(n))
+      const varScore = simpson((S) => sc(S) ** 2 * densS(S), 1e-12, 12 * n * th0, 30000)
+      close(ans[4], (score0 * score0) / varScore, 2e-3)
     }
-  }, 60000)
-  it('Monte Carlo: P(Xbar > c) and the variance of the UMVUE (5 seeds)', () => {
-    for (const s of seeds('B', 5)) {
-      const prm = B.sample(makeRng(s))
-      const ans = answers(B.build(prm))
-      const { n, lam, c } = prm
-      const rng = makeRng('sim' + s)
-      const runs = 300000
-      let hit = 0, u1 = 0, u2 = 0
-      for (let r = 0; r < runs; r++) {
-        let t = 0
-        for (let i = 0; i < n; i++) t += -Math.log(1 - rng.next()) / lam
-        if (t / n > c) hit++
-        const u = (n - 1) / t
-        u1 += u; u2 += u * u
-      }
-      close(ans[0], hit / runs, 0.005)
-      rel(u1 / runs, lam, 0.03)
-      // heavy-tailed for n = 3: loose bound
-      rel(ans[4], u2 / runs - (u1 / runs) ** 2, n === 3 ? 0.35 : 0.1)
+  }, 300000)
+})
+
+// ---------- C ----------
+describe('generator C against independent computation', () => {
+  it('risks by integrating over the normal law of the sample mean; crossing point; best linear rule (200 seeds)', () => {
+    for (const s of seeds('C', 200)) {
+      const p = C.sample(makeRng(s))
+      const ans = answers(C.build(p))
+      const { s2, n, a, theta1, p: pr, m } = p
+      const v = s2 / n, sd = Math.sqrt(v)
+      const risk = (c: number, th: number, pts = 4000) => simpson((x) => (c * x - th) ** 2 * Math.exp(-((x - th) ** 2) / (2 * v)) / Math.sqrt(2 * Math.PI * v), th - 10 * sd, th + 10 * sd, pts)
+      close(ans[0], pr * risk(1, theta1) + (1 - pr) * theta1 ** 2, 1e-6)
+      close(ans[1], risk(a, theta1), 1e-6)
+      // crossing: bisection on risk(a, th) - risk(1, th), which increases in |th|
+      let lo = 0, hi = 50
+      for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; if (risk(a, mid, 1500) < risk(1, mid, 1500)) lo = mid; else hi = mid }
+      close(ans[2], (lo + hi) / 2, 1e-4)
+      // maximum over a grid of theta in [-m, m]
+      let mx = 0
+      for (let i = 0; i <= 20; i++) mx = Math.max(mx, risk(a, -m + (2 * m * i) / 20, 1500))
+      close(ans[3], mx, 1e-6)
+      // best linear rule: minimise the maximum risk over the grid
+      const maxRisk = (c: number) => { let r = 0; for (let i = 0; i <= 8; i++) r = Math.max(r, risk(c, -m + (2 * m * i) / 8, 800)); return r }
+      close(ans[4], golden(maxRisk, 0, 1, false), 1e-4)
     }
-  }, 60000)
+  }, 300000)
 })
 
 // ---------- D ----------
 describe('generator D against independent computation', () => {
-  it('enumerates every outcome sequence with exact fractions (300 seeds)', () => {
+  it('posterior moments by integration; Bayes risk by exact enumeration; minimax estimate has constant risk (300 seeds)', () => {
+    const fact = (k: number) => { let r = 1n; for (let i = 2n; i <= BigInt(k); i++) r *= i; return r }
+    const chooseB = (nn: number, k: number) => fact(nn) / (fact(k) * fact(nn - k))
+    const beta = (a: number, b: number) => new Fr(fact(a - 1) * fact(b - 1), fact(a + b - 1)) // B(a, b), integer arguments
     for (const s of seeds('D', 300)) {
-      const prm = D.sample(makeRng(s))
-      const ans = answers(D.build(prm))
-      const { n, p0, p1, c, xObs, margin } = prm
-      const frac = (p: number) => F(Math.round(p * 100), 100)
-      const tailSeq = (p: number, k0: number) => {
-        let tot = F(0)
-        for (let mask = 0; mask < 1 << n; mask++) {
-          let ones = 0
-          for (let i = 0; i < n; i++) if (mask & (1 << i)) ones++
-          if (ones < k0) continue
-          let pr = F(1)
-          for (let i = 0; i < n; i++) pr = pr.mul(mask & (1 << i) ? frac(p) : F(1).sub(frac(p)))
-          tot = tot.add(pr)
-        }
-        return tot.num
+      const p = D.sample(makeRng(s))
+      const ans = answers(D.build(p))
+      const { n, x, al, be } = p
+      const a = al + x, b = be + n - x
+      const kern = (th: number) => th ** (a - 1) * (1 - th) ** (b - 1)
+      const Z = simpson(kern, 0, 1, 4000)
+      const mean = simpson((th) => th * kern(th), 0, 1, 4000) / Z
+      const vr = simpson((th) => (th - mean) ** 2 * kern(th), 0, 1, 4000) / Z
+      close(ans[0], mean, 1e-9)
+      close(ans[1], vr, 1e-9)
+      // Bayes risk: sum over x' of marginal probability times posterior variance, in exact fractions
+      let risk = F(0)
+      for (let xx = 0; xx <= n; xx++) {
+        const marg = new Fr(chooseB(n, xx), 1n).mul(beta(al + xx, be + n - xx)).div(beta(al, be))
+        const aa = al + xx, bb = be + n - xx
+        const pv = F(aa * bb, (aa + bb) ** 2 * (aa + bb + 1))
+        risk = risk.add(marg.mul(pv))
       }
-      close(ans[0], tailSeq(p0, c), 1e-9)
-      close(ans[1], tailSeq(p1, c), 1e-9)
-      close(ans[2], tailSeq(p0, xObs), 1e-9)
-      const ph = xObs / n
-      close(ans[3], ph - 1.96 * Math.sqrt((ph * (1 - ph)) / n), 1e-12)
-      let m = 1
-      while (1.96 * Math.sqrt((ph * (1 - ph)) / m) > margin) m++
-      expect(ans[4]).toBe(m)
-    }
-  })
-  it('Monte Carlo: size and power of the test (4 seeds)', () => {
-    for (const s of seeds('D', 4)) {
-      const prm = D.sample(makeRng(s))
-      const ans = answers(D.build(prm))
-      const rng = makeRng('sim' + s)
-      const runs = 200000
-      const rate = (p: number) => {
-        let hit = 0
-        for (let r = 0; r < runs; r++) {
-          let x = 0
-          for (let i = 0; i < prm.n; i++) if (rng.next() < p) x++
-          if (x >= prm.c) hit++
-        }
-        return hit / runs
+      close(ans[2], risk.num, 1e-12)
+      // minimax: recover the estimator (x'+s)/(n+2s) from the answer, then check its risk is constant in theta and equals the answer
+      const est = ans[3]
+      const sh = Math.abs(2 * est - 1) < 1e-9 ? Math.sqrt(n) / 2 : (x - est * n) / (2 * est - 1)
+      close(sh, Math.sqrt(n) / 2, 1e-6)
+      for (const th of [0.05, 0.2, 0.5, 0.8, 0.97]) {
+        let r = 0
+        for (let xx = 0; xx <= n; xx++) r += Number(chooseB(n, xx)) * th ** xx * (1 - th) ** (n - xx) * ((xx + sh) / (n + 2 * sh) - th) ** 2
+        close(ans[4], r, 1e-9)
       }
-      close(ans[0], rate(prm.p0), 0.006)
-      close(ans[1], rate(prm.p1), 0.006)
     }
-  }, 60000)
+  }, 300000)
 })
 
 // ---------- E ----------
 describe('generator E against independent computation', () => {
-  it('exact fractions from the raw data (300 seeds)', () => {
-    for (const s of seeds('E', 300)) {
-      const prm = E.sample(makeRng(s))
-      const ans = answers(E.build(prm))
-      const { x, y } = prm
-      // variance by the shortcut (sum x^2 - n xbar^2)/(n-1), exact
-      const sv = (a: number[]) => {
-        const n = a.length
-        const s1 = a.reduce((p, q) => p + q, 0), s2 = a.reduce((p, q) => p + q * q, 0)
-        return { m: F(s1, n), v: F(s2).sub(F(s1 * s1, n)).div(F(n - 1)) }
-      }
-      const X = sv(x), Y = sv(y)
-      const n1 = x.length, n2 = y.length
-      const sp = X.v.mul(F(n1 - 1)).add(Y.v.mul(F(n2 - 1))).div(F(n1 + n2 - 2))
-      close(ans[0], sp.num, 1e-9)
-      const se2 = sp.mul(F(1, n1).add(F(1, n2)))
-      const diff = X.m.sub(Y.m).num
-      close(ans[2], diff / Math.sqrt(se2.num), 1e-9)
-      close(ans[1], E.T975[n1 + n2 - 2] * Math.sqrt(se2.num), 1e-9)
-      close(ans[3], diff / Math.sqrt(X.v.div(F(n1)).add(Y.v.div(F(n2))).num), 1e-9)
-      close(ans[4], X.v.div(Y.v).num, 1e-9)
+  it('posterior summaries by numerical integration of likelihood times prior (200 seeds)', () => {
+    for (const s of seeds('E', 200)) {
+      const p = E.sample(makeRng(s))
+      const ans = answers(E.build(p))
+      const { n, total, a, b } = p
+      const logk = (l: number) => (total + a - 1) * Math.log(l) - (n + b) * l
+      const top = Math.max(...Array.from({ length: 400 }, (_, i) => logk(0.01 + i * 0.05)))
+      const k = (l: number) => (l <= 0 ? 0 : Math.exp(logk(l) - top))
+      const L = 80
+      const Z = simpson(k, 0, L, 80000)
+      const mean = simpson((l) => l * k(l), 0, L, 80000) / Z
+      const vr = simpson((l) => (l - mean) ** 2 * k(l), 0, L, 80000) / Z
+      close(ans[0], mean, 1e-6)
+      close(ans[1], vr, 1e-6)
+      const xb = total / n
+      if (Math.abs(xb - a / b) > 0.05) close(ans[2], (mean - a / b) / (xb - a / b), 1e-5)
+      close(ans[3], simpson((l) => Math.exp(-l) * k(l), 0, L, 80000) / Z, 1e-6)
+      close(ans[4], mean - 1.96 * Math.sqrt(vr), 1e-5)
     }
-  })
-  it('the printed t table matches the 97.5% point of the t density found by integration', () => {
-    const lgamma = (z: number): number => {
-      const g = [676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7]
-      z -= 1
-      let a = 0.99999999999980993
-      for (let i = 0; i < 8; i++) a += g[i] / (z + i + 1)
-      const t = z + 7.5
-      return 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(a)
-    }
-    for (const [dfs, tab] of Object.entries(E.T975)) {
-      const df = Number(dfs)
-      const dens = (t: number) => Math.exp(lgamma((df + 1) / 2) - lgamma(df / 2)) / Math.sqrt(df * Math.PI) * (1 + (t * t) / df) ** (-(df + 1) / 2)
-      const upperTail = (t: number) => 0.5 - simpson(dens, 0, t, 4000)
-      close(upperTail(tab), 0.025, 2e-4)
-    }
-  })
+  }, 300000)
 })
 
 // ---------- F ----------
 describe('generator F against independent computation', () => {
-  it('exact Pearson statistics, G^2 from an identity, binomial fit with exact fractions (300 seeds)', () => {
-    for (const s of seeds('F', 300)) {
-      const prm = Fq.sample(makeRng(s))
-      const ans = answers(Fq.build(prm))
-      const { table, counts } = prm
-      const N = table.flat().reduce((a, b) => a + b, 0)
-      const r = table.map((row) => row.reduce((a, b) => a + b, 0))
-      const cc = [0, 1, 2].map((j) => table[0][j] + table[1][j])
-      // X^2 = N * (sum O^2 / (r c) - 1), exact
-      let acc = F(0)
-      table.forEach((row, i) => row.forEach((o, j) => { acc = acc.add(F(o * o, r[i] * cc[j])) }))
-      close(ans[0], (r[0] * cc[0]) / N, 1e-12)
-      close(ans[1], F(N).mul(acc.sub(F(1))).num, 1e-9)
-      // G^2 = 2 [ sum O ln O - sum r ln r - sum c ln c + N ln N ]
-      const xl = (a: number) => a * Math.log(a)
-      const g2 = 2 * (table.flat().reduce((s2, o) => s2 + xl(o), 0) - r.reduce((s2, v) => s2 + xl(v), 0) - cc.reduce((s2, v) => s2 + xl(v), 0) + xl(N))
-      close(ans[2], g2, 1e-8)
-      // binomial fit: p-hat exact, expected counts exact fractions
-      const M = counts.reduce((a, b) => a + b, 0)
-      const ph = F(counts[1] + 2 * counts[2] + 3 * counts[3], 3 * M)
-      close(ans[3], ph.num, 1e-12)
-      const q = F(1).sub(ph)
-      const coef = [1, 3, 3, 1]
-      let x2 = F(0)
-      counts.forEach((o, k) => {
-        let pk = F(coef[k])
-        for (let i = 0; i < k; i++) pk = pk.mul(ph)
-        for (let i = 0; i < 3 - k; i++) pk = pk.mul(q)
-        const e = pk.mul(F(M))
-        const d = F(o).sub(e)
-        x2 = x2.add(d.mul(d).div(e))
-      })
-      close(ans[4], x2.num, 1e-8)
+  it('Neyman-Pearson knapsack over outcomes sorted by likelihood ratio, in exact fractions (all parameter combinations)', () => {
+    const choose = (nn: number, k: number) => { let r = 1; for (let i = 1; i <= k; i++) r = (r * (nn - k + i)) / i; return Math.round(r) }
+    const pmfF = (nn: number, p: Fr, k: number) => { let r = F(choose(nn, k)); for (let i = 0; i < k; i++) r = r.mul(p); const q = F(1).sub(p); for (let i = 0; i < nn - k; i++) r = r.mul(q); return r }
+    const p0s: [number, number][] = [[1, 4], [1, 3], [1, 2]], p1s: [number, number][] = [[2, 3], [3, 4], [4, 5]], als: [number, number][] = [[1, 20], [1, 10]]
+    for (let n = 8; n <= 12; n++) for (const q0 of p0s) for (const q1 of p1s) for (const al of als) {
+      const ans = answers(Ff.build({ n, p0: q0, p1: q1, alpha: al }))
+      const P0 = F(q0[0], q0[1]), P1 = F(q1[0], q1[1]), alpha = F(al[0], al[1])
+      const f0 = Array.from({ length: n + 1 }, (_, y) => pmfF(n, P0, y)), f1 = Array.from({ length: n + 1 }, (_, y) => pmfF(n, P1, y))
+      const order = Array.from({ length: n + 1 }, (_, y) => y).sort((u, v) => f1[v].mul(f0[u]).cmp(f1[u].mul(f0[v]))) // decreasing likelihood ratio
+      const phi: Fr[] = Array.from({ length: n + 1 }, () => F(0))
+      let budget = alpha
+      for (const y of order) {
+        if (budget.zero) break
+        if (f0[y].cmp(budget) <= 0) { phi[y] = F(1); budget = budget.sub(f0[y]) } else { phi[y] = budget.div(f0[y]); budget = F(0) }
+      }
+      const cStar = Math.max(...phi.map((v, y) => (v.cmp(F(1)) < 0 ? y : -1)))
+      expect(ans[0]).toBe(cStar)
+      let size = F(0), power = F(0)
+      for (let y = 0; y <= n; y++) { size = size.add(phi[y].mul(f0[y])); power = power.add(phi[y].mul(f1[y])) }
+      expect(size.cmp(alpha)).toBe(0)
+      let tail = F(0)
+      for (let y = cStar + 1; y <= n; y++) tail = tail.add(f0[y])
+      close(ans[1], tail.num, 1e-12)
+      close(ans[2], phi[cStar].num, 1e-12)
+      close(ans[3], power.num, 1e-12)
+      close(ans[4], f1[cStar].div(f0[cStar]).num, 1e-9 * Math.max(1, f1[cStar].div(f0[cStar]).num))
     }
   })
-  it('Monte Carlo: Pearson and likelihood ratio statistics are close under independence (sanity of G^2 vs X^2)', () => {
-    // for a big table with small departures, G^2 and X^2 agree closely: checks the two formulas against each other
-    const big = Fq.build({ table: [[400, 400, 400], [405, 395, 401]], counts: [10, 10, 10, 10] })
-    close(big.parts[1].answer, big.parts[2].answer, 0.01)
-  }, 60000)
 })
 
 // ---------- G ----------
 describe('generator G against independent computation', () => {
-  it('numerical MLE, direct likelihood products, exact Poisson sums (300 seeds)', () => {
+  it('conditional probabilities from Poisson pmf ratios; Fisher p-value by enumerating subsets of the margins (300 seeds)', () => {
     for (const s of seeds('G', 300)) {
-      const prm = G.sample(makeRng(s))
-      const ans = answers(G.build(prm))
-      const { n, lam0, counts, c } = prm
-      const lf = (k: number) => { let r = 0; for (let i = 2; i <= k; i++) r += Math.log(i); return r }
-      const ll = (lam: number) => counts.reduce((a, x) => a + x * Math.log(lam) - lam - lf(x), 0)
-      // golden-section search for the maximiser
-      let lo = 1e-6, hi = 20
-      const gr = (Math.sqrt(5) - 1) / 2
-      for (let it = 0; it < 200; it++) {
-        const m1 = hi - gr * (hi - lo), m2 = lo + gr * (hi - lo)
-        if (ll(m1) < ll(m2)) lo = m1; else hi = m2
+      const p = G.sample(makeRng(s))
+      const ans = answers(G.build(p))
+      const { m, x, rho, r1, r2, a, b } = p
+      const cond = (l1: number, l2: number, k: number) => (poisPmf(l1, k) * poisPmf(l2, m - k)) / poisPmf(l1 + l2, m)
+      for (const lam of [0.8, 2.5]) {
+        close(ans[0], cond(lam, lam, x), 1e-9)
+        let up = 0, lowTail = 0
+        for (let k = x; k <= m; k++) up += cond(lam, lam, k)
+        for (let k = 0; k <= m - x; k++) lowTail += cond(lam, lam, k)
+        close(ans[1], up, 1e-9)
+        close(ans[2], up + lowTail, 1e-9)
       }
-      const hat = (lo + hi) / 2
-      close(ans[0], hat, 1e-6)
-      close(ans[1], -2 * (ll(lam0) - ll(hat)), 1e-6)
-      // exact: sum_{k<=c} m^k/k! as a fraction times exp(-m)
-      const exactCdf = (m: Fr) => {
-        let tot = F(0), term = F(1)
-        for (let k = 0; k <= c; k++) { tot = tot.add(term); term = term.mul(m).div(F(k + 1)) }
-        return tot.num
+      close(ans[4], cond(rho * 0.7, 0.7, x), 1e-9)
+      // Fisher: enumerate all subsets of size c1 of the N units (first r1 units are group 1)
+      const N = r1 + r2, c1 = a + b
+      let hit = 0, tot = 0
+      for (let mask = 0; mask < 1 << N; mask++) {
+        let bits = 0, g1 = 0
+        for (let i = 0; i < N; i++) if (mask & (1 << i)) { bits++; if (i < r1) g1++ }
+        if (bits !== c1) continue
+        tot++
+        if (g1 >= a) hit++
       }
-      const m0 = F(n * lam0), m1 = F(n * lam0, 2)
-      close(ans[2], exactCdf(m0) * Math.exp(-n * lam0), 1e-12)
-      close(ans[3], exactCdf(m1) * Math.exp(-(n * lam0) / 2), 1e-12)
-      const pmf = (lam: number, x: number) => Math.exp(x * Math.log(lam) - lam - lf(x))
-      const lr = counts.reduce((a, x) => a * (pmf(lam0 / 2, x) / pmf(lam0, x)), 1)
-      rel(ans[4], lr, 1e-9)
+      close(ans[3], hit / tot, 1e-12)
     }
   })
-  it('Monte Carlo: size and power of the Poisson test (4 seeds)', () => {
-    for (const s of seeds('G', 4)) {
-      const prm = G.sample(makeRng(s))
-      const ans = answers(G.build(prm))
-      const rng = makeRng('sim' + s)
-      const runs = 200000
-      const rate = (mean: number) => {
-        let hit = 0
-        for (let r = 0; r < runs; r++) {
-          let tot = 0, t = 0
-          // count of a Poisson process with rate `mean` on [0,1] by summing exponential gaps
-          for (;;) { t += -Math.log(1 - rng.next()) / mean; if (t > 1) break; tot++ }
-          if (tot <= prm.c) hit++
-        }
-        return hit / runs
-      }
-      close(ans[2], rate(prm.n * prm.lam0), 0.005)
-      close(ans[3], rate((prm.n * prm.lam0) / 2), 0.005)
+  it('the two-sided p-value is the sum of both tails and the null law is symmetric', () => {
+    for (const s of seeds('G', 50)) {
+      const p = G.sample(makeRng(s))
+      expect(p.x).toBeGreaterThan(p.m / 2)
     }
-  }, 60000)
+  })
+})
+
+// ---------- H ----------
+describe('generator H against independent computation', () => {
+  it('coverage by simulation, expected length by integration, median interval by sign patterns, bootstrap by full enumeration (200 seeds)', () => {
+    for (const s of seeds('H', 200)) {
+      const p = H.sample(makeRng(s))
+      const ans = answers(H.build(p))
+      const { n, mx, alpha, th, n2, k, data } = p
+      const c = ans[0] / mx
+      expect(c).toBeGreaterThan(1)
+      // 1: simulated coverage of [M, cM] for true theta = 1 should be 1 - alpha
+      const rng = makeRng('sim' + s)
+      let cov = 0
+      const sims = 20000
+      for (let i = 0; i < sims; i++) { let M = 0; for (let j = 0; j < n; j++) M = Math.max(M, rng.next()); if (M <= 1 && c * M >= 1) cov++ }
+      expect(Math.abs(cov / sims - (1 - alpha)), `coverage ${cov / sims} for alpha ${alpha}`).toBeLessThan(0.012)
+      // 2: expected length by integrating over the density of the maximum
+      close(ans[1], simpson((x) => (c - 1) * x * ((n * x ** (n - 1)) / th ** n), 0, th, 4000), 1e-9)
+      // 3: median interval covers iff at least k observations lie below and at least k above the median; enumerate sign patterns
+      let good = 0
+      for (let mask = 0; mask < 1 << n2; mask++) { let neg = 0; for (let i = 0; i < n2; i++) if (mask & (1 << i)) neg++; if (neg >= k && n2 - neg >= k) good++ }
+      close(ans[2], good / 2 ** n2, 1e-12)
+      // 4, 5: enumerate all n^n bootstrap resamples
+      const nb = data.length
+      const means: number[] = [], vars: number[] = []
+      const idx = new Array(nb).fill(0)
+      for (let r = 0; r < nb ** nb; r++) {
+        let t = r
+        for (let i = 0; i < nb; i++) { idx[i] = t % nb; t = Math.floor(t / nb) }
+        const vals = idx.map((i) => data[i])
+        const mu = vals.reduce((u, v) => u + v, 0) / nb
+        means.push(mu); vars.push(vals.reduce((u, v) => u + (v - mu) ** 2, 0) / nb)
+      }
+      const em = means.reduce((u, v) => u + v, 0) / means.length
+      close(ans[3], Math.sqrt(means.reduce((u, v) => u + (v - em) ** 2, 0) / means.length), 1e-9)
+      const mu0 = data.reduce((u, v) => u + v, 0) / nb
+      const plug = data.reduce((u, v) => u + (v - mu0) ** 2, 0) / nb
+      close(ans[4], vars.reduce((u, v) => u + v, 0) / vars.length - plug, 1e-9)
+    }
+  }, 300000)
 })

@@ -1,0 +1,1858 @@
+[
+ {
+  "id": "rl-1.1",
+  "lecture": 1,
+  "stem": "What is the exploration-exploitation trade-off in a multi-armed bandit?",
+  "correct": [
+   "Pulling the apparent best arm pays now, while other arms may pay more later.",
+   "Reward from the best-looking arm now against information for later."
+  ],
+  "distractors": [
+   {
+    "text": "Exploration is needed only when the reward distributions drift over time.",
+    "misconception": "believes exploration matters only in non-stationary problems"
+   },
+   {
+    "text": "Exploitation means choosing arms uniformly at random to avoid any bias.",
+    "misconception": "confuses exploitation with uniform exploration"
+   },
+   {
+    "text": "A policy can do both at once because every pull reveals the mean of all arms.",
+    "misconception": "ignores that bandit feedback concerns only the pulled arm"
+   },
+   {
+    "text": "Exploration remains necessary at a constant rate even after the best arm is known exactly.",
+    "misconception": "thinks exploration never stops being useful"
+   },
+   {
+    "text": "Exploring is a waste because the sample mean of an arm is already unbiased.",
+    "misconception": "ignores that an unbiased estimate can still be very uncertain"
+   }
+  ],
+  "explanation": "A pull only reveals the reward of the chosen arm. Choosing the apparent best arm exploits current knowledge, while other arms may be better and are only discovered by trying them."
+ },
+ {
+  "id": "rl-1.2",
+  "lecture": 1,
+  "stem": "Why can the purely greedy rule (always pull the arm with the highest sample mean) suffer regret growing linearly in the number of pulls?",
+  "correct": [
+   "One unlucky early sample can make greedy drop the best arm and never pull it again to check.",
+   "It may never revisit an arm it wrongly rejected early on."
+  ],
+  "distractors": [
+   {
+    "text": "Its sample means are biased downward for every arm that it pulls.",
+    "misconception": "invents a bias in sample means"
+   },
+   {
+    "text": "It spreads its pulls evenly over all arms, so it earns only the average reward.",
+    "misconception": "confuses greedy with uniform sampling"
+   },
+   {
+    "text": "The sample mean of a repeatedly pulled arm does not converge to its true mean.",
+    "misconception": "ignores the law of large numbers"
+   },
+   {
+    "text": "It explores too much, wasting pulls on arms that already look poor.",
+    "misconception": "reverses the failure mode"
+   },
+   {
+    "text": "It cannot be run unless the true arm means are known in advance.",
+    "misconception": "confuses the algorithm with the oracle"
+   }
+  ],
+  "explanation": "Greedy can stop sampling the truly best arm after a bad start. Its estimate of that arm then never changes, so the loss per step stays positive forever."
+ },
+ {
+  "id": "rl-1.3",
+  "lecture": 1,
+  "stem": "What does the UCB1 index add to an arm's sample mean?",
+  "correct": [
+   "A bonus that is large for rarely pulled arms and grows only slowly with the elapsed time.",
+   "An optimism term that shrinks as an arm gets pulled more often."
+  ],
+  "distractors": [
+   {
+    "text": "A bonus that grows with the arm's pull count, rewarding arms that were popular.",
+    "misconception": "reverses the role of the count"
+   },
+   {
+    "text": "A random perturbation whose size does not depend on the pull counts.",
+    "misconception": "confuses UCB with noise injection"
+   },
+   {
+    "text": "A penalty proportional to the arm's sample variance, so that risky arms are avoided.",
+    "misconception": "confuses optimism with risk aversion"
+   },
+   {
+    "text": "A constant, so that the rule behaves exactly like the greedy policy.",
+    "misconception": "ignores that the bonus depends on the counts"
+   },
+   {
+    "text": "A term that is switched off for good after a fixed number of rounds.",
+    "misconception": "confuses UCB with explore-then-commit"
+   }
+  ],
+  "explanation": "The bonus is of the form $c\\sqrt{\\ln t/N_a}$. It is large when $N_a$ is small, so uncertain arms are tried, and it grows slowly with $t$ so that no arm is abandoned for ever."
+ },
+ {
+  "id": "rl-1.4",
+  "lecture": 1,
+  "stem": "How does Thompson sampling choose an arm in a Bernoulli bandit with Beta posteriors?",
+  "correct": [
+   "It draws one value from each arm's posterior and plays the arm with the largest draw.",
+   "Play the arm whose random posterior draw is the largest."
+  ],
+  "distractors": [
+   {
+    "text": "It pulls the arm with the highest posterior mean in every round.",
+    "misconception": "confuses sampling from the posterior with the greedy rule on its mean"
+   },
+   {
+    "text": "It pulls each arm with probability proportional to its prior variance.",
+    "misconception": "invents a selection rule"
+   },
+   {
+    "text": "It adds a deterministic confidence bonus to each posterior mean.",
+    "misconception": "describes an upper confidence bound method instead"
+   },
+   {
+    "text": "It plays uniformly at random with a probability that decays over time.",
+    "misconception": "describes epsilon-greedy"
+   },
+   {
+    "text": "It pulls the arm that has been pulled least often so far.",
+    "misconception": "confuses it with round-robin exploration"
+   }
+  ],
+  "explanation": "Randomness comes from the posterior draw. An arm is played with exactly the posterior probability that it is the best, so uncertain arms are explored and the posteriors sharpen as data accumulate."
+ },
+ {
+  "id": "rl-1.5",
+  "lecture": 1,
+  "stem": "What is the expected cumulative regret of a bandit algorithm after $T$ pulls?",
+  "correct": [
+   "The expected reward lost compared with always pulling the best arm, summed over all pulls.",
+   "Each arm's expected pulls multiplied by its gap, added up."
+  ],
+  "distractors": [
+   {
+    "text": "The number of times the algorithm failed to pull the best arm, regardless of the gaps.",
+    "misconception": "counts mistakes without weighting them by the gaps"
+   },
+   {
+    "text": "The difference between the largest and smallest sample means after $T$ pulls.",
+    "misconception": "confuses regret with the spread of estimates"
+   },
+   {
+    "text": "The variance of the rewards that the algorithm has collected so far.",
+    "misconception": "confuses regret with reward variability"
+   },
+   {
+    "text": "The sum of the gaps of all arms, whatever the number of pulls of each.",
+    "misconception": "forgets the weighting by the pull counts"
+   },
+   {
+    "text": "The total reward earned by the algorithm over the $T$ pulls.",
+    "misconception": "confuses reward with loss relative to the benchmark"
+   }
+  ],
+  "explanation": "Each pull of arm $a$ costs $\\Delta_a=\\mu^*-\\mu_a$ in expectation relative to the best arm, so regret is the gap-weighted count of suboptimal pulls."
+ },
+ {
+  "id": "rl-1.6",
+  "lecture": 1,
+  "stem": "Which statement about the regret of reasonable bandit algorithms is correct?",
+  "correct": [
+   "Logarithmic growth in $T$ is the best possible order, and UCB1 attains that order for bounded rewards.",
+   "No consistent algorithm beats regret of order $\\ln T$ in general."
+  ],
+  "distractors": [
+   {
+    "text": "A good algorithm can achieve bounded regret that does not grow with $T$ on every problem.",
+    "misconception": "ignores the need to keep learning which arm is best"
+   },
+   {
+    "text": "Epsilon-greedy with fixed $\\epsilon$ has logarithmic regret, since it explores less over time.",
+    "misconception": "ignores that a fixed exploration rate wastes pulls forever"
+   },
+   {
+    "text": "Thompson sampling must have linear regret because its choices are random.",
+    "misconception": "confuses randomisation with a lack of learning"
+   },
+   {
+    "text": "Regret is always linear in $T$ unless every arm mean is known in advance.",
+    "misconception": "thinks learning cannot reduce the per-step loss"
+   },
+   {
+    "text": "Logarithmic regret is possible only when all gaps are equal.",
+    "misconception": "invents a restriction on the gaps"
+   }
+  ],
+  "explanation": "Lai and Robbins gave a logarithmic lower bound, and UCB1 and Thompson sampling match its order. A fixed $\\epsilon$ keeps picking random arms at rate $\\epsilon$, which costs a constant per step, hence linear regret."
+ },
+ {
+  "id": "rl-2.1",
+  "lecture": 2,
+  "stem": "What does the Markov property of the state in an MDP say?",
+  "correct": [
+   "The next state depends on history only through the current state and action.",
+   "Given the present state and action, the past is irrelevant."
+  ],
+  "distractors": [
+   {
+    "text": "The next state is independent of the action that the agent takes now.",
+    "misconception": "ignores that actions influence transitions"
+   },
+   {
+    "text": "The reward at each step must be a deterministic function of the state.",
+    "misconception": "confuses Markov with deterministic"
+   },
+   {
+    "text": "The policy is not allowed to depend on the current state.",
+    "misconception": "confuses Markov dynamics with a memoryless policy class"
+   },
+   {
+    "text": "Transition probabilities change as the policy improves during learning.",
+    "misconception": "confuses the environment dynamics with the policy"
+   },
+   {
+    "text": "The state must be observed without any noise in every problem.",
+    "misconception": "confuses the Markov property with full observability"
+   }
+  ],
+  "explanation": "The Markov property is a statement about the dynamics: the state summarises everything from the past that matters for the future given the action."
+ },
+ {
+  "id": "rl-2.2",
+  "lecture": 2,
+  "stem": "Why is a discount factor $\\gamma<1$ used in infinite-horizon continuing tasks?",
+  "correct": [
+   "Bounded rewards make the discounted sum finite and favour nearer rewards.",
+   "It makes the infinite sum of discounted bounded rewards converge."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the optimal policy independent of the transition probabilities.",
+    "misconception": "believes discounting removes the dependence on dynamics"
+   },
+   {
+    "text": "It guarantees that the optimal policy is stochastic and non-stationary.",
+    "misconception": "invents an effect of discounting on the policy class"
+   },
+   {
+    "text": "It is required only in episodic tasks and is meaningless in continuing ones.",
+    "misconception": "reverses where discounting is needed"
+   },
+   {
+    "text": "It forces the value function to be zero at every state.",
+    "misconception": "confuses discounting with a zero value"
+   },
+   {
+    "text": "It makes the agent ignore every reward that comes after the first step.",
+    "misconception": "confuses small gamma with gamma equal to zero"
+   }
+  ],
+  "explanation": "If $|r|\\le R$ then $|G_t|\\le R/(1-\\gamma)$. For $\\gamma=1$ in a continuing task the return can diverge."
+ },
+ {
+  "id": "rl-2.3",
+  "lecture": 2,
+  "stem": "Which equation is the Bellman expectation equation for $v_\\pi$?",
+  "correct": [
+   "$v_\\pi(s)=\\sum_a\\pi(a\\mid s)\\sum_{s',r}p(s',r\\mid s,a)\\,[\\,r+\\gamma v_\\pi(s')\\,]$",
+   "Expected reward plus discounted next value."
+  ],
+  "distractors": [
+   {
+    "text": "$v_\\pi(s)=\\max_a\\sum_{s',r}p(s',r\\mid s,a)\\,[\\,r+\\gamma v_\\pi(s')\\,]$",
+    "misconception": "confuses the expectation equation with the optimality equation"
+   },
+   {
+    "text": "$v_\\pi(s)=\\sum_a\\pi(a\\mid s)\\sum_{s',r}p(s',r\\mid s,a)\\,r$",
+    "misconception": "drops the discounted future value"
+   },
+   {
+    "text": "$v_\\pi(s)=\\sum_a\\pi(a\\mid s)\\sum_{s',r}p(s',r\\mid s,a)\\,[\\,r+\\gamma v_\\pi(s)\\,]$",
+    "misconception": "bootstraps from the same state instead of the next state"
+   },
+   {
+    "text": "$v_\\pi(s)=\\gamma\\max_{s'}\\sum_a\\pi(a\\mid s)\\,v_\\pi(s')$",
+    "misconception": "keeps a discounted value but loses the reward and takes a max"
+   },
+   {
+    "text": "$v_\\pi(s)=\\sum_a\\pi(a\\mid s)\\sum_{s',r}p(s',r\\mid s,a)\\,[\\,r+\\gamma v_\\pi(s')\\,]^2$",
+    "misconception": "squares the backup, which has no basis in the definition"
+   }
+  ],
+  "explanation": "The value is the expectation of the return, which splits into the immediate reward and $\\gamma$ times the return from the next state. No max appears because the policy is fixed."
+ },
+ {
+  "id": "rl-2.4",
+  "lecture": 2,
+  "stem": "Which statement about optimal policies in a finite discounted MDP is correct?",
+  "correct": [
+   "Some deterministic stationary policy is optimal, and the optimal value is unique.",
+   "All optimal policies share the same value function."
+  ],
+  "distractors": [
+   {
+    "text": "The optimal policy is always unique, since ties between actions cannot occur.",
+    "misconception": "thinks ties are impossible"
+   },
+   {
+    "text": "Every optimal policy must randomise in order to keep exploring.",
+    "misconception": "confuses learning with the structure of the optimal policy"
+   },
+   {
+    "text": "Different optimal policies can have different values at some states.",
+    "misconception": "forgets that optimal policies share one value function"
+   },
+   {
+    "text": "The optimal policy depends on the initial state distribution.",
+    "misconception": "confuses optimality in every state with optimality for a start distribution"
+   },
+   {
+    "text": "An optimal policy may need to remember the whole history of states.",
+    "misconception": "ignores that Markov problems need no memory"
+   }
+  ],
+  "explanation": "The optimal value function is unique and a greedy deterministic policy with respect to it is optimal. Ties between actions give several optimal policies with the same $v_*$."
+ },
+ {
+  "id": "rl-2.5",
+  "lecture": 2,
+  "stem": "How are $q_*$ and $v_*$ related?",
+  "correct": [
+   "$v_*(s)=\\max_a q_*(s,a)$, and greedy actions on $q_*$ are optimal.",
+   "Greedy actions on $q_*$ need no model of the dynamics."
+  ],
+  "distractors": [
+   {
+    "text": "$v_*(s)=\\min_a q_*(s,a)$, because the value must be pessimistic.",
+    "misconception": "replaces the maximum by a minimum"
+   },
+   {
+    "text": "$v_*(s)$ is the plain average of $q_*(s,a)$ over all actions.",
+    "misconception": "confuses the optimal value with the uniform policy value"
+   },
+   {
+    "text": "Choosing the greedy action from $q_*$ still requires the transition probabilities.",
+    "misconception": "misses the point of action values"
+   },
+   {
+    "text": "$q_*(s,a)=\\max_{s'}v_*(s')$ for every action $a$.",
+    "misconception": "ignores the reward and the transition probabilities"
+   },
+   {
+    "text": "$q_*$ is defined only for deterministic policies.",
+    "misconception": "confuses the definition of action values"
+   }
+  ],
+  "explanation": "Because $q_*$ already includes the one-step lookahead through the model, the greedy action needs no further model knowledge."
+ },
+ {
+  "id": "rl-3.1",
+  "lecture": 3,
+  "stem": "What are the two alternating steps of policy iteration?",
+  "correct": [
+   "Evaluate the current policy's values, then improve it by acting greedily on them.",
+   "Policy evaluation, then greedy improvement, repeated until stable."
+  ],
+  "distractors": [
+   {
+    "text": "Sample complete episodes, then average the returns of each state visited.",
+    "misconception": "describes Monte Carlo prediction"
+   },
+   {
+    "text": "Apply one max backup to the values, then discard the policy entirely.",
+    "misconception": "confuses it with value iteration"
+   },
+   {
+    "text": "Compute the optimal values first, then randomise the policy around them.",
+    "misconception": "invents a randomisation step"
+   },
+   {
+    "text": "Improve the policy by gradient ascent on the return, then re-estimate values by TD.",
+    "misconception": "describes policy gradient methods"
+   },
+   {
+    "text": "Pick the action with the highest immediate reward, then evaluate that policy once.",
+    "misconception": "confuses greedy improvement with one-step reward maximisation"
+   }
+  ],
+  "explanation": "Evaluation gives $v_\\pi$, improvement gives $\\pi'$ greedy in $v_\\pi$. The alternation stops when the greedy policy equals the current policy, which means it is optimal."
+ },
+ {
+  "id": "rl-3.2",
+  "lecture": 3,
+  "stem": "What does one sweep of value iteration do to the value function?",
+  "correct": [
+   "Each state gets the best one-step lookahead value over the available actions.",
+   "Every state receives a Bellman optimality backup in one sweep."
+  ],
+  "distractors": [
+   {
+    "text": "It replaces each $V(s)$ by the backup of one fixed policy until that policy's values converge.",
+    "misconception": "describes iterative policy evaluation"
+   },
+   {
+    "text": "It replaces each $V(s)$ by the largest immediate reward available in that state.",
+    "misconception": "drops the future value"
+   },
+   {
+    "text": "It replaces each $V(s)$ by the uniform average over actions of the backup.",
+    "misconception": "replaces the max by an average"
+   },
+   {
+    "text": "It updates only the states that were visited in the most recent sampled episode.",
+    "misconception": "describes asynchronous sampling methods"
+   },
+   {
+    "text": "It sets each $V(s)$ to the smallest backed-up value over actions.",
+    "misconception": "replaces the max by a min"
+   }
+  ],
+  "explanation": "The update is $V(s)\\leftarrow\\max_a\\sum_{s',r}p(s',r\\mid s,a)[r+\\gamma V(s')]$, the Bellman optimality operator applied to all states."
+ },
+ {
+  "id": "rl-3.3",
+  "lecture": 3,
+  "stem": "Why does value iteration converge to $v_*$ from any starting values in a finite MDP with $\\gamma<1$?",
+  "correct": [
+   "The Bellman optimality operator is a $\\gamma$-contraction in the max norm.",
+   "Backups shrink the distance between value functions by $\\gamma$."
+  ],
+  "distractors": [
+   {
+    "text": "The starting values are always an upper bound on $v_*$, so they only decrease.",
+    "misconception": "invents a requirement on the initial values"
+   },
+   {
+    "text": "Each sweep strictly improves the policy until it is optimal after finitely many sweeps.",
+    "misconception": "confuses value convergence with finite policy iteration"
+   },
+   {
+    "text": "The operator is linear in $V$, so it has a unique solution.",
+    "misconception": "forgets that the maximum makes the operator nonlinear"
+   },
+   {
+    "text": "The transitions must be deterministic for the sweeps to converge.",
+    "misconception": "invents a restriction on the dynamics"
+   },
+   {
+    "text": "Convergence holds only if $V$ starts at zero.",
+    "misconception": "thinks the initial values must be zero"
+   }
+  ],
+  "explanation": "Contraction plus Banach's fixed-point theorem give a unique fixed point and geometric convergence at rate $\\gamma$ from any start."
+ },
+ {
+  "id": "rl-3.4",
+  "lecture": 3,
+  "stem": "Let $\\pi'$ be greedy with respect to $v_\\pi$. Which statement from the policy improvement theorem holds?",
+  "correct": [
+   "The new policy is at least as good as the old one in every single state.",
+   "No state's value falls after the greedy improvement."
+  ],
+  "distractors": [
+   {
+    "text": "$\\pi'$ is optimal after a single improvement step, whatever $\\pi$ was.",
+    "misconception": "thinks one improvement step suffices"
+   },
+   {
+    "text": "$v_{\\pi'}(s)\\ge v_\\pi(s)$ holds only on average over a start-state distribution.",
+    "misconception": "weakens a statement that holds in every state"
+   },
+   {
+    "text": "$\\pi'$ can be worse than $\\pi$ in some states while better in others.",
+    "misconception": "forgets that improvement is uniform over states"
+   },
+   {
+    "text": "Improvement is guaranteed only when $\\gamma=1$.",
+    "misconception": "invents a condition on the discount"
+   },
+   {
+    "text": "$\\pi'$ is better only if the model is estimated from samples.",
+    "misconception": "confuses it with model-free methods"
+   }
+  ],
+  "explanation": "Acting greedily on $q_\\pi$ in every state gives a value at least $v_\\pi$ everywhere. If no improvement is possible the Bellman optimality equation holds."
+ },
+ {
+  "id": "rl-3.5",
+  "lecture": 3,
+  "stem": "Which statement about policy iteration on a finite MDP is correct?",
+  "correct": [
+   "Finitely many policies plus strict improvement force it to terminate.",
+   "It reaches the optimal policy after finitely many iterations."
+  ],
+  "distractors": [
+   {
+    "text": "It needs infinitely many iterations to reach the optimal policy exactly.",
+    "misconception": "confuses it with the asymptotic convergence of value iteration"
+   },
+   {
+    "text": "It can cycle between two policies of equal value forever.",
+    "misconception": "ignores strict improvement"
+   },
+   {
+    "text": "It does not need the transition probabilities.",
+    "misconception": "confuses dynamic programming with model-free learning"
+   },
+   {
+    "text": "Each iteration is cheaper than a sweep of value iteration.",
+    "misconception": "forgets that evaluation is a full solve or many sweeps"
+   },
+   {
+    "text": "It converges only when the starting policy is deterministic and optimal.",
+    "misconception": "invents a condition on the starting policy"
+   }
+  ],
+  "explanation": "A strictly better policy never repeats, and the set of deterministic policies is finite. Each iteration is more expensive than a value iteration sweep because it evaluates a policy."
+ },
+ {
+  "id": "rl-4.1",
+  "lecture": 4,
+  "stem": "What distinguishes Monte Carlo prediction from dynamic programming?",
+  "correct": [
+   "Values come from averaging returns of complete sampled episodes, with no model.",
+   "It learns from complete sampled episodes, not from a model."
+  ],
+  "distractors": [
+   {
+    "text": "It needs the transition probabilities to compute the expectations exactly.",
+    "misconception": "confuses Monte Carlo with dynamic programming"
+   },
+   {
+    "text": "It bootstraps from the estimated value of the successor state.",
+    "misconception": "describes temporal-difference methods"
+   },
+   {
+    "text": "It can update after each step of a never-ending task.",
+    "misconception": "forgets that returns need the episode to end"
+   },
+   {
+    "text": "It updates the value of every state at each step, not only visited ones.",
+    "misconception": "confuses sampling with full sweeps"
+   },
+   {
+    "text": "It always has lower variance than dynamic programming.",
+    "misconception": "forgets that sampled returns are noisy"
+   }
+  ],
+  "explanation": "A return is known only when the episode ends, and its average estimates $v_\\pi$ without using $p(s',r\\mid s,a)$. Estimates for different states are independent, with no bootstrapping."
+ },
+ {
+  "id": "rl-4.2",
+  "lecture": 4,
+  "stem": "How does first-visit Monte Carlo differ from every-visit Monte Carlo?",
+  "correct": [
+   "First-visit uses only the earliest occurrence of the state in each episode.",
+   "Every-visit averages over every occurrence of the state."
+  ],
+  "distractors": [
+   {
+    "text": "First-visit is biased and every-visit is unbiased for $v_\\pi$.",
+    "misconception": "reverses which of them is unbiased"
+   },
+   {
+    "text": "First-visit uses only the first episode and ignores all later ones.",
+    "misconception": "confuses a visit with an episode"
+   },
+   {
+    "text": "They converge to different limits as the number of episodes grows.",
+    "misconception": "forgets that both converge to $v_\\pi$"
+   },
+   {
+    "text": "Every-visit needs the transition model, while first-visit does not.",
+    "misconception": "invents a model requirement"
+   },
+   {
+    "text": "First-visit applies no discounting, whereas every-visit applies it.",
+    "misconception": "confuses visit counting with discounting"
+   }
+  ],
+  "explanation": "Both converge to $v_\\pi$. First-visit averages are unbiased, since the returns are independent across episodes. Every-visit estimates are biased but consistent."
+ },
+ {
+  "id": "rl-4.3",
+  "lecture": 4,
+  "stem": "Why does Monte Carlo control need exploration, through exploring starts or a soft policy?",
+  "correct": [
+   "A greedy policy never tries some actions, so their values stay unknown.",
+   "Actions that are never taken leave no returns to average."
+  ],
+  "distractors": [
+   {
+    "text": "Exploration is needed to make the sampled returns unbiased.",
+    "misconception": "confuses coverage with bias"
+   },
+   {
+    "text": "Monte Carlo cannot estimate the value of any state without randomness.",
+    "misconception": "thinks randomness is required for estimation itself"
+   },
+   {
+    "text": "A greedy policy produces higher-variance returns than a random one.",
+    "misconception": "confuses variance with coverage"
+   },
+   {
+    "text": "Exploration ensures that every episode terminates.",
+    "misconception": "confuses exploration with termination"
+   },
+   {
+    "text": "Action values can be defined only under a uniform random policy.",
+    "misconception": "misunderstands action values"
+   }
+  ],
+  "explanation": "Policy improvement compares action values, which need data for every action in every state. Exploring starts or an $\\epsilon$-soft policy gives that coverage."
+ },
+ {
+  "id": "rl-4.4",
+  "lecture": 4,
+  "stem": "Why is importance sampling used in off-policy Monte Carlo prediction?",
+  "correct": [
+   "Returns generated by $b$ must be reweighted by $\\prod\\pi/b$ to give expectations under $\\pi$.",
+   "It corrects for having sampled from another policy."
+  ],
+  "distractors": [
+   {
+    "text": "It lets the method bootstrap from successor states without waiting for the end.",
+    "misconception": "confuses importance sampling with bootstrapping"
+   },
+   {
+    "text": "It is needed only when the behaviour policy is deterministic.",
+    "misconception": "invents a condition"
+   },
+   {
+    "text": "It reduces the variance compared with on-policy sampling.",
+    "misconception": "forgets that ratios often inflate variance"
+   },
+   {
+    "text": "It estimates the transition probabilities of the environment.",
+    "misconception": "confuses it with model learning"
+   },
+   {
+    "text": "It removes the need for the behaviour policy to explore.",
+    "misconception": "ignores the coverage condition"
+   }
+  ],
+  "explanation": "The return of an episode under $b$ has probability $\\prod\\pi/\\prod b$ relative to $\\pi$. Reweighting by this ratio gives the right expectation, provided $b$ covers $\\pi$."
+ },
+ {
+  "id": "rl-4.5",
+  "lecture": 4,
+  "stem": "How do ordinary and weighted importance sampling compare for off-policy Monte Carlo prediction?",
+  "correct": [
+   "Ordinary is unbiased but high-variance, weighted is biased but steadier.",
+   "Weighted sampling trades some bias for lower variance."
+  ],
+  "distractors": [
+   {
+    "text": "Ordinary is biased and has low variance, while weighted is unbiased.",
+    "misconception": "reverses the bias of the two estimators"
+   },
+   {
+    "text": "Both are unbiased and have identical variance.",
+    "misconception": "ignores the normalisation difference"
+   },
+   {
+    "text": "Weighted is inconsistent and does not converge to $v_\\pi$.",
+    "misconception": "forgets that the bias vanishes as data grows"
+   },
+   {
+    "text": "Ordinary divides by the sum of ratios, while weighted divides by the number of episodes.",
+    "misconception": "swaps the two definitions"
+   },
+   {
+    "text": "Both have bounded variance whenever the behaviour policy covers the target.",
+    "misconception": "forgets that products of ratios can have infinite variance"
+   }
+  ],
+  "explanation": "Ordinary averages $\\rho G$ and divides by $n$. Weighted divides by $\\sum\\rho$, so a single episode returns its own return with ratio cancelled. Both are consistent."
+ },
+ {
+  "id": "rl-5.1",
+  "lecture": 5,
+  "stem": "What is the TD(0) target for $V(S_t)$?",
+  "correct": [
+   "A sampled reward plus the discounted estimate of the next state's value.",
+   "A reward plus a bootstrapped estimate of what follows."
+  ],
+  "distractors": [
+   {
+    "text": "The full return $G_t$ from time $t$ to the end of the episode.",
+    "misconception": "describes the Monte Carlo target"
+   },
+   {
+    "text": "The immediate reward $R_{t+1}$ alone, without any future value.",
+    "misconception": "drops bootstrapping"
+   },
+   {
+    "text": "$R_{t+1}+\\gamma\\max_a Q(S_{t+1},a)$, a maximum over next actions.",
+    "misconception": "confuses the state-value target with the Q-learning target"
+   },
+   {
+    "text": "The average of all rewards observed since the start of learning.",
+    "misconception": "confuses a target with a running mean"
+   },
+   {
+    "text": "The estimate $V(S_{t+1})$ with no reward and no discount.",
+    "misconception": "drops the reward"
+   }
+  ],
+  "explanation": "The TD error is $\\delta_t=R_{t+1}+\\gamma V(S_{t+1})-V(S_t)$. The target uses one sampled reward and the current estimate of the next state, so it is biased but has low variance."
+ },
+ {
+  "id": "rl-5.2",
+  "lecture": 5,
+  "stem": "What distinguishes Q-learning from SARSA?",
+  "correct": [
+   "Q-learning uses the max next action value, SARSA the action actually taken.",
+   "Q-learning is off-policy and SARSA is on-policy."
+  ],
+  "distractors": [
+   {
+    "text": "SARSA is off-policy and Q-learning is on-policy.",
+    "misconception": "swaps the two classifications"
+   },
+   {
+    "text": "Q-learning needs a model of the transition probabilities, whereas SARSA does not.",
+    "misconception": "invents a model requirement"
+   },
+   {
+    "text": "SARSA bootstraps from the maximum over next actions.",
+    "misconception": "attributes the max to SARSA"
+   },
+   {
+    "text": "Q-learning must follow the greedy policy while it learns.",
+    "misconception": "forgets that the behaviour can be exploratory"
+   },
+   {
+    "text": "SARSA does not use a step size, whereas Q-learning does.",
+    "misconception": "invents a difference in the step size"
+   }
+  ],
+  "explanation": "The SARSA target is $R+\\gamma Q(S',A')$ with $A'$ drawn from the behaviour policy, the Q-learning target is $R+\\gamma\\max_{a'}Q(S',a')$."
+ },
+ {
+  "id": "rl-5.3",
+  "lecture": 5,
+  "stem": "In cliff walking with $\\epsilon$-greedy exploration, why does SARSA often learn a safer route than Q-learning?",
+  "correct": [
+   "SARSA counts the cost of exploratory slips near the cliff, Q-learning does not.",
+   "SARSA evaluates the exploring policy it actually follows."
+  ],
+  "distractors": [
+   {
+    "text": "SARSA uses a smaller learning rate, so it moves away from the edge.",
+    "misconception": "attributes the behaviour to the step size"
+   },
+   {
+    "text": "Q-learning is on-policy and therefore fears the cliff more than SARSA does.",
+    "misconception": "swaps on-policy and off-policy"
+   },
+   {
+    "text": "SARSA ignores the exploration policy when it computes its targets.",
+    "misconception": "reverses what SARSA evaluates"
+   },
+   {
+    "text": "SARSA uses a model of the grid to detect the cliff in advance.",
+    "misconception": "invents a model requirement"
+   },
+   {
+    "text": "Q-learning cannot learn the values of states next to the cliff.",
+    "misconception": "thinks it fails near negative rewards"
+   }
+  ],
+  "explanation": "SARSA evaluates the $\\epsilon$-greedy policy being followed, so edge states carry the expected penalty of occasional random steps. Q-learning evaluates the greedy policy, which hugs the edge."
+ },
+ {
+  "id": "rl-5.4",
+  "lecture": 5,
+  "stem": "How do TD and Monte Carlo targets compare in bias and variance?",
+  "correct": [
+   "TD has lower variance but some bias, while Monte Carlo is unbiased but noisier.",
+   "The Monte Carlo return is unbiased but noisier than TD."
+  ],
+  "distractors": [
+   {
+    "text": "TD targets are unbiased and have higher variance than Monte Carlo targets.",
+    "misconception": "reverses the roles"
+   },
+   {
+    "text": "Both targets are unbiased with exactly the same variance.",
+    "misconception": "ignores bootstrapping"
+   },
+   {
+    "text": "Monte Carlo targets are biased because episodes have finite length.",
+    "misconception": "confuses finite episodes with bias"
+   },
+   {
+    "text": "TD targets have higher variance because they involve fewer random rewards.",
+    "misconception": "forgets that fewer random terms lower the variance"
+   },
+   {
+    "text": "The bias of TD targets never vanishes, even if the value estimates are exact.",
+    "misconception": "ignores that the bias disappears when estimates are exact"
+   }
+  ],
+  "explanation": "The TD target contains one random reward and one estimate, so its variance is small, but the estimate is itself wrong. The return sums many random rewards without estimates."
+ },
+ {
+  "id": "rl-5.5",
+  "lecture": 5,
+  "stem": "When does tabular Q-learning converge to $q_*$?",
+  "correct": [
+   "Every state-action pair is updated forever, with Robbins-Monro steps.",
+   "All pairs are visited forever and steps decay."
+  ],
+  "distractors": [
+   {
+    "text": "Only if the behaviour policy is the greedy policy at all times.",
+    "misconception": "confuses off-policy learning with a greedy behaviour"
+   },
+   {
+    "text": "Only if the step size is a positive constant that never decreases.",
+    "misconception": "thinks a constant step size ensures convergence"
+   },
+   {
+    "text": "Only if the transition model is known to the agent.",
+    "misconception": "confuses model-free with model-based requirements"
+   },
+   {
+    "text": "Provided each state is visited at least once.",
+    "misconception": "weakens the visiting requirement"
+   },
+   {
+    "text": "Only if the exploration is switched off after the first episode.",
+    "misconception": "thinks exploration must stop immediately"
+   }
+  ],
+  "explanation": "Convergence needs exploration of all pairs and decreasing steps. The behaviour policy can be any policy that keeps visiting every pair."
+ },
+ {
+  "id": "rl-5.6",
+  "lecture": 5,
+  "stem": "What does batch TD(0), trained repeatedly on a fixed batch of episodes until convergence, estimate?",
+  "correct": [
+   "The value function of the maximum-likelihood Markov model fitted to the batch.",
+   "The certainty-equivalence estimate of the data's model."
+  ],
+  "distractors": [
+   {
+    "text": "The average observed return of each state, as in batch Monte Carlo.",
+    "misconception": "confuses batch TD with batch Monte Carlo"
+   },
+   {
+    "text": "The value function of the greedy policy in the batch.",
+    "misconception": "confuses prediction with control"
+   },
+   {
+    "text": "A value function that depends on the order of the episodes.",
+    "misconception": "forgets that the batch fixed point is unique"
+   },
+   {
+    "text": "The optimal value function of the underlying environment.",
+    "misconception": "ignores that the batch limits the information"
+   },
+   {
+    "text": "The squared-error minimiser over the observed returns of each state.",
+    "misconception": "attributes the Monte Carlo objective to TD"
+   }
+  ],
+  "explanation": "Batch Monte Carlo minimises squared error on the observed returns, whereas batch TD(0) finds the certainty-equivalence estimate and often predicts future data better."
+ },
+ {
+  "id": "rl-6.1",
+  "lecture": 6,
+  "stem": "What is the $n$-step return $G_{t:t+n}$?",
+  "correct": [
+   "$n$ discounted rewards then a bootstrapped value of the state reached.",
+   "Real rewards for $n$ steps, then a bootstrap."
+  ],
+  "distractors": [
+   {
+    "text": "The sum of $n$ rewards with no bootstrap term at all, for every $n$.",
+    "misconception": "confuses it with a truncated return"
+   },
+   {
+    "text": "The estimate of the state value from $n$ steps in the past.",
+    "misconception": "reverses the direction of time"
+   },
+   {
+    "text": "The average of the TD errors over the next $n$ steps.",
+    "misconception": "confuses returns with errors"
+   },
+   {
+    "text": "The return computed by running $n$ agents in parallel and averaging.",
+    "misconception": "confuses it with parallel actors"
+   },
+   {
+    "text": "The TD(0) target with a step size of $1/n$.",
+    "misconception": "confuses it with a step-size schedule"
+   }
+  ],
+  "explanation": "$G_{t:t+n}=R_{t+1}+\\gamma R_{t+2}+\\dots+\\gamma^{n-1}R_{t+n}+\\gamma^nV(S_{t+n})$. For $n=1$ it is the TD(0) target, and for $n$ reaching the episode end it is the Monte Carlo return."
+ },
+ {
+  "id": "rl-6.2",
+  "lecture": 6,
+  "stem": "What is the $\\lambda$-return?",
+  "correct": [
+   "A geometrically weighted average of all the $n$-step returns.",
+   "A decaying-weight mix of $n$-step returns."
+  ],
+  "distractors": [
+   {
+    "text": "An equally weighted average of all $n$-step returns, for any $\\lambda$.",
+    "misconception": "ignores the geometric weights"
+   },
+   {
+    "text": "The $n$-step return with $n=\\lambda$.",
+    "misconception": "confuses a mixing weight with a horizon"
+   },
+   {
+    "text": "A discounted sum of rewards in which $\\lambda$ replaces $\\gamma$.",
+    "misconception": "confuses it with the discount factor"
+   },
+   {
+    "text": "It gives Monte Carlo at $\\lambda=0$ and TD(0) at $\\lambda=1$.",
+    "misconception": "swaps the two extremes"
+   },
+   {
+    "text": "The largest of the $n$-step returns, which is the optimistic target.",
+    "misconception": "confuses averaging with maximising"
+   }
+  ],
+  "explanation": "The weights $(1-\\lambda)\\lambda^{n-1}$ sum to one, with the remaining weight on the full return when the episode ends. Small $\\lambda$ stays close to one-step TD."
+ },
+ {
+  "id": "rl-6.3",
+  "lecture": 6,
+  "stem": "What does an accumulating eligibility trace do in backward-view TD($\\lambda$)?",
+  "correct": [
+   "It decays by $\\gamma\\lambda$ per step and gains one at each visit to the state.",
+   "It records how recently states were visited."
+  ],
+  "distractors": [
+   {
+    "text": "It stores the full list of past rewards for each state.",
+    "misconception": "confuses a trace with a reward history"
+   },
+   {
+    "text": "It increases the learning rate of states with a high value.",
+    "misconception": "confuses eligibility with value"
+   },
+   {
+    "text": "It is reset to zero whenever the TD error is positive.",
+    "misconception": "invents a reset rule"
+   },
+   {
+    "text": "It decays by $\\lambda$ only, with no dependence on $\\gamma$.",
+    "misconception": "forgets that the decay combines both factors"
+   },
+   {
+    "text": "It is a buffer of past transitions that is sampled at random.",
+    "misconception": "confuses it with experience replay"
+   }
+  ],
+  "explanation": "The trace update is $e_t(s)=\\gamma\\lambda e_{t-1}(s)+\\mathbb 1[S_t=s]$, and each value changes by $\\alpha\\delta_te_t(s)$. States visited recently or often share more of the current TD error."
+ },
+ {
+  "id": "rl-6.4",
+  "lecture": 6,
+  "stem": "How are the forward view and the backward view of TD($\\lambda$) related?",
+  "correct": [
+   "For offline updates the backward view gives the same total update as the forward view.",
+   "With offline updates, both views make identical changes."
+  ],
+  "distractors": [
+   {
+    "text": "They coincide only when $\\lambda=0$ or $\\lambda=1$.",
+    "misconception": "thinks the equivalence holds only at the extremes"
+   },
+   {
+    "text": "The backward view needs the future rewards of the episode at each step.",
+    "misconception": "confuses the backward view with the forward view"
+   },
+   {
+    "text": "The forward view can be run online step by step without waiting.",
+    "misconception": "forgets that the forward view needs future rewards"
+   },
+   {
+    "text": "They are identical for online updates too, even when the weights change within an episode.",
+    "misconception": "ignores that online weight changes break the equivalence"
+   },
+   {
+    "text": "The backward view uses a different target, the $n$-step return with $n=1/\\lambda$.",
+    "misconception": "invents a target"
+   }
+  ],
+  "explanation": "The equivalence is exact for offline updates. For online updates and function approximation only approximate equality holds, and true online TD($\\lambda$) restores exactness."
+ },
+ {
+  "id": "rl-6.5",
+  "lecture": 6,
+  "stem": "Why does an intermediate $n$ in $n$-step TD often perform better than both $n=1$ and Monte Carlo?",
+  "correct": [
+   "It trades bootstrapping bias against the variance of long reward sums.",
+   "A middle $n$ balances the bias against the variance."
+  ],
+  "distractors": [
+   {
+    "text": "The $n$-step return is unbiased for every $n$, so a middle $n$ costs nothing.",
+    "misconception": "forgets that bootstrapping introduces bias"
+   },
+   {
+    "text": "Increasing $n$ always reduces the variance of the target.",
+    "misconception": "forgets that more random rewards add variance"
+   },
+   {
+    "text": "The $n$-step method needs no step size, unlike TD(0).",
+    "misconception": "invents a property of the method"
+   },
+   {
+    "text": "A middle $n$ removes the need for exploration.",
+    "misconception": "confuses return length with exploration"
+   },
+   {
+    "text": "The one-step method cannot learn when the rewards are delayed at all.",
+    "misconception": "exaggerates the slowness of one-step TD"
+   }
+  ],
+  "explanation": "The best $n$ depends on the task: small $n$ is biased and slow in propagating a delayed reward, large $n$ has high variance, and the optimum is usually in between."
+ },
+ {
+  "id": "rl-6.6",
+  "lecture": 6,
+  "stem": "What is the difference between replacing and accumulating traces?",
+  "correct": [
+   "A replacing trace is reset to one on a revisit, while an accumulating trace has one added.",
+   "Replacing traces never grow beyond one, however often revisited."
+  ],
+  "distractors": [
+   {
+    "text": "Replacing traces are reset to zero at each revisit, while accumulating traces are not.",
+    "misconception": "confuses resetting to one with resetting to zero"
+   },
+   {
+    "text": "Replacing traces do not decay, while accumulating traces decay by $\\gamma\\lambda$.",
+    "misconception": "thinks only one kind decays"
+   },
+   {
+    "text": "Replacing traces apply only to states that have never been visited.",
+    "misconception": "confuses replacing with initialising"
+   },
+   {
+    "text": "Accumulating traces are bounded by one, but replacing traces are not.",
+    "misconception": "swaps the two bounds"
+   },
+   {
+    "text": "Replacing traces need the model, whereas accumulating traces do not.",
+    "misconception": "invents a model requirement"
+   }
+  ],
+  "explanation": "Both decay by $\\gamma\\lambda$ each step. A replacing trace is set to $1$ at a visit, so it stays within $[0,1]$, whereas an accumulating trace is incremented and can exceed one."
+ },
+ {
+  "id": "rl-7.1",
+  "lecture": 7,
+  "stem": "Why is function approximation needed in reinforcement learning with large state spaces?",
+  "correct": [
+   "A table is infeasible, and updates should generalise to similar states.",
+   "Learning must generalise across a huge state space."
+  ],
+  "distractors": [
+   {
+    "text": "It guarantees convergence to the unique optimal value function in all cases.",
+    "misconception": "thinks approximation brings guarantees"
+   },
+   {
+    "text": "It removes the need for exploration, since the approximator interpolates.",
+    "misconception": "confuses generalisation with exploration"
+   },
+   {
+    "text": "It makes the Markov property unnecessary for the states.",
+    "misconception": "confuses approximation with the state definition"
+   },
+   {
+    "text": "Tabular methods are biased, whereas approximators are unbiased.",
+    "misconception": "invents a bias of tabular methods"
+   },
+   {
+    "text": "It makes the reward signal denser in sparse tasks.",
+    "misconception": "confuses generalisation with reward shaping"
+   }
+  ],
+  "explanation": "Tabular values grow with the number of states, and states are rarely visited twice. Parameters shared across states let each update change many values."
+ },
+ {
+  "id": "rl-7.2",
+  "lecture": 7,
+  "stem": "Why is the TD update with function approximation called semi-gradient?",
+  "correct": [
+   "The target depends on the weights, but that is ignored in the gradient.",
+   "The bootstrapped target is treated as a constant."
+  ],
+  "distractors": [
+   {
+    "text": "Only a subset of the weights is updated at each step.",
+    "misconception": "confuses semi with partial updates"
+   },
+   {
+    "text": "The update uses the gradient of the target but not that of the estimate.",
+    "misconception": "reverses which derivative is used"
+   },
+   {
+    "text": "It uses half of the usual step size to keep the algorithm stable.",
+    "misconception": "confuses semi with half"
+   },
+   {
+    "text": "It minimises only the positive part of the TD error.",
+    "misconception": "invents a one-sided loss"
+   },
+   {
+    "text": "It uses a second-order approximation of the loss.",
+    "misconception": "confuses it with second-order methods"
+   }
+  ],
+  "explanation": "The Monte Carlo target does not depend on $w$ and gives a true gradient, while a bootstrapped target does depend on $w$, so ignoring that dependence gives a semi-gradient."
+ },
+ {
+  "id": "rl-7.3",
+  "lecture": 7,
+  "stem": "Which three ingredients form the deadly triad?",
+  "correct": [
+   "Function approximation, bootstrapping and off-policy training together.",
+   "Approximation, bootstrapping and off-policy updates."
+  ],
+  "distractors": [
+   {
+    "text": "Exploration, discounting and deep networks.",
+    "misconception": "lists generic features, not the triad"
+   },
+   {
+    "text": "Monte Carlo targets, on-policy sampling and linear features.",
+    "misconception": "lists a safe combination"
+   },
+   {
+    "text": "Function approximation, bootstrapping and on-policy training.",
+    "misconception": "names an on-policy combination that is stable for linear TD"
+   },
+   {
+    "text": "Sparse rewards, long horizons and large action spaces.",
+    "misconception": "lists hard-problem features"
+   },
+   {
+    "text": "Experience replay, target networks and large mini-batches.",
+    "misconception": "lists stabilisation tricks, not the hazards"
+   }
+  ],
+  "explanation": "Any two of the three are usually safe: tabular off-policy bootstrapping converges, and on-policy linear TD converges. All three together can diverge, as in Baird's counterexample."
+ },
+ {
+  "id": "rl-7.4",
+  "lecture": 7,
+  "stem": "To what does on-policy linear semi-gradient TD(0) converge?",
+  "correct": [
+   "The TD fixed point, not the least-squares optimum of the value error.",
+   "A solution of the projected Bellman equation."
+  ],
+  "distractors": [
+   {
+    "text": "Exactly to the weights minimising the mean squared value error.",
+    "misconception": "confuses the TD fixed point with the least-squares solution"
+   },
+   {
+    "text": "To the true value function, whatever the features are.",
+    "misconception": "ignores the limits of the feature space"
+   },
+   {
+    "text": "It diverges unless the features are orthogonal.",
+    "misconception": "invents an orthogonality requirement"
+   },
+   {
+    "text": "To the Monte Carlo solution, which is the same fixed point.",
+    "misconception": "confuses the TD fixed point with the Monte Carlo solution"
+   },
+   {
+    "text": "To a point that depends on the starting weights.",
+    "misconception": "ignores the unique fixed point"
+   }
+  ],
+  "explanation": "The fixed point satisfies $\\mathbf A w=\\mathbf b$, equivalently the projected Bellman equation. It is a bounded distance from the best linear approximation, with a factor $1/(1-\\gamma)$."
+ },
+ {
+  "id": "rl-7.5",
+  "lecture": 7,
+  "stem": "How is a tabular method a special case of linear function approximation?",
+  "correct": [
+   "One indicator feature per state makes each weight equal to that state's value.",
+   "One-hot features turn the weights into the table."
+  ],
+  "distractors": [
+   {
+    "text": "Constant features make every state share the same value.",
+    "misconception": "confuses tabular features with a constant feature"
+   },
+   {
+    "text": "Features equal to the true values make the table redundant.",
+    "misconception": "describes an impossible oracle"
+   },
+   {
+    "text": "Tabular methods need nonlinear approximators to represent separate values.",
+    "misconception": "thinks tables are not linear models"
+   },
+   {
+    "text": "Polynomial features of the state index reproduce the table.",
+    "misconception": "thinks smooth features can fit any table"
+   },
+   {
+    "text": "One-hot features that are shared among several states.",
+    "misconception": "confuses one-hot with aggregation"
+   }
+  ],
+  "explanation": "With one-hot features $x(s)=e_s$, the semi-gradient update changes only the weight of the visited state, which is the tabular update."
+ },
+ {
+  "id": "rl-8.1",
+  "lecture": 8,
+  "stem": "What are the main purposes of experience replay in DQN?",
+  "correct": [
+   "Random sampling of stored transitions breaks correlation and reuses data.",
+   "It decorrelates the samples and reuses old data."
+  ],
+  "distractors": [
+   {
+    "text": "It makes Q-learning on-policy by storing only the newest transitions.",
+    "misconception": "confuses replay with on-policy learning"
+   },
+   {
+    "text": "It removes the need for a target network.",
+    "misconception": "thinks replay replaces the target network"
+   },
+   {
+    "text": "It increases the correlation between samples to speed up learning.",
+    "misconception": "reverses the goal"
+   },
+   {
+    "text": "It stores a model of the environment used to plan with.",
+    "misconception": "confuses replay with model-based planning"
+   },
+   {
+    "text": "It guarantees the convergence of Q-learning with a neural network.",
+    "misconception": "over-claims guarantees"
+   }
+  ],
+  "explanation": "Consecutive transitions are strongly correlated and a network trained on them overfits the recent past. A shuffled buffer approximates i.i.d. samples. Replay needs an off-policy method, as Q-learning is."
+ },
+ {
+  "id": "rl-8.2",
+  "lecture": 8,
+  "stem": "What is the role of the target network in DQN?",
+  "correct": [
+   "Its parameters change slowly, so the regression target does not shift at every step.",
+   "It gives a stable bootstrap target to regress on."
+  ],
+  "distractors": [
+   {
+    "text": "It chooses the actions during training and the online network chooses them at test time.",
+    "misconception": "confuses the two networks"
+   },
+   {
+    "text": "It increases exploration by adding noise to the online network.",
+    "misconception": "confuses it with noisy networks"
+   },
+   {
+    "text": "It reduces overestimation by taking the minimum of two value estimates.",
+    "misconception": "describes clipped double Q-learning"
+   },
+   {
+    "text": "It replaces the replay buffer when memory is limited.",
+    "misconception": "thinks the target network replaces replay"
+   },
+   {
+    "text": "It runs in parallel to make training faster.",
+    "misconception": "confuses it with parallel actors"
+   }
+  ],
+  "explanation": "Without it, the target $r+\\gamma\\max_aQ(s',a;\\theta)$ moves with $\\theta$, creating a feedback loop. Copying $\\theta$ only every $C$ steps keeps the target fixed in between."
+ },
+ {
+  "id": "rl-8.3",
+  "lecture": 8,
+  "stem": "Why does Q-learning with a maximum over noisy value estimates overestimate action values?",
+  "correct": [
+   "The maximum of noisy estimates is biased upward, so targets are too high.",
+   "Selecting the largest estimate picks up positive noise."
+  ],
+  "distractors": [
+   {
+    "text": "All rewards are positive, so every estimate is too large.",
+    "misconception": "confuses overestimation with the sign of rewards"
+   },
+   {
+    "text": "The replay buffer repeats large values many times.",
+    "misconception": "blames replay"
+   },
+   {
+    "text": "The discount factor multiplies errors by more than one.",
+    "misconception": "confuses discounting with amplification"
+   },
+   {
+    "text": "The greedy policy is deterministic, so the estimates cannot be noisy.",
+    "misconception": "confuses a deterministic policy with noise-free estimates"
+   },
+   {
+    "text": "The lag of the target network inflates the value.",
+    "misconception": "blames the lag"
+   }
+  ],
+  "explanation": "Selection and evaluation use the same noisy numbers, so the maximum picks up positive errors. This is the maximisation bias, which Double Q-learning removes."
+ },
+ {
+  "id": "rl-8.4",
+  "lecture": 8,
+  "stem": "How does Double DQN form its target?",
+  "correct": [
+   "One network selects the next action and another network evaluates it.",
+   "Action selection is decoupled from action evaluation."
+  ],
+  "distractors": [
+   {
+    "text": "It averages two networks' outputs and then takes the maximum.",
+    "misconception": "describes a different ensemble rule"
+   },
+   {
+    "text": "It uses two replay buffers, one for good and one for bad transitions.",
+    "misconception": "invents a double buffer"
+   },
+   {
+    "text": "It doubles the learning rate of the online network.",
+    "misconception": "confuses double with doubling"
+   },
+   {
+    "text": "It takes the minimum over two target networks.",
+    "misconception": "describes clipped double Q-learning"
+   },
+   {
+    "text": "It evaluates the action chosen by the target network with the online network.",
+    "misconception": "swaps the roles of the networks"
+   }
+  ],
+  "explanation": "The target is $r+\\gamma Q_{\\text{target}}(s',\\arg\\max_{a'}Q_{\\text{online}}(s',a'))$. Two different networks decouple selection from evaluation."
+ },
+ {
+  "id": "rl-8.5",
+  "lecture": 8,
+  "stem": "Why does DQN not directly handle continuous action spaces?",
+  "correct": [
+   "The target is the reward alone, since no successor exists.",
+   "Only the reward appears, with no next-state value."
+  ],
+  "distractors": [
+   {
+    "text": "Neural networks cannot output continuous numbers.",
+    "misconception": "confuses continuous inputs with outputs"
+   },
+   {
+    "text": "Replay buffers can store only discrete actions.",
+    "misconception": "invents a buffer limitation"
+   },
+   {
+    "text": "The target network cannot be defined for continuous actions.",
+    "misconception": "invents a limitation of target networks"
+   },
+   {
+    "text": "Q-values are undefined when the action set is infinite.",
+    "misconception": "confuses a hard maximisation with undefined values"
+   },
+   {
+    "text": "Continuous actions make the rewards random.",
+    "misconception": "confuses action type with reward noise"
+   }
+  ],
+  "explanation": "Value-based methods take an arg max over actions each step. Actor-critic methods avoid this by learning a policy network that outputs actions."
+ },
+ {
+  "id": "rl-9.1",
+  "lecture": 9,
+  "stem": "What does the policy gradient theorem state?",
+  "correct": [
+   "The gradient is an expectation of action values times score functions.",
+   "The state distribution's derivative does not appear."
+  ],
+  "distractors": [
+   {
+    "text": "The gradient needs the derivative of the state visitation distribution with respect to $\\theta$.",
+    "misconception": "forgets that the theorem removes this term"
+   },
+   {
+    "text": "$\\nabla J(\\theta)=\\mathbb E_\\pi[\\nabla q_\\pi(S,A)]$, the gradient of the action values.",
+    "misconception": "differentiates the wrong object"
+   },
+   {
+    "text": "The gradient needs a known model of the transition probabilities.",
+    "misconception": "forgets that the theorem is model-free"
+   },
+   {
+    "text": "$\\nabla J(\\theta)=\\mathbb E_\\pi[\\ln\\pi(A\\mid S,\\theta)\\,R]$, the log probability times the reward.",
+    "misconception": "puts the log-probability itself instead of its gradient"
+   },
+   {
+    "text": "The gradient is defined only for deterministic policies.",
+    "misconception": "confuses the theorem with the deterministic policy gradient"
+   }
+  ],
+  "explanation": "Although the state distribution depends on $\\theta$, the theorem shows its derivative drops out, which allows estimating the gradient from sampled trajectories."
+ },
+ {
+  "id": "rl-9.2",
+  "lecture": 9,
+  "stem": "How does subtracting a state-dependent baseline from the return change the policy gradient estimate?",
+  "correct": [
+   "The expected gradient is unchanged, but the variance can fall considerably.",
+   "It stays unbiased while often reducing variance."
+  ],
+  "distractors": [
+   {
+    "text": "It introduces a bias but reduces the variance.",
+    "misconception": "believes that any baseline biases the estimate"
+   },
+   {
+    "text": "It leaves the variance unchanged and changes only the expectation.",
+    "misconception": "confuses the roles of bias and variance"
+   },
+   {
+    "text": "It stays unbiased only if the baseline equals $v_\\pi(s)$ exactly.",
+    "misconception": "thinks only the exact value works"
+   },
+   {
+    "text": "It increases the variance but speeds up the learning.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It stays unbiased only if the baseline depends on the action.",
+    "misconception": "forgets that an action-dependent baseline breaks unbiasedness"
+   }
+  ],
+  "explanation": "Since $\\sum_a\\nabla\\pi(a\\mid s)=0$, any baseline $b(s)$ not depending on $a$ adds zero in expectation. A good choice, such as $v_\\pi(s)$, reduces the variance."
+ },
+ {
+  "id": "rl-9.3",
+  "lecture": 9,
+  "stem": "What are the properties of REINFORCE?",
+  "correct": [
+   "Unbiased but high variance, updating at the end of each episode.",
+   "Its gradient estimates are unbiased but noisy."
+  ],
+  "distractors": [
+   {
+    "text": "It is low-variance and biased because it bootstraps.",
+    "misconception": "confuses REINFORCE with bootstrapped methods"
+   },
+   {
+    "text": "It updates after every step using the TD error.",
+    "misconception": "confuses it with actor-critic"
+   },
+   {
+    "text": "It needs a learned critic to compute the update.",
+    "misconception": "forgets that REINFORCE needs no critic"
+   },
+   {
+    "text": "It needs a model of the transition probabilities.",
+    "misconception": "forgets that it is model-free"
+   },
+   {
+    "text": "It works only with deterministic policies.",
+    "misconception": "forgets that the policy must be stochastic for the score function"
+   }
+  ],
+  "explanation": "The update is $\\theta\\leftarrow\\theta+\\alpha G_t\\nabla\\ln\\pi(A_t\\mid S_t,\\theta)$ with the complete return. It is unbiased, but $G_t$ is noisy, so a baseline helps."
+ },
+ {
+  "id": "rl-9.4",
+  "lecture": 9,
+  "stem": "How does an actor-critic method differ from REINFORCE?",
+  "correct": [
+   "A learned critic gives lower variance at the price of some bias.",
+   "Critic-based estimates replace the sampled returns."
+  ],
+  "distractors": [
+   {
+    "text": "The critic chooses the actions and the actor evaluates them.",
+    "misconception": "swaps the two roles"
+   },
+   {
+    "text": "Actor-critic gradient estimates are unbiased even with an inaccurate critic.",
+    "misconception": "forgets that the critic's errors cause bias"
+   },
+   {
+    "text": "Actor-critic methods have no baseline.",
+    "misconception": "forgets that the critic acts as a baseline"
+   },
+   {
+    "text": "The actor is trained by Q-learning.",
+    "misconception": "confuses the actor update with value learning"
+   },
+   {
+    "text": "The critic is the policy network itself.",
+    "misconception": "confuses the roles of the networks"
+   }
+  ],
+  "explanation": "The critic estimates $v(s)$ and the TD error $\\delta=r+\\gamma v(s')-v(s)$ replaces $G_t-b$. It is biased if $v$ is wrong, but updates are online."
+ },
+ {
+  "id": "rl-9.5",
+  "lecture": 9,
+  "stem": "For a softmax policy with preferences $h(a)$, what is $\\partial\\ln\\pi(a)/\\partial h(b)$?",
+  "correct": [
+   "$1-\\pi(a)$ for the sampled action and $-\\pi(b)$ for the others.",
+   "The result is $\\mathbb 1[a=b]-\\pi(b)$ in general."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $\\pi(b)$ for every action $b$.",
+    "misconception": "confuses the score with the probability"
+   },
+   {
+    "text": "It equals $1/\\pi(a)$ for the sampled action and zero otherwise.",
+    "misconception": "differentiates the logarithm but ignores the normalisation"
+   },
+   {
+    "text": "It equals $\\pi(a)(1-\\pi(a))$ for $b=a$.",
+    "misconception": "gives the derivative of the probability, not of its logarithm"
+   },
+   {
+    "text": "It is $-\\pi(a)$ for every $b$, including $b=a$.",
+    "misconception": "gets the sampled action wrong"
+   },
+   {
+    "text": "It is independent of the probabilities of the other actions.",
+    "misconception": "forgets the normalising sum"
+   }
+  ],
+  "explanation": "Write $\\ln\\pi(a)=h(a)-\\ln\\sum_be^{h(b)}$. Differentiating gives $\\mathbb 1[a=b]-\\pi(b)$, so the score has zero mean under $\\pi$."
+ },
+ {
+  "id": "rl-10.1",
+  "lecture": 10,
+  "stem": "What does the clipped surrogate objective of PPO do?",
+  "correct": [
+   "It removes the incentive to push the ratio far from one.",
+   "It limits how far one update moves the policy."
+  ],
+  "distractors": [
+   {
+    "text": "It clips the advantage values to the interval $[-\\epsilon,\\epsilon]$.",
+    "misconception": "confuses clipping the ratio with clipping the advantage"
+   },
+   {
+    "text": "It imposes a hard constraint on the KL divergence between the policies.",
+    "misconception": "describes TRPO instead"
+   },
+   {
+    "text": "It clips the norm of the gradient.",
+    "misconception": "confuses it with gradient clipping"
+   },
+   {
+    "text": "It forces the probability ratio to equal one exactly.",
+    "misconception": "confuses a soft limit with an equality"
+   },
+   {
+    "text": "It clips the rewards to a fixed interval.",
+    "misconception": "confuses it with reward clipping"
+   }
+  ],
+  "explanation": "With $r_t=\\pi_\\theta/\\pi_{\\text{old}}$, the term $\\min(r_tA_t,\\operatorname{clip}(r_t,1-\\epsilon,1+\\epsilon)A_t)$ has zero gradient once the ratio has moved far enough in the favoured direction."
+ },
+ {
+  "id": "rl-10.2",
+  "lecture": 10,
+  "stem": "Why does PPO take the minimum of the unclipped and clipped terms?",
+  "correct": [
+   "A pessimistic bound, so clipping only lowers the objective.",
+   "It is a pessimistic bound on the surrogate."
+  ],
+  "distractors": [
+   {
+    "text": "It guarantees that the ratio never leaves the interval during training.",
+    "misconception": "over-claims a hard constraint"
+   },
+   {
+    "text": "It makes the objective differentiable at the clipping points.",
+    "misconception": "confuses it with smoothing"
+   },
+   {
+    "text": "It makes all advantages non-negative.",
+    "misconception": "confuses the minimum with a sign change"
+   },
+   {
+    "text": "It averages the old and the new policies.",
+    "misconception": "confuses it with policy mixing"
+   },
+   {
+    "text": "It sets the KL divergence to zero.",
+    "misconception": "confuses it with a KL constraint"
+   }
+  ],
+  "explanation": "For $A>0$ the objective is capped at $(1+\\epsilon)A$, for $A<0$ the unclipped term is kept when $r>1+\\epsilon$. Gains from big moves are ignored, but bad moves are penalised."
+ },
+ {
+  "id": "rl-10.3",
+  "lecture": 10,
+  "stem": "What does the TRPO update do?",
+  "correct": [
+   "It maximises a surrogate under a bound on the average KL divergence.",
+   "Each step stays inside a KL-based trust region."
+  ],
+  "distractors": [
+   {
+    "text": "It bounds the Euclidean distance between the old and new parameters.",
+    "misconception": "confuses a policy-space with a parameter-space constraint"
+   },
+   {
+    "text": "It adds an entropy bonus and drops all constraints.",
+    "misconception": "confuses it with SAC"
+   },
+   {
+    "text": "It uses only a first-order step with a fixed learning rate.",
+    "misconception": "forgets the natural-gradient and line-search machinery"
+   },
+   {
+    "text": "It minimises the KL divergence to the uniform policy.",
+    "misconception": "confuses the constraint with a regulariser"
+   },
+   {
+    "text": "It clips the probability ratio to a fixed interval.",
+    "misconception": "describes PPO"
+   }
+  ],
+  "explanation": "TRPO measures the step in policy space by the KL divergence, which gives a monotonic-improvement bound in theory. PPO approximates this with a simple clipped objective."
+ },
+ {
+  "id": "rl-10.4",
+  "lecture": 10,
+  "stem": "What does the entropy term do in soft actor-critic?",
+  "correct": [
+   "An entropy bonus is added to the reward, which keeps the policy exploring.",
+   "The agent is rewarded for keeping its policy random."
+  ],
+  "distractors": [
+   {
+    "text": "It penalises entropy so that the policy becomes deterministic quickly.",
+    "misconception": "reverses the sign of the entropy term"
+   },
+   {
+    "text": "It is used only at test time to choose among actions.",
+    "misconception": "thinks entropy is not used in training"
+   },
+   {
+    "text": "It replaces the critic as the learning signal.",
+    "misconception": "confuses entropy with the critic"
+   },
+   {
+    "text": "It makes the algorithm on-policy and removes the replay buffer.",
+    "misconception": "confuses the entropy term with on-policy learning"
+   },
+   {
+    "text": "It adds a fixed amount to every reward and so changes no policy.",
+    "misconception": "treats the bonus as a constant"
+   }
+  ],
+  "explanation": "The soft objective is $\\sum_t\\mathbb E[r_t+\\alpha\\mathcal H(\\pi(\\cdot\\mid s_t))]$. The temperature $\\alpha$ trades reward against randomness, and SAC is off-policy with a replay buffer."
+ },
+ {
+  "id": "rl-10.5",
+  "lecture": 10,
+  "stem": "Which statement about data reuse in PPO, TRPO and SAC is right?",
+  "correct": [
+   "SAC replays old transitions, whereas PPO and TRPO mostly need fresh samples.",
+   "SAC is off-policy and PPO and TRPO are on-policy."
+  ],
+  "distractors": [
+   {
+    "text": "PPO and TRPO are off-policy and use large replay buffers.",
+    "misconception": "swaps the two families"
+   },
+   {
+    "text": "All three are off-policy because they use stored transitions.",
+    "misconception": "over-generalises"
+   },
+   {
+    "text": "All three discard each batch after one gradient step.",
+    "misconception": "ignores that PPO uses several epochs and SAC uses replay"
+   },
+   {
+    "text": "Only TRPO is on-policy, while PPO and SAC are off-policy.",
+    "misconception": "misclassifies PPO"
+   },
+   {
+    "text": "None of them can use data collected earlier by an older policy.",
+    "misconception": "ignores that SAC reuses old data"
+   }
+  ],
+  "explanation": "Policy-gradient surrogates are valid near the data-collecting policy, so PPO and TRPO need fresh data. SAC learns Q-functions with Bellman targets, which are valid for any data."
+ },
+ {
+  "id": "rl-11.1",
+  "lecture": 11,
+  "stem": "Why is reward design critical when applying reinforcement learning to trading?",
+  "correct": [
+   "The agent optimises exactly the reward written, so omitted costs get exploited.",
+   "A reward that ignores risk is exploited by the agent."
+  ],
+  "distractors": [
+   {
+    "text": "The optimal policy does not depend on the scale or the form of the reward.",
+    "misconception": "thinks the reward form is irrelevant"
+   },
+   {
+    "text": "A dense reward is always better than a sparse terminal one.",
+    "misconception": "over-generalises about dense rewards"
+   },
+   {
+    "text": "The reward must equal the profit for the algorithm to be well defined.",
+    "misconception": "confuses a convention with a requirement"
+   },
+   {
+    "text": "Reward design matters only in the final step of an episode.",
+    "misconception": "thinks only terminal rewards matter"
+   },
+   {
+    "text": "The agent learns the right behaviour even without a reward signal.",
+    "misconception": "forgets that the reward defines the task"
+   }
+  ],
+  "explanation": "RL optimises the specified objective, not the intended one. Profit-only rewards encourage large risky bets and ignore trading costs."
+ },
+ {
+  "id": "rl-11.2",
+  "lecture": 11,
+  "stem": "What does potential-based reward shaping $F(s,s')=\\gamma\\Phi(s')-\\Phi(s)$ guarantee?",
+  "correct": [
+   "The optimal policies are the same with the shaping term as without it.",
+   "It leaves the set of best policies exactly unchanged."
+  ],
+  "distractors": [
+   {
+    "text": "The agent is pushed toward high-potential states even at the cost of the original return.",
+    "misconception": "thinks shaping changes the optimum"
+   },
+   {
+    "text": "It is valid only when the discount factor equals one.",
+    "misconception": "invents a condition"
+   },
+   {
+    "text": "It always speeds up learning, whatever the potential.",
+    "misconception": "over-claims faster learning"
+   },
+   {
+    "text": "It is the same as adding a constant bonus in every state.",
+    "misconception": "confuses potential differences with a constant"
+   },
+   {
+    "text": "It changes the discount factor of the problem.",
+    "misconception": "confuses shaping with discounting"
+   }
+  ],
+  "explanation": "Along any trajectory the shaping terms telescope to $\\gamma^T\\Phi(s_T)-\\Phi(s_0)$, which does not depend on the actions, so it adds only a constant per start state."
+ },
+ {
+  "id": "rl-11.3",
+  "lecture": 11,
+  "stem": "Why is selling a large position in one block usually a poor execution strategy?",
+  "correct": [
+   "Impact cost is convex in trade size, so splitting an order lowers cost.",
+   "Large blocks pay a disproportionate impact cost."
+  ],
+  "distractors": [
+   {
+    "text": "Block trades are not allowed on most exchanges.",
+    "misconception": "invents a rule"
+   },
+   {
+    "text": "The market impact falls as the trade size grows.",
+    "misconception": "reverses the sign of the size effect"
+   },
+   {
+    "text": "Waiting is free, so the order should always be spread over a very long period.",
+    "misconception": "ignores the price risk of a held position"
+   },
+   {
+    "text": "The agent gets reward only at the end of the day.",
+    "misconception": "confuses the cost structure with the reward timing"
+   },
+   {
+    "text": "Impact is exactly linear, so the split makes no difference.",
+    "misconception": "forgets that convex impact favours splitting"
+   }
+  ],
+  "explanation": "With impact cost $\\eta v^2$ per interval, splitting into equal slices minimises cost, and risk aversion then speeds up the schedule. The optimum is a compromise."
+ },
+ {
+  "id": "rl-11.4",
+  "lecture": 11,
+  "stem": "Which risks must a market-making agent manage besides earning the spread?",
+  "correct": [
+   "Inventory risk, and adverse selection from informed traders.",
+   "Holding inventory, and trading against informed flow."
+  ],
+  "distractors": [
+   {
+    "text": "Spread risk, because the spread can only narrow over time.",
+    "misconception": "invents a one-way spread"
+   },
+   {
+    "text": "There is no risk, since each fill earns the spread.",
+    "misconception": "ignores inventory and adverse selection"
+   },
+   {
+    "text": "Model risk only, because the market is otherwise predictable.",
+    "misconception": "ignores market risk"
+   },
+   {
+    "text": "Latency matters only for taking liquidity and not for providing it.",
+    "misconception": "ignores that quotes can be picked off"
+   },
+   {
+    "text": "The only risk is a failure to explore enough.",
+    "misconception": "confuses learning difficulty with market risk"
+   }
+  ],
+  "explanation": "A market maker earns the spread but ends up with inventory. Rewards often subtract an inventory penalty, and informed order flow makes fills costly."
+ },
+ {
+  "id": "rl-11.5",
+  "lecture": 11,
+  "stem": "Why is the Sharpe ratio hard to use directly as an RL reward?",
+  "correct": [
+   "It is a nonlinear function of the whole sequence of returns.",
+   "It cannot be written as a sum of step rewards."
+  ],
+  "distractors": [
+   {
+    "text": "It is always negative for profitable strategies.",
+    "misconception": "invents a sign problem"
+   },
+   {
+    "text": "It depends on the number of actions available to the agent.",
+    "misconception": "confuses Sharpe with the action set"
+   },
+   {
+    "text": "It can be computed only after the portfolio has been liquidated.",
+    "misconception": "confuses the definition with timing"
+   },
+   {
+    "text": "It is not defined for stochastic policies.",
+    "misconception": "invents a limitation"
+   },
+   {
+    "text": "Its gradient with respect to the policy is always zero.",
+    "misconception": "invents a degenerate gradient"
+   }
+  ],
+  "explanation": "Rewards must add up over time, but the Sharpe ratio is a ratio of statistics of the whole sample. The differential Sharpe ratio gives an incremental approximation."
+ }
+]

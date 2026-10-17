@@ -76,4 +76,4 @@ export function build({ x, y }: Params): LQInstance {
   }
 }
 
-export const genE: LQGenerator = { id: 'inf-lq-e-twosample', generate: (rng) => build(sample(rng)) }
+export const genE: LQGenerator = { id: 'p2-lq-e-twosample', generate: (rng) => build(sample(rng)) }

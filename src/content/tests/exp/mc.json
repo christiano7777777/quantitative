@@ -1,0 +1,1762 @@
+[
+ {
+  "id": "exp-1.1",
+  "lecture": 1,
+  "stem": "What is the main purpose of randomly assigning experimental units to treatments?",
+  "correct": [
+   "It balances unmeasured background factors across the groups in expectation, so effects are attributable.",
+   "Unobserved factors balance out in expectation, so groups are comparable at the outset."
+  ],
+  "distractors": [
+   {
+    "text": "It guarantees the groups are exactly equal on every measured covariate in each single experiment.",
+    "misconception": "confuses balance in expectation with exact balance"
+   },
+   {
+    "text": "It increases the number of experimental units that are available for the analysis afterwards.",
+    "misconception": "confuses randomisation with replication"
+   },
+   {
+    "text": "It removes the need to measure covariates or to check the groups after the assignment.",
+    "misconception": "treats randomisation as removing all diagnostics"
+   },
+   {
+    "text": "It reduces the error variance by grouping similar units together before any treatment is given.",
+    "misconception": "confuses randomisation with blocking"
+   },
+   {
+    "text": "It ensures that the treatment effect is identical for every unit that takes part in the study.",
+    "misconception": "confuses randomisation with homogeneous effects"
+   }
+  ],
+  "explanation": "Randomisation makes the assignment independent of every pre-treatment factor, measured or not, so groups are comparable on average. A particular randomisation can still be imbalanced by chance."
+ },
+ {
+  "id": "exp-1.2",
+  "lecture": 1,
+  "stem": "A lab measures one sample of material ten times under the treatment and another sample ten times under the control. Why is it wrong to call this ten replicates per treatment?",
+  "correct": [
+   "The ten readings share one experimental unit, so they are subsamples and not true replicates.",
+   "Replication needs separate experimental units, not repeated readings."
+  ],
+  "distractors": [
+   {
+    "text": "Ten readings is too few to estimate a variance, and at least thirty are always required per group.",
+    "misconception": "invents a sample size rule"
+   },
+   {
+    "text": "Repeated measurements are always more informative than extra units because they cut the noise further.",
+    "misconception": "believes pseudo-replication is as good as replication"
+   },
+   {
+    "text": "The two samples should have been measured on different days rather than one straight after the other.",
+    "misconception": "focuses on timing, not on the unit"
+   },
+   {
+    "text": "Replication matters only when the treatment effect is already known to be large in advance.",
+    "misconception": "misunderstands the role of replication"
+   },
+   {
+    "text": "Each reading should have been given its own block label instead of a control group being used.",
+    "misconception": "confuses blocking with replication"
+   }
+  ],
+  "explanation": "The treatment was applied to one sample per arm, so the error estimate from repeated readings reflects measurement noise only. The comparison of treatments needs variability between independent units."
+ },
+ {
+  "id": "exp-1.3",
+  "lecture": 1,
+  "stem": "When is blocking most worthwhile?",
+  "correct": [
+   "When a known nuisance variable explains much of the response variation between comparable units.",
+   "When units form groups alike inside and different between."
+  ],
+  "distractors": [
+   {
+    "text": "When the units are already nearly identical, so that grouping them changes the error very little.",
+    "misconception": "blocking pays off when units differ"
+   },
+   {
+    "text": "When randomisation is impossible, because blocking can replace random assignment entirely in that case.",
+    "misconception": "blocking does not replace randomisation"
+   },
+   {
+    "text": "When the nuisance variable is itself changed by the treatment and is measured only afterwards.",
+    "misconception": "post-treatment variables are not valid blocks"
+   },
+   {
+    "text": "When the sample is so large that random variation is negligible and nothing needs to be done.",
+    "misconception": "ignores that blocking targets nuisance variation"
+   },
+   {
+    "text": "When there are more treatments than experimental units overall, so that groups must be formed.",
+    "misconception": "confuses blocking with an incomplete design"
+   }
+  ],
+  "explanation": "Blocking removes variation due to the nuisance variable from the error term. It needs a blocking factor related to the response and fixed before treatment, and randomisation still takes place inside blocks."
+ },
+ {
+  "id": "exp-1.4",
+  "lecture": 1,
+  "stem": "A website shows a new checkout page to all visitors in week 1 and the old page to all visitors in week 2, then compares conversion. What is the central flaw?",
+  "correct": [
+   "Time and treatment vary together, so any change between weeks is mixed with the treatment effect.",
+   "The treatment is confounded with the calendar week, so their effects cannot be told apart."
+  ],
+  "distractors": [
+   {
+    "text": "Conversion is a binary outcome, which cannot be compared between two different calendar weeks.",
+    "misconception": "wrong reason: binary outcomes can be compared"
+   },
+   {
+    "text": "Two weeks is always too short a period to measure any difference in conversion rates.",
+    "misconception": "invents a duration rule"
+   },
+   {
+    "text": "Each visitor saw only one version, and between-visitor comparisons are never valid in any design.",
+    "misconception": "confuses with a within-subject requirement"
+   },
+   {
+    "text": "Using two periods doubles the type I error, since each week is tested separately against chance.",
+    "misconception": "misdiagnoses the problem as multiplicity"
+   },
+   {
+    "text": "Randomisation was used correctly, but the p-value was not adjusted for the number of visitors.",
+    "misconception": "no randomisation was actually used"
+   }
+  ],
+  "explanation": "With no concurrent control, seasonality, campaigns or traffic mix cannot be separated from the new page. Assigning visitors at random to the two pages in the same weeks removes this."
+ },
+ {
+  "id": "exp-1.5",
+  "lecture": 1,
+  "stem": "Which statement about the experimental unit is correct?",
+  "correct": [
+   "It is the smallest entity independently given a treatment, setting the effective sample size.",
+   "The unit of randomisation decides the number of replicates."
+  ],
+  "distractors": [
+   {
+    "text": "It is the entity on which a measurement is taken, so more measurements per entity mean more replicates.",
+    "misconception": "confuses the observational unit with the experimental unit"
+   },
+   {
+    "text": "It is always a single person or animal, whatever way the treatments were actually assigned.",
+    "misconception": "the unit depends on the assignment mechanism"
+   },
+   {
+    "text": "It is chosen after the analysis as the level at which the treatment effect looks the largest.",
+    "misconception": "data-driven choice of unit"
+   },
+   {
+    "text": "It is the group of all units that carry the same block label in the design.",
+    "misconception": "confuses the experimental unit with a block"
+   },
+   {
+    "text": "It is whichever level has the largest variance, which then receives the most replication.",
+    "misconception": "invents a rule"
+   }
+  ],
+  "explanation": "If treatments are assigned to whole classrooms, the classroom is the experimental unit, and the pupils inside are subsamples. Counting pupils as replicates overstates the information."
+ },
+ {
+  "id": "exp-2.1",
+  "lecture": 2,
+  "stem": "Which assumptions underlie the one-way ANOVA $F$ test?",
+  "correct": [
+   "Independent errors with mean zero and common variance across groups, approximately normal.",
+   "Independent, equal-variance, normal errors with mean zero within every treatment group."
+  ],
+  "distractors": [
+   {
+    "text": "Equal sample sizes in every group, which the $F$ test requires in order to be valid at all.",
+    "misconception": "balance is not required"
+   },
+   {
+    "text": "Normally distributed responses in the pooled sample, rather than within each treatment group.",
+    "misconception": "the normality is of the errors within groups"
+   },
+   {
+    "text": "Equal treatment means, since the test is built on the assumption that the null hypothesis holds.",
+    "misconception": "confuses the null with the model assumptions"
+   },
+   {
+    "text": "Errors that are positively correlated inside each group, which models the shared treatment.",
+    "misconception": "independence is required"
+   },
+   {
+    "text": "A linear trend in the group means across the ordered treatment levels.",
+    "misconception": "confuses ANOVA with trend regression"
+   }
+  ],
+  "explanation": "The model is $y_{ij}=\\mu+\\tau_i+\\varepsilon_{ij}$ with $\\varepsilon_{ij}$ i.i.d. $N(0,\\sigma^2)$. Unequal group sizes are allowed."
+ },
+ {
+  "id": "exp-2.2",
+  "lecture": 2,
+  "stem": "In a one-way ANOVA with $k$ groups and $N$ observations, what is the null distribution of $F=MS_{\\text{between}}/MS_{\\text{within}}$ under normal errors?",
+  "correct": [
+   "An $F$ distribution with $k-1$ and $N-k$ degrees of freedom.",
+   "$F$ with $k-1$ numerator and $N-k$ error df."
+  ],
+  "distractors": [
+   {
+    "text": "An $F$ distribution with $k$ and $N$ degrees of freedom.",
+    "misconception": "ignores the degrees of freedom used by the means"
+   },
+   {
+    "text": "A $\\chi^2$ distribution with $k-1$ degrees of freedom.",
+    "misconception": "forgets that the within mean square is estimated"
+   },
+   {
+    "text": "An $F$ distribution with $N-1$ and $k$ degrees of freedom.",
+    "misconception": "swaps numerator and denominator degrees of freedom"
+   },
+   {
+    "text": "A $t$ distribution with $N-k$ degrees of freedom.",
+    "misconception": "confuses the F test with a t test"
+   },
+   {
+    "text": "An $F$ distribution with $k-1$ and $N-1$ degrees of freedom.",
+    "misconception": "uses total instead of error degrees of freedom"
+   }
+  ],
+  "explanation": "The between sum of squares has $k-1$ degrees of freedom and the within sum of squares has $N-k$. Their scaled ratio is $F_{k-1,N-k}$ under the null."
+ },
+ {
+  "id": "exp-2.3",
+  "lecture": 2,
+  "stem": "In a balanced one-way design, what does the expected between-group mean square equal when the group means differ?",
+  "correct": [
+   "It is $\\sigma^2$ plus a positive term in the squared treatment effects, so $F$ tends to exceed 1.",
+   "It exceeds $\\sigma^2$ by an amount growing with the spread of the group means."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $\\sigma^2$ whether or not the means differ, because both mean squares estimate the error variance.",
+    "misconception": "true only under the null"
+   },
+   {
+    "text": "It equals the within-group mean square exactly, in every sample that is drawn.",
+    "misconception": "confuses expectation with sample equality"
+   },
+   {
+    "text": "It is smaller than $\\sigma^2$ when the means differ, because part of the variation is explained.",
+    "misconception": "the explained variation adds to the between mean square"
+   },
+   {
+    "text": "It equals the total variance of the responses taken without regard to the group labels.",
+    "misconception": "mixes up between-group and total variance"
+   },
+   {
+    "text": "It equals $\\sigma^2$ divided by the number of groups $k$ whatever the treatment effects are.",
+    "misconception": "invents a scaling"
+   }
+  ],
+  "explanation": "$E(MS_{\\text{within}})=\\sigma^2$ always, while $E(MS_{\\text{between}})=\\sigma^2+n\\sum\\tau_i^2/(k-1)$. The ratio exceeds 1 on average exactly when some $\\tau_i\\neq0$."
+ },
+ {
+  "id": "exp-2.4",
+  "lecture": 2,
+  "stem": "After a significant ANOVA $F$ test, why are pairwise comparisons of the means adjusted (Tukey, Bonferroni)?",
+  "correct": [
+   "Many pairwise tests at level $\\alpha$ make some false positive likely, so familywise error needs control.",
+   "Unadjusted tests across all the pairs would exceed the intended familywise error rate."
+  ],
+  "distractors": [
+   {
+    "text": "The $F$ test is invalid once the data have been looked at, so the comparisons restore its validity.",
+    "misconception": "the F test remains valid"
+   },
+   {
+    "text": "Pairwise differences are not normally distributed even when the individual errors are normal.",
+    "misconception": "differences of normal means are normal"
+   },
+   {
+    "text": "Adjusting increases power so that smaller differences between pairs become easier to detect.",
+    "misconception": "adjustment reduces power"
+   },
+   {
+    "text": "The pairwise comparisons use variance estimates that cannot be pooled across the different groups.",
+    "misconception": "the pooled within estimate is used"
+   },
+   {
+    "text": "Adjustment guarantees that every pair that is declared different is truly different in the population.",
+    "misconception": "confuses error control with certainty"
+   }
+  ],
+  "explanation": "With $k$ groups there are $k(k-1)/2$ pairs. Bonferroni uses $\\alpha/m$ per test, and Tukey's method uses the studentised range to control the familywise rate."
+ },
+ {
+  "id": "exp-2.5",
+  "lecture": 2,
+  "stem": "A one-way ANOVA $F$ test is not significant at 5%, yet the largest and smallest group means look far apart. What is the right caution?",
+  "correct": [
+   "Choosing the extreme pair after the data is a selected comparison, so a naive $t$ test is too liberal.",
+   "The unadjusted p-value for the extreme pair overstates evidence."
+  ],
+  "distractors": [
+   {
+    "text": "A non-significant $F$ proves that all the group means are equal, so the extremes must be noise.",
+    "misconception": "treats absence of evidence as evidence of absence"
+   },
+   {
+    "text": "The $F$ test has no power at all against a difference confined to the two extreme groups.",
+    "misconception": "the F test has some power against any difference"
+   },
+   {
+    "text": "The extreme pair should be compared with a one-sided $t$ test, which recovers the lost power.",
+    "misconception": "one-sided tests do not fix selection"
+   },
+   {
+    "text": "Unequal group variances guarantee that the $F$ test fails to reject, whatever the data show.",
+    "misconception": "unequal variances do not force non-rejection"
+   },
+   {
+    "text": "Dropping the middle groups and rerunning the ANOVA on the extremes alone is a valid test.",
+    "misconception": "data-driven subsetting invalidates the test"
+   }
+  ],
+  "explanation": "The range of $k$ means is larger than the difference of two pre-chosen means. A valid comparison of the extremes uses the studentised range or an adjusted procedure such as Tukey or Scheffe."
+ },
+ {
+  "id": "exp-3.1",
+  "lecture": 3,
+  "stem": "In a $2^2$ factorial with factors $A$ and $B$, how is the main effect of $A$ defined?",
+  "correct": [
+   "Mean response at high $A$ minus mean at low $A$, averaged over the levels of $B$.",
+   "The $A$ difference (high minus low) averaged over the two levels of $B$."
+  ],
+  "distractors": [
+   {
+    "text": "The $A$ difference measured at the low level of $B$ only, with the other cells ignored.",
+    "misconception": "confuses a main effect with a simple effect"
+   },
+   {
+    "text": "The change in the response when $A$ and $B$ are both raised from low to high together.",
+    "misconception": "confuses main effect with a joint change"
+   },
+   {
+    "text": "The difference between the two simple effects of $A$ at the two levels of $B$.",
+    "misconception": "that is the interaction"
+   },
+   {
+    "text": "The sum of the four cell means, divided by two, whatever the factor levels are.",
+    "misconception": "confuses with a contrast that is not an effect"
+   },
+   {
+    "text": "The $A$ difference at whichever level of $B$ gives the largest response.",
+    "misconception": "cherry-picks the level of the other factor"
+   }
+  ],
+  "explanation": "Main effect of $A$ is $\\tfrac12[(a b-b)+(a-(1))]$ in standard notation: the average of the two simple effects of $A$."
+ },
+ {
+  "id": "exp-3.2",
+  "lecture": 3,
+  "stem": "A significant $AB$ interaction is found in a factorial experiment. What does this imply for the interpretation of the main effect of $A$?",
+  "correct": [
+   "The effect of $A$ depends on the level of $B$, so the main effect alone can be misleading.",
+   "A factor's effect changes with the other, so check simple effects."
+  ],
+  "distractors": [
+   {
+    "text": "The main effects of $A$ and $B$ must both be exactly zero whenever there is an interaction.",
+    "misconception": "interaction does not imply zero main effects"
+   },
+   {
+    "text": "The factors $A$ and $B$ are correlated in the design, so their effects are confounded.",
+    "misconception": "confuses interaction with confounding"
+   },
+   {
+    "text": "The experiment was not randomised, so none of the effect estimates can be interpreted.",
+    "misconception": "interaction is not a randomisation failure"
+   },
+   {
+    "text": "The main effects are estimated with extra bias, so they should be discarded from the model.",
+    "misconception": "main effects are still estimated without bias"
+   },
+   {
+    "text": "One of the two factors can be dropped from the model without losing any information.",
+    "misconception": "an interaction means both factors matter"
+   }
+  ],
+  "explanation": "The average effect of $A$ can hide opposite effects at the two levels of $B$ (a crossover). Report the simple effects of $A$ at each level of $B$."
+ },
+ {
+  "id": "exp-3.3",
+  "lecture": 3,
+  "stem": "In a replicated $2^k$ factorial, why can every effect be estimated using all the runs?",
+  "correct": [
+   "Each effect is a contrast of all the run totals with signs $\\pm1$, and the sign columns are orthogonal.",
+   "Orthogonal sign columns let each effect use every run without confounding the others."
+  ],
+  "distractors": [
+   {
+    "text": "The effects are found one at a time, by holding the other factors at fixed levels in every run.",
+    "misconception": "describes one-factor-at-a-time"
+   },
+   {
+    "text": "Each effect uses only the runs where all the other factors are at their low level.",
+    "misconception": "wastes the other runs"
+   },
+   {
+    "text": "Using all the runs is possible only when no interactions exist among the factors.",
+    "misconception": "interactions are estimated from the same runs"
+   },
+   {
+    "text": "Each effect uses the variance from a single pair of runs, because the design is balanced.",
+    "misconception": "invents a small effective sample"
+   },
+   {
+    "text": "Pooling works only if the experiment is unreplicated, since replicates have different variances.",
+    "misconception": "replication does not prevent the use of all runs"
+   }
+  ],
+  "explanation": "With $n$ replicates, an effect is the contrast divided by $n2^{k-1}$ and has variance $\\sigma^2/(n2^{k-2})$. Each effect uses all $n2^k$ observations."
+ },
+ {
+  "id": "exp-3.4",
+  "lecture": 3,
+  "stem": "Compared with varying one factor at a time, what is an advantage of a factorial design?",
+  "correct": [
+   "It estimates interactions, and every run contributes to every main effect for the same budget.",
+   "Each run informs every main effect; interactions are estimable."
+  ],
+  "distractors": [
+   {
+    "text": "It needs more runs to estimate each main effect, in exchange for the ability to estimate interactions.",
+    "misconception": "the factorial is more efficient, not less"
+   },
+   {
+    "text": "It requires the interactions to be zero for its main effect estimates to be valid.",
+    "misconception": "factorial estimates are valid with interactions present"
+   },
+   {
+    "text": "It gives main effect estimates that are less precise, but avoids the multiplicity of testing.",
+    "misconception": "the precision is higher"
+   },
+   {
+    "text": "It can be analysed only when the number of factors is at most two.",
+    "misconception": "factorials extend to any number of factors"
+   },
+   {
+    "text": "It removes the error term, so no replication is needed to test the effects.",
+    "misconception": "unreplicated designs lack a pure error estimate"
+   }
+  ],
+  "explanation": "In a $2^2$ design each main effect compares two runs against two runs, while one-factor-at-a-time estimates it from a single pair of runs. For the same budget the factorial is more precise and shows interactions."
+ },
+ {
+  "id": "exp-3.5",
+  "lecture": 3,
+  "stem": "An unreplicated $2^3$ experiment has no pure error estimate. How can the effects be judged?",
+  "correct": [
+   "Negligible effects look like noise about zero, so real ones leave the line on a normal plot.",
+   "Look for points off the line on a normal or half-normal plot."
+  ],
+  "distractors": [
+   {
+    "text": "Divide each effect by the grand mean and compare the ratio with a $t$ critical value.",
+    "misconception": "the grand mean is not an error scale"
+   },
+   {
+    "text": "Treat the three-factor interaction as the only valid error, since it is always exactly zero.",
+    "misconception": "higher interactions are only often small"
+   },
+   {
+    "text": "Use the largest effect as the error estimate for all the other effects.",
+    "misconception": "the largest effect is the least like noise"
+   },
+   {
+    "text": "Declare all effects significant, as there is no error to compare them with.",
+    "misconception": "no error estimate does not mean significance"
+   },
+   {
+    "text": "Compare each effect to the run-to-run variance within the single run of each cell.",
+    "misconception": "a single run has no within-cell variance"
+   }
+  ],
+  "explanation": "With $2^3-1=7$ effects, if only a few are real, the rest estimate zero with common variance. They fall on a straight line on a normal plot."
+ },
+ {
+  "id": "exp-4.1",
+  "lecture": 4,
+  "stem": "In a randomised complete block design, how are the treatments randomised?",
+  "correct": [
+   "Separately inside each block, so every treatment appears once per block in random order.",
+   "Each block gets all treatments, allocated at random within that block."
+  ],
+  "distractors": [
+   {
+    "text": "Across the whole experiment at once, ignoring the block labels completely.",
+    "misconception": "that would be a completely randomised design"
+   },
+   {
+    "text": "Only between blocks, so that a whole block receives a single treatment.",
+    "misconception": "confuses blocks with treatment groups"
+   },
+   {
+    "text": "Not at all, because blocking already removes all differences between the units.",
+    "misconception": "blocking does not remove the need to randomise"
+   },
+   {
+    "text": "In the same fixed order in every block, to make the blocks easy to compare.",
+    "misconception": "a fixed order confounds treatment with position"
+   },
+   {
+    "text": "Within blocks, choosing in each block the treatment that looked best in a pilot run.",
+    "misconception": "pilot-based choice is not random assignment"
+   }
+  ],
+  "explanation": "Randomising separately within each block protects against bias from unknown factors that vary inside blocks, while the block factor removes the known variation."
+ },
+ {
+  "id": "exp-4.2",
+  "lecture": 4,
+  "stem": "Compared with a completely randomised analysis of the same data, what does the randomised block analysis change?",
+  "correct": [
+   "Block variation is taken out of the error sum of squares, shrinking the error mean square.",
+   "Residual variance falls once block sums of squares are split out."
+  ],
+  "distractors": [
+   {
+    "text": "It increases the error degrees of freedom by the number of blocks that are used.",
+    "misconception": "error degrees of freedom decrease by b-1"
+   },
+   {
+    "text": "It removes treatment variation from the comparison instead of block variation.",
+    "misconception": "swaps what is removed"
+   },
+   {
+    "text": "It leaves the error untouched and doubles the treatment sum of squares.",
+    "misconception": "invents an effect"
+   },
+   {
+    "text": "It always improves the precision, even when the blocks are unrelated to the response.",
+    "misconception": "ignores the cost in degrees of freedom"
+   },
+   {
+    "text": "It replaces the $F$ test for treatments by a $t$ test on the block means.",
+    "misconception": "the treatments are still tested with F"
+   }
+  ],
+  "explanation": "Fitting $b-1$ block parameters uses $b-1$ degrees of freedom. The gain is worth it only if block differences are large relative to $\\sigma^2$."
+ },
+ {
+  "id": "exp-4.3",
+  "lecture": 4,
+  "stem": "What defines a Latin square design with $p$ treatments?",
+  "correct": [
+   "A $p\\times p$ array with each treatment once in every row and column, blocking two nuisance factors.",
+   "Each treatment appears once per row and once per column of a $p\\times p$ array."
+  ],
+  "distractors": [
+   {
+    "text": "Each treatment occurs once in every row, but the columns are chosen at random without a restriction.",
+    "misconception": "ignores the column constraint"
+   },
+   {
+    "text": "Each treatment occurs $p$ times in total, and the cells are filled at random.",
+    "misconception": "ignores the row and column balance"
+   },
+   {
+    "text": "Each row and column contains all treatments, and three nuisance factors are blocked at once.",
+    "misconception": "a Latin square blocks two factors"
+   },
+   {
+    "text": "Treatments are placed on the diagonal only, to separate the row and column effects.",
+    "misconception": "invents a layout"
+   },
+   {
+    "text": "Rows and columns are the treatments, and the cells hold the replicates of each pair.",
+    "misconception": "confuses with a two-factor layout"
+   }
+  ],
+  "explanation": "The Latin square uses $p^2$ runs to compare $p$ treatments while removing row and column effects, a $p$-fold saving compared with the full crossing of the three factors."
+ },
+ {
+  "id": "exp-4.4",
+  "lecture": 4,
+  "stem": "Which assumption is needed for the standard analysis of a Latin square?",
+  "correct": [
+   "No interaction among rows, columns and treatments, so their effects simply add.",
+   "Additive row, column and treatment effects, with no interactions among them."
+  ],
+  "distractors": [
+   {
+    "text": "Equal row and column effects, so that the layout contributes no information at all.",
+    "misconception": "confuses additivity with null blocks"
+   },
+   {
+    "text": "Interactions between treatments and rows, which the square is constructed to estimate.",
+    "misconception": "the square cannot estimate them"
+   },
+   {
+    "text": "At least two replicates per cell, so that a pure error can be found within cells.",
+    "misconception": "each cell has a single observation"
+   },
+   {
+    "text": "Randomisation of the rows only, with the columns kept in their original order.",
+    "misconception": "rows, columns and treatments are all randomised"
+   },
+   {
+    "text": "A number of treatments greater than the number of rows in the layout.",
+    "misconception": "squares have as many rows as treatments"
+   }
+  ],
+  "explanation": "Each cell has a single observation and the residual is formed from the leftover degrees of freedom, so interactions would inflate the error or bias the effects."
+ },
+ {
+  "id": "exp-4.5",
+  "lecture": 4,
+  "stem": "Why can a small Latin square give weak tests of the treatment effect?",
+  "correct": [
+   "Rows, columns and treatments use $3(p-1)$ of $p^2-1$ degrees of freedom, leaving $(p-1)(p-2)$ for error.",
+   "Few error degrees of freedom remain when $p$ is small, so the tests have little power."
+  ],
+  "distractors": [
+   {
+    "text": "It has more error degrees of freedom than a randomised block design, because two factors are removed.",
+    "misconception": "removing factors reduces error degrees of freedom"
+   },
+   {
+    "text": "Error has $p^2-1$ degrees of freedom because the three factors are not separately estimated.",
+    "misconception": "ignores the fitted effects"
+   },
+   {
+    "text": "The error degrees of freedom are zero by construction, so a Latin square needs replicates to test anything.",
+    "misconception": "error df are positive once p is above 2"
+   },
+   {
+    "text": "Error has $p-1$ degrees of freedom, the same number as each of the factors.",
+    "misconception": "miscounts"
+   },
+   {
+    "text": "The degrees of freedom do not matter, because the $F$ test is exact for any size of square.",
+    "misconception": "ignores the critical value inflation at small df"
+   }
+  ],
+  "explanation": "For $p=3$ there are only $2$ error degrees of freedom, so the $F$ critical value is large. Replicating the square or using $p\\ge5$ increases the power."
+ },
+ {
+  "id": "exp-5.1",
+  "lecture": 5,
+  "stem": "Why use a $2^{k-p}$ fractional factorial design?",
+  "correct": [
+   "To study many factors in few runs, assuming high-order interactions are negligible, with aliasing.",
+   "It saves runs by confounding some effects, trusting that high-order terms are small."
+  ],
+  "distractors": [
+   {
+    "text": "To estimate all the interactions exactly with fewer runs and no loss of information.",
+    "misconception": "fractions always lose information"
+   },
+   {
+    "text": "To increase the error degrees of freedom by adding replicate runs of the same settings.",
+    "misconception": "a fraction does not replicate"
+   },
+   {
+    "text": "To remove the need for randomisation, because the runs are chosen systematically.",
+    "misconception": "the run order is still randomised"
+   },
+   {
+    "text": "To make each main effect more precise than the full factorial gives with the same runs.",
+    "misconception": "the precision is not improved"
+   },
+   {
+    "text": "To avoid making any assumption about interactions, since all effects remain separately estimable.",
+    "misconception": "the fraction relies on sparsity"
+   }
+  ],
+  "explanation": "A full $2^k$ needs $2^k$ runs. The fraction uses $2^{k-p}$ runs and relies on the sparsity of effects: high-order interactions are usually small."
+ },
+ {
+  "id": "exp-5.2",
+  "lecture": 5,
+  "stem": "In a $2^{3-1}$ design with defining relation $I=ABC$, which effects are aliased?",
+  "correct": [
+   "Each main effect with a two-factor interaction: $A$ with $BC$, $B$ with $AC$, $C$ with $AB$.",
+   "Each main effect is aliased with the complementary two-factor interaction."
+  ],
+  "distractors": [
+   {
+    "text": "Each main effect with the three-factor interaction itself, so that $A$ is aliased with $ABC$.",
+    "misconception": "multiplies wrongly"
+   },
+   {
+    "text": "Each main effect with another main effect: $A$ with $B$, $B$ with $C$ and $C$ with $A$.",
+    "misconception": "main effects are not aliased with each other here"
+   },
+   {
+    "text": "$A$ with $AC$, $B$ with $AB$ and $C$ with $BC$.",
+    "misconception": "the alias is the product with the defining word"
+   },
+   {
+    "text": "Only the two-factor interactions with each other, while all the main effects are clear.",
+    "misconception": "main effects are aliased with interactions here"
+   },
+   {
+    "text": "No effects are aliased, since all four runs have distinct sign patterns.",
+    "misconception": "four runs cannot separate eight effects"
+   }
+  ],
+  "explanation": "Multiply an effect by the defining word and reduce squares to $I$: $A\\cdot ABC=BC$. Four runs give four estimable contrasts, each the sum of two aliased effects."
+ },
+ {
+  "id": "exp-5.3",
+  "lecture": 5,
+  "stem": "What does Resolution III mean for a fractional factorial?",
+  "correct": [
+   "Main effects are clear of each other but aliased with some two-factor interactions.",
+   "Main effects are clear of each other but not of two-factor interactions."
+  ],
+  "distractors": [
+   {
+    "text": "Main effects are aliased with each other, but all the two-factor interactions are clear.",
+    "misconception": "reverses the roles"
+   },
+   {
+    "text": "Main effects are aliased only with interactions of three or more factors.",
+    "misconception": "that is Resolution IV"
+   },
+   {
+    "text": "Two-factor interactions are aliased neither with main effects nor with each other.",
+    "misconception": "that is Resolution V"
+   },
+   {
+    "text": "The design contains exactly three factors, each at two levels, in all of its runs.",
+    "misconception": "confuses resolution with the number of factors"
+   },
+   {
+    "text": "Each run of the design is replicated three times, so error can be estimated.",
+    "misconception": "confuses resolution with replication"
+   }
+  ],
+  "explanation": "Resolution is the length of the shortest word in the defining relation. For Resolution III, main effects are aliased with two-factor interactions, and this is acceptable only if those interactions are small."
+ },
+ {
+  "id": "exp-5.4",
+  "lecture": 5,
+  "stem": "How is the resolution of a fractional factorial read from its defining relation?",
+  "correct": [
+   "It equals the number of letters in the shortest word of the defining relation.",
+   "The length of the shortest word in the defining relation."
+  ],
+  "distractors": [
+   {
+    "text": "It equals the number of words in the complete defining relation.",
+    "misconception": "confuses with the number of generators"
+   },
+   {
+    "text": "It equals the number of letters in the longest word of the defining relation.",
+    "misconception": "uses the longest instead of the shortest word"
+   },
+   {
+    "text": "It equals the number of factors $k$ minus the number of generators $p$.",
+    "misconception": "confuses with the run size exponent"
+   },
+   {
+    "text": "It equals the number of runs of the design, which is $2^{k-p}$.",
+    "misconception": "confuses resolution with run size"
+   },
+   {
+    "text": "It equals the number of effects that are aliased with each main effect.",
+    "misconception": "confuses with the alias count"
+   }
+  ],
+  "explanation": "A word of length $r$ makes some effect of order $s$ aliased with effects of order $r-s$. The shortest word gives the lowest aliasing order, hence the resolution."
+ },
+ {
+  "id": "exp-5.5",
+  "lecture": 5,
+  "stem": "A fractional factorial has Resolution IV. Which statement is true?",
+  "correct": [
+   "Main effects are clear of two-factor interactions, but two-factor interactions alias one another.",
+   "Main effects are not aliased with any two-factor interaction in the design."
+  ],
+  "distractors": [
+   {
+    "text": "Main effects are aliased with two-factor interactions, while two-factor interactions are clear of each other.",
+    "misconception": "reverses the roles"
+   },
+   {
+    "text": "Every two-factor interaction is clear of all the other two-factor interactions.",
+    "misconception": "this holds for Resolution V"
+   },
+   {
+    "text": "Main effects are aliased with each other, though not with any interactions.",
+    "misconception": "main effects are clear of each other in Resolution IV"
+   },
+   {
+    "text": "All interactions up to order four are estimable separately from each other.",
+    "misconception": "overstates what the design can resolve"
+   },
+   {
+    "text": "Main effects are aliased with three-factor interactions, and also with some two-factor interactions.",
+    "misconception": "contradicts the definition"
+   }
+  ],
+  "explanation": "The shortest word has length 4, so a main effect is aliased with three-factor interactions and a two-factor interaction with another two-factor one."
+ },
+ {
+  "id": "exp-6.1",
+  "lecture": 6,
+  "stem": "In a standard A/B test of conversion rates, what does the null hypothesis state?",
+  "correct": [
+   "The conversion rates under the treatment and control are equal, so the true lift is zero.",
+   "There is no difference in expected conversion between the two variants."
+  ],
+  "distractors": [
+   {
+    "text": "The treatment conversion rate exceeds the control rate by exactly the minimum detectable effect.",
+    "misconception": "confuses the null with the design alternative"
+   },
+   {
+    "text": "The observed rates are equal in the sample, with no sampling noise in the results.",
+    "misconception": "confuses sample and population"
+   },
+   {
+    "text": "The treatment is no better than the control with probability 95 percent.",
+    "misconception": "treats the null as a probability statement"
+   },
+   {
+    "text": "The p-value is at most the chosen significance level $\\alpha$ in the experiment.",
+    "misconception": "confuses the null with the rejection rule"
+   },
+   {
+    "text": "The treatment effect is positive but too small to be of any practical interest.",
+    "misconception": "confuses statistical and practical significance"
+   }
+  ],
+  "explanation": "$H_0:p_T=p_C$ is a statement about population rates. The data may or may not give evidence against it."
+ },
+ {
+  "id": "exp-6.2",
+  "lecture": 6,
+  "stem": "What does a p-value of $0.03$ mean in an A/B test?",
+  "correct": [
+   "With no real effect, results at least this extreme would occur about 3% of the time.",
+   "Probability of a result at least this extreme if the null is true."
+  ],
+  "distractors": [
+   {
+    "text": "There is a 97% probability that the treatment really performs better than the control.",
+    "misconception": "interprets the p-value as a posterior probability"
+   },
+   {
+    "text": "There is a 3% probability that the null hypothesis is true, given the data.",
+    "misconception": "the p-value is not the probability of the null"
+   },
+   {
+    "text": "The treatment effect is 3% larger than the control effect in relative terms.",
+    "misconception": "confuses p-value with effect size"
+   },
+   {
+    "text": "Three percent of the users in the treatment arm were affected by the change.",
+    "misconception": "confuses p-value with exposure"
+   },
+   {
+    "text": "The test has 97% power to detect the observed effect at the chosen level.",
+    "misconception": "confuses p-value with power"
+   }
+  ],
+  "explanation": "The p-value is $P(\\text{data at least this extreme}\\mid H_0)$. It is not $P(H_0\\mid\\text{data})$ and says nothing about the size of the effect."
+ },
+ {
+  "id": "exp-6.3",
+  "lecture": 6,
+  "stem": "What makes a good primary metric (overall evaluation criterion) for an A/B test?",
+  "correct": [
+   "It moves within the test duration and is aligned with the long-term goal of the business.",
+   "It is measurable, sensitive within the test period, and tied to the real goal."
+  ],
+  "distractors": [
+   {
+    "text": "It is the metric with the highest variance, so that effects are easiest to see.",
+    "misconception": "high variance lowers sensitivity"
+   },
+   {
+    "text": "It is whichever metric turns out to be significant, chosen after the experiment has run.",
+    "misconception": "post hoc metric selection"
+   },
+   {
+    "text": "It is a metric that the treatment can influence only indirectly, over several years.",
+    "misconception": "too slow to be measured in a test"
+   },
+   {
+    "text": "It is a guardrail metric that must stay unchanged, to show nothing has been harmed.",
+    "misconception": "confuses the primary with a guardrail metric"
+   },
+   {
+    "text": "It is the unweighted average of all the available metrics, so that none is left out.",
+    "misconception": "dilutes the signal and the interpretation"
+   }
+  ],
+  "explanation": "The primary metric is fixed before the test. Guardrail metrics watch for harm, and proxy metrics must be validated against the long-term outcome."
+ },
+ {
+  "id": "exp-6.4",
+  "lecture": 6,
+  "stem": "What does the randomisation unit determine in an online experiment?",
+  "correct": [
+   "Which entity (user, session, device) is assigned as a whole, setting what counts as independent.",
+   "The entity that receives the same variant throughout, such as the user."
+  ],
+  "distractors": [
+   {
+    "text": "The fraction of traffic that is exposed to the new variant, between zero and one.",
+    "misconception": "confuses the unit with the traffic share"
+   },
+   {
+    "text": "The time window of the experiment, measured in a whole number of weeks.",
+    "misconception": "confuses the unit with the duration"
+   },
+   {
+    "text": "Only the denominator of the metric, and not the way the variants are assigned.",
+    "misconception": "the unit governs assignment"
+   },
+   {
+    "text": "The significance level used in the test, which is smaller for coarser units.",
+    "misconception": "invents a link to alpha"
+   },
+   {
+    "text": "Always the page view, because that choice produces the largest possible sample.",
+    "misconception": "finer units cause interference between exposures"
+   }
+  ],
+  "explanation": "Randomising by user keeps each user's experience consistent. The analysis should then treat the user as the independent unit."
+ },
+ {
+  "id": "exp-6.5",
+  "lecture": 6,
+  "stem": "Users are randomised, but click-through rate is computed as total clicks divided by total page views. What issue arises in a naive test treating page views as independent?",
+  "correct": [
+   "Page views of one user are correlated, so the naive variance is too small and the test too liberal.",
+   "The analysis unit (page view) is finer than the randomisation unit (user)."
+  ],
+  "distractors": [
+   {
+    "text": "Click-through rate cannot be tested at all, because it is a ratio of two counts.",
+    "misconception": "the delta method handles ratios"
+   },
+   {
+    "text": "Randomising users guarantees that every page view is an independent trial, so the test is valid.",
+    "misconception": "page views within a user are dependent"
+   },
+   {
+    "text": "The variance is overstated by the dependence, so that the test becomes too conservative.",
+    "misconception": "the sign of the error is reversed"
+   },
+   {
+    "text": "The test loses all validity because the randomisation unit was not the page view.",
+    "misconception": "user-level randomisation is fine with a correct analysis"
+   },
+   {
+    "text": "Heavy users make the ratio biased, which cannot be fixed by any variance formula.",
+    "misconception": "the ratio is consistent; the variance is the issue"
+   }
+  ],
+  "explanation": "The correct variance clusters page views by user, for example by the delta method on user-level totals, or the analysis is done on a user-level metric."
+ },
+ {
+  "id": "exp-7.1",
+  "lecture": 7,
+  "stem": "What is the statistical power of a test?",
+  "correct": [
+   "The probability of rejecting the null when a specified nonzero true effect is present.",
+   "One minus the type II error rate at a specified nonzero effect size."
+  ],
+  "distractors": [
+   {
+    "text": "The probability that the null hypothesis is true when the test has rejected it.",
+    "misconception": "confuses power with the false discovery proportion"
+   },
+   {
+    "text": "The probability of rejecting the null hypothesis when the true effect is exactly zero.",
+    "misconception": "that is the type I error rate"
+   },
+   {
+    "text": "The probability that the observed effect equals the true effect in the experiment.",
+    "misconception": "confuses power with accuracy"
+   },
+   {
+    "text": "One minus the significance level, whatever the size of the true effect.",
+    "misconception": "confuses power with the confidence level"
+   },
+   {
+    "text": "The probability that the confidence interval contains the true value of the effect.",
+    "misconception": "confuses power with coverage"
+   }
+  ],
+  "explanation": "Power is $1-\\beta$ and depends on the true effect, the variance, the sample size and $\\alpha$. It is not one number for a test."
+ },
+ {
+  "id": "exp-7.2",
+  "lecture": 7,
+  "stem": "What is the minimum detectable effect (MDE) in a power analysis?",
+  "correct": [
+   "The smallest true effect that the test detects with the stated power at the chosen level.",
+   "The effect size at which power reaches the target, such as 80%, at level $\\alpha$."
+  ],
+  "distractors": [
+   {
+    "text": "The smallest observed effect that would give a significant result in the collected sample.",
+    "misconception": "confuses the MDE with the critical observed difference"
+   },
+   {
+    "text": "The smallest effect of any business importance, whatever the sample size that is used.",
+    "misconception": "confuses with the practical significance threshold"
+   },
+   {
+    "text": "The expected effect of the treatment, as forecast by the product team beforehand.",
+    "misconception": "confuses the MDE with a forecast"
+   },
+   {
+    "text": "The standard error of the difference between the treatment and control means.",
+    "misconception": "confuses the MDE with the standard error"
+   },
+   {
+    "text": "The true effect at which the type I and type II error rates are equal.",
+    "misconception": "invents a balance condition"
+   }
+  ],
+  "explanation": "The MDE is a design input chosen with the business, then used with $\\alpha$, power and $\\sigma$ to find the sample size. It is not an estimate from the data."
+ },
+ {
+  "id": "exp-7.3",
+  "lecture": 7,
+  "stem": "How does the required sample size per group in a two-sample comparison depend on the effect size $\\delta$ and the standard deviation $\\sigma$?",
+  "correct": [
+   "It grows like $\\sigma^2/\\delta^2$, so half the effect needs four times the sample.",
+   "The per-group sample size is proportional to $\\sigma^2/\\delta^2$ for fixed power."
+  ],
+  "distractors": [
+   {
+    "text": "It grows like $\\sigma/\\delta$, so halving the detectable effect needs about twice the sample.",
+    "misconception": "forgets that variance is squared"
+   },
+   {
+    "text": "It grows like $\\delta^2/\\sigma^2$, so a larger detectable effect needs more data.",
+    "misconception": "inverts the dependence on the effect"
+   },
+   {
+    "text": "It is independent of $\\sigma$, once the power and the level are fixed.",
+    "misconception": "ignores the noise level"
+   },
+   {
+    "text": "It grows like $\\sigma^2/\\delta$, so halving the effect only doubles the sample.",
+    "misconception": "the effect enters squared"
+   },
+   {
+    "text": "It is proportional to $\\delta$, so small effects need very few users.",
+    "misconception": "small effects need more users"
+   }
+  ],
+  "explanation": "The standard error is $\\sigma\\sqrt{2/n}$. Requiring $\\delta\\approx(z_{1-\\alpha/2}+z_{1-\\beta})\\sigma\\sqrt{2/n}$ gives $n\\propto\\sigma^2/\\delta^2$."
+ },
+ {
+  "id": "exp-7.4",
+  "lecture": 7,
+  "stem": "With the sample size and true effect held fixed, which change increases the power of a two-sided $z$ test?",
+  "correct": [
+   "Raising the significance level $\\alpha$, at the cost of more false positives.",
+   "Accepting a larger type I error rate and so more false positives."
+  ],
+  "distractors": [
+   {
+    "text": "Lowering the significance level to make the test more stringent.",
+    "misconception": "lower alpha lowers the power"
+   },
+   {
+    "text": "Increasing the outcome variance by pooling in additional noisy metrics.",
+    "misconception": "more noise lowers the power"
+   },
+   {
+    "text": "Switching to a smaller true effect that is easier to model.",
+    "misconception": "smaller effects are harder to detect"
+   },
+   {
+    "text": "Using a two-sided rather than a one-sided test for the same alternative direction.",
+    "misconception": "a two-sided test spends alpha on both tails"
+   },
+   {
+    "text": "Stopping the experiment as soon as the first look gives a p-value below $\\alpha$.",
+    "misconception": "stopping rules change error rates, not power at fixed n"
+   }
+  ],
+  "explanation": "Power rises with a larger $\\alpha$, a larger effect, a larger $n$ and a smaller $\\sigma$. Each gain has a cost, apart from variance reduction."
+ },
+ {
+  "id": "exp-7.5",
+  "lecture": 7,
+  "stem": "A test was powered for an MDE of 1% but the observed lift is 0.3% with $p=0.2$. What is the right reading?",
+  "correct": [
+   "A non-significant result does not rule out a true lift below 1%, as power is low there.",
+   "Failing to reject says little about effects below the MDE."
+  ],
+  "distractors": [
+   {
+    "text": "It proves that the true lift is below 1%, so the treatment has no useful effect.",
+    "misconception": "treats non-rejection as proof of no effect"
+   },
+   {
+    "text": "The test must be rerun, since a p-value above $\\alpha$ indicates a coding error.",
+    "misconception": "non-rejection is a normal outcome"
+   },
+   {
+    "text": "The sample can be extended until the p-value crosses 0.05 without affecting the error rates.",
+    "misconception": "optional stopping inflates the type I error"
+   },
+   {
+    "text": "The MDE should be reset to 0.3% and power recomputed afterwards to justify the null result.",
+    "misconception": "post hoc power adds no information"
+   },
+   {
+    "text": "Since the lift is positive, the result confirms that the treatment works at a lower level.",
+    "misconception": "ignores that the evidence is weak"
+   }
+  ],
+  "explanation": "Absence of significance is not evidence of no effect. A confidence interval around 0.3% would likely include effects larger than 1% and zero."
+ },
+ {
+  "id": "exp-8.1",
+  "lecture": 8,
+  "stem": "In a two-proportion $z$ test of $H_0:p_A=p_B$, why is a pooled proportion used in the standard error?",
+  "correct": [
+   "Under $H_0$ the groups share one rate, so pooling best estimates the null variance.",
+   "The null says rates are equal, so one common rate is estimated."
+  ],
+  "distractors": [
+   {
+    "text": "Pooling makes the two samples independent of each other, which the test requires.",
+    "misconception": "independence comes from the design"
+   },
+   {
+    "text": "It is required because the two groups have the same sample size in the experiment.",
+    "misconception": "pooling is not tied to equal sizes"
+   },
+   {
+    "text": "The pooled estimate is unbiased for the difference in rates under any alternative.",
+    "misconception": "it is built for the null only"
+   },
+   {
+    "text": "It removes the need for a normal approximation when the counts are small.",
+    "misconception": "the approximation is still used"
+   },
+   {
+    "text": "Pooling lowers the variance whatever the truth, so it is also used for confidence intervals.",
+    "misconception": "intervals use the unpooled variance"
+   }
+  ],
+  "explanation": "The test statistic uses $\\hat p(1-\\hat p)(1/n_A+1/n_B)$ with $\\hat p$ pooled. A confidence interval for the difference uses the unpooled variance, because no null is assumed."
+ },
+ {
+  "id": "exp-8.2",
+  "lecture": 8,
+  "stem": "With large samples in an A/B test of a mean metric, why is Welch's $t$ test usually preferred to the pooled-variance test?",
+  "correct": [
+   "It needs no equal-variance assumption yet loses little power when variances are equal.",
+   "It stays valid when variances and sizes differ."
+  ],
+  "distractors": [
+   {
+    "text": "It assumes the metric is normal, which the pooled test does not need.",
+    "misconception": "reverses the assumptions"
+   },
+   {
+    "text": "It always has more power than the pooled test, whatever the true variances are.",
+    "misconception": "it has less power when variances are equal and sizes unbalanced"
+   },
+   {
+    "text": "It uses a smaller critical value, so its p-values are always smaller.",
+    "misconception": "it is not simply more liberal"
+   },
+   {
+    "text": "It compares medians, which are more stable than means for skewed metrics.",
+    "misconception": "it compares means"
+   },
+   {
+    "text": "It is exact for any sample size and any distribution of the metric.",
+    "misconception": "it is approximate"
+   }
+  ],
+  "explanation": "Welch's statistic $(\\bar x_A-\\bar x_B)/\\sqrt{s_A^2/n_A+s_B^2/n_B}$ has approximately a $t$ distribution with Satterthwaite degrees of freedom."
+ },
+ {
+  "id": "exp-8.3",
+  "lecture": 8,
+  "stem": "Why can a $z$ or $t$ test be used for a skewed revenue-per-user metric in a large A/B test?",
+  "correct": [
+   "The sample mean is near normal by the CLT despite skewed individual revenues.",
+   "Group averages are near normal whatever the user-level shape."
+  ],
+  "distractors": [
+   {
+    "text": "Skewness disappears once users are randomised, so the revenues become normal.",
+    "misconception": "randomisation does not change the distribution"
+   },
+   {
+    "text": "The test uses the median, which is normal for any data in a large sample.",
+    "misconception": "the test uses the mean"
+   },
+   {
+    "text": "The metric becomes normal once it is averaged over only a handful of users.",
+    "misconception": "needs large samples, especially for heavy tails"
+   },
+   {
+    "text": "Revenue is normal on the log scale, so the raw means are exactly normal.",
+    "misconception": "confuses the log scale with the mean"
+   },
+   {
+    "text": "The standard error is zero in large samples, so no distribution is needed.",
+    "misconception": "the standard error shrinks but is not zero"
+   }
+  ],
+  "explanation": "The statistic is a sum of many independent terms. Very heavy tails make the approximation slow, so capping or transforming the metric can help."
+ },
+ {
+  "id": "exp-8.4",
+  "lecture": 8,
+  "stem": "Why is the delta method used for a ratio metric such as clicks per page view?",
+  "correct": [
+   "Both parts are random and correlated, so the ratio's variance needs linearising.",
+   "It gives the variance of a ratio of two sample means, allowing for covariance."
+  ],
+  "distractors": [
+   {
+    "text": "It turns the ratio into a proportion, so the binomial variance formula applies directly.",
+    "misconception": "the ratio is not binomial"
+   },
+   {
+    "text": "It makes the numerator and denominator independent, which removes the covariance term.",
+    "misconception": "the covariance remains"
+   },
+   {
+    "text": "It corrects the bias of the ratio to exactly zero in any sample size.",
+    "misconception": "it is an approximation of the variance only"
+   },
+   {
+    "text": "It is needed only when the denominator is a constant, such as the number of users.",
+    "misconception": "it is needed when the denominator is random"
+   },
+   {
+    "text": "It replaces the test with a permutation test applied to the numerator alone.",
+    "misconception": "it is a variance approximation, not a permutation test"
+   }
+  ],
+  "explanation": "For $R=\\bar X/\\bar Y$, a Taylor expansion about $(\\mu_X,\\mu_Y)$ gives a linear function of $\\bar X$ and $\\bar Y$, whose variance includes their covariance."
+ },
+ {
+  "id": "exp-8.5",
+  "lecture": 8,
+  "stem": "For $R=\\bar X/\\bar Y$ with $\\mu_Y\\neq0$, which terms enter the delta-method variance of $R$?",
+  "correct": [
+   "Both mean variances and their covariance, scaled by the ratio and $1/\\mu_Y^2$.",
+   "$\\operatorname{Var}(\\bar X)$, $\\operatorname{Var}(\\bar Y)$ and $\\operatorname{Cov}(\\bar X,\\bar Y)$, weighted by the ratio."
+  ],
+  "distractors": [
+   {
+    "text": "Only $\\operatorname{Var}(\\bar X)$ divided by $\\mu_Y$, since the denominator is treated as known.",
+    "misconception": "ignores the randomness of the denominator"
+   },
+   {
+    "text": "The sum $\\operatorname{Var}(\\bar X)+\\operatorname{Var}(\\bar Y)$ with no covariance term at all.",
+    "misconception": "omits the covariance and the weights"
+   },
+   {
+    "text": "The product $\\operatorname{Var}(\\bar X)\\operatorname{Var}(\\bar Y)$ divided by the squared ratio.",
+    "misconception": "invents a product formula"
+   },
+   {
+    "text": "Only the covariance, since the variance of a ratio of means is otherwise zero.",
+    "misconception": "the ratio has variance from both parts"
+   },
+   {
+    "text": "The variances of both means, multiplied by $\\mu_Y^2$ rather than divided by it.",
+    "misconception": "gets the scaling of the derivative wrong"
+   }
+  ],
+  "explanation": "$\\operatorname{Var}(R)\\approx\\frac{1}{\\mu_Y^2}\\left[\\operatorname{Var}(\\bar X)-2R\\operatorname{Cov}(\\bar X,\\bar Y)+R^2\\operatorname{Var}(\\bar Y)\\right]$."
+ },
+ {
+  "id": "exp-9.1",
+  "lecture": 9,
+  "stem": "Why does checking an A/B test repeatedly and stopping at the first $p<0.05$ invalidate the test?",
+  "correct": [
+   "Each look is another chance for a false positive, so the overall type I error rate exceeds 5%.",
+   "Each additional look adds another chance of a false positive under the null."
+  ],
+  "distractors": [
+   {
+    "text": "The p-value at each look is computed incorrectly from the partial data available then.",
+    "misconception": "each p-value is valid at its own fixed sample size"
+   },
+   {
+    "text": "Early looks have smaller samples, which turns the test into a one-sided test.",
+    "misconception": "invents a mechanism"
+   },
+   {
+    "text": "Looking changes the true effect, so the estimate is no longer measuring the same quantity.",
+    "misconception": "looking does not change the effect"
+   },
+   {
+    "text": "Early stopping is invalid only when the effect is large, and harmless otherwise.",
+    "misconception": "the problem arises under the null"
+   },
+   {
+    "text": "Checking is harmless provided the stopping time is written down only after the experiment.",
+    "misconception": "a post hoc rule is exactly the problem"
+   }
+  ],
+  "explanation": "With many looks the probability of at least one $|z|>1.96$ under $H_0$ approaches 1. A fixed-sample p-value is valid only for a stopping time chosen in advance."
+ },
+ {
+  "id": "exp-9.2",
+  "lecture": 9,
+  "stem": "What is an alpha-spending function?",
+  "correct": [
+   "A rule setting the cumulative type I error allowed at each look, capped at $\\alpha$.",
+   "It allocates the overall level $\\alpha$ across the planned looks."
+  ],
+  "distractors": [
+   {
+    "text": "A function that raises the sample size at each look so that power stays at 80%.",
+    "misconception": "confuses alpha spending with sample size re-estimation"
+   },
+   {
+    "text": "A rule that spends the type II error budget as the experiment proceeds.",
+    "misconception": "confuses alpha with beta"
+   },
+   {
+    "text": "The p-value computed from all of the data collected up to the current look.",
+    "misconception": "confuses the spending function with a p-value"
+   },
+   {
+    "text": "A budget on the number of users who may be exposed to the new treatment.",
+    "misconception": "confuses with a traffic limit"
+   },
+   {
+    "text": "A penalty added to the test statistic after every look and removed at the end.",
+    "misconception": "invents a mechanism"
+   }
+  ],
+  "explanation": "A spending function $\\alpha^*(t)$ rises from 0 to $\\alpha$ over information time $t\\in[0,1]$. The boundaries at each look are chosen so that the cumulative rejection probability matches it."
+ },
+ {
+  "id": "exp-9.3",
+  "lecture": 9,
+  "stem": "Compared with a fixed-sample $z$ test at $\\alpha=0.05$ (critical value 1.96), how do O'Brien-Fleming boundaries behave across interim looks?",
+  "correct": [
+   "Very strict at early looks, approaching the fixed-sample critical value near the end.",
+   "Large early critical values, shrinking to about 1.96 at the end."
+  ],
+  "distractors": [
+   {
+    "text": "They equal 1.96 at every look, since each interim look is a valid test on its own.",
+    "misconception": "ignores the multiplicity of looks"
+   },
+   {
+    "text": "They are lenient early and strict at the end, which favours stopping the experiment early.",
+    "misconception": "reverses the shape"
+   },
+   {
+    "text": "They stay constant across the looks at a value above 1.96, as in the Pocock rule.",
+    "misconception": "describes Pocock boundaries"
+   },
+   {
+    "text": "They start at zero and rise linearly up to the final look.",
+    "misconception": "invents a shape"
+   },
+   {
+    "text": "They fall below 1.96 at the final look, which compensates for the early looks.",
+    "misconception": "the final boundary is slightly above 1.96"
+   }
+  ],
+  "explanation": "O'Brien-Fleming spends very little alpha early, so early stopping needs overwhelming evidence, and the final test is nearly as powerful as a fixed-sample test."
+ },
+ {
+  "id": "exp-9.4",
+  "lecture": 9,
+  "stem": "What does an always-valid p-value or confidence sequence guarantee?",
+  "correct": [
+   "Type I error control at any data-dependent stopping time, allowing continuous monitoring.",
+   "Validity under continuous peeking with arbitrary stopping."
+  ],
+  "distractors": [
+   {
+    "text": "Maximum power for a fixed sample size, so that experiments run shorter than needed.",
+    "misconception": "confuses validity with efficiency"
+   },
+   {
+    "text": "It removes the need for randomisation, since the stopping rule handles bias on its own.",
+    "misconception": "randomisation is still required"
+   },
+   {
+    "text": "Validity only at a pre-planned number of looks, and at no other times.",
+    "misconception": "that describes group sequential designs"
+   },
+   {
+    "text": "A p-value that can never exceed $\\alpha$ once the null hypothesis is false.",
+    "misconception": "confuses with a power statement"
+   },
+   {
+    "text": "The same width as a fixed-sample interval, at no cost in precision.",
+    "misconception": "ignores the price of continuous monitoring"
+   }
+  ],
+  "explanation": "Formally $P(\\exists t: p_t\\le\\alpha)\\le\\alpha$ under $H_0$. Mixture sequential probability ratio tests give such p-values."
+ },
+ {
+  "id": "exp-9.5",
+  "lecture": 9,
+  "stem": "What is the price of always-valid inference relative to a fixed-horizon test with the same data?",
+  "correct": [
+   "Wider intervals, so less power at a given sample size, in return for freedom to stop at any time.",
+   "Intervals are wider and power is lower, in exchange for the freedom to stop anytime."
+  ],
+  "distractors": [
+   {
+    "text": "There is none, because the always-valid p-value equals the usual p-value at the final sample size.",
+    "misconception": "the sequential p-value is larger"
+   },
+   {
+    "text": "It requires the final sample size to be known before the experiment starts.",
+    "misconception": "it does not require a fixed horizon"
+   },
+   {
+    "text": "It inflates the type I error rate slightly, which is accepted for the sake of flexibility.",
+    "misconception": "the type I error stays controlled"
+   },
+   {
+    "text": "It can only be applied to binary metrics that have a fixed baseline rate.",
+    "misconception": "it applies to means more generally"
+   },
+   {
+    "text": "It needs the true effect size to be specified in advance, as in a power calculation.",
+    "misconception": "always-valid methods need no effect size"
+   }
+  ],
+  "explanation": "Validity at all stopping times requires wider intervals at any given $n$. In practice it is the cost of being allowed to look at the results every day."
+ },
+ {
+  "id": "exp-10.1",
+  "lecture": 10,
+  "stem": "What is the idea of CUPED?",
+  "correct": [
+   "Subtract a multiple of a pre-experiment covariate from the outcome: unbiased effect, lower variance.",
+   "Regression adjustment using pre-experiment data to remove predictable noise."
+  ],
+  "distractors": [
+   {
+    "text": "Re-weight the users by their pre-experiment activity, so that heavy users count more.",
+    "misconception": "weighting changes the estimand"
+   },
+   {
+    "text": "Drop the users with unusual pre-experiment behaviour, which trims the outliers.",
+    "misconception": "trimming is not CUPED and can bias the result"
+   },
+   {
+    "text": "Increase the treatment fraction to 50% so that the two groups are of equal size.",
+    "misconception": "confuses variance reduction with allocation"
+   },
+   {
+    "text": "Replace the experimental metric by the pre-experiment outcome in the analysis.",
+    "misconception": "the experimental metric is still the target"
+   },
+   {
+    "text": "Adjust with a covariate measured after the treatment, since it explains most of the variation.",
+    "misconception": "post-treatment covariates can bias the estimate"
+   }
+  ],
+  "explanation": "CUPED uses $Y-\\theta(X-\\bar X)$ with $X$ a pre-treatment covariate, usually the same metric from before the experiment. Randomisation keeps the adjustment unbiased."
+ },
+ {
+  "id": "exp-10.2",
+  "lecture": 10,
+  "stem": "In CUPED with the optimal coefficient $\\theta=\\operatorname{Cov}(Y,X)/\\operatorname{Var}(X)$, by what factor is the variance of the adjusted metric reduced?",
+  "correct": [
+   "It is multiplied by $1-\\rho^2$, where $\\rho$ is the correlation of outcome and covariate.",
+   "By the factor $1-\\rho^2$, with $\\rho$ the correlation of outcome and covariate."
+  ],
+  "distractors": [
+   {
+    "text": "It is multiplied by $1-\\rho$, so that the gain is linear in the correlation.",
+    "misconception": "the reduction is quadratic in the correlation"
+   },
+   {
+    "text": "It is multiplied by $\\rho^2$, so a high correlation leaves only a small share of variance.",
+    "misconception": "confuses the factor with its complement"
+   },
+   {
+    "text": "It is multiplied by $1/(1+\\rho^2)$, so it can never fall below one half.",
+    "misconception": "invents a bound"
+   },
+   {
+    "text": "It is multiplied by $1-\\rho^2$ only for $\\rho>0$, while a negative correlation raises it.",
+    "misconception": "the sign of the correlation is irrelevant"
+   },
+   {
+    "text": "It is divided by the ratio of the sample sizes in the two groups.",
+    "misconception": "unrelated to the covariate"
+   }
+  ],
+  "explanation": "$\\operatorname{Var}(Y-\\theta X)=\\operatorname{Var}(Y)(1-\\rho^2)$ at the optimal $\\theta$. A correlation of $0.7$ removes about half of the variance."
+ },
+ {
+  "id": "exp-10.3",
+  "lecture": 10,
+  "stem": "Why does CUPED not bias the estimated treatment effect?",
+  "correct": [
+   "The covariate is measured before assignment, so it has the same mean in both arms.",
+   "Pre-treatment covariates are independent of assignment."
+  ],
+  "distractors": [
+   {
+    "text": "The coefficient $\\theta$ is fitted separately in each arm so as to cancel any difference.",
+    "misconception": "it is a single pooled coefficient"
+   },
+   {
+    "text": "The adjustment cancels exactly in every sample, which makes the estimate noiseless.",
+    "misconception": "the estimate still has sampling noise"
+   },
+   {
+    "text": "The adjustment is applied to the control users only, leaving the treated users alone.",
+    "misconception": "both arms are adjusted with the same $\\theta$"
+   },
+   {
+    "text": "The covariate is correlated with the treatment, so the adjustment absorbs the treatment effect.",
+    "misconception": "a pre-treatment covariate is independent of assignment"
+   },
+   {
+    "text": "Unbiasedness holds only if the covariate is a perfect predictor of the outcome.",
+    "misconception": "any pre-treatment covariate works"
+   }
+  ],
+  "explanation": "$E[X]$ is the same in both arms, so subtracting $\\theta(X-\\bar X)$ has mean zero in the difference. A post-treatment covariate would break this."
+ },
+ {
+  "id": "exp-10.4",
+  "lecture": 10,
+  "stem": "How does post-stratification (or stratified randomisation) reduce variance?",
+  "correct": [
+   "Outcomes vary less within strata, so between-stratum variation is removed from the variance.",
+   "It removes the between-strata part of the variation from the estimate."
+  ],
+  "distractors": [
+   {
+    "text": "It increases the sample size inside each stratum by resampling the observed users.",
+    "misconception": "resampling does not add information"
+   },
+   {
+    "text": "It lowers the variance by discarding the strata that have the greatest spread.",
+    "misconception": "discarding strata changes the estimand"
+   },
+   {
+    "text": "It makes the treatment effect equal in every stratum of the population.",
+    "misconception": "strata may have different effects"
+   },
+   {
+    "text": "It helps only if the strata are unrelated to the outcome of interest.",
+    "misconception": "strata must be related to the outcome"
+   },
+   {
+    "text": "It shrinks the variance only if strata sizes are chosen after seeing the outcomes.",
+    "misconception": "strata are defined before outcomes"
+   }
+  ],
+  "explanation": "The estimator averages stratum-wise differences with population weights, leaving only the within-stratum variance. Strata should be defined from pre-treatment variables correlated with the outcome."
+ },
+ {
+  "id": "exp-10.5",
+  "lecture": 10,
+  "stem": "A covariate has zero correlation with the outcome. What happens if it is used in CUPED?",
+  "correct": [
+   "The variance is not reduced, but the estimate stays unbiased.",
+   "No gain in precision, but no bias is introduced either."
+  ],
+  "distractors": [
+   {
+    "text": "The treatment effect estimate becomes biased toward zero.",
+    "misconception": "adjustment with a pre-treatment covariate is unbiased"
+   },
+   {
+    "text": "The variance of the estimate rises by a large factor.",
+    "misconception": "the loss is tiny, from estimating the coefficient"
+   },
+   {
+    "text": "The adjustment fails because the coefficient is undefined at zero correlation.",
+    "misconception": "the coefficient is simply near zero"
+   },
+   {
+    "text": "The variance is halved, as for any pre-period covariate.",
+    "misconception": "the gain depends on the correlation"
+   },
+   {
+    "text": "The type I error is inflated, because an extra parameter has been estimated.",
+    "misconception": "the inflation is negligible for large samples"
+   }
+  ],
+  "explanation": "With $\\rho=0$ the factor $1-\\rho^2$ equals 1. The estimated $\\theta$ is near zero, and the cost of estimating it is of order $1/n$."
+ },
+ {
+  "id": "exp-11.1",
+  "lecture": 11,
+  "stem": "What is a sample ratio mismatch (SRM)?",
+  "correct": [
+   "The observed split of users differs from the designed split by more than chance allows.",
+   "Arm sizes deviating significantly from the planned ratio."
+  ],
+  "distractors": [
+   {
+    "text": "A mismatch between the planned and the achieved effect size on the primary metric.",
+    "misconception": "confuses with an effect size shortfall"
+   },
+   {
+    "text": "A difference between the control and treatment means that is not statistically significant.",
+    "misconception": "confuses with a null result"
+   },
+   {
+    "text": "A mismatch between the sample size calculation and the actual length of the test.",
+    "misconception": "confuses with a duration error"
+   },
+   {
+    "text": "A situation where the treatment arm has a smaller variance than the control arm.",
+    "misconception": "confuses with unequal variances"
+   },
+   {
+    "text": "A change in the definition of the metric between the pre-period and the experiment.",
+    "misconception": "confuses with a metric definition change"
+   }
+  ],
+  "explanation": "If a 50/50 split gives counts that a chi-square test rejects, users were lost or added in a way related to the assignment, which can bias the results."
+ },
+ {
+  "id": "exp-11.2",
+  "lecture": 11,
+  "stem": "How is an SRM usually detected, and what should be done when it is found?",
+  "correct": [
+   "Test arm counts against the design ratio with chi-square, then find the cause first.",
+   "Compare counts with the planned split, and find the cause before using the result."
+  ],
+  "distractors": [
+   {
+    "text": "Run a $t$ test of the metric between the arms, and if it is significant, accept the treatment.",
+    "misconception": "SRM concerns counts, not the metric"
+   },
+   {
+    "text": "Test the counts with chi-square, and if they differ, reweight the arms and proceed.",
+    "misconception": "reweighting cannot repair the selection"
+   },
+   {
+    "text": "Compare the counts by eye: a difference below 10% is fine and above 10% means an SRM.",
+    "misconception": "invents a fixed threshold"
+   },
+   {
+    "text": "Rerun the analysis with a smaller $\\alpha$, since SRM disappears when the p-value is large.",
+    "misconception": "misreads the diagnostic"
+   },
+   {
+    "text": "Do a power calculation, since SRM is present whenever the power is below 80%.",
+    "misconception": "confuses SRM with low power"
+   }
+  ],
+  "explanation": "A very small p-value of the chi-square test of the counts signals a problem in assignment, logging, or filtering. The effect estimate is unreliable until it is explained."
+ },
+ {
+  "id": "exp-11.3",
+  "lecture": 11,
+  "stem": "What is a novelty effect in an A/B test?",
+  "correct": [
+   "A temporary change in behaviour caused by a feature being new, which fades.",
+   "An early lift or drop from curiosity about the new feature that decays."
+  ],
+  "distractors": [
+   {
+    "text": "A lift that grows over the weeks as users learn how to use the feature.",
+    "misconception": "that is a learning or primacy effect"
+   },
+   {
+    "text": "An effect that appears only in new users and never in the existing ones.",
+    "misconception": "confuses with a subgroup effect"
+   },
+   {
+    "text": "Bias from assigning users to variants according to how new their accounts are.",
+    "misconception": "confuses with non-random assignment"
+   },
+   {
+    "text": "A treatment effect that is too small to be statistically detectable.",
+    "misconception": "confuses with low power"
+   },
+   {
+    "text": "The effect on the control arm caused by the presence of the treatment arm.",
+    "misconception": "confuses with interference"
+   }
+  ],
+  "explanation": "Novelty makes early results overstate the lasting effect. Run the test long enough, and compare early and late cohorts or new and returning users."
+ },
+ {
+  "id": "exp-11.4",
+  "lecture": 11,
+  "stem": "Why do social-network and marketplace experiments often violate SUTVA?",
+  "correct": [
+   "A user's outcome can depend on others' treatment, such as neighbours or rival sellers.",
+   "Treated and control units spill over onto each other, contaminating the comparison."
+  ],
+  "distractors": [
+   {
+    "text": "Randomisation is impossible on networks, because the users are connected to each other.",
+    "misconception": "randomisation is possible but the comparison is contaminated"
+   },
+   {
+    "text": "Network users are always correlated with the covariates, so adjustment is needed to fix it.",
+    "misconception": "the problem is interference, not covariates"
+   },
+   {
+    "text": "The variance is infinite in networks, so that no estimate of the effect exists.",
+    "misconception": "estimates exist but are biased"
+   },
+   {
+    "text": "Only the treated users change their behaviour, while the control users never do.",
+    "misconception": "control users are affected too"
+   },
+   {
+    "text": "The bias disappears in large samples, by the law of large numbers.",
+    "misconception": "more users do not remove the spillover"
+   }
+  ],
+  "explanation": "SUTVA requires each unit's outcome to depend only on its own treatment. With spillovers the difference in means estimates neither the global effect nor the direct effect."
+ },
+ {
+  "id": "exp-11.5",
+  "lecture": 11,
+  "stem": "How can cluster or switchback randomisation help with interference?",
+  "correct": [
+   "Whole clusters or periods are assigned together, so most spillover stays within a unit.",
+   "Assign clusters or periods, trading power for less spillover."
+  ],
+  "distractors": [
+   {
+    "text": "It randomises at a finer unit than the user to obtain more independent observations.",
+    "misconception": "a finer unit increases the spillover"
+   },
+   {
+    "text": "It keeps user-level randomisation and relies on a larger sample so that spillovers cancel.",
+    "misconception": "spillover does not cancel with sample size"
+   },
+   {
+    "text": "It removes the control group so that every user sees the treatment.",
+    "misconception": "no comparison would remain"
+   },
+   {
+    "text": "It uses a larger $\\alpha$ to compensate for the bias caused by the spillovers.",
+    "misconception": "alpha does not fix bias"
+   },
+   {
+    "text": "It eliminates interference completely and costs nothing in statistical power.",
+    "misconception": "there is always a cost in the number of effective units"
+   }
+  ],
+  "explanation": "Fewer, larger units mean fewer effective replicates and wider intervals. The gain is a smaller bias because the treated and control units interact less."
+ }
+]

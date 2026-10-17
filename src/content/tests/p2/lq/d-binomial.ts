@@ -84,4 +84,4 @@ export function build({ n, p0, p1, c, xObs, margin }: Params): LQInstance {
   }
 }
 
-export const genD: LQGenerator = { id: 'inf-lq-d-binomial', generate: (rng) => build(sample(rng)) }
+export const genD: LQGenerator = { id: 'p2-lq-d-binomial', generate: (rng) => build(sample(rng)) }
