@@ -1,0 +1,1570 @@
+[
+ {
+  "id": "ci-1.1",
+  "lecture": 1,
+  "stem": "In the potential outcomes framework, what is the fundamental problem of causal inference?",
+  "correct": [
+   "Only one of $Y(1)$ and $Y(0)$ is seen for each unit.",
+   "The other counterfactual outcome is missing."
+  ],
+  "distractors": [
+   {
+    "text": "Treatment effects are always zero.",
+    "misconception": "denies the existence of effects"
+   },
+   {
+    "text": "The outcome cannot be measured accurately.",
+    "misconception": "confuses it with measurement error"
+   },
+   {
+    "text": "Both potential outcomes are observed but cannot be compared.",
+    "misconception": "ignores that one is missing"
+   },
+   {
+    "text": "Randomisation is impossible in practice.",
+    "misconception": "confuses the problem with feasibility of experiments"
+   },
+   {
+    "text": "Causal effects exist only at the population level and cannot be defined for individuals.",
+    "misconception": "confuses what is definable with what is observable"
+   }
+  ],
+  "explanation": "$\\tau_i=Y_i(1)-Y_i(0)$ is well defined, but only $Y_i=T_iY_i(1)+(1-T_i)Y_i(0)$ is seen. Averages over groups require assumptions."
+ },
+ {
+  "id": "ci-1.2",
+  "lecture": 1,
+  "stem": "What does the average treatment effect (ATE) measure?",
+  "correct": [
+   "The mean of $Y_i(1)-Y_i(0)$ over the population.",
+   "$E[Y(1)-Y(0)]$."
+  ],
+  "distractors": [
+   {
+    "text": "The difference between the treated and untreated group means in the observed data.",
+    "misconception": "describes the naive difference in means"
+   },
+   {
+    "text": "The effect for the units that actually received treatment.",
+    "misconception": "describes the ATT"
+   },
+   {
+    "text": "The effect for the units that comply with their assignment.",
+    "misconception": "describes the LATE"
+   },
+   {
+    "text": "The correlation between treatment and outcome.",
+    "misconception": "confuses with correlation"
+   },
+   {
+    "text": "The largest individual effect.",
+    "misconception": "confuses with a maximum"
+   }
+  ],
+  "explanation": "The ATE averages over all units; the ATT averages over the treated only. They differ when effects vary and treatment is selective."
+ },
+ {
+  "id": "ci-1.3",
+  "lecture": 1,
+  "stem": "What is SUTVA (the stable unit treatment value assumption)?",
+  "correct": [
+   "No interference, and one version of treatment.",
+   "Others' treatments do not matter."
+  ],
+  "distractors": [
+   {
+    "text": "Treatment is randomly assigned.",
+    "misconception": "confuses it with randomisation"
+   },
+   {
+    "text": "The treatment effect is the same for all units.",
+    "misconception": "confuses it with homogeneity"
+   },
+   {
+    "text": "There are no unobserved confounders.",
+    "misconception": "confuses it with unconfoundedness"
+   },
+   {
+    "text": "The outcome is observed without error.",
+    "misconception": "confuses with measurement"
+   },
+   {
+    "text": "Every unit has a positive chance of treatment.",
+    "misconception": "confuses with overlap"
+   }
+  ],
+  "explanation": "Violations: spillovers (vaccinating a neighbour protects me), market impact of a trade on other traders, or different dosages under the same label."
+ },
+ {
+  "id": "ci-1.4",
+  "lecture": 1,
+  "stem": "Why is the simple difference in group means generally not the ATE in observational data?",
+  "correct": [
+   "It equals the ATE plus selection bias.",
+   "Units choose treatment for reasons tied to outcomes."
+  ],
+  "distractors": [
+   {
+    "text": "Differences in means are always unbiased.",
+    "misconception": "ignores selection"
+   },
+   {
+    "text": "It estimates the effect on the untreated, which differs from the ATE only by noise.",
+    "misconception": "confuses bias with noise"
+   },
+   {
+    "text": "It has the right expectation but too large a variance.",
+    "misconception": "ignores bias"
+   },
+   {
+    "text": "It requires the outcomes to be binary.",
+    "misconception": "invents a restriction"
+   },
+   {
+    "text": "It equals the median effect.",
+    "misconception": "confuses with the median"
+   }
+  ],
+  "explanation": "$E[Y|T=1]-E[Y|T=0]=\\text{ATT}+\\{E[Y(0)|T=1]-E[Y(0)|T=0]\\}$; the braces are the selection bias."
+ },
+ {
+  "id": "ci-1.5",
+  "lecture": 1,
+  "stem": "Which of the following describes the ATT?",
+  "correct": [
+   "The average effect among those treated.",
+   "The effect on the treated."
+  ],
+  "distractors": [
+   {
+    "text": "The average effect across the whole population.",
+    "misconception": "describes the ATE"
+   },
+   {
+    "text": "The effect among those with an instrument value of one.",
+    "misconception": "confuses it with the IV"
+   },
+   {
+    "text": "The average outcome of the treated units.",
+    "misconception": "forgets to subtract the counterfactual"
+   },
+   {
+    "text": "The difference in means between treated and controls.",
+    "misconception": "describes the naive estimator"
+   },
+   {
+    "text": "The effect on the controls.",
+    "misconception": "describes the ATC"
+   }
+  ],
+  "explanation": "A programme evaluation often asks the ATT: did it help those who took part?"
+ },
+ {
+  "id": "ci-2.1",
+  "lecture": 2,
+  "stem": "Why does randomised assignment support a causal interpretation of a difference in means?",
+  "correct": [
+   "Treatment is independent of potential outcomes.",
+   "Traits balance in expectation."
+  ],
+  "distractors": [
+   {
+    "text": "It makes the two groups exactly identical in every sample.",
+    "misconception": "confuses expectation with equality"
+   },
+   {
+    "text": "It removes all noise from the estimate.",
+    "misconception": "ignores sampling variability"
+   },
+   {
+    "text": "It guarantees that the treatment has an effect.",
+    "misconception": "confuses design with outcome"
+   },
+   {
+    "text": "It is useful only when the effects are constant.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It makes the outcome independent of the covariates.",
+    "misconception": "confuses it with independence of treatment"
+   }
+  ],
+  "explanation": "In any one randomisation, chance imbalances remain; the standard error reflects them, and regression adjustment or blocking can reduce them."
+ },
+ {
+  "id": "ci-2.2",
+  "lecture": 2,
+  "stem": "What does the Neyman estimator of the average treatment effect do?",
+  "correct": [
+   "The difference in sample means across groups.",
+   "Unbiased for the finite-population ATE."
+  ],
+  "distractors": [
+   {
+    "text": "It adjusts the groups for covariates by matching.",
+    "misconception": "describes a different estimator"
+   },
+   {
+    "text": "It estimates the effect only for compliers.",
+    "misconception": "describes the LATE"
+   },
+   {
+    "text": "It uses the pooled variance of both groups.",
+    "misconception": "gives a different variance formula"
+   },
+   {
+    "text": "It requires normally distributed outcomes.",
+    "misconception": "invents a requirement"
+   },
+   {
+    "text": "Its variance estimate is always exactly unbiased.",
+    "misconception": "forgets that it is conservative"
+   }
+  ],
+  "explanation": "The true variance has an additional term $-\\operatorname{Var}(\\tau_i)/n$, which cannot be estimated, so the Neyman estimator is conservative unless the effect is constant."
+ },
+ {
+  "id": "ci-2.3",
+  "lecture": 2,
+  "stem": "What is Fisher's sharp null hypothesis in a randomised experiment?",
+  "correct": [
+   "Treatment has no effect on any unit.",
+   "$Y_i(1)=Y_i(0)$ for all units."
+  ],
+  "distractors": [
+   {
+    "text": "The average treatment effect is zero, with individual effects allowed to differ.",
+    "misconception": "describes the weak null"
+   },
+   {
+    "text": "The treated and control means are equal in the population.",
+    "misconception": "describes the weak null"
+   },
+   {
+    "text": "The treatment effect is constant and positive.",
+    "misconception": "describes a different hypothesis"
+   },
+   {
+    "text": "The outcome variances in the two groups are equal.",
+    "misconception": "confuses with a variance test"
+   },
+   {
+    "text": "There is no randomisation.",
+    "misconception": "misreads the name"
+   }
+  ],
+  "explanation": "Under the sharp null the observed outcomes are fixed, and only the assignment varies, so the p-value is the share of assignments with a statistic at least as extreme."
+ },
+ {
+  "id": "ci-2.4",
+  "lecture": 2,
+  "stem": "How does blocking (stratified randomisation) help in an experiment?",
+  "correct": [
+   "Randomising within strata cuts between-strata variance.",
+   "Groups are balanced by design."
+  ],
+  "distractors": [
+   {
+    "text": "It introduces bias into the effect estimate.",
+    "misconception": "confuses with a bias"
+   },
+   {
+    "text": "It makes the treatment effect larger.",
+    "misconception": "confuses design with effect"
+   },
+   {
+    "text": "It removes the need for randomisation.",
+    "misconception": "misstates the role"
+   },
+   {
+    "text": "It is useful only if the covariate is unrelated to the outcome.",
+    "misconception": "reverses the condition"
+   },
+   {
+    "text": "It reduces the number of units needed to zero.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "The gain depends on how well the blocking variable predicts the outcome; blocking on an irrelevant variable gains nothing."
+ },
+ {
+  "id": "ci-2.5",
+  "lecture": 2,
+  "stem": "How is a p-value computed in a randomisation test?",
+  "correct": [
+   "Count re-assignments giving statistics as extreme.",
+   "Compare to the re-randomisation distribution."
+  ],
+  "distractors": [
+   {
+    "text": "From a normal approximation only.",
+    "misconception": "ignores the exact distribution"
+   },
+   {
+    "text": "By resampling the outcomes with replacement.",
+    "misconception": "describes the bootstrap"
+   },
+   {
+    "text": "By dividing the effect estimate by its standard error and using a table.",
+    "misconception": "describes a $t$ test"
+   },
+   {
+    "text": "By assigning treatment to units based on their outcomes.",
+    "misconception": "breaks the design"
+   },
+   {
+    "text": "By using the observed assignment as the only possibility.",
+    "misconception": "gives a degenerate distribution"
+   }
+  ],
+  "explanation": "With $n=6$ and 3 treated there are $\\binom63=20$ assignments, so the smallest possible two-sided p-value is $2/20=0.1$."
+ },
+ {
+  "id": "ci-3.1",
+  "lecture": 3,
+  "stem": "What is a confounder?",
+  "correct": [
+   "A variable affecting both treatment and outcome.",
+   "A common cause that biases the estimate if ignored."
+  ],
+  "distractors": [
+   {
+    "text": "A variable caused by both treatment and outcome.",
+    "misconception": "describes a collider"
+   },
+   {
+    "text": "A variable on the causal path from treatment to outcome.",
+    "misconception": "describes a mediator"
+   },
+   {
+    "text": "A variable that affects only the outcome.",
+    "misconception": "describes a precision variable"
+   },
+   {
+    "text": "Any variable correlated with the treatment.",
+    "misconception": "includes variables that are not common causes"
+   },
+   {
+    "text": "A variable measured with error.",
+    "misconception": "confuses it with measurement error"
+   }
+  ],
+  "explanation": "Adjusting for a confounder blocks the backdoor path $T\\leftarrow X\\rightarrow Y$."
+ },
+ {
+  "id": "ci-3.2",
+  "lecture": 3,
+  "stem": "What does the backdoor criterion require of an adjustment set $Z$?",
+  "correct": [
+   "$Z$ blocks every backdoor path, with no descendants of treatment.",
+   "It closes non-causal paths."
+  ],
+  "distractors": [
+   {
+    "text": "$Z$ contains all variables in the data set.",
+    "misconception": "ignores that colliders and mediators can do harm"
+   },
+   {
+    "text": "$Z$ contains only descendants of the treatment.",
+    "misconception": "reverses the requirement"
+   },
+   {
+    "text": "$Z$ contains only variables that predict the outcome.",
+    "misconception": "ignores the treatment side"
+   },
+   {
+    "text": "$Z$ must be empty.",
+    "misconception": "forgets that confounders need adjustment"
+   },
+   {
+    "text": "$Z$ contains all colliders on the paths.",
+    "misconception": "conditions on colliders, which opens paths"
+   }
+  ],
+  "explanation": "Adjusting for a mediator removes part of the effect; adjusting for a collider (or its descendant) creates bias."
+ },
+ {
+  "id": "ci-3.3",
+  "lecture": 3,
+  "stem": "What is collider bias?",
+  "correct": [
+   "Conditioning on a common effect induces an association.",
+   "Selecting on an outcome of both variables."
+  ],
+  "distractors": [
+   {
+    "text": "Bias caused by omitting a common cause.",
+    "misconception": "describes confounding"
+   },
+   {
+    "text": "Bias caused by measurement error in the treatment.",
+    "misconception": "describes misclassification"
+   },
+   {
+    "text": "Bias from adjusting for a mediator.",
+    "misconception": "describes overadjustment"
+   },
+   {
+    "text": "Bias that disappears when more variables are conditioned on.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "Bias that occurs only in randomised experiments.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "For $T\\rightarrow C\\leftarrow Y$, $T\\perp Y$ marginally, but $T\\not\\perp Y\\mid C$. Examples: studying only hospitalised patients, or only funds that survived."
+ },
+ {
+  "id": "ci-3.4",
+  "lecture": 3,
+  "stem": "Which variable should generally not be adjusted for when estimating the total effect of a treatment?",
+  "correct": [
+   "A mediator on the causal path.",
+   "A variable caused by the treatment, since it removes part of the effect."
+  ],
+  "distractors": [
+   {
+    "text": "A confounder of treatment and outcome.",
+    "misconception": "is the standard variable to adjust for"
+   },
+   {
+    "text": "A pre-treatment cause of the outcome only.",
+    "misconception": "is harmless and often helpful"
+   },
+   {
+    "text": "A pre-treatment variable that causes both treatment and outcome.",
+    "misconception": "is a confounder"
+   },
+   {
+    "text": "The treatment assignment indicator.",
+    "misconception": "is not a covariate"
+   },
+   {
+    "text": "A variable measured before treatment.",
+    "misconception": "is typically safe, unless it is a collider"
+   }
+  ],
+  "explanation": "If $T\\rightarrow M\\rightarrow Y$, conditioning on $M$ blocks the very path that carries the effect. Post-treatment adjustment is a common error."
+ },
+ {
+  "id": "ci-3.5",
+  "lecture": 3,
+  "stem": "What does d-separation tell us in a causal graph?",
+  "correct": [
+   "Whether a set blocks all paths between two nodes.",
+   "A rule for reading independences off a DAG."
+  ],
+  "distractors": [
+   {
+    "text": "Whether two variables are causally related.",
+    "misconception": "confuses with causation"
+   },
+   {
+    "text": "The size of the causal effect.",
+    "misconception": "gives magnitude from structure alone"
+   },
+   {
+    "text": "Whether the data have been randomised.",
+    "misconception": "confuses with randomisation"
+   },
+   {
+    "text": "The correlation between two variables.",
+    "misconception": "confuses with correlation"
+   },
+   {
+    "text": "How many variables to adjust for.",
+    "misconception": "confuses with counting"
+   }
+  ],
+  "explanation": "A path is blocked by conditioning on a non-collider on it, or by not conditioning on a collider (or its descendants) on it."
+ },
+ {
+  "id": "ci-4.1",
+  "lecture": 4,
+  "stem": "What does regression adjustment assume for the treatment effect to be identified?",
+  "correct": [
+   "Unconfoundedness given covariates, plus a correct outcome model.",
+   "All confounders measured."
+  ],
+  "distractors": [
+   {
+    "text": "Treatment is randomly assigned.",
+    "misconception": "describes an experiment"
+   },
+   {
+    "text": "No covariates are needed.",
+    "misconception": "ignores adjustment"
+   },
+   {
+    "text": "The treatment affects only the covariates.",
+    "misconception": "misstates the model"
+   },
+   {
+    "text": "Covariates are measured after treatment.",
+    "misconception": "invites post-treatment bias"
+   },
+   {
+    "text": "Outcomes are binary.",
+    "misconception": "invents a restriction"
+   }
+  ],
+  "explanation": "Regression adjusts for observed confounders only; an omitted confounder leaves bias."
+ },
+ {
+  "id": "ci-4.2",
+  "lecture": 4,
+  "stem": "What is the idea of matching estimators?",
+  "correct": [
+   "Compare treated units with similar controls.",
+   "Match on covariates."
+  ],
+  "distractors": [
+   {
+    "text": "Randomly assign units to treatment.",
+    "misconception": "describes randomisation"
+   },
+   {
+    "text": "Match treated units on their outcomes.",
+    "misconception": "matches on the outcome, creating bias"
+   },
+   {
+    "text": "Match units on the treatment indicator.",
+    "misconception": "describes a tautology"
+   },
+   {
+    "text": "Pair each unit with itself in a later period.",
+    "misconception": "describes a panel comparison"
+   },
+   {
+    "text": "Remove all units whose covariates differ.",
+    "misconception": "discards too much information"
+   }
+  ],
+  "explanation": "The nearest-neighbour matching estimate of the ATT is $\\frac1{n_1}\\sum_{i:T_i=1}(Y_i-Y_{m(i)})$, where $m(i)$ is the closest control to $i$."
+ },
+ {
+  "id": "ci-4.3",
+  "lecture": 4,
+  "stem": "What does the overlap (common support) condition require?",
+  "correct": [
+   "Every covariate profile can be treated or untreated.",
+   "Similar units exist in both groups."
+  ],
+  "distractors": [
+   {
+    "text": "Treatment is independent of the covariates.",
+    "misconception": "describes randomisation"
+   },
+   {
+    "text": "The treated and control groups have identical outcomes.",
+    "misconception": "confuses with no effect"
+   },
+   {
+    "text": "The covariates are uncorrelated with the outcome.",
+    "misconception": "confuses with irrelevance"
+   },
+   {
+    "text": "The treated group is larger than the control group.",
+    "misconception": "confuses with group sizes"
+   },
+   {
+    "text": "There are no unobserved variables.",
+    "misconception": "confuses with unconfoundedness"
+   }
+  ],
+  "explanation": "Where no controls resemble the treated, the counterfactual rests on extrapolation by the model; trimming restricts the estimate to the region of overlap."
+ },
+ {
+  "id": "ci-4.4",
+  "lecture": 4,
+  "stem": "Why does exact matching on many covariates become difficult?",
+  "correct": [
+   "Few units share identical values, so matches are rare.",
+   "Covariate cells multiply and empty out."
+  ],
+  "distractors": [
+   {
+    "text": "Matching works better as covariates are added.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The matches become identical in all cases.",
+    "misconception": "misstates the issue"
+   },
+   {
+    "text": "It is impossible only for continuous outcomes.",
+    "misconception": "confuses covariates with outcomes"
+   },
+   {
+    "text": "Matching needs fewer units with more covariates.",
+    "misconception": "reverses the sample size requirement"
+   },
+   {
+    "text": "The variance of the estimate goes to zero.",
+    "misconception": "confuses it with a benefit"
+   }
+  ],
+  "explanation": "Propensity scores or distance measures summarise covariates in fewer dimensions, to enable approximate matching."
+ },
+ {
+  "id": "ci-4.5",
+  "lecture": 4,
+  "stem": "What bias can remain after matching on observed covariates?",
+  "correct": [
+   "Unobserved confounders, and imperfect matches.",
+   "Hidden variables are not balanced."
+  ],
+  "distractors": [
+   {
+    "text": "None, matching removes all bias.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "Bias from random assignment.",
+    "misconception": "misattributes"
+   },
+   {
+    "text": "Bias from the choice of outcome only.",
+    "misconception": "ignores the sources"
+   },
+   {
+    "text": "Bias that vanishes once enough covariates are matched, even if some are unobserved.",
+    "misconception": "ignores unobservables"
+   },
+   {
+    "text": "Bias caused by the standard error.",
+    "misconception": "confuses bias with precision"
+   }
+  ],
+  "explanation": "Matching, like regression, relies on unconfoundedness given observed covariates; sensitivity analysis asks how strong an omitted confounder would have to be."
+ },
+ {
+  "id": "ci-5.1",
+  "lecture": 5,
+  "stem": "What is the propensity score?",
+  "correct": [
+   "The probability of treatment given covariates.",
+   "$e(x)=P(T=1\\mid X=x)$."
+  ],
+  "distractors": [
+   {
+    "text": "The expected outcome given the covariates.",
+    "misconception": "describes the regression function"
+   },
+   {
+    "text": "The probability that the outcome is one.",
+    "misconception": "confuses with the outcome probability"
+   },
+   {
+    "text": "The effect of the treatment for a given covariate value.",
+    "misconception": "describes the CATE"
+   },
+   {
+    "text": "The correlation of covariates with treatment.",
+    "misconception": "confuses with correlation"
+   },
+   {
+    "text": "The probability of selection into the sample.",
+    "misconception": "confuses with sampling"
+   }
+  ],
+  "explanation": "Rosenbaum and Rubin: if unconfoundedness holds given $X$ it also holds given $e(X)$, reducing adjustment to one dimension."
+ },
+ {
+  "id": "ci-5.2",
+  "lecture": 5,
+  "stem": "What does the propensity score theorem say?",
+  "correct": [
+   "Given unconfoundedness, $e(X)$ alone suffices for adjustment.",
+   "A balancing score."
+  ],
+  "distractors": [
+   {
+    "text": "The propensity score removes unobserved confounding.",
+    "misconception": "ignores that it requires unconfoundedness"
+   },
+   {
+    "text": "The propensity score equals the treatment effect.",
+    "misconception": "confuses with the effect"
+   },
+   {
+    "text": "The propensity score is always 0.5 in a randomised trial with any design.",
+    "misconception": "restricts the value wrongly"
+   },
+   {
+    "text": "The score must be estimated by linear regression.",
+    "misconception": "invents a method"
+   },
+   {
+    "text": "Outcomes must be binary.",
+    "misconception": "invents a restriction"
+   }
+  ],
+  "explanation": "Conditioning on $e(X)$ balances observed covariates only; it does nothing for unobserved confounders."
+ },
+ {
+  "id": "ci-5.3",
+  "lecture": 5,
+  "stem": "What is the inverse probability weighting (IPW) estimator of the ATE?",
+  "correct": [
+   "$\\frac1n\\sum\\{T_iY_i/e_i-(1-T_i)Y_i/(1-e_i)\\}$.",
+   "A reweighting making the groups resemble the population."
+  ],
+  "distractors": [
+   {
+    "text": "The difference in means between treated and control groups.",
+    "misconception": "drops the weights"
+   },
+   {
+    "text": "The mean of $Y_i/e_i$ over all units.",
+    "misconception": "ignores the treatment indicator"
+   },
+   {
+    "text": "$\\frac1n\\sum(T_i-e_i)Y_i$.",
+    "misconception": "gives a different quantity"
+   },
+   {
+    "text": "The coefficient of treatment in a regression with covariates.",
+    "misconception": "describes regression adjustment"
+   },
+   {
+    "text": "A weighted mean with weights $e_i$.",
+    "misconception": "uses the propensity score instead of its inverse"
+   }
+  ],
+  "explanation": "Units with unusual treatment get large weights, so the estimator is unbiased under unconfoundedness and overlap, but variable if some $e_i$ are near 0 or 1."
+ },
+ {
+  "id": "ci-5.4",
+  "lecture": 5,
+  "stem": "What is a problem with propensity scores near 0 or 1 in IPW?",
+  "correct": [
+   "Weights become huge, so a few units dominate.",
+   "Overlap fails, so estimates are unstable."
+  ],
+  "distractors": [
+   {
+    "text": "Weights become negative.",
+    "misconception": "confuses with sign"
+   },
+   {
+    "text": "The estimator becomes biased towards zero.",
+    "misconception": "misstates the issue"
+   },
+   {
+    "text": "The estimator is not defined for any $e_i$.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "There is no problem, since weights are normalised.",
+    "misconception": "ignores the variance"
+   },
+   {
+    "text": "The effect becomes exactly zero.",
+    "misconception": "invents an effect"
+   }
+  ],
+  "explanation": "Remedies: trimming units with extreme scores, stabilised weights, or the Hajek (normalised) estimator."
+ },
+ {
+  "id": "ci-5.5",
+  "lecture": 5,
+  "stem": "What is the property of a doubly robust estimator?",
+  "correct": [
+   "Consistent if either the propensity or the outcome model is right.",
+   "Two chances."
+  ],
+  "distractors": [
+   {
+    "text": "It is consistent only if both models are correct.",
+    "misconception": "reverses the property"
+   },
+   {
+    "text": "It does not need unconfoundedness.",
+    "misconception": "ignores the assumption"
+   },
+   {
+    "text": "It is always more efficient than the IPW estimator.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "It needs no models.",
+    "misconception": "misstates"
+   },
+   {
+    "text": "It is robust to unobserved confounders.",
+    "misconception": "confuses model with identification"
+   }
+  ],
+  "explanation": "The augmented IPW estimator adds an outcome-model correction to IPW: $\\frac1n\\sum\\{\\hat m_1-\\hat m_0+T(Y-\\hat m_1)/\\hat e-(1-T)(Y-\\hat m_0)/(1-\\hat e)\\}$."
+ },
+ {
+  "id": "ci-6.1",
+  "lecture": 6,
+  "stem": "What are the two main conditions for a valid instrument $Z$ for treatment $T$ and outcome $Y$?",
+  "correct": [
+   "Relevance, and exclusion from the outcome except via $T$.",
+   "It moves $T$ and is unrelated to confounders."
+  ],
+  "distractors": [
+   {
+    "text": "$Z$ is correlated with the outcome, whatever the path.",
+    "misconception": "ignores exclusion"
+   },
+   {
+    "text": "$Z$ is uncorrelated with the treatment.",
+    "misconception": "reverses relevance"
+   },
+   {
+    "text": "$Z$ is caused by the outcome.",
+    "misconception": "confuses direction"
+   },
+   {
+    "text": "$Z$ is a confounder of treatment and outcome.",
+    "misconception": "describes a confounder"
+   },
+   {
+    "text": "$Z$ has the same distribution as $T$.",
+    "misconception": "confuses with duplication"
+   }
+  ],
+  "explanation": "Exclusion is untestable. Examples: a lottery that affects schooling (draft number affecting military service), or random encouragement."
+ },
+ {
+  "id": "ci-6.2",
+  "lecture": 6,
+  "stem": "What is the Wald estimator with a binary instrument?",
+  "correct": [
+   "The reduced form divided by the first stage.",
+   "Outcome gap over treatment gap, by instrument value."
+  ],
+  "distractors": [
+   {
+    "text": "The difference in mean outcomes between treated and untreated.",
+    "misconception": "ignores the instrument"
+   },
+   {
+    "text": "The ratio of the means of the outcome and the treatment.",
+    "misconception": "forgets the differences"
+   },
+   {
+    "text": "The correlation between $Z$ and $Y$.",
+    "misconception": "describes the reduced form only"
+   },
+   {
+    "text": "The difference in treatment means divided by the difference in outcome means.",
+    "misconception": "inverts the ratio"
+   },
+   {
+    "text": "The coefficient from OLS of $Y$ on $T$.",
+    "misconception": "describes OLS"
+   }
+  ],
+  "explanation": "$\\hat\\beta=\\dfrac{E[Y|Z=1]-E[Y|Z=0]}{E[T|Z=1]-E[T|Z=0]}$, the same as 2SLS with one binary instrument."
+ },
+ {
+  "id": "ci-6.3",
+  "lecture": 6,
+  "stem": "What does the instrumental variables estimator identify under heterogeneous effects with monotonicity?",
+  "correct": [
+   "The local average effect for compliers.",
+   "The effect on those the instrument moves."
+  ],
+  "distractors": [
+   {
+    "text": "The average effect for the whole population.",
+    "misconception": "describes the ATE"
+   },
+   {
+    "text": "The effect on always-takers.",
+    "misconception": "misidentifies the group"
+   },
+   {
+    "text": "The effect on never-takers.",
+    "misconception": "misidentifies the group"
+   },
+   {
+    "text": "The average effect among the treated.",
+    "misconception": "describes the ATT"
+   },
+   {
+    "text": "The effect for any unit, at an individual level.",
+    "misconception": "describes an unidentified quantity"
+   }
+  ],
+  "explanation": "Monotonicity rules out defiers. The complier share equals the first-stage difference $E[T|Z=1]-E[T|Z=0]$."
+ },
+ {
+  "id": "ci-6.4",
+  "lecture": 6,
+  "stem": "What is a weak instrument?",
+  "correct": [
+   "One weakly related to treatment, so 2SLS is biased.",
+   "A low first-stage $F$."
+  ],
+  "distractors": [
+   {
+    "text": "An instrument with a large effect on the outcome.",
+    "misconception": "confuses with exclusion violation"
+   },
+   {
+    "text": "An instrument measured with no noise.",
+    "misconception": "confuses with quality of measurement"
+   },
+   {
+    "text": "An instrument that violates exclusion.",
+    "misconception": "describes an invalid instrument"
+   },
+   {
+    "text": "An instrument that causes the treatment strongly.",
+    "misconception": "describes a strong instrument"
+   },
+   {
+    "text": "An instrument that is binary.",
+    "misconception": "confuses with a binary instrument"
+   }
+  ],
+  "explanation": "The Wald ratio divides by a small, noisy number, so estimates are erratic and any small violation of exclusion is amplified."
+ },
+ {
+  "id": "ci-6.5",
+  "lecture": 6,
+  "stem": "How does two-stage least squares (2SLS) work?",
+  "correct": [
+   "Regress treatment on the instrument, then outcome on the fitted treatment.",
+   "The second stage uses instrument-driven variation."
+  ],
+  "distractors": [
+   {
+    "text": "Regress the outcome on the instrument, then regress the residuals on the treatment.",
+    "misconception": "describes a different procedure"
+   },
+   {
+    "text": "Regress the outcome on the treatment, then on the instrument.",
+    "misconception": "reverses the stages"
+   },
+   {
+    "text": "Use the fitted outcome in the first stage.",
+    "misconception": "confuses the stages"
+   },
+   {
+    "text": "Regress the treatment on the outcome.",
+    "misconception": "reverses the relation"
+   },
+   {
+    "text": "It needs no instrument.",
+    "misconception": "misstates"
+   }
+  ],
+  "explanation": "The second-stage standard errors need correcting, since the fitted treatment replaces the actual one."
+ },
+ {
+  "id": "ci-7.1",
+  "lecture": 7,
+  "stem": "What is the key identifying assumption of regression discontinuity (RD)?",
+  "correct": [
+   "Potential outcomes are continuous at the cutoff.",
+   "No precise manipulation of the running variable."
+  ],
+  "distractors": [
+   {
+    "text": "Treatment is randomly assigned for all units.",
+    "misconception": "describes a global randomisation"
+   },
+   {
+    "text": "The outcome is linear in the running variable everywhere.",
+    "misconception": "is an unnecessary functional form"
+   },
+   {
+    "text": "The running variable is unrelated to the outcome.",
+    "misconception": "confuses with irrelevance"
+   },
+   {
+    "text": "Every unit gets treatment.",
+    "misconception": "removes the contrast"
+   },
+   {
+    "text": "The cutoff is chosen after seeing the data.",
+    "misconception": "breaks the design"
+   }
+  ],
+  "explanation": "RD identifies the effect at the cutoff only; it does not extrapolate to units far from it."
+ },
+ {
+  "id": "ci-7.2",
+  "lecture": 7,
+  "stem": "What does a sharp RD estimate?",
+  "correct": [
+   "The jump in the mean outcome at the cutoff.",
+   "The right limit minus the left limit of $E[Y|X=x]$."
+  ],
+  "distractors": [
+   {
+    "text": "The average effect over all units.",
+    "misconception": "confuses local with global"
+   },
+   {
+    "text": "The slope of the outcome in the running variable.",
+    "misconception": "confuses with the slope"
+   },
+   {
+    "text": "The difference in means between all treated and all control units.",
+    "misconception": "ignores the local nature"
+   },
+   {
+    "text": "The effect for compliers.",
+    "misconception": "describes fuzzy RD or IV"
+   },
+   {
+    "text": "The correlation between the running variable and treatment.",
+    "misconception": "confuses with correlation"
+   }
+  ],
+  "explanation": "Local linear regression on each side with a bandwidth $h$ gives the two intercepts at $c$; their difference is the estimate."
+ },
+ {
+  "id": "ci-7.3",
+  "lecture": 7,
+  "stem": "How does a fuzzy RD differ from a sharp RD?",
+  "correct": [
+   "The cutoff shifts the probability of treatment.",
+   "Take-up jumps by less than one."
+  ],
+  "distractors": [
+   {
+    "text": "The cutoff is chosen randomly.",
+    "misconception": "confuses with random assignment"
+   },
+   {
+    "text": "There is no cutoff.",
+    "misconception": "misstates"
+   },
+   {
+    "text": "The outcome is binary.",
+    "misconception": "confuses with a binary outcome"
+   },
+   {
+    "text": "The treatment is assigned deterministically at the cutoff.",
+    "misconception": "describes sharp RD"
+   },
+   {
+    "text": "It uses a larger bandwidth.",
+    "misconception": "confuses with bandwidth"
+   }
+  ],
+  "explanation": "The fuzzy RD estimand is the LATE for compliers at the cutoff: $\\dfrac{\\text{jump in }E[Y|X]}{\\text{jump in }P(T=1|X)}$."
+ },
+ {
+  "id": "ci-7.4",
+  "lecture": 7,
+  "stem": "What is the role of the bandwidth in local linear RD estimation?",
+  "correct": [
+   "It decides which observations near the cutoff are used.",
+   "Narrow windows are comparable but small."
+  ],
+  "distractors": [
+   {
+    "text": "A larger bandwidth always reduces both bias and variance.",
+    "misconception": "ignores the trade-off"
+   },
+   {
+    "text": "It is the size of the treatment effect.",
+    "misconception": "confuses with the effect"
+   },
+   {
+    "text": "It determines the cutoff value.",
+    "misconception": "confuses with the cutoff"
+   },
+   {
+    "text": "It has no effect on the estimate.",
+    "misconception": "ignores the sensitivity"
+   },
+   {
+    "text": "A narrower bandwidth always gives the better estimate.",
+    "misconception": "ignores variance"
+   }
+  ],
+  "explanation": "Data-driven rules (such as Imbens-Kalyanaraman or Calonico-Cattaneo-Titiunik) choose $h$; the result should be robust to reasonable choices."
+ },
+ {
+  "id": "ci-7.5",
+  "lecture": 7,
+  "stem": "What does the McCrary density test check in an RD design?",
+  "correct": [
+   "Whether the running variable's density jumps at the cutoff.",
+   "A sign of manipulation."
+  ],
+  "distractors": [
+   {
+    "text": "Whether the outcome jumps at the cutoff.",
+    "misconception": "describes the treatment effect estimate"
+   },
+   {
+    "text": "Whether the treatment effect is significant.",
+    "misconception": "describes the main test"
+   },
+   {
+    "text": "Whether the bandwidth is optimal.",
+    "misconception": "confuses with bandwidth choice"
+   },
+   {
+    "text": "Whether covariates are balanced.",
+    "misconception": "describes a different check"
+   },
+   {
+    "text": "Whether the outcome is normally distributed.",
+    "misconception": "confuses with normality"
+   }
+  ],
+  "explanation": "If agents can precisely sort around the threshold (for example, to qualify for a benefit), those just above and below differ in unobservables."
+ },
+ {
+  "id": "ci-8.1",
+  "lecture": 8,
+  "stem": "What is the parallel trends assumption in a difference-in-differences design?",
+  "correct": [
+   "Absent treatment, both groups change alike.",
+   "The treated counterfactual change equals the control's."
+  ],
+  "distractors": [
+   {
+    "text": "The treated and control groups have the same outcome level before treatment.",
+    "misconception": "confuses levels with changes"
+   },
+   {
+    "text": "The treatment effect is the same across periods.",
+    "misconception": "confuses with effect homogeneity"
+   },
+   {
+    "text": "The treated and control groups are chosen randomly.",
+    "misconception": "confuses with randomisation"
+   },
+   {
+    "text": "The groups have parallel outcomes in the post period.",
+    "misconception": "includes the treatment effect"
+   },
+   {
+    "text": "No unit changes treatment status.",
+    "misconception": "confuses with a design restriction"
+   }
+  ],
+  "explanation": "Levels may differ; only the change absent treatment needs to match. Pre-treatment trends are a (partial) check."
+ },
+ {
+  "id": "ci-8.2",
+  "lecture": 8,
+  "stem": "What is the 2x2 difference-in-differences estimator?",
+  "correct": [
+   "Treated change less control change.",
+   "A difference in changes."
+  ],
+  "distractors": [
+   {
+    "text": "Treated post minus control post.",
+    "misconception": "ignores the pre period"
+   },
+   {
+    "text": "Treated post minus treated pre.",
+    "misconception": "ignores the control group"
+   },
+   {
+    "text": "Control post minus control pre.",
+    "misconception": "ignores the treated group"
+   },
+   {
+    "text": "The sum of the two changes.",
+    "misconception": "adds instead of subtracting"
+   },
+   {
+    "text": "Treated pre minus control pre.",
+    "misconception": "gives the baseline gap"
+   }
+  ],
+  "explanation": "DiD removes fixed differences between groups and common time shocks, leaving the effect on the treated under parallel trends."
+ },
+ {
+  "id": "ci-8.3",
+  "lecture": 8,
+  "stem": "How can parallel trends be assessed?",
+  "correct": [
+   "Check the groups moved together before treatment.",
+   "Pre-trends and placebo tests."
+  ],
+  "distractors": [
+   {
+    "text": "By testing it directly in the post-treatment period.",
+    "misconception": "is not possible, since the effect contaminates the post period"
+   },
+   {
+    "text": "By checking that the groups have equal outcomes in the pre-period.",
+    "misconception": "confuses levels with changes"
+   },
+   {
+    "text": "It is proved by a significant treatment effect.",
+    "misconception": "confuses"
+   },
+   {
+    "text": "It requires randomisation.",
+    "misconception": "confuses"
+   },
+   {
+    "text": "It does not need any assessment.",
+    "misconception": "gives bad advice"
+   }
+  ],
+  "explanation": "Event-study coefficients before treatment should be near zero; an Ashenfelter dip (outcomes falling just before treatment) is a warning sign."
+ },
+ {
+  "id": "ci-8.4",
+  "lecture": 8,
+  "stem": "What is a concern with two-way fixed effects regressions when treatment starts at different times for different units?",
+  "correct": [
+   "Already-treated units become controls, with negative weights.",
+   "Problematic comparisons if effects vary."
+  ],
+  "distractors": [
+   {
+    "text": "The estimate is always the correct average effect.",
+    "misconception": "ignores the weighting issue"
+   },
+   {
+    "text": "It cannot be computed.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "It needs all units to be treated at once.",
+    "misconception": "misstates"
+   },
+   {
+    "text": "It is biased only if there are no covariates.",
+    "misconception": "confuses with covariates"
+   },
+   {
+    "text": "The standard errors are always exact.",
+    "misconception": "ignores clustering"
+   }
+  ],
+  "explanation": "Recent estimators (Callaway-Sant'Anna, Sun-Abraham) compare each cohort with not-yet or never-treated units."
+ },
+ {
+  "id": "ci-8.5",
+  "lecture": 8,
+  "stem": "What does the DiD estimate represent?",
+  "correct": [
+   "The effect on the treated group (ATT).",
+   "The effect for those who received treatment."
+  ],
+  "distractors": [
+   {
+    "text": "The effect on the control group.",
+    "misconception": "misidentifies the group"
+   },
+   {
+    "text": "The effect on the whole population.",
+    "misconception": "confuses ATT with ATE"
+   },
+   {
+    "text": "The difference in levels between groups.",
+    "misconception": "confuses with the baseline gap"
+   },
+   {
+    "text": "The effect for compliers.",
+    "misconception": "describes the LATE"
+   },
+   {
+    "text": "The correlation of treatment with outcomes.",
+    "misconception": "confuses with correlation"
+   }
+  ],
+  "explanation": "Under parallel trends, the control change is the counterfactual change for the treated units."
+ },
+ {
+  "id": "ci-9.1",
+  "lecture": 9,
+  "stem": "What is the synthetic control method?",
+  "correct": [
+   "A weighted average of untreated donors matching the pre-treatment path.",
+   "A built comparison unit."
+  ],
+  "distractors": [
+   {
+    "text": "A randomised experiment with simulated units.",
+    "misconception": "confuses with simulation"
+   },
+   {
+    "text": "A regression of the treated unit on time.",
+    "misconception": "ignores the donors"
+   },
+   {
+    "text": "The average of all control units with equal weights.",
+    "misconception": "ignores the fit"
+   },
+   {
+    "text": "Matching on the outcome after treatment.",
+    "misconception": "uses the post period for matching"
+   },
+   {
+    "text": "A method that needs many treated units.",
+    "misconception": "reverses the typical use"
+   }
+  ],
+  "explanation": "The effect estimate is the post-treatment gap between the treated unit and its synthetic control."
+ },
+ {
+  "id": "ci-9.2",
+  "lecture": 9,
+  "stem": "How is inference done in the synthetic control method?",
+  "correct": [
+   "Placebo studies: treat each donor in turn.",
+   "Permutation $p$-values from fit ratios."
+  ],
+  "distractors": [
+   {
+    "text": "By the usual regression standard errors.",
+    "misconception": "ignores the design"
+   },
+   {
+    "text": "Inference is impossible.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "By a $t$ test on one post-treatment observation.",
+    "misconception": "ignores that one unit is treated"
+   },
+   {
+    "text": "By bootstrapping time periods.",
+    "misconception": "ignores dependence"
+   },
+   {
+    "text": "By assuming normal errors.",
+    "misconception": "is not needed"
+   }
+  ],
+  "explanation": "The p-value is the share of units (including the treated) with a post/pre RMSPE ratio at least as large as the treated unit's."
+ },
+ {
+  "id": "ci-9.3",
+  "lecture": 9,
+  "stem": "Why is a good pre-treatment fit important in synthetic control?",
+  "correct": [
+   "A poor pre-fit means a post gap is not an effect.",
+   "Weights then capture unobserved factors."
+  ],
+  "distractors": [
+   {
+    "text": "A good fit proves the effect is positive.",
+    "misconception": "confuses fit with effect"
+   },
+   {
+    "text": "A good fit is needed only to compute standard errors.",
+    "misconception": "misstates the role"
+   },
+   {
+    "text": "Fit is unrelated to bias.",
+    "misconception": "ignores the role"
+   },
+   {
+    "text": "A perfect fit is always possible with non-negative weights.",
+    "misconception": "ignores convex hull restrictions"
+   },
+   {
+    "text": "The post-treatment fit matters more.",
+    "misconception": "confuses the periods"
+   }
+  ],
+  "explanation": "A treated unit outside the convex hull of the donors cannot be matched, so the method should not be used."
+ },
+ {
+  "id": "ci-9.4",
+  "lecture": 9,
+  "stem": "What does a unit fixed effect do in a panel regression?",
+  "correct": [
+   "It absorbs time-invariant differences between units.",
+   "Each unit gets its own intercept."
+  ],
+  "distractors": [
+   {
+    "text": "It controls for time-varying confounders.",
+    "misconception": "confuses with time-varying variables"
+   },
+   {
+    "text": "It increases the variation used to estimate the effect.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It cannot be used with panel data.",
+    "misconception": "misstates"
+   },
+   {
+    "text": "It removes the need for a control group.",
+    "misconception": "misstates"
+   },
+   {
+    "text": "It estimates a common time trend.",
+    "misconception": "describes time fixed effects"
+   }
+  ],
+  "explanation": "Within-transformation: subtract each unit's mean. Time-varying confounders and reverse causation remain a threat."
+ },
+ {
+  "id": "ci-9.5",
+  "lecture": 9,
+  "stem": "What assumption underlies the fixed-effects estimator of a treatment effect?",
+  "correct": [
+   "Strict exogeneity given the unit effects.",
+   "Confounders are constant over time."
+  ],
+  "distractors": [
+   {
+    "text": "Treatment is randomly assigned.",
+    "misconception": "is not needed"
+   },
+   {
+    "text": "There are no unobserved variables.",
+    "misconception": "ignores unit effects"
+   },
+   {
+    "text": "Unit effects are uncorrelated with treatment.",
+    "misconception": "describes random effects"
+   },
+   {
+    "text": "Treatment effects are constant.",
+    "misconception": "confuses with homogeneity"
+   },
+   {
+    "text": "The outcome is stationary.",
+    "misconception": "confuses with stationarity"
+   }
+  ],
+  "explanation": "If treatment responds to past outcomes (feedback), strict exogeneity fails and fixed effects are biased."
+ },
+ {
+  "id": "ci-10.1",
+  "lecture": 10,
+  "stem": "What is the idea of Rosenbaum sensitivity analysis?",
+  "correct": [
+   "How strong a hidden confounder ($\\Gamma$) must be to overturn results.",
+   "Bounds on $p$-values."
+  ],
+  "distractors": [
+   {
+    "text": "Prove that there is no hidden bias.",
+    "misconception": "is impossible"
+   },
+   {
+    "text": "Increase the sample size until bias vanishes.",
+    "misconception": "confuses bias with variance"
+   },
+   {
+    "text": "Remove observations that disagree with the result.",
+    "misconception": "cherry-picks"
+   },
+   {
+    "text": "Add more covariates until the effect disappears.",
+    "misconception": "confuses with specification search"
+   },
+   {
+    "text": "Randomise the treatment after the fact.",
+    "misconception": "is impossible"
+   }
+  ],
+  "explanation": "$\\Gamma=1$ is no hidden bias; a study that is significant up to a large $\\Gamma$ is robust to unobserved confounding."
+ },
+ {
+  "id": "ci-10.2",
+  "lecture": 10,
+  "stem": "What are Manski-type (worst-case) bounds on the ATE?",
+  "correct": [
+   "Bounds assuming nothing on selection.",
+   "The ATE range consistent with the data."
+  ],
+  "distractors": [
+   {
+    "text": "A point estimate under unconfoundedness.",
+    "misconception": "describes an identified estimate"
+   },
+   {
+    "text": "A confidence interval for the sample mean.",
+    "misconception": "confuses with sampling error"
+   },
+   {
+    "text": "Bounds that shrink to zero width with more data.",
+    "misconception": "ignores the identification gap"
+   },
+   {
+    "text": "The effect on compliers.",
+    "misconception": "describes the LATE"
+   },
+   {
+    "text": "A range obtained by bootstrapping.",
+    "misconception": "confuses with resampling"
+   }
+  ],
+  "explanation": "For a bounded outcome the width of the no-assumption bounds equals the outcome's range, however large the sample. Assumptions narrow them."
+ },
+ {
+  "id": "ci-10.3",
+  "lecture": 10,
+  "stem": "What is the conditional average treatment effect (CATE)?",
+  "correct": [
+   "The average effect for units with $X=x$.",
+   "Heterogeneity as a function of covariates."
+  ],
+  "distractors": [
+   {
+    "text": "The average effect across the whole population.",
+    "misconception": "describes the ATE"
+   },
+   {
+    "text": "The effect for compliers.",
+    "misconception": "describes the LATE"
+   },
+   {
+    "text": "The effect for a single individual.",
+    "misconception": "is not identified"
+   },
+   {
+    "text": "The difference between treated and control outcomes.",
+    "misconception": "describes the naive difference"
+   },
+   {
+    "text": "The probability of treatment given covariates.",
+    "misconception": "describes the propensity score"
+   }
+  ],
+  "explanation": "The ATE is the average of CATEs over the covariate distribution; CATEs help target treatments."
+ },
+ {
+  "id": "ci-10.4",
+  "lecture": 10,
+  "stem": "What is a risk when searching for subgroups with large treatment effects?",
+  "correct": [
+   "Many subgroup tests give false positives.",
+   "Chance subgroups appear."
+  ],
+  "distractors": [
+   {
+    "text": "Subgroup effects are always larger than the average effect.",
+    "misconception": "states a false rule"
+   },
+   {
+    "text": "No risk exists, since subgroup effects are causal.",
+    "misconception": "ignores multiplicity"
+   },
+   {
+    "text": "Subgroups cannot be defined by covariates.",
+    "misconception": "misstates"
+   },
+   {
+    "text": "Heterogeneity does not exist in practice.",
+    "misconception": "denies heterogeneity"
+   },
+   {
+    "text": "The overall effect becomes biased.",
+    "misconception": "confuses with bias"
+   }
+  ],
+  "explanation": "Honest estimation (sample splitting, causal forests) and multiple testing corrections guard against false subgroup claims."
+ }
+]
