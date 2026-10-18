@@ -3,6 +3,7 @@ import { domainLabels } from '../data'
 import { useApp } from '../context'
 import { isUnlocked, statusOf } from '../lib/graph'
 import { hasTest } from '../lib/content'
+import { hasLessons, lectureKey, lectureUnlocked, lessonsDone } from '../lib/lessons'
 import { passMark, totalMarks, testConfig } from '../config/test.config'
 
 export function TopicPage() {
@@ -17,6 +18,9 @@ export function TopicPage() {
   const attempts = store.attempts(id)
   const best = store.best(id)
   const ready = hasTest(id)
+  const lessonsOn = hasLessons(id)
+  const lecturesPassed = lessonsOn ? topic.lectures.filter((_, i) => store.isPassed(lectureKey(id, i + 1))).length : 0
+  const lecturesOk = lessonsDone(store, id, dev)
 
   return (
     <>
@@ -54,7 +58,10 @@ export function TopicPage() {
             <span key={m}>{i > 0 && ', '}<Link to={`/topic/${m}`}>{graph.byId.get(m)!.label}</Link></span>
           ))}.</p>
         )}
-        {ready && unlocked && (
+        {ready && unlocked && !lecturesOk && (
+          <p>Locked until you pass all {topic.lectures.length} lecture quizzes ({lecturesPassed}/{topic.lectures.length} passed).</p>
+        )}
+        {ready && unlocked && lecturesOk && (
           <p><Link className="btn primary" to={`/topic/${id}/test`}>{attempts.length ? 'Retake the test' : 'Take the test'}</Link></p>
         )}
         {dev && !passed.has(id) && ready && missing.length > 0 && <p className="small muted">Dev mode: prerequisites ignored.</p>}
@@ -78,6 +85,26 @@ export function TopicPage() {
           </table>
         )}
       </section>
+
+      {lessonsOn && (
+        <section className="card">
+          <h2>Lectures</h2>
+          <p className="muted small">Each lecture has a lesson, a worked sample and a quiz. Pass the quiz (12/15) to open the next lecture; pass all of them to unlock the topic test.</p>
+          <ol className="outline">
+            {topic.lectures.map((l, i) => {
+              const n = i + 1
+              const done = store.isPassed(lectureKey(id, n))
+              const open = unlocked && lectureUnlocked(store, id, n, dev)
+              return (
+                <li key={l.title} value={n}>
+                  {open ? <Link to={`/topic/${id}/lecture/${n}`}><b>{l.title}</b></Link> : <b>{l.title}</b>}{' '}
+                  <span className={`badge st-${done ? 'passed' : open ? 'open' : 'locked'}`}>{done ? 'passed' : open ? 'open' : 'locked'}</span>
+                </li>
+              )
+            })}
+          </ol>
+        </section>
+      )}
 
       <section className="card">
         <h2>What this test covers</h2>

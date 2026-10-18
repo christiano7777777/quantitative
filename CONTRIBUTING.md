@@ -105,6 +105,28 @@ formula proves nothing. Good independent checks:
 See `src/content/tests/sp/lq/lq.test.ts`. A good habit: temporarily break the generator and confirm the test
 fails.
 
+## Lessons and lecture quizzes (optional, per topic)
+
+A topic can also have a teaching layer: `src/content/lessons/<topicId>/index.ts` default-exports one `Lesson` per
+lecture, in the order of `topics.json`. Without that folder the topic goes straight to its test.
+
+```ts
+{ teach: ['## Heading', 'A paragraph with $KaTeX$.'],   // at least 5 entries; "## " starts a sub-heading
+  workedSeed: 'np-3-worked',                          // fixed seed for the worked sample
+  lqId: 'np-lq-a-signed#0,1,2,3' }                    // generator id, optionally "#" + 0-based parts to keep
+```
+
+- Each lecture page shows the lesson, one **worked sample** (the generator `lqId` at `workedSeed`, with the working and
+  answers shown), then the quiz. The quiz has **5 MC** (all with `lecture` = this lecture, unseen first) and **1 LQ**
+  (the same generator with fresh numbers), 15 marks, pass at 12 (`lectureConfig` in `test.config.ts`).
+- Lecture n unlocks when lecture n-1 is passed. The topic test unlocks when every lecture quiz is passed. Dev mode
+  opens everything. Lecture attempts are stored under the key `<topicId>#L<n>`.
+- A generator can serve two lectures by keeping only some parts: `id#0,1,2` keeps parts 0-2 with the numbers of the full
+  question. Every kept part must carry `lecture` = the lecture it serves (a test enforces this), and a kept part must not
+  depend on a part that is dropped (check the prompts and the intro). When no generator fits a lecture, write a small one
+  with its own independent test and list it in the bank's `lectureLq` (never drawn for the topic test).
+- Each lecture needs at least 5 MC questions in `mc.json`.
+
 ## Checking your work
 
 ```

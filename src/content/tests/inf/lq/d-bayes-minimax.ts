@@ -46,7 +46,7 @@ export function build({ n, x, al, be }: Params): LQInstance {
       },
       {
         prompt: 'Find the constant risk of this minimax estimator, ' + tex('n/\\{4(n+\\sqrt n)^2\\}') + '. (The maximum risk of the sample proportion ' + tex('x/n') + ' is ' + tex('1/(4n)=' + dec(1 / (4 * n))) + '.)',
-        answer: constRisk, tolerance: tol4, lecture: 1,
+        answer: constRisk, tolerance: tol4, lecture: 2,
         explanation: tex(n + '/\\{4(' + n + '+' + rn + ')^2\\}=' + dec(constRisk)) + ', smaller than the worst-case risk ' + dec(1 / (4 * n)) + ' of ' + tex('x/n') + ', although ' + tex('x/n') + ' is better near ' + tex('\\theta=0') + ' and ' + tex('1') + '.',
       },
     ],

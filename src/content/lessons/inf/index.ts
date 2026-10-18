@@ -1,0 +1,215 @@
+// Lessons for Statistical Inference (HKU STAT3602 order, 11 lectures). One entry per lecture, in order.
+// `lqId` names a generator in src/content/tests/inf/lq (or its `lectureLq` list); "#0,1,2" keeps only those parts
+// (0-based), so a shared generator is split by lecture. The worked sample is that generator at `workedSeed`.
+import type { Lesson } from '../../../lib/types'
+
+const lessons: Lesson[] = [
+  {
+    // 1. Decision theory
+    workedSeed: 'inf-1-worked',
+    lqId: 'inf-lq-c-risk#0,1,2',
+    teach: [
+      "## The framework",
+      "A decision problem has a parameter $\\theta$, an action $d$ (for example an estimate), a loss $L(\\theta,d)$ and a decision rule $\\delta(X)$ that turns data into an action. The risk of a rule is its expected loss, $R(\\theta,\\delta)=E_\\theta\\,L(\\theta,\\delta(X))$. For squared error loss $L=(d-\\theta)^2$,",
+      "$$R(\\theta,\\delta)=\\mathrm{Var}_\\theta(\\delta)+\\{\\mathrm{bias}_\\theta(\\delta)\\}^2.$$",
+      "## Comparing rules",
+      "Risk is a function of $\\theta$, and the risk functions of two rules usually cross, so there is no uniformly best rule. A rule is inadmissible if some other rule has risk no larger for every $\\theta$ and strictly smaller for some; otherwise it is admissible.",
+      "Example: $\\bar X\\sim N(\\theta,v)$ with $v=\\sigma^2/n$, and the shrinkage rule $\\delta_a=a\\bar X$. Its bias is $(a-1)\\theta$ and its variance is $a^2v$, so",
+      "$$R(\\theta,\\delta_a)=a^2v+(1-a)^2\\theta^2,\\qquad R(\\theta,\\bar X)=v.$$",
+      "Setting $R(\\theta,\\delta_a)<v$ gives $\\theta^2<v(1+a)/(1-a)$ for $0<a<1$: shrinking helps when $\\theta$ is small and hurts when it is large.",
+      "## Randomised rules",
+      "A randomised rule picks rule $\\delta_1$ with probability $p$ and $\\delta_2$ with probability $1-p$. Its risk is the average $p\\,R(\\theta,\\delta_1)+(1-p)\\,R(\\theta,\\delta_2)$. For the rule that uses $\\bar X$ with probability $p$ and otherwise the constant estimate $0$, the risk is $p\\,v+(1-p)\\theta^2$.",
+      "## Typical mistakes",
+      "Forgetting the squared bias term; writing $(1-a)\\theta$ without squaring it; and averaging the rules' estimates instead of their risks for a randomised rule.",
+    ],
+  },
+  {
+    // 2. Bayes and minimax rules
+    workedSeed: 'inf-2-worked',
+    lqId: 'inf-lq-d-bayes-minimax',
+    teach: [
+      "## Bayes rules",
+      "Put a prior $\\pi$ on $\\theta$. The Bayes risk of a rule is its risk averaged over the prior, $r(\\pi,\\delta)=E_\\pi R(\\theta,\\delta)$, and a Bayes rule minimises it. It can be found one data value at a time: minimise the posterior expected loss. Under squared error loss the Bayes estimate is the posterior mean, and its posterior expected loss is the posterior variance; under absolute error loss it is the posterior median.",
+      "Binomial example: $X\\sim\\mathrm{Bin}(n,\\theta)$ with prior $\\mathrm{Beta}(\\alpha,\\beta)$. The posterior is $\\mathrm{Beta}(\\alpha+x,\\beta+n-x)$, so the Bayes estimate is $\\dfrac{x+\\alpha}{n+\\alpha+\\beta}$, and the Bayes risk of this estimator is",
+      "$$\\frac{\\alpha\\beta}{(\\alpha+\\beta)(\\alpha+\\beta+1)(\\alpha+\\beta+n)}.$$",
+      "## Minimax rules",
+      "A minimax rule minimises the worst-case risk, $\\max_\\theta R(\\theta,\\delta)$. Useful fact: a Bayes rule whose risk is constant in $\\theta$ is minimax, and the prior that gives it is called least favourable. For the binomial, the prior $\\mathrm{Beta}(\\sqrt n/2,\\sqrt n/2)$ gives the estimator",
+      "$$\\delta(x)=\\frac{x+\\sqrt n/2}{n+\\sqrt n},\\qquad R(\\theta,\\delta)=\\frac{n}{4(n+\\sqrt n)^2}\\ \\text{for every }\\theta.$$",
+      "The sample proportion $x/n$ has maximum risk $1/(4n)$, which is larger, so it is not minimax.",
+      "## Typical mistakes",
+      "Mixing up the Bayes risk (an average over $\\theta$) with the posterior expected loss (an average over $\\theta$ given $x$); and using the minimax constant risk formula with $n$ replaced by $n+\\sqrt n$ in only one place.",
+    ],
+  },
+  {
+    // 3. Prior and posterior inference
+    workedSeed: 'inf-3-worked',
+    lqId: 'inf-lq-e-gamma-poisson',
+    teach: [
+      "## Conjugate updating",
+      "Counts $X_1,\\dots,X_n$ are i.i.d. Poisson$(\\lambda)$ with prior $\\lambda\\sim\\mathrm{Gamma}(a,b)$ (shape $a$, rate $b$, mean $a/b$). With total $\\sum x_i$ the posterior is",
+      "$$\\lambda\\mid x\\sim\\mathrm{Gamma}\\Big(a+\\sum x_i,\\ b+n\\Big),\\quad \\text{mean }\\frac{a+\\sum x_i}{b+n},\\quad \\text{variance }\\frac{a+\\sum x_i}{(b+n)^2}.$$",
+      "## Shrinkage",
+      "The posterior mean is a weighted average of the prior mean $a/b$ and the sample mean $\\bar x$:",
+      "$$\\frac{a+\\sum x_i}{b+n}=\\frac b{b+n}\\cdot\\frac ab+\\frac n{b+n}\\,\\bar x.$$",
+      "The weight on the sample mean is $n/(b+n)$; it tends to $1$ as $n$ grows, so the data eventually dominate.",
+      "## Posterior predictive",
+      "A new count $\\tilde X$ given $\\lambda$ is Poisson$(\\lambda)$, and averaging over the posterior $\\mathrm{Gamma}(A,B)$ gives a negative binomial. In particular $P(\\tilde X=0\\mid x)=E[e^{-\\lambda}]=\\big(B/(B+1)\\big)^{A}$ with $A=a+\\sum x_i$ and $B=b+n$.",
+      "## Credible sets",
+      "A $95\\%$ credible set has posterior probability $0.95$. When the posterior is approximately normal, posterior mean $\\pm\\,1.96$ posterior standard deviations is a quick credible interval. With a flat prior the numbers often resemble a frequentist interval, but the interpretation differs: the credible interval is a probability statement about $\\lambda$, the confidence interval is a statement about the procedure.",
+      "## Typical mistakes",
+      "Using the rate as if it were a scale (the mean is $a/b$, not $ab$); forgetting to add $n$ (not $\\sum x_i$) to the rate; and using the prior instead of the posterior in the predictive probability.",
+    ],
+  },
+  {
+    // 4. Exponential families and sufficiency
+    workedSeed: 'inf-4-worked',
+    lqId: 'inf-lq-j-sufficiency',
+    teach: [
+      "## Exponential families",
+      "A family is an exponential family if its density can be written $f(x\\mid\\eta)=h(x)\\exp\\{\\eta\\,T(x)-A(\\eta)\\}$ (with vector $\\eta$ and $T$ in general). Examples: Poisson with $T=x$ and $\\eta=\\log\\lambda$; Bernoulli with $T=x$ and $\\eta=\\log\\{p/(1-p)\\}$; normal $N(\\mu,\\sigma^2)$ with",
+      "$$T(x)=(x,\\ x^2),\\qquad \\eta=\\Big(\\frac\\mu{\\sigma^2},\\ -\\frac1{2\\sigma^2}\\Big).$$",
+      "To find the natural parameter, write $\\log f$ as a function of $x$ and read off the coefficients of $x$ and $x^2$.",
+      "## Sufficiency",
+      "A statistic $T(X)$ is sufficient if the conditional distribution of the data given $T$ does not depend on $\\theta$: once you know $T$, the rest of the data tell you nothing more about $\\theta$. By the factorisation theorem $T$ is sufficient iff the likelihood factors as $g(T(x),\\theta)\\,h(x)$. For an i.i.d. sample from a full-rank exponential family, $\\sum_iT(X_i)$ is sufficient and minimal sufficient, so the normal sample is summarised by $(\\sum x_i,\\ \\sum x_i^2)$ and the MLE of the variance can be computed from it: $\\hat\\sigma^2=\\sum x_i^2/n-\\bar x^2$.",
+      "## Checking sufficiency by conditioning",
+      "For a Bernoulli sample with total $T=t$, all $\\binom nt$ arrangements of the successes are equally likely, whatever $p$ is. The number of arrangements with $X_1=1$ and $X_2=0$ is $\\binom{n-2}{t-1}$, so",
+      "$$P(X_1=1,X_2=0\\mid T=t)=\\frac{t(n-t)}{n(n-1)}.$$",
+      "The answer does not involve $p$, which is exactly what sufficiency of $T$ means. A statistic whose distribution does not involve $\\theta$ at all is called ancillary; by Basu's theorem a complete sufficient statistic is independent of every ancillary statistic.",
+      "## Typical mistakes",
+      "Using the divisor $n-1$ instead of $n$ for the MLE of the variance; reading the natural parameter off the density without the factor $\\frac12$ in $-1/(2\\sigma^2)$; and counting the arrangements out of $n^2$ instead of $n(n-1)$.",
+    ],
+  },
+  {
+    // 5. Completeness and UMVU estimation
+    workedSeed: 'inf-5-worked',
+    lqId: 'inf-lq-a-poisson#1,2,3',
+    teach: [
+      "## Completeness and the UMVUE",
+      "A statistic $T$ is complete if $E_\\theta g(T)=0$ for all $\\theta$ implies $g(T)=0$ with probability one. Two theorems do the work:",
+      "- Rao-Blackwell: if $U$ is unbiased for $g(\\theta)$ and $T$ is sufficient, then $E[U\\mid T]$ is unbiased and has variance no larger than $U$.",
+      "- Lehmann-Scheffe: if $T$ is complete and sufficient, any unbiased estimator that is a function of $T$ is the unique uniformly minimum variance unbiased estimator (UMVUE).",
+      "So to find a UMVUE, either find an unbiased function of the complete sufficient statistic, or start from any unbiased estimator and condition on it.",
+      "## Poisson example",
+      "For $X_1,\\dots,X_n$ i.i.d. Poisson$(\\lambda)$, $T=\\sum X_i\\sim\\mathrm{Poisson}(n\\lambda)$ is complete and sufficient.",
+      "- UMVUE of $\\lambda^2$: since $E[T(T-1)]=(n\\lambda)^2$, the estimator is $T(T-1)/n^2$.",
+      "- UMVUE of $e^{-\\lambda}$: the indicator $\\mathbf 1\\{X_1=0\\}$ is unbiased. Given $T=t$, $X_1\\sim\\mathrm{Bin}(t,1/n)$, so the UMVUE is $P(X_1=0\\mid T=t)=(1-1/n)^t$.",
+      "- UMVUE of $\\lambda e^{-\\lambda}=P(X_1=1)$: $P(X_1=1\\mid T=t)=t\\cdot\\dfrac1n\\Big(1-\\dfrac1n\\Big)^{t-1}$.",
+      "## Typical mistakes",
+      "Using $T^2/n^2$ for $\\lambda^2$ (it is biased); writing the conditional distribution of $X_1$ given $T$ with success probability $\\lambda$ instead of $1/n$; and dropping a factor in the exponent $t-1$.",
+    ],
+  },
+  {
+    // 6. Information inequality
+    workedSeed: 'inf-6-worked',
+    lqId: 'inf-lq-k-information',
+    teach: [
+      "## Fisher information",
+      "The score is $U(\\theta)=\\partial\\log f(X\\mid\\theta)/\\partial\\theta$. Under regularity conditions $E_\\theta U=0$ and the Fisher information is",
+      "$$I(\\theta)=\\mathrm{Var}_\\theta(U)=E_\\theta(U^2)=-E_\\theta\\Big[\\frac{\\partial^2}{\\partial\\theta^2}\\log f\\Big].$$",
+      "For $n$ independent observations the information adds: $I_n=nI_1$. For a Bernoulli$(p)$ observation the score is $x/p-(1-x)/(1-p)$ and $I_1(p)=1/\\{p(1-p)\\}$.",
+      "## The Cramer-Rao bound",
+      "If $T$ is unbiased for $g(\\theta)$ then",
+      "$$\\mathrm{Var}_\\theta(T)\\ge\\frac{\\{g'(\\theta)\\}^2}{nI_1(\\theta)}.$$",
+      "The sample proportion has variance $p(1-p)/n$, equal to the bound for $g(p)=p$, so it is efficient. For $g(p)=p^2$ the bound is $\\dfrac{(2p)^2p(1-p)}{n}=\\dfrac{4p^3(1-p)}n$. The efficiency of an unbiased estimator is the bound divided by its variance, a number between $0$ and $1$; using only the first $m$ of $n$ observations gives efficiency $m/n$. The bound is attained exactly when the score is a linear function of the estimator, which happens for the mean parameter of an exponential family.",
+      "## Reparametrisation",
+      "If $\\eta=h(\\theta)$ then $I(\\eta)=I(\\theta)\\{d\\theta/d\\eta\\}^2$. For the log-odds $\\eta=\\log\\{p/(1-p)\\}$, $dp/d\\eta=p(1-p)$, so $I_1(\\eta)=p(1-p)$.",
+      "The bound needs regularity: it fails when the support depends on $\\theta$, for example for the uniform on $(0,\\theta)$.",
+      "## Typical mistakes",
+      "Forgetting the factor $\\{g'(\\theta)\\}^2$; using $I_1$ instead of $nI_1$; and inverting the efficiency (it is bound over variance).",
+    ],
+  },
+  {
+    // 7. Likelihood and large-sample theory of the MLE
+    workedSeed: 'inf-7-worked',
+    lqId: 'inf-lq-b-exponential#2,3,4',
+    teach: [
+      "## Large-sample behaviour of the MLE",
+      "Under regularity conditions the MLE $\\hat\\theta$ is consistent and asymptotically normal and efficient:",
+      "$$\\sqrt n(\\hat\\theta-\\theta)\\xrightarrow{d}N\\big(0,\\ 1/I_1(\\theta)\\big),$$",
+      "so its variance is approximately $1/I_n(\\theta)$, the Cramer-Rao bound. In practice the standard error is $1/\\sqrt{I_n(\\hat\\theta)}$, with the information evaluated at the MLE.",
+      "## Wald and score tests",
+      "To test $H_0:\\theta=\\theta_0$ two statistics, each approximately $\\chi^2_1$ under $H_0$, are",
+      "$$W=(\\hat\\theta-\\theta_0)^2\\,I_n(\\hat\\theta),\\qquad S=\\frac{U(\\theta_0)^2}{I_n(\\theta_0)}.$$",
+      "The Wald statistic uses the information at the MLE and needs the fit under the alternative; the score statistic uses the information at the null value $\\theta_0$ and needs no fit at all.",
+      "## Exponential example",
+      "For i.i.d. exponential observations with mean $\\theta$: the MLE is $\\bar X$, $I_n(\\theta)=n/\\theta^2$, and the score is $U(\\theta)=n(\\bar x-\\theta)/\\theta^2$. So the standard error at $\\bar x$ is $\\bar x/\\sqrt n$, the Wald statistic is $n(\\bar x-\\theta_0)^2/\\bar x^2$, and the score statistic is $U(\\theta_0)^2\\theta_0^2/n=n(\\bar x-\\theta_0)^2/\\theta_0^2$.",
+      "## Typical mistakes",
+      "Using the information at $\\theta_0$ in the Wald statistic (or at $\\hat\\theta$ in the score statistic); forgetting that $I_n=n\\,I_1$; and comparing the statistic with a normal critical value instead of $\\chi^2_1$.",
+    ],
+  },
+  {
+    // 8. Uniformly most powerful tests
+    workedSeed: 'inf-8-worked',
+    lqId: 'inf-lq-f-ump',
+    teach: [
+      "## Neyman-Pearson and monotone likelihood ratio",
+      "For a simple null against a simple alternative, the most powerful level-$\\alpha$ test rejects for large likelihood ratio $f_{\\theta_1}(x)/f_{\\theta_0}(x)$ (Neyman-Pearson lemma). A family has monotone likelihood ratio (MLR) in $T$ if that ratio is nondecreasing in $T$ for $\\theta_1>\\theta_0$. By the Karlin-Rubin theorem, for $H_0:\\theta\\le\\theta_0$ against $H_1:\\theta>\\theta_0$ the test that rejects for large $T$ is uniformly most powerful (UMP); its size is attained at the boundary $\\theta_0$ and its power increases in $\\theta$.",
+      "## Discrete data: randomisation",
+      "For $Y\\sim\\mathrm{Bin}(n,p)$ the family has MLR in $Y$. Because $Y$ is discrete, an exact level $\\alpha$ needs a randomised test: reject if $Y>c$, reject with probability $\\gamma$ if $Y=c$, accept if $Y<c$.",
+      "1. Find $c$: the smallest integer with $P_{p_0}(Y>c)\\le\\alpha$.",
+      "2. Randomisation probability: $\\gamma=\\dfrac{\\alpha-P_{p_0}(Y>c)}{P_{p_0}(Y=c)}$.",
+      "3. Power at $p$: $P_p(Y>c)+\\gamma\\,P_p(Y=c)$.",
+      "The same test is the Neyman-Pearson test for each simple alternative $p_1>p_0$, which is why it is UMP. At the boundary value $y=c$ the likelihood ratio is $\\dfrac{f_{p_1}(c)}{f_{p_0}(c)}=\\Big(\\dfrac{p_1}{p_0}\\Big)^c\\Big(\\dfrac{1-p_1}{1-p_0}\\Big)^{n-c}$.",
+      "## Typical mistakes",
+      "Choosing $c$ so that $P(Y\\ge c)\\le\\alpha$ rather than $P(Y>c)\\le\\alpha$ and then also randomising at $c$; computing the size at the alternative instead of at $p_0$; and forgetting that $\\gamma$ lies between $0$ and $1$.",
+    ],
+  },
+  {
+    // 9. UMP unbiased and conditional tests
+    workedSeed: 'inf-9-worked',
+    lqId: 'inf-lq-g-conditional#0,2,3,4',
+    teach: [
+      "## When no UMP test exists",
+      "For a two-sided alternative $\\theta\\ne\\theta_0$ no UMP test exists. Restrict to unbiased tests, whose power is at least $\\alpha$ everywhere under the alternative. In exponential families there is a UMP unbiased (UMPU) test, and when there are nuisance parameters it is obtained by conditioning on the sufficient statistic for the nuisance parameter.",
+      "## Two Poisson counts",
+      "Let $X\\sim\\mathrm{Poisson}(\\lambda_1)$ and $Y\\sim\\mathrm{Poisson}(\\lambda_2)$ be independent. To test $H_0:\\lambda_1=\\lambda_2$, condition on $X+Y=m$. Given the total,",
+      "$$X\\mid X+Y=m\\ \\sim\\ \\mathrm{Bin}\\Big(m,\\ \\frac{\\lambda_1}{\\lambda_1+\\lambda_2}\\Big).$$",
+      "Under $H_0$ the success probability is $\\tfrac12$. The one-sided p-value for $H_1:\\lambda_1>\\lambda_2$ is $P(X\\ge x\\mid X+Y=m)$. Because $\\mathrm{Bin}(m,\\tfrac12)$ is symmetric, the two-sided p-value is the sum of the two tails, $P(X\\ge x)+P(X\\le m-x)$ for $x>m/2$, which is twice the one-sided value. Under an alternative with $\\lambda_1/\\lambda_2=\\rho$ the success probability is $\\rho/(1+\\rho)$.",
+      "## Fisher's exact test",
+      "For a $2\\times2$ table with all margins fixed and no association, the top-left cell is hypergeometric: with group sizes $r_1,r_2$ and $c_1$ successes in total, $P(A=a)=\\binom{r_1}{a}\\binom{r_2}{c_1-a}\\big/\\binom{r_1+r_2}{c_1}$. The one-sided p-value is the sum of these probabilities for $a$ and all larger values.",
+      "## Typical mistakes",
+      "Using the unconditional Poisson probabilities instead of the binomial given the total; using $p=\\lambda_1/\\lambda_2$ instead of $\\lambda_1/(\\lambda_1+\\lambda_2)$; and adding the wrong tail in the two-sided p-value.",
+    ],
+  },
+  {
+    // 10. Large-sample LRT and confidence sets
+    workedSeed: 'inf-10-worked',
+    lqId: 'inf-lq-i-wilks#0,3,4',
+    teach: [
+      "## Wilks' theorem",
+      "The likelihood ratio is $\\Lambda=\\sup_{H_0}L/\\sup L$. Under $H_0$ and regularity conditions, $-2\\log\\Lambda\\to\\chi^2_r$ where $r$ is the number of free parameters removed by $H_0$. Reject for large $-2\\log\\Lambda$. For a Poisson sample with total $T$ and $n$ observations, $\\hat\\lambda=T/n$ and",
+      "$$-2\\log\\Lambda=2\\Big\\{T\\log\\frac{\\hat\\lambda}{\\lambda_0}-T+n\\lambda_0\\Big\\}.$$",
+      "The Wald and score statistics are $n(\\hat\\lambda-\\lambda_0)^2/\\hat\\lambda$ and $n(\\hat\\lambda-\\lambda_0)^2/\\lambda_0$; all three agree to first order when $\\lambda_0$ is near $\\hat\\lambda$.",
+      "## Confidence sets by inverting tests",
+      "A $95\\%$ confidence set is the set of $\\lambda_0$ that the level-$5\\%$ test does not reject:",
+      "$$\\{\\lambda:\\ -2\\log\\Lambda(\\lambda)\\le\\chi^2_{1,0.95}=3.8415\\}.$$",
+      "To find its endpoints, solve $2\\{T\\log(\\hat\\lambda/\\lambda)-T+n\\lambda\\}=3.8415$ for $\\lambda$ on each side of $\\hat\\lambda$, by trial and error or Newton steps. The set is generally not symmetric about $\\hat\\lambda$, unlike a Wald interval.",
+      "## Two-sample comparison",
+      "To test whether two independent Poisson samples have equal means, $H_0$ removes one of two free parameters, so $r=1$. With group totals $T_1,T_2$, group MLEs $\\hat\\lambda_1,\\hat\\lambda_2$ and pooled MLE $\\hat\\lambda_0=(T_1+T_2)/(n_1+n_2)$,",
+      "$$-2\\log\\Lambda=2\\Big\\{T_1\\log\\frac{\\hat\\lambda_1}{\\hat\\lambda_0}+T_2\\log\\frac{\\hat\\lambda_2}{\\hat\\lambda_0}\\Big\\}\\ \\approx\\ \\chi^2_1.$$",
+      "## Typical mistakes",
+      "Using the wrong degrees of freedom (count the parameters removed by $H_0$, not those in the model); taking the logarithm of the ratio the wrong way round; and using the full-model MLE as the null estimate.",
+    ],
+  },
+  {
+    // 11. Bootstrap
+    workedSeed: 'inf-11-worked',
+    lqId: 'inf-lq-l-bootstrap',
+    teach: [
+      "## The plug-in principle",
+      "Replace the unknown distribution $F$ by the empirical distribution $\\hat F_n$ (mass $1/n$ on each observation). A bootstrap resample is a sample of size $n$ drawn with replacement from the data. To study an estimator $\\hat\\theta$, recompute it on many resamples: the standard deviation of the replicates estimates its standard error, their mean minus $\\hat\\theta$ estimates its bias, and the $2.5\\%$ and $97.5\\%$ points give a percentile interval.",
+      "## Cases with an exact answer",
+      "A resample mean averages $n$ independent draws from the data, each with variance $\\hat\\sigma^2=\\frac1n\\sum(x_i-\\bar x)^2$, so the exact bootstrap standard error of the mean is",
+      "$$\\frac{\\hat\\sigma}{\\sqrt n}=\\frac{\\sqrt{\\sum(x_i-\\bar x)^2}}{n}.$$",
+      "The plug-in variance is biased: $E^*[\\hat\\sigma^{*2}]=(1-1/n)\\hat\\sigma^2$, so the bootstrap bias estimate is $-\\hat\\sigma^2/n$ and the bias-corrected estimate is $\\hat\\sigma^2-(-\\hat\\sigma^2/n)=\\hat\\sigma^2(1+1/n)$.",
+      "## Counting resamples",
+      "There are $n^n$ equally likely ordered resamples. If only which values appear and how often matters, there are $\\binom{2n-1}{n}$ distinct resamples, and they are not equally likely (a resample using each value once is far more likely than one using a single value $n$ times).",
+      "## When it works",
+      "The bootstrap is consistent for smooth functionals such as means, variances and correlations. It can fail for non-smooth ones: for the sample maximum of a uniform sample the bootstrap distribution is wrong, because it puts mass $1-(1-1/n)^n\\to1-e^{-1}\\approx0.632$ on the observed maximum while the true distribution of the maximum is continuous.",
+      "## Typical mistakes",
+      "Using $\\sqrt{\\hat\\sigma^2}\\,n$ instead of $\\hat\\sigma/\\sqrt n$; using the divisor $n-1$ for the plug-in variance; and confusing the number of ordered resamples $n^n$ with the number of distinct multisets $\\binom{2n-1}{n}$.",
+    ],
+  },
+]
+
+export default lessons

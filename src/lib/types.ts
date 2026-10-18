@@ -72,6 +72,20 @@ export interface TestBank {
    * testConfig.lqCount slots. If omitted, generators are drawn uniformly (no coverage guarantee).
    */
   lqSlots?: string[][]
+  /** extra long-question generators used only by lecture quizzes; never drawn for the topic test */
+  lectureLq?: LQGenerator[]
+}
+
+/**
+ * One lecture's teaching page. `teach` is a list of paragraphs ($...$ KaTeX; a paragraph starting with "## " is a
+ * sub-heading). The worked sample is built from the long-question generator `lqId` with the fixed seed `workedSeed`,
+ * so it is the same kind of question as the quiz, with different numbers and the full working shown.
+ */
+export interface Lesson {
+  teach: string[]
+  workedSeed: string
+  /** generator id, optionally `id#0,2,3` to keep only those parts (0-based); see findGenerator */
+  lqId: string
 }
 
 // ---- a concrete attempt ----
