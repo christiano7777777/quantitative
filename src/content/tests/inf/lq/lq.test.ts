@@ -7,6 +7,7 @@
 //  F: the test as the Neyman-Pearson knapsack (outcomes sorted by likelihood ratio, budget alpha) in exact fractions.
 //  G: conditional probabilities from Poisson pmf ratios; Fisher's p-value by enumerating all subsets of the margins.
 //  H: coverage and expected length of the uniform interval by simulation and integration; the median interval by enumerating sign patterns; the bootstrap by enumerating all n^n resamples.
+//  I: log-likelihood of the Poisson total maximised by golden-section search (likelihood ratio, two-sample statistic); Wald and score from finite-difference derivatives of the log-likelihood; the interval endpoint by grid scan and interpolation; null rejection rates of the statistics by Monte Carlo.
 import { describe, expect, it } from 'vitest'
 import { makeRng } from '../../../../lib/rng'
 import { topics } from '../../../../data'
@@ -20,6 +21,7 @@ import * as E from './e-gamma-poisson'
 import * as Ff from './f-ump'
 import * as G from './g-conditional'
 import * as H from './h-confidence-bootstrap'
+import * as I from './i-wilks'
 
 const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => `${prefix}${i}`)
 const answers = (inst: LQInstance) => inst.parts.map((p) => p.answer)
@@ -45,6 +47,7 @@ const gens: [string, LQGenerator, number][] = [
   ['F', { id: 'F', generate: (r) => Ff.build(Ff.sample(r)) }, 5],
   ['G', { id: 'G', generate: (r) => G.build(G.sample(r)) }, 5],
   ['H', { id: 'H', generate: (r) => H.build(H.sample(r)) }, 5],
+  ['I', { id: 'I', generate: (r) => I.build(I.sample(r)) }, 5],
 ]
 
 describe.each(gens)('generator %s: generic rules', (name, gen, nParts) => {
@@ -339,4 +342,53 @@ describe('generator H against independent computation', () => {
       close(ans[4], vars.reduce((u, v) => u + v, 0) / vars.length - plug, 1e-9)
     }
   }, 300000)
+})
+
+// ---------- I ----------
+describe('generator I against independent computation', () => {
+  // log-likelihood of the Poisson total T over n observations (the factorial constant is kept, it cancels in differences)
+  const ll = (T: number, n: number, lam: number) => -n * lam + T * Math.log(n * lam) - logFact(T)
+  const mle = (T: number, n: number) => golden((l) => ll(T, n, l), 0.01, 40, true)
+  const poisDraw = (rng: ReturnType<typeof makeRng>, mu: number) => { const u = rng.next(); let k = 0, p = Math.exp(-mu), c = p; while (u > c && k < 1000) { k++; p *= mu / k; c += p } return k }
+  it('likelihood ratio by maximising the log-likelihood; Wald and score by finite differences; endpoint by scanning; two-sample statistic by golden-section search (300 seeds)', () => {
+    for (const s of seeds('I', 300)) {
+      const p = I.sample(makeRng(s))
+      const ans = answers(I.build(p))
+      const { n, lam0, T, n2, T2 } = p
+      const hat = mle(T, n)
+      close(hat, T / n, 1e-5)
+      close(ans[0], 2 * (ll(T, n, hat) - ll(T, n, lam0)), 1e-6)
+      // Wald: observed information from the second difference at the MLE
+      const h = 1e-3
+      const info = -(ll(T, n, hat + h) - 2 * ll(T, n, hat) + ll(T, n, hat - h)) / (h * h)
+      close(ans[1], (hat - lam0) ** 2 * info, 1e-3)
+      // score: derivative at lambda0 by central difference, expected information n / lambda0
+      const u = (ll(T, n, lam0 + h) - ll(T, n, lam0 - h)) / (2 * h)
+      close(ans[2], (u * u) / (n / lam0), 1e-5)
+      // upper endpoint: scan upward from the MLE until the deviance crosses the critical value, then interpolate
+      const dv = (l: number) => 2 * (ll(T, n, hat) - ll(T, n, l))
+      let l = hat; const step = 1e-3
+      while (dv(l + step) <= I.CRIT) l += step
+      const frac = (I.CRIT - dv(l)) / (dv(l + step) - dv(l))
+      close(ans[3], l + frac * step, 2e-3)
+      // two-sample: pooled MLE by search of the joint log-likelihood against the separate MLEs
+      const common = golden((x) => ll(T, n, x) + ll(T2, n2, x), 0.01, 40, true)
+      const sep = ll(T, n, mle(T, n)) + ll(T2, n2, mle(T2, n2))
+      close(ans[4], 2 * (sep - ll(T, n, common) - ll(T2, n2, common)), 1e-5)
+    }
+  }, 300000)
+  it('Wilks: the one-degree-of-freedom statistics reject at about 5% under the null (Monte Carlo)', () => {
+    for (const s of seeds('I', 12)) {
+      const p = I.sample(makeRng(s)); const rng = makeRng('mc' + s)
+      let rej1 = 0, rej2 = 0; const sims = 12000
+      for (let i = 0; i < sims; i++) {
+        const t = poisDraw(rng, p.n * p.lam0)
+        if (t > 0 && I.dev(t, p.n, p.lam0) > I.CRIT) rej1++
+        const a = poisDraw(rng, p.n * p.lam0), b = poisDraw(rng, p.n2 * p.lam0)
+        if (a > 0 && b > 0) { const pooled = (a + b) / (p.n + p.n2); if (2 * (a * Math.log(a / p.n / pooled) + b * Math.log(b / p.n2 / pooled)) > I.CRIT) rej2++ }
+      }
+      expect(Math.abs(rej1 / sims - 0.05), `one-sample rejection ${rej1 / sims}`).toBeLessThan(0.02)
+      expect(Math.abs(rej2 / sims - 0.05), `two-sample rejection ${rej2 / sims}`).toBeLessThan(0.015)
+    }
+  }, 120000)
 })

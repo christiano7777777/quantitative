@@ -66,98 +66,130 @@
  {
   "id": "np-1.3",
   "lecture": 1,
-  "stem": "Why are rank-based methods robust to outliers?",
+  "stem": "Let $X_1,\\dots,X_n$ be independent with a common continuous cdf $F$. What is the cdf of the sample maximum $X_{(n)}$?",
   "correct": [
-   "An extreme value has only the top rank, however large.",
-   "Ranks remove the size of outliers."
+   "$P(X_{(n)}\\le x)=F(x)^n$, since all $n$ observations must be at most $x$.",
+   "It is $F(x)$ multiplied by itself $n$ times, one factor per observation."
   ],
   "distractors": [
    {
-    "text": "Outliers are automatically deleted before ranking.",
-    "misconception": "confuses ranking with trimming"
+    "text": "$P(X_{(n)}\\le x)=nF(x)$ for $x$ in the support, with one term for each observation.",
+    "misconception": "adds the probabilities instead of multiplying them"
    },
    {
-    "text": "Ranks are computed after the outliers are replaced by the mean.",
-    "misconception": "invents a replacement step"
+    "text": "$P(X_{(n)}\\le x)=1-(1-F(x))^n$, because one observation below $x$ is enough.",
+    "misconception": "gives the cdf of the minimum instead"
    },
    {
-    "text": "Ranks assign larger weight to extreme values.",
-    "misconception": "reverses the effect"
+    "text": "$P(X_{(n)}\\le x)=F(x)$, so the maximum has the same law as a single draw.",
+    "misconception": "thinks the maximum has the same law as one observation"
    },
    {
-    "text": "Rank methods ignore the order of the observations.",
-    "misconception": "confuses ranks with orderless summaries"
+    "text": "$P(X_{(n)}\\le x)=F(x)^{1/n}$, which rises as the sample size grows.",
+    "misconception": "inverts the power"
    },
    {
-    "text": "They are not robust, only distribution-free.",
-    "misconception": "denies the robustness"
+    "text": "$P(X_{(n)}\\le x)=1-F(x)^n$, the chance that all observations exceed $x$.",
+    "misconception": "confuses all below with all above"
    }
   ],
-  "explanation": "In the sample $1,2,3,4,1000$, the ranks are $1,\\dots,5$ whatever the last value is, whereas it dominates the mean and the standard deviation."
+  "explanation": "The maximum is at most $x$ exactly when each of the $n$ independent observations is, which gives $F(x)^n$. The minimum has cdf $1-(1-F(x))^n$."
  },
  {
   "id": "np-1.4",
   "lecture": 1,
-  "stem": "What do nonparametric methods trade off for their flexibility?",
+  "stem": "For $n$ independent continuous observations, which statement correctly describes $P(X_{(k)}\\le x)$, where $F=F(x)$ and $1\\le k\\le n$?",
   "correct": [
-   "Some efficiency when the parametric model is right.",
-   "Slower convergence in estimation problems."
+   "It is the chance that at least $k$ observations are at most $x$, $\\sum_{j=k}^{n}\\binom nj F^j(1-F)^{n-j}$.",
+   "With $N\\sim\\mathrm{Bin}(n,F)$ the number at most $x$, it equals $P(N\\ge k)$."
   ],
   "distractors": [
    {
-    "text": "They are always biased.",
-    "misconception": "confuses with bias"
+    "text": "It is $\\binom nk F^k(1-F)^{n-k}$, the probability that exactly $k$ observations lie below $x$.",
+    "misconception": "uses exactly $k$ instead of at least $k$"
    },
    {
-    "text": "They require larger sample sizes than parametric methods in every setting, without exception.",
-    "misconception": "overstates"
+    "text": "It is $\\sum_{j=0}^{k}\\binom nj F^j(1-F)^{n-j}$, the probability of at most $k$ observations below $x$.",
+    "misconception": "flips the direction of the binomial tail"
    },
    {
-    "text": "They cannot be used for hypothesis testing.",
-    "misconception": "denies their use"
+    "text": "It is $F^k$, because the $k$ smallest observations must all lie below the point $x$.",
+    "misconception": "ignores that the other observations are free and which ones are below"
    },
    {
-    "text": "They need more assumptions than parametric methods.",
-    "misconception": "reverses the idea"
+    "text": "It is $kF(x)/n$, a linear interpolation between the minimum and the maximum of the sample.",
+    "misconception": "treats order statistics as proportional to the cdf"
    },
    {
-    "text": "They are inconsistent.",
-    "misconception": "denies consistency"
+    "text": "It is $F^k(1-F)^{n-k}$, with no binomial coefficient needed for the choice of observations.",
+    "misconception": "forgets the number of ways to choose which observations are below"
    }
   ],
-  "explanation": "Nonparametric density and regression estimators converge slower than $n^{-1/2}$ (for example $n^{-2/5}$), a cost of weaker assumptions."
+  "explanation": "$X_{(k)}\\le x$ exactly when at least $k$ observations are at most $x$, and that count is binomial. For $k=n$ this reduces to $F^n$."
  },
  {
   "id": "np-1.5",
   "lecture": 1,
-  "stem": "Which situation favours a nonparametric method?",
+  "stem": "Let $X_1,\\dots,X_n$ be iid with a continuous cdf $F$, and let $R_i$ be the rank of $X_i$ in the sample. Which statement is true?",
   "correct": [
-   "Small skewed or heavy-tailed samples with outliers.",
-   "Ordinal data, where only order matters."
+   "The rank vector is uniform over all $n!$ permutations, whatever $F$ is.",
+   "Each assignment of the ranks $1,\\dots,n$ to the observations has probability $1/n!$, free of $F$."
   ],
   "distractors": [
    {
-    "text": "Large normal samples with no outliers.",
-    "misconception": "favours parametric methods"
+    "text": "The law of the ranks depends on $F$, so rank procedures need $F$ to be known beforehand.",
+    "misconception": "thinks ranks carry the shape of the distribution"
    },
    {
-    "text": "A situation with known parametric form and clean data.",
-    "misconception": "favours parametric methods"
+    "text": "Each $R_i$ is uniform on $\\{1,\\dots,n\\}$ only when $F$ is symmetric about its centre.",
+    "misconception": "believes symmetry is needed for rank laws to be free of $F$"
    },
    {
-    "text": "Data that are exactly normal by design.",
-    "misconception": "favours parametric methods"
+    "text": "The ranks are independent of each other, because the observations themselves are independent.",
+    "misconception": "misses that the ranks always sum to a fixed total"
    },
    {
-    "text": "A model whose parameters have to be estimated precisely.",
-    "misconception": "favours parametric methods"
+    "text": "The largest rank is more likely to go to an observation that falls far out in a tail.",
+    "misconception": "confuses the size of a value with its rank"
    },
    {
-    "text": "Data with no variation.",
-    "misconception": "makes any test meaningless"
+    "text": "The ranks are uniform over the permutations only when the data come from a normal law.",
+    "misconception": "ties distribution-free behaviour to the normal law"
    }
   ],
-  "explanation": "Ordinal ratings (1 to 5 stars) have no meaningful differences, so rank methods are natural."
+  "explanation": "Continuity rules out ties and exchangeability makes every ordering equally likely. The ranks are not independent: they always sum to $n(n+1)/2$."
+ },
+ {
+  "id": "np-1.6",
+  "lecture": 1,
+  "stem": "A distribution-free confidence interval for the $p$-quantile $\\xi_p$ of a continuous distribution is $(X_{(r)},X_{(s)})$ with $r<s$. How is its coverage found?",
+  "correct": [
+   "It is $P(r\\le B\\le s-1)$ with $B\\sim\\mathrm{Bin}(n,p)$, whatever $F$ is.",
+   "It is the chance that the binomial count of observations below $\\xi_p$ lies in $[r,s-1]$."
+  ],
+  "distractors": [
+   {
+    "text": "It requires $F$ to be normal, since the endpoints are order statistics of the data.",
+    "misconception": "thinks order statistics need a parametric model"
+   },
+   {
+    "text": "It is $(s-r)/n$, the fraction of the sample lying between the two endpoints of the interval.",
+    "misconception": "confuses coverage of the quantile with the sample fraction"
+   },
+   {
+    "text": "It is $P(B\\ge r)$ with $B\\sim\\mathrm{Bin}(n,1/2)$, whatever the value of $p$ is.",
+    "misconception": "uses the median probability for every quantile"
+   },
+   {
+    "text": "It tends to 1 as $n$ grows, even when $r$ and $s$ are held fixed.",
+    "misconception": "believes more data always raises the coverage of fixed order statistics"
+   },
+   {
+    "text": "It can be made exactly $1-\\alpha$ for any chosen level $\\alpha$ and any sample size.",
+    "misconception": "ignores that the coverage takes only discrete binomial values"
+   }
+  ],
+  "explanation": "Since $F(\\xi_p)=p$, the count of observations below $\\xi_p$ is $\\mathrm{Bin}(n,p)$, whatever $F$ is. Because the count is discrete, one picks $r,s$ with coverage at least $1-\\alpha$."
  },
  {
   "id": "np-2.1",
@@ -930,34 +962,66 @@
  {
   "id": "np-6.5",
   "lecture": 6,
-  "stem": "How do Kendall's tau and Spearman's rho typically compare in size?",
+  "stem": "Which statement describes the Mann-Kendall statistic $S$ for observations $x_1,\\dots,x_n$ recorded in time order?",
   "correct": [
-   "Spearman's rho is usually larger in size than Kendall's tau.",
-   "Tau reads as a probability difference."
+   "$S=\\sum_{i<j}\\mathrm{sgn}(x_j-x_i)$, the number of rising pairs minus falling pairs.",
+   "It is Kendall's concordance statistic between the series and its time index."
   ],
   "distractors": [
    {
-    "text": "Kendall's tau is always larger in absolute value.",
-    "misconception": "reverses the typical relation"
+    "text": "It sums only the signs of consecutive differences $x_{t+1}-x_t$, ignoring pairs far apart in time.",
+    "misconception": "uses adjacent pairs instead of all pairs"
    },
    {
-    "text": "They are always equal.",
-    "misconception": "ignores the different scales"
+    "text": "It sums the raw differences $x_j-x_i$ over all pairs, so large jumps dominate the value.",
+    "misconception": "ignores that only signs enter"
    },
    {
-    "text": "They have the opposite sign for the same data.",
-    "misconception": "invents a relation"
+    "text": "It tests only for a straight-line trend and needs normally distributed errors.",
+    "misconception": "confuses it with the regression slope test"
    },
    {
-    "text": "Tau is bounded by 0.5 and rho by 1.",
-    "misconception": "gives wrong bounds"
+    "text": "It equals $n$ times the Spearman correlation between the series and time.",
+    "misconception": "mixes up two different rank statistics"
    },
    {
-    "text": "Both lie in $[0,1]$.",
-    "misconception": "forgets negative values"
+    "text": "It is large only if the series rises in every single period, with no falls at all.",
+    "misconception": "demands strict monotonicity period by period"
    }
   ],
-  "explanation": "Both lie in $[-1,1]$. Under bivariate normality $\\tau=\\tfrac2\\pi\\arcsin\\rho$, which gives a ratio near 2/3 at moderate values."
+  "explanation": "Every pair $i<j$ contributes $\\pm1$ according to the direction of change, so $S$ is the numerator of Kendall's tau between time and the observation. It detects monotone, not just linear, trends."
+ },
+ {
+  "id": "np-6.6",
+  "lecture": 6,
+  "stem": "Under the hypothesis that $n$ observations are iid with no ties, what are the null mean and variance of the Mann-Kendall statistic $S$?",
+  "correct": [
+   "$E[S]=0$ and $\\mathrm{Var}(S)=n(n-1)(2n+5)/18$, with $S$ near normal for moderate $n$.",
+   "Centred at zero with variance $n(n-1)(2n+5)/18$, so a normal approximation applies."
+  ],
+  "distractors": [
+   {
+    "text": "$E[S]=n(n-1)/4$ and $\\mathrm{Var}(S)=n(n-1)(2n+5)/18$, with $S$ near normal for large $n$.",
+    "misconception": "takes the mean of the concordant count rather than of $S$"
+   },
+   {
+    "text": "$E[S]=0$ and $\\mathrm{Var}(S)=n(n+1)(2n+1)/24$, the same as the signed-rank statistic.",
+    "misconception": "borrows the signed-rank variance"
+   },
+   {
+    "text": "$E[S]=0$ and $\\mathrm{Var}(S)=n(n-1)/2$, since there are that many pair signs.",
+    "misconception": "treats the pair signs as independent"
+   },
+   {
+    "text": "$E[S]=0$ and $\\mathrm{Var}(S)=n(n-1)(2n+5)/72$, as for the number of concordant pairs.",
+    "misconception": "uses the variance of the concordant count instead of that of $S$"
+   },
+   {
+    "text": "$E[S]=0$ and $\\mathrm{Var}(S)=n(n-1)(n+1)/12$, the same form as the rank-sum variance.",
+    "misconception": "borrows the form of the rank-sum variance"
+   }
+  ],
+  "explanation": "$S=2C-n(n-1)/2$ where $C$ counts concordant pairs, so $\\mathrm{Var}(S)=4\\mathrm{Var}(C)$. Check $n=3$: $S$ takes values $\\pm3,\\pm1$ with probabilities $1,2,2,1$ over 6, so the variance is $22/6=3\\cdot2\\cdot11/18$."
  },
  {
   "id": "np-7.1",
@@ -1122,6 +1186,166 @@
  {
   "id": "np-8.1",
   "lecture": 8,
+  "stem": "Let $\\hat F_n$ be the empirical cdf of $n$ iid observations from an arbitrary distribution $F$. What does the Glivenko-Cantelli theorem state?",
+  "correct": [
+   "$\\sup_x|\\hat F_n(x)-F(x)|\\to0$ almost surely, for every $F$.",
+   "The empirical cdf converges to $F$ uniformly in $x$, with probability one."
+  ],
+  "distractors": [
+   {
+    "text": "$\\hat F_n(x)\\to F(x)$ at each fixed $x$ but never uniformly over all $x$, however large $n$ is.",
+    "misconception": "denies uniformity"
+   },
+   {
+    "text": "The convergence holds only when $F$ is continuous, since jumps in $F$ break the argument.",
+    "misconception": "believes jumps in $F$ break the result"
+   },
+   {
+    "text": "The convergence holds only when $F$ has a finite variance, which the proof needs.",
+    "misconception": "thinks moments are needed"
+   },
+   {
+    "text": "$\\hat F_n(x)$ equals $F(x)$ exactly once $n$ passes some finite threshold.",
+    "misconception": "confuses convergence with equality"
+   },
+   {
+    "text": "$\\sqrt n\\,\\sup_x|\\hat F_n(x)-F(x)|\\to0$ almost surely, at the same time.",
+    "misconception": "confuses the rate of convergence"
+   }
+  ],
+  "explanation": "The theorem holds for every $F$, discrete or continuous, with no moment condition. The supremum is of order $1/\\sqrt n$, so after multiplying by $\\sqrt n$ it does not vanish."
+ },
+ {
+  "id": "np-8.2",
+  "lecture": 8,
+  "stem": "What is the plug-in estimator of the variance functional $T(F)=\\int(x-\\mu)^2\\,dF(x)$ with $\\mu=\\int x\\,dF(x)$?",
+  "correct": [
+   "$T(\\hat F_n)=\\frac1n\\sum_i(X_i-\\bar X)^2$, the variance with divisor $n$.",
+   "The mean squared deviation about $\\bar X$, from $\\hat F_n$ with mass $1/n$ on each point."
+  ],
+  "distractors": [
+   {
+    "text": "$\\frac1{n-1}\\sum_i(X_i-\\bar X)^2$, because plug-in estimators are always unbiased.",
+    "misconception": "believes plug-in estimators are unbiased by construction"
+   },
+   {
+    "text": "$\\frac1n\\sum_i(X_i-\\mu)^2$, keeping the true mean $\\mu$ inside the sum.",
+    "misconception": "plugs in only part of the functional"
+   },
+   {
+    "text": "$\\frac1n\\sum_i|X_i-\\bar X|$, the mean absolute deviation about the sample mean.",
+    "misconception": "replaces the functional by a different one"
+   },
+   {
+    "text": "The sample median of the squared observations $X_i^2$, a robust summary of spread.",
+    "misconception": "confuses the variance with a median of squares"
+   },
+   {
+    "text": "$\\bar X^2$, the square of the plug-in estimator of the mean.",
+    "misconception": "confuses the variance with the squared mean"
+   }
+  ],
+  "explanation": "The plug-in estimator evaluates $T$ at $\\hat F_n$. For the variance this has divisor $n$, so it is biased by the factor $(n-1)/n$ but still consistent."
+ },
+ {
+  "id": "np-8.3",
+  "lecture": 8,
+  "stem": "The influence function of a functional $T$ at $x$ is $L_T(x)=\\lim_{\\varepsilon\\to0}\\{T((1-\\varepsilon)F+\\varepsilon\\delta_x)-T(F)\\}/\\varepsilon$. What does it measure?",
+  "correct": [
+   "The effect on $T$ of a tiny contamination at $x$; for the mean it is $x-\\mu$, unbounded.",
+   "The rate of change of $T$ when mass is added at $x$; for the mean it is linear in $x$."
+  ],
+  "distractors": [
+   {
+    "text": "The effect of deleting the observation $x$ from the sample; for the mean it is $\\bar X_{(-x)}$.",
+    "misconception": "confuses the influence function with leave-one-out"
+   },
+   {
+    "text": "The density of $F$ at the point $x$, so that for the mean it is simply equal to $f(x)$.",
+    "misconception": "confuses influence with the density"
+   },
+   {
+    "text": "The effect on $T$ of a tiny contamination at $x$; for the mean it is $x-\\mu$, a bounded function.",
+    "misconception": "believes the mean is a robust functional"
+   },
+   {
+    "text": "The bias of the estimator $T(\\hat F_n)$; for the mean it is zero since $\\bar X$ is unbiased.",
+    "misconception": "confuses influence with bias"
+   },
+   {
+    "text": "The variance of $T(\\hat F_n)$ at sample size $x$; for the mean it is $\\sigma^2/x$.",
+    "misconception": "confuses influence with the sampling variance"
+   }
+  ],
+  "explanation": "The influence function is the derivative of $T$ along the path from $F$ towards $\\delta_x$. For the mean, $T=\\mu$ moves linearly, giving $x-\\mu$; the median has a bounded influence function."
+ },
+ {
+  "id": "np-8.4",
+  "lecture": 8,
+  "stem": "Using the influence function $L_T$, the standard error of $T(\\hat F_n)$ is approximated by $\\hat\\tau/\\sqrt n$. How is $\\hat\\tau^2$ computed?",
+  "correct": [
+   "$\\hat\\tau^2=\\frac1n\\sum_i\\hat L(X_i)^2$, the mean of the squared influence values at the data.",
+   "Replace $F$ by $\\hat F_n$ in $\\int L_T(x)^2\\,dF(x)$ and evaluate the integral."
+  ],
+  "distractors": [
+   {
+    "text": "$\\hat\\tau^2=\\frac1n\\sum_i\\hat L(X_i)$, the average influence value over the sample.",
+    "misconception": "forgets to square, although the average is always zero"
+   },
+   {
+    "text": "$\\hat\\tau^2=\\max_i\\hat L(X_i)^2$, the largest squared influence value in the sample.",
+    "misconception": "uses the largest instead of the average"
+   },
+   {
+    "text": "$\\hat\\tau^2=\\{\\frac1n\\sum_i\\hat L(X_i)\\}^2$, the square of the average influence.",
+    "misconception": "squares after averaging"
+   },
+   {
+    "text": "$\\hat\\tau^2=\\hat F_n(x)\\{1-\\hat F_n(x)\\}$ for every functional $T$ and every $x$.",
+    "misconception": "applies the binomial variance of the empirical cdf to all functionals"
+   },
+   {
+    "text": "It is available only if $F$ belongs to a parametric family, since $L_T$ needs a density.",
+    "misconception": "thinks the influence function needs a parametric model"
+   }
+  ],
+  "explanation": "For the mean $L(x)=x-\\mu$, so $\\hat\\tau^2=\\frac1n\\sum(X_i-\\bar X)^2$ and the standard error is about $\\hat\\sigma/\\sqrt n$, as expected."
+ },
+ {
+  "id": "np-8.5",
+  "lecture": 8,
+  "stem": "Which statement about the Dvoretzky-Kiefer-Wolfowitz (DKW) inequality is true?",
+  "correct": [
+   "$P(\\sup_x|\\hat F_n-F|>\\varepsilon)\\le2e^{-2n\\varepsilon^2}$ for every $F$ and every $n$.",
+   "The band $\\hat F_n\\pm\\sqrt{\\log(2/\\alpha)/(2n)}$ covers $F$ with probability at least $1-\\alpha$."
+  ],
+  "distractors": [
+   {
+    "text": "It holds only asymptotically, and only for a continuous $F$ with a bounded density.",
+    "misconception": "thinks the bound is only a large-sample result"
+   },
+   {
+    "text": "The bound is $2e^{-2n\\varepsilon}$, so the band shrinks like $1/n$ as the sample grows.",
+    "misconception": "misplaces the square and the rate"
+   },
+   {
+    "text": "The bound depends on the density of $F$, so every $F$ needs its own band.",
+    "misconception": "believes the band depends on the unknown $F$"
+   },
+   {
+    "text": "The band half-width is of order $1/n$, much narrower than any parametric band.",
+    "misconception": "gets the order of the half-width wrong"
+   },
+   {
+    "text": "It controls the error of $\\hat F_n(x)$ at one fixed $x$ only, not uniformly in $x$.",
+    "misconception": "confuses a uniform bound with a pointwise one"
+   }
+  ],
+  "explanation": "The half-width is of order $n^{-1/2}$, and the inequality holds for all $n$ and all $F$. To make it at most $\\varepsilon$ one needs $n\\ge\\log(2/\\alpha)/(2\\varepsilon^2)$."
+ },
+ {
+  "id": "np-9.1",
+  "lecture": 9,
   "stem": "What is the nonparametric bootstrap?",
   "correct": [
    "Resample with replacement and recompute the statistic each time.",
@@ -1152,8 +1376,8 @@
   "explanation": "The bootstrap standard error is the standard deviation of the bootstrap replicates $\\hat\\theta^*_1,\\dots,\\hat\\theta^*_B$."
  },
  {
-  "id": "np-8.2",
-  "lecture": 8,
+  "id": "np-9.2",
+  "lecture": 9,
   "stem": "How is a percentile bootstrap confidence interval formed?",
   "correct": [
    "The $\\alpha/2$ and $1-\\alpha/2$ quantiles of the replicates.",
@@ -1184,8 +1408,8 @@
   "explanation": "The percentile interval is transformation-respecting; BCa refines it by correcting for bias and skewness."
  },
  {
-  "id": "np-8.3",
-  "lecture": 8,
+  "id": "np-9.3",
+  "lecture": 9,
   "stem": "How does the jackknife estimate the bias of a statistic $\\hat\\theta$?",
   "correct": [
    "$(n-1)(\\bar\\theta_{(\\cdot)}-\\hat\\theta)$, from leave-one-out estimates.",
@@ -1216,8 +1440,8 @@
   "explanation": "The jackknife-corrected estimate is $n\\hat\\theta-(n-1)\\bar\\theta_{(\\cdot)}$, which removes the $O(1/n)$ bias."
  },
  {
-  "id": "np-8.4",
-  "lecture": 8,
+  "id": "np-9.4",
+  "lecture": 9,
   "stem": "Where does the jackknife fail?",
   "correct": [
    "For non-smooth statistics such as the median.",
@@ -1248,8 +1472,8 @@
   "explanation": "Bootstrap works for the median; neither works for the sample maximum."
  },
  {
-  "id": "np-8.5",
-  "lecture": 8,
+  "id": "np-9.5",
+  "lecture": 9,
   "stem": "In a sample of size $n$, what is the probability that a given observation does not appear in a bootstrap resample?",
   "correct": [
    "$(1-1/n)^n$, about $e^{-1}\\approx0.368$ for large $n$, so roughly a third is left out.",
@@ -1280,8 +1504,8 @@
   "explanation": "The remaining 63% of observations appear at least once; this is why out-of-bag error is based on roughly a third of the trees in bagging."
  },
  {
-  "id": "np-9.1",
-  "lecture": 9,
+  "id": "np-10.1",
+  "lecture": 10,
   "stem": "How does a kernel density estimator with kernel $K$ and bandwidth $h$ work?",
   "correct": [
    "$\\hat f(x)=\\frac1{nh}\\sum_iK\\{(x-X_i)/h\\}$, a smooth bump averaged over the observations.",
@@ -1312,8 +1536,8 @@
   "explanation": "The factor $1/h$ keeps the area at 1, since $\\int K\\{(x-X_i)/h\\}dx=h$."
  },
  {
-  "id": "np-9.2",
-  "lecture": 9,
+  "id": "np-10.2",
+  "lecture": 10,
   "stem": "What is the effect of the bandwidth $h$ on a kernel density estimate?",
   "correct": [
    "Small $h$ is wiggly and noisy; large $h$ oversmooths and adds bias.",
@@ -1344,8 +1568,8 @@
   "explanation": "$\\text{bias}\\approx h^2f''(x)\\mu_2(K)/2$ and $\\text{variance}\\approx f(x)R(K)/(nh)$; both are balanced by $h\\propto n^{-1/5}$."
  },
  {
-  "id": "np-9.3",
-  "lecture": 9,
+  "id": "np-10.3",
+  "lecture": 10,
   "stem": "How does the asymptotically optimal bandwidth (for mean integrated squared error) scale with the sample size $n$?",
   "correct": [
    "In proportion to $n^{-1/5}$.",
@@ -1376,8 +1600,8 @@
   "explanation": "Parametric densities converge at rate $n^{-1}$ in MISE; this slower rate is the price of flexibility. Silverman's rule is $h=1.06\\,\\hat\\sigma n^{-1/5}$."
  },
  {
-  "id": "np-9.4",
-  "lecture": 9,
+  "id": "np-10.4",
+  "lecture": 10,
   "stem": "Which is true of the choice of kernel in density estimation?",
   "correct": [
    "It matters little next to the bandwidth.",
@@ -1408,8 +1632,8 @@
   "explanation": "Kernels are nonnegative, symmetric and integrate to one; they differ in efficiency by under 5%."
  },
  {
-  "id": "np-9.5",
-  "lecture": 9,
+  "id": "np-10.5",
+  "lecture": 10,
   "stem": "What is a known weakness of the kernel density estimator near the boundary of a bounded support?",
   "correct": [
    "It leaks mass outside the support and is biased near the edge.",
@@ -1440,8 +1664,8 @@
   "explanation": "Examples: densities of returns' absolute values or durations, supported on $[0,\\infty)$. Reflecting the data or using log transformations helps."
  },
  {
-  "id": "np-10.1",
-  "lecture": 10,
+  "id": "np-11.1",
+  "lecture": 11,
   "stem": "What does the Nadaraya-Watson estimator of the regression function compute at $x$?",
   "correct": [
    "A kernel-weighted average of the responses.",
@@ -1472,8 +1696,8 @@
   "explanation": "It is a locally constant fit; as $h\\to\\infty$ it tends to the sample mean, and as $h\\to0$ it interpolates the data."
  },
  {
-  "id": "np-10.2",
-  "lecture": 10,
+  "id": "np-11.2",
+  "lecture": 11,
   "stem": "Why is local linear regression often preferred to Nadaraya-Watson?",
   "correct": [
    "Less bias at boundaries, as it fits a line.",
@@ -1504,8 +1728,8 @@
   "explanation": "Local linear regression reproduces linear functions exactly, so its bias depends on the curvature only, not on the design density."
  },
  {
-  "id": "np-10.3",
-  "lecture": 10,
+  "id": "np-11.3",
+  "lecture": 11,
   "stem": "What is LOESS (LOWESS)?",
   "correct": [
    "Local regression with weights falling with distance.",
@@ -1536,8 +1760,8 @@
   "explanation": "The span (the fraction of points used) plays the role of the bandwidth; a larger span gives a smoother curve."
  },
  {
-  "id": "np-10.4",
-  "lecture": 10,
+  "id": "np-11.4",
+  "lecture": 11,
   "stem": "How is the bandwidth of a kernel regression typically chosen?",
   "correct": [
    "By cross-validation, minimising leave-one-out prediction error.",
@@ -1568,8 +1792,8 @@
   "explanation": "The in-sample squared error decreases as $h\\to0$, so a held-out criterion (leave-one-out CV, GCV) is needed."
  },
  {
-  "id": "np-10.5",
-  "lecture": 10,
+  "id": "np-11.5",
+  "lecture": 11,
   "stem": "How do nonparametric regression estimators behave as the number of predictors grows?",
   "correct": [
    "They suffer the curse of dimensionality: neighbourhoods empty out.",
@@ -1598,5 +1822,165 @@
    }
   ],
   "explanation": "Additive or single-index models restore reasonable rates by imposing structure."
+ },
+ {
+  "id": "np-12.1",
+  "lecture": 12,
+  "stem": "Which statement correctly contrasts the Kendall and Spearman distances between two rankings of $n$ items?",
+  "correct": [
+   "Kendall counts discordant pairs of items; Spearman sums squared rank differences.",
+   "Kendall is the number of adjacent swaps between the rankings; Spearman squares rank displacements."
+  ],
+  "distractors": [
+   {
+    "text": "Kendall counts the positions where the rankings differ, while Spearman counts the discordant pairs.",
+    "misconception": "mixes up the definitions with a position-wise count"
+   },
+   {
+    "text": "Kendall sums squared rank differences, whereas Spearman counts the discordant pairs of items.",
+    "misconception": "reverses the two definitions"
+   },
+   {
+    "text": "Both are at most $n$, because each item can move at most $n$ places in a ranking.",
+    "misconception": "misjudges the maximum possible distance"
+   },
+   {
+    "text": "Kendall's distance can be negative, which then signals that the rankings are reversed.",
+    "misconception": "confuses a distance with a correlation"
+   },
+   {
+    "text": "Both vanish when one ranking is the exact reverse of the other ranking.",
+    "misconception": "confuses zero distance with reversal"
+   }
+  ],
+  "explanation": "Both are zero only for identical rankings. The reversed ranking is at the maximum Kendall distance $n(n-1)/2$."
+ },
+ {
+  "id": "np-12.2",
+  "lecture": 12,
+  "stem": "In the Mallows model $P(\\pi)\\propto\\exp\\{-\\theta\\,d(\\pi,\\pi_0)\\}$ with $\\theta>0$ and $d$ the Kendall distance, which statement is true?",
+  "correct": [
+   "The centre $\\pi_0$ is the mode, and $\\theta\\to0$ gives the uniform law.",
+   "Probabilities fall geometrically with the distance from $\\pi_0$, and $\\theta=0$ makes all rankings equally likely."
+  ],
+  "distractors": [
+   {
+    "text": "The central ranking is the least likely, since the distance in the exponent is largest there.",
+    "misconception": "reverses the sign of the exponent"
+   },
+   {
+    "text": "Probabilities decrease linearly in the distance from the central ranking.",
+    "misconception": "confuses geometric decay with linear decay"
+   },
+   {
+    "text": "Letting $\\theta\\to\\infty$ makes all $n!$ rankings equally likely in the limit.",
+    "misconception": "swaps the two limits"
+   },
+   {
+    "text": "The model needs a separate parameter for every pair of items in the list.",
+    "misconception": "confuses it with a saturated pairwise model"
+   },
+   {
+    "text": "Two rankings at the same distance from $\\pi_0$ can have different probabilities, depending on which items differ.",
+    "misconception": "ignores that only the distance matters"
+   }
+  ],
+  "explanation": "The probability depends on $\\pi$ only through $d(\\pi,\\pi_0)$, so rankings at equal distance are equally likely. The model has the centre and one concentration parameter."
+ },
+ {
+  "id": "np-12.3",
+  "lecture": 12,
+  "stem": "In a Plackett-Luce model with positive weights $w_1,\\dots,w_n$, what is the probability of the ranking $\\pi=(\\pi_1,\\dots,\\pi_n)$, listed best first?",
+  "correct": [
+   "$\\prod_{i=1}^{n}w_{\\pi_i}/\\sum_{j\\ge i}w_{\\pi_j}$.",
+   "Each place goes to an unranked item with probability proportional to its weight, and the factors multiply."
+  ],
+  "distractors": [
+   {
+    "text": "$\\prod_i w_{\\pi_i}/\\sum_{j=1}^{n}w_j$, always dividing by the total weight of all items.",
+    "misconception": "forgets to remove the items already ranked"
+   },
+   {
+    "text": "$\\prod_{i<j}w_{\\pi_i}/(w_{\\pi_i}+w_{\\pi_j})$, a product over all pairs of positions.",
+    "misconception": "multiplies pairwise Bradley-Terry probabilities as if independent"
+   },
+   {
+    "text": "$\\frac1{n!}\\prod_i w_{\\pi_i}$, so that every ranking is close to uniform.",
+    "misconception": "confuses weights with a uniform prior over rankings"
+   },
+   {
+    "text": "$w_{\\pi_1}/\\sum_j w_j$, because the first place alone decides the whole ranking.",
+    "misconception": "ignores all places after the first"
+   },
+   {
+    "text": "$\\sum_i w_{\\pi_i}\\,(n-i)$, a weighted score of the ranking, as in a Borda count.",
+    "misconception": "confuses the probability with a Borda-type score"
+   }
+  ],
+  "explanation": "With weights $3,2,1$ the ranking $(1,2,3)$ has probability $\\frac36\\cdot\\frac23\\cdot1=\\frac13$. The factors are renormalised over the remaining items at each place."
+ },
+ {
+  "id": "np-12.4",
+  "lecture": 12,
+  "stem": "How does the Plackett-Luce model relate to Thurstone's model of latent utilities?",
+  "correct": [
+   "Plackett-Luce is the Thurstone model with iid Gumbel errors, taking $w_i=e^{\\mu_i}$.",
+   "Sorting utilities $\\mu_i+\\varepsilon_i$ with iid Gumbel noise gives Plackett-Luce rankings."
+  ],
+  "distractors": [
+   {
+    "text": "Plackett-Luce is Thurstone with normal noise and weights $\\mu_i$.",
+    "misconception": "confuses Gumbel with normal noise"
+   },
+   {
+    "text": "They are unrelated, as Thurstone's model is a distance model around a centre.",
+    "misconception": "confuses it with the Mallows model"
+   },
+   {
+    "text": "Thurstone models are Plackett-Luce models with all weights equal.",
+    "misconception": "thinks the latent scores carry no item effect"
+   },
+   {
+    "text": "Every Thurstone model has the same ranking probabilities as Plackett-Luce.",
+    "misconception": "ignores that the noise law decides the model"
+   },
+   {
+    "text": "Thurstone models rank only the top item, while Plackett-Luce ranks the full list.",
+    "misconception": "thinks Thurstone gives only a best-choice model"
+   }
+  ],
+  "explanation": "Thurstone uses latent utilities with noise and ranks by realised value. With normal noise the probabilities have no closed form; with Gumbel noise they reduce to the Plackett-Luce product."
+ },
+ {
+  "id": "np-12.5",
+  "lecture": 12,
+  "stem": "Several judges each rank the same $m$ items. How do the Borda count and the Kemeny consensus ranking compare?",
+  "correct": [
+   "Borda sorts by total points; Kemeny minimises total Kendall distance; they can differ.",
+   "Kemeny has the fewest pairwise disagreements with the judges in total, unlike Borda."
+  ],
+  "distractors": [
+   {
+    "text": "Borda and Kemeny always return the same ranking, since both use the judges' full rankings.",
+    "misconception": "believes the two rules coincide"
+   },
+   {
+    "text": "Kemeny sorts items by mean rank, whereas Borda minimises the total Kendall distance.",
+    "misconception": "swaps the two definitions"
+   },
+   {
+    "text": "Borda counts only each judge's first choice and ignores the rest of the lists.",
+    "misconception": "confuses Borda with plurality voting"
+   },
+   {
+    "text": "The Kemeny ranking is always found at once by sorting the Borda scores of the items.",
+    "misconception": "overlooks that Kemeny aggregation is computationally hard"
+   },
+   {
+    "text": "An item preferred to every other item by a majority of judges always has the top Borda score.",
+    "misconception": "believes Borda always elects a Condorcet winner"
+   }
+  ],
+  "explanation": "Borda is a score rule; Kemeny is the median ranking under Kendall distance and is hard to compute in general. With a Condorcet winner Kemeny puts it first, but Borda may not."
  }
 ]
