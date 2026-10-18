@@ -320,8 +320,8 @@
   "explanation": "For $\\mathrm{Beta}(\\alpha,\\beta)$ the weight of the prior mean is $(\\alpha+\\beta)/(\\alpha+\\beta+n)\\to0$."
  },
  {
-  "id": "bay-3.1",
-  "lecture": 3,
+  "id": "bay-4.1",
+  "lecture": 4,
   "stem": "What is the MAP estimate?",
   "correct": [
    "The posterior mode.",
@@ -352,8 +352,8 @@
   "explanation": "With a flat prior the MAP equals the MLE; the MAP is not invariant under reparametrisation, unlike the MLE."
  },
  {
-  "id": "bay-3.2",
-  "lecture": 3,
+  "id": "bay-4.2",
+  "lecture": 4,
   "stem": "Which loss function does the posterior mean minimise?",
   "correct": [
    "Squared error loss.",
@@ -384,8 +384,8 @@
   "explanation": "The posterior median minimises absolute error, and the posterior mode is optimal for zero-one loss."
  },
  {
-  "id": "bay-3.3",
-  "lecture": 3,
+  "id": "bay-4.3",
+  "lecture": 4,
   "stem": "How does a 95% credible interval differ from a 95% confidence interval?",
   "correct": [
    "A credible interval holds $\\theta$ with posterior probability 0.95; a confidence interval concerns coverage.",
@@ -416,8 +416,8 @@
   "explanation": "With a flat prior and a normal model the two intervals coincide numerically, but their interpretations differ."
  },
  {
-  "id": "bay-3.4",
-  "lecture": 3,
+  "id": "bay-4.4",
+  "lecture": 4,
   "stem": "What is a highest posterior density (HPD) interval?",
   "correct": [
    "The shortest interval with posterior probability $1-\\alpha$.",
@@ -448,8 +448,8 @@
   "explanation": "For a skewed posterior the HPD interval is shorter than the equal-tailed one and not symmetric in probability."
  },
  {
-  "id": "bay-4.1",
-  "lecture": 4,
+  "id": "bay-3.1",
+  "lecture": 3,
   "stem": "What is a weakly informative prior?",
   "correct": [
    "A prior that rules out absurd values only.",
@@ -480,8 +480,8 @@
   "explanation": "A weakly informative prior helps with separation in logistic regression or sparse data, where flat priors give unstable estimates."
  },
  {
-  "id": "bay-4.2",
-  "lecture": 4,
+  "id": "bay-3.2",
+  "lecture": 3,
   "stem": "What is a drawback of an improper flat prior $p(\\theta)\\propto1$?",
   "correct": [
    "It is not a proper density and is not reparametrisation invariant.",
@@ -512,8 +512,8 @@
   "explanation": "A flat prior on a variance is not flat on the standard deviation; Jeffreys priors are designed to be invariant."
  },
  {
-  "id": "bay-4.3",
-  "lecture": 4,
+  "id": "bay-3.3",
+  "lecture": 3,
   "stem": "What is the Jeffreys prior?",
   "correct": [
    "A prior proportional to $\\sqrt{I(\\theta)}$.",
@@ -544,8 +544,8 @@
   "explanation": "For the binomial it is $\\mathrm{Beta}(\\tfrac12,\\tfrac12)$; for a normal mean with known variance it is flat."
  },
  {
-  "id": "bay-4.4",
-  "lecture": 4,
+  "id": "bay-3.4",
+  "lecture": 3,
   "stem": "What is a prior sensitivity analysis?",
   "correct": [
    "Repeat the analysis under several reasonable priors.",

@@ -1053,6 +1053,21 @@
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
+    "title": "Decision theory",
+    "theory": "Loss, risk, admissibility, randomised rules",
+    "computation": "Risk functions and comparing rules"
+   },
+   {
+    "title": "Bayes and minimax rules",
+    "theory": "Bayes risk, posterior expected loss, minimax and least favourable priors",
+    "computation": "Bayes estimators under squared and absolute loss"
+   },
+   {
+    "title": "Prior and posterior inference",
+    "theory": "Conjugate priors, credible sets, Bayes versus frequentist",
+    "computation": "Posterior means and intervals"
+   },
+   {
     "title": "Exponential families and sufficiency",
     "theory": "Exponential families, minimal sufficiency, ancillarity",
     "computation": "Identifying natural parameters and sufficient statistics"
@@ -1071,21 +1086,6 @@
     "title": "Likelihood and large-sample theory of the MLE",
     "theory": "Consistency, asymptotic normality, efficiency, Wald and score statistics",
     "computation": "Asymptotic variances and standard errors"
-   },
-   {
-    "title": "Decision theory",
-    "theory": "Loss, risk, admissibility, randomised rules",
-    "computation": "Risk functions and comparing rules"
-   },
-   {
-    "title": "Bayes and minimax rules",
-    "theory": "Bayes risk, posterior expected loss, minimax and least favourable priors",
-    "computation": "Bayes estimators under squared and absolute loss"
-   },
-   {
-    "title": "Prior and posterior inference",
-    "theory": "Conjugate priors, credible sets, Bayes versus frequentist",
-    "computation": "Posterior means and intervals"
    },
    {
     "title": "Uniformly most powerful tests",
@@ -1509,14 +1509,14 @@
     "computation": "Posterior updates, shrinkage weights"
    },
    {
-    "title": "Posterior summaries",
-    "theory": "MAP, posterior mean, credible vs HPD vs confidence intervals",
-    "computation": "A 95% credible interval"
-   },
-   {
     "title": "Choosing a prior",
     "theory": "Elicitation, noninformative and weakly informative priors, sensitivity analysis",
     "computation": "Comparing posteriors under different priors"
+   },
+   {
+    "title": "Posterior summaries",
+    "theory": "MAP, posterior mean, credible vs HPD vs confidence intervals",
+    "computation": "A 95% credible interval"
    },
    {
     "title": "Model evaluation and selection",
@@ -1675,6 +1675,11 @@
     "computation": "Densities and probabilities for order statistics, quantile confidence levels"
    },
    {
+    "title": "Goodness-of-fit tests",
+    "theory": "Kolmogorov-Smirnov, Anderson-Darling, chi-square",
+    "computation": "KS statistic from small samples"
+   },
+   {
     "title": "Sign and signed-rank tests",
     "theory": "Sign test, Wilcoxon signed-rank",
     "computation": "Exact and normal-approximation tests"
@@ -1690,9 +1695,9 @@
     "computation": "H statistics from rank sums"
    },
    {
-    "title": "Goodness-of-fit tests",
-    "theory": "Kolmogorov-Smirnov, Anderson-Darling, chi-square",
-    "computation": "KS statistic from small samples"
+    "title": "Permutation tests",
+    "theory": "Exchangeability, exact and Monte Carlo tests",
+    "computation": "Enumerating permutation distributions"
    },
    {
     "title": "Tests for association and trend",
@@ -1700,24 +1705,9 @@
     "computation": "Computing rank correlations and trend statistics"
    },
    {
-    "title": "Permutation tests",
-    "theory": "Exchangeability, exact and Monte Carlo tests",
-    "computation": "Enumerating permutation distributions"
-   },
-   {
-    "title": "Statistical functionals and the empirical distribution",
-    "theory": "Empirical CDF, plug-in estimators, statistical functionals, influence function, DKW bound",
-    "computation": "Plug-in estimates and influence values"
-   },
-   {
     "title": "Jackknife and bootstrap",
     "theory": "Jackknife bias and variance, bootstrap variance, bias and intervals",
     "computation": "Jackknife estimates, bootstrap standard errors"
-   },
-   {
-    "title": "Kernel density estimation",
-    "theory": "Bias-variance, bandwidth selection",
-    "computation": "Density estimates at points"
    },
    {
     "title": "Nonparametric regression",
@@ -1728,6 +1718,16 @@
     "title": "Statistical modelling for ranking data",
     "theory": "Rank data, Mallows and Plackett-Luce models, Thurstone, distance-based models, rank aggregation",
     "computation": "Probabilities of rankings, Kendall distance, Borda counts"
+   },
+   {
+    "title": "Statistical functionals and the empirical distribution",
+    "theory": "Empirical CDF, plug-in estimators, statistical functionals, influence function, DKW bound",
+    "computation": "Plug-in estimates and influence values"
+   },
+   {
+    "title": "Kernel density estimation",
+    "theory": "Bias-variance, bandwidth selection",
+    "computation": "Density estimates at points"
    }
   ]
  },

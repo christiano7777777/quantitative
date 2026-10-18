@@ -16,9 +16,10 @@ import { genJ } from './lq/j-functional'
 import { genK } from './lq/k-ranking'
 
 // Blueprint: every attempt has one long question from each slot.
-//   slot 1: order statistics and efficiency (1), sign and signed-rank tests (2), two-sample rank tests (3), designed experiments (4): generators I, A, B
-//   slot 2: goodness-of-fit (5), association and trend (6), permutation tests (7), functionals, plug-in and DKW (8): generators C, D, E, J
-//   slot 3: jackknife and bootstrap (9), kernel density estimation (10), nonparametric regression (11), ranking data (12): generators F, G, H, K
+//   (lectures follow the HKU STAT3620 topic order: order statistics 1, goodness-of-fit 2, rank tests 3-4, designed experiments 5, permutation 6, trend and association 7, jackknife and bootstrap 8, regression 9, ranking data 10, functionals 11, kernel estimation 12)
+//   slot 1: order statistics and efficiency, sign and signed-rank tests, two-sample rank tests, designed experiments: generators I, A, B
+//   slot 2: goodness-of-fit, association and trend, permutation tests, functionals, plug-in and DKW: generators C, D, E, J
+//   slot 3: jackknife and bootstrap, kernel density estimation, nonparametric regression, ranking data: generators F, G, H, K
 const lqSlots = [[genA.id, genB.id, genI.id], [genC.id, genD.id, genE.id, genJ.id], [genF.id, genG.id, genH.id, genK.id]]
 
 const bank: TestBank = { mc: mcJson as MCQuestion[], lq: [genA, genB, genC, genD, genE, genF, genG, genH, genI, genJ, genK], lqSlots }
