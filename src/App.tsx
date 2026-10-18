@@ -5,6 +5,7 @@ import { Tree } from './pages/Tree'
 import { TopicPage } from './pages/Topic'
 import { TestPage } from './pages/Test'
 import { ResultPage } from './pages/Result'
+import { LecturePage } from './pages/Lecture'
 import { applySavedProgress, checkCredentials, loggedInUser, setLoggedInUser } from './lib/testLogin'
 
 function Header() {
@@ -85,6 +86,9 @@ export function App() {
             <Route path="/topic/:id" element={<TopicPage />} />
             <Route path="/topic/:id/test" element={<TestPage />} />
             <Route path="/topic/:id/attempt/:n" element={<ResultPage />} />
+            <Route path="/topic/:id/lecture/:lec" element={<LecturePage />} />
+            <Route path="/topic/:id/lecture/:lec/quiz" element={<TestPage />} />
+            <Route path="/topic/:id/lecture/:lec/attempt/:n" element={<ResultPage />} />
             <Route path="*" element={<p>Not found. <Link to="/">Back to the tree</Link></p>} />
           </Routes>
         </main>

@@ -75,7 +75,8 @@ export function createLocalProgress(storage: Pick<Storage, 'getItem' | 'setItem'
     isPassed: (id) => list(id).some((a) => a.passed),
     best: (id) => list(id).reduce<Attempt | null>((b, a) => (b === null || a.total > b.total ? a : b), null),
     seenMcIds: (id) => new Set(list(id).flatMap((a) => a.spec.mcIds)),
-    passedIds: () => new Set(Object.keys(state.attempts).filter((id) => store.isPassed(id))),
+    // lecture quizzes are stored under "<topicId>#L<n>" and are not topics
+    passedIds: () => new Set(Object.keys(state.attempts).filter((id) => !id.includes('#') && store.isPassed(id))),
     devMode: () => state.devMode,
     setDevMode(on) { state.devMode = on; save() },
     exportJson: () => JSON.stringify(state, null, 1),

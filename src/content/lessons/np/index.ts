@@ -1,0 +1,230 @@
+// Lessons for Nonparametric Statistics (HKU STAT3620 order, 12 lectures). One entry per lecture, in order.
+// `lqId` names a generator in src/content/tests/np/lq; "#0,1,2" keeps only those parts (0-based), so a shared
+// generator is split by lecture. The worked sample is that generator at `workedSeed`; the quiz draws fresh numbers.
+import type { Lesson } from '../../../lib/types'
+
+const lessons: Lesson[] = [
+  {
+    // 1. Why nonparametric, and order statistics
+    workedSeed: 'np-1-worked',
+    lqId: 'np-lq-i-orderstat',
+    teach: [
+      "## The idea",
+      "A parametric method assumes the data come from a named family (normal, exponential, ...) with a few unknown parameters. A nonparametric (distribution-free) method assumes much less, often only that the distribution is continuous, and its null distribution does not depend on which continuous distribution generated the data. The price is some loss of efficiency when the parametric model is right; the gain is validity when it is wrong.",
+      "Efficiency is compared by the asymptotic relative efficiency (ARE): the limiting ratio of the sample sizes two tests need for the same power. The Wilcoxon signed-rank test has ARE $3/\\pi\\approx 0.955$ against the $t$ test when the data are normal, and ARE at least $0.864$ for every continuous symmetric distribution, so little is lost and a lot can be gained for heavy tails.",
+      "## Order statistics",
+      "Sort an i.i.d. sample from a continuous distribution with cdf $F$ and density $f$: $X_{(1)}<\\cdots<X_{(n)}$. The key observation is that $X_{(k)}\\le x$ exactly when at least $k$ of the $n$ observations are $\\le x$. The number of observations $\\le x$ is $\\mathrm{Bin}(n,F(x))$, so",
+      "$$P(X_{(k)}\\le x)=\\sum_{j=k}^{n}\\binom nj F(x)^j\\{1-F(x)\\}^{n-j}.$$",
+      "Special cases: $P(X_{(n)}\\le x)=F(x)^n$ (the maximum) and $P(X_{(1)}\\le x)=1-\\{1-F(x)\\}^n$ (the minimum). Differentiating gives the density $\\dfrac{n!}{(k-1)!(n-k)!}F^{k-1}(1-F)^{n-k}f$. For a uniform$(0,1)$ sample $X_{(k)}\\sim\\mathrm{Beta}(k,n+1-k)$, with mean $k/(n+1)$.",
+      "## Distribution-free confidence interval for a quantile",
+      "Let $\\xi_p$ be the $p$-quantile. The number of observations below $\\xi_p$ is $J\\sim\\mathrm{Bin}(n,p)$, whatever $F$ is. Now $X_{(r)}\\le\\xi_p<X_{(s)}$ exactly when $r\\le J\\le s-1$, so",
+      "$$P(X_{(r)}\\le\\xi_p<X_{(s)})=\\sum_{j=r}^{s-1}\\binom nj p^j(1-p)^{n-j}.$$",
+      "For the median take $p=\\tfrac12$. Choose $r$ and $s$ so that the sum is at least the confidence level you want; because the binomial is discrete, the exact coverage is usually a little above the target.",
+      "## Typical mistakes",
+      "Summing the binomial from the wrong end (it is $j\\ge k$ for $X_{(k)}\\le x$); using $\\sum_{j=r}^{s}$ instead of $\\sum_{j=r}^{s-1}$ for the interval; and forgetting that the coverage in the last formula does not involve $F$ at all.",
+    ],
+  },
+  {
+    // 2. Goodness-of-fit tests
+    workedSeed: 'np-2-worked',
+    lqId: 'np-lq-c-ks',
+    teach: [
+      "## The question",
+      "Does a sample come from a completely specified continuous distribution $F_0$? Compare the empirical distribution function $F_n(x)=\\frac1n\\#\\{i:X_i\\le x\\}$ with $F_0$.",
+      "## Kolmogorov-Smirnov",
+      "The statistic is the largest vertical gap, $D_n=\\sup_x|F_n(x)-F_0(x)|$. Because $F_n$ is a step function that jumps at the ordered observations, the supremum is attained at a jump, and it is computed from the sorted sample as $D_n=\\max(D^+,D^-)$ with",
+      "$$D^+=\\max_i\\Big\\{\\frac in-F_0(x_{(i)})\\Big\\},\\qquad D^-=\\max_i\\Big\\{F_0(x_{(i)})-\\frac{i-1}n\\Big\\}.$$",
+      "$D^+$ measures how far $F_n$ rises above $F_0$ (just after a jump), $D^-$ how far it falls below (just before a jump). If $F_0$ is continuous and fully specified, the null distribution of $D_n$ does not depend on $F_0$. For large $n$, $\\sqrt n D_n$ is compared with the Kolmogorov distribution, whose 5% point is about $1.36$.",
+      "## Other tests",
+      "Anderson-Darling uses a weighted squared distance that puts more weight on the tails, so it detects tail differences better than KS. The chi-square test groups the data into $k$ cells and uses $\\sum (O_j-E_j)^2/E_j\\approx\\chi^2_{k-1-m}$, where $m$ is the number of parameters estimated from the grouped data; it works for discrete data too, at the cost of throwing away information inside cells.",
+      "## Typical mistakes",
+      "Computing only $D^+$ or only $D^-$; using $i/n$ in both formulas (the second needs $(i-1)/n$); and using the standard KS critical values when the parameters of $F_0$ were estimated from the same data, which makes the test too conservative (the Lilliefors correction is needed).",
+    ],
+  },
+  {
+    // 3. Sign and signed-rank tests
+    workedSeed: 'np-3-worked',
+    lqId: 'np-lq-a-signed#0,1,2,3',
+    teach: [
+      "## The setting",
+      "Paired data give differences $d_i$ (after minus before). Under $H_0$ there is no effect: the differences are centred at $0$. Drop any $d_i=0$ and let $n$ be the number left.",
+      "## Sign test",
+      "Under $H_0$ each difference is positive with probability $\\tfrac12$, so the number of positives is $\\mathrm{Bin}(n,\\tfrac12)$. With $k=\\min(\\#{+},\\#{-})$ the exact two-sided p-value is $\\min\\{1,\\,2P(\\mathrm{Bin}(n,\\tfrac12)\\le k)\\}$. It uses only the signs, so it assumes nothing about the shape of the distribution, but it throws away the sizes.",
+      "## Wilcoxon signed-rank test",
+      "Rank the absolute differences $|d_i|$ from $1$ (smallest) to $n$. Let $W^+$ be the sum of the ranks that belong to positive differences. If the distribution of the differences is symmetric about $0$, each rank is attached to a plus sign with probability $\\tfrac12$ independently, which gives",
+      "$$E(W^+)=\\frac{n(n+1)}4,\\qquad \\mathrm{Var}(W^+)=\\frac{n(n+1)(2n+1)}{24}.$$",
+      "For moderate $n$ use $z=\\{W^+-n(n+1)/4\\}/\\sqrt{n(n+1)(2n+1)/24}$ against the standard normal. The test uses the sizes through the ranks, so it is more powerful than the sign test, but it needs symmetry of the differences.",
+      "## Typical mistakes",
+      "Ranking the signed values instead of the absolute values; including zero differences in $n$; and forgetting that the sign test counts the smaller of the two tails and doubles it.",
+    ],
+  },
+  {
+    // 4. Two-sample rank tests
+    workedSeed: 'np-4-worked',
+    lqId: 'np-lq-b-ranksum#0,1,2',
+    teach: [
+      "## The setting",
+      "Two independent samples, sizes $n_1$ and $n_2$, from distributions $F$ and $G$. Under $H_0:F=G$ the $n_1+n_2$ values are exchangeable, so every assignment of ranks to the two samples is equally likely.",
+      "## Rank-sum and Mann-Whitney",
+      "Rank all $N=n_1+n_2$ values together (1 = smallest). Let $W$ be the sum of the ranks of sample 1 (Wilcoxon rank-sum). The Mann-Whitney statistic counts pairs:",
+      "$$U_1=\\#\\{(i,j):X_i>Y_j\\}=W-\\frac{n_1(n_1+1)}2,\\qquad U_1+U_2=n_1n_2.$$",
+      "Under $H_0$ (no ties)",
+      "$$E(U_1)=\\frac{n_1n_2}2,\\qquad\\mathrm{Var}(U_1)=\\frac{n_1n_2(n_1+n_2+1)}{12},$$",
+      "so $z=(U_1-n_1n_2/2)/\\sqrt{n_1n_2(n_1+n_2+1)/12}$ is approximately standard normal. $U_1/(n_1n_2)$ estimates $P(X>Y)$, which gives the test a direct meaning: it is sensitive to one sample tending to be larger than the other. It is most powerful against a location shift.",
+      "## Typical mistakes",
+      "Ranking each sample separately instead of jointly; forgetting to subtract $n_1(n_1+1)/2$ to turn $W$ into $U_1$; and using $n_1+n_2$ instead of $n_1+n_2+1$ in the variance.",
+    ],
+  },
+  {
+    // 5. Tests for designed experiments
+    workedSeed: 'np-5-worked',
+    lqId: 'np-lq-b-ranksum#3,4',
+    teach: [
+      "## More than two groups",
+      "These are the rank versions of one-way and randomised-block ANOVA.",
+      "## Kruskal-Wallis (independent groups)",
+      "With $k$ groups of sizes $n_i$ and $N=\\sum n_i$, rank all $N$ values together and let $R_i$ be the rank sum of group $i$. Under $H_0$ (all groups have the same distribution)",
+      "$$H=\\frac{12}{N(N+1)}\\sum_{i=1}^k\\frac{R_i^2}{n_i}-3(N+1)\\;\\approx\\;\\chi^2_{k-1}.$$",
+      "Large $H$ means the groups' average ranks differ more than chance allows. With ties a correction factor is used.",
+      "## Friedman (blocks)",
+      "With $b$ blocks (e.g. subjects) each measured under $k$ treatments, rank the $k$ scores within each block, and let $R_j$ be the sum over blocks of the ranks of treatment $j$. Then",
+      "$$Q=\\frac{12}{bk(k+1)}\\sum_{j=1}^kR_j^2-3b(k+1)\\;\\approx\\;\\chi^2_{k-1}.$$",
+      "Ranking within blocks removes block-to-block differences, which is the point of a blocked design.",
+      "## After a significant result",
+      "The omnibus test only says that some group differs. To find which, compare pairs of groups on the rank scale (e.g. Dunn's procedure) with an adjusted significance level such as Bonferroni, since $\\binom k2$ pairs are tested.",
+      "## Typical mistakes",
+      "Ranking within groups for Kruskal-Wallis (it is a joint ranking), ranking across blocks for Friedman (it is within blocks), and using $k$ instead of $k-1$ degrees of freedom.",
+    ],
+  },
+  {
+    // 6. Permutation tests
+    workedSeed: 'np-6-worked',
+    lqId: 'np-lq-e-permutation',
+    teach: [
+      "## The idea",
+      "If the null hypothesis says the group labels carry no information, then the labels are exchangeable: every relabelling of the observed values is equally likely. So the null distribution of any statistic can be built from the data themselves, by recomputing it over all relabellings. No distributional assumption is needed, and the test is exact.",
+      "## Procedure",
+      "1. Choose a statistic $T$ (for example the difference in group means) and compute it on the data, $t_{\\mathrm{obs}}$.",
+      "2. List every way of splitting the pooled values into groups of the original sizes: $\\binom N{n_1}$ ways. With two groups of three that is $\\binom63=20$.",
+      "3. Compute $T$ for each split. The one-sided p-value is the fraction of splits with $T\\ge t_{\\mathrm{obs}}$, counting the observed split itself; the two-sided p-value uses $|T|\\ge|t_{\\mathrm{obs}}|$.",
+      "When $\\binom N{n_1}$ is too large, draw $B$ random relabellings and use $p=(1+\\#\\{T_b\\ge t_{\\mathrm{obs}}\\})/(B+1)$, which is still a valid p-value.",
+      "## Typical mistakes",
+      "Leaving out the observed split from the count (a p-value can then be $0$, which is impossible for a permutation test); using the one-sided count for a two-sided question; and permuting under a design where the labels are not exchangeable (for example paired data, where signs, not labels, are permuted).",
+    ],
+  },
+  {
+    // 7. Tests for association and trend
+    workedSeed: 'np-7-worked',
+    lqId: 'np-lq-d-rankcorr',
+    teach: [
+      "## Rank correlation",
+      "To measure monotone association without assuming linearity or normality, work with ranks.",
+      "Spearman's coefficient is the Pearson correlation of the two rank vectors. With no ties, and $d_i$ the difference of unit $i$'s two ranks,",
+      "$$\\rho_S=1-\\frac{6\\sum_i d_i^2}{n(n^2-1)}.$$",
+      "Kendall's coefficient counts pairs of units. A pair is concordant if both variables order it the same way and discordant otherwise; with $C$ and $D$ these counts and $\\binom n2$ pairs,",
+      "$$\\tau=\\frac{C-D}{\\binom n2}.$$",
+      "Both lie in $[-1,1]$, equal $1$ for a perfectly increasing relation and $-1$ for a perfectly decreasing one, and are unchanged by any increasing transformation of either variable. Pearson's $r$ is not, which is why it can differ from both.",
+      "## Trend: the Mann-Kendall test",
+      "For a series $x_1,\\dots,x_n$ let $S=\\sum_{i<j}\\mathrm{sign}(x_j-x_i)$. Under no trend and no ties, $E(S)=0$ and $\\mathrm{Var}(S)=n(n-1)(2n+5)/18$; use $z=(S\\mp1)/\\sqrt{\\mathrm{Var}(S)}$ with the continuity correction moving $S$ one unit toward $0$. It is Kendall's $\\tau$ between the series and time.",
+      "## Typical mistakes",
+      "Using the Spearman formula when there are ties; counting $C$ and $D$ over $n^2$ ordered pairs instead of $\\binom n2$ unordered pairs; and reading a small $|\\rho_S|$ as independence (it only says no monotone association).",
+    ],
+  },
+  {
+    // 8. Jackknife and bootstrap
+    workedSeed: 'np-8-worked',
+    lqId: 'np-lq-f-jackknife',
+    teach: [
+      "## Why resample",
+      "For a statistic $\\hat\\theta$ with no simple formula for its bias or standard error, we can learn about its sampling behaviour by recomputing it on modified versions of the data.",
+      "## Jackknife",
+      "Leave out observation $i$ and recompute: $\\hat\\theta_{(i)}$, for $i=1,\\dots,n$. With $\\bar\\theta_{(\\cdot)}=\\frac1n\\sum\\hat\\theta_{(i)}$,",
+      "$$\\widehat{\\mathrm{bias}}=(n-1)(\\bar\\theta_{(\\cdot)}-\\hat\\theta),\\qquad \\widehat{\\mathrm{se}}=\\sqrt{\\frac{n-1}n\\sum_i(\\hat\\theta_{(i)}-\\bar\\theta_{(\\cdot)})^2}.$$",
+      "The bias-corrected estimate is $\\hat\\theta-\\widehat{\\mathrm{bias}}=n\\hat\\theta-(n-1)\\bar\\theta_{(\\cdot)}$. The jackknife works for smooth statistics (means, variances, correlations) and fails for non-smooth ones such as the median.",
+      "## Bootstrap",
+      "Draw $B$ samples of size $n$ with replacement from the observed data, recompute $\\hat\\theta^*_b$ each time. The standard deviation of the $\\hat\\theta^*_b$ estimates the standard error; their mean minus $\\hat\\theta$ estimates the bias; and the $2.5\\%$ and $97.5\\%$ points of the $\\hat\\theta^*_b$ give a percentile interval. In one resample a given observation is missed with probability $(1-1/n)^n\\to e^{-1}\\approx0.368$, so about $63.2\\%$ of the distinct observations appear.",
+      "## Typical mistakes",
+      "Using $\\frac1n$ instead of $\\frac{n-1}n$ in the jackknife standard error; dropping the factor $(n-1)$ in the bias; and resampling without replacement (that just reproduces the sample).",
+    ],
+  },
+  {
+    // 9. Nonparametric regression
+    workedSeed: 'np-9-worked',
+    lqId: 'np-lq-h-regression',
+    teach: [
+      "## The idea",
+      "Estimate $m(x)=E(Y\\mid X=x)$ without assuming a formula for $m$, by averaging the $y_i$ whose $x_i$ are near $x$.",
+      "## Nadaraya-Watson (local constant)",
+      "With a kernel $K$ and bandwidth $h$, put weights $w_i=K\\{(x-x_i)/h\\}$ and take the weighted mean",
+      "$$\\hat m(x)=\\frac{\\sum_i w_iy_i}{\\sum_i w_i}.$$",
+      "A box kernel (weight $1$ if $|x_i-x|\\le h$, else $0$) gives a moving average; a Gaussian kernel $K(u)=e^{-u^2/2}$ gives every point a weight that decays smoothly with distance (the constant $1/\\sqrt{2\\pi}$ cancels in the ratio).",
+      "## Local linear",
+      "Fit a straight line by weighted least squares with the same weights and use its value at $x$. With $d_i=x_i-x$, $S_k=\\sum_i w_id_i^k$ and $T_k=\\sum_i w_id_i^ky_i$,",
+      "$$\\hat m(x)=\\frac{S_2T_0-S_1T_1}{S_0S_2-S_1^2}.$$",
+      "The local linear fit removes the leading bias that the local constant fit has at the edges of the data and where the design is uneven. LOESS is a local polynomial fit with a nearest-neighbour bandwidth (a fixed fraction of the points) and tricube weights.",
+      "## Bandwidth",
+      "A small $h$ gives low bias and high variance (a wiggly fit); a large $h$ gives high bias and low variance (an oversmoothed fit). It is usually chosen by cross-validation.",
+      "## Typical mistakes",
+      "Forgetting to divide by $\\sum w_i$; measuring $d_i$ from the wrong centre; and reading a fit at a point near the boundary as if it were as reliable as one in the middle.",
+    ],
+  },
+  {
+    // 10. Statistical modelling for ranking data
+    workedSeed: 'np-10-worked',
+    lqId: 'np-lq-k-ranking',
+    teach: [
+      "## Ranking data",
+      "Each observation is a ranking $\\pi$ of $m$ items (here $m=4$: A, B, C, D). We want a probability model on the $m!$ possible rankings.",
+      "## Distances between rankings",
+      "The Kendall distance $d_K(\\pi,\\pi_0)$ is the number of pairs of items that the two rankings put in opposite orders. The Spearman distance is $d_S=\\sum_i(r_i-r_i^0)^2$ over the items' ranks. Both are $0$ only when the rankings agree.",
+      "## Mallows model (distance based)",
+      "Pick a centre ranking $\\pi_0$ and a dispersion $q\\in(0,1]$. Then $P(\\sigma)=q^{d_K(\\sigma,\\pi_0)}/Z$, with normalising constant for Kendall distance",
+      "$$Z=\\prod_{j=1}^{m}(1+q+\\cdots+q^{j-1}).$$",
+      "Rankings far from the centre are exponentially less likely; $q=1$ is the uniform distribution.",
+      "## Plackett-Luce (stage-wise)",
+      "Each item has a weight $w_i>0$. Choose first place with probability proportional to $w_i$ among all items, then second place the same way among the remaining items, and so on, so for a ranking listing items best first",
+      "$$P(\\pi)=\\prod_{k=1}^{m}\\frac{w_{\\pi(k)}}{\\sum_{l\\ge k}w_{\\pi(l)}}.$$",
+      "Thurstone models instead give each item a random latent utility (for example normal) and rank by it.",
+      "## Aggregating voters: Borda count",
+      "Give $m-1$ points to the first-ranked item, $m-2$ to the second, ..., $0$ to the last, and add over voters. The highest total wins. With four items the points are $3,2,1,0$.",
+      "## Typical mistakes",
+      "Using the Plackett-Luce denominator over all items at every stage instead of only the items not yet placed, and counting the Kendall distance as the sum of rank differences (that is closer to the Spearman distance).",
+    ],
+  },
+  {
+    // 11. Statistical functionals and the empirical distribution
+    workedSeed: 'np-11-worked',
+    lqId: 'np-lq-j-functional',
+    teach: [
+      "## Parameters as functionals",
+      "Many quantities are functions of the distribution $F$ itself: the mean $T(F)=\\int x\\,dF(x)$, the variance, a probability $P(a<X\\le b)=F(b)-F(a)$, a quantile. The plug-in estimator replaces $F$ by the empirical distribution $\\hat F_n$, which puts mass $1/n$ on each observation: $\\hat\\theta=T(\\hat F_n)$.",
+      "So the plug-in mean is $\\bar x$, the plug-in variance is $\\frac1n\\sum(x_i-\\bar x)^2$ (divisor $n$, not $n-1$), and the plug-in probability is the fraction of observations in $(a,b]$.",
+      "## Influence function",
+      "The influence function $L_T(y)$ measures how much a tiny amount of contamination at $y$ changes $T$. For the mean $L(y)=y-\\mu$; for the variance $L(y)=(y-\\mu)^2-\\sigma^2$. It is unbounded for both, which is the formal reason that the mean and variance are not robust to outliers. The nonparametric delta method uses it: $\\mathrm{Var}(\\hat\\theta)\\approx\\frac1n E\\{L(X)^2\\}$.",
+      "## How good is $\\hat F_n$? The DKW inequality",
+      "$$P\\Big(\\sup_x|\\hat F_n(x)-F(x)|>\\varepsilon\\Big)\\le2e^{-2n\\varepsilon^2}.$$",
+      "Setting the right side equal to $\\alpha$ gives $\\varepsilon=\\sqrt{\\ln(2/\\alpha)/(2n)}$, so $\\hat F_n\\pm\\varepsilon$ is a distribution-free confidence band for all of $F$ at once. Solving the other way gives the sample size needed for a target half-width.",
+      "## Typical mistakes",
+      "Using the divisor $n-1$ for the plug-in variance; taking $\\varepsilon=\\sqrt{\\ln(1/\\alpha)/(2n)}$ (the factor $2$ in $\\ln(2/\\alpha)$ matters); and evaluating $\\hat F_n(b)-\\hat F_n(a)$ with the wrong endpoint convention (it counts $a<x_i\\le b$).",
+    ],
+  },
+  {
+    // 12. Kernel density estimation
+    workedSeed: 'np-12-worked',
+    lqId: 'np-lq-g-kde',
+    teach: [
+      "## The estimator",
+      "A histogram's shape depends on arbitrary bin edges. A kernel density estimate puts a small bump on every observation and adds them up:",
+      "$$\\hat f(x)=\\frac1{nh}\\sum_{i=1}^nK\\Big(\\frac{x-X_i}h\\Big).$$",
+      "$K$ is a density (Gaussian $e^{-u^2/2}/\\sqrt{2\\pi}$, Epanechnikov $\\frac34(1-u^2)$ for $|u|\\le1$, and so on) and $h>0$ is the bandwidth. The $1/h$ keeps $\\hat f$ integrating to $1$. A kernel with bounded support, like the Epanechnikov, uses only the observations within $h$ of $x$.",
+      "## Bias and variance",
+      "The bandwidth matters far more than the kernel. Small $h$: low bias, high variance (spiky). Large $h$: high bias, low variance (oversmoothed). The integrated variance is of order $1/(nh)$ and the integrated squared bias of order $h^4$; balancing them gives $h\\propto n^{-1/5}$ and a mean integrated squared error that falls like $n^{-4/5}$, slower than the $n^{-1}$ of a parametric estimate.",
+      "## Choosing $h$",
+      "Silverman's rule of thumb, derived for roughly normal data, is $h=1.06\\,s\\,n^{-1/5}$ with $s$ the sample standard deviation. Cross-validation chooses $h$ from the data and adapts to non-normal shapes.",
+      "## Typical mistakes",
+      "Omitting the $1/h$; forgetting that the Epanechnikov kernel is zero beyond $|u|=1$; and expecting the mean integrated squared error to fall like $n^{-1}$.",
+    ],
+  },
+]
+
+export default lessons

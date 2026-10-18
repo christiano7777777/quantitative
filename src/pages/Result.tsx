@@ -3,42 +3,49 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { Math } from '../components/Math'
 import { useApp } from '../context'
 import { banks } from '../lib/content'
-import { localGrader } from '../lib/grader'
+import { lectureRules, localGrader, topicRules } from '../lib/grader'
+import { lectureKey } from '../lib/lessons'
 import { renderPaper } from '../lib/test-builder'
 import { fmt } from './Topic'
 
 const num = (x: number) => String(Number(x.toPrecision(6)))
 
 export function ResultPage() {
-  const { id = '', n = '' } = useParams()
+  const { id = '', n = '', lec } = useParams()
   const { graph, store } = useApp()
   const topic = graph.byId.get(id)
-  const attempt = store.attempts(id)[Number(n)]
+  const lecture = lec === undefined ? null : Number(lec)
+  const key = lecture === null ? id : lectureKey(id, lecture)
+  const rules = lecture === null ? topicRules : lectureRules
+  const back = lecture === null ? `/topic/${id}` : `/topic/${id}/lecture/${lecture}`
+  const retake = lecture === null ? `/topic/${id}/test` : `/topic/${id}/lecture/${lecture}/quiz`
+  const attempt = store.attempts(key)[Number(n)]
   const bank = banks[id]
 
   // The paper is rebuilt from the saved seed and question ids, then re-graded from the saved answers.
   const view = useMemo(() => {
     if (!attempt || !bank) return null
     const paper = renderPaper(bank, attempt.spec)
-    return { paper, result: localGrader.grade(paper, attempt.answers) }
-  }, [attempt, bank])
+    return { paper, result: localGrader.grade(paper, attempt.answers, rules) }
+  }, [attempt, bank, rules])
 
-  if (!topic || !view) return <Navigate to={`/topic/${id}`} replace />
+  if (!topic || !view) return <Navigate to={back} replace />
   const { paper, result: r } = view
 
   return (
     <>
-      <p><Link to={`/topic/${id}`}>← {topic.label}</Link></p>
-      <h1>{topic.label}: attempt {Number(n) + 1}</h1>
+      <p><Link to={back}>← {lecture === null ? topic.label : `Lecture ${lecture}`}</Link></p>
+      <h1>{topic.label}{lecture === null ? '' : `, lecture ${lecture} quiz`}: attempt {Number(n) + 1}</h1>
       <div className={`banner ${r.passed ? 'pass' : 'fail'}`} role="status">
         <b>{r.passed ? 'Passed' : 'Not passed'}</b>: {fmt(r.total)}/{r.max} (pass mark {r.passMark}).
         MC {fmt(r.mcScore)}/{r.mcMax}, long questions {fmt(r.lqScore)}/{r.lqMax}.
         {r.failedSectionMin.length > 0 && <> Below the section minimum: {r.failedSectionMin.join(', ')}.</>}
-        {r.passed && <> Topics that depend on this one are now unlocked when their other prerequisites are passed.</>}
+        {r.passed && lecture === null && <> Topics that depend on this one are now unlocked when their other prerequisites are passed.</>}
+        {r.passed && lecture !== null && <> The next step is unlocked.</>}
       </div>
       <p>
-        <Link className="btn" to={`/topic/${id}`}>Back to topic</Link>{' '}
-        <Link className="btn primary" to={`/topic/${id}/test`}>Retake with new questions</Link>
+        <Link className="btn" to={back}>{lecture === null ? 'Back to topic' : 'Back to lecture'}</Link>{' '}
+        <Link className="btn primary" to={retake}>Retake with new questions</Link>
       </p>
 
       <h2>Multiple choice</h2>
@@ -69,7 +76,7 @@ export function ResultPage() {
       <h2>Long questions</h2>
       {paper.lq.map((q, qi) => (
         <section key={q.id} className="card">
-          <h3>Long question {qi + 1}</h3>
+          <h3>Long question{paper.lq.length > 1 ? ` ${qi + 1}` : ''}</h3>
           <p><Math text={q.intro} /></p>
           <ol type="a">
             {q.parts.map((p, pi) => {

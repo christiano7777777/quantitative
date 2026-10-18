@@ -1,6 +1,6 @@
 import { testConfig } from '../config/test.config'
 import { makeRng } from './rng'
-import type { Paper, PaperMC, PaperSpec, TestBank } from './types'
+import type { LQGenerator, Paper, PaperMC, PaperSpec, TestBank } from './types'
 
 /**
  * Choose which questions an attempt contains.
@@ -40,6 +40,25 @@ export function selectPaper(bank: TestBank, seed: string, seenMcIds: ReadonlySet
   return { seed, mcIds: rng.shuffle(chosen), lqIds }
 }
 
+/**
+ * Look up a long-question generator. An id of the form `base#0,1,3` means "generator `base`, keeping only parts
+ * 0, 1 and 3" (0-based): the numbers are those of the full question, so a lecture quiz can use just the parts
+ * that belong to its lecture. Parts of a generator must therefore not depend on each other's printed answers.
+ */
+export function findGenerator(bank: TestBank, id: string): LQGenerator | undefined {
+  const [base, sel] = id.split('#')
+  const g = [...bank.lq, ...(bank.lectureLq ?? [])].find((x) => x.id === base)
+  if (!g || sel === undefined) return g
+  const keep = sel.split(',').map(Number)
+  return {
+    id,
+    generate: (rng) => {
+      const inst = g.generate(rng)
+      return { ...inst, parts: keep.map((i) => inst.parts[i]) }
+    },
+  }
+}
+
 /** Deterministic: the same spec always rebuilds the same paper (options, order, LQ numbers). */
 export function renderPaper(bank: TestBank, spec: PaperSpec): Paper {
   const root = makeRng(spec.seed)
@@ -54,7 +73,7 @@ export function renderPaper(bank: TestBank, spec: PaperSpec): Paper {
     return { id, lecture: q.lecture, stem: q.stem, options, explanation: q.explanation }
   })
   const lq = spec.lqIds.map((id) => {
-    const g = bank.lq.find((x) => x.id === id)
+    const g = findGenerator(bank, id)
     if (!g) throw new Error(`unknown LQ generator ${id}`)
     const inst = g.generate(root.fork(`lq/${id}`))
     return { id, intro: inst.intro, parts: inst.parts }

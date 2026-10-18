@@ -59,6 +59,22 @@ prerequisites have tests; use Dev mode to try them.
 | `latex` LaTeX & Research Writing | **not built, waiting for the owner**: see "Proposal for `latex`" below |
 | the other topics (prerequisites) | not started |
 
+## Lessons and lecture quizzes (added 2026-10-19)
+Topics `np`, `bay`, `inf` have lessons (`src/content/lessons/<id>/index.ts`; format in CONTRIBUTING.md). Owner's rules: each
+lecture teaches the topic (lesson text), shows one worked sample, then a quiz of 5 MC + 1 LQ (15 marks, pass 12/15, i.e. 80%);
+passing lecture n opens n+1; all lectures passed unlock the topic test (40/50); topics without lessons go straight to the test.
+- The worked sample is the lesson's LQ generator at a fixed seed, so it is the same kind of question as the quiz.
+- Long-question generators written only for lectures (`bay` I, J; `inf` J, K, L) live in the bank's `lectureLq`, so the topic
+  exams are unchanged. `inf` `d-bayes-minimax` part 5 was retagged from lecture 1 to 2 so that the whole generator serves lecture 2.
+- Added MC: `bay-1.5, 3.5, 4.5, 5.5, 7.5, 10.5, 11.5` (so every bay lecture has at least 5).
+- The lesson texts are the author's own and have **not** been reviewed by a human or a second AI. Items to check: the Wilcoxon
+  efficiency bounds (np 1), Friedman and Kruskal-Wallis formulas (np 5), the Mallows normalising constant (np 10), the
+  Beta-tail/binomial identity (bay 4), the R-hat and ESS formulas (bay 9), the Basu statement (inf 4), the bootstrap-maximum
+  remark (inf 11).
+- `lq` quiz parts reuse the existing independent tests; the five new generators have `lq/lecture.test.ts` in their topic and
+  were mutation-checked (every part's answer changed to `ans*1.02+0.02` makes a test fail).
+- Not yet checked in a real browser: a full quiz played through with typed answers on a phone-width screen.
+
 ## Workflow that worked (per topic)
 1. Read the topic's lectures in `src/data/topics.json` (use UTF-8 when printing; the Windows console chokes on accents).
 2. Write the MC bank in a few part files, then merge into `src/content/tests/<id>/mc.json`.

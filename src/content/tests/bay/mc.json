@@ -1726,5 +1726,229 @@
    }
   ],
   "explanation": "Far from the data the posterior mean returns to the prior mean and the variance to the prior variance."
+ },
+ {
+  "id": "bay-1.5",
+  "lecture": 1,
+  "stem": "Once the data $y$ have been observed, how is the likelihood $p(y\\mid\\theta)$ used in a Bayesian analysis?",
+  "correct": [
+   "It is read as a function of $\\theta$ that shows how well each value explains the observed data.",
+   "Held at the observed $y$, it ranks values of $\\theta$ by how well they fit."
+  ],
+  "distractors": [
+   {
+    "text": "It is a probability distribution for $\\theta$, so it integrates to one over the parameter space.",
+    "misconception": "treats the likelihood as a density in $\\theta$"
+   },
+   {
+    "text": "It is the belief about $\\theta$ after seeing the data, obtained by updating the prior.",
+    "misconception": "confuses the likelihood with the posterior"
+   },
+   {
+    "text": "It is the probability of the data averaged over the prior, so it no longer depends on $\\theta$.",
+    "misconception": "confuses the likelihood with the marginal likelihood"
+   },
+   {
+    "text": "It stays a function of $y$ with $\\theta$ fixed, so it cannot be used to compare parameter values.",
+    "misconception": "reverses which argument is held fixed"
+   },
+   {
+    "text": "It serves only to normalise the posterior and says nothing about which $\\theta$ values are likely.",
+    "misconception": "confuses the likelihood with the normalising constant"
+   }
+  ],
+  "explanation": "After the data are seen, $y$ is fixed and $p(y\\mid\\theta)$ is a function of $\\theta$. It need not integrate to one in $\\theta$, and multiplying it by the prior gives the unnormalised posterior."
+ },
+ {
+  "id": "bay-3.5",
+  "lecture": 3,
+  "stem": "A $\\mathrm{Beta}(a,b)$ prior for a proportion can be read as $a+b$ prior observations. How does its influence on the posterior mean change as the sample size $n$ grows?",
+  "correct": [
+   "The weight on the prior mean, $(a+b)/(a+b+n)$, shrinks toward zero as $n$ grows, so the data dominate.",
+   "More data make the prior counts a small share, so the mean nears $k/n$."
+  ],
+  "distractors": [
+   {
+    "text": "The weight on the prior mean stays at $a/(a+b)$ however large $n$ becomes, so the prior never fades.",
+    "misconception": "confuses the prior mean with the weight given to it"
+   },
+   {
+    "text": "The weight on the prior mean grows with $n$, because more data make the prior assumptions more credible.",
+    "misconception": "thinks data strengthen the prior's influence"
+   },
+   {
+    "text": "The influence vanishes only for an improper prior, because a proper prior keeps a fixed share of the posterior.",
+    "misconception": "thinks a proper prior is never overwhelmed by data"
+   },
+   {
+    "text": "The posterior mean moves toward the prior mean as $n$ grows, since the prior is averaged over more data.",
+    "misconception": "gets the direction of the shrinkage backwards"
+   },
+   {
+    "text": "The prior stops mattering only once $n$ exceeds $a+b$, after which the posterior equals the likelihood.",
+    "misconception": "believes the prior switches off at a threshold"
+   }
+  ],
+  "explanation": "The posterior mean is $\\dfrac{a+b}{a+b+n}\\cdot\\dfrac{a}{a+b}+\\dfrac{n}{a+b+n}\\cdot\\dfrac kn$. The weight on the prior mean falls smoothly to zero as $n$ increases, but never switches off at a threshold."
+ },
+ {
+  "id": "bay-4.5",
+  "lecture": 4,
+  "stem": "How do the posterior mean, posterior median and MAP estimate compare when the posterior is skewed?",
+  "correct": [
+   "They generally differ, because each summarises differently and the mean is pulled toward the long tail.",
+   "Skewness separates them; the mean is dragged furthest into the long tail."
+  ],
+  "distractors": [
+   {
+    "text": "They coincide for every unimodal posterior, because each of them sits at the centre of the distribution.",
+    "misconception": "thinks unimodal implies symmetric"
+   },
+   {
+    "text": "The MAP lies far out in the long tail while the mean sits at the peak, since the mode reacts strongly to skew.",
+    "misconception": "swaps the roles of the mode and the mean"
+   },
+   {
+    "text": "The median is always the largest of the three, because it minimises the posterior expected absolute error.",
+    "misconception": "confuses the optimal loss with the size of the estimate"
+   },
+   {
+    "text": "They differ only when the prior is improper, because a proper prior makes the posterior symmetric.",
+    "misconception": "believes a proper prior forces a symmetric posterior"
+   },
+   {
+    "text": "The mean and the MAP agree whenever the posterior is skewed, and differ only for symmetric posteriors.",
+    "misconception": "reverses the effect of skewness"
+   }
+  ],
+  "explanation": "For a right-skewed posterior the order is typically mode < median < mean, and the reverse for a left-skewed one. They agree exactly for a symmetric unimodal posterior."
+ },
+ {
+  "id": "bay-5.5",
+  "lecture": 5,
+  "stem": "A Bayes factor $BF_{12}=0.2$ is reported when comparing model $M_1$ with model $M_2$. What does it say?",
+  "correct": [
+   "The data are five times more likely under $M_2$ than $M_1$, with each model averaged over its prior.",
+   "The marginal likelihood of $M_2$ is five times that of $M_1$."
+  ],
+  "distractors": [
+   {
+    "text": "The posterior probability of $M_1$ is $0.2$, whatever the prior probabilities of the two models were.",
+    "misconception": "mistakes the Bayes factor for a posterior probability"
+   },
+   {
+    "text": "The data are five times more likely under $M_1$, because a value below one favours the first model.",
+    "misconception": "reads the ratio the wrong way round"
+   },
+   {
+    "text": "$M_1$ is rejected at the $20\\%$ level, in the same way as a frequentist p-value of $0.2$.",
+    "misconception": "interprets the Bayes factor as a p-value"
+   },
+   {
+    "text": "$M_2$ has five times the maximised likelihood, so the penalty for complexity has already been removed.",
+    "misconception": "confuses averaged with maximised likelihood"
+   },
+   {
+    "text": "The prior odds of $M_1$ against $M_2$ are $0.2$, and the observed data have not changed these odds.",
+    "misconception": "confuses the Bayes factor with the prior odds"
+   }
+  ],
+  "explanation": "$BF_{12}=p(y\\mid M_1)/p(y\\mid M_2)=0.2$, so $BF_{21}=5$. Posterior odds equal the Bayes factor times the prior odds."
+ },
+ {
+  "id": "bay-7.5",
+  "lecture": 7,
+  "stem": "In importance sampling one proposal draw has a weight much larger than all the others. What is the likely consequence?",
+  "correct": [
+   "The effective sample size is small, so the estimate acts like only a few draws and has a high variance.",
+   "One draw dominates the weighted average, so the variance is high."
+  ],
+  "distractors": [
+   {
+    "text": "The estimate is biased toward zero but has low variance, because all the other weights are small.",
+    "misconception": "confuses a variance problem with a bias problem"
+   },
+   {
+    "text": "The effective sample size stays close to the number of draws, because the weights sum to one.",
+    "misconception": "thinks normalising the weights fixes their imbalance"
+   },
+   {
+    "text": "The estimator becomes more exact, because the dominant draw lies where the target density is largest.",
+    "misconception": "thinks a large weight signals a good draw"
+   },
+   {
+    "text": "The variance falls, because a very large weight shows the proposal matches the target there.",
+    "misconception": "reads a large weight as a sign of a good proposal"
+   },
+   {
+    "text": "Only the self-normalised estimator is affected, while the plain estimator remains accurate unchanged.",
+    "misconception": "thinks the plain estimator avoids weight degeneracy"
+   }
+  ],
+  "explanation": "Weights with one huge value give $(\\sum w_i)^2/\\sum w_i^2$ close to $1$: the average is essentially one draw. This usually means the proposal has lighter tails than the target."
+ },
+ {
+  "id": "bay-10.5",
+  "lecture": 10,
+  "stem": "The Laplace approximation of a posterior is centred at the mode $\\hat\\theta$. Where does its variance come from?",
+  "correct": [
+   "It comes from the curvature of the log-posterior at the mode: the inverse of minus its second derivative.",
+   "The inverse of minus the second derivative of $\\log p(\\theta\\mid y)$ at $\\hat\\theta$."
+  ],
+  "distractors": [
+   {
+    "text": "It is the posterior mean of $(\\theta-\\hat\\theta)^2$, estimated by sampling from the exact posterior.",
+    "misconception": "replaces the local curvature by an expectation under the true posterior"
+   },
+   {
+    "text": "It comes from the height of the log-posterior at the mode, a higher peak meaning a larger variance.",
+    "misconception": "uses the peak height instead of its curvature"
+   },
+   {
+    "text": "It comes from the first derivative of the log-posterior at the mode, which measures how steeply it falls.",
+    "misconception": "forgets that the first derivative is zero at the mode"
+   },
+   {
+    "text": "It equals the prior variance alone, because the likelihood only shifts the centre and keeps the spread.",
+    "misconception": "ignores the information in the data"
+   },
+   {
+    "text": "It is the second derivative of the log-posterior at the mode, used directly without the sign or inversion.",
+    "misconception": "forgets to negate and invert the curvature"
+   }
+  ],
+  "explanation": "A Taylor expansion of $\\log p(\\theta\\mid y)$ about the mode has no linear term, and the quadratic term gives a normal with variance $\\{-(\\log p)''(\\hat\\theta)\\}^{-1}$."
+ },
+ {
+  "id": "bay-11.5",
+  "lecture": 11,
+  "stem": "Why is the ELBO useful for choosing the variational approximation $q$ to a posterior?",
+  "correct": [
+   "Maximising it over $q$ minimises $KL(q\\|p)$, and it needs the posterior only up to a constant.",
+   "It lower-bounds $\\log p(y)$, and the gap is exactly $KL(q\\|p)$."
+  ],
+  "distractors": [
+   {
+    "text": "It equals the log marginal likelihood exactly for every $q$, so any choice of $q$ gives the same value.",
+    "misconception": "ignores the KL gap that makes the bound loose"
+   },
+   {
+    "text": "It is an upper bound on $\\log p(y)$, so minimising it over $q$ brings $q$ closer to the posterior.",
+    "misconception": "reverses the direction of the bound and of the optimisation"
+   },
+   {
+    "text": "It measures $KL(p\\|q)$, so maximising it makes $q$ cover all the tails of the posterior.",
+    "misconception": "swaps the order of the arguments of the divergence"
+   },
+   {
+    "text": "It needs the normalised posterior $p(\\theta\\mid y)$ for every $q$, which is why the method is slow.",
+    "misconception": "thinks the normalising constant is required"
+   },
+   {
+    "text": "It is the expected log-likelihood alone, so the prior has no part in the choice of the best $q$.",
+    "misconception": "drops the prior and entropy terms"
+   }
+  ],
+  "explanation": "$\\log p(y)=\\mathrm{ELBO}(q)+KL(q\\|p)$, so maximising the ELBO minimises the divergence. The ELBO uses only the joint $p(y,\\theta)$, not the normalised posterior."
  }
 ]
