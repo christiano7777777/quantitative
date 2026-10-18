@@ -46,12 +46,12 @@ export function build({ n, lam0, T, n2, T2 }: Params): LQInstance {
       },
       {
         prompt: 'Find the Wald statistic ' + tex('n(\\hat\\lambda-\\lambda_0)^2/\\hat\\lambda') + ', which uses the Fisher information ' + tex('n/\\lambda') + ' evaluated at ' + tex('\\hat\\lambda') + '.',
-        answer: wald, tolerance: tol3, lecture: 4,
+        answer: wald, tolerance: tol3, lecture: 7,
         explanation: tex('' + n + '(' + dec(hat) + '-' + dec(lam0) + ')^2/' + dec(hat) + '=' + dec(wald)) + '.',
       },
       {
         prompt: 'Find the score statistic ' + tex('n(\\hat\\lambda-\\lambda_0)^2/\\lambda_0') + ', which uses the information at the null value ' + tex('\\lambda_0') + '.',
-        answer: score, tolerance: tol3, lecture: 4,
+        answer: score, tolerance: tol3, lecture: 7,
         explanation: 'The score at ' + tex('\\lambda_0') + ' is ' + tex('n(\\hat\\lambda-\\lambda_0)/\\lambda_0') + ' and the information is ' + tex('n/\\lambda_0') + ', so the statistic is ' + tex('' + n + '(' + dec(hat) + '-' + dec(lam0) + ')^2/' + dec(lam0) + '=' + dec(score)) + '. All three statistics are asymptotically ' + tex('\\chi^2_1') + ' under ' + tex('H_0') + ' and close to each other here.',
       },
       {

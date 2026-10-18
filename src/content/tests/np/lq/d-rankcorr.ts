@@ -30,27 +30,27 @@ export function build({ x, y }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find Spearman\'s rank correlation ' + tex('\\rho_S=1-6\\sum d_i^2/\\{n(n^2-1)\\}') + ', where ' + tex('d_i') + ' is the difference between the two ranks of unit ' + tex('i') + '.',
-        answer: rho, tolerance: tol3, lecture: 6,
+        answer: rho, tolerance: tol3, lecture: 7,
         explanation: 'Ranks of ' + tex('x') + ': ' + rx.join(',') + '; of ' + tex('y') + ': ' + ry.join(',') + '; ' + tex('\\sum d_i^2=' + d2) + ', so ' + tex('\\rho_S=1-6\\cdot' + d2 + '/210') + ' = ' + dec(rho) + '.',
       },
       {
         prompt: 'How many of the 15 pairs of units are concordant (the two variables are ordered the same way)?',
-        answer: C, tolerance: tolInt, lecture: 6,
+        answer: C, tolerance: tolInt, lecture: 7,
         explanation: 'A pair is concordant when ' + tex('(x_i-x_j)(y_i-y_j)>0') + '; counting gives ' + C + '.',
       },
       {
         prompt: 'How many pairs are discordant?',
-        answer: D, tolerance: tolInt, lecture: 6,
+        answer: D, tolerance: tolInt, lecture: 7,
         explanation: tex('15-' + C) + ' = ' + D + ' (no ties).',
       },
       {
         prompt: 'Find Kendall\'s ' + tex('\\tau=(C-D)/15') + '.',
-        answer: tau, tolerance: tol3, lecture: 6,
+        answer: tau, tolerance: tol3, lecture: 7,
         explanation: tex('(' + C + '-' + D + ')/15') + ' = ' + dec(tau) + '.',
       },
       {
         prompt: 'For comparison find the ordinary Pearson correlation of the raw values.',
-        answer: r, tolerance: tol3, lecture: 6,
+        answer: r, tolerance: tol3, lecture: 7,
         explanation: tex('\\sum(x-\\bar x)(y-\\bar y)/\\sqrt{\\sum(x-\\bar x)^2\\sum(y-\\bar y)^2}') + ' = ' + dec(r) + '.',
       },
     ],

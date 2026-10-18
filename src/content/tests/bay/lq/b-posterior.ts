@@ -36,7 +36,7 @@ export function build({ mu0, tau, sigma, n, ybar, ga, gb, S, m, nb, kb }: Params
       },
       {
         prompt: 'Find the lower end of the equal-tailed 95% credible interval, ' + tex('\\text{mean}-1.96\\times\\text{sd}') + ' (the posterior is normal).',
-        answer: lo, tolerance: tol4, lecture: 3,
+        answer: lo, tolerance: tol4, lecture: 4,
         explanation: tex(dec(pm) + '-1.96\\cdot' + dec(psd)) + ' = ' + dec(lo) + '. It is a direct statement: the mean lies in the interval with probability 0.95 given the data and prior.',
       },
       {
@@ -46,7 +46,7 @@ export function build({ mu0, tau, sigma, n, ybar, ga, gb, S, m, nb, kb }: Params
       },
       {
         prompt: tex(kb) + ' successes were observed in ' + tex(nb) + ' trials. Find the difference in posterior means, ' + tex('\\text{flat prior }\\mathrm{Beta}(1,1)') + ' minus ' + tex('\\text{Jeffreys prior }\\mathrm{Beta}(\\tfrac12,\\tfrac12)') + ' (a prior sensitivity check).',
-        answer: flat - jeff, tolerance: { abs: 0.00005 }, lecture: 4,
+        answer: flat - jeff, tolerance: { abs: 0.00005 }, lecture: 3,
         explanation: tex('\\frac{' + (kb + 1) + '}{' + (nb + 2) + '}-\\frac{' + (kb + 0.5) + '}{' + (nb + 1) + '}=' + dec(flat) + '-' + dec(jeff)) + ' = ' + dec(flat - jeff) + '.',
       },
     ],

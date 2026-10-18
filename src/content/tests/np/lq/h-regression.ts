@@ -34,27 +34,27 @@ export function build({ x, y, x0, h }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the Nadaraya-Watson estimate ' + tex('\\sum w_iy_i/\\sum w_i') + '.',
-        answer: a, tolerance: tol4, lecture: 11,
+        answer: a, tolerance: tol4, lecture: 9,
         explanation: 'Weights ' + tex(x.map((v) => dec(K((x0 - v) / h))).join(',')) + ', so the weighted mean of the ' + tex('y_i') + ' is ' + dec(a) + '.',
       },
       {
         prompt: 'Find the local linear estimate: fit a line by weighted least squares with these weights and evaluate it at ' + tex('x_0') + '. (With ' + tex('d_i=x_i-x_0') + ', ' + tex('S_k=\\sum w_id_i^k') + ', ' + tex('T_k=\\sum w_id_i^ky_i') + ', the fitted value at ' + tex('x_0') + ' is ' + tex('(S_2T_0-S_1T_1)/(S_0S_2-S_1^2)') + '.)',
-        answer: b, tolerance: tol4, lecture: 11,
+        answer: b, tolerance: tol4, lecture: 9,
         explanation: 'This is the intercept of the weighted line in the variable ' + tex('d') + ': ' + dec(b) + '.',
       },
       {
         prompt: 'Find the difference between the Nadaraya-Watson and local linear estimates (a measure of the local bias that the linear term corrects).',
-        answer: a - b, tolerance: tol4, lecture: 11,
+        answer: a - b, tolerance: tol4, lecture: 9,
         explanation: tex(dec(a) + '-' + dec(b)) + ' = ' + dec(a - b) + '.',
       },
       {
         prompt: 'With the box kernel (weight 1 for ' + tex('|x_i-x_0|\\le h') + ', 0 otherwise), the estimate is a moving average. Find it.',
-        answer: box, tolerance: tol4, lecture: 11,
+        answer: box, tolerance: tol4, lecture: 9,
         explanation: 'The points within ' + tex(dec(h)) + ' of ' + tex(x0) + ' have ' + tex('y') + ' values ' + win.map((i) => dec(y[i])).join(', ') + ', with mean ' + dec(box) + '.',
       },
       {
         prompt: 'How many observations fall inside the box-kernel window ' + tex('|x_i-x_0|\\le h') + '?',
-        answer: win.length, tolerance: tolInt, lecture: 11,
+        answer: win.length, tolerance: tolInt, lecture: 9,
         explanation: 'The window ' + tex('[' + dec(x0 - h) + ',' + dec(x0 + h) + ']') + ' holds ' + win.length + ' of the 5 points; a bandwidth with too few points gives a high-variance estimate.',
       },
     ],

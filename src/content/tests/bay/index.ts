@@ -12,7 +12,7 @@ import { genF } from './lq/f-gibbs'
 import { genG } from './lq/g-approx'
 import { genH } from './lq/h-nonparam'
 
-// Blueprint: every attempt has one long question from each slot.
+// Blueprint: every attempt has one long question from each slot. (Lecture 3 is the choice of prior and lecture 4 posterior summaries, following the HKU STAT4610 order.)
 //   slot 1: Bayesian framework, conjugate models, summaries and priors (lectures 1-4)
 //   slot 2: model evaluation, Monte Carlo, importance sampling, Metropolis-Hastings (lectures 5-8)
 //   slot 3: Gibbs sampling and diagnostics, Laplace and variational approximations, nonparametric Bayes (lectures 9-12)

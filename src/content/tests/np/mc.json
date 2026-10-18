@@ -192,8 +192,8 @@
   "explanation": "Since $F(\\xi_p)=p$, the count of observations below $\\xi_p$ is $\\mathrm{Bin}(n,p)$, whatever $F$ is. Because the count is discrete, one picks $r,s$ with coverage at least $1-\\alpha$."
  },
  {
-  "id": "np-2.1",
-  "lecture": 2,
+  "id": "np-3.1",
+  "lecture": 3,
   "stem": "What does the sign test use in a paired design?",
   "correct": [
    "Only the signs of the differences; under the null the count is $\\mathrm{Bin}(n,1/2)$.",
@@ -224,8 +224,8 @@
   "explanation": "Zero differences are discarded. The test is for the median of the differences being zero, and needs no symmetry."
  },
  {
-  "id": "np-2.2",
-  "lecture": 2,
+  "id": "np-3.2",
+  "lecture": 3,
   "stem": "How does the Wilcoxon signed-rank test use the differences?",
   "correct": [
    "It ranks absolute differences and sums the ranks of the positive ones.",
@@ -256,8 +256,8 @@
   "explanation": "$W^+=\\sum_iR_i\\mathbf 1\\{d_i>0\\}$ with $R_i$ the rank of $|d_i|$. It needs the differences to be symmetric about the median under $H_0$."
  },
  {
-  "id": "np-2.3",
-  "lecture": 2,
+  "id": "np-3.3",
+  "lecture": 3,
   "stem": "Under $H_0$, what are the mean and variance of the Wilcoxon signed-rank statistic $W^+$ for $n$ nonzero differences (no ties)?",
   "correct": [
    "Mean $n(n+1)/4$ and variance $n(n+1)(2n+1)/24$.",
@@ -288,8 +288,8 @@
   "explanation": "Each rank $i$ is included with probability $1/2$, so $EW^+=\\tfrac12\\sum i=n(n+1)/4$ and $\\operatorname{Var}=\\tfrac14\\sum i^2=n(n+1)(2n+1)/24$."
  },
  {
-  "id": "np-2.4",
-  "lecture": 2,
+  "id": "np-3.4",
+  "lecture": 3,
   "stem": "Which assumption does the Wilcoxon signed-rank test need that the sign test does not?",
   "correct": [
    "The differences are symmetric about their median.",
@@ -320,8 +320,8 @@
   "explanation": "Without symmetry, a significant signed-rank result may reflect skewness rather than a nonzero median."
  },
  {
-  "id": "np-2.5",
-  "lecture": 2,
+  "id": "np-3.5",
+  "lecture": 3,
   "stem": "What is the treatment of zero differences and ties in the signed-rank test?",
   "correct": [
    "Zeros are dropped, ties get average ranks.",
@@ -352,8 +352,8 @@
   "explanation": "With ties, the variance of $W^+$ is reduced by a correction, and exact tables no longer apply."
  },
  {
-  "id": "np-3.1",
-  "lecture": 3,
+  "id": "np-4.1",
+  "lecture": 4,
   "stem": "What does the Mann-Whitney (Wilcoxon rank-sum) test compare?",
   "correct": [
    "Two independent samples, through pooled ranks.",
@@ -384,8 +384,8 @@
   "explanation": "If the two distributions differ only by a shift, the test is a test of equal medians; in general it tests stochastic dominance."
  },
  {
-  "id": "np-3.2",
-  "lecture": 3,
+  "id": "np-4.2",
+  "lecture": 4,
   "stem": "How is the Mann-Whitney statistic $U$ related to the rank sum $W$ of sample 1 (sizes $n_1$ and $n_2$)?",
   "correct": [
    "$U_1=W-n_1(n_1+1)/2$.",
@@ -416,8 +416,8 @@
   "explanation": "The smallest rank sum possible is $n_1(n_1+1)/2$, when sample 1 holds the lowest ranks, which gives $U_1=0$."
  },
  {
-  "id": "np-3.3",
-  "lecture": 3,
+  "id": "np-4.3",
+  "lecture": 4,
   "stem": "What are the mean and variance of $U$ under $H_0$ for sample sizes $n_1,n_2$ (no ties)?",
   "correct": [
    "Mean $n_1n_2/2$, variance $n_1n_2(n_1+n_2+1)/12$.",
@@ -448,8 +448,8 @@
   "explanation": "These give $z=(U-n_1n_2/2)/\\sqrt{n_1n_2(n_1+n_2+1)/12}$, with a tie correction to the variance if needed."
  },
  {
-  "id": "np-3.4",
-  "lecture": 3,
+  "id": "np-4.4",
+  "lecture": 4,
   "stem": "What does the quantity $U_1/(n_1n_2)$ estimate?",
   "correct": [
    "The chance a random observation of sample 1 beats one of sample 2.",
@@ -480,8 +480,8 @@
   "explanation": "A value of 0.5 means no tendency; values near 1 mean sample 1 almost always exceeds sample 2. It is also the area under the ROC curve."
  },
  {
-  "id": "np-3.5",
-  "lecture": 3,
+  "id": "np-4.5",
+  "lecture": 4,
   "stem": "How are ties handled in the Mann-Whitney test?",
   "correct": [
    "Ties get average ranks, and the variance gets a correction.",
@@ -512,8 +512,8 @@
   "explanation": "With many ties (such as ordinal ratings), the normal approximation with the tie correction is used instead of exact tables."
  },
  {
-  "id": "np-4.1",
-  "lecture": 4,
+  "id": "np-5.1",
+  "lecture": 5,
   "stem": "What does the Kruskal-Wallis test do?",
   "correct": [
    "Whether $k$ independent samples share a distribution, using pooled ranks.",
@@ -544,8 +544,8 @@
   "explanation": "A significant result says that at least one group differs; post-hoc pairwise tests (Dunn) show which."
  },
  {
-  "id": "np-4.2",
-  "lecture": 4,
+  "id": "np-5.2",
+  "lecture": 5,
   "stem": "How is the Kruskal-Wallis statistic computed?",
   "correct": [
    "$H=\\frac{12}{N(N+1)}\\sum_i R_i^2/n_i-3(N+1)$, compared with $\\chi^2_{k-1}$.",
@@ -576,8 +576,8 @@
   "explanation": "Under $H_0$ every group has expected rank sum $n_i(N+1)/2$, and $H$ measures deviations from it."
  },
  {
-  "id": "np-4.3",
-  "lecture": 4,
+  "id": "np-5.3",
+  "lecture": 5,
   "stem": "What is the Friedman test used for?",
   "correct": [
    "Comparing $k$ treatments on the same blocks, ranking within blocks.",
@@ -608,8 +608,8 @@
   "explanation": "The statistic $\\frac{12}{bk(k+1)}\\sum_jR_j^2-3b(k+1)$ uses rank sums $R_j$ across blocks and is approximately $\\chi^2_{k-1}$."
  },
  {
-  "id": "np-4.4",
-  "lecture": 4,
+  "id": "np-5.4",
+  "lecture": 5,
   "stem": "How does the Friedman test differ from the Kruskal-Wallis test?",
   "correct": [
    "Friedman ranks within blocks; Kruskal-Wallis ranks pooled data.",
@@ -640,8 +640,8 @@
   "explanation": "A block is a subject measured under every treatment; ranking within it removes subject-to-subject differences."
  },
  {
-  "id": "np-4.5",
-  "lecture": 4,
+  "id": "np-5.5",
+  "lecture": 5,
   "stem": "What are the large-sample null distributions of the Kruskal-Wallis and Friedman statistics?",
   "correct": [
    "Both are approximately $\\chi^2$ with $k-1$ degrees of freedom.",
@@ -672,8 +672,8 @@
   "explanation": "For small samples exact permutation tables are used. A significant result calls for pairwise follow-up tests with a multiplicity correction."
  },
  {
-  "id": "np-5.1",
-  "lecture": 5,
+  "id": "np-2.1",
+  "lecture": 2,
   "stem": "What is the Kolmogorov-Smirnov statistic for testing $H_0:F=F_0$?",
   "correct": [
    "$D_n=\\sup_x|F_n(x)-F_0(x)|$, the largest vertical gap.",
@@ -704,8 +704,8 @@
   "explanation": "Compute from the ordered sample: $D_n=\\max_i\\max\\{i/n-F_0(x_{(i)}),\\ F_0(x_{(i)})-(i-1)/n\\}$."
  },
  {
-  "id": "np-5.2",
-  "lecture": 5,
+  "id": "np-2.2",
+  "lecture": 2,
   "stem": "When is the null distribution of the Kolmogorov-Smirnov statistic free of the underlying distribution?",
   "correct": [
    "When $F_0$ is continuous and fully specified.",
@@ -736,8 +736,8 @@
   "explanation": "If parameters are estimated (the normal with estimated mean and variance), use Lilliefors' modified critical values, which are smaller."
  },
  {
-  "id": "np-5.3",
-  "lecture": 5,
+  "id": "np-2.3",
+  "lecture": 2,
   "stem": "Why is the Anderson-Darling test often more powerful than the Kolmogorov-Smirnov test against tail alternatives?",
   "correct": [
    "It weights the tails more heavily.",
@@ -768,8 +768,8 @@
   "explanation": "The statistic integrates $(F_n-F_0)^2/\\{F_0(1-F_0)\\}$, which blows up in the tails and so detects heavy tails. For financial returns tail fit matters."
  },
  {
-  "id": "np-5.4",
-  "lecture": 5,
+  "id": "np-2.4",
+  "lecture": 2,
   "stem": "What does the two-sample Kolmogorov-Smirnov test compare?",
   "correct": [
    "Largest gap between two empirical cdfs.",
@@ -800,8 +800,8 @@
   "explanation": "It is sensitive to differences in location, scale or shape, but most sensitive around the centre of the distributions."
  },
  {
-  "id": "np-5.5",
-  "lecture": 5,
+  "id": "np-2.5",
+  "lecture": 2,
   "stem": "How should a result of a Kolmogorov-Smirnov test with a very large sample be read?",
   "correct": [
    "Even a tiny departure can be significant.",
@@ -832,8 +832,8 @@
   "explanation": "$\\sqrt nD_n$ is compared with the Kolmogorov distribution; the 5% point is about 1.36, so $D_n>1.36/\\sqrt n$ rejects."
  },
  {
-  "id": "np-6.1",
-  "lecture": 6,
+  "id": "np-7.1",
+  "lecture": 7,
   "stem": "How is Spearman's rank correlation computed?",
   "correct": [
    "The Pearson correlation between the ranks.",
@@ -864,8 +864,8 @@
   "explanation": "$d_i$ is the difference between the two ranks of observation $i$. $\\rho_S=\\pm1$ for any strictly monotone relation."
  },
  {
-  "id": "np-6.2",
-  "lecture": 6,
+  "id": "np-7.2",
+  "lecture": 7,
   "stem": "How is Kendall's tau defined?",
   "correct": [
    "$(C-D)/\\{n(n-1)/2\\}$, concordant minus discordant.",
@@ -896,8 +896,8 @@
   "explanation": "A pair $(i,j)$ is concordant if $(x_i-x_j)(y_i-y_j)>0$. Tau has a direct probabilistic meaning, unlike rho."
  },
  {
-  "id": "np-6.3",
-  "lecture": 6,
+  "id": "np-7.3",
+  "lecture": 7,
   "stem": "Which relationship does a rank correlation detect that the Pearson correlation may miss?",
   "correct": [
    "A monotone but nonlinear relationship.",
@@ -928,8 +928,8 @@
   "explanation": "For $y=e^x$ on $x=1,\\dots,10$ the rank correlation is exactly 1, while Pearson's is noticeably smaller. Both are near 0 for $y=x^2$ on a symmetric $x$ range."
  },
  {
-  "id": "np-6.4",
-  "lecture": 6,
+  "id": "np-7.4",
+  "lecture": 7,
   "stem": "What happens to Spearman's and Kendall's coefficients if one variable is transformed by a strictly increasing function?",
   "correct": [
    "They are unchanged, since the ranks are the same.",
@@ -960,8 +960,8 @@
   "explanation": "A strictly decreasing transformation reverses the ranks and changes the sign of the coefficients. Pearson's correlation is only invariant to linear maps."
  },
  {
-  "id": "np-6.5",
-  "lecture": 6,
+  "id": "np-7.5",
+  "lecture": 7,
   "stem": "Which statement describes the Mann-Kendall statistic $S$ for observations $x_1,\\dots,x_n$ recorded in time order?",
   "correct": [
    "$S=\\sum_{i<j}\\mathrm{sgn}(x_j-x_i)$, the number of rising pairs minus falling pairs.",
@@ -992,8 +992,8 @@
   "explanation": "Every pair $i<j$ contributes $\\pm1$ according to the direction of change, so $S$ is the numerator of Kendall's tau between time and the observation. It detects monotone, not just linear, trends."
  },
  {
-  "id": "np-6.6",
-  "lecture": 6,
+  "id": "np-7.6",
+  "lecture": 7,
   "stem": "Under the hypothesis that $n$ observations are iid with no ties, what are the null mean and variance of the Mann-Kendall statistic $S$?",
   "correct": [
    "$E[S]=0$ and $\\mathrm{Var}(S)=n(n-1)(2n+5)/18$, with $S$ near normal for moderate $n$.",
@@ -1024,8 +1024,8 @@
   "explanation": "$S=2C-n(n-1)/2$ where $C$ counts concordant pairs, so $\\mathrm{Var}(S)=4\\mathrm{Var}(C)$. Check $n=3$: $S$ takes values $\\pm3,\\pm1$ with probabilities $1,2,2,1$ over 6, so the variance is $22/6=3\\cdot2\\cdot11/18$."
  },
  {
-  "id": "np-7.1",
-  "lecture": 7,
+  "id": "np-6.1",
+  "lecture": 6,
   "stem": "What assumption makes a permutation test valid?",
   "correct": [
    "Under $H_0$ the labels are exchangeable.",
@@ -1056,8 +1056,8 @@
   "explanation": "Exchangeability can fail with unequal variances between groups or dependent data, in which case a plain permutation test can be invalid."
  },
  {
-  "id": "np-7.2",
-  "lecture": 7,
+  "id": "np-6.2",
+  "lecture": 6,
   "stem": "How is an exact permutation p-value computed for a difference in group means?",
   "correct": [
    "Enumerate all assignments and find the share at least as extreme.",
@@ -1088,8 +1088,8 @@
   "explanation": "With groups of sizes $n_1,n_2$ there are $\\binom{n_1+n_2}{n_1}$ assignments; the observed one is included, so the smallest p-value is $1/\\binom{n}{n_1}$."
  },
  {
-  "id": "np-7.3",
-  "lecture": 7,
+  "id": "np-6.3",
+  "lecture": 6,
   "stem": "How many distinct assignments exist when $m$ of $N$ units are randomly assigned to treatment?",
   "correct": [
    "$\\binom Nm$, as order within groups is irrelevant.",
@@ -1120,8 +1120,8 @@
   "explanation": "The number of assignments sets the smallest attainable p-value, $1/\\binom Nm$, so small experiments can have limited resolution."
  },
  {
-  "id": "np-7.4",
-  "lecture": 7,
+  "id": "np-6.4",
+  "lecture": 6,
   "stem": "What is a Monte Carlo permutation test?",
   "correct": [
    "It approximates the permutation distribution with random relabellings.",
@@ -1152,8 +1152,8 @@
   "explanation": "A p-value estimate $(1+\\#\\{T^*\\ge T_{obs}\\})/(1+B)$ with $B$ random permutations remains valid."
  },
  {
-  "id": "np-7.5",
-  "lecture": 7,
+  "id": "np-6.5",
+  "lecture": 6,
   "stem": "What is an advantage of permutation tests over $t$ tests?",
   "correct": [
    "Exact validity in finite samples under exchangeability.",
@@ -1184,8 +1184,8 @@
   "explanation": "For the difference in means with many observations, the permutation test is close to the $t$ test, but it also allows medians, trimmed means or ranks."
  },
  {
-  "id": "np-8.1",
-  "lecture": 8,
+  "id": "np-11.1",
+  "lecture": 11,
   "stem": "Let $\\hat F_n$ be the empirical cdf of $n$ iid observations from an arbitrary distribution $F$. What does the Glivenko-Cantelli theorem state?",
   "correct": [
    "$\\sup_x|\\hat F_n(x)-F(x)|\\to0$ almost surely, for every $F$.",
@@ -1216,8 +1216,8 @@
   "explanation": "The theorem holds for every $F$, discrete or continuous, with no moment condition. The supremum is of order $1/\\sqrt n$, so after multiplying by $\\sqrt n$ it does not vanish."
  },
  {
-  "id": "np-8.2",
-  "lecture": 8,
+  "id": "np-11.2",
+  "lecture": 11,
   "stem": "What is the plug-in estimator of the variance functional $T(F)=\\int(x-\\mu)^2\\,dF(x)$ with $\\mu=\\int x\\,dF(x)$?",
   "correct": [
    "$T(\\hat F_n)=\\frac1n\\sum_i(X_i-\\bar X)^2$, the variance with divisor $n$.",
@@ -1248,8 +1248,8 @@
   "explanation": "The plug-in estimator evaluates $T$ at $\\hat F_n$. For the variance this has divisor $n$, so it is biased by the factor $(n-1)/n$ but still consistent."
  },
  {
-  "id": "np-8.3",
-  "lecture": 8,
+  "id": "np-11.3",
+  "lecture": 11,
   "stem": "The influence function of a functional $T$ at $x$ is $L_T(x)=\\lim_{\\varepsilon\\to0}\\{T((1-\\varepsilon)F+\\varepsilon\\delta_x)-T(F)\\}/\\varepsilon$. What does it measure?",
   "correct": [
    "The effect on $T$ of a tiny contamination at $x$; for the mean it is $x-\\mu$, unbounded.",
@@ -1280,8 +1280,8 @@
   "explanation": "The influence function is the derivative of $T$ along the path from $F$ towards $\\delta_x$. For the mean, $T=\\mu$ moves linearly, giving $x-\\mu$; the median has a bounded influence function."
  },
  {
-  "id": "np-8.4",
-  "lecture": 8,
+  "id": "np-11.4",
+  "lecture": 11,
   "stem": "Using the influence function $L_T$, the standard error of $T(\\hat F_n)$ is approximated by $\\hat\\tau/\\sqrt n$. How is $\\hat\\tau^2$ computed?",
   "correct": [
    "$\\hat\\tau^2=\\frac1n\\sum_i\\hat L(X_i)^2$, the mean of the squared influence values at the data.",
@@ -1312,8 +1312,8 @@
   "explanation": "For the mean $L(x)=x-\\mu$, so $\\hat\\tau^2=\\frac1n\\sum(X_i-\\bar X)^2$ and the standard error is about $\\hat\\sigma/\\sqrt n$, as expected."
  },
  {
-  "id": "np-8.5",
-  "lecture": 8,
+  "id": "np-11.5",
+  "lecture": 11,
   "stem": "Which statement about the Dvoretzky-Kiefer-Wolfowitz (DKW) inequality is true?",
   "correct": [
    "$P(\\sup_x|\\hat F_n-F|>\\varepsilon)\\le2e^{-2n\\varepsilon^2}$ for every $F$ and every $n$.",
@@ -1344,8 +1344,8 @@
   "explanation": "The half-width is of order $n^{-1/2}$, and the inequality holds for all $n$ and all $F$. To make it at most $\\varepsilon$ one needs $n\\ge\\log(2/\\alpha)/(2\\varepsilon^2)$."
  },
  {
-  "id": "np-9.1",
-  "lecture": 9,
+  "id": "np-8.1",
+  "lecture": 8,
   "stem": "What is the nonparametric bootstrap?",
   "correct": [
    "Resample with replacement and recompute the statistic each time.",
@@ -1376,8 +1376,8 @@
   "explanation": "The bootstrap standard error is the standard deviation of the bootstrap replicates $\\hat\\theta^*_1,\\dots,\\hat\\theta^*_B$."
  },
  {
-  "id": "np-9.2",
-  "lecture": 9,
+  "id": "np-8.2",
+  "lecture": 8,
   "stem": "How is a percentile bootstrap confidence interval formed?",
   "correct": [
    "The $\\alpha/2$ and $1-\\alpha/2$ quantiles of the replicates.",
@@ -1408,8 +1408,8 @@
   "explanation": "The percentile interval is transformation-respecting; BCa refines it by correcting for bias and skewness."
  },
  {
-  "id": "np-9.3",
-  "lecture": 9,
+  "id": "np-8.3",
+  "lecture": 8,
   "stem": "How does the jackknife estimate the bias of a statistic $\\hat\\theta$?",
   "correct": [
    "$(n-1)(\\bar\\theta_{(\\cdot)}-\\hat\\theta)$, from leave-one-out estimates.",
@@ -1440,8 +1440,8 @@
   "explanation": "The jackknife-corrected estimate is $n\\hat\\theta-(n-1)\\bar\\theta_{(\\cdot)}$, which removes the $O(1/n)$ bias."
  },
  {
-  "id": "np-9.4",
-  "lecture": 9,
+  "id": "np-8.4",
+  "lecture": 8,
   "stem": "Where does the jackknife fail?",
   "correct": [
    "For non-smooth statistics such as the median.",
@@ -1472,8 +1472,8 @@
   "explanation": "Bootstrap works for the median; neither works for the sample maximum."
  },
  {
-  "id": "np-9.5",
-  "lecture": 9,
+  "id": "np-8.5",
+  "lecture": 8,
   "stem": "In a sample of size $n$, what is the probability that a given observation does not appear in a bootstrap resample?",
   "correct": [
    "$(1-1/n)^n$, about $e^{-1}\\approx0.368$ for large $n$, so roughly a third is left out.",
@@ -1504,8 +1504,8 @@
   "explanation": "The remaining 63% of observations appear at least once; this is why out-of-bag error is based on roughly a third of the trees in bagging."
  },
  {
-  "id": "np-10.1",
-  "lecture": 10,
+  "id": "np-12.1",
+  "lecture": 12,
   "stem": "How does a kernel density estimator with kernel $K$ and bandwidth $h$ work?",
   "correct": [
    "$\\hat f(x)=\\frac1{nh}\\sum_iK\\{(x-X_i)/h\\}$, a smooth bump averaged over the observations.",
@@ -1536,8 +1536,8 @@
   "explanation": "The factor $1/h$ keeps the area at 1, since $\\int K\\{(x-X_i)/h\\}dx=h$."
  },
  {
-  "id": "np-10.2",
-  "lecture": 10,
+  "id": "np-12.2",
+  "lecture": 12,
   "stem": "What is the effect of the bandwidth $h$ on a kernel density estimate?",
   "correct": [
    "Small $h$ is wiggly and noisy; large $h$ oversmooths and adds bias.",
@@ -1568,8 +1568,8 @@
   "explanation": "$\\text{bias}\\approx h^2f''(x)\\mu_2(K)/2$ and $\\text{variance}\\approx f(x)R(K)/(nh)$; both are balanced by $h\\propto n^{-1/5}$."
  },
  {
-  "id": "np-10.3",
-  "lecture": 10,
+  "id": "np-12.3",
+  "lecture": 12,
   "stem": "How does the asymptotically optimal bandwidth (for mean integrated squared error) scale with the sample size $n$?",
   "correct": [
    "In proportion to $n^{-1/5}$.",
@@ -1600,8 +1600,8 @@
   "explanation": "Parametric densities converge at rate $n^{-1}$ in MISE; this slower rate is the price of flexibility. Silverman's rule is $h=1.06\\,\\hat\\sigma n^{-1/5}$."
  },
  {
-  "id": "np-10.4",
-  "lecture": 10,
+  "id": "np-12.4",
+  "lecture": 12,
   "stem": "Which is true of the choice of kernel in density estimation?",
   "correct": [
    "It matters little next to the bandwidth.",
@@ -1632,8 +1632,8 @@
   "explanation": "Kernels are nonnegative, symmetric and integrate to one; they differ in efficiency by under 5%."
  },
  {
-  "id": "np-10.5",
-  "lecture": 10,
+  "id": "np-12.5",
+  "lecture": 12,
   "stem": "What is a known weakness of the kernel density estimator near the boundary of a bounded support?",
   "correct": [
    "It leaks mass outside the support and is biased near the edge.",
@@ -1664,8 +1664,8 @@
   "explanation": "Examples: densities of returns' absolute values or durations, supported on $[0,\\infty)$. Reflecting the data or using log transformations helps."
  },
  {
-  "id": "np-11.1",
-  "lecture": 11,
+  "id": "np-9.1",
+  "lecture": 9,
   "stem": "What does the Nadaraya-Watson estimator of the regression function compute at $x$?",
   "correct": [
    "A kernel-weighted average of the responses.",
@@ -1696,8 +1696,8 @@
   "explanation": "It is a locally constant fit; as $h\\to\\infty$ it tends to the sample mean, and as $h\\to0$ it interpolates the data."
  },
  {
-  "id": "np-11.2",
-  "lecture": 11,
+  "id": "np-9.2",
+  "lecture": 9,
   "stem": "Why is local linear regression often preferred to Nadaraya-Watson?",
   "correct": [
    "Less bias at boundaries, as it fits a line.",
@@ -1728,8 +1728,8 @@
   "explanation": "Local linear regression reproduces linear functions exactly, so its bias depends on the curvature only, not on the design density."
  },
  {
-  "id": "np-11.3",
-  "lecture": 11,
+  "id": "np-9.3",
+  "lecture": 9,
   "stem": "What is LOESS (LOWESS)?",
   "correct": [
    "Local regression with weights falling with distance.",
@@ -1760,8 +1760,8 @@
   "explanation": "The span (the fraction of points used) plays the role of the bandwidth; a larger span gives a smoother curve."
  },
  {
-  "id": "np-11.4",
-  "lecture": 11,
+  "id": "np-9.4",
+  "lecture": 9,
   "stem": "How is the bandwidth of a kernel regression typically chosen?",
   "correct": [
    "By cross-validation, minimising leave-one-out prediction error.",
@@ -1792,8 +1792,8 @@
   "explanation": "The in-sample squared error decreases as $h\\to0$, so a held-out criterion (leave-one-out CV, GCV) is needed."
  },
  {
-  "id": "np-11.5",
-  "lecture": 11,
+  "id": "np-9.5",
+  "lecture": 9,
   "stem": "How do nonparametric regression estimators behave as the number of predictors grows?",
   "correct": [
    "They suffer the curse of dimensionality: neighbourhoods empty out.",
@@ -1824,8 +1824,8 @@
   "explanation": "Additive or single-index models restore reasonable rates by imposing structure."
  },
  {
-  "id": "np-12.1",
-  "lecture": 12,
+  "id": "np-10.1",
+  "lecture": 10,
   "stem": "Which statement correctly contrasts the Kendall and Spearman distances between two rankings of $n$ items?",
   "correct": [
    "Kendall counts discordant pairs of items; Spearman sums squared rank differences.",
@@ -1856,8 +1856,8 @@
   "explanation": "Both are zero only for identical rankings. The reversed ranking is at the maximum Kendall distance $n(n-1)/2$."
  },
  {
-  "id": "np-12.2",
-  "lecture": 12,
+  "id": "np-10.2",
+  "lecture": 10,
   "stem": "In the Mallows model $P(\\pi)\\propto\\exp\\{-\\theta\\,d(\\pi,\\pi_0)\\}$ with $\\theta>0$ and $d$ the Kendall distance, which statement is true?",
   "correct": [
    "The centre $\\pi_0$ is the mode, and $\\theta\\to0$ gives the uniform law.",
@@ -1888,8 +1888,8 @@
   "explanation": "The probability depends on $\\pi$ only through $d(\\pi,\\pi_0)$, so rankings at equal distance are equally likely. The model has the centre and one concentration parameter."
  },
  {
-  "id": "np-12.3",
-  "lecture": 12,
+  "id": "np-10.3",
+  "lecture": 10,
   "stem": "In a Plackett-Luce model with positive weights $w_1,\\dots,w_n$, what is the probability of the ranking $\\pi=(\\pi_1,\\dots,\\pi_n)$, listed best first?",
   "correct": [
    "$\\prod_{i=1}^{n}w_{\\pi_i}/\\sum_{j\\ge i}w_{\\pi_j}$.",
@@ -1920,8 +1920,8 @@
   "explanation": "With weights $3,2,1$ the ranking $(1,2,3)$ has probability $\\frac36\\cdot\\frac23\\cdot1=\\frac13$. The factors are renormalised over the remaining items at each place."
  },
  {
-  "id": "np-12.4",
-  "lecture": 12,
+  "id": "np-10.4",
+  "lecture": 10,
   "stem": "How does the Plackett-Luce model relate to Thurstone's model of latent utilities?",
   "correct": [
    "Plackett-Luce is the Thurstone model with iid Gumbel errors, taking $w_i=e^{\\mu_i}$.",
@@ -1952,8 +1952,8 @@
   "explanation": "Thurstone uses latent utilities with noise and ranks by realised value. With normal noise the probabilities have no closed form; with Gumbel noise they reduce to the Plackett-Luce product."
  },
  {
-  "id": "np-12.5",
-  "lecture": 12,
+  "id": "np-10.5",
+  "lecture": 10,
   "stem": "Several judges each rank the same $m$ items. How do the Borda count and the Kemeny consensus ranking compare?",
   "correct": [
    "Borda sorts by total points; Kemeny minimises total Kendall distance; they can differ.",
