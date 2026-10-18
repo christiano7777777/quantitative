@@ -1,0 +1,1858 @@
+[
+ {
+  "id": "la2-1.1",
+  "lecture": 1,
+  "stem": "Let $P_n$ denote the real polynomials of degree at most $n$. What is $\\dim P_n$?",
+  "correct": [
+   "It is $n+1$, because the monomials $1,x,\\dots,x^n$ form a basis of $P_n$ over the reals.",
+   "It is $n+1$, counting the monomials $1,\\dots,x^n$."
+  ],
+  "distractors": [
+   {
+    "text": "It is $n$, because the constant polynomial $1$ is not counted.",
+    "misconception": "forgets the constant term"
+   },
+   {
+    "text": "It is infinite, because every coefficient ranges over a continuum.",
+    "misconception": "confuses the size of the set with its dimension"
+   },
+   {
+    "text": "It is $n!$, because the coefficients can be listed in $n!$ orders.",
+    "misconception": "confuses orderings of coefficients with dimension"
+   },
+   {
+    "text": "It is $n+2$, because the zero polynomial is one more basis vector.",
+    "misconception": "counts the zero vector as a basis element"
+   },
+   {
+    "text": "It is $2n$, because each power needs a positive and a negative coefficient.",
+    "misconception": "invents a doubling of coordinates"
+   }
+  ],
+  "explanation": "The monomials $1,x,\\dots,x^n$ span $P_n$ and are linearly independent, so there are $n+1$ basis vectors."
+ },
+ {
+  "id": "la2-1.2",
+  "lecture": 1,
+  "stem": "Which of these subsets of the space $C[0,1]$ of continuous real functions on $[0,1]$ is a subspace?",
+  "correct": [
+   "The set of all continuous $f$ with $f(0)=0$.",
+   "The functions vanishing at the endpoint $0$, as evaluation at $0$ is linear."
+  ],
+  "distractors": [
+   {
+    "text": "The set of all $f$ with $f(0)=1$, which is closed under taking averages.",
+    "misconception": "overlooks that the zero function is missing"
+   },
+   {
+    "text": "The set of all $f$ with $f(x)\\ge 0$ for every $x$, a natural family of functions.",
+    "misconception": "not closed under negative scalars"
+   },
+   {
+    "text": "The set of all $f$ with $f(0)f(1)=0$, a product condition on two values.",
+    "misconception": "not closed under addition"
+   },
+   {
+    "text": "The set of all $f$ with $|f(x)|\\le 1$ for every $x$, a bounded family.",
+    "misconception": "not closed under scalar multiples"
+   },
+   {
+    "text": "The set of all $f$ with $\\int_0^1 f(x)^2\\,dx=1$, a normalised family.",
+    "misconception": "fails to contain the zero function and is not closed"
+   }
+  ],
+  "explanation": "A subspace needs the zero vector and closure under sums and scalar multiples. Only $f(0)=0$ is the kernel of the linear map $f\\mapsto f(0)$."
+ },
+ {
+  "id": "la2-1.3",
+  "lecture": 1,
+  "stem": "Consider the functions $1,\\ \\cos^2x,\\ \\sin^2x$ in the space $C(\\mathbb{R})$. Which statement is true?",
+  "correct": [
+   "They are linearly dependent, because $\\cos^2x+\\sin^2x-1=0$ holds for every real number $x$.",
+   "They are dependent, since $1=\\cos^2x+\\sin^2x$ holds for all real $x$."
+  ],
+  "distractors": [
+   {
+    "text": "They are linearly independent, because no one of them is a scalar multiple of another.",
+    "misconception": "checks only pairwise proportionality"
+   },
+   {
+    "text": "They are linearly independent, because the three graphs cross each other at several points.",
+    "misconception": "confuses graph intersections with independence"
+   },
+   {
+    "text": "They are dependent only on the interval $[0,\\pi]$ and independent on all of $\\mathbb{R}$.",
+    "misconception": "thinks dependence can hold on part of the domain only"
+   },
+   {
+    "text": "They are dependent, because $C(\\mathbb{R})$ has finite dimension and three vectors are too many.",
+    "misconception": "believes function spaces are finite dimensional"
+   },
+   {
+    "text": "They are dependent, because all three take values in the interval $[0,1]$.",
+    "misconception": "confuses a common range with linear dependence"
+   }
+  ],
+  "explanation": "Dependence means a nontrivial combination equals the zero function. The identity $\\cos^2+\\sin^2=1$ is such a combination. Pairwise non-proportionality is not enough."
+ },
+ {
+  "id": "la2-1.4",
+  "lecture": 1,
+  "stem": "Let $V$ have dimension $n$. Which statement is true?",
+  "correct": [
+   "Any $n$ linearly independent vectors in $V$ form a basis of the space $V$.",
+   "An independent list of length $n$ spans $V$."
+  ],
+  "distractors": [
+   {
+    "text": "Any $n$ vectors in $V$ span $V$, whether or not they are independent.",
+    "misconception": "ignores that repeated vectors cannot span"
+   },
+   {
+    "text": "Every spanning set of $V$ contains exactly $n$ vectors.",
+    "misconception": "confuses spanning sets with bases"
+   },
+   {
+    "text": "Any $n+1$ vectors in $V$ form a basis of $V$ as long as none is zero.",
+    "misconception": "ignores that more than $n$ vectors are dependent"
+   },
+   {
+    "text": "The dimension of $V$ changes when one passes to a different basis.",
+    "misconception": "thinks dimension depends on the basis"
+   },
+   {
+    "text": "Every basis of $V$ must contain a given nonzero vector $v$.",
+    "misconception": "confuses extension to a basis with a forced element"
+   }
+  ],
+  "explanation": "In dimension $n$, independent lists have length at most $n$, and an independent list of length $n$ is a maximal one, hence a basis."
+ },
+ {
+  "id": "la2-1.5",
+  "lecture": 1,
+  "stem": "Let $B=(b_1,\\dots,b_n)$ be an ordered basis of $V$. The coordinate map $v\\mapsto[v]_B\\in\\mathbb{R}^n$ is which kind of map?",
+  "correct": [
+   "A linear bijection, so independent sets in $V$ match independent sets in $\\mathbb{R}^n$.",
+   "An isomorphism from $V$ onto $\\mathbb{R}^n$, preserving structure."
+  ],
+  "distractors": [
+   {
+    "text": "A linear map that is generally not injective, as many vectors share coordinates.",
+    "misconception": "forgets that coordinates determine the vector"
+   },
+   {
+    "text": "A map that is not linear, since coordinates change when the basis changes.",
+    "misconception": "confuses dependence on the basis with nonlinearity"
+   },
+   {
+    "text": "A map that is defined only when $B$ is an orthonormal basis of $V$.",
+    "misconception": "thinks coordinates need an inner product"
+   },
+   {
+    "text": "A map that sends each vector to its length with respect to the basis $B$.",
+    "misconception": "confuses the coordinate vector with a norm"
+   },
+   {
+    "text": "A map that does not depend on the order of the vectors in $B$.",
+    "misconception": "forgets that reordering permutes the coordinates"
+   }
+  ],
+  "explanation": "Every $v$ is a unique combination $\\sum c_ib_i$, and $[v]_B=(c_1,\\dots,c_n)$. The map is linear, one-to-one and onto, but it depends on the order and choice of $B$."
+ },
+ {
+  "id": "la2-2.1",
+  "lecture": 2,
+  "stem": "Let $T:V\\to W$ be linear with $V$ finite dimensional. Which identity always holds?",
+  "correct": [
+   "$\\dim\\ker T+\\dim\\operatorname{im}T=\\dim V$, the dimension of the domain space.",
+   "Nullity plus rank equals $\\dim V$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\dim\\ker T+\\dim\\operatorname{im}T=\\dim W$, the dimension of the codomain.",
+    "misconception": "uses the codomain instead of the domain"
+   },
+   {
+    "text": "$\\dim\\ker T=\\dim\\operatorname{im}T$, since the two subspaces correspond.",
+    "misconception": "believes kernel and image are equally large"
+   },
+   {
+    "text": "$\\dim\\operatorname{im}T=\\dim V$ whenever the kernel is a proper subspace.",
+    "misconception": "ignores that the image shrinks by the kernel dimension"
+   },
+   {
+    "text": "$\\dim\\ker T\\cdot\\dim\\operatorname{im}T=\\dim V$, since kernel and image combine.",
+    "misconception": "multiplies where dimensions add"
+   },
+   {
+    "text": "$\\dim\\ker T+\\dim\\operatorname{im}T=\\dim V+\\dim W$, counting both spaces.",
+    "misconception": "adds domain and codomain dimensions"
+   }
+  ],
+  "explanation": "This is the rank-nullity theorem. The kernel is what $T$ collapses and the image is what remains, so the two dimensions add to $\\dim V$."
+ },
+ {
+  "id": "la2-2.2",
+  "lecture": 2,
+  "stem": "Let $T:V\\to V$ be a linear operator on a finite dimensional space. Which statement is correct?",
+  "correct": [
+   "If $T$ is injective, then $T$ is also surjective, and so $\\operatorname{im}T=V$ holds.",
+   "$\\ker T=\\{0\\}$ forces $\\operatorname{im}T=V$ for such operators."
+  ],
+  "distractors": [
+   {
+    "text": "An operator can be surjective and still have a nonzero kernel.",
+    "misconception": "ignores rank-nullity for operators on one space"
+   },
+   {
+    "text": "Injective operators are surjective only when $V$ is infinite dimensional.",
+    "misconception": "reverses the finite and infinite cases"
+   },
+   {
+    "text": "$T$ is injective exactly when $0$ does not lie in the image of $T$.",
+    "misconception": "forgets that the zero vector is always in the image"
+   },
+   {
+    "text": "The kernel of $T$ is nonzero exactly when the image of $T$ is nonzero.",
+    "misconception": "confuses the two subspaces"
+   },
+   {
+    "text": "For operators on a finite dimensional space, injectivity and surjectivity are independent properties.",
+    "misconception": "true only for maps between spaces of different dimension"
+   }
+  ],
+  "explanation": "By rank-nullity, $\\dim\\operatorname{im}T=\\dim V-\\dim\\ker T=\\dim V$ when the kernel is zero, so the image is all of $V$. This fails in infinite dimensions, for example for the shift on sequences."
+ },
+ {
+  "id": "la2-2.3",
+  "lecture": 2,
+  "stem": "The columns of the invertible matrix $P$ are the coordinates of the new basis $B'$ with respect to the old basis $B$. If $A=[T]_B$, what is $[T]_{B'}$?",
+  "correct": [
+   "The matrix $P^{-1}AP$, a matrix similar to $A$ in the new basis.",
+   "$P^{-1}AP$ with the inverse on the left."
+  ],
+  "distractors": [
+   {
+    "text": "The matrix $PAP^{-1}$, with the factors in the other order.",
+    "misconception": "swaps the roles of the two bases"
+   },
+   {
+    "text": "The matrix $P^{\\top}AP$, a congruence of $A$ by $P$.",
+    "misconception": "confuses similarity with congruence"
+   },
+   {
+    "text": "The matrix $PAP$, using $P$ on both sides.",
+    "misconception": "forgets that the inverse is needed"
+   },
+   {
+    "text": "The matrix $A^{-1}PA$, conjugating $P$ by $A$.",
+    "misconception": "mixes up which matrix is being conjugated"
+   },
+   {
+    "text": "The matrix $PA$, since only the input coordinates change.",
+    "misconception": "forgets that output coordinates change too"
+   }
+  ],
+  "explanation": "A vector with new coordinates $y$ has old coordinates $Py$. So $T$ in new coordinates is: convert to old coordinates, apply $A$, convert back, which is $P^{-1}AP$."
+ },
+ {
+  "id": "la2-2.4",
+  "lecture": 2,
+  "stem": "Let $B=P^{-1}AP$ for an invertible $P$. Which property is shared by $A$ and $B$?",
+  "correct": [
+   "They share the characteristic polynomial and hence all eigenvalues.",
+   "The same characteristic polynomial, so equal eigenvalues."
+  ],
+  "distractors": [
+   {
+    "text": "They have exactly the same eigenvectors, as column vectors in $\\mathbb{R}^n$.",
+    "misconception": "forgets that eigenvectors are transformed by $P$"
+   },
+   {
+    "text": "They have the same entries on the diagonal, since $P$ only moves entries around.",
+    "misconception": "treats similarity as a permutation of entries"
+   },
+   {
+    "text": "They are symmetric together, so a symmetric $A$ gives a symmetric $B$.",
+    "misconception": "forgets that symmetry is not preserved by similarity"
+   },
+   {
+    "text": "They have the same null space as subsets of $\\mathbb{R}^n$.",
+    "misconception": "forgets that the null space is mapped by $P^{-1}$"
+   },
+   {
+    "text": "They have the same row space as subspaces of $\\mathbb{R}^n$.",
+    "misconception": "confuses similarity with row operations"
+   }
+  ],
+  "explanation": "$\\det(B-\\lambda I)=\\det(P^{-1}(A-\\lambda I)P)=\\det(A-\\lambda I)$. Eigenvectors become $P^{-1}v$, and entries, symmetry and subspaces are not preserved."
+ },
+ {
+  "id": "la2-2.5",
+  "lecture": 2,
+  "stem": "Two $n\\times n$ matrices have the same characteristic polynomial. Which statement is correct?",
+  "correct": [
+   "They need not be similar: $\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ and the zero matrix share one.",
+   "The same characteristic polynomial is not sufficient."
+  ],
+  "distractors": [
+   {
+    "text": "They are similar, because the characteristic polynomial determines the matrix up to a change of basis.",
+    "misconception": "treats the polynomial as a complete invariant"
+   },
+   {
+    "text": "They have the same eigenvectors, since the eigenvalues coincide.",
+    "misconception": "confuses eigenvalues with eigenvectors"
+   },
+   {
+    "text": "They have the same rank, since rank is the number of nonzero eigenvalues.",
+    "misconception": "equates rank with the count of nonzero eigenvalues"
+   },
+   {
+    "text": "They are similar if and only if they have the same trace and determinant.",
+    "misconception": "thinks two invariants suffice"
+   },
+   {
+    "text": "They are similar as long as both matrices are invertible.",
+    "misconception": "ignores the Jordan structure of repeated eigenvalues"
+   }
+  ],
+  "explanation": "The nilpotent matrix and $0$ both have characteristic polynomial $\\lambda^2$ but different ranks, so they cannot be similar."
+ },
+ {
+  "id": "la2-2.6",
+  "lecture": 2,
+  "stem": "How is the matrix $[T]_B^{B'}$ of $T:V\\to W$ formed, for bases $B=(b_j)$ of $V$ and $B'$ of $W$?",
+  "correct": [
+   "Its $j$th column is $[T(b_j)]_{B'}$, the image of the basis vector $b_j$ in the output basis.",
+   "Column $j$ holds the $B'$-coordinates of the image $T(b_j)$."
+  ],
+  "distractors": [
+   {
+    "text": "Its $j$th row is the coordinate vector $[T(b_j)]_{B'}$, written horizontally.",
+    "misconception": "transposes rows and columns"
+   },
+   {
+    "text": "Its $j$th column is the $B$-coordinate vector of $b_j$ scaled by $T$.",
+    "misconception": "mixes the domain basis and codomain basis"
+   },
+   {
+    "text": "Its $j$th column is $T(e_j)$ in standard coordinates, whatever the bases.",
+    "misconception": "ignores the chosen bases"
+   },
+   {
+    "text": "Its $j$th column is the coordinate vector $[b_j]_{B'}$ of the basis vector itself.",
+    "misconception": "forgets to apply $T$ first"
+   },
+   {
+    "text": "Its $j$th column is the coordinate vector $[T(b_j)]_{B}$ in the domain basis instead.",
+    "misconception": "expresses the image in the wrong basis"
+   }
+  ],
+  "explanation": "Column $j$ records how $T$ treats the $j$th input basis vector, expressed in the output basis. Then $[T(v)]_{B'}=[T]_B^{B'}[v]_B$."
+ },
+ {
+  "id": "la2-3.1",
+  "lecture": 3,
+  "stem": "For a square matrix $A$, when is $\\lambda$ an eigenvalue?",
+  "correct": [
+   "Exactly when $\\det(A-\\lambda I)=0$, i.e. when the matrix $A-\\lambda I$ is singular.",
+   "When $A-\\lambda I$ has a nonzero kernel vector."
+  ],
+  "distractors": [
+   {
+    "text": "Exactly when $\\det(A-\\lambda I)=1$, i.e. when $A-\\lambda I$ preserves volume.",
+    "misconception": "confuses the zero determinant with volume preservation"
+   },
+   {
+    "text": "Exactly when $A-\\lambda I$ is invertible, so that $Av=\\lambda v$ can be solved.",
+    "misconception": "reverses singular and invertible"
+   },
+   {
+    "text": "Exactly when $\\lambda$ is a diagonal entry of $A$, for any matrix $A$.",
+    "misconception": "true only for triangular matrices"
+   },
+   {
+    "text": "Exactly when $\\lambda$ divides $\\det A$, a necessary divisibility condition.",
+    "misconception": "invents a divisibility rule"
+   },
+   {
+    "text": "Exactly when $\\lambda\\ne0$ and $A$ is invertible.",
+    "misconception": "confuses eigenvalues with invertibility"
+   }
+  ],
+  "explanation": "$Av=\\lambda v$ with $v\\ne0$ means $(A-\\lambda I)v=0$ has a nontrivial solution, so $A-\\lambda I$ is singular and its determinant vanishes."
+ },
+ {
+  "id": "la2-3.2",
+  "lecture": 3,
+  "stem": "For an eigenvalue $\\lambda$ of a matrix, which relation between the multiplicities always holds?",
+  "correct": [
+   "$1\\le\\dim\\ker(A-\\lambda I)\\le$ the algebraic multiplicity of $\\lambda$.",
+   "Geometric multiplicity is at least $1$ and at most algebraic multiplicity."
+  ],
+  "distractors": [
+   {
+    "text": "The algebraic multiplicity is at most the geometric multiplicity.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "The two multiplicities are always equal, for every square matrix.",
+    "misconception": "true only for diagonalizable matrices"
+   },
+   {
+    "text": "The geometric multiplicity can exceed the algebraic multiplicity for special matrices.",
+    "misconception": "believes the inequality can fail"
+   },
+   {
+    "text": "The geometric multiplicity of a real eigenvalue is always exactly $1$.",
+    "misconception": "confuses geometric multiplicity with simplicity"
+   },
+   {
+    "text": "The two multiplicities are equal exactly when $\\lambda$ is a simple root.",
+    "misconception": "confuses equality with simple roots; equality can also hold for repeated roots"
+   }
+  ],
+  "explanation": "The eigenspace has dimension at most the multiplicity of the root in the characteristic polynomial. For $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ the multiplicities are $2$ and $1$."
+ },
+ {
+  "id": "la2-3.3",
+  "lecture": 3,
+  "stem": "Eigenvectors $v_1,\\dots,v_k$ of a matrix belong to pairwise distinct eigenvalues. What follows?",
+  "correct": [
+   "The vectors $v_1,\\dots,v_k$ are linearly independent.",
+   "Eigenvectors for distinct eigenvalues cannot be linearly dependent."
+  ],
+  "distractors": [
+   {
+    "text": "The vectors are pairwise orthogonal, as in any matrix with distinct eigenvalues.",
+    "misconception": "true only for symmetric or normal matrices"
+   },
+   {
+    "text": "The vectors are linearly dependent once $k$ exceeds two.",
+    "misconception": "believes independence breaks for many vectors"
+   },
+   {
+    "text": "The vectors can be dependent, but then the eigenvalues must be zero.",
+    "misconception": "invents a special role for the eigenvalue zero"
+   },
+   {
+    "text": "The vectors form a basis of the whole space whenever $k\\ge2$.",
+    "misconception": "forgets that $k$ must equal the dimension"
+   },
+   {
+    "text": "The vectors span a subspace on which the matrix acts as the identity.",
+    "misconception": "confuses acting by $\\lambda_i$ with acting trivially"
+   }
+  ],
+  "explanation": "Suppose a minimal dependence $\\sum c_iv_i=0$; applying $A-\\lambda_kI$ gives a shorter one. Orthogonality needs extra structure such as symmetry."
+ },
+ {
+  "id": "la2-3.4",
+  "lecture": 3,
+  "stem": "Which statement about the eigenvalues of a square matrix $A$ is correct, counting algebraic multiplicity over $\\mathbb{C}$?",
+  "correct": [
+   "The trace is the sum of the eigenvalues and the determinant is their product.",
+   "$\\operatorname{tr}A=\\sum_i\\lambda_i$ and $\\det A=\\prod_i\\lambda_i$ with multiplicity."
+  ],
+  "distractors": [
+   {
+    "text": "The trace equals the sum of eigenvalues only if $A$ is diagonalizable.",
+    "misconception": "believes the identity needs diagonalizability"
+   },
+   {
+    "text": "The determinant equals the sum of the eigenvalues and the trace equals their product.",
+    "misconception": "swaps sum and product"
+   },
+   {
+    "text": "The trace is the sum of the real eigenvalues only, ignoring complex ones.",
+    "misconception": "drops complex conjugate pairs"
+   },
+   {
+    "text": "The determinant is the product of the nonzero eigenvalues only.",
+    "misconception": "drops zero eigenvalues"
+   },
+   {
+    "text": "The identities hold for symmetric matrices but fail for triangular ones.",
+    "misconception": "thinks they depend on matrix type"
+   }
+  ],
+  "explanation": "Both follow from the factorisation of the characteristic polynomial $\\det(\\lambda I-A)=\\prod(\\lambda-\\lambda_i)$ by comparing coefficients, for every square matrix."
+ },
+ {
+  "id": "la2-3.5",
+  "lecture": 3,
+  "stem": "Let $A$ be a real $3\\times3$ matrix. Which statement is correct?",
+  "correct": [
+   "$A$ has at least one real eigenvalue, since a real cubic has a real root.",
+   "Odd-size real matrices always have a real eigenvalue."
+  ],
+  "distractors": [
+   {
+    "text": "$A$ has three distinct real eigenvalues, since its characteristic polynomial has degree three.",
+    "misconception": "confuses degree with the number of real roots"
+   },
+   {
+    "text": "A non-real eigenvalue of $A$ can occur without its complex conjugate.",
+    "misconception": "forgets conjugate pairs for real matrices"
+   },
+   {
+    "text": "$A$ has no real eigenvalue whenever $\\det A>0$.",
+    "misconception": "links the sign of the determinant to realness"
+   },
+   {
+    "text": "$A$ has a real eigenvalue only if $A$ is symmetric.",
+    "misconception": "confuses real eigenvalues with symmetry"
+   },
+   {
+    "text": "$A$ is diagonalizable over $\\mathbb{C}$ whatever its entries.",
+    "misconception": "ignores Jordan blocks"
+   }
+  ],
+  "explanation": "Real polynomial roots occur in conjugate pairs and a cubic has three roots counted with multiplicity, so at least one is real. Even size fails: a rotation of the plane has none."
+ },
+ {
+  "id": "la2-4.1",
+  "lecture": 4,
+  "stem": "When is an $n\\times n$ matrix $A$ diagonalizable?",
+  "correct": [
+   "Exactly when $A$ has $n$ linearly independent eigenvectors.",
+   "When there is a basis of eigenvectors."
+  ],
+  "distractors": [
+   {
+    "text": "Exactly when $A$ has $n$ distinct eigenvalues.",
+    "misconception": "confuses a sufficient condition with a necessary one"
+   },
+   {
+    "text": "Exactly when $A$ is invertible, so that no eigenvalue is zero.",
+    "misconception": "confuses invertibility with diagonalizability"
+   },
+   {
+    "text": "Exactly when $A$ is symmetric, so that eigenvectors can be orthogonal.",
+    "misconception": "confuses diagonalizable with orthogonally diagonalizable"
+   },
+   {
+    "text": "Exactly when the characteristic polynomial has only real roots.",
+    "misconception": "ignores the need for enough eigenvectors"
+   },
+   {
+    "text": "Exactly when $\\det A\\ne0$ and $\\operatorname{tr}A\\ne0$.",
+    "misconception": "invents a criterion from trace and determinant"
+   }
+  ],
+  "explanation": "$A=PDP^{-1}$ means the columns of $P$ are $n$ independent eigenvectors. Distinct eigenvalues suffice but are not necessary, and a real-rooted characteristic polynomial does not suffice."
+ },
+ {
+  "id": "la2-4.2",
+  "lecture": 4,
+  "stem": "Why is $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ not diagonalizable?",
+  "correct": [
+   "The eigenvalue $1$ has algebraic multiplicity $2$ but its eigenspace has dimension only $1$.",
+   "It has just one independent eigenvector, so no eigenbasis exists."
+  ],
+  "distractors": [
+   {
+    "text": "Because its determinant is $1$, and matrices with nonzero determinant are not diagonalizable.",
+    "misconception": "confuses invertible with non-diagonalizable"
+   },
+   {
+    "text": "Because it has a repeated eigenvalue, and repeated eigenvalues always prevent diagonalization.",
+    "misconception": "ignores the identity matrix"
+   },
+   {
+    "text": "Because it is not symmetric, and only symmetric matrices are diagonalizable.",
+    "misconception": "confuses diagonalizable with symmetric"
+   },
+   {
+    "text": "Because its eigenvalue is not real, so the diagonal form cannot be written over $\\mathbb{R}$.",
+    "misconception": "misreads the eigenvalue"
+   },
+   {
+    "text": "Because its trace is $2$, and matrices with trace $2$ cannot be diagonalized.",
+    "misconception": "invents a trace criterion"
+   }
+  ],
+  "explanation": "$A-I=\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ has rank $1$, so the eigenspace of $1$ is a line. A repeated eigenvalue prevents diagonalization only when the geometric multiplicity is smaller."
+ },
+ {
+  "id": "la2-4.3",
+  "lecture": 4,
+  "stem": "If $A=PDP^{-1}$ with $D$ diagonal, which formula holds for $A^n$ with $n\\ge1$?",
+  "correct": [
+   "$A^n=PD^nP^{-1}$, where $D^n$ raises the diagonal entries to the $n$th power.",
+   "$A^n=PD^nP^{-1}$, with $D^n$ taken entrywise on the diagonal."
+  ],
+  "distractors": [
+   {
+    "text": "$A^n=P^nDP^{-n}$, as each factor is raised to the $n$th power.",
+    "misconception": "powers the outer factors instead of the diagonal"
+   },
+   {
+    "text": "$A^n=nPDP^{-1}$, as powers multiply a matrix by $n$.",
+    "misconception": "confuses powers with multiples"
+   },
+   {
+    "text": "$A^n=PDP^{-1}$ for all $n$, since conjugation does not change powers.",
+    "misconception": "thinks $A^n=A$"
+   },
+   {
+    "text": "$A^n=D^nP^{-1}P$, because $P$ cancels against its inverse.",
+    "misconception": "cancels factors in the wrong place"
+   },
+   {
+    "text": "$A^n=P^{-1}D^nP$, with the roles of $P$ and $P^{-1}$ exchanged.",
+    "misconception": "swaps $P$ and $P^{-1}$"
+   }
+  ],
+  "explanation": "In $(PDP^{-1})^n$ the inner factors $P^{-1}P$ cancel, leaving $PD^nP^{-1}$."
+ },
+ {
+  "id": "la2-4.4",
+  "lecture": 4,
+  "stem": "How are invertibility and diagonalizability of a square matrix related?",
+  "correct": [
+   "Neither implies the other: $\\operatorname{diag}(1,0)$ is singular yet diagonalizable, and a Jordan block is the reverse.",
+   "Neither property implies the other one."
+  ],
+  "distractors": [
+   {
+    "text": "Every invertible matrix is diagonalizable, since it has no zero eigenvalue.",
+    "misconception": "ignores Jordan blocks"
+   },
+   {
+    "text": "Every diagonalizable matrix is invertible, since its diagonal form is well defined.",
+    "misconception": "ignores zero eigenvalues"
+   },
+   {
+    "text": "A singular matrix is never diagonalizable, as it has a nontrivial kernel.",
+    "misconception": "forgets that the kernel is an eigenspace for zero"
+   },
+   {
+    "text": "Diagonalizable matrices are exactly the invertible matrices with real eigenvalues.",
+    "misconception": "combines two false claims"
+   },
+   {
+    "text": "An invertible matrix is diagonalizable if and only if its determinant is positive.",
+    "misconception": "invents a determinant criterion"
+   }
+  ],
+  "explanation": "Diagonalizability concerns having enough eigenvectors; invertibility only concerns the eigenvalue $0$ not occurring."
+ },
+ {
+  "id": "la2-4.5",
+  "lecture": 4,
+  "stem": "A matrix $A$ is diagonalizable. When does $A^n\\to0$ as $n\\to\\infty$?",
+  "correct": [
+   "When every eigenvalue satisfies $|\\lambda|<1$.",
+   "Exactly when all eigenvalues lie inside the unit circle."
+  ],
+  "distractors": [
+   {
+    "text": "When at least one eigenvalue satisfies $|\\lambda|<1$.",
+    "misconception": "needs all eigenvalues, not one"
+   },
+   {
+    "text": "When every real eigenvalue satisfies $\\lambda<1$, including large negative ones.",
+    "misconception": "ignores the absolute value"
+   },
+   {
+    "text": "When $\\det A<1$, since the volume shrinks to zero.",
+    "misconception": "confuses the product of eigenvalues with each factor"
+   },
+   {
+    "text": "When $\\operatorname{tr}A<1$, since the diagonal entries stay small.",
+    "misconception": "links the trace to decay"
+   },
+   {
+    "text": "When $\\det A=0$, so that some direction is collapsed to zero.",
+    "misconception": "a single zero eigenvalue does not control the other directions"
+   }
+  ],
+  "explanation": "$A^n=PD^nP^{-1}$ and $D^n\\to0$ exactly when every $|\\lambda_i|<1$. A determinant below $1$ is not enough: $\\operatorname{diag}(10,0.01)$ has $\\det=0.1$ yet $A^n$ blows up."
+ },
+ {
+  "id": "la2-4.6",
+  "lecture": 4,
+  "stem": "Two diagonalizable matrices $A$ and $B$ commute, $AB=BA$. What follows?",
+  "correct": [
+   "They can be diagonalized by the very same invertible matrix.",
+   "They share a common basis of eigenvectors."
+  ],
+  "distractors": [
+   {
+    "text": "They must have the same eigenvalues, listed in the same order.",
+    "misconception": "confuses commuting with equal spectrum"
+   },
+   {
+    "text": "They must be equal up to a scalar multiple.",
+    "misconception": "believes commuting means proportional"
+   },
+   {
+    "text": "Their product is diagonalizable, but no common eigenbasis need exist.",
+    "misconception": "misses simultaneous diagonalization"
+   },
+   {
+    "text": "One must be a polynomial in the other, as for any commuting pair.",
+    "misconception": "confuses commuting with being polynomials of each other"
+   },
+   {
+    "text": "They must have equal traces, since commuting matrices act alike.",
+    "misconception": "confuses commuting with equal invariants"
+   }
+  ],
+  "explanation": "Each eigenspace of $A$ is invariant under $B$, so $B$ can be diagonalized inside each one; together this gives a common eigenbasis. The converse also holds."
+ },
+ {
+  "id": "la2-5.1",
+  "lecture": 5,
+  "stem": "Which property separates an inner product from a symmetric bilinear form that is only positive semidefinite?",
+  "correct": [
+   "$\\langle v,v\\rangle=0$ implies $v=0$, positive definiteness.",
+   "Only the zero vector has self-pairing zero."
+  ],
+  "distractors": [
+   {
+    "text": "Symmetry: $\\langle u,v\\rangle=\\langle v,u\\rangle$ for all $u,v$.",
+    "misconception": "both kinds of forms are symmetric"
+   },
+   {
+    "text": "Linearity in the first argument for sums and scalars.",
+    "misconception": "both kinds of forms are linear"
+   },
+   {
+    "text": "Non-negativity: $\\langle v,v\\rangle\\ge 0$ for every vector $v$.",
+    "misconception": "semidefinite forms also satisfy this"
+   },
+   {
+    "text": "Bounded values: $|\\langle u,v\\rangle|\\le 1$ for all unit vectors.",
+    "misconception": "unrelated to the axioms"
+   },
+   {
+    "text": "Non-negativity of $\\langle u,v\\rangle$ for all pairs $u,v$.",
+    "misconception": "inner products of different vectors can be negative"
+   }
+  ],
+  "explanation": "Semidefinite forms allow $\\langle v,v\\rangle=0$ for some $v\\ne0$, which then has zero length. The definiteness axiom rules this out."
+ },
+ {
+  "id": "la2-5.2",
+  "lecture": 5,
+  "stem": "When does equality $|\\langle u,v\\rangle|=\\|u\\|\\|v\\|$ hold in the Cauchy-Schwarz inequality?",
+  "correct": [
+   "Exactly when $u$ and $v$ are linearly dependent vectors.",
+   "When one is a multiple of the other."
+  ],
+  "distractors": [
+   {
+    "text": "Exactly when $u$ and $v$ are orthogonal to each other.",
+    "misconception": "orthogonality gives the opposite extreme"
+   },
+   {
+    "text": "Exactly when $\\|u\\|=\\|v\\|$, so the vectors have the same length.",
+    "misconception": "confuses equal norms with parallelism"
+   },
+   {
+    "text": "Exactly when $u+v=0$, so the vectors are negatives of each other.",
+    "misconception": "covers only one of the parallel cases"
+   },
+   {
+    "text": "Exactly when $u$ and $v$ are linearly independent.",
+    "misconception": "reverses dependence and independence"
+   },
+   {
+    "text": "Exactly when the angle between $u$ and $v$ is $45^{\\circ}$.",
+    "misconception": "invents a particular angle"
+   }
+  ],
+  "explanation": "Equality means $\\cos\\theta=\\pm1$, i.e. the vectors are parallel in the same or opposite sense. Orthogonal vectors give $\\langle u,v\\rangle=0$, the smallest left-hand side."
+ },
+ {
+  "id": "la2-5.3",
+  "lecture": 5,
+  "stem": "On $\\mathbb{R}^2$ define $\\langle x,y\\rangle=x_1y_1-x_2y_2$. Why is this not an inner product?",
+  "correct": [
+   "Positive definiteness fails, e.g. $\\langle(0,1),(0,1)\\rangle=-1$.",
+   "Some nonzero $x$ has $\\langle x,x\\rangle<0$ here."
+  ],
+  "distractors": [
+   {
+    "text": "It is not symmetric in $x$ and $y$.",
+    "misconception": "the formula is symmetric"
+   },
+   {
+    "text": "It is not linear in the first argument.",
+    "misconception": "the formula is bilinear"
+   },
+   {
+    "text": "Because inner products must be positive for every pair of distinct vectors.",
+    "misconception": "inner products of distinct vectors may be negative"
+   },
+   {
+    "text": "Because an inner product space cannot contain orthogonal nonzero vectors.",
+    "misconception": "orthogonal pairs are allowed in inner product spaces"
+   },
+   {
+    "text": "It fails bilinearity in the second argument, since the sign is attached to one term.",
+    "misconception": "the formula is bilinear"
+   }
+  ],
+  "explanation": "Symmetry and bilinearity hold, but $\\langle x,x\\rangle=x_1^2-x_2^2$ is negative for $x=(0,1)$. A negative value alone for $\\langle u,v\\rangle$ is harmless."
+ },
+ {
+  "id": "la2-5.4",
+  "lecture": 5,
+  "stem": "Which condition characterises the norms that come from an inner product?",
+  "correct": [
+   "The parallelogram law $\\|u+v\\|^2+\\|u-v\\|^2=2\\|u\\|^2+2\\|v\\|^2$.",
+   "The parallelogram law holds for all pairs."
+  ],
+  "distractors": [
+   {
+    "text": "The triangle inequality $\\|u+v\\|\\le\\|u\\|+\\|v\\|$ for all $u,v$.",
+    "misconception": "holds for every norm"
+   },
+   {
+    "text": "The homogeneity rule $\\|cv\\|=|c|\\|v\\|$ for all scalars $c$.",
+    "misconception": "holds for every norm"
+   },
+   {
+    "text": "The identity $\\|u+v\\|^2=\\|u\\|^2+\\|v\\|^2$ for all $u,v$.",
+    "misconception": "holds only for orthogonal vectors"
+   },
+   {
+    "text": "Positivity: $\\|v\\|=0$ only for $v=0$ and $\\|v\\|\\ge0$.",
+    "misconception": "holds for every norm"
+   },
+   {
+    "text": "Completeness: every Cauchy sequence converges in the norm.",
+    "misconception": "completeness is unrelated to inner products"
+   }
+  ],
+  "explanation": "Norms such as the max-norm on $\\mathbb{R}^2$ satisfy the triangle inequality and homogeneity but not the parallelogram law, so they do not arise from an inner product."
+ },
+ {
+  "id": "la2-5.5",
+  "lecture": 5,
+  "stem": "In a real inner product space, when does $\\|u+v\\|^2=\\|u\\|^2+\\|v\\|^2$ hold?",
+  "correct": [
+   "Exactly when $u$ and $v$ are orthogonal vectors, i.e. $\\langle u,v\\rangle=0$.",
+   "Exactly when the cross term $\\langle u,v\\rangle$ vanishes."
+  ],
+  "distractors": [
+   {
+    "text": "Exactly when $u$ and $v$ are parallel vectors.",
+    "misconception": "parallel vectors give the triangle equality, not Pythagoras"
+   },
+   {
+    "text": "Exactly when $\\|u\\|=\\|v\\|$, so the vectors have equal length.",
+    "misconception": "confuses equal lengths with orthogonality"
+   },
+   {
+    "text": "Exactly when both $u$ and $v$ are unit vectors.",
+    "misconception": "adds an irrelevant normalisation"
+   },
+   {
+    "text": "Exactly when $u=-v$, so that the sum is zero.",
+    "misconception": "the equation fails for nonzero $u=-v$"
+   },
+   {
+    "text": "Exactly when the angle between $u$ and $v$ is acute.",
+    "misconception": "acute angles give a positive cross term"
+   }
+  ],
+  "explanation": "Expanding gives $\\|u+v\\|^2=\\|u\\|^2+2\\langle u,v\\rangle+\\|v\\|^2$, so equality holds exactly when the cross term $\\langle u,v\\rangle$ is zero."
+ },
+ {
+  "id": "la2-5.6",
+  "lecture": 5,
+  "stem": "Why does $\\cos\\theta=\\dfrac{\\langle u,v\\rangle}{\\|u\\|\\|v\\|}$ define a genuine angle in a real inner product space?",
+  "correct": [
+   "The Cauchy-Schwarz inequality keeps the quotient in $[-1,1]$ for nonzero $u,v$.",
+   "The quotient never leaves $[-1,1]$ by Cauchy-Schwarz."
+  ],
+  "distractors": [
+   {
+    "text": "Because inner products of nonzero vectors are always positive, so $\\theta$ is acute.",
+    "misconception": "inner products can be negative or zero"
+   },
+   {
+    "text": "Because $\\|u\\|\\|v\\|\\le1$ for all vectors, so the quotient is small.",
+    "misconception": "norms are not bounded by one"
+   },
+   {
+    "text": "Because the triangle inequality bounds $\\langle u,v\\rangle$ by $\\|u\\|+\\|v\\|$.",
+    "misconception": "uses the wrong inequality"
+   },
+   {
+    "text": "Because the angle is defined only for orthogonal vectors, where it is $90^{\\circ}$.",
+    "misconception": "restricts angles wrongly"
+   },
+   {
+    "text": "Because the formula is a definition and needs no justification at all.",
+    "misconception": "ignores that arccos needs an argument in $[-1,1]$"
+   }
+  ],
+  "explanation": "The arccosine is defined on $[-1,1]$ only. The Cauchy-Schwarz inequality $|\\langle u,v\\rangle|\\le\\|u\\|\\|v\\|$ guarantees the quotient lies there."
+ },
+ {
+  "id": "la2-6.1",
+  "lecture": 6,
+  "stem": "In Gram-Schmidt, $w_k=v_k-\\sum_{j<k}\\langle v_k,e_j\\rangle e_j$ with $e_1,\\dots,e_{k-1}$ already orthonormal. What does this step achieve?",
+  "correct": [
+   "It subtracts the components of $v_k$ along the earlier $e_j$ vectors.",
+   "$w_k$ is orthogonal to all earlier $e_j$ vectors."
+  ],
+  "distractors": [
+   {
+    "text": "It rescales $v_k$ to length $1$, so that $w_k$ is a unit vector.",
+    "misconception": "confuses subtracting projections with normalising"
+   },
+   {
+    "text": "It rotates $v_k$ into the plane spanned by $e_1$ and $e_2$.",
+    "misconception": "invents a rotation"
+   },
+   {
+    "text": "It makes $w_k$ orthogonal to $v_k$ itself.",
+    "misconception": "confuses the vector with the subspace"
+   },
+   {
+    "text": "It replaces $v_k$ by an eigenvector of the Gram matrix.",
+    "misconception": "confuses orthogonalising with diagonalising"
+   },
+   {
+    "text": "It leaves the span of $v_1,\\dots,v_k$ unchanged only if the $v_j$ are already orthogonal.",
+    "misconception": "the span is always preserved"
+   }
+  ],
+  "explanation": "The sum is the orthogonal projection of $v_k$ onto $\\operatorname{span}(e_1,\\dots,e_{k-1})$; subtracting it leaves the part orthogonal to that span. The span of the first $k$ vectors is preserved."
+ },
+ {
+  "id": "la2-6.2",
+  "lecture": 6,
+  "stem": "Let $W$ be a subspace of an inner product space $V$ and $v\\in V$. Which condition characterises $p=P_Wv$?",
+  "correct": [
+   "$p\\in W$ and $v-p$ is orthogonal to every vector of $W$.",
+   "The unique $p\\in W$ such that $v-p\\perp W$ holds."
+  ],
+  "distractors": [
+   {
+    "text": "$p\\in W$ and $v-p$ also lies in $W$.",
+    "misconception": "confuses orthogonality with membership"
+   },
+   {
+    "text": "$p\\perp W$ and $v-p\\in W$, so the roles are reversed.",
+    "misconception": "swaps the subspace and its complement"
+   },
+   {
+    "text": "$p$ is the unit vector in $W$ that points in the direction of $v$.",
+    "misconception": "confuses projection with normalisation"
+   },
+   {
+    "text": "$p$ is the vector of $W$ with the largest inner product with $v$.",
+    "misconception": "confuses the nearest vector with the largest inner product"
+   },
+   {
+    "text": "$p=v$ whenever $v$ is orthogonal to $W$.",
+    "misconception": "orthogonal vectors project to zero"
+   }
+  ],
+  "explanation": "The projection is the unique $p\\in W$ with $v-p\\in W^{\\perp}$, and it is also the nearest point of $W$ to $v$."
+ },
+ {
+  "id": "la2-6.3",
+  "lecture": 6,
+  "stem": "For $A\\in\\mathbb{R}^{m\\times n}$ and $b\\in\\mathbb{R}^m$, when is the least squares solution of $Ax\\approx b$ unique?",
+  "correct": [
+   "Exactly when the columns of $A$ are linearly independent.",
+   "When $A$ has full column rank, i.e. $A^{\\top}A$ is invertible."
+  ],
+  "distractors": [
+   {
+    "text": "Exactly when $A$ is a square matrix.",
+    "misconception": "confuses uniqueness with squareness"
+   },
+   {
+    "text": "Exactly when $b$ lies in the column space of $A$.",
+    "misconception": "confuses exact solvability with uniqueness"
+   },
+   {
+    "text": "Exactly when $A$ has more rows than columns.",
+    "misconception": "treats a necessary condition as sufficient"
+   },
+   {
+    "text": "Exactly when $A^{\\top}A=I$, so the columns are orthonormal.",
+    "misconception": "requires more than is needed"
+   },
+   {
+    "text": "Always, because the normal equations are always uniquely solvable.",
+    "misconception": "ignores rank deficiency"
+   }
+  ],
+  "explanation": "The solutions of $A^{\\top}Ax=A^{\\top}b$ form a coset of $\\ker(A^{\\top}A)=\\ker A$, a single point exactly when the columns are independent."
+ },
+ {
+  "id": "la2-6.4",
+  "lecture": 6,
+  "stem": "Let $\\hat x$ solve the least squares problem $\\min\\|Ax-b\\|$. What can be said of the residual $r=b-A\\hat x$?",
+  "correct": [
+   "It is orthogonal to every column of $A$, that is $A^{\\top}r=0$ holds.",
+   "$r$ is orthogonal to the column space of $A$."
+  ],
+  "distractors": [
+   {
+    "text": "It is zero, because least squares solves $Ax=b$ exactly.",
+    "misconception": "confuses least squares with exact solving"
+   },
+   {
+    "text": "It lies in the column space of $A$, along the fitted values.",
+    "misconception": "confuses the residual with the fit"
+   },
+   {
+    "text": "It is parallel to $\\hat x$, so the error points along the solution.",
+    "misconception": "mixes residual and solution"
+   },
+   {
+    "text": "It has the smallest possible entries, each one separately minimal.",
+    "misconception": "confuses minimising the sum of squares with each entry"
+   },
+   {
+    "text": "It is orthogonal to $b$, since the fit takes all of $b$.",
+    "misconception": "confuses the residual with the fitted value"
+   }
+  ],
+  "explanation": "The normal equations $A^{\\top}(b-A\\hat x)=0$ say exactly that $r$ is orthogonal to the columns of $A$. The fit $A\\hat x$ is the projection of $b$ onto the column space."
+ },
+ {
+  "id": "la2-6.5",
+  "lecture": 6,
+  "stem": "Which pair of properties characterises a matrix $P$ of an orthogonal projection onto a subspace of $\\mathbb{R}^n$?",
+  "correct": [
+   "$P^2=P$ and $P^{\\top}=P$ both hold.",
+   "$P$ is both idempotent and symmetric, as a matrix."
+  ],
+  "distractors": [
+   {
+    "text": "$P^2=P$ alone, with no further condition.",
+    "misconception": "this gives all projections, including oblique ones"
+   },
+   {
+    "text": "$P^{\\top}P=I$, so that $P$ is an orthogonal matrix.",
+    "misconception": "confuses projection with orthogonal matrix"
+   },
+   {
+    "text": "$P^2=2P$, since the projection doubles on the second application.",
+    "misconception": "invents a relation"
+   },
+   {
+    "text": "$P$ is invertible with eigenvalues between $0$ and $1$.",
+    "misconception": "eigenvalues are exactly $0$ or $1$ and a projection onto a proper subspace is singular"
+   },
+   {
+    "text": "$P^{\\top}P=P^{\\top}$ and $\\det P=1$.",
+    "misconception": "projections onto proper subspaces have zero determinant"
+   }
+  ],
+  "explanation": "Idempotence means projecting twice equals projecting once. Symmetry makes it orthogonal. The eigenvalues are $1$ on the subspace and $0$ on its complement."
+ },
+ {
+  "id": "la2-6.6",
+  "lecture": 6,
+  "stem": "For a subspace $W$ of $\\mathbb{R}^n$, which statement about $W^{\\perp}$ is correct?",
+  "correct": [
+   "$\\dim W+\\dim W^{\\perp}=n$, and $(W^{\\perp})^{\\perp}=W$ holds.",
+   "Complement dimension is $n-\\dim W$, and doing it twice gives $W$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\dim W^{\\perp}=\\dim W$ for every subspace $W$.",
+    "misconception": "confuses complement with a copy"
+   },
+   {
+    "text": "$W\\cap W^{\\perp}$ equals $W$, since each vector is orthogonal to itself.",
+    "misconception": "believes nonzero vectors are self-orthogonal"
+   },
+   {
+    "text": "$(W^{\\perp})^{\\perp}=W^{\\perp}$, so taking the complement is idempotent.",
+    "misconception": "confuses the complement with a projection"
+   },
+   {
+    "text": "$W+W^{\\perp}$ is a proper subspace unless $W=\\{0\\}$.",
+    "misconception": "the sum is the whole space"
+   },
+   {
+    "text": "$W^{\\perp}$ always contains $W$, so every vector is orthogonal to its own subspace.",
+    "misconception": "confuses the complement with containment"
+   }
+  ],
+  "explanation": "Write $\\mathbb{R}^n=W\\oplus W^{\\perp}$. The intersection is $\\{0\\}$, the dimensions add to $n$, and applying the complement twice returns $W$ in finite dimensions."
+ },
+ {
+  "id": "la2-7.1",
+  "lecture": 7,
+  "stem": "Let $T$ be an operator on a complex inner product space with orthonormal basis $B$ and $[T]_B=A$. What is $[T^*]_B$?",
+  "correct": [
+   "The conjugate transpose $A^*=\\bar A^{\\top}$ of the matrix of $T$.",
+   "$\\bar A^{\\top}$, valid because $B$ is orthonormal."
+  ],
+  "distractors": [
+   {
+    "text": "The inverse $A^{-1}$, as $T^*$ undoes $T$.",
+    "misconception": "confuses adjoint with inverse"
+   },
+   {
+    "text": "The plain transpose $A^{\\top}$, without conjugating the entries.",
+    "misconception": "forgets the conjugation over complex fields"
+   },
+   {
+    "text": "The adjugate (cofactor) matrix of $A$, since both are called adjoint.",
+    "misconception": "confuses classical adjoint and operator adjoint"
+   },
+   {
+    "text": "The matrix $\\bar A^{\\top}$ in any basis, orthonormal or not.",
+    "misconception": "forgets the orthonormality assumption"
+   },
+   {
+    "text": "The matrix $A$ itself, since $\\langle Tv,w\\rangle=\\langle v,Tw\\rangle$.",
+    "misconception": "assumes every operator is self-adjoint"
+   }
+  ],
+  "explanation": "The adjoint satisfies $\\langle Tv,w\\rangle=\\langle v,T^*w\\rangle$. In an orthonormal basis, this makes the matrix of $T^*$ the conjugate transpose."
+ },
+ {
+  "id": "la2-7.2",
+  "lecture": 7,
+  "stem": "What do you know about the eigenvalues of a self-adjoint operator $T=T^*$?",
+  "correct": [
+   "They are all real numbers.",
+   "Each eigenvalue is real, even over complex scalars."
+  ],
+  "distractors": [
+   {
+    "text": "They are all purely imaginary numbers.",
+    "misconception": "describes skew-adjoint operators"
+   },
+   {
+    "text": "They all have absolute value $1$.",
+    "misconception": "describes unitary operators"
+   },
+   {
+    "text": "They are all positive, since $T=T^*$ makes $\\langle Tv,v\\rangle>0$.",
+    "misconception": "confuses self-adjoint with positive definite"
+   },
+   {
+    "text": "They can be non-real, but then come in conjugate pairs.",
+    "misconception": "the conjugate pair rule applies to real non-symmetric matrices"
+   },
+   {
+    "text": "They are real only when the space is finite dimensional.",
+    "misconception": "the argument does not need dimension"
+   }
+  ],
+  "explanation": "If $Tv=\\lambda v$ with $\\|v\\|=1$ then $\\lambda=\\langle Tv,v\\rangle=\\langle v,Tv\\rangle=\\bar\\lambda$, so $\\lambda$ is real."
+ },
+ {
+  "id": "la2-7.3",
+  "lecture": 7,
+  "stem": "Which of these matrices is guaranteed to be normal, i.e. to satisfy $AA^*=A^*A$?",
+  "correct": [
+   "Any unitary matrix $U$, since $UU^*=U^*U=I$.",
+   "Every matrix whose conjugate transpose equals its inverse."
+  ],
+  "distractors": [
+   {
+    "text": "Any invertible matrix, since $A$ has an inverse.",
+    "misconception": "confuses normal with invertible"
+   },
+   {
+    "text": "Any upper triangular matrix, since it has a simple form.",
+    "misconception": "triangular matrices need not be normal"
+   },
+   {
+    "text": "Any matrix with real entries, since transposition is then easy.",
+    "misconception": "real matrices need not be normal"
+   },
+   {
+    "text": "Any diagonalizable matrix, as its eigenvalues are visible.",
+    "misconception": "diagonalizable matrices need not be normal"
+   },
+   {
+    "text": "Any matrix with only positive entries.",
+    "misconception": "positivity of entries gives no normality"
+   }
+  ],
+  "explanation": "Unitary, self-adjoint and skew-adjoint matrices are normal. Invertible, real, triangular or diagonalizable matrices need not be: $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ is all four."
+ },
+ {
+  "id": "la2-7.4",
+  "lecture": 7,
+  "stem": "Why is $A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ not normal?",
+  "correct": [
+   "$AA^{\\top}=\\begin{pmatrix}2&1\\\\1&1\\end{pmatrix}$ differs from $A^{\\top}A=\\begin{pmatrix}1&1\\\\1&2\\end{pmatrix}$.",
+   "$A$ does not commute with its own transpose."
+  ],
+  "distractors": [
+   {
+    "text": "Because $A$ is not symmetric, and normal matrices must be symmetric.",
+    "misconception": "normal does not require symmetry, e.g. rotations"
+   },
+   {
+    "text": "Because $A$ has a repeated eigenvalue, which normal matrices cannot have.",
+    "misconception": "the identity is normal with repeated eigenvalue"
+   },
+   {
+    "text": "Because $\\det A=1\\ne0$, whereas normal matrices are singular.",
+    "misconception": "invents a determinant condition"
+   },
+   {
+    "text": "Because $A$ is not orthogonal, and normal matrices are orthogonal.",
+    "misconception": "confuses normal with orthogonal"
+   },
+   {
+    "text": "Because $A$ has a zero entry, and normal matrices have no zero entries.",
+    "misconception": "invents an entrywise condition"
+   }
+  ],
+  "explanation": "Direct multiplication shows $AA^{\\top}\\ne A^{\\top}A$. Rotations are normal without being symmetric, and the identity is normal with a repeated eigenvalue."
+ },
+ {
+  "id": "la2-7.5",
+  "lecture": 7,
+  "stem": "Let $T$ be normal and $Tv=\\lambda v$. What can be said about $T^*v$?",
+  "correct": [
+   "$T^*v=\\bar\\lambda v$, so $v$ is also an eigenvector of $T^*$.",
+   "$v$ is an eigenvector of $T^*$ for $\\bar\\lambda$."
+  ],
+  "distractors": [
+   {
+    "text": "$T^*v=\\lambda v$, with the same eigenvalue.",
+    "misconception": "true only when the eigenvalue is real"
+   },
+   {
+    "text": "$T^*v=-\\lambda v$, the opposite eigenvalue.",
+    "misconception": "describes skew-adjoint operators"
+   },
+   {
+    "text": "$T^*v=\\lambda^{-1}v$, the inverse eigenvalue.",
+    "misconception": "describes unitary operators"
+   },
+   {
+    "text": "$T^*v$ is orthogonal to $v$ for every eigenvector $v$.",
+    "misconception": "it is parallel to $v$"
+   },
+   {
+    "text": "$T^*v$ is not parallel to $v$ unless $T$ is self-adjoint.",
+    "misconception": "normality already suffices"
+   }
+  ],
+  "explanation": "For normal $T$, $\\|(T-\\lambda I)v\\|=\\|(T^*-\\bar\\lambda I)v\\|$, so the eigenvector equation transfers to $T^*$ with $\\bar\\lambda$."
+ },
+ {
+  "id": "la2-8.1",
+  "lecture": 8,
+  "stem": "For a real $n\\times n$ matrix $A$, when is $A=Q\\Lambda Q^{\\top}$ possible with $Q$ orthogonal and $\\Lambda$ diagonal?",
+  "correct": [
+   "Exactly when $A$ is symmetric, that is $A=A^{\\top}$ holds.",
+   "Iff $A$ equals its transpose."
+  ],
+  "distractors": [
+   {
+    "text": "Exactly when $A$ is normal, as in the complex spectral theorem.",
+    "misconception": "rotations are normal but not real-orthogonally diagonalizable"
+   },
+   {
+    "text": "Exactly when all eigenvalues of $A$ are real.",
+    "misconception": "real eigenvalues do not exclude Jordan blocks"
+   },
+   {
+    "text": "Exactly when $A$ is diagonalizable over $\\mathbb{R}$.",
+    "misconception": "the eigenvectors may be non-orthogonal"
+   },
+   {
+    "text": "Exactly when $A$ is invertible, so that $\\Lambda$ has no zero entry.",
+    "misconception": "confuses invertibility with the spectral theorem"
+   },
+   {
+    "text": "Exactly when $A$ has $n$ distinct real eigenvalues.",
+    "misconception": "sufficient for diagonalizability but not for orthogonality"
+   }
+  ],
+  "explanation": "The real spectral theorem is an equivalence: orthogonally diagonalizable real matrices are exactly symmetric ones. Normality is the right condition only over $\\mathbb{C}$."
+ },
+ {
+  "id": "la2-8.2",
+  "lecture": 8,
+  "stem": "Why is the rotation matrix $R_{\\theta}$ of the plane, with $\\theta\\ne0,\\pi$, not orthogonally diagonalizable over $\\mathbb{R}$?",
+  "correct": [
+   "Its eigenvalues $e^{\\pm i\\theta}$ are not real, but $Q\\Lambda Q^{\\top}$ has real ones.",
+   "It is not symmetric, and symmetry is required."
+  ],
+  "distractors": [
+   {
+    "text": "Because it is not a normal matrix, so no spectral theorem applies.",
+    "misconception": "rotations are normal"
+   },
+   {
+    "text": "Because it is not an orthogonal matrix.",
+    "misconception": "rotations are orthogonal"
+   },
+   {
+    "text": "Because its eigenvectors over $\\mathbb{C}$ are not orthogonal.",
+    "misconception": "they are orthogonal"
+   },
+   {
+    "text": "Because its determinant equals $-1$.",
+    "misconception": "the determinant is $+1$"
+   },
+   {
+    "text": "Because it has a repeated eigenvalue, so no basis of eigenvectors exists.",
+    "misconception": "the eigenvalues are distinct over the complex numbers"
+   }
+  ],
+  "explanation": "Rotations are normal, so they are unitarily diagonalizable over $\\mathbb{C}$ with eigenvalues $e^{\\pm i\\theta}$. Over $\\mathbb{R}$ orthogonal diagonalizability requires symmetry."
+ },
+ {
+  "id": "la2-8.3",
+  "lecture": 8,
+  "stem": "Let $A$ be real symmetric with eigenvectors $u$ and $w$ for different eigenvalues. What follows?",
+  "correct": [
+   "$u$ and $w$ are orthogonal to each other.",
+   "Eigenvectors for different eigenvalues are perpendicular."
+  ],
+  "distractors": [
+   {
+    "text": "$u$ and $w$ are parallel, since they come from the same matrix.",
+    "misconception": "different eigenvalues give independent vectors"
+   },
+   {
+    "text": "$u$ and $w$ are orthogonal only after a Gram-Schmidt step.",
+    "misconception": "orthogonality is automatic across different eigenvalues"
+   },
+   {
+    "text": "$u$ and $w$ are orthogonal for every real matrix with distinct eigenvalues.",
+    "misconception": "this needs symmetry or normality"
+   },
+   {
+    "text": "$u$ and $w$ are orthogonal only if both eigenvalues are positive.",
+    "misconception": "adds an irrelevant condition"
+   },
+   {
+    "text": "$u$ and $w$ have equal length, since both come from the same matrix.",
+    "misconception": "eigenvectors can be scaled arbitrarily"
+   }
+  ],
+  "explanation": "$\\lambda\\langle u,w\\rangle=\\langle Au,w\\rangle=\\langle u,Aw\\rangle=\\mu\\langle u,w\\rangle$ gives $(\\lambda-\\mu)\\langle u,w\\rangle=0$, so $\\langle u,w\\rangle=0$."
+ },
+ {
+  "id": "la2-8.4",
+  "lecture": 8,
+  "stem": "Let $A=\\sum_i\\lambda_iu_iu_i^{\\top}$ be the spectral decomposition of a real symmetric matrix with orthonormal $u_i$. What is each $u_iu_i^{\\top}$?",
+  "correct": [
+   "The orthogonal projection onto the line $\\mathbb{R}u_i$.",
+   "A rank-one symmetric projection."
+  ],
+  "distractors": [
+   {
+    "text": "The identity matrix restricted to $\\mathbb{R}u_i$, of rank $n$.",
+    "misconception": "confuses the projection with the identity"
+   },
+   {
+    "text": "An orthogonal matrix whose columns are the $u_i$.",
+    "misconception": "confuses outer product with the matrix $Q$"
+   },
+   {
+    "text": "A diagonal matrix with $\\lambda_i$ in position $i$.",
+    "misconception": "confuses the projection with the diagonal factor"
+   },
+   {
+    "text": "The inverse of $\\lambda_iu_iu_i^{\\top}$.",
+    "misconception": "rank-one matrices are not invertible"
+   },
+   {
+    "text": "A matrix of rank $n-1$ that kills $u_i$ and fixes its orthogonal complement.",
+    "misconception": "describes the projection onto the complement"
+   }
+  ],
+  "explanation": "$(u_iu_i^{\\top})^2=u_iu_i^{\\top}$ and it is symmetric of rank one, hence the projection onto $\\mathbb{R}u_i$. The $u_iu_i^{\\top}$ sum to the identity."
+ },
+ {
+  "id": "la2-8.5",
+  "lecture": 8,
+  "stem": "Two real symmetric matrices $A$ and $B$. When do they share an orthonormal basis of eigenvectors?",
+  "correct": [
+   "Exactly when they commute, that is $AB=BA$ holds.",
+   "They do exactly when $AB=BA$."
+  ],
+  "distractors": [
+   {
+    "text": "Always, because both have orthonormal eigenbases.",
+    "misconception": "each has its own basis but they need not agree"
+   },
+   {
+    "text": "Exactly when they have the same eigenvalues.",
+    "misconception": "confuses common eigenvectors with equal spectra"
+   },
+   {
+    "text": "Exactly when $A+B$ is symmetric, which is automatic.",
+    "misconception": "the sum is always symmetric, so this is no condition"
+   },
+   {
+    "text": "Exactly when $AB$ is symmetric and invertible.",
+    "misconception": "confuses products with commuting"
+   },
+   {
+    "text": "Exactly when $A$ and $B$ have the same rank.",
+    "misconception": "rank is unrelated to a common eigenbasis"
+   }
+  ],
+  "explanation": "Commuting symmetric matrices are simultaneously orthogonally diagonalizable, and conversely diagonal matrices commute. Symmetry of $AB$ is equivalent to commuting, but invertibility is irrelevant."
+ },
+ {
+  "id": "la2-9.1",
+  "lecture": 9,
+  "stem": "For a real symmetric matrix $A$, which test shows that $A$ is positive definite?",
+  "correct": [
+   "All eigenvalues of the matrix $A$ are strictly positive.",
+   "Leading minors all positive."
+  ],
+  "distractors": [
+   {
+    "text": "All diagonal entries of $A$ are positive.",
+    "misconception": "necessary but not sufficient"
+   },
+   {
+    "text": "The determinant of $A$ is positive.",
+    "misconception": "an even number of negative eigenvalues also gives positive determinant"
+   },
+   {
+    "text": "All entries of $A$ are positive.",
+    "misconception": "neither necessary nor sufficient"
+   },
+   {
+    "text": "The trace of $A$ is positive.",
+    "misconception": "one large eigenvalue can hide negative ones"
+   },
+   {
+    "text": "The inequality $x^{\\top}Ax\\ge0$ holds for all vectors $x$.",
+    "misconception": "that is semidefiniteness, which allows zero values"
+   }
+  ],
+  "explanation": "Both criteria are equivalent for symmetric matrices. $\\begin{pmatrix}1&2\\\\2&1\\end{pmatrix}$ has positive diagonal and entries but eigenvalues $3$ and $-1$."
+ },
+ {
+  "id": "la2-9.2",
+  "lecture": 9,
+  "stem": "Which test is valid for positive semidefiniteness of a real symmetric matrix?",
+  "correct": [
+   "Every principal minor is nonnegative.",
+   "Each principal minor is $\\ge0$."
+  ],
+  "distractors": [
+   {
+    "text": "All leading principal minors are nonnegative.",
+    "misconception": "$\\operatorname{diag}(0,-1)$ is a counterexample"
+   },
+   {
+    "text": "The determinant is nonnegative.",
+    "misconception": "$-I$ has positive determinant in even size"
+   },
+   {
+    "text": "All diagonal entries are nonnegative.",
+    "misconception": "necessary only"
+   },
+   {
+    "text": "The trace is nonnegative.",
+    "misconception": "one large eigenvalue hides negative ones"
+   },
+   {
+    "text": "At least one eigenvalue is nonnegative.",
+    "misconception": "requires all eigenvalues"
+   }
+  ],
+  "explanation": "For semidefiniteness leading minors do not suffice. For $\\operatorname{diag}(0,-1)$ the leading minors are $0,0$, yet the form is negative on $e_2$."
+ },
+ {
+  "id": "la2-9.3",
+  "lecture": 9,
+  "stem": "A $2\\times2$ real symmetric matrix has one positive and one negative eigenvalue. What is the curve $x^{\\top}Ax=1$?",
+  "correct": [
+   "A hyperbola, never an ellipse or circle.",
+   "A hyperbola, because the form is indefinite."
+  ],
+  "distractors": [
+   {
+    "text": "An ellipse, because the equation is quadratic.",
+    "misconception": "ellipses need positive definite"
+   },
+   {
+    "text": "A circle, since the equation has a constant right side.",
+    "misconception": "circles need equal positive eigenvalues"
+   },
+   {
+    "text": "A parabola, since there is a sign change.",
+    "misconception": "parabolas arise from degenerate forms with a linear term"
+   },
+   {
+    "text": "The empty set, since the form can be negative.",
+    "misconception": "the form also takes positive values"
+   },
+   {
+    "text": "A pair of intersecting lines, since the form factorises.",
+    "misconception": "factorisation happens only when the right side is zero"
+   }
+  ],
+  "explanation": "In principal axes the equation is $\\lambda_1y_1^2+\\lambda_2y_2^2=1$ with $\\lambda_1>0>\\lambda_2$, a hyperbola."
+ },
+ {
+  "id": "la2-9.4",
+  "lecture": 9,
+  "stem": "A covariance matrix $\\Sigma$ of a random vector $X$ is always which kind of matrix?",
+  "correct": [
+   "Symmetric positive semidefinite, since $a^{\\top}\\Sigma a=\\operatorname{Var}(a^{\\top}X)\\ge0$.",
+   "Symmetric with nonnegative eigenvalues."
+  ],
+  "distractors": [
+   {
+    "text": "Positive definite, whatever the random vector.",
+    "misconception": "perfectly dependent variables give zero eigenvalues"
+   },
+   {
+    "text": "Entrywise nonnegative, since variances are nonnegative.",
+    "misconception": "covariances can be negative"
+   },
+   {
+    "text": "Diagonal, since variables are always taken as uncorrelated.",
+    "misconception": "confuses covariance with independence"
+   },
+   {
+    "text": "Orthogonal, with determinant equal to $1$.",
+    "misconception": "confuses covariance with rotation"
+   },
+   {
+    "text": "Symmetric with all eigenvalues at most $1$, since covariances are bounded by one.",
+    "misconception": "confuses covariance with correlation"
+   }
+  ],
+  "explanation": "The quadratic form is a variance and so is nonnegative. It is strictly positive for all $a\\ne0$ only if no nontrivial combination of the components is constant."
+ },
+ {
+  "id": "la2-9.5",
+  "lecture": 9,
+  "stem": "When is a covariance matrix $\\Sigma$ singular?",
+  "correct": [
+   "Some nonzero combination has zero variance.",
+   "When some $a^{\\top}X$ is constant."
+  ],
+  "distractors": [
+   {
+    "text": "When the variables are uncorrelated.",
+    "misconception": "uncorrelated variables with positive variance give a positive definite diagonal matrix"
+   },
+   {
+    "text": "When all correlations are positive.",
+    "misconception": "positive correlations can still be non-singular"
+   },
+   {
+    "text": "When the variables are independent.",
+    "misconception": "independent non-degenerate variables give a diagonal positive definite matrix"
+   },
+   {
+    "text": "When some variable has variance $1$.",
+    "misconception": "the scale of one variance does not matter"
+   },
+   {
+    "text": "When the covariance matrix has negative entries.",
+    "misconception": "negative entries do not imply singularity"
+   }
+  ],
+  "explanation": "$\\Sigma a=0$ for $a\\ne0$ means $a^{\\top}\\Sigma a=\\operatorname{Var}(a^{\\top}X)=0$, so $a^{\\top}X$ is constant: an exact linear dependence among the variables."
+ },
+ {
+  "id": "la2-9.6",
+  "lecture": 9,
+  "stem": "For a real symmetric matrix $A$, what is $\\max_{\\|x\\|=1}x^{\\top}Ax$?",
+  "correct": [
+   "The largest eigenvalue of the matrix $A$.",
+   "The top eigenvalue, $\\lambda_{\\max}(A)$."
+  ],
+  "distractors": [
+   {
+    "text": "The largest absolute value of an eigenvalue.",
+    "misconception": "differs when the most extreme eigenvalue is negative"
+   },
+   {
+    "text": "The sum of all eigenvalues, i.e. the trace.",
+    "misconception": "confuses maximum with total"
+   },
+   {
+    "text": "The largest diagonal entry of $A$.",
+    "misconception": "diagonal entries are only lower bounds on $\\lambda_{\\max}$"
+   },
+   {
+    "text": "The determinant of $A$.",
+    "misconception": "confuses the maximum with a product"
+   },
+   {
+    "text": "The smallest eigenvalue of $A$.",
+    "misconception": "gives the minimum rather than the maximum"
+   }
+  ],
+  "explanation": "Writing $x=Qy$ gives $\\sum\\lambda_iy_i^2$ with $\\sum y_i^2=1$, maximised by putting all weight on the largest eigenvalue. With eigenvalues $-5,1$ the maximum is $1$, not $5$."
+ },
+ {
+  "id": "la2-9.7",
+  "lecture": 9,
+  "stem": "Under a congruence $A\\mapsto P^{\\top}AP$ with $P$ invertible, what stays the same for symmetric $A$?",
+  "correct": [
+   "Eigenvalue sign counts (the inertia).",
+   "The signature of the form."
+  ],
+  "distractors": [
+   {
+    "text": "The eigenvalues themselves.",
+    "misconception": "congruence is not similarity"
+   },
+   {
+    "text": "The determinant of the matrix.",
+    "misconception": "only the sign of the determinant is preserved"
+   },
+   {
+    "text": "The trace of the matrix.",
+    "misconception": "the trace changes under congruence"
+   },
+   {
+    "text": "The eigenvectors as vectors in $\\mathbb{R}^n$.",
+    "misconception": "both eigenvalues and eigenvectors move"
+   },
+   {
+    "text": "The condition number of $A$.",
+    "misconception": "the condition number changes under congruence"
+   }
+  ],
+  "explanation": "Congruence changes coordinates of the form $x^{\\top}Ax$, so definiteness persists while the eigenvalues, trace and determinant magnitude change. For example $P=2I$ scales $A$ by $4$."
+ },
+ {
+  "id": "la2-10.1",
+  "lecture": 10,
+  "stem": "How are the singular values of a real matrix $A$ defined?",
+  "correct": [
+   "They are the square roots of the eigenvalues of $A^{\\top}A$.",
+   "The square roots of eigenvalues of $A^{\\top}A$."
+  ],
+  "distractors": [
+   {
+    "text": "They are the eigenvalues of $A^{\\top}A$ themselves.",
+    "misconception": "forgets the square root"
+   },
+   {
+    "text": "They are the absolute values of the eigenvalues of $A$ for every square matrix.",
+    "misconception": "true only for normal matrices"
+   },
+   {
+    "text": "They are the diagonal entries of $A$ after row reduction.",
+    "misconception": "confuses pivots with singular values"
+   },
+   {
+    "text": "They are the lengths of the rows of $A$.",
+    "misconception": "confuses row norms with singular values"
+   },
+   {
+    "text": "They are the square roots of the eigenvalues of $A^2$.",
+    "misconception": "gives absolute eigenvalues instead"
+   }
+  ],
+  "explanation": "$A^{\\top}A$ is positive semidefinite, so its eigenvalues $\\sigma_i^2$ are nonnegative. For $\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ the eigenvalues of $A$ are $0,0$ but $\\sigma_1=1$."
+ },
+ {
+  "id": "la2-10.2",
+  "lecture": 10,
+  "stem": "How does the rank of a real matrix show up in its singular values?",
+  "correct": [
+   "The rank equals the number of nonzero singular values of the matrix.",
+   "Rank counts the positive singular values."
+  ],
+  "distractors": [
+   {
+    "text": "The rank equals the number of nonzero eigenvalues of $A$.",
+    "misconception": "nilpotent matrices have rank above their eigenvalue count"
+   },
+   {
+    "text": "The rank equals the number of distinct singular values.",
+    "misconception": "repeated values count several times"
+   },
+   {
+    "text": "The rank equals the number of singular values larger than $1$.",
+    "misconception": "confuses a threshold with zero"
+   },
+   {
+    "text": "The rank equals the largest singular value rounded up.",
+    "misconception": "confuses magnitude with count"
+   },
+   {
+    "text": "The rank equals the number of singular values equal to the largest one.",
+    "misconception": "counts only the top singular value"
+   }
+  ],
+  "explanation": "In $A=U\\Sigma V^{\\top}$ the rank of $A$ is the rank of $\\Sigma$, the number of positive diagonal entries."
+ },
+ {
+  "id": "la2-10.3",
+  "lecture": 10,
+  "stem": "What does the Eckart-Young theorem say about the best rank-$k$ approximation of $A$?",
+  "correct": [
+   "The truncated SVD $A_k=\\sum_{i\\le k}\\sigma_iu_iv_i^{\\top}$ minimises the error in both norms.",
+   "Keeping the $k$ largest singular triples is optimal."
+  ],
+  "distractors": [
+   {
+    "text": "Keeping the $k$ largest entries of $A$ and zeroing the rest is optimal.",
+    "misconception": "entry thresholding is not optimal"
+   },
+   {
+    "text": "Keeping the $k$ rows of $A$ with the largest norms is optimal.",
+    "misconception": "row selection is not optimal"
+   },
+   {
+    "text": "The eigendecomposition truncated to $k$ terms is optimal for every square matrix.",
+    "misconception": "needs symmetric positive semidefinite"
+   },
+   {
+    "text": "Zeroing the $k$ largest singular values gives the optimal approximation.",
+    "misconception": "keeps the smallest instead of the largest"
+   },
+   {
+    "text": "Rounding every entry of $A$ to $k$ decimal places is optimal.",
+    "misconception": "confuses rank with numerical precision"
+   }
+  ],
+  "explanation": "The error is $\\|A-A_k\\|_2=\\sigma_{k+1}$ and $\\|A-A_k\\|_F^2=\\sum_{i>k}\\sigma_i^2$, and no rank-$k$ matrix does better."
+ },
+ {
+  "id": "la2-10.4",
+  "lecture": 10,
+  "stem": "How are the principal component directions of a data matrix $X$ obtained?",
+  "correct": [
+   "They are the right singular vectors of the column-centred matrix $X$.",
+   "Top eigenvectors of the covariance matrix."
+  ],
+  "distractors": [
+   {
+    "text": "They are the left singular vectors of the centred matrix $X$.",
+    "misconception": "left vectors live in observation space"
+   },
+   {
+    "text": "They are the right singular vectors of $X$ computed without centring the columns.",
+    "misconception": "centring is part of the definition"
+   },
+   {
+    "text": "They are the eigenvectors with the smallest eigenvalues of the covariance.",
+    "misconception": "reversed order"
+   },
+   {
+    "text": "They are the coordinate axes along the variables with the largest variance.",
+    "misconception": "components are generally rotated axes"
+   },
+   {
+    "text": "They are the rows of $X$ with the largest norms.",
+    "misconception": "confuses data points with directions"
+   }
+  ],
+  "explanation": "With $X$ centred, the sample covariance is $X^{\\top}X/(n-1)=V\\Sigma^2V^{\\top}/(n-1)$, so the columns of $V$ are the principal directions and the variances are $\\sigma_i^2/(n-1)$."
+ },
+ {
+  "id": "la2-10.5",
+  "lecture": 10,
+  "stem": "What fraction of the total variance does the $i$th principal component explain?",
+  "correct": [
+   "The share $\\lambda_i/\\sum_j\\lambda_j$ of covariance eigenvalues in the total variance.",
+   "$\\sigma_i^2$ divided by the sum of all squared singular values."
+  ],
+  "distractors": [
+   {
+    "text": "The ratio $\\sigma_i/\\sum_j\\sigma_j$ of the unsquared singular values.",
+    "misconception": "variance scales like the square of a singular value"
+   },
+   {
+    "text": "The eigenvalue $\\lambda_i$ divided by the number of observations $n$.",
+    "misconception": "forgets to divide by the total variance"
+   },
+   {
+    "text": "The proportion $1/p$ of the $p$ variables, whatever the data.",
+    "misconception": "assumes equal shares"
+   },
+   {
+    "text": "The ratio of the $i$th diagonal entry of the covariance to its trace.",
+    "misconception": "this is the share of a single variable"
+   },
+   {
+    "text": "The partial sum $\\lambda_1+\\dots+\\lambda_i$ divided by the number $p$ of variables.",
+    "misconception": "confuses a cumulative sum with a share"
+   }
+  ],
+  "explanation": "Variance along a principal direction is $\\lambda_i=\\sigma_i^2/(n-1)$, and the total variance is $\\operatorname{tr}\\Sigma=\\sum_j\\lambda_j$."
+ },
+ {
+  "id": "la2-10.6",
+  "lecture": 10,
+  "stem": "Which statement about the SVD is correct?",
+  "correct": [
+   "Every real $m\\times n$ matrix has an SVD $A=U\\Sigma V^{\\top}$ of any rank.",
+   "An SVD exists for every real matrix."
+  ],
+  "distractors": [
+   {
+    "text": "It exists only for square matrices, as with eigendecomposition.",
+    "misconception": "SVD works for rectangular matrices"
+   },
+   {
+    "text": "It exists only for invertible matrices.",
+    "misconception": "rank deficient matrices have an SVD"
+   },
+   {
+    "text": "It exists only for symmetric matrices.",
+    "misconception": "this is the condition for orthogonal diagonalization"
+   },
+   {
+    "text": "It exists only if $A$ has real eigenvalues.",
+    "misconception": "the SVD uses $A^{\\top}A$, not $A$"
+   },
+   {
+    "text": "It exists only for matrices with full column rank.",
+    "misconception": "rank deficiency just gives zero singular values"
+   }
+  ],
+  "explanation": "$A^{\\top}A$ is symmetric positive semidefinite, hence orthogonally diagonalizable; this gives $V$ and $\\Sigma$, and $U$ follows from $Av_i=\\sigma_iu_i$."
+ },
+ {
+  "id": "la2-10.7",
+  "lecture": 10,
+  "stem": "Let $Z=XV$ be the principal component scores of a centred data matrix $X$. What holds for them?",
+  "correct": [
+   "Their covariance matrix is diagonal, with the variances $\\lambda_i$ on its diagonal.",
+   "The scores are uncorrelated with each other."
+  ],
+  "distractors": [
+   {
+    "text": "Their sample covariance is the identity matrix.",
+    "misconception": "whitening requires dividing by the standard deviations"
+   },
+   {
+    "text": "They are statistically independent, whatever the distribution of the data.",
+    "misconception": "uncorrelated does not imply independent"
+   },
+   {
+    "text": "Their variances are all equal.",
+    "misconception": "the variances are the eigenvalues"
+   },
+   {
+    "text": "Their correlations equal the correlations of the original variables.",
+    "misconception": "rotation to scores removes the correlations"
+   },
+   {
+    "text": "Their sample covariance matrix equals that of $X$, as $V$ is orthogonal.",
+    "misconception": "an orthogonal change of axes removes the correlations"
+   }
+  ],
+  "explanation": "$Z^{\\top}Z/(n-1)=V^{\\top}(X^{\\top}X/(n-1))V=\\Lambda$. Independence would need extra assumptions such as joint normality."
+ }
+]

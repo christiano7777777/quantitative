@@ -1,0 +1,1794 @@
+[
+ {
+  "id": "ra-1.1",
+  "lecture": 1,
+  "stem": "Which of the following sets is countable?",
+  "correct": [
+   "The finite subsets of $\\mathbb N$, which can be listed in a sequence.",
+   "Finite subsets of the naturals can be listed."
+  ],
+  "distractors": [
+   {
+    "text": "The set of all subsets of $\\mathbb N$, including the infinite ones.",
+    "misconception": "treats the power set of N as countable"
+   },
+   {
+    "text": "The set of all sequences $(x_1,x_2,\\dots)$ with every $x_i\\in\\{0,1\\}$.",
+    "misconception": "believes infinite binary sequences can be listed"
+   },
+   {
+    "text": "The set of irrational numbers lying in the interval $[0,1]$.",
+    "misconception": "thinks removing a countable set leaves a countable set"
+   },
+   {
+    "text": "The set of all real numbers lying in the interval $[0,1]$.",
+    "misconception": "treats every bounded set as countable"
+   },
+   {
+    "text": "The set of all functions from $\\mathbb N$ to $\\mathbb N$.",
+    "misconception": "treats a set of infinite sequences as countable"
+   }
+  ],
+  "explanation": "The finite subsets of $\\mathbb N$ form a countable union over $n$ of the finitely many subsets of $\\{1,\\dots,n\\}$. The other sets are uncountable by the diagonal argument."
+ },
+ {
+  "id": "ra-1.2",
+  "lecture": 1,
+  "stem": "What does Cantor's diagonal argument establish?",
+  "correct": [
+   "Any list of reals misses some point of $[0,1]$, so $[0,1]$ is uncountable.",
+   "$[0,1]$ is uncountable: no bijection with $\\mathbb N$."
+  ],
+  "distractors": [
+   {
+    "text": "The rational numbers form an uncountable set of reals.",
+    "misconception": "confuses dense with uncountable"
+   },
+   {
+    "text": "Every infinite set has the same cardinality as the naturals.",
+    "misconception": "believes all infinite sets are countable"
+   },
+   {
+    "text": "Every infinite subset of $\\mathbb R$ has the same size as $\\mathbb R$.",
+    "misconception": "forgets countably infinite subsets such as Q"
+   },
+   {
+    "text": "The rationals cannot be listed because they have no smallest element.",
+    "misconception": "mistakes the ordering for the cardinality"
+   },
+   {
+    "text": "The interval $[0,1]$ has strictly more points than the whole line $\\mathbb R$.",
+    "misconception": "thinks a bounded interval is smaller than the line"
+   }
+  ],
+  "explanation": "Given any list, change the $n$th digit of the $n$th number to get a number not on the list. The conclusion concerns cardinality, not order or density."
+ },
+ {
+  "id": "ra-1.3",
+  "lecture": 1,
+  "stem": "Which statement about open sets in $\\mathbb R$ is correct?",
+  "correct": [
+   "An open set is a countable union of disjoint intervals.",
+   "Open sets have countably many components."
+  ],
+  "distractors": [
+   {
+    "text": "Every open set is a finite union of open intervals.",
+    "misconception": "replaces countable by finite"
+   },
+   {
+    "text": "The intersection of infinitely many open sets is always open.",
+    "misconception": "forgets that only finite intersections are open"
+   },
+   {
+    "text": "Every nonempty open set is itself an interval.",
+    "misconception": "confuses open sets with open intervals"
+   },
+   {
+    "text": "The complement of an open set is again an open set.",
+    "misconception": "confuses open with clopen"
+   },
+   {
+    "text": "A bounded open set contains all of its boundary points.",
+    "misconception": "confuses open with closed"
+   }
+  ],
+  "explanation": "Take the connected components of the open set; each is an open interval, and each contains a distinct rational, so there are countably many."
+ },
+ {
+  "id": "ra-1.4",
+  "lecture": 1,
+  "stem": "What is $\\limsup A_n$ for a sequence of sets $A_n\\subseteq\\mathbb R$?",
+  "correct": [
+   "The points that lie in $A_n$ for infinitely many $n$.",
+   "The intersection over $k$ of $\\bigcup_{n\\ge k}A_n$."
+  ],
+  "distractors": [
+   {
+    "text": "The set of points that belong to $A_n$ for all sufficiently large $n$.",
+    "misconception": "confuses limsup with liminf"
+   },
+   {
+    "text": "The set of points that belong to every single $A_n$.",
+    "misconception": "replaces infinitely many by all"
+   },
+   {
+    "text": "The set of points that belong to at least one $A_n$.",
+    "misconception": "replaces infinitely many by at least one"
+   },
+   {
+    "text": "The set $\\bigcup_{k\\ge1}\\bigcap_{n\\ge k}A_n$.",
+    "misconception": "uses the liminf formula"
+   },
+   {
+    "text": "The set of points that belong to only finitely many $A_n$.",
+    "misconception": "takes the complement of the right event"
+   }
+  ],
+  "explanation": "A point is in the intersection of the tail unions exactly when it lies in some $A_n$ with $n\\ge k$ for every $k$, that is, infinitely often."
+ },
+ {
+  "id": "ra-1.5",
+  "lecture": 1,
+  "stem": "When does the set limit $\\lim A_n$ exist?",
+  "correct": [
+   "The limit exists exactly when $\\limsup A_n=\\liminf A_n$ as sets.",
+   "Each point's membership stabilises eventually."
+  ],
+  "distractors": [
+   {
+    "text": "Only when the sets $A_n$ form an increasing sequence.",
+    "misconception": "forgets decreasing and other convergent sequences"
+   },
+   {
+    "text": "Whenever the measures $\\lambda(A_n)$ converge to a number.",
+    "misconception": "confuses convergence of measures with convergence of sets"
+   },
+   {
+    "text": "Whenever all the sets $A_n$ contain one common point.",
+    "misconception": "thinks a shared point forces convergence"
+   },
+   {
+    "text": "Whenever each $A_n$ is an interval of the real line.",
+    "misconception": "ignores sequences alternating between two intervals"
+   },
+   {
+    "text": "Only when the sets $A_n$ are pairwise disjoint.",
+    "misconception": "treats a sufficient condition as necessary"
+   }
+  ],
+  "explanation": "Alternating $A_n=[0,1]$ and $[2,3]$ has $\\limsup=[0,1]\\cup[2,3]$ and $\\liminf=\\emptyset$, so no limit. Monotone and disjoint sequences always have limits."
+ },
+ {
+  "id": "ra-2.1",
+  "lecture": 2,
+  "stem": "Which properties are part of the definition of a $\\sigma$-algebra $\\mathcal F$ on $\\Omega$?",
+  "correct": [
+   "Contains $\\Omega$; closed under complements and countable unions.",
+   "Complements and countable unions stay inside it."
+  ],
+  "distractors": [
+   {
+    "text": "Closure under arbitrary unions, including uncountable unions.",
+    "misconception": "confuses with the axioms of a topology"
+   },
+   {
+    "text": "Closure under finite unions only, with no countable unions.",
+    "misconception": "confuses a sigma-algebra with an algebra"
+   },
+   {
+    "text": "Closure under unions and intersections but not under complements.",
+    "misconception": "drops the complement axiom"
+   },
+   {
+    "text": "It contains every singleton $\\{\\omega\\}$ with $\\omega\\in\\Omega$.",
+    "misconception": "invents a requirement"
+   },
+   {
+    "text": "Every subset of a member of $\\mathcal F$ is also a member.",
+    "misconception": "confuses with completeness or an ideal"
+   }
+  ],
+  "explanation": "Countable intersections follow by De Morgan from complements and countable unions. Singletons need not be members, for example in $\\{\\emptyset,\\Omega\\}$."
+ },
+ {
+  "id": "ra-2.2",
+  "lecture": 2,
+  "stem": "What is the Borel $\\sigma$-algebra $\\mathcal B(\\mathbb R)$?",
+  "correct": [
+   "The smallest $\\sigma$-algebra containing all the open sets.",
+   "The $\\sigma$-algebra generated by the open intervals."
+  ],
+  "distractors": [
+   {
+    "text": "The collection of all subsets of $\\mathbb R$.",
+    "misconception": "takes the power set"
+   },
+   {
+    "text": "The collection of all finite unions of open intervals.",
+    "misconception": "stops at an algebra"
+   },
+   {
+    "text": "The collection of open sets together with the closed sets.",
+    "misconception": "forgets closure under unions"
+   },
+   {
+    "text": "The collection of all Lebesgue measurable subsets of $\\mathbb R$.",
+    "misconception": "confuses Borel with Lebesgue"
+   },
+   {
+    "text": "The collection of all countable subsets of $\\mathbb R$.",
+    "misconception": "confuses with countable sets, which are not closed under complement"
+   }
+  ],
+  "explanation": "Open sets and closed sets alone are not closed under unions of mixed types; the Borel sets are what you get by closing under complements and countable unions."
+ },
+ {
+  "id": "ra-2.3",
+  "lecture": 2,
+  "stem": "Let $\\Omega$ be uncountable. Which family of subsets of $\\Omega$ is a $\\sigma$-algebra?",
+  "correct": [
+   "Sets that are countable or have countable complement.",
+   "The countable and co-countable subsets."
+  ],
+  "distractors": [
+   {
+    "text": "All countable subsets of $\\Omega$, and nothing more.",
+    "misconception": "forgets complements"
+   },
+   {
+    "text": "All finite subsets of $\\Omega$, and nothing more.",
+    "misconception": "forgets complements and countable unions"
+   },
+   {
+    "text": "All sets that are finite or have a finite complement.",
+    "misconception": "confuses with an algebra, which is not closed under countable unions"
+   },
+   {
+    "text": "All sets that are open or closed.",
+    "misconception": "forgets unions of mixed types"
+   },
+   {
+    "text": "All bounded sets together with those having a bounded complement.",
+    "misconception": "ignores unions of unboundedly many bounded sets"
+   }
+  ],
+  "explanation": "Complements swap the two cases, and a countable union of countable sets is countable. The finite-cofinite family fails because countably many singletons form an infinite set with infinite complement."
+ },
+ {
+  "id": "ra-2.4",
+  "lecture": 2,
+  "stem": "Which statement about Borel sets is correct?",
+  "correct": [
+   "Countable sets are Borel, as countable unions of points.",
+   "Sets such as the rationals are Borel."
+  ],
+  "distractors": [
+   {
+    "text": "A subset of $\\mathbb R$ is Borel only if it is open or closed.",
+    "misconception": "ignores countable unions and intersections"
+   },
+   {
+    "text": "Every subset of $\\mathbb R$ is a Borel set.",
+    "misconception": "forgets non-measurable sets"
+   },
+   {
+    "text": "Every Borel set is a countable union of intervals.",
+    "misconception": "forgets the irrationals and other sets with empty interior"
+   },
+   {
+    "text": "The irrationals are not Borel, because $\\mathbb Q$ is not closed.",
+    "misconception": "forgets that the complement of a Borel set is Borel"
+   },
+   {
+    "text": "Every null set of the line is a Borel set.",
+    "misconception": "confuses Borel with Lebesgue completeness"
+   }
+  ],
+  "explanation": "Singletons are closed, so countable sets are Borel, and complements of Borel sets are Borel. A null subset of the Cantor set can fail to be Borel."
+ },
+ {
+  "id": "ra-2.5",
+  "lecture": 2,
+  "stem": "Let $\\mathcal A$ be a collection of subsets of $\\Omega$. Which statement about $\\sigma(\\mathcal A)$ is correct?",
+  "correct": [
+   "The intersection of all $\\sigma$-algebras that contain $\\mathcal A$.",
+   "The smallest $\\sigma$-algebra containing $\\mathcal A$."
+  ],
+  "distractors": [
+   {
+    "text": "It is the union of all $\\sigma$-algebras on $\\Omega$ that contain $\\mathcal A$.",
+    "misconception": "replaces intersection by union"
+   },
+   {
+    "text": "It consists only of countable unions of members of $\\mathcal A$.",
+    "misconception": "forgets complements"
+   },
+   {
+    "text": "It consists of the members of $\\mathcal A$ and their complements.",
+    "misconception": "forgets unions"
+   },
+   {
+    "text": "It is the largest $\\sigma$-algebra on $\\Omega$ containing $\\mathcal A$.",
+    "misconception": "confuses smallest with largest"
+   },
+   {
+    "text": "It always has the same cardinality as $\\mathcal A$.",
+    "misconception": "ignores that closing adds sets"
+   }
+  ],
+  "explanation": "The power set is a $\\sigma$-algebra containing $\\mathcal A$, so the family of such $\\sigma$-algebras is nonempty and the intersection is again a $\\sigma$-algebra. A single set $A$ gives the four sets $\\emptyset,A,A^c,\\Omega$."
+ },
+ {
+  "id": "ra-2.6",
+  "lecture": 2,
+  "stem": "How do the Borel and Lebesgue measurable sets compare?",
+  "correct": [
+   "Every Borel set is Lebesgue measurable, but not conversely.",
+   "The Lebesgue sets properly contain the Borel sets."
+  ],
+  "distractors": [
+   {
+    "text": "The two families are equal, so every measurable set is Borel.",
+    "misconception": "identifies the two sigma-algebras"
+   },
+   {
+    "text": "Every Lebesgue measurable set is a Borel set, and not conversely.",
+    "misconception": "reverses the inclusion"
+   },
+   {
+    "text": "The Lebesgue sets are those Borel sets that are not null.",
+    "misconception": "confuses with sets of positive measure"
+   },
+   {
+    "text": "The Lebesgue family is generated by the open sets alone.",
+    "misconception": "forgets that it also contains all null sets"
+   },
+   {
+    "text": "The Borel sets include every subset of $\\mathbb R$ that is not measurable.",
+    "misconception": "confuses non-measurable with Borel"
+   }
+  ],
+  "explanation": "Lebesgue measure is complete: every subset of a null Borel set is Lebesgue measurable. A subset of the Cantor set has measure zero but need not be Borel, by a cardinality count."
+ },
+ {
+  "id": "ra-3.1",
+  "lecture": 3,
+  "stem": "How is the Lebesgue outer measure $\\lambda^*(E)$ of $E\\subseteq\\mathbb R$ defined?",
+  "correct": [
+   "The infimum of $\\sum_k\\ell(I_k)$ over countable covers of $E$ by open intervals $I_k$.",
+   "The infimum of the total lengths of countable open covers."
+  ],
+  "distractors": [
+   {
+    "text": "The supremum of the total lengths of finite families of disjoint intervals inside $E$.",
+    "misconception": "describes an inner content"
+   },
+   {
+    "text": "The infimum of total length over finite covers of $E$ by closed intervals.",
+    "misconception": "uses finite instead of countable covers"
+   },
+   {
+    "text": "The sum of the lengths of the connected components of $E$.",
+    "misconception": "ignores sets without interval components"
+   },
+   {
+    "text": "The supremum of $\\sum_k\\ell(I_k)$ over countable covers of $E$ by open intervals.",
+    "misconception": "takes a supremum instead of an infimum"
+   },
+   {
+    "text": "The length of the smallest interval that contains $E$.",
+    "misconception": "confuses with the diameter"
+   }
+  ],
+  "explanation": "Taking the infimum over countable covers gives a value for every set. For $E=\\mathbb Q\\cap[0,1]$ the finite-cover version would give 1, not 0."
+ },
+ {
+  "id": "ra-3.2",
+  "lecture": 3,
+  "stem": "Which basic properties does Lebesgue outer measure have on all subsets of $\\mathbb R$?",
+  "correct": [
+   "$E\\subseteq F$ gives $\\lambda^*(E)\\le\\lambda^*(F)$, and $\\lambda^*(\\bigcup E_k)\\le\\sum\\lambda^*(E_k)$.",
+   "It is monotone and countably subadditive."
+  ],
+  "distractors": [
+   {
+    "text": "It is countably additive on all subsets of $\\mathbb R$.",
+    "misconception": "overlooks non-measurable sets"
+   },
+   {
+    "text": "It is additive for any two disjoint subsets of the line.",
+    "misconception": "overlooks non-measurable sets"
+   },
+   {
+    "text": "It satisfies $\\lambda^*(E)\\le\\lambda^*(F)$ whenever $F\\subseteq E$.",
+    "misconception": "reverses monotonicity"
+   },
+   {
+    "text": "It satisfies $\\lambda^*(E)+\\lambda^*([0,1]\\setminus E)=1$ for every $E\\subseteq[0,1]$.",
+    "misconception": "assumes complementary additivity"
+   },
+   {
+    "text": "It takes only finite values on bounded sets and on the whole line.",
+    "misconception": "forgets that the line has infinite outer measure"
+   }
+  ],
+  "explanation": "Subadditivity and monotonicity follow from the covers. Additivity holds only on measurable sets, by the Caratheodory construction."
+ },
+ {
+  "id": "ra-3.3",
+  "lecture": 3,
+  "stem": "What is the outer measure of $\\mathbb Q\\cap[0,1]$?",
+  "correct": [
+   "Zero, covering the $k$th rational by an interval of length $\\varepsilon2^{-k}$.",
+   "$0$, since every countable set has outer measure zero."
+  ],
+  "distractors": [
+   {
+    "text": "One, because the rationals are dense in $[0,1]$.",
+    "misconception": "confuses dense with large"
+   },
+   {
+    "text": "Infinite, because there are infinitely many rationals.",
+    "misconception": "adds up the points"
+   },
+   {
+    "text": "One half, because the rationals fill half of the interval.",
+    "misconception": "invents a proportion"
+   },
+   {
+    "text": "It is undefined, because the rationals do not form an interval.",
+    "misconception": "thinks outer measure needs intervals"
+   },
+   {
+    "text": "A positive number less than one, since the rationals are not countable.",
+    "misconception": "believes the rationals are uncountable"
+   }
+  ],
+  "explanation": "The cover has total length at most $\\sum_k\\varepsilon2^{-k}=\\varepsilon$ for every $\\varepsilon>0$. Density does not make the covers long, because the intervals may shrink."
+ },
+ {
+  "id": "ra-3.4",
+  "lecture": 3,
+  "stem": "Which statement is the Caratheodory criterion for $E\\subseteq\\mathbb R$ to be measurable?",
+  "correct": [
+   "$\\lambda^*(A)=\\lambda^*(A\\cap E)+\\lambda^*(A\\setminus E)$ for every test set $A$.",
+   "$E$ splits every test set $A$ additively."
+  ],
+  "distractors": [
+   {
+    "text": "$\\lambda^*(E)=\\lambda^*(E^c)$, so that $E$ and its complement are equally large.",
+    "misconception": "confuses with symmetry"
+   },
+   {
+    "text": "$\\lambda^*(A)\\le\\lambda^*(A\\cap E)$ for every set $A$.",
+    "misconception": "gets a wrong inequality"
+   },
+   {
+    "text": "$\\lambda^*(E\\cup F)=\\lambda^*(E)+\\lambda^*(F)$ for every set $F\\subseteq\\mathbb R$.",
+    "misconception": "asks additivity for overlapping sets"
+   },
+   {
+    "text": "$\\lambda^*(E)=0$ or $\\lambda^*(E^c)=0$, so one of the two sets is null.",
+    "misconception": "confuses measurable with null or conull"
+   },
+   {
+    "text": "$E$ is either an open set or a closed subset of $\\mathbb R$.",
+    "misconception": "confuses measurable with topological"
+   }
+  ],
+  "explanation": "The inequality $\\le$ is automatic from subadditivity, so the content is $\\ge$. The test must hold for every set $A$, and additivity for overlapping sets fails already for $F=E$."
+ },
+ {
+  "id": "ra-3.5",
+  "lecture": 3,
+  "stem": "Is every subset of $\\mathbb R$ of outer measure zero countable?",
+  "correct": [
+   "No, the Cantor set is uncountable yet has outer measure zero.",
+   "No; the Cantor ternary set is uncountable and null."
+  ],
+  "distractors": [
+   {
+    "text": "Yes, a null set can contain only countably many points.",
+    "misconception": "equates null with countable"
+   },
+   {
+    "text": "Yes for closed sets, and no for sets that are not closed.",
+    "misconception": "forgets that the Cantor set is closed"
+   },
+   {
+    "text": "No, but every null set is a countable union of closed intervals.",
+    "misconception": "thinks null sets are made of intervals"
+   },
+   {
+    "text": "No, because every uncountable subset of $[0,1]$ has positive outer measure.",
+    "misconception": "equates uncountable with positive measure"
+   },
+   {
+    "text": "Yes, since a null set can only have finitely many points.",
+    "misconception": "equates null with finite"
+   }
+  ],
+  "explanation": "The Cantor set is closed, uncountable and covered by $2^n$ intervals of length $3^{-n}$, total $(2/3)^n\\to0$."
+ },
+ {
+  "id": "ra-4.1",
+  "lecture": 4,
+  "stem": "What is countable additivity of a measure $\\mu$ on a $\\sigma$-algebra?",
+  "correct": [
+   "$\\mu(\\bigcup_kE_k)=\\sum_k\\mu(E_k)$ for pairwise disjoint measurable $E_k$.",
+   "Measure adds over countable disjoint unions."
+  ],
+  "distractors": [
+   {
+    "text": "The same identity for every family of measurable sets, even if they overlap.",
+    "misconception": "drops the disjointness requirement"
+   },
+   {
+    "text": "Only $\\mu(E\\cup F)=\\mu(E)+\\mu(F)$ for disjoint $E$ and $F$.",
+    "misconception": "confuses with finite additivity"
+   },
+   {
+    "text": "The same identity for any family of disjoint sets, including uncountable ones.",
+    "misconception": "extends it to uncountable unions"
+   },
+   {
+    "text": "The identity $\\mu(E^c)=\\mu(E)$ for every measurable set.",
+    "misconception": "invents a symmetry"
+   },
+   {
+    "text": "The rule $\\mu(E\\cup F)=\\max\\{\\mu(E),\\mu(F)\\}$.",
+    "misconception": "mixes up measure with supremum"
+   }
+  ],
+  "explanation": "Uncountable additivity fails: $[0,1]$ is an uncountable disjoint union of null singletons but has measure 1."
+ },
+ {
+  "id": "ra-4.2",
+  "lecture": 4,
+  "stem": "Which statement about limits of measures of sets is correct?",
+  "correct": [
+   "If measurable sets $E_1\\subseteq E_2\\subseteq\\cdots$ increase, then $\\mu(\\bigcup E_n)=\\lim_n\\mu(E_n)$.",
+   "Continuity from below holds for every measure space."
+  ],
+  "distractors": [
+   {
+    "text": "For decreasing sets, $\\mu(\\bigcap E_n)=\\lim\\mu(E_n)$ holds without any finiteness assumption.",
+    "misconception": "forgets the finite measure condition"
+   },
+   {
+    "text": "Continuity from below holds only when every $E_n$ has finite measure.",
+    "misconception": "adds a spurious finiteness condition"
+   },
+   {
+    "text": "$\\mu(\\liminf E_n)\\ge\\limsup\\mu(E_n)$ for every sequence of measurable sets.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "Continuity from below holds only for open sets $E_n$.",
+    "misconception": "adds a spurious topological condition"
+   },
+   {
+    "text": "For increasing sets, $\\mu(\\bigcup E_n)\\le\\mu(E_1)$.",
+    "misconception": "confuses increasing with decreasing"
+   }
+  ],
+  "explanation": "For $E_n=[n,\\infty)$ we have $\\lambda(E_n)=\\infty$ for all $n$ while $\\bigcap E_n=\\emptyset$, so continuity from above needs $\\mu(E_1)<\\infty$."
+ },
+ {
+  "id": "ra-4.3",
+  "lecture": 4,
+  "stem": "Which of the following subsets of $\\mathbb R$ has Lebesgue measure zero?",
+  "correct": [
+   "Every countable subset of $\\mathbb R$, such as $\\mathbb Q$.",
+   "Any set listed as a sequence."
+  ],
+  "distractors": [
+   {
+    "text": "Every dense subset of the real line.",
+    "misconception": "confuses dense with large"
+   },
+   {
+    "text": "Every uncountable subset of $[0,1]$.",
+    "misconception": "confuses uncountable with positive measure"
+   },
+   {
+    "text": "Every closed subset of $\\mathbb R$ with empty interior.",
+    "misconception": "forgets fat Cantor sets"
+   },
+   {
+    "text": "Every bounded subset of the line.",
+    "misconception": "confuses bounded with small"
+   },
+   {
+    "text": "Every subset whose complement is open.",
+    "misconception": "makes closed sets null"
+   }
+  ],
+  "explanation": "Countable sets are null by the covering argument. The other sets include $[0,1]\\setminus\\mathbb Q$, a fat Cantor set and $[0,1]$ itself."
+ },
+ {
+  "id": "ra-4.4",
+  "lecture": 4,
+  "stem": "Which statement about closed sets with empty interior is correct?",
+  "correct": [
+   "Some have positive measure, e.g. a fat Cantor set.",
+   "Empty interior need not mean null."
+  ],
+  "distractors": [
+   {
+    "text": "Every such set has Lebesgue measure zero.",
+    "misconception": "equates empty interior with null"
+   },
+   {
+    "text": "Positive measure forces the set to contain an interval.",
+    "misconception": "equates positive measure with containing an interval"
+   },
+   {
+    "text": "Every closed null set is countable.",
+    "misconception": "forgets the Cantor set"
+   },
+   {
+    "text": "A fat Cantor set is countable.",
+    "misconception": "confuses fat with countable"
+   },
+   {
+    "text": "A closed set of positive measure must be an interval.",
+    "misconception": "equates positive measure with an interval"
+   }
+  ],
+  "explanation": "Remove from $[0,1]$ intervals of total length less than 1, for example $2^{k-1}$ intervals of length $c4^{-k}$ at stage $k$ with $c<2$. What remains is closed, nowhere dense, uncountable and of positive measure."
+ },
+ {
+  "id": "ra-4.5",
+  "lecture": 4,
+  "stem": "Which statement about the completeness of Lebesgue measure is correct?",
+  "correct": [
+   "Every subset of a null set is measurable, with measure zero.",
+   "Subsets of null sets are measurable, with measure zero."
+  ],
+  "distractors": [
+   {
+    "text": "Every subset of a measurable set of positive measure is measurable.",
+    "misconception": "extends completeness to positive measure sets"
+   },
+   {
+    "text": "Every subset of a Borel null set is a Borel set.",
+    "misconception": "confuses Lebesgue and Borel completeness"
+   },
+   {
+    "text": "Every subset of $\\mathbb R$ of finite outer measure is measurable.",
+    "misconception": "ignores Vitali sets"
+   },
+   {
+    "text": "Every subset of a null set is null, but may be non-measurable.",
+    "misconception": "contradicts the monotonicity of outer measure"
+   },
+   {
+    "text": "Measure zero sets must be countable, so every subset is countable.",
+    "misconception": "equates null with countable"
+   }
+  ],
+  "explanation": "A subset of a null set has outer measure zero by monotonicity, and sets of outer measure zero pass the Caratheodory criterion."
+ },
+ {
+  "id": "ra-4.6",
+  "lecture": 4,
+  "stem": "Let $E$ and $F$ be measurable with finite measure. Which identity holds?",
+  "correct": [
+   "$\\mu(E\\cup F)=\\mu(E)+\\mu(F)-\\mu(E\\cap F)$ for finite measures.",
+   "$\\mu(E\\cup F)+\\mu(E\\cap F)=\\mu(E)+\\mu(F)$ in this case."
+  ],
+  "distractors": [
+   {
+    "text": "$\\mu(E\\cup F)=\\mu(E)+\\mu(F)$ for all measurable sets.",
+    "misconception": "forgets the overlap"
+   },
+   {
+    "text": "$\\mu(E\\cup F)=\\max\\{\\mu(E),\\mu(F)\\}$ for all measurable $E,F$.",
+    "misconception": "confuses with supremum"
+   },
+   {
+    "text": "$\\mu(E\\cap F)=\\mu(E)\\mu(F)$ for all measurable sets $E,F$.",
+    "misconception": "treats sets as independent events"
+   },
+   {
+    "text": "$\\mu(E\\setminus F)=\\mu(E)-\\mu(F)$ for all measurable sets.",
+    "misconception": "forgets that F must lie inside E"
+   },
+   {
+    "text": "$\\mu(E\\cup F)\\ge\\mu(E)+\\mu(F)$ for all measurable sets.",
+    "misconception": "reverses the subadditivity"
+   }
+  ],
+  "explanation": "Write $E\\cup F=E\\sqcup(F\\setminus E)$ and $\\mu(F\\setminus E)=\\mu(F)-\\mu(E\\cap F)$, valid since $\\mu(E\\cap F)<\\infty$."
+ },
+ {
+  "id": "ra-5.1",
+  "lecture": 5,
+  "stem": "Which condition makes $f:\\mathbb R\\to\\mathbb R$ Lebesgue measurable?",
+  "correct": [
+   "$\\{x:f(x)>a\\}$ is measurable for each real number $a$.",
+   "Every superlevel set $\\{f>a\\}$ is measurable."
+  ],
+  "distractors": [
+   {
+    "text": "The set $\\{x:f(x)=a\\}$ is measurable for every real number $a$.",
+    "misconception": "checks only level sets, which is insufficient"
+   },
+   {
+    "text": "The function $f$ is continuous at almost every point.",
+    "misconception": "confuses measurable with a.e. continuous"
+   },
+   {
+    "text": "For every open $B$, the preimage $f^{-1}(B)$ is open.",
+    "misconception": "describes continuity"
+   },
+   {
+    "text": "The function $f$ takes only countably many values.",
+    "misconception": "thinks few values imply measurability"
+   },
+   {
+    "text": "The function $f$ is bounded.",
+    "misconception": "confuses boundedness with measurability"
+   }
+  ],
+  "explanation": "Measurability concerns preimages of half-lines (equivalently Borel sets). Level sets alone are not enough, and the Dirichlet function is measurable although discontinuous everywhere."
+ },
+ {
+  "id": "ra-5.2",
+  "lecture": 5,
+  "stem": "Which statement about measurable functions is correct?",
+  "correct": [
+   "If $f$ and $g$ are real-valued and measurable, then so are $f+g$ and $fg$.",
+   "Sums and products of measurable functions stay measurable."
+  ],
+  "distractors": [
+   {
+    "text": "If $f$ and $g$ are Lebesgue measurable then $f\\circ g$ is Lebesgue measurable.",
+    "misconception": "ignores that composition needs a Borel outer function"
+   },
+   {
+    "text": "If $|f|$ is measurable then $f$ is measurable.",
+    "misconception": "overlooks sign changes on a non-measurable set"
+   },
+   {
+    "text": "The supremum of any family of measurable functions is measurable.",
+    "misconception": "forgets that families must be countable"
+   },
+   {
+    "text": "Changing a measurable function on a set of positive measure keeps it measurable.",
+    "misconception": "forgets that only the null set is harmless"
+   },
+   {
+    "text": "Every function whose graph is a Borel set is measurable.",
+    "misconception": "invents a criterion"
+   }
+  ],
+  "explanation": "Sums and products are limits and continuous combinations of measurable pieces. For $f\\circ g$ one needs $f$ Borel, and $|f|$ cannot see the sign of $f$ on a non-measurable set."
+ },
+ {
+  "id": "ra-5.3",
+  "lecture": 5,
+  "stem": "Let $f_n$ be measurable functions converging pointwise to $f$. What can be said about $f$?",
+  "correct": [
+   "It is measurable, being a limsup of measurable functions.",
+   "Limits of measurable sequences are measurable."
+  ],
+  "distractors": [
+   {
+    "text": "It is measurable only if the convergence is uniform.",
+    "misconception": "requires a stronger mode of convergence"
+   },
+   {
+    "text": "It is measurable only if each $f_n$ is continuous.",
+    "misconception": "requires continuity"
+   },
+   {
+    "text": "It is measurable only if the sequence is monotone.",
+    "misconception": "requires monotonicity"
+   },
+   {
+    "text": "It need not be measurable, since the limit may leave the class.",
+    "misconception": "believes pointwise limits can leave the class"
+   },
+   {
+    "text": "It is continuous whenever every $f_n$ is continuous.",
+    "misconception": "confuses pointwise with uniform limits"
+   }
+  ],
+  "explanation": "$\\{f>a\\}=\\bigcup_k\\bigcup_N\\bigcap_{n\\ge N}\\{f_n>a+1/k\\}$. The limit of continuous functions can be Dirichlet, so it need not be continuous."
+ },
+ {
+  "id": "ra-5.4",
+  "lecture": 5,
+  "stem": "What is the role of simple functions for a nonnegative measurable $f$?",
+  "correct": [
+   "There exist simple functions $\\varphi_n$ with $0\\le\\varphi_n\\uparrow f$ pointwise everywhere.",
+   "Simple functions $\\varphi_n$ increase pointwise to $f$."
+  ],
+  "distractors": [
+   {
+    "text": "Every measurable $f$ is a finite sum of indicator functions of intervals.",
+    "misconception": "forgets that sets in general are not intervals"
+   },
+   {
+    "text": "The convergence $\\varphi_n\\to f$ can always be taken uniform.",
+    "misconception": "forgets that unbounded f admits no uniform approximation"
+   },
+   {
+    "text": "A decreasing sequence of simple functions always converges to $f$ from above.",
+    "misconception": "replaces increasing by decreasing"
+   },
+   {
+    "text": "Only bounded $f$ can be approximated by simple functions.",
+    "misconception": "restricts the class unnecessarily"
+   },
+   {
+    "text": "The approximants $\\varphi_n$ must be continuous.",
+    "misconception": "confuses simple with continuous"
+   }
+  ],
+  "explanation": "Use $\\varphi_n=\\min(n,2^{-n}\\lfloor2^nf\\rfloor)$. The convergence is uniform only when $f$ is bounded."
+ },
+ {
+  "id": "ra-5.5",
+  "lecture": 5,
+  "stem": "What does Egorov's theorem say?",
+  "correct": [
+   "A.e. convergence on a finite measure set is uniform off a small set.",
+   "On finite measure, a.e. convergence is almost uniform."
+  ],
+  "distractors": [
+   {
+    "text": "A.e. convergence on a set of finite measure is uniform on the whole set.",
+    "misconception": "drops the exceptional set"
+   },
+   {
+    "text": "It holds on the whole line without any finiteness assumption.",
+    "misconception": "drops finite measure"
+   },
+   {
+    "text": "Pointwise convergence is uniform on every bounded interval.",
+    "misconception": "confuses with a false uniformity claim"
+   },
+   {
+    "text": "The theorem requires every $f_n$ to be continuous.",
+    "misconception": "adds a spurious continuity hypothesis"
+   },
+   {
+    "text": "The exceptional set can always be taken countable.",
+    "misconception": "confuses small with countable"
+   }
+  ],
+  "explanation": "The moving bump $1_{[n,n+1]}\\to0$ on $\\mathbb R$ shows that finite measure is needed. On $[0,1]$, $x^n\\to0$ a.e. is uniform off $[1-\\delta,1]$ but not on $[0,1]$."
+ },
+ {
+  "id": "ra-5.6",
+  "lecture": 5,
+  "stem": "Let $f$ be Lebesgue measurable and $g=f$ except on a null set. What follows?",
+  "correct": [
+   "$g$ is measurable, as Lebesgue measure is complete.",
+   "Changing $f$ on a null set keeps it measurable."
+  ],
+  "distractors": [
+   {
+    "text": "$g$ need not be measurable because the null set may be non-Borel.",
+    "misconception": "confuses with Borel measurability"
+   },
+   {
+    "text": "$g$ is measurable only if the null set is countable.",
+    "misconception": "requires countability"
+   },
+   {
+    "text": "$g$ is measurable only if $f$ is continuous.",
+    "misconception": "requires continuity"
+   },
+   {
+    "text": "$g$ is measurable but $\\int g\\ne\\int f$ in general.",
+    "misconception": "forgets that the integral ignores null sets"
+   },
+   {
+    "text": "$g$ is measurable only if the null set is closed.",
+    "misconception": "requires a topological condition"
+   }
+  ],
+  "explanation": "For each $a$, $\\{g>a\\}$ differs from $\\{f>a\\}$ by a subset of a null set, which is measurable by completeness."
+ },
+ {
+  "id": "ra-6.1",
+  "lecture": 6,
+  "stem": "How is $\\int\\varphi\\,d\\lambda$ defined for a simple function $\\varphi=\\sum_ia_i1_{E_i}$ with $a_i\\ge0$ and disjoint measurable $E_i$?",
+  "correct": [
+   "Values times set measures, summed: $\\sum_ia_i\\lambda(E_i)$.",
+   "The integral equals $\\sum_ia_i\\lambda(E_i)$ for this $\\varphi$."
+  ],
+  "distractors": [
+   {
+    "text": "It equals $\\sum_ia_i$, ignoring the measures of the sets.",
+    "misconception": "ignores the sizes of the sets"
+   },
+   {
+    "text": "It equals $\\max_ia_i\\cdot\\lambda(\\bigcup_iE_i)$.",
+    "misconception": "replaces the sum by a maximum"
+   },
+   {
+    "text": "It equals $\\sum_i\\lambda(E_i)/a_i$.",
+    "misconception": "inverts the weights"
+   },
+   {
+    "text": "It equals the average of the values $a_i$ over $i$.",
+    "misconception": "takes an unweighted average"
+   },
+   {
+    "text": "It equals $\\sum_ia_i\\,\\#E_i$, counting the points of each set.",
+    "misconception": "uses the counting measure"
+   }
+  ],
+  "explanation": "The integral weights each value by the size of its level set. It is independent of the representation of $\\varphi$."
+ },
+ {
+  "id": "ra-6.2",
+  "lecture": 6,
+  "stem": "How is $\\int f\\,d\\lambda$ defined for a nonnegative measurable function $f$?",
+  "correct": [
+   "The supremum of the integrals of simple functions $\\varphi$ with $0\\le\\varphi\\le f$.",
+   "The sup of integrals of simple functions below $f$."
+  ],
+  "distractors": [
+   {
+    "text": "As the infimum of $\\int\\varphi$ over simple functions $\\varphi\\ge f$.",
+    "misconception": "replaces the supremum from below by an infimum from above"
+   },
+   {
+    "text": "As the limit of left Riemann sums on equal subintervals.",
+    "misconception": "describes the Riemann integral"
+   },
+   {
+    "text": "As the sum of the values of $f$ over a countable dense set.",
+    "misconception": "confuses with a series"
+   },
+   {
+    "text": "As the supremum of $\\int\\varphi$ over all simple functions $\\varphi$, with no bound.",
+    "misconception": "drops the constraint from below"
+   },
+   {
+    "text": "As the measure of the region under the graph, defined only for continuous $f$.",
+    "misconception": "restricts the class"
+   }
+  ],
+  "explanation": "Approximating from below by simple functions needs no partition of the domain, only measurability of level sets. This is why many discontinuous functions can be integrated."
+ },
+ {
+  "id": "ra-6.3",
+  "lecture": 6,
+  "stem": "Let $f\\ge0$ be measurable with $\\int f\\,d\\lambda=0$. What follows?",
+  "correct": [
+   "$f$ equals zero almost everywhere.",
+   "The set where $f>0$ is null."
+  ],
+  "distractors": [
+   {
+    "text": "$f(x)=0$ for every real $x$.",
+    "misconception": "asks for everywhere rather than almost everywhere"
+   },
+   {
+    "text": "$f$ is zero except at finitely many points.",
+    "misconception": "restricts the exceptional set to a finite set"
+   },
+   {
+    "text": "$f$ is continuous and zero.",
+    "misconception": "confuses with continuous functions"
+   },
+   {
+    "text": "$f$ is zero on a dense subset only.",
+    "misconception": "thinks a dense zero set is enough"
+   },
+   {
+    "text": "$\\{f>0\\}$ is a nonempty countable set.",
+    "misconception": "confuses null with countable"
+   }
+  ],
+  "explanation": "If $\\lambda(\\{f>1/n\\})>0$ for some $n$ then $\\int f\\ge\\lambda(\\{f>1/n\\})/n>0$. So all these sets are null and so is their union $\\{f>0\\}$."
+ },
+ {
+  "id": "ra-6.4",
+  "lecture": 6,
+  "stem": "For measurable $f\\ge0$ and $t>0$, which bound is valid?",
+  "correct": [
+   "Markov: $\\lambda(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\lambda$.",
+   "Markov's inequality."
+  ],
+  "distractors": [
+   {
+    "text": "$\\lambda(\\{f\\ge t\\})\\ge\\frac1t\\int f\\,d\\lambda$.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "$\\lambda(\\{f\\ge t\\})\\le t\\int f\\,d\\lambda$.",
+    "misconception": "multiplies by t instead of dividing"
+   },
+   {
+    "text": "$\\lambda(\\{f\\ge t\\})\\le\\frac1{t^2}\\int f\\,d\\lambda$.",
+    "misconception": "confuses with Chebyshev"
+   },
+   {
+    "text": "$\\lambda(\\{f\\ge t\\})\\le\\frac1t\\int f^2\\,d\\lambda$.",
+    "misconception": "squares the function without scaling"
+   },
+   {
+    "text": "$\\lambda(\\{f\\ge t\\})\\le\\int f\\,d\\lambda$ for every $t>0$.",
+    "misconception": "drops the factor 1/t"
+   }
+  ],
+  "explanation": "The simple function $t1_{\\{f\\ge t\\}}$ lies below $f$, so $t\\lambda(\\{f\\ge t\\})\\le\\int f$. The bound with $t$ replaced by $t^2$ needs $f^2$ in the integral."
+ },
+ {
+  "id": "ra-6.5",
+  "lecture": 6,
+  "stem": "What is the main structural difference between the Lebesgue and the Riemann construction?",
+  "correct": [
+   "Lebesgue slices the range of $f$ and measures the preimages; Riemann slices the domain.",
+   "Lebesgue weights values by the measure of level sets."
+  ],
+  "distractors": [
+   {
+    "text": "Lebesgue slices the domain into intervals of equal length.",
+    "misconception": "describes the Riemann integral"
+   },
+   {
+    "text": "Riemann sums use countable additivity while Lebesgue sums do not.",
+    "misconception": "reverses the roles"
+   },
+   {
+    "text": "Lebesgue integration is defined only for continuous functions.",
+    "misconception": "restricts the class"
+   },
+   {
+    "text": "Both integrals partition the domain, differing only in the choice of sample points.",
+    "misconception": "ignores the range partition"
+   },
+   {
+    "text": "Lebesgue integration uses finitely many sets, Riemann integration countably many.",
+    "misconception": "reverses finite and countable"
+   }
+  ],
+  "explanation": "Level sets $\\{y_i\\le f<y_{i+1}\\}$ can be wild sets. That is why measures of arbitrary measurable sets, not just lengths of intervals, are needed."
+ },
+ {
+  "id": "ra-7.1",
+  "lecture": 7,
+  "stem": "What does the Monotone Convergence Theorem state?",
+  "correct": [
+   "If $0\\le f_1\\le f_2\\le\\cdots$ are measurable and $f_n\\uparrow f$, then $\\int f_n\\to\\int f$.",
+   "Increasing limits pass through the integral."
+  ],
+  "distractors": [
+   {
+    "text": "If $f_n\\ge0$ converge pointwise to $f$, then $\\int f_n\\to\\int f$.",
+    "misconception": "drops monotonicity"
+   },
+   {
+    "text": "If $f_n\\ge0$ are decreasing, the same conclusion holds with no extra condition.",
+    "misconception": "forgets that decreasing needs integrability"
+   },
+   {
+    "text": "The conclusion requires $f$ to be finite and the $f_n$ to be bounded.",
+    "misconception": "adds spurious conditions"
+   },
+   {
+    "text": "If $f_n\\uparrow f$ then $\\int f_n\\ge\\int f$ for every $n$.",
+    "misconception": "reverses the monotonicity of the integral"
+   },
+   {
+    "text": "The conclusion requires the convergence to be uniform.",
+    "misconception": "requires uniform convergence"
+   }
+  ],
+  "explanation": "Both sides may equal $+\\infty$. For decreasing sequences, $f_n=1_{[n,\\infty)}$ gives $\\int f_n=\\infty$ but $\\int f=0$."
+ },
+ {
+  "id": "ra-7.2",
+  "lecture": 7,
+  "stem": "What does Fatou's lemma state for measurable $f_n\\ge0$?",
+  "correct": [
+   "$\\int\\liminf f_n\\le\\liminf\\int f_n$ for every sequence of measurable functions $f_n\\ge0$.",
+   "The liminf can only lose mass in the integral."
+  ],
+  "distractors": [
+   {
+    "text": "$\\int\\liminf f_n\\ge\\liminf\\int f_n$ for every sequence of nonnegative functions.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "$\\int\\limsup f_n\\le\\limsup\\int f_n$ for every sequence of nonnegative functions.",
+    "misconception": "applies the inequality to limsup"
+   },
+   {
+    "text": "$\\int\\lim f_n=\\lim\\int f_n$ whenever the pointwise limit exists.",
+    "misconception": "turns the inequality into equality"
+   },
+   {
+    "text": "The inequality needs the sequence $f_n$ to be increasing.",
+    "misconception": "adds a spurious monotonicity condition"
+   },
+   {
+    "text": "The inequality holds only if the $f_n$ are bounded.",
+    "misconception": "adds a spurious boundedness condition"
+   }
+  ],
+  "explanation": "The strict inequality can occur: $f_n=n1_{(0,1/n)}$ has $\\liminf f_n=0$ but $\\int f_n=1$. For limsup, the reverse inequality needs a dominating function."
+ },
+ {
+  "id": "ra-7.3",
+  "lecture": 7,
+  "stem": "Which hypotheses give $\\int f_n\\to\\int f$ by the Dominated Convergence Theorem?",
+  "correct": [
+   "$f_n\\to f$ a.e. with $|f_n|\\le g$ for one integrable $g$.",
+   "A.e. convergence and one integrable bound."
+  ],
+  "distractors": [
+   {
+    "text": "$f_n\\to f$ uniformly on the whole line $\\mathbb R$.",
+    "misconception": "believes uniform convergence suffices on infinite measure"
+   },
+   {
+    "text": "$f_n\\to f$ a.e. and each $f_n$ is integrable.",
+    "misconception": "forgets the common dominating function"
+   },
+   {
+    "text": "$f_n\\to f$ a.e. and $\\sup_n\\int|f_n|<\\infty$.",
+    "misconception": "confuses bounded integrals with domination"
+   },
+   {
+    "text": "$f_n\\to f$ a.e. and $|f_n|\\le C$ for a constant $C$.",
+    "misconception": "ignores that constants are not integrable on the line"
+   },
+   {
+    "text": "$f_n\\to f$ a.e. and $|f_n|\\le g_n$ with each $g_n$ integrable.",
+    "misconception": "lets the dominating function depend on n"
+   }
+  ],
+  "explanation": "Counterexamples: $f_n=\\frac1n1_{[0,n]}\\to0$ uniformly with $\\int f_n=1$; the integrals of $f_n=n1_{(0,1/n)}$ are bounded but not convergent to the integral of the limit."
+ },
+ {
+  "id": "ra-7.4",
+  "lecture": 7,
+  "stem": "Which statement about $f_n=n1_{(0,1/n)}$ on $[0,1]$ is correct?",
+  "correct": [
+   "$f_n\\to0$ pointwise, while $\\int f_n=1$ for every single $n$.",
+   "Pointwise limit $0$, integrals all $1$."
+  ],
+  "distractors": [
+   {
+    "text": "$f_n\\to0$ uniformly on $[0,1]$.",
+    "misconception": "confuses pointwise with uniform convergence"
+   },
+   {
+    "text": "$\\int f_n\\to0$ by dominated convergence with $g=n$.",
+    "misconception": "takes a changing bound as a dominating function"
+   },
+   {
+    "text": "$\\int f_n\\to0$, since the pointwise limit is $0$.",
+    "misconception": "assumes limit and integral commute"
+   },
+   {
+    "text": "$(f_n)$ increases with $n$, so monotone convergence gives $\\int f_n\\to1$.",
+    "misconception": "confuses monotonicity of supports with monotone functions"
+   },
+   {
+    "text": "Fatou's lemma fails for this sequence.",
+    "misconception": "believes Fatou has a counterexample"
+   }
+  ],
+  "explanation": "Here $\\int\\lim f_n=0<1=\\lim\\int f_n$, consistent with Fatou. The supremum $\\sup_nf_n$ behaves like $1/x$, which is not integrable."
+ },
+ {
+  "id": "ra-7.5",
+  "lecture": 7,
+  "stem": "When can a series be integrated term by term, $\\int\\sum_nf_n=\\sum_n\\int f_n$?",
+  "correct": [
+   "If $\\sum_n\\int|f_n|\\,d\\lambda<\\infty$, the exchange is allowed.",
+   "For absolutely summable integrals."
+  ],
+  "distractors": [
+   {
+    "text": "Whenever the series converges pointwise.",
+    "misconception": "believes pointwise convergence suffices"
+   },
+   {
+    "text": "Whenever every term $f_n$ is continuous.",
+    "misconception": "believes continuity suffices"
+   },
+   {
+    "text": "Only when the convergence is uniform.",
+    "misconception": "treats a sufficient condition as necessary"
+   },
+   {
+    "text": "For nonnegative terms, only if the total sum is finite.",
+    "misconception": "forgets that monotone convergence has no finiteness condition"
+   },
+   {
+    "text": "Whenever each term is integrable.",
+    "misconception": "forgets the summability condition"
+   }
+  ],
+  "explanation": "For nonnegative terms the identity always holds, by monotone convergence, even with value $+\\infty$. For signed terms, absolute summability gives domination by $\\sum|f_n|$."
+ },
+ {
+  "id": "ra-7.6",
+  "lecture": 7,
+  "stem": "Which implication holds on a set of finite measure?",
+  "correct": [
+   "Uniform convergence of integrable functions $f_n\\to f$ implies $\\int f_n\\to\\int f$.",
+   "Uniform convergence on $[0,1]$ passes to the integrals."
+  ],
+  "distractors": [
+   {
+    "text": "Pointwise convergence on $[0,1]$ always implies convergence of the integrals.",
+    "misconception": "forgets domination"
+   },
+   {
+    "text": "Uniform convergence on $\\mathbb R$ always implies convergence of the integrals.",
+    "misconception": "forgets that finite measure is needed"
+   },
+   {
+    "text": "Convergence in $L^1$ implies a.e. convergence of the whole sequence.",
+    "misconception": "forgets that only a subsequence converges a.e."
+   },
+   {
+    "text": "Convergence a.e. implies convergence in $L^1$.",
+    "misconception": "forgets domination"
+   },
+   {
+    "text": "Pointwise convergence never implies convergence in measure.",
+    "misconception": "forgets Egorov on finite measure"
+   }
+  ],
+  "explanation": "On $[0,1]$, $|\\int f_n-\\int f|\\le\\sup|f_n-f|$. On the line, $f_n=\\frac1n1_{[0,n]}$ converges uniformly but not in integral."
+ },
+ {
+  "id": "ra-8.1",
+  "lecture": 8,
+  "stem": "Which function on $[0,1]$ is Lebesgue integrable but not Riemann integrable?",
+  "correct": [
+   "Indicator of the rationals, with Lebesgue integral 0.",
+   "Dirichlet's function $1_{\\mathbb Q}$."
+  ],
+  "distractors": [
+   {
+    "text": "Every continuous function on $[0,1]$.",
+    "misconception": "confuses continuity with failure"
+   },
+   {
+    "text": "The indicator function of the Cantor ternary set.",
+    "misconception": "forgets that its discontinuities form a null set"
+   },
+   {
+    "text": "Every monotone function on $[0,1]$.",
+    "misconception": "forgets that monotone functions are Riemann integrable"
+   },
+   {
+    "text": "The indicator function of an interval $[a,b]\\subseteq[0,1]$.",
+    "misconception": "confuses jump with failure"
+   },
+   {
+    "text": "Every function with finitely many discontinuities.",
+    "misconception": "confuses finite exceptions with failure"
+   }
+  ],
+  "explanation": "Every upper sum of $1_{\\mathbb Q}$ is 1 and every lower sum is 0. The Cantor set indicator is continuous except on a null set, so it is Riemann integrable."
+ },
+ {
+  "id": "ra-8.2",
+  "lecture": 8,
+  "stem": "What is Lebesgue's criterion for Riemann integrability of a function $f$ on $[a,b]$?",
+  "correct": [
+   "$f$ is bounded and discontinuous only on a null set.",
+   "Bounded and continuous almost everywhere."
+  ],
+  "distractors": [
+   {
+    "text": "$f$ is bounded and its set of discontinuities is countable.",
+    "misconception": "replaces null by countable"
+   },
+   {
+    "text": "$f$ is bounded and has only finitely many discontinuities.",
+    "misconception": "replaces null by finite"
+   },
+   {
+    "text": "$f$ is bounded and its set of discontinuities is nowhere dense.",
+    "misconception": "replaces null by nowhere dense"
+   },
+   {
+    "text": "$f$ is measurable and bounded.",
+    "misconception": "confuses measurable with Riemann integrable"
+   },
+   {
+    "text": "$f$ is continuous at every point of $[a,b]$.",
+    "misconception": "requires continuity"
+   }
+  ],
+  "explanation": "Countable is sufficient but not necessary, as the Cantor set shows. Nowhere dense fails: the indicator of a fat Cantor set is discontinuous exactly on that positive measure set."
+ },
+ {
+  "id": "ra-8.3",
+  "lecture": 8,
+  "stem": "Let $f$ be Riemann integrable on $[a,b]$. How do the two integrals compare?",
+  "correct": [
+   "$f$ is Lebesgue integrable, and the two integrals have the same value.",
+   "Riemann integral and Lebesgue integral coincide for such $f$."
+  ],
+  "distractors": [
+   {
+    "text": "The Lebesgue integral can be larger than the Riemann integral.",
+    "misconception": "believes the integrals can disagree"
+   },
+   {
+    "text": "The function $f$ need not be Lebesgue measurable.",
+    "misconception": "forgets that Riemann integrable functions are a.e. continuous"
+   },
+   {
+    "text": "The two integrals agree only when $f$ is continuous everywhere.",
+    "misconception": "restricts the class"
+   },
+   {
+    "text": "The Lebesgue integral exists only after $f$ is changed on a null set.",
+    "misconception": "believes a modification is required"
+   },
+   {
+    "text": "The Lebesgue integral is only defined when $f$ is monotone.",
+    "misconception": "restricts the class"
+   }
+  ],
+  "explanation": "Upper and lower Darboux sums squeeze a pair of step functions whose integrals have a common limit, and the Lebesgue integral lies between them."
+ },
+ {
+  "id": "ra-8.4",
+  "lecture": 8,
+  "stem": "Consider $f(x)=\\sin x/x$ on $(0,\\infty)$. What is correct?",
+  "correct": [
+   "The improper integral converges, but $\\int|f|=\\infty$.",
+   "Conditionally convergent, not in $L^1$."
+  ],
+  "distractors": [
+   {
+    "text": "$f$ is Lebesgue integrable since its improper Riemann integral converges.",
+    "misconception": "equates improper convergence with integrability"
+   },
+   {
+    "text": "The improper Riemann integral does not exist.",
+    "misconception": "overlooks conditional convergence"
+   },
+   {
+    "text": "$\\int|f|<\\infty$, by comparison with $1/x^2$.",
+    "misconception": "misapplies a comparison"
+   },
+   {
+    "text": "$f$ is not measurable on $(0,\\infty)$.",
+    "misconception": "confuses measurability with integrability"
+   },
+   {
+    "text": "Both integrals exist and equal $\\pi/2$.",
+    "misconception": "believes the Lebesgue integral equals the improper value"
+   }
+  ],
+  "explanation": "Over $[k\\pi,(k+1)\\pi]$ the integral of $|f|$ is at least $2/((k+1)\\pi)$, and a harmonic series diverges."
+ },
+ {
+  "id": "ra-8.5",
+  "lecture": 8,
+  "stem": "What does absolute continuity of the integral say about an integrable $f$?",
+  "correct": [
+   "Small $\\lambda(E)$ forces small $\\int_E|f|$, uniformly over all sets $E$.",
+   "Small sets carry little of the integral."
+  ],
+  "distractors": [
+   {
+    "text": "The same holds for every measurable $f$, even if it is not integrable.",
+    "misconception": "drops integrability"
+   },
+   {
+    "text": "The number $\\delta$ depends on the set $E$ and not only on $\\varepsilon$.",
+    "misconception": "makes delta depend on the set"
+   },
+   {
+    "text": "Sets of small measure carry exactly zero integral.",
+    "misconception": "confuses small with null"
+   },
+   {
+    "text": "It holds only for bounded $f$.",
+    "misconception": "restricts the class"
+   },
+   {
+    "text": "It means $F(x)=\\int_a^xf$ is differentiable everywhere.",
+    "misconception": "confuses absolute continuity with differentiability"
+   }
+  ],
+  "explanation": "Truncating $f$ at height $M$ and splitting gives $\\int_E|f|\\le M\\lambda(E)+\\int_{\\{|f|>M\\}}|f|$. The function $1/x$ on $(0,1)$ fails because it is not integrable."
+ },
+ {
+  "id": "ra-9.1",
+  "lecture": 9,
+  "stem": "Which inequality is Holder's inequality?",
+  "correct": [
+   "$\\int|fg|\\le\\|f\\|_p\\|g\\|_q$ whenever $1/p+1/q=1$.",
+   "Holder for conjugate exponents $p,q$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\int|fg|\\le\\|f\\|_p\\|g\\|_p$ for every exponent $p$.",
+    "misconception": "uses the same exponent for both"
+   },
+   {
+    "text": "$\\int|fg|\\ge\\|f\\|_p\\|g\\|_q$ for $1/p+1/q=1$.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "$\\int|fg|\\le\\|f\\|_p\\|g\\|_q$ for $p+q=1$.",
+    "misconception": "misremembers the conjugate condition"
+   },
+   {
+    "text": "$\\int|fg|\\le\\|f\\|_p\\|g\\|_q$ for $pq=1$.",
+    "misconception": "misremembers the conjugate condition"
+   },
+   {
+    "text": "$\\int|fg|=\\|f\\|_p\\|g\\|_q$ for every pair of functions.",
+    "misconception": "turns the inequality into equality"
+   }
+  ],
+  "explanation": "The case $p=q=2$ is Cauchy-Schwarz. For $p=q=1$ the inequality $\\int|fg|\\le\\|f\\|_1\\|g\\|_1$ would fail, for example with $f=g=x^{-1/2}$ on $(0,1)$, where $\\int fg=\\infty$ but $\\|f\\|_1=2$."
+ },
+ {
+  "id": "ra-9.2",
+  "lecture": 9,
+  "stem": "Which of these is Minkowski's inequality?",
+  "correct": [
+   "$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p$ for all $1\\le p\\le\\infty$.",
+   "The $L^p$ triangle inequality."
+  ],
+  "distractors": [
+   {
+    "text": "The same inequality for every $p>0$, including $0<p<1$.",
+    "misconception": "forgets that p must be at least 1"
+   },
+   {
+    "text": "$\\|f+g\\|_p^2=\\|f\\|_p^2+\\|g\\|_p^2$ for all $f,g$.",
+    "misconception": "imports the Pythagorean identity"
+   },
+   {
+    "text": "$\\|fg\\|_p\\le\\|f\\|_p\\|g\\|_p$ for all $f,g$.",
+    "misconception": "treats the norm as submultiplicative"
+   },
+   {
+    "text": "$\\|f+g\\|_p=\\max\\{\\|f\\|_p,\\|g\\|_p\\}$.",
+    "misconception": "confuses with an ultrametric"
+   },
+   {
+    "text": "$\\|f+g\\|_p\\ge\\|f\\|_p+\\|g\\|_p$.",
+    "misconception": "reverses the triangle inequality"
+   }
+  ],
+  "explanation": "For $0<p<1$ the reverse inequality holds for nonnegative functions. The product rule fails: $\\|fg\\|_1\\le\\|f\\|_1\\|g\\|_1$ is false."
+ },
+ {
+  "id": "ra-9.3",
+  "lecture": 9,
+  "stem": "What does the Riesz-Fischer theorem state?",
+  "correct": [
+   "Cauchy sequences in $L^p$ converge in norm within $L^p$ for $p\\ge1$.",
+   "$L^p$ is complete for every $1\\le p\\le\\infty$, a Banach space."
+  ],
+  "distractors": [
+   {
+    "text": "$L^p$ is complete only for $p=2$.",
+    "misconception": "restricts completeness to Hilbert space"
+   },
+   {
+    "text": "Continuous functions on $[0,1]$ with the $L^p$ norm form a complete space.",
+    "misconception": "believes continuous functions are complete"
+   },
+   {
+    "text": "Cauchy sequences in $L^p$ converge pointwise at every point.",
+    "misconception": "confuses norm and pointwise convergence"
+   },
+   {
+    "text": "$L^1$ is not complete since it contains unbounded functions.",
+    "misconception": "believes unbounded elements spoil completeness"
+   },
+   {
+    "text": "Completeness holds only on spaces of finite measure.",
+    "misconception": "adds a spurious finite measure condition"
+   }
+  ],
+  "explanation": "A Cauchy sequence has a subsequence converging a.e., and Fatou's lemma shows the limit is in $L^p$ and is the norm limit. Continuous functions are not complete: they approximate step functions."
+ },
+ {
+  "id": "ra-9.4",
+  "lecture": 9,
+  "stem": "On a finite measure space, how do the spaces $L^p$ compare for $p\\le q$?",
+  "correct": [
+   "$L^q\\subseteq L^p$, so higher exponents give smaller spaces.",
+   "Larger exponent, smaller space on $[0,1]$."
+  ],
+  "distractors": [
+   {
+    "text": "$L^p\\subseteq L^q$, so larger exponents give bigger spaces.",
+    "misconception": "reverses the inclusion"
+   },
+   {
+    "text": "$L^q=L^p$ for all $p,q$, because the measure is finite.",
+    "misconception": "believes the spaces coincide"
+   },
+   {
+    "text": "$L^\\infty\\subseteq L^p$ on the whole line $\\mathbb R$.",
+    "misconception": "forgets that finite measure is needed"
+   },
+   {
+    "text": "$L^1(\\mathbb R)$ is contained in $L^2(\\mathbb R)$ on the whole line.",
+    "misconception": "applies the finite measure inclusion to the line"
+   },
+   {
+    "text": "$L^p\\subseteq L^q$ whenever the whole space has infinite measure.",
+    "misconception": "confuses with the sequence-space inclusion"
+   }
+  ],
+  "explanation": "On $[0,1]$, Holder with exponents $q/p$ gives $\\|f\\|_p\\le\\|f\\|_q\\,\\mu(X)^{1/p-1/q}$. On counting measure the inclusion goes the other way: $\\ell^p\\subseteq\\ell^q$."
+ },
+ {
+  "id": "ra-9.5",
+  "lecture": 9,
+  "stem": "What does $\\|f\\|_p=0$ imply?",
+  "correct": [
+   "$f=0$ almost everywhere, not necessarily everywhere.",
+   "$f$ is the zero class of $L^p$."
+  ],
+  "distractors": [
+   {
+    "text": "$f(x)=0$ for every $x$.",
+    "misconception": "asks for everywhere"
+   },
+   {
+    "text": "$f=0$ at every rational number.",
+    "misconception": "confuses with a dense set"
+   },
+   {
+    "text": "$\\int f\\,d\\lambda=0$ and nothing more.",
+    "misconception": "confuses with the zero integral of a signed function"
+   },
+   {
+    "text": "$f$ is continuous and zero.",
+    "misconception": "confuses with continuous functions"
+   },
+   {
+    "text": "$f$ is zero on a set of positive measure only.",
+    "misconception": "misreads the condition"
+   }
+  ],
+  "explanation": "$\\int|f|^p=0$ means $|f|^p=0$ almost everywhere. This is why elements of $L^p$ are classes of functions equal almost everywhere."
+ },
+ {
+  "id": "ra-9.6",
+  "lecture": 9,
+  "stem": "What is $\\|f\\|_\\infty$?",
+  "correct": [
+   "The infimum of $M$ with $|f|\\le M$ almost everywhere.",
+   "It is the essential supremum of $|f|$."
+  ],
+  "distractors": [
+   {
+    "text": "The supremum of $|f(x)|$ over every point $x$.",
+    "misconception": "ignores null sets"
+   },
+   {
+    "text": "The limit of $\\|f\\|_p$ as $p\\to0$.",
+    "misconception": "takes the wrong limit"
+   },
+   {
+    "text": "The infimum of $M$ with $|f|\\le M$ on a set of positive measure.",
+    "misconception": "misreads the almost-everywhere condition"
+   },
+   {
+    "text": "The average value of $|f|$ over the domain.",
+    "misconception": "confuses with the mean"
+   },
+   {
+    "text": "The supremum of $|f|$ over the continuity points of $f$.",
+    "misconception": "confuses with a pointwise supremum"
+   }
+  ],
+  "explanation": "Changing $f$ on a null set does not change the essential supremum. On a finite measure space, $\\|f\\|_p\\to\\|f\\|_\\infty$ as $p\\to\\infty$."
+ },
+ {
+  "id": "ra-10.1",
+  "lecture": 10,
+  "stem": "What is a measure space $(X,\\mathcal F,\\mu)$?",
+  "correct": [
+   "A set with a $\\sigma$-algebra and a countably additive $\\mu:\\mathcal F\\to[0,\\infty]$.",
+   "A set with a $\\sigma$-algebra and a measure defined on it."
+  ],
+  "distractors": [
+   {
+    "text": "A $\\sigma$-algebra with a countably additive $\\mu$ that must be finite.",
+    "misconception": "forgets infinite measures such as Lebesgue"
+   },
+   {
+    "text": "A set with a countably additive $\\mu$ defined on every subset.",
+    "misconception": "forgets the sigma-algebra"
+   },
+   {
+    "text": "A $\\sigma$-algebra with a finitely additive set function $\\mu\\ge0$.",
+    "misconception": "weakens countable additivity"
+   },
+   {
+    "text": "A $\\sigma$-algebra with a measure that is translation invariant.",
+    "misconception": "confuses with Lebesgue measure"
+   },
+   {
+    "text": "A $\\sigma$-algebra with a countably additive $\\mu$ and $\\mu(X)=1$.",
+    "misconception": "confuses with probability space"
+   }
+  ],
+  "explanation": "Probability spaces are the special case $\\mu(X)=1$. Counting measure and Lebesgue measure are infinite examples."
+ },
+ {
+  "id": "ra-10.2",
+  "lecture": 10,
+  "stem": "Which statement about counting measure on $\\mathbb N$ is correct?",
+  "correct": [
+   "Integrals for counting measure are sums: $\\int f\\,d\\mu=\\sum_nf(n)$.",
+   "Sums are counting-measure integrals."
+  ],
+  "distractors": [
+   {
+    "text": "The integral of $f\\ge0$ equals $\\sup_nf(n)$.",
+    "misconception": "replaces the sum by a maximum"
+   },
+   {
+    "text": "Counting measure on $\\mathbb N$ is not $\\sigma$-finite.",
+    "misconception": "forgets that N is a countable union of finite sets"
+   },
+   {
+    "text": "Counting measure of a set is the sum of the lengths of its elements.",
+    "misconception": "confuses with length"
+   },
+   {
+    "text": "Counting measure is a finite measure on $\\mathbb N$.",
+    "misconception": "forgets that N is infinite"
+   },
+   {
+    "text": "Counting measure on the uncountable set $\\mathbb R$ is $\\sigma$-finite.",
+    "misconception": "forgets that countably many finite sets cannot cover R"
+   }
+  ],
+  "explanation": "$\\mathbb N=\\bigcup_n\\{1,\\dots,n\\}$ shows $\\sigma$-finiteness. On $\\mathbb R$ every set of finite measure is finite, so countably many cannot cover it."
+ },
+ {
+  "id": "ra-10.3",
+  "lecture": 10,
+  "stem": "Which statement about Tonelli's theorem is correct?",
+  "correct": [
+   "For $f\\ge0$ and $\\sigma$-finite factors, both iterated integrals agree.",
+   "Nonnegative $f$ needs no integrability condition."
+  ],
+  "distractors": [
+   {
+    "text": "It needs $\\int|f|<\\infty$ for the double integral.",
+    "misconception": "confuses with Fubini's theorem"
+   },
+   {
+    "text": "The iterated integrals of any measurable $f$ always agree.",
+    "misconception": "forgets nonnegativity or integrability"
+   },
+   {
+    "text": "It holds with no $\\sigma$-finiteness assumption at all.",
+    "misconception": "forgets the counterexample with counting measure"
+   },
+   {
+    "text": "It holds only for continuous functions on a rectangle.",
+    "misconception": "restricts the class"
+   },
+   {
+    "text": "It gives equality of iterated integrals for signed $f$ whenever both exist.",
+    "misconception": "forgets absolute integrability"
+   }
+  ],
+  "explanation": "The diagonal in $[0,1]^2$ with Lebesgue and counting measure gives iterated integrals $0$ and $1$, because counting measure on $[0,1]$ is not $\\sigma$-finite."
+ },
+ {
+  "id": "ra-10.4",
+  "lecture": 10,
+  "stem": "Which statement about Fubini's theorem is correct?",
+  "correct": [
+   "For $f\\in L^1(\\mu\\times\\nu)$ the iterated integrals agree.",
+   "Integrability makes order irrelevant."
+  ],
+  "distractors": [
+   {
+    "text": "If both iterated integrals exist and are finite, they are equal.",
+    "misconception": "forgets the classic counterexample"
+   },
+   {
+    "text": "It holds for every measurable $f$ on the product.",
+    "misconception": "drops integrability"
+   },
+   {
+    "text": "It needs $f$ to be bounded.",
+    "misconception": "adds a spurious boundedness condition"
+   },
+   {
+    "text": "It needs $f$ to be continuous on the rectangle.",
+    "misconception": "adds a spurious continuity condition"
+   },
+   {
+    "text": "It holds if the inner integral exists for each fixed $x$.",
+    "misconception": "forgets joint integrability"
+   }
+  ],
+  "explanation": "The function $(x^2-y^2)/(x^2+y^2)^2$ on $(0,1)^2$ has iterated integrals $\\pi/4$ and $-\\pi/4$, because it is not absolutely integrable."
+ },
+ {
+  "id": "ra-10.5",
+  "lecture": 10,
+  "stem": "Which statement about Lebesgue measure $\\lambda^2$ on $\\mathbb R^2$ is correct?",
+  "correct": [
+   "$\\lambda^2(A\\times B)=\\lambda(A)\\lambda(B)$ for measurable $A,B$, with $0\\cdot\\infty=0$.",
+   "Rectangle area is the product of sides."
+  ],
+  "distractors": [
+   {
+    "text": "$\\lambda^2(A\\times B)=\\lambda(A)+\\lambda(B)$ for measurable $A,B$.",
+    "misconception": "adds instead of multiplies"
+   },
+   {
+    "text": "The diagonal $\\{(x,x):x\\in[0,1]\\}$ has positive area.",
+    "misconception": "treats the diagonal as a thick set"
+   },
+   {
+    "text": "The line $\\{0\\}\\times\\mathbb R$ has infinite area, because $\\lambda(\\mathbb R)=\\infty$.",
+    "misconception": "forgets the convention that zero times infinity is zero"
+   },
+   {
+    "text": "The product measure of $A\\times B$ depends on how $A$ and $B$ are placed.",
+    "misconception": "forgets translation invariance"
+   },
+   {
+    "text": "$\\lambda^2(A\\times B)=\\lambda(A)\\lambda(B)$ only when both sets are intervals.",
+    "misconception": "restricts to intervals"
+   }
+  ],
+  "explanation": "The product measure is determined on rectangles. A null set times any measurable set is null, since it is covered by rectangles of arbitrarily small area."
+ },
+ {
+  "id": "ra-10.6",
+  "lecture": 10,
+  "stem": "For a measurable set $E\\subseteq\\mathbb R^2$ with sections $E_x=\\{y:(x,y)\\in E\\}$, what is $\\lambda^2(E)$?",
+  "correct": [
+   "$\\int\\lambda(E_x)\\,dx$, the integral of slice lengths.",
+   "Cavalieri's principle for areas."
+  ],
+  "distractors": [
+   {
+    "text": "The largest slice length, $\\sup_x\\lambda(E_x)$.",
+    "misconception": "takes the largest slice"
+   },
+   {
+    "text": "The sum $\\sum_x\\lambda(E_x)$ over all real $x$.",
+    "misconception": "sums over uncountably many x"
+   },
+   {
+    "text": "The integral of squared slice lengths, $\\int\\lambda(E_x)^2\\,dx$.",
+    "misconception": "squares the section lengths"
+   },
+   {
+    "text": "The length of the projection, $\\lambda(\\{x:E_x\\ne\\emptyset\\})$.",
+    "misconception": "measures the projection"
+   },
+   {
+    "text": "$\\int\\lambda(E_x)\\,dx$ only when $E$ is convex.",
+    "misconception": "restricts to convex sets"
+   }
+  ],
+  "explanation": "Apply Tonelli to $1_E$. For the triangle $0\\le y\\le x\\le1$ the sections have length $x$, giving $\\int_0^1x\\,dx=1/2$."
+ }
+]

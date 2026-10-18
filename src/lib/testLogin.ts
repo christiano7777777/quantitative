@@ -8,7 +8,7 @@ const USER = 'chrisccthz'
 const HASH = '52eb163f530f52ca797f731bafdc34a15496f828e8882eb69ed92f4dcbf568c7'
 const STORAGE_KEY = 'quantitative.testuser'
 
-export const SAVED_TOPICS = ['calc', 'la1', 'dm', 'py', 'mvc', 'p1', 'p2', 'pf1', 'reg1', 'dv1', 'sp', 'sc', 'cpp1']
+export const SAVED_TOPICS = ['calc', 'la1', 'dm', 'py', 'mvc', 'p1', 'p2', 'pf1', 'reg1', 'dv1', 'sp', 'sc', 'cpp1', 'ds1']
 
 export async function checkCredentials(user: string, password: string): Promise<boolean> {
   if (user !== USER) return false

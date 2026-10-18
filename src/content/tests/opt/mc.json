@@ -1,0 +1,1762 @@
+[
+ {
+  "id": "opt-1.1",
+  "lecture": 1,
+  "stem": "Which feature makes an optimisation problem a linear program?",
+  "correct": [
+   "The objective and all the constraints are linear functions of the decision variables.",
+   "A linear objective optimised under linear constraints and nothing more."
+  ],
+  "distractors": [
+   {
+    "text": "The decision variables are restricted to take only integer values.",
+    "misconception": "confuses LP with integer programming"
+   },
+   {
+    "text": "The objective contains a product of two decision variables somewhere.",
+    "misconception": "a product term makes the objective quadratic"
+   },
+   {
+    "text": "The feasible set must contain exactly one point for the problem to be solved.",
+    "misconception": "confuses a feasible set with a unique solution"
+   },
+   {
+    "text": "Every coefficient in the objective and constraints has to be positive.",
+    "misconception": "invents a sign restriction on the data"
+   },
+   {
+    "text": "All the constraints must be written as equalities and never as inequalities.",
+    "misconception": "inequalities are allowed in an LP"
+   }
+  ],
+  "explanation": "Linearity of the objective and constraints is what defines an LP; integrality, products of variables or sign conditions on the data are separate matters."
+ },
+ {
+  "id": "opt-1.2",
+  "lecture": 1,
+  "stem": "Which statement about the feasible region of a linear program is always true?",
+  "correct": [
+   "It is convex: the segment between any two feasible points stays inside the region.",
+   "It is an intersection of half-spaces, so it is convex."
+  ],
+  "distractors": [
+   {
+    "text": "It is bounded whenever the optimal objective value of the LP is finite.",
+    "misconception": "a finite optimum can occur on an unbounded region"
+   },
+   {
+    "text": "It always has a non-empty interior, so a strictly feasible point exists.",
+    "misconception": "the region can be a single point or a segment, or empty"
+   },
+   {
+    "text": "It can consist of several disconnected pieces if the constraints conflict.",
+    "misconception": "a set cut out by half-spaces cannot be disconnected"
+   },
+   {
+    "text": "It always contains the origin once all variables are required to be non-negative.",
+    "misconception": "ignores constraints of the form at least a positive number"
+   },
+   {
+    "text": "It is always a bounded polygon with finitely many corner points.",
+    "misconception": "regions can be unbounded or have no corner at all"
+   }
+  ],
+  "explanation": "Intersections of half-spaces are convex. The region can be unbounded, degenerate or empty, and need not contain the origin."
+ },
+ {
+  "id": "opt-1.3",
+  "lecture": 1,
+  "stem": "A linear program has at least one vertex in its feasible region and has an optimal solution. What follows?",
+  "correct": [
+   "At least one vertex of the feasible region is an optimal solution.",
+   "Some optimal solution is attained at a corner point."
+  ],
+  "distractors": [
+   {
+    "text": "Every optimal solution must itself be a vertex of the region.",
+    "misconception": "ties along an edge give optimal points that are not vertices"
+   },
+   {
+    "text": "The optimum can lie in the interior only when all objective coefficients are positive.",
+    "misconception": "a linear objective never has an interior-only optimum without being constant along an edge"
+   },
+   {
+    "text": "A vertex is optimal only when the optimal solution is unique.",
+    "misconception": "a vertex can be optimal even when alternative optima exist"
+   },
+   {
+    "text": "The gradient of the objective vanishes at the optimal point.",
+    "misconception": "the objective gradient is a nonzero constant for an LP"
+   },
+   {
+    "text": "Every point of the feasible region has the same objective value.",
+    "misconception": "confuses optimality with a constant objective"
+   }
+  ],
+  "explanation": "A linear function attains its optimum at an extreme point; if the objective is parallel to an edge, the whole edge is optimal, but its end vertices are optimal too."
+ },
+ {
+  "id": "opt-1.4",
+  "lecture": 1,
+  "stem": "In the graphical method, an objective contour line is parallel to a binding constraint and touches the feasible region along that edge at the optimum. What happens?",
+  "correct": [
+   "Every point on that edge is optimal, so there are infinitely many optimal solutions.",
+   "The LP has alternative optima along the entire edge of the region."
+  ],
+  "distractors": [
+   {
+    "text": "The LP is unbounded because the objective can be improved without limit.",
+    "misconception": "confuses alternative optima with unboundedness"
+   },
+   {
+    "text": "The LP is infeasible because the contour line never meets the region.",
+    "misconception": "the contour does touch the region"
+   },
+   {
+    "text": "The optimum is unique and sits at the lower vertex of that edge.",
+    "misconception": "assumes uniqueness despite the tie"
+   },
+   {
+    "text": "The optimal objective value is zero because the contour passes through the origin.",
+    "misconception": "invents a link between parallelism and a zero value"
+   },
+   {
+    "text": "The LP has no optimal solution because the contour never leaves the region.",
+    "misconception": "the optimum is attained on the edge"
+   }
+  ],
+  "explanation": "When the objective has the same direction as a constraint normal, moving along the edge does not change the objective, so all of its points are optimal."
+ },
+ {
+  "id": "opt-1.5",
+  "lecture": 1,
+  "stem": "A feasible region of a two-variable LP is unbounded. Which conclusion is correct?",
+  "correct": [
+   "The LP can still have a finite optimum, depending on the direction of the objective.",
+   "Boundedness of the LP depends on the objective direction too."
+  ],
+  "distractors": [
+   {
+    "text": "The LP is necessarily unbounded, with no optimal solution at all.",
+    "misconception": "confuses unbounded regions with unbounded objectives"
+   },
+   {
+    "text": "The LP must be infeasible, since a bounded region is required for a solution.",
+    "misconception": "treats boundedness as necessary for feasibility"
+   },
+   {
+    "text": "The optimum can only be found by moving to a point at infinity.",
+    "misconception": "ignores that a vertex can be optimal"
+   },
+   {
+    "text": "The optimal solution, if it exists, is never at a vertex.",
+    "misconception": "an unbounded region can still have an optimal vertex"
+   },
+   {
+    "text": "The optimal solution, if it exists, lies at the origin of the two variables.",
+    "misconception": "invents a location for the optimum"
+   }
+  ],
+  "explanation": "For example, minimising $x+y$ over $x,y\\ge0$ has a finite optimum although the region is unbounded; maximising it is unbounded."
+ },
+ {
+  "id": "opt-2.1",
+  "lecture": 2,
+  "stem": "What is a basic feasible solution of $Ax=b$, $x\\ge0$, where $A$ is $m\\times n$ with rank $m$?",
+  "correct": [
+   "Set $n-m$ variables to zero and solve for the other $m$, which must be non-negative.",
+   "A feasible point on linearly independent columns."
+  ],
+  "distractors": [
+   {
+    "text": "Any feasible point in which every component is strictly positive.",
+    "misconception": "such a point is interior, not basic"
+   },
+   {
+    "text": "A feasible point that maximises the objective function over the region.",
+    "misconception": "confuses basic with optimal"
+   },
+   {
+    "text": "A solution in which all $m$ basic variables are equal to zero.",
+    "misconception": "that is the degenerate extreme case, not the definition"
+   },
+   {
+    "text": "A feasible point in which every slack variable is equal to zero.",
+    "misconception": "confuses basic solutions with points on every constraint boundary"
+   },
+   {
+    "text": "A feasible point with at least one slack variable strictly positive.",
+    "misconception": "slack positivity is unrelated to basic status"
+   }
+  ],
+  "explanation": "Fixing $n-m$ nonbasic variables at zero leaves a square system for the basis; the solution is a BFS if the basic values are non-negative."
+ },
+ {
+  "id": "opt-2.2",
+  "lecture": 2,
+  "stem": "How are basic feasible solutions related to the geometry of the feasible region of an LP in standard form?",
+  "correct": [
+   "They are exactly the extreme points (vertices) of the feasible region of the LP.",
+   "Each BFS is a corner of the feasible polyhedron, and conversely."
+  ],
+  "distractors": [
+   {
+    "text": "They are the points lying anywhere on the boundary of the feasible region.",
+    "misconception": "boundary points include non-vertex points on edges"
+   },
+   {
+    "text": "They are the intersections of constraint lines, whether or not these are feasible.",
+    "misconception": "ignores that a basic solution may have negative components"
+   },
+   {
+    "text": "They are interior points where all the slack variables are positive.",
+    "misconception": "interior points are not extreme"
+   },
+   {
+    "text": "They are only the optimal points, and any other vertex is not basic.",
+    "misconception": "every vertex is a BFS, not only the optimal one"
+   },
+   {
+    "text": "They correspond to the centroids of the faces of the feasible set.",
+    "misconception": "invents a geometry unrelated to extreme points"
+   }
+  ],
+  "explanation": "A basic solution is any solution of a basis system; it is feasible only when all components are non-negative, and BFSs are exactly the vertices."
+ },
+ {
+  "id": "opt-2.3",
+  "lecture": 2,
+  "stem": "In a maximisation problem, which nonbasic variable is the usual candidate to enter the basis under the largest-coefficient (Dantzig) rule?",
+  "correct": [
+   "The one with the largest positive reduced cost, that is, the fastest rate of improvement.",
+   "The nonbasic variable with the largest positive $c_j-z_j$."
+  ],
+  "distractors": [
+   {
+    "text": "The variable that gives the smallest ratio in the minimum ratio test.",
+    "misconception": "confuses the entering rule with the ratio test used for leaving"
+   },
+   {
+    "text": "The basic variable that currently has the largest value in the solution.",
+    "misconception": "mixes basic variables with the entering choice"
+   },
+   {
+    "text": "The variable with the largest coefficient in the original constraint with the smallest right-hand side.",
+    "misconception": "invents a rule based on constraints"
+   },
+   {
+    "text": "Always the slack variable belonging to the tightest constraint.",
+    "misconception": "slack variables are not always the entering choice"
+   },
+   {
+    "text": "The nonbasic variable with the smallest current value in the solution.",
+    "misconception": "nonbasic variables are all zero"
+   }
+  ],
+  "explanation": "Entering choice depends on reduced costs; the leaving choice, taken afterwards, comes from the ratio test."
+ },
+ {
+  "id": "opt-2.4",
+  "lecture": 2,
+  "stem": "What is the purpose of the minimum ratio test in a simplex iteration?",
+  "correct": [
+   "It selects the leaving variable, keeping every basic variable non-negative.",
+   "It finds how far the entering variable can grow."
+  ],
+  "distractors": [
+   {
+    "text": "It selects the entering variable that gives the greatest increase in the objective.",
+    "misconception": "confuses the ratio test with the entering rule"
+   },
+   {
+    "text": "It checks whether the current basic solution is optimal.",
+    "misconception": "optimality is judged by reduced costs"
+   },
+   {
+    "text": "It produces the dual solution associated with the current tableau.",
+    "misconception": "the dual comes from reduced costs of slacks, not the ratio test"
+   },
+   {
+    "text": "It guarantees that no basic variable can ever equal zero at a vertex.",
+    "misconception": "ties in the test cause degeneracy rather than prevent it"
+   },
+   {
+    "text": "It decides when the algorithm may stop because the objective stops changing.",
+    "misconception": "stopping is decided by reduced costs"
+   }
+  ],
+  "explanation": "The ratio test finds the first basic variable to reach zero as the entering variable grows; that variable leaves, preserving feasibility."
+ },
+ {
+  "id": "opt-2.5",
+  "lecture": 2,
+  "stem": "At optimality of a maximisation problem written in tableau form, which condition characterises the current basis?",
+  "correct": [
+   "No nonbasic variable has a positive reduced cost at a feasible basis.",
+   "Every nonbasic reduced cost $c_j-z_j$ is non-positive."
+  ],
+  "distractors": [
+   {
+    "text": "Every basic variable is strictly positive and every slack variable is zero.",
+    "misconception": "confuses optimality with non-degeneracy"
+   },
+   {
+    "text": "All reduced costs of the nonbasic variables are strictly positive.",
+    "misconception": "positive reduced costs mean the objective can still improve"
+   },
+   {
+    "text": "The minimum ratio test produces a tie between two rows.",
+    "misconception": "ties signal degeneracy, not optimality"
+   },
+   {
+    "text": "The current objective value is equal to zero in the tableau.",
+    "misconception": "optimal value need not be zero"
+   },
+   {
+    "text": "The reduced costs of the basic variables are all strictly negative.",
+    "misconception": "reduced costs of basic variables are zero"
+   }
+  ],
+  "explanation": "If no nonbasic variable has a positive reduced cost, increasing any of them cannot improve the objective, so the BFS is optimal."
+ },
+ {
+  "id": "opt-2.6",
+  "lecture": 2,
+  "stem": "In the ratio test, only rows with a positive entry in the entering column are considered. Why?",
+  "correct": [
+   "A non-positive entry means that basic variable does not decrease, so it gives no limit.",
+   "Such a basic variable never reaches zero as it grows."
+  ],
+  "distractors": [
+   {
+    "text": "Rows with a negative entry would make the current solution infeasible.",
+    "misconception": "the current solution is feasible whatever the column entries are"
+   },
+   {
+    "text": "Positive entries are the only ones that can be used to scale a row to 1.",
+    "misconception": "confuses the pivot-scaling step with the test"
+   },
+   {
+    "text": "A negative entry means the entering variable should be replaced by another one.",
+    "misconception": "this changes the entering choice, which the test does not do"
+   },
+   {
+    "text": "Rows with a zero right-hand side must be ignored for every choice of entering variable.",
+    "misconception": "mixes the test with a degeneracy rule"
+   },
+   {
+    "text": "A zero entry in the column makes the pivot element equal to one.",
+    "misconception": "the pivot scaling is unrelated to the test"
+   }
+  ],
+  "explanation": "If all entries in the entering column are non-positive, nothing blocks the entering variable and the LP is unbounded."
+ },
+ {
+  "id": "opt-3.1",
+  "lecture": 3,
+  "stem": "When is a basic feasible solution called degenerate?",
+  "correct": [
+   "When at least one of the basic variables is equal to zero at that vertex.",
+   "Some basic variable takes the value zero there."
+  ],
+  "distractors": [
+   {
+    "text": "When some nonbasic variable is strictly positive in the solution.",
+    "misconception": "nonbasic variables are zero by definition of a basic solution"
+   },
+   {
+    "text": "When the LP has more than one optimal solution.",
+    "misconception": "degeneracy and alternative optima are different phenomena"
+   },
+   {
+    "text": "When no feasible solution exists for the constraint system.",
+    "misconception": "confuses degeneracy with infeasibility"
+   },
+   {
+    "text": "When all the reduced costs of the nonbasic variables are exactly zero.",
+    "misconception": "zero reduced costs signal alternative optima"
+   },
+   {
+    "text": "When two different constraints are parallel in the feasible region.",
+    "misconception": "parallel constraints are not degeneracy"
+   }
+  ],
+  "explanation": "In a degenerate BFS more than $n-m$ of the variables are zero, so more constraints than needed are tight at the vertex."
+ },
+ {
+  "id": "opt-3.2",
+  "lecture": 3,
+  "stem": "Which risk does degeneracy bring to the simplex method?",
+  "correct": [
+   "Pivots can leave the objective unchanged, and the method may cycle forever.",
+   "Zero-step pivots may repeat; Bland's rule prevents it."
+  ],
+  "distractors": [
+   {
+    "text": "The LP becomes unbounded as soon as one basic variable equals zero.",
+    "misconception": "degeneracy has no effect on boundedness"
+   },
+   {
+    "text": "The objective value must increase strictly at every single pivot.",
+    "misconception": "the opposite: degenerate pivots do not increase it"
+   },
+   {
+    "text": "The optimal solution is no longer a vertex of the feasible region.",
+    "misconception": "a degenerate vertex is still a vertex"
+   },
+   {
+    "text": "The dual of the problem becomes infeasible at the degenerate point.",
+    "misconception": "degeneracy does not affect dual feasibility in this way"
+   },
+   {
+    "text": "The dual of the problem is guaranteed to be degenerate as well.",
+    "misconception": "degeneracy of the primal does not force the dual to be degenerate"
+   }
+  ],
+  "explanation": "A degenerate pivot has step length zero, so the objective stays the same and the same basis can recur; Bland's rule prevents cycling."
+ },
+ {
+  "id": "opt-3.3",
+  "lecture": 3,
+  "stem": "In a maximisation problem, how does the simplex method reveal that the LP is unbounded?",
+  "correct": [
+   "An entering column has no positive entry, so the ratio test gives no limit.",
+   "The entering column is entirely non-positive."
+  ],
+  "distractors": [
+   {
+    "text": "A basic variable becomes negative after a pivot.",
+    "misconception": "the ratio test prevents negative basic variables"
+   },
+   {
+    "text": "Every reduced cost is non-positive in the optimal tableau.",
+    "misconception": "that is the optimality test, not unboundedness"
+   },
+   {
+    "text": "Every entry of the entering column is positive and the ratios are all equal.",
+    "misconception": "equal ratios cause degeneracy"
+   },
+   {
+    "text": "The Phase I objective stays positive at its optimum.",
+    "misconception": "that signals infeasibility, not unboundedness"
+   },
+   {
+    "text": "Every reduced cost becomes exactly zero after the pivot.",
+    "misconception": "zero reduced costs signal alternative optima"
+   }
+  ],
+  "explanation": "With no blocking row the entering variable can increase indefinitely while the objective keeps improving."
+ },
+ {
+  "id": "opt-3.4",
+  "lecture": 3,
+  "stem": "What is Phase I of the two-phase simplex method used for?",
+  "correct": [
+   "It finds a feasible basis, or shows there is none, via artificial variables.",
+   "It produces a feasible starting basis for Phase II."
+  ],
+  "distractors": [
+   {
+    "text": "Computing the optimal solution of the dual of the original problem.",
+    "misconception": "the dual is not computed in Phase I"
+   },
+   {
+    "text": "Checking whether the original LP has a bounded objective.",
+    "misconception": "boundedness is detected during Phase II"
+   },
+   {
+    "text": "Maximising the original objective while ignoring all the constraints.",
+    "misconception": "the constraints are kept in Phase I"
+   },
+   {
+    "text": "Removing degeneracy from the starting tableau before pivoting.",
+    "misconception": "degeneracy is not the point of Phase I"
+   },
+   {
+    "text": "Checking that the artificial variables have no effect on the objective.",
+    "misconception": "artificial variables are central to Phase I"
+   }
+  ],
+  "explanation": "Artificial variables give an easy starting basis; Phase I drives them to zero, giving a BFS for Phase II."
+ },
+ {
+  "id": "opt-3.5",
+  "lecture": 3,
+  "stem": "Phase I ends with a strictly positive optimal value of the sum of artificial variables. What does this mean?",
+  "correct": [
+   "The original LP is infeasible: the artificial variables cannot all be driven to zero.",
+   "No feasible point exists for the original constraints."
+  ],
+  "distractors": [
+   {
+    "text": "The original LP is unbounded and has no finite optimal solution.",
+    "misconception": "confuses infeasibility with unboundedness"
+   },
+   {
+    "text": "The original LP has an optimal solution, with some artificial variable kept positive.",
+    "misconception": "a positive artificial variable violates the original constraints"
+   },
+   {
+    "text": "Phase II should now be started with the artificial variables kept in the basis.",
+    "misconception": "Phase II needs a feasible basis without them"
+   },
+   {
+    "text": "The LP has multiple optimal solutions, so Bland's rule should be applied.",
+    "misconception": "confuses with alternative optima"
+   },
+   {
+    "text": "All artificial variables are zero, so Phase II can start from that basis.",
+    "misconception": "gives the opposite outcome"
+   }
+  ],
+  "explanation": "A positive Phase I optimum means every point violates some constraint; the original problem is infeasible."
+ },
+ {
+  "id": "opt-4.1",
+  "lecture": 4,
+  "stem": "What is the dual of the problem: maximise $c^\\top x$ subject to $Ax\\le b$, $x\\ge0$?",
+  "correct": [
+   "Minimise $b^\\top y$ subject to $A^\\top y\\ge c$ with non-negative $y$.",
+   "A minimisation with objective $b^\\top y$, $A^\\top y\\ge c$, $y\\ge0$."
+  ],
+  "distractors": [
+   {
+    "text": "Minimise $b^\\top y$ subject to $A^\\top y\\le c$ and $y\\ge0$.",
+    "misconception": "gets the direction of the dual constraints wrong"
+   },
+   {
+    "text": "Minimise $c^\\top y$ subject to $Ay\\ge b$ and $y\\ge0$.",
+    "misconception": "swaps the roles of $b$ and $c$ without transposing the matrix"
+   },
+   {
+    "text": "Maximise $b^\\top y$ subject to $A^\\top y\\ge c$ and $y\\ge0$.",
+    "misconception": "keeps the maximisation instead of switching to minimisation"
+   },
+   {
+    "text": "Minimise $b^\\top y$ subject to $A^\\top y=c$ with $y$ free in sign.",
+    "misconception": "that is the dual of an equality-form primal"
+   },
+   {
+    "text": "Maximise $c^\\top y$ subject to $A^\\top y\\le b$ and $y\\le0$.",
+    "misconception": "mixes the sign conventions of both problems"
+   }
+  ],
+  "explanation": "The dual has one variable per primal constraint and one constraint per primal variable; max with $\\le$ constraints becomes min with $\\ge$ constraints."
+ },
+ {
+  "id": "opt-4.2",
+  "lecture": 4,
+  "stem": "Let $x$ be primal feasible and $y$ dual feasible for a maximisation primal $\\max c^\\top x$ and its dual. What does weak duality state?",
+  "correct": [
+   "$c^\\top x\\le b^\\top y$ for every feasible pair.",
+   "Dual values bound primal values from above."
+  ],
+  "distractors": [
+   {
+    "text": "$c^\\top x\\ge b^\\top y$ for every such pair.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "$c^\\top x=b^\\top y$ for every pair of feasible solutions.",
+    "misconception": "equality only holds at optimality"
+   },
+   {
+    "text": "$c^\\top x\\le b^\\top y$ only when both solutions are optimal.",
+    "misconception": "weak duality needs only feasibility"
+   },
+   {
+    "text": "$c^\\top x\\le b^\\top y$ only if the primal has a unique optimum.",
+    "misconception": "adds a nonexistent uniqueness condition"
+   },
+   {
+    "text": "$c^\\top x\\le b^\\top y$ only when $A$ is a square matrix.",
+    "misconception": "weak duality needs no assumption on the shape of $A$"
+   }
+  ],
+  "explanation": "Weak duality holds for all feasible pairs. In particular, a feasible pair with equal objective values is optimal for both problems."
+ },
+ {
+  "id": "opt-4.3",
+  "lecture": 4,
+  "stem": "The primal LP has a finite optimal value. What does strong duality say about its dual?",
+  "correct": [
+   "The dual also has an optimal solution, and its optimal value is the same.",
+   "Both problems attain the same optimal objective value."
+  ],
+  "distractors": [
+   {
+    "text": "The dual is unbounded and so has no finite optimal value.",
+    "misconception": "unbounded dual would contradict weak duality"
+   },
+   {
+    "text": "The dual optimal value is strictly smaller than the primal optimal value.",
+    "misconception": "there is no duality gap in LP"
+   },
+   {
+    "text": "The dual optimum is attained at the same vector as the primal one.",
+    "misconception": "primal and dual solutions live in different spaces"
+   },
+   {
+    "text": "The dual is infeasible, since only one of the pair can be feasible.",
+    "misconception": "confuses with the unbounded-primal case"
+   },
+   {
+    "text": "The dual has a feasible solution but no optimal solution.",
+    "misconception": "weak duality guarantees a bound on feasible solutions"
+   }
+  ],
+  "explanation": "For LPs there is no duality gap: if either problem has a finite optimum, so does the other, with equal values."
+ },
+ {
+  "id": "opt-4.4",
+  "lecture": 4,
+  "stem": "A maximisation LP is unbounded. What can be said about its dual?",
+  "correct": [
+   "The dual problem has no feasible point at all.",
+   "No feasible solution exists for the dual."
+  ],
+  "distractors": [
+   {
+    "text": "The dual is unbounded as well.",
+    "misconception": "weak duality would be violated by an unbounded pair"
+   },
+   {
+    "text": "The dual has a finite optimum that equals zero.",
+    "misconception": "a finite dual optimum forces a finite primal optimum"
+   },
+   {
+    "text": "The dual may or may not be feasible, depending on the vector $b$.",
+    "misconception": "weak duality forces infeasibility"
+   },
+   {
+    "text": "The dual is feasible but has no optimal solution.",
+    "misconception": "a feasible dual would bound the primal"
+   },
+   {
+    "text": "The dual is feasible, but its objective is unbounded below.",
+    "misconception": "weak duality would be violated by a finite feasible primal bound"
+   }
+  ],
+  "explanation": "A feasible dual point would give a finite upper bound on the primal objective by weak duality, contradicting unboundedness."
+ },
+ {
+  "id": "opt-4.5",
+  "lecture": 4,
+  "stem": "The primal LP is infeasible. Which statement about its dual is correct?",
+  "correct": [
+   "The dual is infeasible or unbounded.",
+   "No finite optimum for the dual."
+  ],
+  "distractors": [
+   {
+    "text": "The dual must be unbounded.",
+    "misconception": "both the primal and the dual can be infeasible"
+   },
+   {
+    "text": "The dual must be infeasible.",
+    "misconception": "the dual can be unbounded"
+   },
+   {
+    "text": "The dual has a finite optimal value equal to zero.",
+    "misconception": "a finite dual optimum would force a primal optimum"
+   },
+   {
+    "text": "The dual is feasible and bounded below.",
+    "misconception": "strong duality would then give a feasible primal"
+   },
+   {
+    "text": "The dual must have the same feasibility status as the primal.",
+    "misconception": "an infeasible primal can have an unbounded dual"
+   }
+  ],
+  "explanation": "If the dual had a finite optimum, strong duality would give a primal optimum; so the dual is infeasible or unbounded (both cases occur)."
+ },
+ {
+  "id": "opt-4.6",
+  "lecture": 4,
+  "stem": "What do the complementary slackness conditions state for optimal $x^*$ and $y^*$ of a primal-dual pair?",
+  "correct": [
+   "A positive variable forces the paired constraint to be tight.",
+   "For each pair, the variable is zero or its constraint is tight."
+  ],
+  "distractors": [
+   {
+    "text": "Every constraint of both problems must hold with equality at the optimum.",
+    "misconception": "only constraints paired with positive variables must be tight"
+   },
+   {
+    "text": "If a constraint has slack, its dual variable must be strictly positive.",
+    "misconception": "reverses the implication"
+   },
+   {
+    "text": "The vectors $x^*$ and $y^*$ are orthogonal to each other.",
+    "misconception": "they live in different spaces"
+   },
+   {
+    "text": "Primal and dual optimal solutions are equal vectors.",
+    "misconception": "the two vectors have different meanings and sizes"
+   },
+   {
+    "text": "The cost per unit of the resource, set by the market and independent of the model.",
+    "misconception": "shadow prices come from the optimal dual"
+   }
+  ],
+  "explanation": "$x_j^*(A^\\top y^*-c)_j=0$ and $y_i^*(b-Ax^*)_i=0$; a positive shadow price means the resource is fully used."
+ },
+ {
+  "id": "opt-5.1",
+  "lecture": 5,
+  "stem": "What does the shadow price of a constraint measure?",
+  "correct": [
+   "The change in the optimal value per extra unit of the right-hand side, in its range.",
+   "The marginal value of one more unit of the scarce resource."
+  ],
+  "distractors": [
+   {
+    "text": "The total amount of the resource used up by the optimal solution.",
+    "misconception": "confuses a price with consumption"
+   },
+   {
+    "text": "The amount of slack remaining in the constraint at the optimum.",
+    "misconception": "confuses with the slack variable"
+   },
+   {
+    "text": "The change in the objective per unit increase of a decision variable.",
+    "misconception": "that is an objective coefficient or reduced cost"
+   },
+   {
+    "text": "The price at which the resource can be bought, whatever its marginal value.",
+    "misconception": "confuses with market price"
+   },
+   {
+    "text": "A positive reduced cost of every nonbasic variable.",
+    "misconception": "the sign pattern of reduced costs in the optimum is non-positive for a maximum"
+   }
+  ],
+  "explanation": "It is the optimal dual variable. It is valid only while the right-hand side stays within its allowable range."
+ },
+ {
+  "id": "opt-5.2",
+  "lecture": 5,
+  "stem": "A constraint is not binding at the optimum of a maximisation LP. What is its shadow price?",
+  "correct": [
+   "Zero, because extra resource would not improve the optimum.",
+   "Its dual value is zero by complementary slackness."
+  ],
+  "distractors": [
+   {
+    "text": "Positive, because every constraint has some value attached.",
+    "misconception": "a slack resource is worth nothing at the margin"
+   },
+   {
+    "text": "Equal to the amount of slack in the constraint.",
+    "misconception": "confuses the price with the slack"
+   },
+   {
+    "text": "Negative, since relaxing the constraint lowers the objective.",
+    "misconception": "relaxing a constraint cannot lower a maximum"
+   },
+   {
+    "text": "Equal to the objective coefficient of the variable using the resource.",
+    "misconception": "mixes prices with objective coefficients"
+   },
+   {
+    "text": "Undefined, because the constraint plays no role in the dual problem.",
+    "misconception": "the dual variable exists and equals zero"
+   }
+  ],
+  "explanation": "If the constraint has slack, small changes of its right-hand side do not change the optimal solution, so its dual variable is $0$."
+ },
+ {
+  "id": "opt-5.3",
+  "lecture": 5,
+  "stem": "What does the allowable range of a right-hand side $b_i$ describe?",
+  "correct": [
+   "Values keeping the current optimal basis feasible, so the shadow price holds.",
+   "Values of $b_i$ for which the same basis stays feasible."
+  ],
+  "distractors": [
+   {
+    "text": "The interval over which the optimal values of the decision variables do not change.",
+    "misconception": "the variable values do change with the right-hand side"
+   },
+   {
+    "text": "The interval where the problem remains degenerate at the optimum.",
+    "misconception": "degeneracy is unrelated to the range"
+   },
+   {
+    "text": "The interval over which the objective value stays constant.",
+    "misconception": "the objective value changes linearly with the shadow price"
+   },
+   {
+    "text": "The interval where every reduced cost remains exactly zero.",
+    "misconception": "reduced costs of nonbasic variables need not be zero"
+   },
+   {
+    "text": "The interval over which the shadow price of the constraint keeps changing.",
+    "misconception": "the shadow price is constant inside the range"
+   }
+  ],
+  "explanation": "Within the range the optimal basis is unchanged, the optimum moves linearly with $b_i$ at slope equal to the shadow price; outside it a different basis is optimal."
+ },
+ {
+  "id": "opt-5.4",
+  "lecture": 5,
+  "stem": "The cost coefficient $c_j$ of a basic variable is changed within its allowable range. What happens to the optimal solution?",
+  "correct": [
+   "The same vertex stays optimal, although the optimal value changes.",
+   "The variable values stay put while the objective value moves."
+  ],
+  "distractors": [
+   {
+    "text": "The optimal objective value and the optimal vertex both remain unchanged.",
+    "misconception": "the objective changes by the shift times the variable's value"
+   },
+   {
+    "text": "The solution moves immediately to an adjacent vertex of the region.",
+    "misconception": "the vertex only changes outside the range"
+   },
+   {
+    "text": "The shadow prices of all constraints remain exactly the same.",
+    "misconception": "shadow prices depend on the costs of basic variables"
+   },
+   {
+    "text": "The variable becomes nonbasic and its value drops to zero.",
+    "misconception": "this happens only outside the range"
+   },
+   {
+    "text": "The shadow prices increase by exactly the same amount as the cost coefficient.",
+    "misconception": "the change in shadow prices is not one for one"
+   }
+  ],
+  "explanation": "Inside the range the basis is still optimal, so the primal solution is unchanged; the value $c^\\top x$ and the shadow prices adapt."
+ },
+ {
+  "id": "opt-5.5",
+  "lecture": 5,
+  "stem": "In a maximisation LP, what does the reduced cost of a nonbasic variable tell you?",
+  "correct": [
+   "How much its coefficient must improve before entering the basis pays.",
+   "Net gain per unit if it were forced into the solution."
+  ],
+  "distractors": [
+   {
+    "text": "The amount of the variable that appears in the optimal solution.",
+    "misconception": "nonbasic variables are zero"
+   },
+   {
+    "text": "The shadow price of the constraint that the variable uses.",
+    "misconception": "confuses reduced cost with shadow price"
+   },
+   {
+    "text": "The total cost of producing the optimal quantity of that variable.",
+    "misconception": "confuses reduced cost with production cost"
+   },
+   {
+    "text": "The slack of the associated dual constraint is always strictly positive.",
+    "misconception": "zero is possible for alternative optima"
+   },
+   {
+    "text": "It is the amount the variable would take if the resource were doubled.",
+    "misconception": "reduced cost is not a quantity of the variable"
+   }
+  ],
+  "explanation": "The reduced cost is $c_j-y^\\top a_j$ (for max, non-positive at optimality); it measures the change in the objective per unit of forcing it in."
+ },
+ {
+  "id": "opt-5.6",
+  "lecture": 5,
+  "stem": "A new activity with column $a$ and objective coefficient $c$ is proposed for a maximisation LP with optimal shadow prices $y$. When is it worth adding to the production plan?",
+  "correct": [
+   "When its reduced cost $c-y^\\top a$ is positive, so it beats its resource cost.",
+   "Its value exceeds the shadow-price value of resources used."
+  ],
+  "distractors": [
+   {
+    "text": "Whenever its objective coefficient $c$ is positive, whatever resources it uses.",
+    "misconception": "ignores the resources it consumes"
+   },
+   {
+    "text": "Only when its coefficient exceeds those of all existing activities.",
+    "misconception": "compares coefficients without resource costs"
+   },
+   {
+    "text": "Whenever its column $a$ has only non-negative entries.",
+    "misconception": "the sign of the column alone says nothing about value"
+   },
+   {
+    "text": "Only when all the shadow prices are equal to zero.",
+    "misconception": "zero shadow prices would mean free resources"
+   },
+   {
+    "text": "When the new activity is cheaper than all existing activities.",
+    "misconception": "comparing coefficients without resource values is not a test"
+   }
+  ],
+  "explanation": "Pricing out the new column with the current shadow prices shows whether it can improve the objective; if $c-y^\\top a\\le0$ the plan is still optimal."
+ },
+ {
+  "id": "opt-6.1",
+  "lecture": 6,
+  "stem": "What does the max-flow min-cut theorem state?",
+  "correct": [
+   "The maximum $s$-$t$ flow equals the minimum capacity among all possible $s$-$t$ cuts.",
+   "A maximum flow has the value of a cheapest cut."
+  ],
+  "distractors": [
+   {
+    "text": "The maximum flow equals the capacity of the largest cut separating $s$ and $t$.",
+    "misconception": "confuses minimum with maximum"
+   },
+   {
+    "text": "The maximum flow equals the smallest single edge capacity in the network.",
+    "misconception": "ignores the combination of edges in a cut"
+   },
+   {
+    "text": "The maximum flow equals the sum of all edge capacities in the network.",
+    "misconception": "many edges are not saturated by a flow"
+   },
+   {
+    "text": "The maximum flow always equals the number of edge-disjoint paths from $s$ to $t$.",
+    "misconception": "holds only when all capacities are one"
+   },
+   {
+    "text": "The maximum flow equals the capacity of the cut with the fewest edges.",
+    "misconception": "the number of edges in a cut is irrelevant"
+   }
+  ],
+  "explanation": "Any flow is at most any cut's capacity, and at optimality some cut is saturated, so the two values coincide."
+ },
+ {
+  "id": "opt-6.2",
+  "lecture": 6,
+  "stem": "How can you recognise a maximum flow using the residual network?",
+  "correct": [
+   "A flow is maximal exactly when the residual network has no path from $s$ to $t$.",
+   "No augmenting path remains in the residual graph of the flow."
+  ],
+  "distractors": [
+   {
+    "text": "The flow is maximal when every edge of the network is saturated.",
+    "misconception": "it is enough that one cut is saturated"
+   },
+   {
+    "text": "The flow is maximal when all edges leaving $s$ have a positive flow.",
+    "misconception": "positive flow does not ensure optimality"
+   },
+   {
+    "text": "The flow is maximal when no path from $s$ to $t$ exists in the original network.",
+    "misconception": "the original network has a path whenever there is any flow"
+   },
+   {
+    "text": "The flow is maximal whenever flow conservation holds at every internal node.",
+    "misconception": "conservation holds for all feasible flows"
+   },
+   {
+    "text": "The flow is maximal when the residual network contains a cycle through $s$.",
+    "misconception": "cycles do not matter; paths from $s$ to $t$ do"
+   }
+  ],
+  "explanation": "An augmenting path in the residual network can increase the flow; when none exists, the set reachable from $s$ defines a minimum cut."
+ },
+ {
+  "id": "opt-6.3",
+  "lecture": 6,
+  "stem": "All edge capacities of a flow network are integers. Which statement is guaranteed?",
+  "correct": [
+   "Some maximum flow has an integer value on every edge.",
+   "An integer-valued maximum flow always exists."
+  ],
+  "distractors": [
+   {
+    "text": "Every maximum flow has integer values on all edges.",
+    "misconception": "a maximum flow can split fractionally between equal paths"
+   },
+   {
+    "text": "The maximum flow is integral only if the network has no cycles.",
+    "misconception": "acyclicity is not required"
+   },
+   {
+    "text": "An integer maximum flow exists only when all capacities equal one.",
+    "misconception": "the integrality theorem covers all integer capacities"
+   },
+   {
+    "text": "The maximum flow value must be an even integer.",
+    "misconception": "invents a parity condition"
+   },
+   {
+    "text": "The maximum flow is integral only when the network has a single source and a single sink.",
+    "misconception": "integrality does not depend on the number of terminals"
+   }
+  ],
+  "explanation": "Each augmentation changes the flow by an integer amount (the bottleneck), so Ford-Fulkerson produces integer flows."
+ },
+ {
+  "id": "opt-6.4",
+  "lecture": 6,
+  "stem": "What characterises an arbitrage opportunity among currencies with exchange rates $r_{ij}$?",
+  "correct": [
+   "A cycle of conversions with the product of rates above 1.",
+   "A cycle of negative weight under $-\\log r_{ij}$."
+  ],
+  "distractors": [
+   {
+    "text": "A cycle in which the sum of the exchange rates exceeds the number of currencies.",
+    "misconception": "rates multiply rather than add"
+   },
+   {
+    "text": "A cycle whose product of rates is smaller than 1.",
+    "misconception": "that loses money"
+   },
+   {
+    "text": "Any cycle of three currencies, whatever the rates.",
+    "misconception": "the product of rates must exceed one"
+   },
+   {
+    "text": "A pair of currencies with $r_{ij}=r_{ji}$.",
+    "misconception": "consistent rates would rule out arbitrage only when $r_{ij}r_{ji}=1$"
+   },
+   {
+    "text": "A cycle of conversions in which the first and the last currency coincide.",
+    "misconception": "every cycle returns to its first currency"
+   }
+  ],
+  "explanation": "Money is multiplied by each rate along the cycle; taking logs turns the product into a sum, and a negative cycle can be found by Bellman-Ford."
+ },
+ {
+  "id": "opt-6.5",
+  "lecture": 6,
+  "stem": "In a minimum cost network flow model, what does the flow conservation constraint at a node say?",
+  "correct": [
+   "Outflow minus inflow equals the node's supply, negative at demand nodes.",
+   "Net outflow at a node equals its supply or minus its demand."
+  ],
+  "distractors": [
+   {
+    "text": "Inflow equals outflow at every node of the network, including the supply and demand nodes.",
+    "misconception": "ignores the supply and demand nodes"
+   },
+   {
+    "text": "Outflow is at most the cost of the cheapest incident edge.",
+    "misconception": "mixes costs into the conservation law"
+   },
+   {
+    "text": "The flow on each edge is at most the supply at its tail.",
+    "misconception": "confuses capacity with conservation"
+   },
+   {
+    "text": "Total flow through a node equals its capacity in any feasible solution.",
+    "misconception": "a node need not be saturated"
+   },
+   {
+    "text": "The inflow at each node must exceed its outflow by the node's capacity.",
+    "misconception": "conservation concerns net supply, not capacity"
+   }
+  ],
+  "explanation": "Transhipment nodes have zero supply, so inflow equals outflow there; sources and sinks carry the net flow."
+ },
+ {
+  "id": "opt-7.1",
+  "lecture": 7,
+  "stem": "For a maximisation integer program, what does the optimal value of its LP relaxation provide?",
+  "correct": [
+   "An upper bound on the optimal value of the integer program.",
+   "A value at least as large as the best integer solution."
+  ],
+  "distractors": [
+   {
+    "text": "A lower bound on the optimal value of the integer program.",
+    "misconception": "the relaxation enlarges the feasible set, so its maximum is higher"
+   },
+   {
+    "text": "A value that always equals the integer optimum when the data are integers.",
+    "misconception": "equality needs special structure"
+   },
+   {
+    "text": "A feasible objective value for the integer program.",
+    "misconception": "the relaxation solution may violate integrality"
+   },
+   {
+    "text": "A bound that is valid only when the LP solution is fractional.",
+    "misconception": "the bound is always valid"
+   },
+   {
+    "text": "A value equal to the integer optimum if the objective coefficients are integers.",
+    "misconception": "integer coefficients do not close the gap"
+   }
+  ],
+  "explanation": "The relaxation drops integrality, which can only enlarge the feasible set; the maximum over a bigger set is at least as large."
+ },
+ {
+  "id": "opt-7.2",
+  "lecture": 7,
+  "stem": "The LP relaxation of an integer program has a fractional optimum. What is the issue with simply rounding it to the nearest integers?",
+  "correct": [
+   "The rounded point may violate a constraint, or it may be far from the true optimum.",
+   "Feasibility and optimality of the rounded point are not guaranteed."
+  ],
+  "distractors": [
+   {
+    "text": "The rounded point is always feasible, but never optimal.",
+    "misconception": "rounded points can be infeasible and sometimes optimal"
+   },
+   {
+    "text": "It always yields a lower bound that equals the integer optimum.",
+    "misconception": "the rounded value need not equal the optimum"
+   },
+   {
+    "text": "It gives the optimum whenever the constraints are all of the less-than-or-equal type.",
+    "misconception": "no such guarantee exists"
+   },
+   {
+    "text": "The rounded solution is optimal for the LP relaxation as well.",
+    "misconception": "it need not even be feasible for the relaxation"
+   },
+   {
+    "text": "Rounding always gives a point with a better objective value than the relaxation.",
+    "misconception": "the relaxation value is the best possible"
+   }
+  ],
+  "explanation": "Rounding can leave the feasible region (for example, rounding up a tight constraint) and can lose a lot of value."
+ },
+ {
+  "id": "opt-7.3",
+  "lecture": 7,
+  "stem": "In branch-and-bound for a maximisation IP, when can a node be pruned?",
+  "correct": [
+   "When infeasible, integral, or no better than the incumbent.",
+   "When its upper bound cannot beat the incumbent."
+  ],
+  "distractors": [
+   {
+    "text": "Whenever its LP solution contains a fractional variable.",
+    "misconception": "fractional nodes are the ones that need branching"
+   },
+   {
+    "text": "When its LP bound is strictly larger than the incumbent value.",
+    "misconception": "such a node may still contain a better solution"
+   },
+   {
+    "text": "As soon as its depth in the tree exceeds the number of variables.",
+    "misconception": "depth is not a pruning criterion"
+   },
+   {
+    "text": "When its LP relaxation is unbounded, because that gives a good bound.",
+    "misconception": "an unbounded node must be branched or analysed"
+   },
+   {
+    "text": "When its LP bound is below zero, whatever the incumbent is.",
+    "misconception": "pruning compares with the incumbent, not with zero"
+   }
+  ],
+  "explanation": "Pruning is safe when a node cannot contain a solution better than the incumbent: infeasible, integral (record it), or bounded by the incumbent."
+ },
+ {
+  "id": "opt-7.4",
+  "lecture": 7,
+  "stem": "In branch-and-bound a variable has the fractional LP value $x_j=3.4$. How are the two child subproblems formed?",
+  "correct": [
+   "One adds the constraint $x_j\\le3$, the other adds $x_j\\ge4$.",
+   "The two child problems are $x_j\\le3$ and $x_j\\ge4$."
+  ],
+  "distractors": [
+   {
+    "text": "One adds $x_j\\le3.4$ and the other adds $x_j\\ge3.4$.",
+    "misconception": "the current LP solution stays feasible in both"
+   },
+   {
+    "text": "One fixes $x_j=3$ and the other fixes $x_j=4$.",
+    "misconception": "all other integer values are lost"
+   },
+   {
+    "text": "One adds $x_j\\le4$ and the other adds $x_j\\ge3$.",
+    "misconception": "the branches overlap and the fractional point remains feasible"
+   },
+   {
+    "text": "One restricts $x_j\\le0$ and the other restricts $x_j\\ge7$.",
+    "misconception": "arbitrary bounds cut off integer solutions"
+   },
+   {
+    "text": "One fixes $x_j$ at the rounded value $3$ and the other drops $x_j$ from the problem.",
+    "misconception": "discards integer values of the variable"
+   }
+  ],
+  "explanation": "Every integer solution satisfies $x_j\\le3$ or $x_j\\ge4$, but the fractional point $3.4$ satisfies neither branch."
+ },
+ {
+  "id": "opt-7.5",
+  "lecture": 7,
+  "stem": "A fixed set-up cost is incurred if product $x$ is made at all. The constraint $x\\le My$ with $y\\in\\{0,1\\}$ and a cost $Fy$ is used. What does it model?",
+  "correct": [
+   "If $y=0$ then $x=0$; if $y=1$ then $x\\le M$ and $F$ is paid.",
+   "The cost $F$ is paid only when production is positive."
+  ],
+  "distractors": [
+   {
+    "text": "If $y=1$ then $x$ must equal $M$ exactly.",
+    "misconception": "the constraint is only an upper bound"
+   },
+   {
+    "text": "If $x>0$ then $y$ must be $0$, so the set-up cost is avoided.",
+    "misconception": "reverses the logic"
+   },
+   {
+    "text": "Both $x$ and $y$ are binary variables restricted to $0$ or $1$.",
+    "misconception": "$x$ is continuous in a fixed-charge model"
+   },
+   {
+    "text": "The constraint forces $x$ to be zero in any optimal solution.",
+    "misconception": "$x$ can be positive when $y=1$"
+   },
+   {
+    "text": "The constraint makes $y$ continuous so that set-up costs scale with $x$.",
+    "misconception": "$y$ is binary in this construction"
+   }
+  ],
+  "explanation": "If $x>0$ the constraint forces $y=1$, and minimising cost keeps $y=0$ otherwise; $M$ must be a valid upper bound for $x$."
+ },
+ {
+  "id": "opt-8.1",
+  "lecture": 8,
+  "stem": "What property must a valid cutting plane have for an integer program?",
+  "correct": [
+   "All integer feasible points satisfy it, but the fractional LP optimum violates it.",
+   "It removes the LP optimum but keeps every integer point."
+  ],
+  "distractors": [
+   {
+    "text": "It is satisfied by the current fractional LP optimum, so the optimum stays feasible.",
+    "misconception": "then it does not cut anything off"
+   },
+   {
+    "text": "It removes some feasible integer points to shrink the region faster.",
+    "misconception": "that would lose possible optima"
+   },
+   {
+    "text": "It is parallel to the objective function and passes through the optimum.",
+    "misconception": "geometry of the objective is unrelated"
+   },
+   {
+    "text": "It has integer coefficients but need not exclude any LP point.",
+    "misconception": "an ineffective cut is not a cut"
+   },
+   {
+    "text": "It passes through the LP optimum and cuts off a fraction of the integer points.",
+    "misconception": "valid cuts must keep every integer point"
+   }
+  ],
+  "explanation": "A cut tightens the LP relaxation without losing integer solutions; repeated cuts push the LP optimum towards an integer point."
+ },
+ {
+  "id": "opt-8.2",
+  "lecture": 8,
+  "stem": "How is a Gomory fractional cut obtained from a tableau row whose basic variable has a fractional value?",
+  "correct": [
+   "Use the fractional parts of the row and require $\\sum_jf_jx_j\\ge f_0$ over nonbasic variables.",
+   "Weighted nonbasic sum at least the fractional right-hand side."
+  ],
+  "distractors": [
+   {
+    "text": "Take the integer parts of the coefficients and require the sum to be at most the integer part of the right-hand side.",
+    "misconception": "uses the integer parts rather than fractional parts"
+   },
+   {
+    "text": "Require $\\sum_j f_jx_j\\le f_0$ with the fractional parts of the row.",
+    "misconception": "reverses the inequality"
+   },
+   {
+    "text": "Use the fractional part of the objective row and set it equal to zero.",
+    "misconception": "cuts come from a constraint row, not the objective row"
+   },
+   {
+    "text": "Round every coefficient of the row up to the next integer and keep the equality.",
+    "misconception": "rounding does not give a valid cut"
+   },
+   {
+    "text": "Add the constraint that every nonbasic variable equals its integer part.",
+    "misconception": "this removes valid integer solutions"
+   }
+  ],
+  "explanation": "The basic variable equals an integer plus fractions; integrality of the left side forces $\\sum f_jx_j$ to be at least $f_0$."
+ },
+ {
+  "id": "opt-8.3",
+  "lecture": 8,
+  "stem": "Under which condition is a Gomory fractional cut guaranteed to be valid?",
+  "correct": [
+   "When every slack variable is integer at integer solutions.",
+   "With integer data in the constraints."
+  ],
+  "distractors": [
+   {
+    "text": "Only when the problem is a minimisation problem.",
+    "misconception": "the validity does not depend on the direction of optimisation"
+   },
+   {
+    "text": "Only when every variable is restricted to be binary.",
+    "misconception": "general integers are fine"
+   },
+   {
+    "text": "Only when the LP optimum is degenerate.",
+    "misconception": "degeneracy is irrelevant"
+   },
+   {
+    "text": "Only when the objective coefficients are fractional.",
+    "misconception": "the argument involves the constraint row, not the objective"
+   },
+   {
+    "text": "Only when the right-hand side of the cut is negative.",
+    "misconception": "the right-hand side of a Gomory cut is a fractional part"
+   }
+  ],
+  "explanation": "The proof uses that the left-hand side of the row is an integer; with fractional data the slack variables need not be integer, and the cut can be invalid."
+ },
+ {
+  "id": "opt-8.4",
+  "lecture": 8,
+  "stem": "Valid cuts are added to a maximisation integer program and the LP relaxation is re-solved. How does its optimal value compare?",
+  "correct": [
+   "It does not increase, and it stays at least as large as the integer optimum.",
+   "It decreases or stays the same, above the integer optimum."
+  ],
+  "distractors": [
+   {
+    "text": "It increases, since extra constraints give a better bound.",
+    "misconception": "more constraints cannot raise a maximum"
+   },
+   {
+    "text": "It may drop below the integer optimum, since cuts remove feasible points.",
+    "misconception": "valid cuts keep all integer points"
+   },
+   {
+    "text": "It stays exactly the same after every cut by definition.",
+    "misconception": "useful cuts remove the fractional optimum"
+   },
+   {
+    "text": "The relaxation becomes infeasible whenever the integer program has a solution.",
+    "misconception": "valid cuts keep integer solutions"
+   },
+   {
+    "text": "It becomes smaller than the integer optimum after enough cuts.",
+    "misconception": "valid cuts never cut off the integer optimum"
+   }
+  ],
+  "explanation": "A valid cut shrinks the relaxation but keeps every integer solution, so the bound tightens but never crosses the integer optimum."
+ },
+ {
+  "id": "opt-8.5",
+  "lecture": 8,
+  "stem": "How do linear programming and integer programming compare in computational complexity?",
+  "correct": [
+   "LP is solvable in polynomial time, whereas general integer programming is NP-hard.",
+   "Integer programming is NP-hard; LP is polynomial."
+  ],
+  "distractors": [
+   {
+    "text": "Both LP and general integer programming are solvable in polynomial time.",
+    "misconception": "underestimates the difficulty of integer programming"
+   },
+   {
+    "text": "Integer programming is polynomial but LP is NP-hard.",
+    "misconception": "reverses the two classes"
+   },
+   {
+    "text": "The simplex method is guaranteed to run in polynomial time on every LP.",
+    "misconception": "simplex is exponential in the worst case"
+   },
+   {
+    "text": "Integer programming is easy whenever the coefficients are rational numbers.",
+    "misconception": "rational data does not remove the hardness"
+   },
+   {
+    "text": "Integer programming reduces to LP by dropping the integrality, with no loss.",
+    "misconception": "dropping integrality changes the problem"
+   }
+  ],
+  "explanation": "Interior-point and ellipsoid methods solve LPs in polynomial time; simplex is fast in practice but exponential in the worst case."
+ },
+ {
+  "id": "opt-9.1",
+  "lecture": 9,
+  "stem": "What is the definition of a convex function $f$?",
+  "correct": [
+   "$f(\\theta x+(1-\\theta)y)\\le\\theta f(x)+(1-\\theta)f(y)$ for all $x$, $y$ and $\\theta\\in[0,1]$.",
+   "The graph of $f$ lies below every chord of the graph."
+  ],
+  "distractors": [
+   {
+    "text": "$f(\\theta x+(1-\\theta)y)\\ge\\theta f(x)+(1-\\theta)f(y)$ for all such $x,y,\\theta$.",
+    "misconception": "this is the definition of concave"
+   },
+   {
+    "text": "$f(x+y)=f(x)+f(y)$ for all points $x$ and $y$.",
+    "misconception": "describes additivity, which is linearity"
+   },
+   {
+    "text": "$f$ has a unique minimiser and is non-negative everywhere.",
+    "misconception": "describes a property that follows only for some convex functions"
+   },
+   {
+    "text": "$f(\\theta x+(1-\\theta)y)\\le\\max\\{f(x),f(y)\\}$ for all such $x,y,\\theta$.",
+    "misconception": "this is quasiconvexity, which is weaker"
+   },
+   {
+    "text": "$f(x)\\le f(y)+\\nabla f(y)^\\top(x-y)$ for all $x$ and $y$.",
+    "misconception": "the reversed tangent inequality characterises concave functions"
+   }
+  ],
+  "explanation": "Convexity compares the function at a mixture with the mixture of values; the quasiconvex condition is weaker."
+ },
+ {
+  "id": "opt-9.2",
+  "lecture": 9,
+  "stem": "A twice continuously differentiable function $f$ on $\\mathbb{R}^n$. When is $f$ convex?",
+  "correct": [
+   "Its Hessian is positive semidefinite at every point of the domain.",
+   "The Hessian has no negative eigenvalue at any point."
+  ],
+  "distractors": [
+   {
+    "text": "Only when its Hessian is positive definite at every point.",
+    "misconception": "convex functions such as $x^4$ have a singular Hessian at $0$"
+   },
+   {
+    "text": "Whenever the determinant of the Hessian is positive.",
+    "misconception": "two negative eigenvalues also give a positive determinant"
+   },
+   {
+    "text": "Whenever the trace of the Hessian is positive everywhere.",
+    "misconception": "a positive trace allows one negative eigenvalue"
+   },
+   {
+    "text": "Whenever all the entries of the Hessian are non-negative.",
+    "misconception": "entries alone do not determine definiteness"
+   },
+   {
+    "text": "Whenever its Hessian is symmetric at every point of the domain.",
+    "misconception": "symmetry holds for all smooth functions"
+   }
+  ],
+  "explanation": "Convexity is equivalent to the Hessian being PSD; positive definiteness is sufficient for strict convexity, not necessary."
+ },
+ {
+  "id": "opt-9.3",
+  "lecture": 9,
+  "stem": "What is special about a local minimiser of a convex function over a convex set?",
+  "correct": [
+   "It is also a global minimiser of the problem.",
+   "No feasible point has a lower objective value."
+  ],
+  "distractors": [
+   {
+    "text": "It is the unique minimiser of the problem.",
+    "misconception": "a flat region can contain many minimisers"
+   },
+   {
+    "text": "It must lie on a vertex of the feasible set.",
+    "misconception": "convex minimisers can be interior points"
+   },
+   {
+    "text": "It is a KKT point only when the objective is also concave.",
+    "misconception": "confuses with concavity"
+   },
+   {
+    "text": "It must lie on the boundary of the feasible set.",
+    "misconception": "unconstrained minima are interior"
+   },
+   {
+    "text": "It is a saddle point of the objective in general.",
+    "misconception": "local minima of convex functions are not saddle points"
+   }
+  ],
+  "explanation": "If a better point existed, moving along the segment towards it would lower the objective near the local minimiser, by convexity."
+ },
+ {
+  "id": "opt-9.4",
+  "lecture": 9,
+  "stem": "A convex problem with differentiable functions satisfies Slater's condition. What is the status of the KKT conditions?",
+  "correct": [
+   "They are necessary and sufficient for global optimality.",
+   "A feasible point is optimal exactly when KKT multipliers exist."
+  ],
+  "distractors": [
+   {
+    "text": "They are sufficient but not necessary for optimality.",
+    "misconception": "Slater's condition makes them necessary as well"
+   },
+   {
+    "text": "They are necessary but not sufficient for optimality.",
+    "misconception": "convexity gives sufficiency"
+   },
+   {
+    "text": "They are neither necessary nor sufficient unless the objective is linear.",
+    "misconception": "linearity is not needed"
+   },
+   {
+    "text": "They are necessary and sufficient only at vertices of the feasible set.",
+    "misconception": "the position of the optimum does not matter"
+   },
+   {
+    "text": "They are necessary but their solutions never give the global optimum.",
+    "misconception": "for convex problems KKT points are global optima"
+   }
+  ],
+  "explanation": "Convexity gives sufficiency of KKT, and a constraint qualification such as Slater gives necessity."
+ },
+ {
+  "id": "opt-9.5",
+  "lecture": 9,
+  "stem": "What are the basic facts about the Lagrangian dual function $g(\\lambda)=\\inf_xL(x,\\lambda)$ of a primal problem with inequality constraints?",
+  "correct": [
+   "It is concave, and for $\\lambda\\ge0$ it lower-bounds the primal optimum.",
+   "It never exceeds the primal optimum, and is concave."
+  ],
+  "distractors": [
+   {
+    "text": "It is convex in $\\lambda$ and an upper bound on the primal optimal value.",
+    "misconception": "reverses both convexity and the bound"
+   },
+   {
+    "text": "It is concave but it overestimates the primal optimum for $\\lambda\\ge0$.",
+    "misconception": "gets the bound direction wrong"
+   },
+   {
+    "text": "It equals the primal optimal value for every multiplier $\\lambda$.",
+    "misconception": "equality needs the optimal multiplier"
+   },
+   {
+    "text": "It is concave only when the primal problem is convex.",
+    "misconception": "the dual function is always concave"
+   },
+   {
+    "text": "It is convex in $\\lambda$ only when the primal problem is a linear program.",
+    "misconception": "concavity holds for any primal problem"
+   }
+  ],
+  "explanation": "As the infimum of functions affine in $\\lambda$, $g$ is concave for any problem; weak duality gives $g(\\lambda)\\le p^*$."
+ },
+ {
+  "id": "opt-9.6",
+  "lecture": 9,
+  "stem": "What does complementary slackness say in the KKT conditions for the constraints $g_i(x)\\le0$?",
+  "correct": [
+   "Each multiplier $\\lambda_i$ is zero unless its constraint is active.",
+   "Each product $\\lambda_ig_i(x^*)$ vanishes at the optimum."
+  ],
+  "distractors": [
+   {
+    "text": "Every multiplier is strictly positive at the optimum.",
+    "misconception": "inactive constraints have zero multipliers"
+   },
+   {
+    "text": "Each constraint must be violated, $g_i(x^*)>0$, when its multiplier is positive.",
+    "misconception": "an active constraint is satisfied with equality"
+   },
+   {
+    "text": "Each multiplier equals the value $g_i(x^*)$ of its constraint.",
+    "misconception": "confuses the multiplier with the constraint value"
+   },
+   {
+    "text": "The multipliers must add up to one.",
+    "misconception": "confuses with probabilities"
+   },
+   {
+    "text": "The multipliers of the active constraints must all be negative.",
+    "misconception": "multipliers of $\\le$ constraints are non-negative in a minimisation"
+   }
+  ],
+  "explanation": "An inactive constraint does not affect the optimum locally, so its multiplier is zero; a positive multiplier forces the constraint to be tight."
+ },
+ {
+  "id": "opt-10.1",
+  "lecture": 10,
+  "stem": "A convex quadratic program minimises $\\tfrac12x^\\top Qx+c^\\top x$ subject to linear constraints, with $Q$ positive semidefinite. Where can the minimiser lie?",
+  "correct": [
+   "Anywhere in the feasible set, even in the interior.",
+   "At an interior point, on a face, or at a vertex."
+  ],
+  "distractors": [
+   {
+    "text": "Always at a vertex of the feasible polyhedron, as for linear programs.",
+    "misconception": "the quadratic term can pull the optimum off the vertices"
+   },
+   {
+    "text": "Only on the boundary of the feasible set.",
+    "misconception": "interior minima occur when the unconstrained minimiser is feasible"
+   },
+   {
+    "text": "Only at the origin, because quadratic forms are minimised there.",
+    "misconception": "the linear term moves the minimiser"
+   },
+   {
+    "text": "Only where all the constraints hold with equality.",
+    "misconception": "constraints may be inactive"
+   },
+   {
+    "text": "Always at a point where the objective gradient is zero.",
+    "misconception": "constraints can hold the optimum away from the unconstrained minimiser"
+   }
+  ],
+  "explanation": "Unlike LP, the objective curves, so a minimiser may be interior or on an edge; convexity makes any KKT point globally optimal."
+ },
+ {
+  "id": "opt-10.2",
+  "lecture": 10,
+  "stem": "Fully invested portfolios (weights sum to one, short sales allowed) with covariance matrix $\\Sigma$. What is the minimum-variance portfolio?",
+  "correct": [
+   "The weights are proportional to $\\Sigma^{-1}\\mathbf 1$, scaled so that they sum to one.",
+   "The vector $\\Sigma^{-1}\\mathbf 1$ rescaled so that the weights sum to one."
+  ],
+  "distractors": [
+   {
+    "text": "The weights proportional to $\\Sigma\\mathbf 1$, scaled to sum to one.",
+    "misconception": "forgets the inverse of the covariance matrix"
+   },
+   {
+    "text": "The weights inversely proportional to the variances, whatever the correlations.",
+    "misconception": "correct only for uncorrelated assets"
+   },
+   {
+    "text": "The equal-weight portfolio, which is optimal for any covariance matrix.",
+    "misconception": "equal weights are optimal only in symmetric cases"
+   },
+   {
+    "text": "The weights proportional to the vector of expected returns.",
+    "misconception": "ignores risk entirely"
+   },
+   {
+    "text": "The weights proportional to the inverse of each asset's expected return.",
+    "misconception": "expected returns do not enter the minimum-variance problem"
+   }
+  ],
+  "explanation": "The Lagrange condition $\\Sigma w=\\lambda\\mathbf 1$ gives $w\\propto\\Sigma^{-1}\\mathbf 1$, with minimum variance $1/(\\mathbf 1^\\top\\Sigma^{-1}\\mathbf 1)$."
+ },
+ {
+  "id": "opt-10.3",
+  "lecture": 10,
+  "stem": "Two risky assets have correlation $\\rho<1$. How does the volatility of a 50/50 portfolio compare with the average of their volatilities?",
+  "correct": [
+   "It is strictly smaller than the average of the volatilities.",
+   "Combining assets lowers risk below the average risk."
+  ],
+  "distractors": [
+   {
+    "text": "It equals the average of the two volatilities for every $\\rho$.",
+    "misconception": "holds only when $\\rho=1$"
+   },
+   {
+    "text": "It is larger than the average of the volatilities.",
+    "misconception": "reverses the diversification effect"
+   },
+   {
+    "text": "It equals the smaller volatility of the two assets.",
+    "misconception": "not true in general"
+   },
+   {
+    "text": "It depends only on the expected returns and not on the correlation.",
+    "misconception": "risk depends on covariances"
+   },
+   {
+    "text": "It equals the average of the two volatilities whenever the two means are different.",
+    "misconception": "confuses means with risk"
+   }
+  ],
+  "explanation": "With $\\rho<1$ the variance is below the squared average volatility, which is the diversification benefit."
+ },
+ {
+  "id": "opt-10.4",
+  "lecture": 10,
+  "stem": "What is the efficient frontier in mean-variance analysis?",
+  "correct": [
+   "Least variance for a given expected return, upper branch.",
+   "Highest return for a given level of variance."
+  ],
+  "distractors": [
+   {
+    "text": "The set of all feasible portfolios, including dominated ones.",
+    "misconception": "the frontier excludes dominated portfolios"
+   },
+   {
+    "text": "The portfolios with the highest Sharpe ratio for every risk level.",
+    "misconception": "only the tangency portfolio maximises the Sharpe ratio"
+   },
+   {
+    "text": "The portfolios that have zero variance.",
+    "misconception": "risky assets cannot all have zero variance"
+   },
+   {
+    "text": "The equal-weighted portfolios of all subsets of assets.",
+    "misconception": "the weights are optimised, not equal"
+   },
+   {
+    "text": "The set of portfolios with maximum variance for each expected return.",
+    "misconception": "maximising variance is the opposite of efficiency"
+   }
+  ],
+  "explanation": "The efficient frontier is the upper part of the minimum-variance curve; portfolios below the minimum-variance point are dominated."
+ },
+ {
+  "id": "opt-10.5",
+  "lecture": 10,
+  "stem": "The covariance matrix $\\Sigma$ of the assets is singular, for example because one asset is a combination of others. What is the consequence for the minimum-variance problem?",
+  "correct": [
+   "$\\Sigma^{-1}$ does not exist, and the minimiser may not be unique.",
+   "The objective is not strictly convex."
+  ],
+  "distractors": [
+   {
+    "text": "The portfolio variance can become negative.",
+    "misconception": "a covariance matrix is positive semidefinite, so variance is non-negative"
+   },
+   {
+    "text": "The problem becomes non-convex and has no minimiser.",
+    "misconception": "it is still a convex QP"
+   },
+   {
+    "text": "The minimum variance is always exactly one.",
+    "misconception": "invents a value"
+   },
+   {
+    "text": "Every portfolio has the same variance.",
+    "misconception": "singular directions are special, not all"
+   },
+   {
+    "text": "The minimum-variance portfolio is the zero vector of weights.",
+    "misconception": "the budget constraint rules out zero weights"
+   }
+  ],
+  "explanation": "A singular PSD $\\Sigma$ has a zero-variance direction; the problem stays convex but the weights are not determined uniquely."
+ },
+ {
+  "id": "opt-10.6",
+  "lecture": 10,
+  "stem": "Why may assets be clustered before building a portfolio?",
+  "correct": [
+   "It groups correlated assets, so fewer covariances need estimating.",
+   "It stabilises the estimated covariance matrix."
+  ],
+  "distractors": [
+   {
+    "text": "To guarantee a higher expected return than any unclustered portfolio.",
+    "misconception": "clustering gives no return guarantee"
+   },
+   {
+    "text": "To make the covariance matrix exactly diagonal.",
+    "misconception": "clusters remain correlated"
+   },
+   {
+    "text": "To eliminate all systematic risk from the portfolio.",
+    "misconception": "systematic risk cannot be clustered away"
+   },
+   {
+    "text": "To make the weights sum to one automatically.",
+    "misconception": "unrelated to the budget constraint"
+   },
+   {
+    "text": "To remove any need for estimating expected returns in the model.",
+    "misconception": "clustering does not remove the estimation of returns"
+   }
+  ],
+  "explanation": "With many assets the sample covariance matrix is noisy; grouping similar assets lets one allocate across groups first."
+ }
+]
