@@ -32,7 +32,7 @@ prerequisites have tests; use Dev mode to try them.
 | `sp` Stochastic Processes | done, MC bank rewritten after an external AI review |
 | `p3` Probability III | done (pilot): 55 MC, 5 LQ generators, slots `[A] [B,C] [D,E]`. **MC content not yet reviewed by a human or a second AI** |
 | `p2` Probability II (HKU SDST2602) | done: 55 MC, 7 LQ generators, slots `[A,B,H] [D,E] [F,G]`. Converted from the old `inf` test; lecture 2 (LLN, CLT) is new. MC not yet reviewed |
-| `inf` Statistical Inference (HKU SDST3602) | done: 55 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. Exponential families, UMVUE, Cramer-Rao, decision theory, UMP tests, bootstrap. MC not yet reviewed |
+| `inf` Statistical Inference (HKU STAT3602) | done: 59 MC, 9 LQ generators, slots `[A,B] [C,D,E] [F,G,H,I]`. Exponential families, UMVUE, Cramer-Rao, decision theory, UMP tests, large-sample LRT, bootstrap. MC not yet reviewed |
 | `reg2` Regression II | done: 56 MC (6 in lecture 8), 7 LQ generators, slots `[A,B] [D,E] [F,G,H]`. MC not yet reviewed |
 | `ts2` Time Series II | done: 50 MC, 8 LQ generators, slots `[A,B] [D,E,F] [G,H,I]`. MC not yet reviewed |
 | `ml` Machine Learning | done: 55 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. Theory plus hand computation only; LQ-A part 5 is a short "read this gradient-descent procedure" item. MC not yet reviewed |
@@ -41,7 +41,7 @@ prerequisites have tests; use Dev mode to try them.
 | `pf2` Portfolio & Asset Pricing II | done: 49 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
 | `hd` High-dimensional Stats | done: 50 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
 | `ci` Causal Inference | done: 49 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
-| `np` Nonparametric | done: 50 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
+| `np` Nonparametric (HKU STAT3620) | done: 62 MC, 11 LQ generators, slots `[A,B,I] [C,D,E,J] [F,G,H,K]`. 12 lectures (order statistics, functionals and ranking data added to match the outline). MC not yet reviewed |
 | `dl` Deep Learning | done: 55 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]` (no coding). MC not yet reviewed |
 | `mc` Monte Carlo | done: 45 MC (4 per lecture, 5 in lecture 11, below the usual 55), 7 LQ generators, slots `[A,B] [C,D,E] [F,G]`. MC not yet reviewed |
 | `algo` Algo / Quant Trading | done: 55 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]` (no coding). MC not yet reviewed |

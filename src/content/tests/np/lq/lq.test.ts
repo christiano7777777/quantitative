@@ -7,6 +7,9 @@
 //  F: jackknife bias of the squared mean equals s^2/n exactly; the inclusion probability by exact enumeration of resamples.
 //  G: kernel densities integrate to one numerically; the Epanechnikov window counted directly.
 //  H: weighted least squares solved by elimination; local linear fits reproduce straight lines exactly.
+//  I: order-statistic probabilities by exact enumeration of the 2^n below/above patterns; the Beta mean by numerical integration; median-interval coverage by enumeration and by simulation.
+//  J: the plug-in variance from the unbiased one; the influence value as a numerical derivative of the functional at a contaminated empirical distribution; the DKW constants by solving the bound; a simulation of the bound.
+//  K: Kendall distance by bubble-sort swaps, Spearman by lookup; Mallows probability from all 24 rankings in exact fractions; Plackett-Luce by exact marginals and an exponential-race simulation; Borda by counting items ranked below.
 import { describe, expect, it } from 'vitest'
 import { makeRng } from '../../../../lib/rng'
 import { topics } from '../../../../data'
@@ -20,6 +23,9 @@ import * as E from './e-permutation'
 import * as Fj from './f-jackknife'
 import * as G from './g-kde'
 import * as H from './h-regression'
+import * as I from './i-orderstat'
+import * as J from './j-functional'
+import * as K from './k-ranking'
 
 const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => `${prefix}${i}`)
 const answers = (inst: LQInstance) => inst.parts.map((p) => p.answer)
@@ -36,6 +42,9 @@ const gens: [string, LQGenerator, number][] = [
   ['F', { id: 'F', generate: (r) => Fj.build(Fj.sample(r)) }, 5],
   ['G', { id: 'G', generate: (r) => G.build(G.sample(r)) }, 5],
   ['H', { id: 'H', generate: (r) => H.build(H.sample(r)) }, 5],
+  ['I', { id: 'I', generate: (r) => I.build(I.sample(r)) }, 5],
+  ['J', { id: 'J', generate: (r) => J.build(J.sample(r)) }, 5],
+  ['K', { id: 'K', generate: (r) => K.build(K.sample(r)) }, 5],
 ]
 
 describe.each(gens)('generator %s: generic rules', (name, gen, nParts) => {
@@ -305,5 +314,154 @@ describe('generator H against independent computation', () => {
       const line = p.x.map((v) => 3 - 0.5 * v)
       close(H.localLinear(p.x, line, p.x0, p.h), 3 - 0.5 * p.x0, 1e-9)
     }
+  })
+})
+
+// ---------- I ----------
+describe('generator I against independent computation', () => {
+  it('order-statistic probabilities by enumerating every below/above pattern in exact fractions; Beta mean by integration; coverage by enumeration (300 seeds)', () => {
+    const cnt = (mask: number) => { let c = 0; for (let m = mask; m; m >>= 1) c += m & 1; return c }
+    const probAtLeast = (n: number, k: number, c10: number) => {
+      // each observation is <= c with probability c10/10; sum the probabilities of all patterns with at least k below
+      let tot = F(0)
+      for (let mask = 0; mask < 1 << n; mask++) {
+        if (cnt(mask) < k) continue
+        let pr = F(1)
+        for (let i = 0; i < n; i++) pr = pr.mul(mask & (1 << i) ? F(c10, 10) : F(10 - c10, 10))
+        tot = tot.add(pr)
+      }
+      return tot.num
+    }
+    for (const s of seeds('I', 300)) {
+      const p = I.sample(makeRng(s))
+      const ans = answers(I.build(p))
+      const n = p.n
+      close(ans[0], probAtLeast(n, n, Math.round(p.cMax * 10)), 1e-12) // maximum <= c: all below
+      close(ans[1], probAtLeast(n, 1, Math.round(p.cMin * 10)), 1e-12) // minimum <= c: at least one below
+      close(ans[2], probAtLeast(n, p.k, Math.round(p.cK * 10)), 1e-12)
+      // E X_(k) by integrating x times the density n!/((k-1)!(n-k)!) x^(k-1) (1-x)^(n-k)
+      const fact = (m: number) => { let r = 1; for (let i = 2; i <= m; i++) r *= i; return r }
+      const dens = (x: number) => (fact(n) / (fact(p.k - 1) * fact(n - p.k))) * x ** (p.k - 1) * (1 - x) ** (n - p.k)
+      close(ans[3], simpson((x) => x * dens(x), 0, 1, 2000), 1e-9)
+      close(simpson(dens, 0, 1, 2000), 1, 1e-9)
+      // coverage of (X_(r), X_(n+1-r)) for the median: count patterns of "below the median" (probability 1/2 each)
+      let good = 0
+      for (let mask = 0; mask < 1 << n; mask++) { const below = cnt(mask); if (below >= p.r && below <= n - p.r) good++ }
+      close(ans[4], good / 2 ** n, 1e-12)
+    }
+  })
+  it('simulated uniform samples agree with the probabilities and the coverage', () => {
+    const rng = makeRng('simI')
+    for (const n of [6, 8, 10]) for (const r of [2, 3]) {
+      const p: I.Params = { n, cMax: 0.8, cMin: 0.2, k: 3, cK: 0.5, r }
+      const ans = answers(I.build(p))
+      const T = 60000
+      const hit = [0, 0, 0, 0, 0]
+      for (let t = 0; t < T; t++) {
+        const x = Array.from({ length: n }, () => rng.next()).sort((a, b) => a - b)
+        if (x[n - 1] <= 0.8) hit[0]++
+        if (x[0] <= 0.2) hit[1]++
+        if (x[2] <= 0.5) hit[2]++
+        hit[3] += x[2]
+        if (x[r - 1] < 0.5 && 0.5 < x[n - r]) hit[4]++
+      }
+      for (const i of [0, 1, 2, 3, 4]) close(hit[i] / T, ans[i], 0.01)
+    }
+  })
+})
+
+// ---------- J ----------
+describe('generator J against independent computation', () => {
+  it('plug-in variance from the unbiased one; influence value as a numerical derivative of the functional; DKW constants (300 seeds)', () => {
+    for (const s of seeds('J', 300)) {
+      const p = J.sample(makeRng(s))
+      const ans = answers(J.build(p))
+      const n = p.x.length
+      const mean = p.x.reduce((a, v) => a + v, 0) / n
+      const unb = p.x.reduce((a, v) => a + (v - mean) ** 2, 0) / (n - 1)
+      close(ans[1], unb * ((n - 1) / n), 1e-9)
+      expect(ans[0] * n).toBeCloseTo(p.x.filter((v) => v > p.a && v <= p.b).length, 9)
+      // T((1-e) Fn + e delta_x0) for the variance functional, as a weighted variance; derivative at e = 0
+      const T = (e: number) => {
+        const pts = [...p.x, p.x0], wts = [...p.x.map(() => (1 - e) / n), e]
+        const m = pts.reduce((a, v, i) => a + v * wts[i], 0)
+        return pts.reduce((a, v, i) => a + wts[i] * (v - m) ** 2, 0)
+      }
+      close(ans[2], (T(1e-7) - T(0)) / 1e-7, 1e-3)
+      // the DKW half-width solves 2 exp(-2 N eps^2) = alpha
+      close(2 * Math.exp(-2 * p.N * ans[3] ** 2), p.alpha, 1e-12)
+      // the smallest n with 2 exp(-2 n eps0^2) <= alpha
+      const bound = (m: number) => 2 * Math.exp(-2 * m * p.eps0 ** 2)
+      expect(bound(ans[4])).toBeLessThanOrEqual(p.alpha + 1e-12)
+      expect(bound(ans[4] - 1)).toBeGreaterThan(p.alpha)
+    }
+  })
+  it('the DKW band holds at least as often as claimed in simulation', () => {
+    const rng = makeRng('simJ')
+    for (const [N, alpha] of [[20, 0.05], [50, 0.1]] as [number, number][]) {
+      const eps = answers(J.build({ x: [1, 2, 3, 4, 5, 6], a: 3, b: 5, x0: 20, alpha, N, eps0: 0.1 }))[3]
+      let bad = 0
+      const T = 5000
+      for (let t = 0; t < T; t++) {
+        const u = Array.from({ length: N }, () => rng.next()).sort((a, b) => a - b)
+        let sup = 0
+        u.forEach((v, i) => { sup = Math.max(sup, Math.abs((i + 1) / N - v), Math.abs(i / N - v)) })
+        if (sup > eps) bad++
+      }
+      expect(bad / T).toBeLessThanOrEqual(alpha)
+    }
+  })
+})
+
+// ---------- K ----------
+describe('generator K against independent computation', () => {
+  const perms = (xs: number[]): number[][] => (xs.length <= 1 ? [xs] : xs.flatMap((x, i) => perms([...xs.slice(0, i), ...xs.slice(i + 1)]).map((r) => [x, ...r])))
+  const all = perms([0, 1, 2, 3])
+  // Kendall distance as the number of adjacent swaps bubble sort needs to turn `a` into `b`
+  const swaps = (a: number[], b: number[]) => {
+    const seq = a.map((item) => b.indexOf(item))
+    let c = 0
+    for (let pass = 0; pass < seq.length; pass++) for (let i = 0; i + 1 < seq.length; i++) if (seq[i] > seq[i + 1]) { [seq[i], seq[i + 1]] = [seq[i + 1], seq[i]]; c++ }
+    return c
+  }
+  const plProb = (r: number[], w: number[]) => { let pr = F(1); r.forEach((item, t) => { pr = pr.mul(F(w[item], r.slice(t).reduce((s, j) => s + w[j], 0))) }); return pr }
+  it('distances, Mallows probability from all 24 rankings, Plackett-Luce, Borda (300 seeds)', () => {
+    expect(all).toHaveLength(24)
+    for (const s of seeds('K', 300)) {
+      const p = K.sample(makeRng(s))
+      const ans = answers(K.build(p))
+      expect(ans[0]).toBe(swaps(p.pi, p.centre))
+      expect(ans[1]).toBe([0, 1, 2, 3].reduce((a, i) => a + (p.pi.indexOf(i) - p.centre.indexOf(i)) ** 2, 0))
+      // Mallows: normalise over every ranking
+      const q = F(p.q[0], p.q[1])
+      const qd = (d: number) => { let r = F(1); for (let i = 0; i < d; i++) r = r.mul(q); return r }
+      const Z = all.reduce((a, r) => a.add(qd(swaps(r, p.centre))), F(0))
+      close(ans[2], qd(swaps(p.pi, p.centre)).div(Z).num, 1e-12)
+      // Plackett-Luce: exact product, probabilities of all rankings sum to one, first-place marginal is w_i / W
+      close(ans[3], plProb(p.pi, p.w).num, 1e-12)
+      expect(all.reduce((a, r) => a.add(plProb(r, p.w)), F(0)).num).toBeCloseTo(1, 12)
+      const W = p.w.reduce((a, v) => a + v, 0)
+      for (let i = 0; i < 4; i++) close(all.filter((r) => r[0] === i).reduce((a, r) => a.add(plProb(r, p.w)), F(0)).num, p.w[i] / W, 1e-12)
+      // Borda: for each voter count the items ranked below the chosen item
+      expect(ans[4]).toBe(p.voters.reduce((a, v) => a + v.slice(v.indexOf(p.item) + 1).length, 0))
+    }
+  })
+  it('Plackett-Luce probabilities agree with an exponential-race simulation; a Mallows ranking is most likely at the centre', () => {
+    const rng = makeRng('simK')
+    const w = [1, 2, 3, 4]
+    const T = 200000
+    const counts = new Map<string, number>()
+    for (let t = 0; t < T; t++) {
+      const times = w.map((wi) => -Math.log(1 - rng.next()) / wi)
+      const key = [0, 1, 2, 3].sort((a, b) => times[a] - times[b]).join('')
+      counts.set(key, (counts.get(key) ?? 0) + 1)
+    }
+    for (const r of [[3, 2, 1, 0], [0, 1, 2, 3], [2, 3, 1, 0], [1, 0, 3, 2]]) {
+      const p = K.sample(makeRng('fixed'))
+      const got = answers(K.build({ ...p, pi: r, w }))[3]
+      close((counts.get(r.join('')) ?? 0) / T, got, 0.003)
+    }
+    const pc = K.sample(makeRng('c'))
+    close(answers(K.build({ ...pc, pi: pc.centre, q: [1, 2] }))[2], 1 / (1 * 1.5 * 1.75 * 1.875), 1e-12)
   })
 })

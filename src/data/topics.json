@@ -1041,7 +1041,7 @@
   "prerequisites": [
    "p2"
   ],
-  "courses": "HKU SDST3602 · HKUST MATH3423 (second half) · CityU MS2602",
+  "courses": "HKU STAT3602 / SDST3602 · HKUST MATH3423 (second half) · CityU MS2602",
   "starred": false,
   "summary": "Rigorous theory of estimation and testing: exponential families, UMVUE, information inequality, decision theory, UMP tests and the bootstrap.",
   "outcomes": [
@@ -1049,7 +1049,7 @@
    "State and apply decision-theoretic ideas: risk, admissibility, Bayes and minimax rules",
    "Construct UMP and UMP unbiased tests and the matching confidence sets"
   ],
-  "note": "Follows HKU SDST3602 (Statistical inference), the rigorous follow-up to SDST2602: estimation theory, decision theory, hypothesis testing and bootstrap. Assumes Probability II.",
+  "note": "Anchored on the HKU STAT3602/SDST3602 course outline (Statistical Inference): decision problem (frequentist and Bayesian), estimation theory (exponential families, sufficiency, completeness, UMVU, information inequality, large-sample MLE), hypothesis testing (UMP, monotone likelihood ratio, UMPU, conditional tests, large-sample likelihood ratio, confidence sets) and bootstrap. Assumes Probability II.",
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
@@ -1098,9 +1098,9 @@
     "computation": "Two-sided and conditional tests"
    },
    {
-    "title": "Confidence sets and duality",
-    "theory": "Inversion of tests, optimal and unbiased confidence sets",
-    "computation": "Confidence sets from tests"
+    "title": "Large-sample likelihood ratio tests and confidence sets",
+    "theory": "Wilks theorem, inversion of tests, optimal and unbiased confidence sets",
+    "computation": "Asymptotic LRT, confidence sets from tests"
    },
    {
     "title": "Bootstrap",
@@ -1658,21 +1658,21 @@
   "prerequisites": [
    "p2"
   ],
-  "courses": "HKU STAT3620",
+  "courses": "HKU STAT3620 (SDST3620)",
   "starred": false,
-  "summary": "Inference without strong distributional assumptions: rank tests, permutation methods and smoothing.",
+  "summary": "Distribution-free and modern nonparametric methods: order statistics, rank tests, permutation tests, functionals, jackknife and bootstrap, smoothing and ranking data.",
   "outcomes": [
    "Choose and run rank-based tests",
    "Use permutation and bootstrap inference",
    "Estimate densities and regression curves nonparametrically"
   ],
-  "note": "Follows HKU STAT3620 (nonparametric methods). Distribution-free tests first, then smoothing.",
+  "note": "Anchored on the HKU SDST3620/STAT3620 outline (Modern Nonparametric Statistics): order statistics; goodness-of-fit; rank tests for one and two samples; tests for designed experiments; permutation tests; tests for trends and association; jackknife and bootstrap; nonparametric regression; statistical modelling for ranking data; nonparametric estimators and statistical functionals.",
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
-    "title": "Why nonparametric",
-    "theory": "Parametric vs distribution-free, efficiency",
-    "computation": "Comparing test power"
+    "title": "Why nonparametric, and order statistics",
+    "theory": "Parametric vs distribution-free, efficiency; distribution of order statistics, ranks, distribution-free confidence intervals for quantiles",
+    "computation": "Densities and probabilities for order statistics, quantile confidence levels"
    },
    {
     "title": "Sign and signed-rank tests",
@@ -1685,29 +1685,34 @@
     "computation": "Computing U and p-values"
    },
    {
-    "title": "Multi-sample tests",
-    "theory": "Kruskal-Wallis, Friedman",
+    "title": "Tests for designed experiments",
+    "theory": "Kruskal-Wallis, Friedman, multiple comparisons for ranks",
     "computation": "H statistics from rank sums"
    },
    {
-    "title": "Tests of fit",
-    "theory": "Kolmogorov-Smirnov, Anderson-Darling",
+    "title": "Goodness-of-fit tests",
+    "theory": "Kolmogorov-Smirnov, Anderson-Darling, chi-square",
     "computation": "KS statistic from small samples"
    },
    {
-    "title": "Rank correlation",
-    "theory": "Spearman, Kendall tau",
-    "computation": "Computing rank correlations"
+    "title": "Tests for association and trend",
+    "theory": "Spearman, Kendall tau, Mann-Kendall trend test",
+    "computation": "Computing rank correlations and trend statistics"
    },
    {
     "title": "Permutation tests",
-    "theory": "Exchangeability, exact tests",
+    "theory": "Exchangeability, exact and Monte Carlo tests",
     "computation": "Enumerating permutation distributions"
    },
    {
-    "title": "Bootstrap and jackknife",
-    "theory": "Bootstrap variance, bias, intervals",
-    "computation": "Jackknife estimates"
+    "title": "Statistical functionals and the empirical distribution",
+    "theory": "Empirical CDF, plug-in estimators, statistical functionals, influence function, DKW bound",
+    "computation": "Plug-in estimates and influence values"
+   },
+   {
+    "title": "Jackknife and bootstrap",
+    "theory": "Jackknife bias and variance, bootstrap variance, bias and intervals",
+    "computation": "Jackknife estimates, bootstrap standard errors"
    },
    {
     "title": "Kernel density estimation",
@@ -1718,6 +1723,11 @@
     "title": "Nonparametric regression",
     "theory": "Nadaraya-Watson, local linear, LOESS",
     "computation": "Kernel regression at a point"
+   },
+   {
+    "title": "Statistical modelling for ranking data",
+    "theory": "Rank data, Mallows and Plackett-Luce models, Thurstone, distance-based models, rank aggregation",
+    "computation": "Probabilities of rankings, Kendall distance, Borda counts"
    }
   ]
  },

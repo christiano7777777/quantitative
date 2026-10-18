@@ -1600,6 +1600,134 @@
   "explanation": "By duality, a set is unbiased iff the corresponding tests are unbiased. UMPU tests give uniformly most accurate unbiased confidence sets."
  },
  {
+  "id": "inf-10.6",
+  "lecture": 10,
+  "stem": "Under regularity conditions with an interior true parameter, what is the limit law of $-2\\log\\Lambda_n$ when $H_0$ restricts $r$ of the $d$ free parameters?",
+  "correct": [
+   "A chi-square law whose degrees of freedom equal the difference in the number of free parameters, here $r$.",
+   "$\\chi^2_r$, with $r$ the dimension of the full model minus that of the null model."
+  ],
+  "distractors": [
+   {
+    "text": "A chi-square law with $d$ degrees of freedom, the dimension of the full parameter space.",
+    "misconception": "uses the full dimension instead of the difference"
+   },
+   {
+    "text": "A normal law with mean zero and variance $r$, because the log-likelihood is a sum of terms.",
+    "misconception": "applies the central limit theorem to the statistic without squaring"
+   },
+   {
+    "text": "A chi-square law with $n-d$ degrees of freedom, as for a residual sum of squares.",
+    "misconception": "imports the regression degrees of freedom"
+   },
+   {
+    "text": "A chi-square law with $r$ degrees of freedom, but only when the data come from a normal model.",
+    "misconception": "restricts a general theorem to Gaussian data"
+   },
+   {
+    "text": "A chi-square law whose degrees of freedom grow with the sample size $n$ under the null.",
+    "misconception": "confuses the dimension of the model with the sample size"
+   }
+  ],
+  "explanation": "Wilks theorem gives $-2\\log\\Lambda_n\\to\\chi^2_r$ in distribution, with $r$ the number of free parameters in the full model minus the null model, for any regular family and an interior true value."
+ },
+ {
+  "id": "inf-10.7",
+  "lecture": 10,
+  "stem": "Which situation can make the chi-square limit of $-2\\log\\Lambda_n$, with degrees of freedom equal to the difference in dimension, fail?",
+  "correct": [
+   "The true parameter lies on the boundary of the parameter space, for instance a variance component tested against zero.",
+   "A boundary null value, where the limit becomes a mixture of chi-square laws."
+  ],
+  "distractors": [
+   {
+    "text": "The null model is a smooth subfamily of the full model and the true parameter is an interior point.",
+    "misconception": "treats the regular nested case as a failure"
+   },
+   {
+    "text": "The likelihood is not Gaussian, since Wilks theorem is specific to normal models and nothing else.",
+    "misconception": "restricts the theorem to Gaussian likelihoods"
+   },
+   {
+    "text": "The null hypothesis is simple, so the denominator of the ratio has no free parameter to maximise.",
+    "misconception": "believes a simple null removes the asymptotics"
+   },
+   {
+    "text": "The null model differs from the full model by several parameters instead of by a single one.",
+    "misconception": "believes more than one restriction breaks the theorem"
+   },
+   {
+    "text": "The maximum likelihood estimates have to be found numerically instead of by a closed formula.",
+    "misconception": "confuses the form of the estimator with the regularity conditions"
+   }
+  ],
+  "explanation": "Wilks theorem needs the true value to be interior and the models nested and regular. A true value on the boundary, or a non-nested pair, gives a different limit, typically a mixture such as $\\tfrac12\\chi^2_0+\\tfrac12\\chi^2_1$."
+ },
+ {
+  "id": "inf-10.8",
+  "lecture": 10,
+  "stem": "How do the Wald and score tests relate to the likelihood ratio test in a regular model with an interior true parameter?",
+  "correct": [
+   "Under $H_0$ the three statistics differ by $o_P(1)$, so each has the same $\\chi^2$ limit.",
+   "They are asymptotically equivalent alternatives, with a common chi-square limit under the null."
+  ],
+  "distractors": [
+   {
+    "text": "The score test needs the unrestricted fit, while the Wald test is computed from the null fit alone.",
+    "misconception": "swaps which fit each statistic uses"
+   },
+   {
+    "text": "The three statistics are exactly equal in every finite sample whenever the model is regular.",
+    "misconception": "confuses asymptotic equivalence with finite-sample equality"
+   },
+   {
+    "text": "The Wald test is invariant to reparametrization, unlike the likelihood ratio test.",
+    "misconception": "reverses which of the two is invariant"
+   },
+   {
+    "text": "Only the likelihood ratio statistic has a chi-square limit, the other two having model-dependent limits.",
+    "misconception": "believes Wald and score limits depend on the model"
+   },
+   {
+    "text": "The three statistics have different degrees of freedom, so they cannot share one critical value.",
+    "misconception": "believes equivalence fails for the degrees of freedom"
+   }
+  ],
+  "explanation": "The Wald statistic uses the unrestricted MLE and the score statistic the null fit only; all three share the $\\chi^2_r$ limit and differ by $o_P(1)$. Only the likelihood ratio test is reparametrization invariant."
+ },
+ {
+  "id": "inf-10.9",
+  "lecture": 10,
+  "stem": "For a parameter vector $\\theta$ of dimension $d$, how is an approximate $1-\\alpha$ confidence set obtained by inverting the asymptotic likelihood ratio test?",
+  "correct": [
+   "Keep every $\\theta_0$ with $2\\{\\ell(\\hat\\theta)-\\ell(\\theta_0)\\}\\le\\chi^2_{d,1-\\alpha}$, the chi-square quantile on $d$ degrees of freedom.",
+   "The $\\theta_0$ whose log-likelihood is within $\\tfrac12\\chi^2_{d,1-\\alpha}$ of the maximum."
+  ],
+  "distractors": [
+   {
+    "text": "Keep every $\\theta_0$ with $2\\{\\ell(\\hat\\theta)-\\ell(\\theta_0)\\}\\ge\\chi^2_{d,1-\\alpha}$, the values the test rejects.",
+    "misconception": "reverses the inequality and keeps rejected values"
+   },
+   {
+    "text": "Keep every $\\theta_0$ with $\\ell(\\hat\\theta)-\\ell(\\theta_0)\\le\\chi^2_{d,1-\\alpha}$, without the factor two.",
+    "misconception": "drops the factor two in the statistic"
+   },
+   {
+    "text": "Keep every $\\theta_0$ below the quantile $\\chi^2_{1,1-\\alpha}$, with one degree of freedom whatever $d$ is.",
+    "misconception": "uses one degree of freedom for a vector parameter"
+   },
+   {
+    "text": "The set has coverage exactly $1-\\alpha$ at every $n$, since each test of $\\theta_0$ has exact size $\\alpha$.",
+    "misconception": "treats an asymptotic size as an exact size"
+   },
+   {
+    "text": "The set is always $\\hat\\theta\\pm z_{1-\\alpha/2}/\\sqrt{nI(\\hat\\theta)}$, the Wald interval, in every model.",
+    "misconception": "treats the likelihood set as always equal to the symmetric Wald interval"
+   }
+  ],
+  "explanation": "The test of $\\theta=\\theta_0$ rejects when $-2\\log\\Lambda_n>\\chi^2_{d,1-\\alpha}$, so the accepted values form the set. Its coverage tends to $1-\\alpha$, and it follows the shape of the likelihood."
+ },
+ {
   "id": "inf-11.1",
   "lecture": 11,
   "stem": "What is the plug-in principle behind the bootstrap?",
