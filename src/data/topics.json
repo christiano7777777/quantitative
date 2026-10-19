@@ -1666,68 +1666,113 @@
    "Use permutation and bootstrap inference",
    "Estimate densities and regression curves nonparametrically"
   ],
-  "note": "Anchored on the HKU SDST3620/STAT3620 outline (Modern Nonparametric Statistics): order statistics; goodness-of-fit; rank tests for one and two samples; tests for designed experiments; permutation tests; tests for trends and association; jackknife and bootstrap; nonparametric regression; statistical modelling for ranking data; nonparametric estimators and statistical functionals.",
+  "note": "Follows the HKU SDST3620/STAT3620 lecture notes chapter by chapter (introduction; one-sample methods; two-sample methods; K-sample methods; paired comparisons and block designs; trends and association; bootstrap), then the outline topics the notes have not reached yet: jackknife, statistical functionals, kernel density estimation, nonparametric regression, ranking data.",
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
-    "title": "Why nonparametric, and order statistics",
-    "theory": "Parametric vs distribution-free, efficiency; distribution of order statistics, ranks, distribution-free confidence intervals for quantiles",
-    "computation": "Densities and probabilities for order statistics, quantile confidence levels"
+    "title": "Parametric versus nonparametric methods",
+    "theory": "Advantages and disadvantages of distribution-free methods; when the t test fails; asymptotic relative efficiency; what a rank-based test costs",
+    "computation": "Efficiency-based sample sizes, the smallest attainable exact p-value"
    },
    {
-    "title": "Goodness-of-fit tests",
-    "theory": "Kolmogorov-Smirnov, Anderson-Darling, chi-square",
-    "computation": "KS statistic from small samples"
+    "title": "One-sample sign (binomial) test for the median",
+    "theory": "Binomial/sign test for a median, treatment of ties and zeros, large-sample approximation, power comparison with the t test",
+    "computation": "Exact and approximate sign-test p-values, probabilities under an alternative"
    },
    {
-    "title": "Sign and signed-rank tests",
-    "theory": "Sign test, Wilcoxon signed-rank",
-    "computation": "Exact and normal-approximation tests"
+    "title": "Confidence intervals for the median and the cdf",
+    "theory": "Order statistics, distribution-free interval for a median or quantile from the binomial, confidence interval for the population cdf at a point",
+    "computation": "Coverage of an order-statistic interval, empirical cdf and its standard error"
    },
    {
-    "title": "Two-sample rank tests",
-    "theory": "Mann-Whitney, Wilcoxon rank-sum",
-    "computation": "Computing U and p-values"
+    "title": "Permutation tests and the Wilcoxon rank-sum test",
+    "theory": "Exchangeability, exact and Monte Carlo permutation tests for two groups, Wilcoxon rank-sum statistic and its exact null distribution",
+    "computation": "Enumerating permutations, p-values, rank sums"
    },
    {
-    "title": "Tests for designed experiments",
-    "theory": "Kruskal-Wallis, Friedman, multiple comparisons for ranks",
-    "computation": "H statistics from rank sums"
+    "title": "Mann-Whitney test, Hodges-Lehmann estimate and test comparison",
+    "theory": "Mann-Whitney U and its link to the rank sum, normal approximation, ties, Hodges-Lehmann shift estimate and confidence interval, comparing two-sample tests",
+    "computation": "U, z, Hodges-Lehmann estimate and interval from pairwise differences"
    },
    {
-    "title": "Permutation tests",
-    "theory": "Exchangeability, exact and Monte Carlo tests",
-    "computation": "Enumerating permutation distributions"
+    "title": "Tests for scale: Siegel-Tukey, Ansari-Bradley and deviances",
+    "theory": "Equality of scale parameters, Siegel-Tukey and Ansari-Bradley ranks, ratio of mean deviances with a permutation null",
+    "computation": "Alternating-rank scores, rank sums, ratio of mean absolute deviations"
    },
    {
-    "title": "Tests for association and trend",
-    "theory": "Spearman, Kendall tau, Mann-Kendall trend test",
-    "computation": "Computing rank correlations and trend statistics"
+    "title": "Kolmogorov-Smirnov tests and goodness of fit",
+    "theory": "One-sample and two-sample Kolmogorov-Smirnov statistics, Anderson-Darling and chi-square tests, permutation null for the two-sample statistic",
+    "computation": "KS statistic from small samples, empirical cdfs and their maximum difference"
    },
    {
-    "title": "Jackknife and bootstrap",
-    "theory": "Jackknife bias and variance, bootstrap variance, bias and intervals",
-    "computation": "Jackknife estimates, bootstrap standard errors"
+    "title": "K-sample methods: permutation F test and Kruskal-Wallis",
+    "theory": "One-way ANOVA assumptions, permutation F test, Kruskal-Wallis statistic and chi-square approximation, adjustment for ties",
+    "computation": "Mean ranks, KW statistic, tie correction"
    },
    {
-    "title": "Nonparametric regression",
-    "theory": "Nadaraya-Watson, local linear, LOESS",
-    "computation": "Kernel regression at a point"
+    "title": "Multiple comparisons and ordered alternatives",
+    "theory": "Family-wise error rate, Bonferroni, Fisher LSD, Tukey HSD and their rank versions, Jonckheere-Terpstra test for ordered alternatives",
+    "computation": "Adjusted levels, pairwise differences of mean ranks, JT statistic and its normal approximation"
    },
    {
-    "title": "Statistical modelling for ranking data",
-    "theory": "Rank data, Mallows and Plackett-Luce models, Thurstone, distance-based models, rank aggregation",
-    "computation": "Probabilities of rankings, Kendall distance, Borda counts"
+    "title": "Paired comparisons: sign and Wilcoxon signed-rank tests",
+    "theory": "Paired t test, sign test for paired samples, Wilcoxon signed-rank statistic, exact null and normal approximation, zeros and ties",
+    "computation": "Sign counts, signed-rank statistic, exact and approximate tests"
+   },
+   {
+    "title": "Randomized complete blocks: Friedman, Page, Cochran's Q and Kendall's W",
+    "theory": "Friedman test, Page's test for ordered alternatives, Cochran's Q test for 0/1 data, McNemar, Kendall's coefficient of concordance",
+    "computation": "Within-block ranks, Friedman and Page statistics, Q, W"
+   },
+   {
+    "title": "Correlation and association: Pearson and Spearman",
+    "theory": "Pearson correlation and its limits, Spearman rank correlation, tests of independence",
+    "computation": "Sample correlations, rank differences, Spearman's coefficient"
+   },
+   {
+    "title": "Kendall's tau and tests for trend",
+    "theory": "Concordant and discordant pairs, Kendall's tau, Mann-Kendall trend test, relation between tau and correlation",
+    "computation": "C, D, tau, the trend statistic and its null mean and variance"
+   },
+   {
+    "title": "The bootstrap: standard errors, bias and simple intervals",
+    "theory": "Plug-in principle, resampling from the empirical cdf, bootstrap standard error and bias, normal-based, residual (basic) and percentile intervals",
+    "computation": "Interval endpoints from bootstrap replicates, bias-adjusted estimates"
+   },
+   {
+    "title": "Bootstrap intervals: pivotal and BCa",
+    "theory": "Bootstrap-t (studentised pivot), bias-corrected and accelerated (BCa) interval, bias and acceleration constants",
+    "computation": "Studentised intervals, BCa adjusted percentile levels"
+   },
+   {
+    "title": "Bootstrap for regression, hypothesis testing and when it fails",
+    "theory": "Paired and residual bootstrap for regression, bootstrap hypothesis tests, bootstrap failures (for example the sample maximum)",
+    "computation": "Resampled slopes, bootstrap p-values, the probability of the observed maximum"
+   },
+   {
+    "title": "Jackknife",
+    "theory": "Leave-one-out estimates, jackknife bias and variance, bias correction, where the jackknife fails",
+    "computation": "Jackknife estimates, standard errors and bias-corrected estimates"
    },
    {
     "title": "Statistical functionals and the empirical distribution",
-    "theory": "Empirical CDF, plug-in estimators, statistical functionals, influence function, DKW bound",
+    "theory": "Empirical cdf, plug-in estimators of functionals, influence function, DKW inequality and confidence bands",
     "computation": "Plug-in estimates and influence values"
    },
    {
     "title": "Kernel density estimation",
-    "theory": "Bias-variance, bandwidth selection",
-    "computation": "Density estimates at points"
+    "theory": "Kernels and bandwidth, bias-variance trade-off, rule-of-thumb and cross-validated bandwidths, boundary effects",
+    "computation": "Density estimates at points, Silverman's bandwidth"
+   },
+   {
+    "title": "Nonparametric regression",
+    "theory": "Nadaraya-Watson, local linear and LOESS estimators, bandwidth choice, curse of dimensionality",
+    "computation": "Kernel regression at a point"
+   },
+   {
+    "title": "Statistical modelling for ranking data",
+    "theory": "Rank data, Mallows and Plackett-Luce models, Thurstone model, distance-based models, Borda count",
+    "computation": "Probabilities of rankings, Kendall distance, Borda counts"
    }
   ]
  },

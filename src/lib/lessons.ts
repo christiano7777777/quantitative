@@ -16,8 +16,17 @@ for (const [path, mod] of Object.entries(modules)) {
 
 export const hasLessons = (topicId: string) => topicId in lessons
 
+/**
+ * Revision of a topic's lecture structure. Bump it when the lectures of a topic are re-split or reordered, so that quiz
+ * progress saved for the old lectures is ignored instead of being applied to different lectures. Topic passes are separate.
+ */
+const lessonRevision: Record<string, number> = { np: 2 }
+
 /** Progress key of a lecture quiz inside the ProgressStore (never a topic id: it contains '#'). */
-export const lectureKey = (topicId: string, n: number) => `${topicId}#L${n}`
+export const lectureKey = (topicId: string, n: number) => {
+  const rev = lessonRevision[topicId] ?? 1
+  return rev === 1 ? `${topicId}#L${n}` : `${topicId}#r${rev}L${n}`
+}
 
 export const lecturePassed = (store: ProgressStore, topicId: string, n: number) => store.isPassed(lectureKey(topicId, n))
 

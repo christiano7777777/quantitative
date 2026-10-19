@@ -28,27 +28,27 @@ export function build({ x, a, b, x0, alpha, N, eps0 }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the plug-in estimate of ' + tex('P(' + a + '<X\\le ' + b + ')') + ', that is ' + tex('\\hat F_n(' + b + ')-\\hat F_n(' + a + ')') + '.',
-        answer: p, tolerance: tol4, lecture: 11,
+        answer: p, tolerance: tol4, lecture: 18,
         explanation: tex('\\hat F_n(' + b + ')=' + x.filter((v) => v <= b).length + '/' + n + '') + ' and ' + tex('\\hat F_n(' + a + ')=' + x.filter((v) => v <= a).length + '/' + n) + ', so the difference is ' + dec(p) + '.',
       },
       {
         prompt: 'The variance is the functional ' + tex('T(F)=\\int(x-\\mu)^2\\,dF(x)') + '. Find the plug-in estimate ' + tex('T(\\hat F_n)') + '.',
-        answer: sig2, tolerance: tol4, lecture: 11,
+        answer: sig2, tolerance: tol4, lecture: 18,
         explanation: tex('\\hat F_n') + ' puts mass ' + tex('1/' + n) + ' on each observation, so ' + tex('T(\\hat F_n)=\\frac1n\\sum(x_i-\\bar x)^2') + ' with ' + tex('\\bar x=' + dec(mean)) + ', which equals ' + dec(sig2) + ' (divisor ' + tex(n) + ', not ' + tex(n - 1) + ').',
       },
       {
         prompt: 'The influence function of the variance functional is ' + tex('L(y)=(y-\\mu)^2-\\sigma^2') + '. Evaluate it at ' + tex('y=' + x0) + ', using the plug-in estimates of ' + tex('\\mu') + ' and ' + tex('\\sigma^2') + '.',
-        answer: infl, tolerance: tol4, lecture: 11,
+        answer: infl, tolerance: tol4, lecture: 18,
         explanation: tex('(' + x0 + '-' + dec(mean) + ')^2-' + dec(sig2)) + ' = ' + dec(infl) + '. A single value far from the centre has a large influence on the variance.',
       },
       {
         prompt: 'The DKW inequality gives ' + tex('P(\\sup_x|\\hat F_n(x)-F(x)|>\\varepsilon)\\le 2e^{-2n\\varepsilon^2}') + '. For a sample of size ' + tex('n=' + N) + ', find the half-width ' + tex('\\varepsilon') + ' of the band ' + tex('\\hat F_n\\pm\\varepsilon') + ' that contains ' + tex('F') + ' with probability at least ' + tex(dec(1 - alpha)) + '.',
-        answer: half, tolerance: tol4, lecture: 11,
+        answer: half, tolerance: tol4, lecture: 18,
         explanation: 'Set ' + tex('2e^{-2' + N + '\\varepsilon^2}=' + dec(alpha)) + ', so ' + tex('\\varepsilon=\\sqrt{\\ln(2/' + dec(alpha) + ')/(2\\cdot' + N + ')}') + ' = ' + dec(half) + '.',
       },
       {
         prompt: 'What is the smallest sample size ' + tex('n') + ' for which the DKW band at confidence level ' + tex(dec(1 - alpha)) + ' has half-width at most ' + tex(dec(eps0)) + '? Give a whole number.',
-        answer: nMin, tolerance: tolInt, lecture: 11,
+        answer: nMin, tolerance: tolInt, lecture: 18,
         explanation: 'Need ' + tex('n\\ge\\ln(2/' + dec(alpha) + ')/(2\\cdot' + dec(eps0) + '^2)=' + dec(Math.log(2 / alpha) / (2 * eps0 * eps0))) + ', so ' + tex('n=' + nMin) + '.',
       },
     ],

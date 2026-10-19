@@ -36,27 +36,27 @@ export function build({ n, cMax, cMin, k, cK, r }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find ' + tex('P(X_{(' + n + ')}\\le ' + dec(cMax) + ')') + ', the probability that the sample maximum is at most ' + tex(dec(cMax)) + '.',
-        answer: pMax, tolerance: tol4, lecture: 1,
+        answer: pMax, tolerance: tol4, lecture: 3,
         explanation: 'The maximum is at most ' + tex(dec(cMax)) + ' exactly when all ' + tex(n) + ' observations are, so the probability is ' + tex(dec(cMax) + '^{' + n + '}') + ' = ' + dec(pMax) + '.',
       },
       {
         prompt: 'Find ' + tex('P(X_{(1)}\\le ' + dec(cMin) + ')') + ', the probability that the sample minimum is at most ' + tex(dec(cMin)) + '.',
-        answer: pMin, tolerance: tol4, lecture: 1,
+        answer: pMin, tolerance: tol4, lecture: 3,
         explanation: 'The minimum exceeds ' + tex(dec(cMin)) + ' only if every observation does, so the probability is ' + tex('1-(1-' + dec(cMin) + ')^{' + n + '}') + ' = ' + dec(pMin) + '.',
       },
       {
         prompt: 'Find ' + tex('P(X_{(' + k + ')}\\le ' + dec(cK) + ')') + '. (Hint: ' + tex('X_{(' + k + ')}\\le ' + dec(cK)) + ' exactly when at least ' + tex(k) + ' of the ' + tex(n) + ' observations are at most ' + tex(dec(cK)) + '.)',
-        answer: pK, tolerance: tol4, lecture: 1,
+        answer: pK, tolerance: tol4, lecture: 3,
         explanation: 'The number of observations at most ' + tex(dec(cK)) + ' is binomial ' + tex('(' + n + ',' + dec(cK) + ')') + ', so the probability is ' + tex('\\sum_{j=' + k + '}^{' + n + '}\\binom{' + n + '}{j}' + dec(cK) + '^j' + dec(1 - cK) + '^{' + (n) + '-j}') + ' = ' + dec(pK) + '.',
       },
       {
         prompt: 'Find the mean ' + tex('E[X_{(' + k + ')}]') + '. (Hint: for a uniform sample, ' + tex('X_{(j)}') + ' has a Beta distribution with parameters ' + tex('j') + ' and ' + tex('n+1-j') + '.)',
-        answer: eK, tolerance: tol4, lecture: 1,
+        answer: eK, tolerance: tol4, lecture: 3,
         explanation: 'The mean of ' + tex('\\text{Beta}(' + k + ',' + (n + 1 - k) + ')') + ' is ' + tex(k + '/' + (n + 1)) + ' = ' + dec(eK) + '.',
       },
       {
         prompt: 'For a continuous distribution with median ' + tex('m') + ', the interval ' + tex('(X_{(' + r + ')},X_{(' + s + ')})') + ' is used as a confidence interval for ' + tex('m') + '. Find its exact coverage probability, which does not depend on the distribution.',
-        answer: cover, tolerance: tol4, lecture: 1,
+        answer: cover, tolerance: tol4, lecture: 3,
         explanation: 'The interval covers ' + tex('m') + ' when between ' + tex(r) + ' and ' + tex(s - 1) + ' observations fall below ' + tex('m') + ', and that count is binomial ' + tex('(' + n + ',1/2)') + ': ' + tex('\\sum_{j=' + r + '}^{' + (s - 1) + '}\\binom{' + n + '}{j}/2^{' + n + '}=' + ways + '/' + 2 ** n) + ' = ' + dec(cover) + '.',
       },
     ],

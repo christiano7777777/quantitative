@@ -41,7 +41,7 @@ prerequisites have tests; use Dev mode to try them.
 | `pf2` Portfolio & Asset Pricing II | done: 49 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
 | `hd` High-dimensional Stats | done: 50 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
 | `ci` Causal Inference | done: 49 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. MC not yet reviewed |
-| `np` Nonparametric (HKU STAT3620) | done: 62 MC, 11 LQ generators, slots `[A,B,I] [C,D,E,J] [F,G,H,K]`. 12 lectures (order statistics, functionals and ranking data added to match the outline). MC not yet reviewed |
+| `np` Nonparametric (HKU STAT3620) | **restructured 2026-10-19**: 21 lectures that follow the STAT3620 lecture notes chapter by chapter (lectures 1-16), then the outline topics the notes have not reached (17-21: jackknife, functionals, KDE, regression, ranking). 107 MC (5+ per lecture), 22 LQ generators (11 new: l-intro, m-sign, n-cicdf, o-hl, p-scale, q-kw, r-mult, s-block, t-bootci, u-pivotal, v-bootreg), slots `[L,M,N,I,E,O,P,C] [Q,R,A,B,S,D] [T,U,V,F,J,G,H,K]`. MC not yet reviewed |
 | `dl` Deep Learning | done: 55 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]` (no coding). MC not yet reviewed |
 | `mc` Monte Carlo | done: 45 MC (4 per lecture, 5 in lecture 11, below the usual 55), 7 LQ generators, slots `[A,B] [C,D,E] [F,G]`. MC not yet reviewed |
 | `algo` Algo / Quant Trading | done: 55 MC, 8 LQ generators, slots `[A,B,C] [D,E,F] [G,H]` (no coding). MC not yet reviewed |
@@ -68,6 +68,7 @@ passing lecture n opens n+1; all lectures passed unlock the topic test (40/50); 
   exams are unchanged. `inf` `d-bayes-minimax` part 5 was retagged from lecture 1 to 2 so that the whole generator serves lecture 2.
 - Added MC: `bay-1.5, 3.5, 4.5, 5.5, 7.5, 10.5, 11.5` (so every bay lecture has at least 5).
 - The lesson texts are the author's own and have **not** been reviewed by a human or a second AI. Items to check: the Wilcoxon
+- **np was restructured to follow the HKU lecture notes** (Downloads: `Chap0`-`Chap6`, T0-T4, midterm, assignments). Lecture quiz progress saved before the restructure is ignored (`lessonRevision` in `src/lib/lessons.ts`; bump it again whenever a topic's lectures are re-split). Lecture boundaries are my split of the chapters by section; check them against the real timetable. Slide items with no quiz yet: bootstrap hypothesis-test details beyond the p-value rule, the chi-square test in lecture 7, Cochran's Q / McNemar numerics.
   efficiency bounds (np 1), Friedman and Kruskal-Wallis formulas (np 5), the Mallows normalising constant (np 10), the
   Beta-tail/binomial identity (bay 4), the R-hat and ESS formulas (bay 9), the Basu statement (inf 4), the bootstrap-maximum
   remark (inf 11).

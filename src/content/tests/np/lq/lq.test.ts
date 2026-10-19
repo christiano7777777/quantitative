@@ -26,6 +26,17 @@ import * as H from './h-regression'
 import * as I from './i-orderstat'
 import * as J from './j-functional'
 import * as K from './k-ranking'
+import * as L from './l-intro'
+import * as M from './m-sign'
+import * as N from './n-cicdf'
+import * as O from './o-hl'
+import * as P from './p-scale'
+import * as Q from './q-kw'
+import * as R from './r-mult'
+import * as S from './s-block'
+import * as T from './t-bootci'
+import * as U from './u-pivotal'
+import * as V from './v-bootreg'
 
 const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => `${prefix}${i}`)
 const answers = (inst: LQInstance) => inst.parts.map((p) => p.answer)
@@ -45,6 +56,17 @@ const gens: [string, LQGenerator, number][] = [
   ['I', { id: 'I', generate: (r) => I.build(I.sample(r)) }, 5],
   ['J', { id: 'J', generate: (r) => J.build(J.sample(r)) }, 5],
   ['K', { id: 'K', generate: (r) => K.build(K.sample(r)) }, 5],
+  ['L', { id: 'L', generate: (r) => L.build(L.sample(r)) }, 5],
+  ['M', { id: 'M', generate: (r) => M.build(M.sample(r)) }, 5],
+  ['N', { id: 'N', generate: (r) => N.build(N.sample(r)) }, 5],
+  ['O', { id: 'O', generate: (r) => O.build(O.sample(r)) }, 5],
+  ['P', { id: 'P', generate: (r) => P.build(P.sample(r)) }, 5],
+  ['Q', { id: 'Q', generate: (r) => Q.build(Q.sample(r)) }, 5],
+  ['R', { id: 'R', generate: (r) => R.build(R.sample(r)) }, 5],
+  ['S', { id: 'S', generate: (r) => S.build(S.sample(r)) }, 5],
+  ['T', { id: 'T', generate: (r) => T.build(T.sample(r)) }, 5],
+  ['U', { id: 'U', generate: (r) => U.build(U.sample(r)) }, 5],
+  ['V', { id: 'V', generate: (r) => V.build(V.sample(r)) }, 5],
 ]
 
 describe.each(gens)('generator %s: generic rules', (name, gen, nParts) => {
