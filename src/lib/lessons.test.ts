@@ -96,6 +96,14 @@ describe.each(Object.keys(lessons))('lessons for %s', (id) => {
     }
   })
 
+  it.each(ls.map((l, i) => [i + 1, l] as const))('lecture %i: a single-sample lesson has no "## Part" headings', (n, lesson) => {
+    // one lesson = one story: a migrated lecture is a single sample with plain "## " sub-headings,
+    // while a merged lecture (several samples) legitimately keeps its "## Part k" headings until migrated
+    if (lesson.samples.length !== 1) return
+    for (const p of lesson.teach)
+      expect(p.startsWith('## Part'), `lecture ${n}: ${p.slice(0, 80)}`).toBe(false)
+  })
+
   it('retakes prefer unseen MC questions when the lecture has enough of them', () => {
     const n = 1
     const first = selectLecturePaper(bank, ls[0], n, 'a')

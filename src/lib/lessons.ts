@@ -21,7 +21,7 @@ export const hasLessons = (topicId: string) => topicId in lessons
  * Revision of a topic's lecture structure. Bump it when the lectures of a topic are re-split or reordered, so that quiz
  * progress saved for the old lectures is ignored instead of being applied to different lectures. Topic passes are separate.
  */
-const lessonRevision: Record<string, number> = { np: 3, inf: 3, bay: 3 }
+const lessonRevision: Record<string, number> = { np: 4, inf: 4, bay: 4 }
 
 /** Progress key of a lecture quiz inside the ProgressStore (never a topic id: it contains '#'). */
 export const lectureKey = (topicId: string, n: number) => {

@@ -59,8 +59,8 @@ describe('lecture page and quiz', () => {
     render(<App />)
     expect(screen.getByRole('heading', { name: /Lecture 1: Why nonparametric/ })).toBeTruthy()
     expect(screen.getByRole('heading', { name: 'Lesson' })).toBeTruthy()
-    expect(screen.getAllByRole('heading', { name: /^Worked sample/ }).length).toBe(3) // np lecture 1 has three sections
-    expect(screen.getAllByText('Working:').length).toBeGreaterThanOrEqual(2)
+    expect(screen.getAllByRole('heading', { name: /^Worked sample/ }).length).toBe(1) // np lecture 1 is one story with one worked sample
+    expect(screen.getAllByText('Working:').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByRole('link', { name: /take the quiz/i })).toBeTruthy()
   })
 
