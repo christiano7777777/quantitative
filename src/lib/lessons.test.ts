@@ -172,7 +172,7 @@ describe('lecture structure revision', () => {
   it('keys of a restructured topic differ from the old ones, so old saved quizzes are ignored', () => {
     expect(lectureKey('np', 3)).not.toBe('np#L3')
     expect(lectureKey('np', 3)).toContain('#')
-    expect(lectureKey('bay', 3)).toBe('bay#L3')
+    expect(lectureKey('calc', 3)).toBe('calc#L3') // a topic whose structure was never revised
     const store = createLocalProgress({ getItem: () => JSON.stringify({ version: 1, devMode: false, attempts: { 'np#L1': [{ spec: { seed: 's', mcIds: [], lqIds: [] }, date: 'd', mcScore: 5, lqScore: 10, total: 15, max: 15, passed: true, answers: { mc: [], lq: [] } }] } }), setItem: () => {} })
     expect(store.isPassed('np#L1')).toBe(true) // still stored
     expect(lecturePassed(store, 'np', 1)).toBe(false) // but not counted for the new lecture 1

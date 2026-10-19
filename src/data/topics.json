@@ -1530,72 +1530,83 @@
    "Implement MCMC samplers",
    "Compare models and check fit"
   ],
-  "note": "Follows HKU SDST4610 (Bayesian learning). Coding questions are graded with a fixed random seed and a statistical tolerance.",
+  "note": "Follows the HKU STAT4610 lecture notes and tutorials (lectures 1-10: the Bayesian framework, conjugate models, summaries, Monte Carlo, importance sampling, Markov chains and Metropolis-Hastings), then the outline topics the notes have not reached yet: MCMC practice and HMC, model evaluation, Laplace approximation, variational Bayes, nonparametric Bayes. Choosing priors (lecture 5) draws on the course outline and the topics of past papers.",
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
-    "title": "Bayesian framework",
-    "theory": "Likelihood, prior, posterior, posterior predictive",
-    "computation": "Posterior for a discrete parameter"
+    "title": "Inference frameworks and probability",
+    "theory": "Frequentist and Bayesian philosophies, the joint distribution as prior times likelihood, marginal and conditional probability, expectations, Bayes' theorem",
+    "computation": "Posterior, evidence and predictive probability for a discrete parameter"
+   },
+   {
+    "title": "Likelihood, prior, posterior and prediction",
+    "theory": "Likelihood for an i.i.d. sample, prior and posterior, marginal likelihood, the normal-normal model, the posterior predictive distribution, non-conjugate priors",
+    "computation": "Posterior mean and variance of the normal model, predictive variance, prior pseudo-count"
    },
    {
     "title": "Conjugate models",
-    "theory": "Beta-binomial, normal-normal, gamma-Poisson",
-    "computation": "Posterior updates, shrinkage weights"
+    "theory": "Conjugate priors, Beta-binomial, Dirichlet-multinomial and the Bayesian histogram, Gamma-Poisson and Gamma-Weibull",
+    "computation": "Posterior parameters, posterior predictive probabilities, posterior mean and mode"
    },
    {
-    "title": "Choosing a prior",
-    "theory": "Elicitation, noninformative and weakly informative priors, sensitivity analysis",
-    "computation": "Comparing posteriors under different priors"
+    "title": "Posterior summaries and intervals",
+    "theory": "MAP versus MLE, posterior mean versus mode, credible (equal-tailed and HPD) versus confidence intervals",
+    "computation": "Posterior mean, mode, standard deviation, a 95% credible interval, posterior probabilities"
    },
    {
-    "title": "Posterior summaries",
-    "theory": "MAP, posterior mean, credible vs HPD vs confidence intervals",
-    "computation": "A 95% credible interval"
-   },
-   {
-    "title": "Model evaluation and selection",
-    "theory": "Posterior predictive checks, Bayes factors, WAIC",
-    "computation": "Comparing two models"
+    "title": "Choosing priors",
+    "theory": "Elicitation, weakly informative and noninformative priors, Jeffreys prior and invariance, power priors and effective sample size, prior sensitivity",
+    "computation": "Jeffreys posteriors, power prior parameters, effective sample sizes"
    },
    {
     "title": "Monte Carlo basics",
-    "theory": "Law of large numbers, bias and variance, inverse transform sampling",
-    "computation": "Standard error, required sample size",
-    "coding": "Inverse transform sampler"
+    "theory": "Law of large numbers, unbiasedness and variance of the Monte Carlo estimate, estimating pi, the curse of dimensionality",
+    "computation": "Standard error, required sample size, the circle estimate and its error"
+   },
+   {
+    "title": "Inverse transform sampling",
+    "theory": "Quantile function, why F(X) is uniform, exponential, Weibull, logistic, Cauchy and Laplace draws, posterior predictive sampling",
+    "computation": "Draws from a uniform value for several distributions"
    },
    {
     "title": "Importance sampling",
-    "theory": "Proposal choice, weights, effective sample size",
-    "computation": "Computing weights and estimates",
-    "coding": "Implement importance sampling"
+    "theory": "Weights and the importance sampling identity, proposals with heavier tails, self-normalised importance sampling for unnormalised posteriors, effective sample size",
+    "computation": "Weights, self-normalised estimates and effective sample size"
    },
    {
-    "title": "MCMC I",
-    "theory": "Stationary distribution, detailed balance, Metropolis-Hastings",
-    "computation": "Acceptance rates",
-    "coding": "Metropolis-Hastings sampler"
+    "title": "Markov chains and stationary distributions",
+    "theory": "Markov property, transition matrix and n-step probabilities, regular chains, stationary distribution, detailed balance and reversibility, ergodic averages",
+    "computation": "Two-step probabilities, stationary distribution of a birth-death chain"
    },
    {
-    "title": "MCMC II",
-    "theory": "Gibbs sampling, hierarchical models, burn-in, ESS, R-hat, HMC overview",
-    "computation": "Diagnostic statistics",
-    "coding": "Gibbs sampler"
+    "title": "Metropolis-Hastings",
+    "theory": "Proposal density, acceptance probability, symmetric and independence proposals, unnormalised targets, Bayesian logistic regression, proposal scale",
+    "computation": "Acceptance probabilities and transition probabilities of a sampler"
+   },
+   {
+    "title": "MCMC in practice: Gibbs, diagnostics and HMC",
+    "theory": "Gibbs sampling and full conditionals, burn-in, autocorrelation, effective sample size, Gelman-Rubin statistic, Hamiltonian Monte Carlo",
+    "computation": "Full conditionals, effective sample size, R-hat"
+   },
+   {
+    "title": "Model evaluation and selection",
+    "theory": "Posterior predictive checks, marginal likelihood and Bayes factors, sensitivity to the prior, WAIC",
+    "computation": "Bayes factor, posterior model probability, WAIC from a table"
    },
    {
     "title": "Laplace approximation",
-    "theory": "Normal approximation of the posterior, when it applies",
-    "computation": "Computing a Laplace approximation"
+    "theory": "Normal approximation of the posterior at its mode, when it applies, marginal likelihood, behaviour with sample size",
+    "computation": "The Laplace mean and variance for a Beta posterior"
    },
    {
     "title": "Variational Bayes",
-    "theory": "ELBO, mean-field, comparison with MCMC",
-    "computation": "The ELBO of a simple model"
+    "theory": "ELBO, mean-field families, coordinate ascent updates for a mixture model, comparison with MCMC",
+    "computation": "Responsibilities, updated pseudo-counts, the ELBO of a normal model"
    },
    {
     "title": "Nonparametric Bayes",
-    "theory": "Dirichlet process, Gaussian process, machine learning applications",
-    "computation": "A simple Dirichlet process calculation"
+    "theory": "Dirichlet process, Chinese restaurant process, stick-breaking, Gaussian processes",
+    "computation": "Seating probabilities, expected tables, expected stick weights, a GP posterior mean"
    }
   ]
  },

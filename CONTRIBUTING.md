@@ -126,6 +126,7 @@ lecture, in the order of `topics.json`. Without that folder the topic goes strai
   depend on a part that is dropped (check the prompts and the intro). When no generator fits a lecture, write a small one
   with its own independent test and list it in the bank's `lectureLq` (never drawn for the topic test).
 - Each lecture needs at least 5 MC questions in `mc.json`.
+- When a topic's lectures are re-split or reordered, bump its entry in `lessonRevision` (`src/lib/lessons.ts`): lecture quiz progress saved for the old lectures is then ignored instead of being applied to different lectures. Also re-tag `lecture` in the MC bank and in the generator parts, and update any hard-coded career hour totals in the tests (hours are 3 per lecture).
 
 ## Checking your work
 

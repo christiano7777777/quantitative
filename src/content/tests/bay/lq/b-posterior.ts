@@ -41,12 +41,12 @@ export function build({ mu0, tau, sigma, n, ybar, ga, gb, S, m, nb, kb }: Params
       },
       {
         prompt: 'Event counts follow a Poisson distribution with rate ' + tex('\\lambda') + ' and a ' + tex('\\mathrm{Gamma}(' + ga + ',' + gb + ')') + ' prior (shape, rate). The total count over ' + tex(m) + ' periods is ' + tex(S) + '. Find the posterior mean of ' + tex('\\lambda') + '.',
-        answer: gm, tolerance: tol4, lecture: 2,
+        answer: gm, tolerance: tol4, lecture: 3,
         explanation: 'The posterior is ' + tex('\\mathrm{Gamma}(' + (ga + S) + ',' + (gb + m) + ')') + ', with mean ' + tex((ga + S) + '/' + (gb + m)) + ' = ' + dec(gm) + '.',
       },
       {
         prompt: tex(kb) + ' successes were observed in ' + tex(nb) + ' trials. Find the difference in posterior means, ' + tex('\\text{flat prior }\\mathrm{Beta}(1,1)') + ' minus ' + tex('\\text{Jeffreys prior }\\mathrm{Beta}(\\tfrac12,\\tfrac12)') + ' (a prior sensitivity check).',
-        answer: flat - jeff, tolerance: { abs: 0.00005 }, lecture: 3,
+        answer: flat - jeff, tolerance: { abs: 0.00005 }, lecture: 5,
         explanation: tex('\\frac{' + (kb + 1) + '}{' + (nb + 2) + '}-\\frac{' + (kb + 0.5) + '}{' + (nb + 1) + '}=' + dec(flat) + '-' + dec(jeff)) + ' = ' + dec(flat - jeff) + '.',
       },
     ],

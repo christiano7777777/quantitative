@@ -21,6 +21,16 @@ import * as E from './e-mh'
 import * as Ff from './f-gibbs'
 import * as G from './g-approx'
 import * as H from './h-nonparam'
+import * as I from './i-prior'
+import * as J from './j-summary'
+import * as K from './k-normal'
+import * as L from './l-conjugate'
+import * as M from './m-jeffreys'
+import * as N from './n-inverse'
+import * as O from './o-is'
+import * as P from './p-markov'
+import * as Q from './q-cavi'
+import * as R from './r-mc'
 
 const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => `${prefix}${i}`)
 const answers = (inst: LQInstance) => inst.parts.map((p) => p.answer)
@@ -39,6 +49,16 @@ const gens: [string, LQGenerator, number][] = [
   ['F', { id: 'F', generate: (r) => Ff.build(Ff.sample(r)) }, 5],
   ['G', { id: 'G', generate: (r) => G.build(G.sample(r)) }, 5],
   ['H', { id: 'H', generate: (r) => H.build(H.sample(r)) }, 5],
+  ['I', { id: 'I', generate: (r) => I.build(I.sample(r)) }, 5],
+  ['J', { id: 'J', generate: (r) => J.build(J.sample(r)) }, 5],
+  ['K', { id: 'K', generate: (r) => K.build(K.sample(r)) }, 5],
+  ['L', { id: 'L', generate: (r) => L.build(L.sample(r)) }, 5],
+  ['M', { id: 'M', generate: (r) => M.build(M.sample(r)) }, 5],
+  ['N', { id: 'N', generate: (r) => N.build(N.sample(r)) }, 5],
+  ['O', { id: 'O', generate: (r) => O.build(O.sample(r)) }, 5],
+  ['P', { id: 'P', generate: (r) => P.build(P.sample(r)) }, 5],
+  ['Q', { id: 'Q', generate: (r) => Q.build(Q.sample(r)) }, 5],
+  ['R', { id: 'R', generate: (r) => R.build(R.sample(r)) }, 5],
 ]
 
 describe.each(gens)('generator %s: generic rules', (name, gen, nParts) => {

@@ -38,17 +38,17 @@ export function build({ sd, n, eps, lam, u, p, q, f }: Params): LQInstance {
       },
       {
         prompt: 'Use inverse transform sampling to turn the uniform draw ' + tex('u=' + dec(u)) + ' into an exponential draw with rate ' + tex('\\lambda=' + dec(lam)) + ', using ' + tex('x=-\\ln(u)/\\lambda') + '.',
-        answer: x, tolerance: tol4, lecture: 6,
+        answer: x, tolerance: tol4, lecture: 7,
         explanation: tex('-\\ln(' + dec(u) + ')/' + dec(lam)) + ' = ' + dec(x) + '.',
       },
       {
         prompt: 'Four draws from a proposal density ' + tex('q') + ' have target density values ' + tex('p=' + p.map((v) => dec(v / 10)).join(',')) + ', proposal values ' + tex('q=' + q.map((v) => dec(v / 10)).join(',')) + ' and function values ' + tex('f=' + f.join(',')) + '. Find the self-normalised importance sampling estimate ' + tex('\\sum w_if_i/\\sum w_i') + ' with ' + tex('w_i=p_i/q_i') + '.',
-        answer: est, tolerance: tol4, lecture: 7,
+        answer: est, tolerance: tol4, lecture: 8,
         explanation: 'Weights ' + tex(w.map(dec).join(',')) + ' sum to ' + dec(sw) + '; the weighted mean of ' + tex('f') + ' is ' + dec(est) + '.',
       },
       {
         prompt: 'Find the effective sample size of these four weights, ' + tex('(\\sum w_i)^2/\\sum w_i^2') + ' (it equals 4 only if the weights are equal).',
-        answer: ess, tolerance: tol3, lecture: 7,
+        answer: ess, tolerance: tol3, lecture: 8,
         explanation: tex('(' + dec(sw) + ')^2/' + dec(w.reduce((a, v) => a + v * v, 0))) + ' = ' + dec(ess) + '.',
       },
     ],
