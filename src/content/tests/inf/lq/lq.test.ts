@@ -22,6 +22,17 @@ import * as Ff from './f-ump'
 import * as G from './g-conditional'
 import * as H from './h-confidence-bootstrap'
 import * as I from './i-wilks'
+import * as J from './j-sufficiency'
+import * as K from './k-information'
+import * as L from './l-bootstrap'
+import * as M from './m-decision'
+import * as N from './n-bayes'
+import * as O from './o-riskset'
+import * as P from './p-bayestest'
+import * as Q from './q-nuisance'
+import * as R from './r-expfam'
+import * as S from './s-natural'
+import * as T from './t-likelihood'
 
 const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => `${prefix}${i}`)
 const answers = (inst: LQInstance) => inst.parts.map((p) => p.answer)
@@ -48,6 +59,17 @@ const gens: [string, LQGenerator, number][] = [
   ['G', { id: 'G', generate: (r) => G.build(G.sample(r)) }, 5],
   ['H', { id: 'H', generate: (r) => H.build(H.sample(r)) }, 5],
   ['I', { id: 'I', generate: (r) => I.build(I.sample(r)) }, 5],
+  ['J', { id: 'J', generate: (r) => J.build(J.sample(r)) }, 5],
+  ['K', { id: 'K', generate: (r) => K.build(K.sample(r)) }, 5],
+  ['L', { id: 'L', generate: (r) => L.build(L.sample(r)) }, 5],
+  ['M', { id: 'M', generate: (r) => M.build(M.sample(r)) }, 5],
+  ['N', { id: 'N', generate: (r) => N.build(N.sample(r)) }, 5],
+  ['O', { id: 'O', generate: (r) => O.build(O.sample(r)) }, 5],
+  ['P', { id: 'P', generate: (r) => P.build(P.sample(r)) }, 5],
+  ['Q', { id: 'Q', generate: (r) => Q.build(Q.sample(r)) }, 5],
+  ['R', { id: 'R', generate: (r) => R.build(R.sample(r)) }, 5],
+  ['S', { id: 'S', generate: (r) => S.build(S.sample(r)) }, 5],
+  ['T', { id: 'T', generate: (r) => T.build(T.sample(r)) }, 5],
 ]
 
 describe.each(gens)('generator %s: generic rules', (name, gen, nParts) => {

@@ -1,4 +1,4 @@
-// Tests of the generators used only by lecture quizzes (inf lectures 4, 6 and 11). Every answer is recomputed by a
+// Tests of the generators used only by lecture quizzes (inf lectures 10, 13 and 18). Every answer is recomputed by a
 // different method from the generator's own:
 //  J: the MLE of the normal variance by numerical maximisation of the log-likelihood; the natural parameter from a
 //     second difference of the log density; the conditional probability by enumerating all 0/1 sequences with the
@@ -20,9 +20,9 @@ const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) =>
 const close = (got: number, want: number, tol: number, what = '') => expect(Math.abs(got - want), `${what}: got ${got}, want ${want}`).toBeLessThan(tol)
 
 const gens = [
-  ['J', (s: string) => J.build(J.sample(makeRng(s))), 4],
-  ['K', (s: string) => K.build(K.sample(makeRng(s))), 6],
-  ['L', (s: string) => L.build(L.sample(makeRng(s))), 11],
+  ['J', (s: string) => J.build(J.sample(makeRng(s))), 10],
+  ['K', (s: string) => K.build(K.sample(makeRng(s))), 13],
+  ['L', (s: string) => L.build(L.sample(makeRng(s))), 18],
 ] as const
 
 describe.each(gens)('lecture-quiz generator %s: generic rules', (name, make, lec) => {

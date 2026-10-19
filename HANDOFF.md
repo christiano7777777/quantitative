@@ -32,7 +32,7 @@ prerequisites have tests; use Dev mode to try them.
 | `sp` Stochastic Processes | done, MC bank rewritten after an external AI review |
 | `p3` Probability III | done (pilot): 55 MC, 5 LQ generators, slots `[A] [B,C] [D,E]`. **MC content not yet reviewed by a human or a second AI** |
 | `p2` Probability II (HKU SDST2602) | done: 55 MC, 7 LQ generators, slots `[A,B,H] [D,E] [F,G]`. Converted from the old `inf` test; lecture 2 (LLN, CLT) is new. MC not yet reviewed |
-| `inf` Statistical Inference (HKU STAT3602) | done: 59 MC, 9 LQ generators, slots `[A,B] [C,D,E] [F,G,H,I]`. Exponential families, UMVUE, Cramer-Rao, decision theory, UMP tests, large-sample LRT, bootstrap. MC not yet reviewed |
+| `inf` Statistical Inference (HKU STAT3602) | **restructured 2026-10-19**: 18 lectures that follow the STAT3602 notes (decision theory 1-4, Bayesian approach 5-7, exponential families 8-9, sufficiency/likelihood/completeness 10-12), then the outline topics the notes have not reached (13-18: information inequality, MLE, UMP, UMPU, LRT/confidence sets, bootstrap). 94 MC (5+ per lecture), 20 LQ generators (8 new: m-decision, n-bayes, o-riskset, p-bayestest, q-nuisance, r-expfam, s-natural, t-likelihood; j, k, l moved from lectureLq into the exam), slots `[C,M,N,D,O,E,P,Q] [R,S,J,T,A,K,B] [F,G,H,I,L]`. `d-bayes-minimax` is now exam-only. MC not yet reviewed |
 | `reg2` Regression II | done: 56 MC (6 in lecture 8), 7 LQ generators, slots `[A,B] [D,E] [F,G,H]`. MC not yet reviewed |
 | `ts2` Time Series II | done: 50 MC, 8 LQ generators, slots `[A,B] [D,E,F] [G,H,I]`. MC not yet reviewed |
 | `ml` Machine Learning | done: 55 MC, 8 LQ generators, slots `[A,B] [C,D,E] [F,G,H]`. Theory plus hand computation only; LQ-A part 5 is a short "read this gradient-descent procedure" item. MC not yet reviewed |
@@ -69,6 +69,7 @@ passing lecture n opens n+1; all lectures passed unlock the topic test (40/50); 
 - Added MC: `bay-1.5, 3.5, 4.5, 5.5, 7.5, 10.5, 11.5` (so every bay lecture has at least 5).
 - The lesson texts are the author's own and have **not** been reviewed by a human or a second AI. Items to check: the Wilcoxon
 - **np was restructured to follow the HKU lecture notes** (Downloads: `Chap0`-`Chap6`, T0-T4, midterm, assignments). Lecture quiz progress saved before the restructure is ignored (`lessonRevision` in `src/lib/lessons.ts`; bump it again whenever a topic's lectures are re-split). Lecture boundaries are my split of the chapters by section; check them against the real timetable. Slide items with no quiz yet: bootstrap hypothesis-test details beyond the p-value rule, the chi-square test in lecture 7, Cochran's Q / McNemar numerics.
+- **inf was restructured the same way** (revision 2). Career hour totals changed because inf has 18 lectures instead of 11 (QR path 672 -> 693 h). Notation follows the notes: natural parameter of the normal is eta=(-1/(2 sigma^2), mu/sigma^2) with natural statistic (x^2, x). Lectures 13-18 are from the outline only.
   efficiency bounds (np 1), Friedman and Kruskal-Wallis formulas (np 5), the Mallows normalising constant (np 10), the
   Beta-tail/binomial identity (bay 4), the R-hat and ESS formulas (bay 9), the Basu statement (inf 4), the bootstrap-maximum
   remark (inf 11).

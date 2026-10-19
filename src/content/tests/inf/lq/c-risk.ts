@@ -23,17 +23,17 @@ export function build({ s2, n, a, theta1, p, m }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the risk of the randomised rule at ' + tex('\\theta=' + theta1) + '.',
-        answer: rRand, tolerance: tol4, lecture: 1,
+        answer: rRand, tolerance: tol4, lecture: 4,
         explanation: 'The risk is the mixture of the two risks: ' + tex(p + '\\cdot v+' + dec(1 - p) + '\\cdot\\theta^2=' + dec(p * v) + '+' + dec((1 - p) * theta1 ** 2) + '=' + dec(rRand)) + '.',
       },
       {
         prompt: 'Find the risk of ' + tex('\\delta_a') + ' at ' + tex('\\theta=' + theta1) + '. (Variance plus squared bias.)',
-        answer: rA, tolerance: tol4, lecture: 1,
+        answer: rA, tolerance: tol4, lecture: 2,
         explanation: tex('\\mathrm{Var}=a^2v=' + dec(a * a * v)) + ' and ' + tex('\\mathrm{bias}^2=(1-a)^2\\theta^2=' + dec((1 - a) ** 2 * theta1 ** 2)) + ', total ' + dec(rA) + '. For comparison, the risk of ' + tex('\\bar X') + ' is ' + dec(v) + '.',
       },
       {
         prompt: tex('\\delta_a') + ' has smaller risk than ' + tex('\\bar X') + ' exactly when ' + tex('|\\theta|<\\theta^*') + '. Find ' + tex('\\theta^*') + '.',
-        answer: star, tolerance: tol4, lecture: 1,
+        answer: star, tolerance: tol4, lecture: 2,
         explanation: tex('a^2v+(1-a)^2\\theta^2<v') + ' iff ' + tex('\\theta^2<v(1+a)/(1-a)=' + dec((v * (1 + a)) / (1 - a))) + ', so ' + tex('\\theta^*=' + dec(star)) + '. Neither rule dominates the other, so ' + tex('\\bar X') + ' is not made inadmissible by ' + tex('\\delta_a') + '.',
       },
       {
