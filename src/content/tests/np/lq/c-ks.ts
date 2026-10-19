@@ -22,27 +22,27 @@ export function build({ x }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find ' + tex('D^+=\\max_i\\{i/n-F_0(x_{(i)})\\}') + ', how far the empirical cdf rises above ' + tex('F_0') + '.',
-        answer: dPlus, tolerance: tol3, lecture: 7,
+        answer: dPlus, tolerance: tol3, lecture: 3,
         explanation: tex('i/5-x_{(i)}') + ' for ' + tex('i=1,\\dots,5') + ' gives ' + s.map((v, i) => dec((i + 1) / n - v)).join(', ') + '; the maximum is ' + dec(dPlus) + '.',
       },
       {
         prompt: 'Find ' + tex('D^-=\\max_i\\{F_0(x_{(i)})-(i-1)/n\\}') + ', how far the empirical cdf falls below ' + tex('F_0') + ' (measured just before each jump).',
-        answer: dMinus, tolerance: tol3, lecture: 7,
+        answer: dMinus, tolerance: tol3, lecture: 3,
         explanation: tex('x_{(i)}-(i-1)/5') + ' gives ' + s.map((v, i) => dec(v - i / n)).join(', ') + '; the maximum is ' + dec(dMinus) + '.',
       },
       {
         prompt: 'Find the Kolmogorov-Smirnov statistic ' + tex('D_5=\\max(D^+,D^-)') + '.',
-        answer: D, tolerance: tol3, lecture: 7,
+        answer: D, tolerance: tol3, lecture: 3,
         explanation: tex('\\max(' + dec(dPlus) + ',' + dec(dMinus) + ')') + ' = ' + dec(D) + '.',
       },
       {
         prompt: 'Find the large-sample 5% critical value ' + tex('1.36/\\sqrt n') + ' (the exact small-sample value is larger).',
-        answer: 1.36 / Math.sqrt(n), tolerance: tol3, lecture: 7,
+        answer: 1.36 / Math.sqrt(n), tolerance: tol3, lecture: 3,
         explanation: tex('1.36/\\sqrt5') + ' = ' + dec(1.36 / Math.sqrt(n)) + '.',
       },
       {
         prompt: 'Find the scaled statistic ' + tex('\\sqrt nD_n') + ', which is compared with the Kolmogorov distribution (5% point 1.36).',
-        answer: Math.sqrt(n) * D, tolerance: tol3, lecture: 7,
+        answer: Math.sqrt(n) * D, tolerance: tol3, lecture: 3,
         explanation: tex('\\sqrt5\\cdot' + dec(D)) + ' = ' + dec(Math.sqrt(n) * D) + (Math.sqrt(n) * D > 1.36 ? ', above 1.36: reject uniformity.' : ', below 1.36: no rejection.'),
       },
     ],

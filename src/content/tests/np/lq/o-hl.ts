@@ -34,27 +34,27 @@ export function build({ x, y, k }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the Mann-Whitney statistic ' + tex('U_1') + ', the number of pairs ' + tex('(i,j)') + ' with ' + tex('X_i>Y_j') + '. Give a whole number.',
-        answer: U, tolerance: tolInt, lecture: 5,
+        answer: U, tolerance: tolInt, lecture: 2,
         explanation: 'Count, for each ' + tex('X_i') + ', the ' + tex('Y') + ' values below it: ' + x.map((a) => a + ':' + y.filter((b) => a > b).length).join(', ') + '. The total is ' + tex('U_1=' + U) + '.',
       },
       {
         prompt: 'Find the normal approximation ' + tex('z=(U_1-mn/2)/\\sqrt{mn(m+n+1)/12}') + '.',
-        answer: z, tolerance: tol4, lecture: 5,
+        answer: z, tolerance: tol4, lecture: 2,
         explanation: tex('mn/2=' + dec((m * n) / 2)) + ' and ' + tex('\\sqrt{' + m * n + '\\times' + (m + n + 1) + '/12}=' + dec(Math.sqrt((m * n * (m + n + 1)) / 12))) + ', so ' + tex('z=(' + U + '-' + dec((m * n) / 2) + ')/' + dec(Math.sqrt((m * n * (m + n + 1)) / 12))) + ' = ' + dec(z) + '.',
       },
       {
         prompt: 'The Hodges-Lehmann estimate of the shift ' + tex('\\Delta') + ' (' + tex('X') + ' relative to ' + tex('Y') + ') is the median of the ' + tex('mn=' + m * n) + ' differences ' + tex('X_i-Y_j') + '. Find it.',
-        answer: hl, tolerance: tol4, lecture: 5,
+        answer: hl, tolerance: tol4, lecture: 2,
         explanation: 'The sorted differences are ' + diffs.join(', ') + '. Their median (' + (N % 2 ? 'the middle one' : 'the average of the two middle ones') + ') is ' + dec(hl) + '.',
       },
       {
         prompt: 'A confidence interval for ' + tex('\\Delta') + ' runs from the ' + tex('k') + '-th smallest to the ' + tex('k') + '-th largest of the ' + tex('mn') + ' differences. With ' + tex('k=' + k) + ', find the lower end ' + tex('D_{(' + k + ')}') + '.',
-        answer: dk, tolerance: tol4, lecture: 5,
+        answer: dk, tolerance: tol4, lecture: 2,
         explanation: 'In the sorted list of differences the ' + tex(k) + '-th smallest is ' + dk + '. The upper end is the ' + tex(k) + '-th largest, ' + diffs[N - k] + '.',
       },
       {
         prompt: 'Find the estimate ' + tex('U_1/(mn)') + ' of ' + tex('P(X>Y)') + '.',
-        answer: prob, tolerance: tol4, lecture: 5,
+        answer: prob, tolerance: tol4, lecture: 2,
         explanation: tex(U + '/' + m * n) + ' = ' + dec(prob) + '. A value of ' + dec(0.5) + ' would mean neither sample tends to be larger.',
       },
     ],

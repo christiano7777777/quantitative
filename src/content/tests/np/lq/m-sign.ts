@@ -40,27 +40,27 @@ export function build({ m0, x, p1 }: Params): LQInstance {
     parts: [
       {
         prompt: 'How many observations remain after dropping those equal to ' + tex(m0) + '? Give a whole number.',
-        answer: nn, tolerance: tolInt, lecture: 2,
+        answer: nn, tolerance: tolInt, lecture: 1,
         explanation: tex(x.length) + ' observations minus ' + (x.length - nn) + ' equal to ' + tex(m0) + ' leaves ' + tex(nn) + '.',
       },
       {
         prompt: 'How many of the remaining observations are above ' + tex(m0) + '? (This is ' + tex('B') + '.) Give a whole number.',
-        answer: k, tolerance: tolInt, lecture: 2,
+        answer: k, tolerance: tolInt, lecture: 1,
         explanation: 'The values above ' + tex(m0) + ' are ' + x.filter((v) => v > m0).join(', ') + ', so ' + tex('B=' + k) + '.',
       },
       {
         prompt: 'Find the exact one-sided p-value for ' + tex('H_1:\\text{median}>' + m0) + ', ' + tex('P(B\\ge' + k + ')') + ' with ' + tex('B\\sim\\mathrm{Bin}(' + nn + ',\\tfrac12)') + '.',
-        answer: upper, tolerance: tol4, lecture: 2,
+        answer: upper, tolerance: tol4, lecture: 1,
         explanation: 'Sum ' + tex('\\binom{' + nn + '}{j}/2^{' + nn + '}') + ' for ' + tex('j=' + k + ',\\dots,' + nn) + ': ' + dec(upper) + '.',
       },
       {
         prompt: 'Find the exact two-sided p-value: twice the smaller tail probability, capped at 1.',
-        answer: two, tolerance: tol4, lecture: 2,
+        answer: two, tolerance: tol4, lecture: 1,
         explanation: 'Since ' + tex('B') + ' is above ' + tex(nn / 2) + ', the smaller tail is the upper one: ' + tex('2\\times' + dec(upper)) + ' = ' + dec(two) + (two === 1 ? ' (capped at 1)' : '') + '.',
       },
       {
         prompt: 'The sign test uses only whether each observation is above ' + tex(m0) + '. If in fact each observation is above ' + tex(m0) + ' with probability ' + tex(dec(p1)) + ', then ' + tex('B\\sim\\mathrm{Bin}(' + nn + ',' + dec(p1) + ')') + '. Find ' + tex('P(B\\ge' + k + ')') + ' under this alternative.',
-        answer: alt, tolerance: tol4, lecture: 2,
+        answer: alt, tolerance: tol4, lecture: 1,
         explanation: 'Sum ' + tex('\\binom{' + nn + '}{j}' + dec(p1) + '^j' + dec(1 - p1) + '^{' + nn + '-j}') + ' for ' + tex('j=' + k + ',\\dots,' + nn) + ': ' + dec(alt) + '. It is much larger than under ' + tex('H_0') + ', which is why a large ' + tex('B') + ' is evidence against it.',
       },
     ],

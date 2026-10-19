@@ -28,27 +28,27 @@ export function build({ sd, n, eps, lam, u, p, q, f }: Params): LQInstance {
     parts: [
       {
         prompt: 'A Monte Carlo estimate averages ' + tex(n) + ' independent draws of a quantity with standard deviation ' + tex(sd) + '. Find its standard error ' + tex('\\sigma/\\sqrt n') + '.',
-        answer: se, tolerance: tol4, lecture: 6,
+        answer: se, tolerance: tol4, lecture: 4,
         explanation: tex(sd + '/\\sqrt{' + n + '}') + ' = ' + dec(se) + '.',
       },
       {
         prompt: 'How many independent draws are needed so that the 95% error margin ' + tex('1.96\\sigma/\\sqrt n') + ' is at most ' + tex(dec(eps)) + ' (with ' + tex('\\sigma=' + sd) + ')? Give a whole number.',
-        answer: need, tolerance: tolInt, lecture: 6,
+        answer: need, tolerance: tolInt, lecture: 4,
         explanation: tex('n\\ge(1.96\\cdot' + sd + '/' + dec(eps) + ')^2=' + dec(((1.96 * sd) / eps) ** 2)) + ', rounded up to ' + need + '.',
       },
       {
         prompt: 'Use inverse transform sampling to turn the uniform draw ' + tex('u=' + dec(u)) + ' into an exponential draw with rate ' + tex('\\lambda=' + dec(lam)) + ', using ' + tex('x=-\\ln(u)/\\lambda') + '.',
-        answer: x, tolerance: tol4, lecture: 7,
+        answer: x, tolerance: tol4, lecture: 4,
         explanation: tex('-\\ln(' + dec(u) + ')/' + dec(lam)) + ' = ' + dec(x) + '.',
       },
       {
         prompt: 'Four draws from a proposal density ' + tex('q') + ' have target density values ' + tex('p=' + p.map((v) => dec(v / 10)).join(',')) + ', proposal values ' + tex('q=' + q.map((v) => dec(v / 10)).join(',')) + ' and function values ' + tex('f=' + f.join(',')) + '. Find the self-normalised importance sampling estimate ' + tex('\\sum w_if_i/\\sum w_i') + ' with ' + tex('w_i=p_i/q_i') + '.',
-        answer: est, tolerance: tol4, lecture: 8,
+        answer: est, tolerance: tol4, lecture: 5,
         explanation: 'Weights ' + tex(w.map(dec).join(',')) + ' sum to ' + dec(sw) + '; the weighted mean of ' + tex('f') + ' is ' + dec(est) + '.',
       },
       {
         prompt: 'Find the effective sample size of these four weights, ' + tex('(\\sum w_i)^2/\\sum w_i^2') + ' (it equals 4 only if the weights are equal).',
-        answer: ess, tolerance: tol3, lecture: 8,
+        answer: ess, tolerance: tol3, lecture: 5,
         explanation: tex('(' + dec(sw) + ')^2/' + dec(w.reduce((a, v) => a + v * v, 0))) + ' = ' + dec(ess) + '.',
       },
     ],

@@ -32,27 +32,27 @@ export function build({ x, ts, z0, a }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the estimated standard error ' + tex('S/\\sqrt n') + ' of the sample mean (sample standard deviation with divisor ' + tex('n-1') + ').',
-        answer: se, tolerance: tol4, lecture: 15,
+        answer: se, tolerance: tol4, lecture: 8,
         explanation: tex('\\bar x=' + dec(mean) + ',\\ S=' + dec(s)) + ', so ' + tex('S/\\sqrt{' + n + '}') + ' = ' + dec(se) + '.',
       },
       {
         prompt: 'The bootstrap-t interval is ' + tex('(\\bar x-t^*_{0.95}\\,S/\\sqrt n,\\ \\bar x-t^*_{0.05}\\,S/\\sqrt n)') + '. Find its lower end.',
-        answer: lo, tolerance: tol4, lecture: 15,
+        answer: lo, tolerance: tol4, lecture: 8,
         explanation: tex('t^*_{0.95}') + ' is the largest replicate, ' + dec(sorted[18]) + ', so the lower end is ' + tex(dec(mean) + '-' + dec(sorted[18]) + '\\times' + dec(se)) + ' = ' + dec(lo) + '. The percentiles are used in reversed order because of the minus sign.',
       },
       {
         prompt: 'Find the upper end of the bootstrap-t interval.',
-        answer: hi, tolerance: tol4, lecture: 15,
+        answer: hi, tolerance: tol4, lecture: 8,
         explanation: tex('t^*_{0.05}') + ' is the smallest replicate, ' + dec(sorted[0]) + ', so the upper end is ' + tex(dec(mean) + '-(' + dec(sorted[0]) + ')\\times' + dec(se)) + ' = ' + dec(hi) + '.',
       },
       {
         prompt: 'For a BCa interval let ' + tex('\\hat z_0=' + dec(z0)) + ' (bias) and ' + tex('\\hat a=' + dec(a)) + ' (acceleration), and ' + tex('z_{\\alpha/2}=1.645') + '. The upper limit is the bootstrap percentile at level ' + tex('\\Phi(u)') + ' with ' + tex('u=\\hat z_0+\\dfrac{\\hat z_0+z_{\\alpha/2}}{1-\\hat a(\\hat z_0+z_{\\alpha/2})}') + '. Find ' + tex('u') + '.',
-        answer: argU, tolerance: tol4, lecture: 15,
+        answer: argU, tolerance: tol4, lecture: 8,
         explanation: tex('\\hat z_0+z_{\\alpha/2}=' + dec(z0 + z)) + ', so ' + tex('u=' + dec(z0) + '+' + dec(z0 + z) + '/(1-' + dec(a) + '\\times' + dec(z0 + z) + ')') + ' = ' + dec(argU) + '. With ' + tex('\\hat z_0=\\hat a=0') + ' this would be just ' + tex('z_{\\alpha/2}=1.645') + ', the ordinary percentile interval.',
       },
       {
         prompt: 'The lower limit is the percentile at level ' + tex('\\Phi(v)') + ' with ' + tex('v=\\hat z_0+\\dfrac{\\hat z_0-z_{\\alpha/2}}{1-\\hat a(\\hat z_0-z_{\\alpha/2})}') + '. Find ' + tex('v') + '.',
-        answer: argL, tolerance: tol4, lecture: 15,
+        answer: argL, tolerance: tol4, lecture: 8,
         explanation: tex('\\hat z_0-z_{\\alpha/2}=' + dec(z0 - z)) + ', so ' + tex('v=' + dec(z0) + '+(' + dec(z0 - z) + ')/(1-' + dec(a) + '\\times(' + dec(z0 - z) + '))') + ' = ' + dec(argL) + '.',
       },
     ],

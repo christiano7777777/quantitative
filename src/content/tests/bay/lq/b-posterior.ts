@@ -26,27 +26,27 @@ export function build({ mu0, tau, sigma, n, ybar, ga, gb, S, m, nb, kb }: Params
     parts: [
       {
         prompt: 'Normal data with known standard deviation ' + tex('\\sigma=' + dec(sigma)) + ' have sample mean ' + tex('\\bar y=' + dec(ybar)) + ' from ' + tex('n=' + n) + ' observations. The prior on the mean is ' + tex('N(' + dec(mu0) + ',' + dec(tau * tau) + ')') + '. Find the posterior mean.',
-        answer: pm, tolerance: tol4, lecture: 2,
+        answer: pm, tolerance: tol4, lecture: 1,
         explanation: 'Precision ' + tex('1/' + dec(tau * tau) + '+' + n + '/' + dec(sigma * sigma) + '=' + dec(prec)) + '; precision-weighted mean ' + dec(pm) + '.',
       },
       {
         prompt: 'Find the posterior standard deviation ' + tex('\\sqrt{(1/\\tau^2+n/\\sigma^2)^{-1}}') + '.',
-        answer: psd, tolerance: tol4, lecture: 2,
+        answer: psd, tolerance: tol4, lecture: 1,
         explanation: tex('1/\\sqrt{' + dec(prec) + '}') + ' = ' + dec(psd) + '.',
       },
       {
         prompt: 'Find the lower end of the equal-tailed 95% credible interval, ' + tex('\\text{mean}-1.96\\times\\text{sd}') + ' (the posterior is normal).',
-        answer: lo, tolerance: tol4, lecture: 4,
+        answer: lo, tolerance: tol4, lecture: 3,
         explanation: tex(dec(pm) + '-1.96\\cdot' + dec(psd)) + ' = ' + dec(lo) + '. It is a direct statement: the mean lies in the interval with probability 0.95 given the data and prior.',
       },
       {
         prompt: 'Event counts follow a Poisson distribution with rate ' + tex('\\lambda') + ' and a ' + tex('\\mathrm{Gamma}(' + ga + ',' + gb + ')') + ' prior (shape, rate). The total count over ' + tex(m) + ' periods is ' + tex(S) + '. Find the posterior mean of ' + tex('\\lambda') + '.',
-        answer: gm, tolerance: tol4, lecture: 3,
+        answer: gm, tolerance: tol4, lecture: 2,
         explanation: 'The posterior is ' + tex('\\mathrm{Gamma}(' + (ga + S) + ',' + (gb + m) + ')') + ', with mean ' + tex((ga + S) + '/' + (gb + m)) + ' = ' + dec(gm) + '.',
       },
       {
         prompt: tex(kb) + ' successes were observed in ' + tex(nb) + ' trials. Find the difference in posterior means, ' + tex('\\text{flat prior }\\mathrm{Beta}(1,1)') + ' minus ' + tex('\\text{Jeffreys prior }\\mathrm{Beta}(\\tfrac12,\\tfrac12)') + ' (a prior sensitivity check).',
-        answer: flat - jeff, tolerance: { abs: 0.00005 }, lecture: 5,
+        answer: flat - jeff, tolerance: { abs: 0.00005 }, lecture: 3,
         explanation: tex('\\frac{' + (kb + 1) + '}{' + (nb + 2) + '}-\\frac{' + (kb + 0.5) + '}{' + (nb + 1) + '}=' + dec(flat) + '-' + dec(jeff)) + ' = ' + dec(flat - jeff) + '.',
       },
     ],

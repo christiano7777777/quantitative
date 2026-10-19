@@ -23,27 +23,27 @@ export function build({ rho, y, n, ac, W, Bn, m, sd }: Params): LQInstance {
     parts: [
       {
         prompt: 'A Gibbs sampler targets a bivariate normal with zero means, unit variances and correlation ' + tex('\\rho=' + dec(rho)) + '. Given ' + tex('y=' + dec(y)) + ', the full conditional of ' + tex('x') + ' is normal with mean ' + tex('\\rho y') + '. Find that mean.',
-        answer: cm, tolerance: tol4, lecture: 11,
+        answer: cm, tolerance: tol4, lecture: 7,
         explanation: tex(dec(rho) + '\\cdot' + dec(y)) + ' = ' + dec(cm) + '.',
       },
       {
         prompt: 'Find the variance ' + tex('1-\\rho^2') + ' of that full conditional. (A large ' + tex('\\rho') + ' makes the conditional narrow and the Gibbs moves small.)',
-        answer: cv, tolerance: tol4, lecture: 11,
+        answer: cv, tolerance: tol4, lecture: 7,
         explanation: tex('1-' + dec(rho * rho)) + ' = ' + dec(cv) + '.',
       },
       {
         prompt: 'A chain of ' + tex(n) + ' draws behaves like an AR(1) process with autocorrelation ' + tex(dec(ac)) + '. Find its effective sample size ' + tex('n(1-\\rho)/(1+\\rho)') + ' (3 decimal places).',
-        answer: ess, tolerance: tol3, lecture: 11,
+        answer: ess, tolerance: tol3, lecture: 7,
         explanation: tex(n + '\\cdot' + dec(1 - ac) + '/' + dec(1 + ac)) + ' = ' + dec(ess) + '.',
       },
       {
         prompt: tex(m) + ' chains of ' + tex(n) + ' draws each have average within-chain variance ' + tex('W=' + dec(W)) + ' and the variance of the chain means is ' + tex(dec(Bn)) + ' (so the between-chain variance is ' + tex('B=n\\cdot' + dec(Bn)) + '). Find ' + tex('\\hat R=\\sqrt{\\{(n-1)W/n+B/n\\}/W}') + '.',
-        answer: rhat, tolerance: tol4, lecture: 11,
+        answer: rhat, tolerance: tol4, lecture: 7,
         explanation: tex('\\sqrt{((n-1)/n\\cdot' + dec(W) + '+' + dec(Bn) + ')/' + dec(W) + '}') + ' = ' + dec(rhat) + (rhat > 1.01 ? ', above 1.01: the chains have not converged.' : ', close to 1: no sign of non-convergence.'),
       },
       {
         prompt: 'The posterior standard deviation of a parameter is ' + tex(dec(sd)) + '. Using the effective sample size from part (c), find the Monte Carlo standard error of the posterior mean, ' + tex('\\mathrm{sd}/\\sqrt{\\mathrm{ESS}}') + '.',
-        answer: mcse, tolerance: tol4, lecture: 11,
+        answer: mcse, tolerance: tol4, lecture: 7,
         explanation: tex(dec(sd) + '/\\sqrt{' + dec(ess) + '}') + ' = ' + dec(mcse) + '; the naive value ' + tex(dec(sd) + '/\\sqrt{' + n + '}') + ' = ' + dec(sd / Math.sqrt(n)) + ' would be too small.',
       },
     ],

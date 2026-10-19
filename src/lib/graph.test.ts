@@ -9,8 +9,8 @@ describe('graph on the real data', () => {
 
   // Expected values were computed independently in Python while checking the source data.
   const expected: Record<string, [number, number]> = {
-    qr: [21, 702], qt: [17, 534], dq: [18, 570], rmg: [16, 537],
-    air: [19, 609], mle: [20, 651], ds: [18, 615], swe: [13, 426],
+    qr: [21, 666], qt: [17, 534], dq: [18, 570], rmg: [16, 516],
+    air: [19, 609], mle: [20, 651], ds: [18, 579], swe: [13, 426],
   }
   it.each(Object.entries(expected))('career %s: effective topics and hours', (id, [n, h]) => {
     const s = careerSummary(g, careers.find((c) => c.id === id)!)
@@ -70,7 +70,7 @@ describe('careerProgress', () => {
     expect(p.percent).toBe(0)
     expect(p.path).toEqual({ passed: 0, total: 21 })
     expect(p.required).toEqual({ passed: 0, total: qr.required.length })
-    expect(p.hours).toEqual({ passed: 0, total: 702 })
+    expect(p.hours).toEqual({ passed: 0, total: 666 })
   })
   it('counts passed topics and weights hours by lectures', () => {
     const p = careerProgress(g, qr, new Set(['calc', 'p3', 'zzz-not-on-path']))
@@ -79,7 +79,7 @@ describe('careerProgress', () => {
     expect(p.required.passed).toBe(1)
     expect(p.hours.passed).toBe(h('calc') + h('p3'))
     const bonusTotal = 5 * (qr.bonus.reduce((n, b) => n + h(b), 0) / qr.bonus.length)
-    expect(p.percent).toBe(Math.round((100 * (h('calc') + h('p3'))) / (702 + bonusTotal)))
+    expect(p.percent).toBe(Math.round((100 * (h('calc') + h('p3'))) / (666 + bonusTotal)))
   })
   it('needs 5 bonus topics on top of the path to reach 100%', () => {
     const all = careerSummary(g, qr).ids

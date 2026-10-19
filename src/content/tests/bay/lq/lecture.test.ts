@@ -1,4 +1,4 @@
-// Tests of the generators used only by lecture quizzes (bay lectures 5 and 4). Every answer is recomputed by a
+// Tests of the generators used only by lecture quizzes (bay lecture 3). Every answer is recomputed by a
 // different method from the generator's own:
 //  I: the Beta prior parameter and posterior means by numerical integration of likelihood times prior; the prior
 //     weight from the posterior mean by solving the weighted-average identity.
@@ -29,8 +29,8 @@ const betaMoments = (a: number, b: number) => {
 }
 
 const gens = [
-  ['I', (s: string) => I.build(I.sample(makeRng(s))), 5],
-  ['J', (s: string) => J.build(J.sample(makeRng(s))), 4],
+  ['I', (s: string) => I.build(I.sample(makeRng(s))), 3],
+  ['J', (s: string) => J.build(J.sample(makeRng(s))), 3],
 ] as const
 
 describe.each(gens)('lecture-quiz generator %s: generic rules', (name, make, lec) => {

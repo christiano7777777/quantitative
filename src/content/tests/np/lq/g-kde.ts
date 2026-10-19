@@ -28,27 +28,27 @@ export function build({ x, x0, h, m }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find ' + tex('\\hat f(x_0)') + ' with the Gaussian kernel ' + tex('K(u)=e^{-u^2/2}/\\sqrt{2\\pi}') + '.',
-        answer: g, tolerance: tol4, lecture: 19,
+        answer: g, tolerance: tol4, lecture: 10,
         explanation: 'Scaled distances ' + tex('u_i=(x_0-X_i)/h') + ' are ' + x.map((v) => dec((x0 - v) / h)).join(', ') + '; averaging the kernel values and dividing by ' + tex('h') + ' gives ' + dec(g) + '.',
       },
       {
         prompt: 'Find ' + tex('\\hat f(x_0)') + ' with the Epanechnikov kernel ' + tex('K(u)=\\tfrac34(1-u^2)') + ' for ' + tex('|u|\\le1') + ' (zero otherwise).',
-        answer: e, tolerance: tol4, lecture: 19,
+        answer: e, tolerance: tol4, lecture: 10,
         explanation: 'Only observations within ' + tex('h') + ' of ' + tex('x_0') + ' contribute: ' + dec(e) + '.',
       },
       {
         prompt: 'How many observations lie within ' + tex('h') + ' of ' + tex('x_0') + ' (and so contribute to the Epanechnikov estimate)?',
-        answer: within, tolerance: tolInt, lecture: 19,
+        answer: within, tolerance: tolInt, lecture: 10,
         explanation: 'The observations with ' + tex('|x_0-X_i|\\le' + dec(h)) + ' number ' + within + '.',
       },
       {
         prompt: 'Find Silverman\'s rule-of-thumb bandwidth ' + tex('h=1.06\\,s\\,n^{-1/5}') + ', with ' + tex('s') + ' the sample standard deviation (divisor ' + tex('n-1') + ').',
-        answer: silver, tolerance: tol4, lecture: 19,
+        answer: silver, tolerance: tol4, lecture: 10,
         explanation: tex('s=' + dec(s) + ',\\ 1.06\\cdot' + dec(s) + '\\cdot' + n + '^{-0.2}') + ' = ' + dec(silver) + '.',
       },
       {
         prompt: 'With the optimal bandwidth the mean integrated squared error falls like ' + tex('n^{-4/5}') + '. By what factor does it change if the sample size is multiplied by ' + tex(m) + '? (' + tex(m + '^{-4/5}') + ')',
-        answer: factor, tolerance: tol4, lecture: 19,
+        answer: factor, tolerance: tol4, lecture: 10,
         explanation: tex(m + '^{-0.8}') + ' = ' + dec(factor) + '. A parametric estimator would improve by the factor ' + dec(1 / m) + '.',
       },
     ],

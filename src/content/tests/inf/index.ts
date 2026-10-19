@@ -5,6 +5,8 @@
 // LQ: twenty generators in lq/, each tested against an independent computation (lq/lq.test.ts, lq/lecture.test.ts, lq/slides.test.ts).
 import type { MCQuestion, TestBank } from '../../../lib/types'
 import mcJson from './mc.json'
+import lessons from '../../lessons/inf'
+import { buildExamSlots } from '../../../lib/lq-composite'
 import { genA } from './lq/a-poisson'
 import { genB } from './lq/b-exponential'
 import { genC } from './lq/c-risk'
@@ -26,19 +28,11 @@ import { genR } from './lq/r-expfam'
 import { genS } from './lq/s-natural'
 import { genT } from './lq/t-likelihood'
 
-// Blueprint: every attempt has one long question from each slot.
-//   slot 1: decision theory and the Bayesian approach (lectures 1-7): risk and rules C, M, Bayes rules and risk sets N, D, O, posterior inference E, P, Q
-//   slot 2: exponential families, sufficiency, completeness, information and the MLE (lectures 8-14): R, S, J, T, A, K, B
-//   slot 3: tests, confidence sets and the bootstrap (lectures 15-18): F, G, H, I, L
-const lqSlots = [
-  [genC.id, genM.id, genN.id, genD.id, genO.id, genE.id, genP.id, genQ.id],
-  [genR.id, genS.id, genJ.id, genT.id, genA.id, genK.id, genB.id],
-  [genF.id, genG.id, genH.id, genI.id, genL.id],
-]
-
 const bank: TestBank = {
   mc: mcJson as MCQuestion[],
   lq: [genA, genB, genC, genD, genE, genF, genG, genH, genI, genJ, genK, genL, genM, genN, genO, genP, genQ, genR, genS, genT],
-  lqSlots,
 }
+// Final test: three long questions, one per slot; each slot covers its own range of lectures and offers three composite
+// questions (first two parts of one section of every lecture in the range), so every attempt asks something from every lecture.
+bank.examSlots = buildExamSlots(bank, lessons, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11]])
 export default bank

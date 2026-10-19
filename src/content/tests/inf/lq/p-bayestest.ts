@@ -36,27 +36,27 @@ export function build({ a, b, n, x, L0, L1 }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the Bayes estimate of ' + tex('\\theta') + ' under squared error loss, the posterior mean.',
-        answer: mean, tolerance: tol4, lecture: 6,
+        answer: mean, tolerance: tol4, lecture: 3,
         explanation: tex('A/(A+B)=' + A + '/' + (A + B)) + ' = ' + dec(mean) + '.',
       },
       {
         prompt: 'Find the posterior mean of the odds ' + tex('\\theta/(1-\\theta)') + ', which for a ' + tex('\\mathrm{Beta}(A,B)') + ' posterior with ' + tex('B>1') + ' equals ' + tex('A/(B-1)') + '.',
-        answer: odds, tolerance: tol4, lecture: 6,
+        answer: odds, tolerance: tol4, lecture: 3,
         explanation: tex(A + '/(' + B + '-1)') + ' = ' + dec(odds) + '. It differs from the odds of the posterior mean, ' + dec(A / B) + ', because the odds are a nonlinear function of ' + tex('\\theta') + '.',
       },
       {
         prompt: 'Find the posterior probability ' + tex('P(H_0\\mid x)=P(\\theta\\le\\tfrac12\\mid x)') + '. (For integer parameters it equals ' + tex('P(\\mathrm{Bin}(A+B-1,\\tfrac12)\\ge A)') + '.)',
-        answer: p0, tolerance: tol4, lecture: 6,
+        answer: p0, tolerance: tol4, lecture: 3,
         explanation: tex('A+B-1=' + m) + ', so sum ' + tex('\\binom{' + m + '}{j}/2^{' + m + '}') + ' for ' + tex('j=' + A + ',\\dots,' + m) + ': ' + dec(p0) + '.',
       },
       {
         prompt: 'Find the expected posterior loss of accepting ' + tex('H_0') + ', ' + tex(L1 + '\\,P(H_1\\mid x)') + '.',
-        answer: lossAccept, tolerance: tol4, lecture: 6,
+        answer: lossAccept, tolerance: tol4, lecture: 3,
         explanation: tex('P(H_1\\mid x)=1-' + dec(p0) + '=' + dec(1 - p0)) + ', so the expected loss is ' + tex(L1 + '\\times' + dec(1 - p0)) + ' = ' + dec(lossAccept) + '.',
       },
       {
         prompt: 'Find the expected posterior loss of rejecting ' + tex('H_0') + ', ' + tex(L0 + '\\,P(H_0\\mid x)') + '. (The Bayes decision takes the action with the smaller expected posterior loss.)',
-        answer: lossReject, tolerance: tol4, lecture: 6,
+        answer: lossReject, tolerance: tol4, lecture: 3,
         explanation: tex(L0 + '\\times' + dec(p0)) + ' = ' + dec(lossReject) + ', so the Bayes decision is to ' + decision + ' ' + tex('H_0') + '. Equivalently, reject iff ' + tex('P(H_1\\mid x)>L_0/(L_0+L_1)=' + dec(L0 / (L0 + L1))) + '.',
       },
     ],

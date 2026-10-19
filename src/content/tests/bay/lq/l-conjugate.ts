@@ -30,27 +30,27 @@ export function build({ alpha, counts, a, b, T }: Params): LQInstance {
     parts: [
       {
         prompt: 'Part A. The posterior is ' + tex('\\mathrm{Dirichlet}(\\alpha_1+n_1,\\alpha_2+n_2,\\alpha_3+n_3)') + '. Find the first parameter ' + tex('\\alpha_1+n_1') + '. Give a whole number.',
-        answer: post1, tolerance: { abs: 0.25 }, lecture: 3,
+        answer: post1, tolerance: { abs: 0.25 }, lecture: 2,
         explanation: tex(alpha[0] + '+' + counts[0]) + ' = ' + post1 + '. Conjugacy: the counts are added to the prior parameters.',
       },
       {
         prompt: 'Part A. Find the posterior predictive probability that the next meal is healthy, ' + tex('\\dfrac{\\alpha_2+n_2}{\\alpha_1+\\alpha_2+\\alpha_3+n}') + '.',
-        answer: pred2, tolerance: tol4, lecture: 3,
+        answer: pred2, tolerance: tol4, lecture: 2,
         explanation: tex('\\dfrac{' + alpha[1] + '+' + counts[1] + '}{' + a0 + '+' + n + '}') + ' = ' + dec(pred2) + '. It equals the posterior mean of ' + tex('\\theta_2') + '.',
       },
       {
         prompt: 'Part B. The posterior is ' + tex('\\lambda\\mid T\\sim\\mathrm{Gamma}(a+n,\\ b+\\sum T_i^k)') + '. Find the posterior rate ' + tex('\\beta_n=b+\\sum_iT_i^2') + '.',
-        answer: betaN, tolerance: tol4, lecture: 3,
+        answer: betaN, tolerance: tol4, lecture: 2,
         explanation: tex('\\sum T_i^2=' + T.map((t) => dec(t) + '^2').join('+') + '=' + dec(sk)) + ', so ' + tex('\\beta_n=' + b + '+' + dec(sk)) + ' = ' + dec(betaN) + ' (and the shape is ' + tex('\\alpha_n=' + a + '+' + T.length + '=' + alphaN) + ').',
       },
       {
         prompt: 'Part B. Find the posterior mean ' + tex('E(\\lambda\\mid T)=\\alpha_n/\\beta_n') + '.',
-        answer: mean, tolerance: tol4, lecture: 3,
+        answer: mean, tolerance: tol4, lecture: 2,
         explanation: tex(alphaN + '/' + dec(betaN)) + ' = ' + dec(mean) + '.',
       },
       {
         prompt: 'Part B. Find the posterior mode ' + tex('(\\alpha_n-1)/\\beta_n') + '.',
-        answer: mode, tolerance: tol4, lecture: 3,
+        answer: mode, tolerance: tol4, lecture: 2,
         explanation: tex('(' + alphaN + '-1)/' + dec(betaN)) + ' = ' + dec(mode) + ', below the mean ' + dec(mean) + ' because a Gamma posterior is right-skewed.',
       },
     ],

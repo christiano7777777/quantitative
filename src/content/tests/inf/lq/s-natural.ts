@@ -31,27 +31,27 @@ export function build({ m, n, lam, mu, t, k }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the natural parameter ' + tex('\\eta_1=\\ln(\\lambda/\\mu)') + ' when ' + tex('\\lambda=' + dec(lam) + ',\\ \\mu=' + dec(mu)) + '.',
-        answer: eta1, tolerance: tol4, lecture: 9,
+        answer: eta1, tolerance: tol4, lecture: 5,
         explanation: tex('\\ln(' + dec(lam) + '/' + dec(mu) + ')=' + dec(eta1)) + '. The hypothesis ' + tex('H_0:\\lambda=\\mu') + ' is ' + tex('\\eta_1=0') + ', which does not involve the nuisance parameter ' + tex('\\eta_2') + '.',
       },
       {
         prompt: 'Given the total ' + tex('t') + ', ' + tex('S\\sim\\mathrm{Bin}(t,\\ m\\lambda/(m\\lambda+n\\mu))') + '. Find this success probability for ' + tex('m=' + m + ',\\ n=' + n) + ', ' + tex('\\lambda=' + dec(lam) + ',\\ \\mu=' + dec(mu)) + '.',
-        answer: pAlt, tolerance: tol4, lecture: 9,
+        answer: pAlt, tolerance: tol4, lecture: 5,
         explanation: tex('\\dfrac{' + m + '\\times' + dec(lam) + '}{' + m + '\\times' + dec(lam) + '+' + n + '\\times' + dec(mu) + '}') + ' = ' + dec(pAlt) + '.',
       },
       {
         prompt: 'Under ' + tex('H_0') + ' the success probability is ' + tex('m/(m+n)') + '. With total ' + tex('t=' + t) + ' find the conditional probability ' + tex('P(S=' + k + '\\mid t)') + '.',
-        answer: pmf(k, p0), tolerance: tol4, lecture: 9,
+        answer: pmf(k, p0), tolerance: tol4, lecture: 5,
         explanation: tex('\\binom{' + t + '}{' + k + '}(' + m + '/' + (m + n) + ')^{' + k + '}(' + n + '/' + (m + n) + ')^{' + (t - k) + '}') + ' = ' + dec(pmf(k, p0)) + '.',
       },
       {
         prompt: 'Find the one-sided conditional p-value ' + tex('P(S\\ge' + k + '\\mid t=' + t + ')') + ' under ' + tex('H_0') + '.',
-        answer: tail, tolerance: tol4, lecture: 9,
+        answer: tail, tolerance: tol4, lecture: 5,
         explanation: 'Add ' + tex('\\binom{' + t + '}{j}(' + m + '/' + (m + n) + ')^j(' + n + '/' + (m + n) + ')^{' + t + '-j}') + ' for ' + tex('j=' + k + ',\\dots,' + t) + ': ' + dec(tail) + '. The null distribution is completely known, so no nuisance parameter is left.',
       },
       {
         prompt: 'Under the alternative with the values of ' + tex('\\lambda,\\mu') + ' above, find the conditional mean ' + tex('E(S\\mid t=' + t + ')=t\\,m\\lambda/(m\\lambda+n\\mu)') + '.',
-        answer: t * pAlt, tolerance: tol4, lecture: 9,
+        answer: t * pAlt, tolerance: tol4, lecture: 5,
         explanation: tex(t + '\\times' + dec(pAlt)) + ' = ' + dec(t * pAlt) + ', compared with ' + dec(t * p0) + ' under ' + tex('H_0') + '.',
       },
     ],

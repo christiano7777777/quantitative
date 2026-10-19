@@ -29,7 +29,8 @@
     "misconception": "confuses validity with efficiency"
    }
   ],
-  "explanation": "Rank tests keep the stated significance level whatever the continuous distribution; the price is a small loss of power when the parametric model is exactly right."
+  "explanation": "Rank tests keep the stated significance level whatever the continuous distribution; the price is a small loss of power when the parametric model is exactly right.",
+  "section": 1
  },
  {
   "id": "np-1.2",
@@ -61,7 +62,8 @@
     "misconception": "denies the comparison"
    }
   ],
-  "explanation": "The ARE of the Wilcoxon test relative to the $t$ test never falls below 0.864 for any continuous distribution, which makes it a safe choice."
+  "explanation": "The ARE of the Wilcoxon test relative to the $t$ test never falls below 0.864 for any continuous distribution, which makes it a safe choice.",
+  "section": 1
  },
  {
   "id": "np-1.3",
@@ -93,7 +95,8 @@
     "misconception": "ignores the independence assumption"
    }
   ],
-  "explanation": "Distribution-free means the null distribution does not depend on the (continuous) population. Independence and continuity (no ties) are still assumed, and power does depend on the population."
+  "explanation": "Distribution-free means the null distribution does not depend on the (continuous) population. Independence and continuity (no ties) are still assumed, and power does depend on the population.",
+  "section": 1
  },
  {
   "id": "np-1.4",
@@ -125,7 +128,8 @@
     "misconception": "confuses a constant efficiency loss with an unbounded one"
    }
   ],
-  "explanation": "Under normality the Wilcoxon signed-rank test has ARE $3/\\pi$ against the $t$ test, so the price of using ranks is small; for heavy-tailed data the ARE is at least $0.864$ and can exceed $1$."
+  "explanation": "Under normality the Wilcoxon signed-rank test has ARE $3/\\pi$ against the $t$ test, so the price of using ranks is small; for heavy-tailed data the ARE is at least $0.864$ and can exceed $1$.",
+  "section": 1
  },
  {
   "id": "np-1.5",
@@ -157,11 +161,12 @@
     "misconception": "thinks ties make rank methods unusable"
    }
   ],
-  "explanation": "Heavy tails make the sample mean erratic. For the double exponential the sign test has ARE $2$ against the $t$ test, so it needs about half as many observations."
+  "explanation": "Heavy tails make the sample mean erratic. For the double exponential the sign test has ARE $2$ against the $t$ test, so it needs about half as many observations.",
+  "section": 1
  },
  {
-  "id": "np-2.1",
-  "lecture": 2,
+  "id": "np-1.6",
+  "lecture": 1,
   "stem": "What does the sign test for a hypothesised median $\\theta_0$ count?",
   "correct": [
    "The observations above $\\theta_0$, out of those that differ from $\\theta_0$; under $H_0$ the count is binomial with $p=\\tfrac12$.",
@@ -189,11 +194,12 @@
     "misconception": "confuses the sign test with a runs test"
    }
   ],
-  "explanation": "Drop observations equal to $\\theta_0$, let $n$ be the number left and $B$ the number above $\\theta_0$. Under $H_0$, $B\\sim\\mathrm{Bin}(n,\\tfrac12)$."
+  "explanation": "Drop observations equal to $\\theta_0$, let $n$ be the number left and $B$ the number above $\\theta_0$. Under $H_0$, $B\\sim\\mathrm{Bin}(n,\\tfrac12)$.",
+  "section": 2
  },
  {
-  "id": "np-2.2",
-  "lecture": 2,
+  "id": "np-1.7",
+  "lecture": 1,
   "stem": "Some observations equal the hypothesised median $\\theta_0$. How does the sign test treat them?",
   "correct": [
    "They are dropped and $n$ is reduced to the number of observations that differ from $\\theta_0$.",
@@ -221,11 +227,12 @@
     "misconception": "invents a replacement value"
    }
   ],
-  "explanation": "A value equal to $\\theta_0$ is neither above nor below it, so it carries no information about the sign; drop it and use the smaller $n$."
+  "explanation": "A value equal to $\\theta_0$ is neither above nor below it, so it carries no information about the sign; drop it and use the smaller $n$.",
+  "section": 2
  },
  {
-  "id": "np-2.3",
-  "lecture": 2,
+  "id": "np-1.8",
+  "lecture": 1,
   "stem": "A two-sided sign test has $B$ observations above the median out of $n$. How is the exact p-value found?",
   "correct": [
    "Double the smaller of the two tail probabilities $P(B'\\ge B)$ and $P(B'\\le B)$, capping the result at $1$.",
@@ -253,11 +260,12 @@
     "misconception": "adds the two overlapping tails"
    }
   ],
-  "explanation": "For $H_1:\\theta\\ne\\theta_0$ both tails count. Since $\\mathrm{Bin}(n,\\tfrac12)$ is symmetric the two-sided p-value is twice the smaller tail (at most $1$)."
+  "explanation": "For $H_1:\\theta\\ne\\theta_0$ both tails count. Since $\\mathrm{Bin}(n,\\tfrac12)$ is symmetric the two-sided p-value is twice the smaller tail (at most $1$).",
+  "section": 2
  },
  {
-  "id": "np-2.4",
-  "lecture": 2,
+  "id": "np-1.9",
+  "lecture": 1,
   "stem": "Why can the sign test be applied to data from any continuous distribution?",
   "correct": [
    "Under $H_0$ each observation exceeds the median with probability $\\tfrac12$, whatever the distribution.",
@@ -285,11 +293,12 @@
     "misconception": "confuses the sign count with rank statistics"
    }
   ],
-  "explanation": "By definition of the median, $P(X>\\theta)=\\tfrac12$ for a continuous distribution, so the sign count is binomial and symmetry is not required."
+  "explanation": "By definition of the median, $P(X>\\theta)=\\tfrac12$ for a continuous distribution, so the sign count is binomial and symmetry is not required.",
+  "section": 2
  },
  {
-  "id": "np-2.5",
-  "lecture": 2,
+  "id": "np-1.10",
+  "lecture": 1,
   "stem": "How does the power of the sign test compare with that of the $t$ test?",
   "correct": [
    "About $\\pi/2\\approx1.57$ times the observations under normality, but fewer for heavy-tailed data.",
@@ -317,11 +326,12 @@
     "misconception": "thinks power does not grow with n"
    }
   ],
-  "explanation": "Under normality the sign test has ARE $2/\\pi$ against the $t$ test; under the double exponential its ARE is $2$."
+  "explanation": "Under normality the sign test has ARE $2/\\pi$ against the $t$ test; under the double exponential its ARE is $2$.",
+  "section": 2
  },
  {
-  "id": "np-3.1",
-  "lecture": 3,
+  "id": "np-1.11",
+  "lecture": 1,
   "stem": "Let $X_1,\\dots,X_n$ be independent with a common continuous cdf $F$. What is the cdf of the sample maximum $X_{(n)}$?",
   "correct": [
    "$P(X_{(n)}\\le x)=F(x)^n$, since all $n$ observations must be at most $x$.",
@@ -349,11 +359,12 @@
     "misconception": "confuses all below with all above"
    }
   ],
-  "explanation": "The maximum is at most $x$ exactly when each of the $n$ independent observations is, which gives $F(x)^n$. The minimum has cdf $1-(1-F(x))^n$."
+  "explanation": "The maximum is at most $x$ exactly when each of the $n$ independent observations is, which gives $F(x)^n$. The minimum has cdf $1-(1-F(x))^n$.",
+  "section": 3
  },
  {
-  "id": "np-3.2",
-  "lecture": 3,
+  "id": "np-1.12",
+  "lecture": 1,
   "stem": "For $n$ independent continuous observations, which statement correctly describes $P(X_{(k)}\\le x)$, where $F=F(x)$ and $1\\le k\\le n$?",
   "correct": [
    "It is the chance that at least $k$ observations are at most $x$, $\\sum_{j=k}^{n}\\binom nj F^j(1-F)^{n-j}$.",
@@ -381,11 +392,12 @@
     "misconception": "forgets the number of ways to choose which observations are below"
    }
   ],
-  "explanation": "$X_{(k)}\\le x$ exactly when at least $k$ observations are at most $x$, and that count is binomial. For $k=n$ this reduces to $F^n$."
+  "explanation": "$X_{(k)}\\le x$ exactly when at least $k$ observations are at most $x$, and that count is binomial. For $k=n$ this reduces to $F^n$.",
+  "section": 3
  },
  {
-  "id": "np-3.3",
-  "lecture": 3,
+  "id": "np-1.13",
+  "lecture": 1,
   "stem": "Let $X_1,\\dots,X_n$ be iid with a continuous cdf $F$, and let $R_i$ be the rank of $X_i$ in the sample. Which statement is true?",
   "correct": [
    "The rank vector is uniform over all $n!$ permutations, whatever $F$ is.",
@@ -413,11 +425,12 @@
     "misconception": "ties distribution-free behaviour to the normal law"
    }
   ],
-  "explanation": "Continuity rules out ties and exchangeability makes every ordering equally likely. The ranks are not independent: they always sum to $n(n+1)/2$."
+  "explanation": "Continuity rules out ties and exchangeability makes every ordering equally likely. The ranks are not independent: they always sum to $n(n+1)/2$.",
+  "section": 3
  },
  {
-  "id": "np-3.4",
-  "lecture": 3,
+  "id": "np-1.14",
+  "lecture": 1,
   "stem": "A distribution-free confidence interval for the $p$-quantile $\\xi_p$ of a continuous distribution is $(X_{(r)},X_{(s)})$ with $r<s$. How is its coverage found?",
   "correct": [
    "It is $P(r\\le B\\le s-1)$ with $B\\sim\\mathrm{Bin}(n,p)$, whatever $F$ is.",
@@ -445,11 +458,12 @@
     "misconception": "ignores that the coverage takes only discrete binomial values"
    }
   ],
-  "explanation": "Since $F(\\xi_p)=p$, the count of observations below $\\xi_p$ is $\\mathrm{Bin}(n,p)$, whatever $F$ is. Because the count is discrete, one picks $r,s$ with coverage at least $1-\\alpha$."
+  "explanation": "Since $F(\\xi_p)=p$, the count of observations below $\\xi_p$ is $\\mathrm{Bin}(n,p)$, whatever $F$ is. Because the count is discrete, one picks $r,s$ with coverage at least $1-\\alpha$.",
+  "section": 3
  },
  {
-  "id": "np-3.5",
-  "lecture": 3,
+  "id": "np-1.15",
+  "lecture": 1,
   "stem": "How can a confidence interval for the population cdf value $F(x_0)$ be obtained?",
   "correct": [
    "The count of observations at most $x_0$ is $\\mathrm{Bin}(n,F(x_0))$, so a binomial-proportion interval applies to $\\hat F(x_0)$.",
@@ -477,11 +491,12 @@
     "misconception": "thinks nonparametric intervals are impossible"
    }
   ],
-  "explanation": "At a fixed $x_0$, $n\\hat F(x_0)\\sim\\mathrm{Bin}(n,F(x_0))$, so $\\hat F\\pm z\\sqrt{\\hat F(1-\\hat F)/n}$ is an approximate interval."
+  "explanation": "At a fixed $x_0$, $n\\hat F(x_0)\\sim\\mathrm{Bin}(n,F(x_0))$, so $\\hat F\\pm z\\sqrt{\\hat F(1-\\hat F)/n}$ is an approximate interval.",
+  "section": 3
  },
  {
-  "id": "np-4.1",
-  "lecture": 4,
+  "id": "np-2.1",
+  "lecture": 2,
   "stem": "What assumption makes a permutation test valid?",
   "correct": [
    "Under $H_0$ the labels are exchangeable.",
@@ -509,11 +524,12 @@
     "misconception": "confuses with a time-series test"
    }
   ],
-  "explanation": "Exchangeability can fail with unequal variances between groups or dependent data, in which case a plain permutation test can be invalid."
+  "explanation": "Exchangeability can fail with unequal variances between groups or dependent data, in which case a plain permutation test can be invalid.",
+  "section": 1
  },
  {
-  "id": "np-4.2",
-  "lecture": 4,
+  "id": "np-2.2",
+  "lecture": 2,
   "stem": "How is an exact permutation p-value computed for a difference in group means?",
   "correct": [
    "Enumerate all assignments and find the share at least as extreme.",
@@ -541,11 +557,12 @@
     "misconception": "gives a degenerate distribution"
    }
   ],
-  "explanation": "With groups of sizes $n_1,n_2$ there are $\\binom{n_1+n_2}{n_1}$ assignments; the observed one is included, so the smallest p-value is $1/\\binom{n}{n_1}$."
+  "explanation": "With groups of sizes $n_1,n_2$ there are $\\binom{n_1+n_2}{n_1}$ assignments; the observed one is included, so the smallest p-value is $1/\\binom{n}{n_1}$.",
+  "section": 1
  },
  {
-  "id": "np-4.3",
-  "lecture": 4,
+  "id": "np-2.3",
+  "lecture": 2,
   "stem": "How many distinct assignments exist when $m$ of $N$ units are randomly assigned to treatment?",
   "correct": [
    "$\\binom Nm$, as order within groups is irrelevant.",
@@ -573,11 +590,12 @@
     "misconception": "divides by two wrongly"
    }
   ],
-  "explanation": "The number of assignments sets the smallest attainable p-value, $1/\\binom Nm$, so small experiments can have limited resolution."
+  "explanation": "The number of assignments sets the smallest attainable p-value, $1/\\binom Nm$, so small experiments can have limited resolution.",
+  "section": 1
  },
  {
-  "id": "np-4.4",
-  "lecture": 4,
+  "id": "np-2.4",
+  "lecture": 2,
   "stem": "What is a Monte Carlo permutation test?",
   "correct": [
    "It approximates the permutation distribution with random relabellings.",
@@ -605,11 +623,12 @@
     "misconception": "describes a different method"
    }
   ],
-  "explanation": "A p-value estimate $(1+\\#\\{T^*\\ge T_{obs}\\})/(1+B)$ with $B$ random permutations remains valid."
+  "explanation": "A p-value estimate $(1+\\#\\{T^*\\ge T_{obs}\\})/(1+B)$ with $B$ random permutations remains valid.",
+  "section": 1
  },
  {
-  "id": "np-4.5",
-  "lecture": 4,
+  "id": "np-2.5",
+  "lecture": 2,
   "stem": "What is an advantage of permutation tests over $t$ tests?",
   "correct": [
    "Exact validity in finite samples under exchangeability.",
@@ -637,11 +656,12 @@
     "misconception": "ignores the exchangeability requirement"
    }
   ],
-  "explanation": "For the difference in means with many observations, the permutation test is close to the $t$ test, but it also allows medians, trimmed means or ranks."
+  "explanation": "For the difference in means with many observations, the permutation test is close to the $t$ test, but it also allows medians, trimmed means or ranks.",
+  "section": 1
  },
  {
-  "id": "np-5.1",
-  "lecture": 5,
+  "id": "np-2.6",
+  "lecture": 2,
   "stem": "What does the Mann-Whitney (Wilcoxon rank-sum) test compare?",
   "correct": [
    "Two independent samples, through pooled ranks.",
@@ -669,11 +689,12 @@
     "misconception": "describes the Kruskal-Wallis test"
    }
   ],
-  "explanation": "If the two distributions differ only by a shift, the test is a test of equal medians; in general it tests stochastic dominance."
+  "explanation": "If the two distributions differ only by a shift, the test is a test of equal medians; in general it tests stochastic dominance.",
+  "section": 2
  },
  {
-  "id": "np-5.2",
-  "lecture": 5,
+  "id": "np-2.7",
+  "lecture": 2,
   "stem": "How is the Mann-Whitney statistic $U$ related to the rank sum $W$ of sample 1 (sizes $n_1$ and $n_2$)?",
   "correct": [
    "$U_1=W-n_1(n_1+1)/2$.",
@@ -701,11 +722,12 @@
     "misconception": "ignores the sum constraint"
    }
   ],
-  "explanation": "The smallest rank sum possible is $n_1(n_1+1)/2$, when sample 1 holds the lowest ranks, which gives $U_1=0$."
+  "explanation": "The smallest rank sum possible is $n_1(n_1+1)/2$, when sample 1 holds the lowest ranks, which gives $U_1=0$.",
+  "section": 2
  },
  {
-  "id": "np-5.3",
-  "lecture": 5,
+  "id": "np-2.8",
+  "lecture": 2,
   "stem": "What are the mean and variance of $U$ under $H_0$ for sample sizes $n_1,n_2$ (no ties)?",
   "correct": [
    "Mean $n_1n_2/2$, variance $n_1n_2(n_1+n_2+1)/12$.",
@@ -733,11 +755,12 @@
     "misconception": "doubles the variance"
    }
   ],
-  "explanation": "These give $z=(U-n_1n_2/2)/\\sqrt{n_1n_2(n_1+n_2+1)/12}$, with a tie correction to the variance if needed."
+  "explanation": "These give $z=(U-n_1n_2/2)/\\sqrt{n_1n_2(n_1+n_2+1)/12}$, with a tie correction to the variance if needed.",
+  "section": 2
  },
  {
-  "id": "np-5.4",
-  "lecture": 5,
+  "id": "np-2.9",
+  "lecture": 2,
   "stem": "What does the quantity $U_1/(n_1n_2)$ estimate?",
   "correct": [
    "The chance a random observation of sample 1 beats one of sample 2.",
@@ -765,11 +788,12 @@
     "misconception": "confuses with equality"
    }
   ],
-  "explanation": "A value of 0.5 means no tendency; values near 1 mean sample 1 almost always exceeds sample 2. It is also the area under the ROC curve."
+  "explanation": "A value of 0.5 means no tendency; values near 1 mean sample 1 almost always exceeds sample 2. It is also the area under the ROC curve.",
+  "section": 2
  },
  {
-  "id": "np-5.5",
-  "lecture": 5,
+  "id": "np-2.10",
+  "lecture": 2,
   "stem": "How are ties handled in the Mann-Whitney test?",
   "correct": [
    "Ties get average ranks, and the variance gets a correction.",
@@ -797,11 +821,12 @@
     "misconception": "overstates"
    }
   ],
-  "explanation": "With many ties (such as ordinal ratings), the normal approximation with the tie correction is used instead of exact tables."
+  "explanation": "With many ties (such as ordinal ratings), the normal approximation with the tie correction is used instead of exact tables.",
+  "section": 2
  },
  {
-  "id": "np-5.6",
-  "lecture": 5,
+  "id": "np-2.11",
+  "lecture": 2,
   "stem": "What does the Hodges-Lehmann estimator of the shift $\\Delta$ between two samples compute?",
   "correct": [
    "The median of all $mn$ pairwise differences $X_i-Y_j$.",
@@ -829,11 +854,12 @@
     "misconception": "uses the midrange of the differences"
    }
   ],
-  "explanation": "The Hodges-Lehmann estimate is the median of the $mn$ differences; it inherits the robustness of the Mann-Whitney test and differs from $\\bar x-\\bar y$."
+  "explanation": "The Hodges-Lehmann estimate is the median of the $mn$ differences; it inherits the robustness of the Mann-Whitney test and differs from $\\bar x-\\bar y$.",
+  "section": 2
  },
  {
-  "id": "np-5.7",
-  "lecture": 5,
+  "id": "np-2.12",
+  "lecture": 2,
   "stem": "How is a confidence interval for the shift $\\Delta$ built from the Mann-Whitney test?",
   "correct": [
    "The $k$-th smallest and $k$-th largest of the $mn$ pairwise differences, with $k$ from the null law of $U$.",
@@ -861,11 +887,12 @@
     "misconception": "uses a single value instead of an acceptance region"
    }
   ],
-  "explanation": "Inverting the Mann-Whitney test gives an interval whose ends are the $k$-th smallest and $k$-th largest of the $mn$ pairwise differences."
+  "explanation": "Inverting the Mann-Whitney test gives an interval whose ends are the $k$-th smallest and $k$-th largest of the $mn$ pairwise differences.",
+  "section": 2
  },
  {
-  "id": "np-6.1",
-  "lecture": 6,
+  "id": "np-3.1",
+  "lecture": 3,
   "stem": "What do the Siegel-Tukey and Ansari-Bradley tests compare for two samples that share the same location?",
   "correct": [
    "The dispersion of the two populations, using ranks that are small for extreme observations.",
@@ -893,11 +920,12 @@
     "misconception": "invents a tail-only comparison"
    }
   ],
-  "explanation": "Both tests turn a difference in spread into a difference in rank sums by giving low ranks to extreme observations."
+  "explanation": "Both tests turn a difference in spread into a difference in rank sums by giving low ranks to extreme observations.",
+  "section": 1
  },
  {
-  "id": "np-6.2",
-  "lecture": 6,
+  "id": "np-3.2",
+  "lecture": 3,
   "stem": "How are ranks assigned to the sorted combined sample in the Siegel-Tukey test?",
   "correct": [
    "Rank $1$ to the smallest value, $2$ and $3$ to the two largest, $4$ and $5$ to the next two smallest, and so on.",
@@ -925,11 +953,12 @@
     "misconception": "scrambles the alternating pattern"
    }
   ],
-  "explanation": "Siegel-Tukey scores run $1;\\,2,3;\\,4,5;\\dots$ alternately from the low and high ends, so extreme observations get small scores and a small rank sum for $X$ suggests larger spread."
+  "explanation": "Siegel-Tukey scores run $1;\\,2,3;\\,4,5;\\dots$ alternately from the low and high ends, so extreme observations get small scores and a small rank sum for $X$ suggests larger spread.",
+  "section": 1
  },
  {
-  "id": "np-6.3",
-  "lecture": 6,
+  "id": "np-3.3",
+  "lecture": 3,
   "stem": "Why do the Siegel-Tukey and Ansari-Bradley tests need the two samples to share a location?",
   "correct": [
    "If the centres differ, a location shift changes the rank pattern and is mistaken for a scale difference.",
@@ -957,11 +986,12 @@
     "misconception": "dismisses the assumption"
    }
   ],
-  "explanation": "With unequal medians one can first subtract each sample's median (or use the deviance-based RMD test), so that location differences do not masquerade as scale differences."
+  "explanation": "With unequal medians one can first subtract each sample's median (or use the deviance-based RMD test), so that location differences do not masquerade as scale differences.",
+  "section": 1
  },
  {
-  "id": "np-6.4",
-  "lecture": 6,
+  "id": "np-3.4",
+  "lecture": 3,
   "stem": "How does the ratio of mean deviances (RMD) test compare the scales of two samples?",
   "correct": [
    "Divide the mean absolute deviation from the median of $X$ by that of $Y$, and judge the ratio by a permutation test.",
@@ -989,11 +1019,12 @@
     "misconception": "treats independent samples as paired"
    }
   ],
-  "explanation": "RMD uses absolute deviations about the median (robust to non-normality) and gets its null distribution by permuting the data between the two samples."
+  "explanation": "RMD uses absolute deviations about the median (robust to non-normality) and gets its null distribution by permuting the data between the two samples.",
+  "section": 1
  },
  {
-  "id": "np-6.5",
-  "lecture": 6,
+  "id": "np-3.5",
+  "lecture": 3,
   "stem": "Why is the $F$ test for equal variances unreliable for non-normal data?",
   "correct": [
    "Its null distribution relies on normality, and with heavy tails it rejects a true null too often.",
@@ -1021,11 +1052,12 @@
     "misconception": "confuses the F test with rank methods"
    }
   ],
-  "explanation": "The $F$ test for a variance ratio is very sensitive to kurtosis: with non-normal data its true size can be far above the nominal level, which motivates permutation and rank tests."
+  "explanation": "The $F$ test for a variance ratio is very sensitive to kurtosis: with non-normal data its true size can be far above the nominal level, which motivates permutation and rank tests.",
+  "section": 1
  },
  {
-  "id": "np-7.1",
-  "lecture": 7,
+  "id": "np-3.6",
+  "lecture": 3,
   "stem": "What is the Kolmogorov-Smirnov statistic for testing $H_0:F=F_0$?",
   "correct": [
    "$D_n=\\sup_x|F_n(x)-F_0(x)|$, the largest vertical gap.",
@@ -1053,11 +1085,12 @@
     "misconception": "gives the range"
    }
   ],
-  "explanation": "Compute from the ordered sample: $D_n=\\max_i\\max\\{i/n-F_0(x_{(i)}),\\ F_0(x_{(i)})-(i-1)/n\\}$."
+  "explanation": "Compute from the ordered sample: $D_n=\\max_i\\max\\{i/n-F_0(x_{(i)}),\\ F_0(x_{(i)})-(i-1)/n\\}$.",
+  "section": 2
  },
  {
-  "id": "np-7.2",
-  "lecture": 7,
+  "id": "np-3.7",
+  "lecture": 3,
   "stem": "When is the null distribution of the Kolmogorov-Smirnov statistic free of the underlying distribution?",
   "correct": [
    "When $F_0$ is continuous and fully specified.",
@@ -1085,11 +1118,12 @@
     "misconception": "denies the property"
    }
   ],
-  "explanation": "If parameters are estimated (the normal with estimated mean and variance), use Lilliefors' modified critical values, which are smaller."
+  "explanation": "If parameters are estimated (the normal with estimated mean and variance), use Lilliefors' modified critical values, which are smaller.",
+  "section": 2
  },
  {
-  "id": "np-7.3",
-  "lecture": 7,
+  "id": "np-3.8",
+  "lecture": 3,
   "stem": "Why is the Anderson-Darling test often more powerful than the Kolmogorov-Smirnov test against tail alternatives?",
   "correct": [
    "It weights the tails more heavily.",
@@ -1117,11 +1151,12 @@
     "misconception": "describes the KS statistic"
    }
   ],
-  "explanation": "The statistic integrates $(F_n-F_0)^2/\\{F_0(1-F_0)\\}$, which blows up in the tails and so detects heavy tails. For financial returns tail fit matters."
+  "explanation": "The statistic integrates $(F_n-F_0)^2/\\{F_0(1-F_0)\\}$, which blows up in the tails and so detects heavy tails. For financial returns tail fit matters.",
+  "section": 2
  },
  {
-  "id": "np-7.4",
-  "lecture": 7,
+  "id": "np-3.9",
+  "lecture": 3,
   "stem": "What does the two-sample Kolmogorov-Smirnov test compare?",
   "correct": [
    "Largest gap between two empirical cdfs.",
@@ -1149,11 +1184,12 @@
     "misconception": "gives an unrelated rule"
    }
   ],
-  "explanation": "It is sensitive to differences in location, scale or shape, but most sensitive around the centre of the distributions."
+  "explanation": "It is sensitive to differences in location, scale or shape, but most sensitive around the centre of the distributions.",
+  "section": 2
  },
  {
-  "id": "np-7.5",
-  "lecture": 7,
+  "id": "np-3.10",
+  "lecture": 3,
   "stem": "How should a result of a Kolmogorov-Smirnov test with a very large sample be read?",
   "correct": [
    "Even a tiny departure can be significant.",
@@ -1181,11 +1217,12 @@
     "misconception": "confuses with proof of the null"
    }
   ],
-  "explanation": "$\\sqrt nD_n$ is compared with the Kolmogorov distribution; the 5% point is about 1.36, so $D_n>1.36/\\sqrt n$ rejects."
+  "explanation": "$\\sqrt nD_n$ is compared with the Kolmogorov distribution; the 5% point is about 1.36, so $D_n>1.36/\\sqrt n$ rejects.",
+  "section": 2
  },
  {
-  "id": "np-8.1",
-  "lecture": 8,
+  "id": "np-4.1",
+  "lecture": 4,
   "stem": "What does the Kruskal-Wallis test do?",
   "correct": [
    "Whether $k$ independent samples share a distribution, using pooled ranks.",
@@ -1213,11 +1250,12 @@
     "misconception": "reverses the idea"
    }
   ],
-  "explanation": "A significant result says that at least one group differs; post-hoc pairwise tests (Dunn) show which."
+  "explanation": "A significant result says that at least one group differs; post-hoc pairwise tests (Dunn) show which.",
+  "section": 1
  },
  {
-  "id": "np-8.2",
-  "lecture": 8,
+  "id": "np-4.2",
+  "lecture": 4,
   "stem": "How is the Kruskal-Wallis statistic computed?",
   "correct": [
    "$H=\\frac{12}{N(N+1)}\\sum_i R_i^2/n_i-3(N+1)$, compared with $\\chi^2_{k-1}$.",
@@ -1245,11 +1283,12 @@
     "misconception": "discards the rank structure"
    }
   ],
-  "explanation": "Under $H_0$ every group has expected rank sum $n_i(N+1)/2$, and $H$ measures deviations from it."
+  "explanation": "Under $H_0$ every group has expected rank sum $n_i(N+1)/2$, and $H$ measures deviations from it.",
+  "section": 1
  },
  {
-  "id": "np-8.3",
-  "lecture": 8,
+  "id": "np-4.3",
+  "lecture": 4,
   "stem": "What are the large-sample null distributions of the Kruskal-Wallis and Friedman statistics?",
   "correct": [
    "Both are approximately $\\chi^2$ with $k-1$ degrees of freedom.",
@@ -1277,11 +1316,12 @@
     "misconception": "confuses with a $p$-value"
    }
   ],
-  "explanation": "For small samples exact permutation tables are used. A significant result calls for pairwise follow-up tests with a multiplicity correction."
+  "explanation": "For small samples exact permutation tables are used. A significant result calls for pairwise follow-up tests with a multiplicity correction.",
+  "section": 1
  },
  {
-  "id": "np-8.4",
-  "lecture": 8,
+  "id": "np-4.4",
+  "lecture": 4,
   "stem": "What is the idea of the permutation $F$ test for $k$ groups?",
   "correct": [
    "Recompute $F$ over relabellings of the pooled data and compare the observed $F$ with that permutation distribution.",
@@ -1309,11 +1349,12 @@
     "misconception": "changes the group sizes in the permutation"
    }
   ],
-  "explanation": "Under $H_0$ the $N$ observations are exchangeable across groups, so $F$ can be recomputed for all (or many random) assignments of the observations to groups of the original sizes."
+  "explanation": "Under $H_0$ the $N$ observations are exchangeable across groups, so $F$ can be recomputed for all (or many random) assignments of the observations to groups of the original sizes.",
+  "section": 1
  },
  {
-  "id": "np-8.5",
-  "lecture": 8,
+  "id": "np-4.5",
+  "lecture": 4,
   "stem": "How are tied values handled in the Kruskal-Wallis statistic?",
   "correct": [
    "Tied values receive mid-ranks and the statistic is divided by $1-\\sum(t^3-t)/(N^3-N)$.",
@@ -1341,11 +1382,12 @@
     "misconception": "thinks any tie rules the test out"
    }
   ],
-  "explanation": "With ties the ranks are averaged and $KW_{\\text{ties}}=KW/C$ where $C=1-\\sum(t^3-t)/(N^3-N)<1$, so the correction increases the statistic."
+  "explanation": "With ties the ranks are averaged and $KW_{\\text{ties}}=KW/C$ where $C=1-\\sum(t^3-t)/(N^3-N)<1$, so the correction increases the statistic.",
+  "section": 1
  },
  {
-  "id": "np-9.1",
-  "lecture": 9,
+  "id": "np-4.6",
+  "lecture": 4,
   "stem": "Why does running every pairwise test at level $\\alpha$ inflate the Type I error of the whole analysis?",
   "correct": [
    "The chance of at least one false rejection among many tests, the family-wise error rate, exceeds $\\alpha$.",
@@ -1373,11 +1415,12 @@
     "misconception": "invents an arithmetic reason"
    }
   ],
-  "explanation": "With $m$ independent true nulls tested at level $\\alpha$ the chance of at least one false rejection is $1-(1-\\alpha)^m$, which exceeds $\\alpha$ for $m\\ge2$."
+  "explanation": "With $m$ independent true nulls tested at level $\\alpha$ the chance of at least one false rejection is $1-(1-\\alpha)^m$, which exceeds $\\alpha$ for $m\\ge2$.",
+  "section": 2
  },
  {
-  "id": "np-9.2",
-  "lecture": 9,
+  "id": "np-4.7",
+  "lecture": 4,
   "stem": "How does the Bonferroni adjustment control the family-wise error rate for $m$ comparisons?",
   "correct": [
    "Each test is run at level $\\alpha/m$, and the union bound keeps the overall error rate at most $\\alpha$.",
@@ -1405,11 +1448,12 @@
     "misconception": "claims exactness under dependence"
    }
   ],
-  "explanation": "By the union bound, $P(\\cup E_j)\\le\\sum P(E_j)\\le m\\cdot\\alpha/m=\\alpha$. The price is conservativeness, which grows with $m$."
+  "explanation": "By the union bound, $P(\\cup E_j)\\le\\sum P(E_j)\\le m\\cdot\\alpha/m=\\alpha$. The price is conservativeness, which grows with $m$.",
+  "section": 2
  },
  {
-  "id": "np-9.3",
-  "lecture": 9,
+  "id": "np-4.8",
+  "lecture": 4,
   "stem": "How do Fisher's LSD and Tukey's HSD multiple comparison procedures differ?",
   "correct": [
    "LSD does not control the family-wise error rate, while HSD controls it exactly with equal sample sizes.",
@@ -1437,11 +1481,12 @@
     "misconception": "swaps the protection rule"
    }
   ],
-  "explanation": "LSD is 'protected' by the omnibus test but each pairwise test is at level $\\alpha$; HSD compares all pairs with the null distribution of the largest mean difference, so the overall level is $\\alpha$."
+  "explanation": "LSD is 'protected' by the omnibus test but each pairwise test is at level $\\alpha$; HSD compares all pairs with the null distribution of the largest mean difference, so the overall level is $\\alpha$.",
+  "section": 2
  },
  {
-  "id": "np-9.4",
-  "lecture": 9,
+  "id": "np-4.9",
+  "lecture": 4,
   "stem": "What alternative hypothesis does the Jonckheere-Terpstra test detect?",
   "correct": [
    "An ordering of the groups, $F_1\\ge F_2\\ge\\cdots\\ge F_k$ with at least one strict inequality, in a direction stated beforehand.",
@@ -1469,11 +1514,12 @@
     "misconception": "ignores the middle groups"
    }
   ],
-  "explanation": "JT is built for the ordered alternative $\\mu_1\\le\\mu_2\\le\\cdots\\le\\mu_k$ and is more powerful than Kruskal-Wallis when the stated order is right."
+  "explanation": "JT is built for the ordered alternative $\\mu_1\\le\\mu_2\\le\\cdots\\le\\mu_k$ and is more powerful than Kruskal-Wallis when the stated order is right.",
+  "section": 2
  },
  {
-  "id": "np-9.5",
-  "lecture": 9,
+  "id": "np-4.10",
+  "lecture": 4,
   "stem": "What is the Jonckheere-Terpstra statistic?",
   "correct": [
    "Add, over pairs of groups, the cross-group pairs in the hypothesised order.",
@@ -1501,11 +1547,12 @@
     "misconception": "describes the sum of squares behind Kruskal-Wallis"
    }
   ],
-  "explanation": "$JT=\\sum_{i<j}T_{ij}$ with $T_{ij}$ the Mann-Whitney count for groups $i$ and $j$. It ranges from $0$ to $\\sum_{i<j}n_in_j$, and large values support the increasing order."
+  "explanation": "$JT=\\sum_{i<j}T_{ij}$ with $T_{ij}$ the Mann-Whitney count for groups $i$ and $j$. It ranges from $0$ to $\\sum_{i<j}n_in_j$, and large values support the increasing order.",
+  "section": 2
  },
  {
-  "id": "np-10.1",
-  "lecture": 10,
+  "id": "np-5.1",
+  "lecture": 5,
   "stem": "What does the sign test use in a paired design?",
   "correct": [
    "Only the signs of the differences; under the null the count is $\\mathrm{Bin}(n,1/2)$.",
@@ -1533,11 +1580,12 @@
     "misconception": "confuses with the mean"
    }
   ],
-  "explanation": "Zero differences are discarded. The test is for the median of the differences being zero, and needs no symmetry."
+  "explanation": "Zero differences are discarded. The test is for the median of the differences being zero, and needs no symmetry.",
+  "section": 1
  },
  {
-  "id": "np-10.2",
-  "lecture": 10,
+  "id": "np-5.2",
+  "lecture": 5,
   "stem": "How does the Wilcoxon signed-rank test use the differences?",
   "correct": [
    "It ranks absolute differences and sums the ranks of the positive ones.",
@@ -1565,11 +1613,12 @@
     "misconception": "describes the rank-sum test"
    }
   ],
-  "explanation": "$W^+=\\sum_iR_i\\mathbf 1\\{d_i>0\\}$ with $R_i$ the rank of $|d_i|$. It needs the differences to be symmetric about the median under $H_0$."
+  "explanation": "$W^+=\\sum_iR_i\\mathbf 1\\{d_i>0\\}$ with $R_i$ the rank of $|d_i|$. It needs the differences to be symmetric about the median under $H_0$.",
+  "section": 1
  },
  {
-  "id": "np-10.3",
-  "lecture": 10,
+  "id": "np-5.3",
+  "lecture": 5,
   "stem": "Under $H_0$, what are the mean and variance of the Wilcoxon signed-rank statistic $W^+$ for $n$ nonzero differences (no ties)?",
   "correct": [
    "Mean $n(n+1)/4$ and variance $n(n+1)(2n+1)/24$.",
@@ -1597,11 +1646,12 @@
     "misconception": "gives a wrong formula"
    }
   ],
-  "explanation": "Each rank $i$ is included with probability $1/2$, so $EW^+=\\tfrac12\\sum i=n(n+1)/4$ and $\\operatorname{Var}=\\tfrac14\\sum i^2=n(n+1)(2n+1)/24$."
+  "explanation": "Each rank $i$ is included with probability $1/2$, so $EW^+=\\tfrac12\\sum i=n(n+1)/4$ and $\\operatorname{Var}=\\tfrac14\\sum i^2=n(n+1)(2n+1)/24$.",
+  "section": 1
  },
  {
-  "id": "np-10.4",
-  "lecture": 10,
+  "id": "np-5.4",
+  "lecture": 5,
   "stem": "Which assumption does the Wilcoxon signed-rank test need that the sign test does not?",
   "correct": [
    "The differences are symmetric about their median.",
@@ -1629,11 +1679,12 @@
     "misconception": "gets the condition backwards"
    }
   ],
-  "explanation": "Without symmetry, a significant signed-rank result may reflect skewness rather than a nonzero median."
+  "explanation": "Without symmetry, a significant signed-rank result may reflect skewness rather than a nonzero median.",
+  "section": 1
  },
  {
-  "id": "np-10.5",
-  "lecture": 10,
+  "id": "np-5.5",
+  "lecture": 5,
   "stem": "What is the treatment of zero differences and ties in the signed-rank test?",
   "correct": [
    "Zeros are dropped, ties get average ranks.",
@@ -1661,11 +1712,12 @@
     "misconception": "ignores the issue"
    }
   ],
-  "explanation": "With ties, the variance of $W^+$ is reduced by a correction, and exact tables no longer apply."
+  "explanation": "With ties, the variance of $W^+$ is reduced by a correction, and exact tables no longer apply.",
+  "section": 1
  },
  {
-  "id": "np-11.1",
-  "lecture": 11,
+  "id": "np-5.6",
+  "lecture": 5,
   "stem": "What is the Friedman test used for?",
   "correct": [
    "Comparing $k$ treatments on the same blocks, ranking within blocks.",
@@ -1693,11 +1745,12 @@
     "misconception": "describes smoothing"
    }
   ],
-  "explanation": "The statistic $\\frac{12}{bk(k+1)}\\sum_jR_j^2-3b(k+1)$ uses rank sums $R_j$ across blocks and is approximately $\\chi^2_{k-1}$."
+  "explanation": "The statistic $\\frac{12}{bk(k+1)}\\sum_jR_j^2-3b(k+1)$ uses rank sums $R_j$ across blocks and is approximately $\\chi^2_{k-1}$.",
+  "section": 2
  },
  {
-  "id": "np-11.2",
-  "lecture": 11,
+  "id": "np-5.7",
+  "lecture": 5,
   "stem": "How does the Friedman test differ from the Kruskal-Wallis test?",
   "correct": [
    "Friedman ranks within blocks; Kruskal-Wallis ranks pooled data.",
@@ -1725,11 +1778,12 @@
     "misconception": "ignores the difference"
    }
   ],
-  "explanation": "A block is a subject measured under every treatment; ranking within it removes subject-to-subject differences."
+  "explanation": "A block is a subject measured under every treatment; ranking within it removes subject-to-subject differences.",
+  "section": 2
  },
  {
-  "id": "np-11.3",
-  "lecture": 11,
+  "id": "np-5.8",
+  "lecture": 5,
   "stem": "How does Page's test differ from Friedman's test in a randomized complete block design?",
   "correct": [
    "Page's test uses $\\sum iR_{i+}$ for a specified order, so it is more powerful when that order is right.",
@@ -1757,11 +1811,12 @@
     "misconception": "denies a permutation null"
    }
   ],
-  "explanation": "Page's statistic weights the rank sums by the hypothesised order. If the true order is different it can have lower power than Friedman's test."
+  "explanation": "Page's statistic weights the rank sums by the hypothesised order. If the true order is different it can have lower power than Friedman's test.",
+  "section": 2
  },
  {
-  "id": "np-11.4",
-  "lecture": 11,
+  "id": "np-5.9",
+  "lecture": 5,
   "stem": "When is Cochran's $Q$ test used?",
   "correct": [
    "For several matched treatments with $0/1$ responses; it is Friedman's test with ties.",
@@ -1789,11 +1844,12 @@
     "misconception": "uses it for independent samples"
    }
   ],
-  "explanation": "With $0/1$ data within each block the ranks have heavy ties; Friedman's statistic with ties then equals Cochran's $Q$. With $k=2$ treatments it equals McNemar's test."
+  "explanation": "With $0/1$ data within each block the ranks have heavy ties; Friedman's statistic with ties then equals Cochran's $Q$. With $k=2$ treatments it equals McNemar's test.",
+  "section": 2
  },
  {
-  "id": "np-11.5",
-  "lecture": 11,
+  "id": "np-5.10",
+  "lecture": 5,
   "stem": "What does Kendall's coefficient of concordance $W$ measure?",
   "correct": [
    "The agreement among judges ranking the same items, from $0$ (none) to $1$ (perfect).",
@@ -1821,11 +1877,12 @@
     "misconception": "describes a different probability"
    }
   ],
-  "explanation": "With $b$ judges (blocks) and $k$ items, $W=\\dfrac{12\\sum(R_{i+}-b(k+1)/2)^2}{b^2k(k^2-1)}$. It is $1$ if all judges give identical rankings and near $0$ if the rank sums are nearly equal."
+  "explanation": "With $b$ judges (blocks) and $k$ items, $W=\\dfrac{12\\sum(R_{i+}-b(k+1)/2)^2}{b^2k(k^2-1)}$. It is $1$ if all judges give identical rankings and near $0$ if the rank sums are nearly equal.",
+  "section": 2
  },
  {
-  "id": "np-12.1",
-  "lecture": 12,
+  "id": "np-6.1",
+  "lecture": 6,
   "stem": "How is Spearman's rank correlation computed?",
   "correct": [
    "The Pearson correlation between the ranks.",
@@ -1853,11 +1910,12 @@
     "misconception": "gives a mean, not a correlation"
    }
   ],
-  "explanation": "$d_i$ is the difference between the two ranks of observation $i$. $\\rho_S=\\pm1$ for any strictly monotone relation."
+  "explanation": "$d_i$ is the difference between the two ranks of observation $i$. $\\rho_S=\\pm1$ for any strictly monotone relation.",
+  "section": 1
  },
  {
-  "id": "np-12.2",
-  "lecture": 12,
+  "id": "np-6.2",
+  "lecture": 6,
   "stem": "Which relationship does a rank correlation detect that the Pearson correlation may miss?",
   "correct": [
    "A monotone but nonlinear relationship.",
@@ -1885,11 +1943,12 @@
     "misconception": "restricts it wrongly"
    }
   ],
-  "explanation": "For $y=e^x$ on $x=1,\\dots,10$ the rank correlation is exactly 1, while Pearson's is noticeably smaller. Both are near 0 for $y=x^2$ on a symmetric $x$ range."
+  "explanation": "For $y=e^x$ on $x=1,\\dots,10$ the rank correlation is exactly 1, while Pearson's is noticeably smaller. Both are near 0 for $y=x^2$ on a symmetric $x$ range.",
+  "section": 1
  },
  {
-  "id": "np-12.3",
-  "lecture": 12,
+  "id": "np-6.3",
+  "lecture": 6,
   "stem": "What does the Pearson correlation coefficient measure, and what limits it?",
   "correct": [
    "Linear association only; a monotone but curved relation can have a correlation well below $1$.",
@@ -1917,11 +1976,12 @@
     "misconception": "thinks it needs normality to be defined"
    }
   ],
-  "explanation": "Pearson's $r$ measures linear association. An outlier can change it a lot, and $y=e^x$ on a wide range gives $r<1$ although the relation is perfectly monotone."
+  "explanation": "Pearson's $r$ measures linear association. An outlier can change it a lot, and $y=e^x$ on a wide range gives $r<1$ although the relation is perfectly monotone.",
+  "section": 1
  },
  {
-  "id": "np-12.4",
-  "lecture": 12,
+  "id": "np-6.4",
+  "lecture": 6,
   "stem": "How does a test of independence based on Spearman's coefficient work?",
   "correct": [
    "Under independence all pairings of ranks are equally likely, so its null law depends on $n$ only.",
@@ -1949,11 +2009,12 @@
     "misconception": "mixes up the raw-data coefficient"
    }
   ],
-  "explanation": "Under independence every pairing of ranks is equally likely, so the null distribution of $\\rho_S$ depends on $n$ only; for moderate $n$, $\\rho_S\\sqrt{n-1}$ is approximately standard normal."
+  "explanation": "Under independence every pairing of ranks is equally likely, so the null distribution of $\\rho_S$ depends on $n$ only; for moderate $n$, $\\rho_S\\sqrt{n-1}$ is approximately standard normal.",
+  "section": 1
  },
  {
-  "id": "np-12.5",
-  "lecture": 12,
+  "id": "np-6.5",
+  "lecture": 6,
   "stem": "What happens to Spearman's and Kendall's coefficients if one variable is transformed by a strictly increasing function?",
   "correct": [
    "They are unchanged, since the ranks are the same.",
@@ -1981,11 +2042,12 @@
     "misconception": "restricts the invariance wrongly"
    }
   ],
-  "explanation": "A strictly decreasing transformation reverses the ranks and changes the sign of the coefficients. Pearson's correlation is only invariant to linear maps."
+  "explanation": "A strictly decreasing transformation reverses the ranks and changes the sign of the coefficients. Pearson's correlation is only invariant to linear maps.",
+  "section": 1
  },
  {
-  "id": "np-13.1",
-  "lecture": 13,
+  "id": "np-6.6",
+  "lecture": 6,
   "stem": "How is Kendall's tau defined?",
   "correct": [
    "$(C-D)/\\{n(n-1)/2\\}$, concordant minus discordant.",
@@ -2013,11 +2075,12 @@
     "misconception": "gives an unrelated quantity"
    }
   ],
-  "explanation": "A pair $(i,j)$ is concordant if $(x_i-x_j)(y_i-y_j)>0$. Tau has a direct probabilistic meaning, unlike rho."
+  "explanation": "A pair $(i,j)$ is concordant if $(x_i-x_j)(y_i-y_j)>0$. Tau has a direct probabilistic meaning, unlike rho.",
+  "section": 2
  },
  {
-  "id": "np-13.2",
-  "lecture": 13,
+  "id": "np-6.7",
+  "lecture": 6,
   "stem": "Which statement describes the Mann-Kendall statistic $S$ for observations $x_1,\\dots,x_n$ recorded in time order?",
   "correct": [
    "$S=\\sum_{i<j}\\mathrm{sgn}(x_j-x_i)$, the number of rising pairs minus falling pairs.",
@@ -2045,11 +2108,12 @@
     "misconception": "demands strict monotonicity period by period"
    }
   ],
-  "explanation": "Every pair $i<j$ contributes $\\pm1$ according to the direction of change, so $S$ is the numerator of Kendall's tau between time and the observation. It detects monotone, not just linear, trends."
+  "explanation": "Every pair $i<j$ contributes $\\pm1$ according to the direction of change, so $S$ is the numerator of Kendall's tau between time and the observation. It detects monotone, not just linear, trends.",
+  "section": 2
  },
  {
-  "id": "np-13.3",
-  "lecture": 13,
+  "id": "np-6.8",
+  "lecture": 6,
   "stem": "Under the hypothesis that $n$ observations are iid with no ties, what are the null mean and variance of the Mann-Kendall statistic $S$?",
   "correct": [
    "$E[S]=0$ and $\\mathrm{Var}(S)=n(n-1)(2n+5)/18$, with $S$ near normal for moderate $n$.",
@@ -2077,11 +2141,12 @@
     "misconception": "borrows the form of the rank-sum variance"
    }
   ],
-  "explanation": "$S=2C-n(n-1)/2$ where $C$ counts concordant pairs, so $\\mathrm{Var}(S)=4\\mathrm{Var}(C)$. Check $n=3$: $S$ takes values $\\pm3,\\pm1$ with probabilities $1,2,2,1$ over 6, so the variance is $22/6=3\\cdot2\\cdot11/18$."
+  "explanation": "$S=2C-n(n-1)/2$ where $C$ counts concordant pairs, so $\\mathrm{Var}(S)=4\\mathrm{Var}(C)$. Check $n=3$: $S$ takes values $\\pm3,\\pm1$ with probabilities $1,2,2,1$ over 6, so the variance is $22/6=3\\cdot2\\cdot11/18$.",
+  "section": 2
  },
  {
-  "id": "np-13.4",
-  "lecture": 13,
+  "id": "np-6.9",
+  "lecture": 6,
   "stem": "How are Kendall's $\\tau$ and Spearman's $\\rho_S$ related for the same data?",
   "correct": [
    "Both detect monotone association and agree in sign, but $|\\tau|$ is usually smaller than $|\\rho_S|$.",
@@ -2109,11 +2174,12 @@
     "misconception": "misdescribes pair counting"
    }
   ],
-  "explanation": "For normal data $\\tau=\\tfrac2\\pi\\arcsin\\rho$ while Spearman's $\\rho_S\\approx\\tfrac6\\pi\\arcsin(\\rho/2)$; both are monotone in $\\rho$ and $|\\tau|<|\\rho_S|$ except at $0,\\pm1$."
+  "explanation": "For normal data $\\tau=\\tfrac2\\pi\\arcsin\\rho$ while Spearman's $\\rho_S\\approx\\tfrac6\\pi\\arcsin(\\rho/2)$; both are monotone in $\\rho$ and $|\\tau|<|\\rho_S|$ except at $0,\\pm1$.",
+  "section": 2
  },
  {
-  "id": "np-13.5",
-  "lecture": 13,
+  "id": "np-6.10",
+  "lecture": 6,
   "stem": "What does a significantly positive Mann-Kendall statistic indicate for a time series?",
   "correct": [
    "An upward monotone trend: later values exceed earlier ones more often than chance allows.",
@@ -2141,11 +2207,12 @@
     "misconception": "gets the direction backwards"
    }
   ],
-  "explanation": "$S=\\sum_{i<j}\\mathrm{sign}(x_j-x_i)$ is Kendall's $\\tau$ between the series and time; a large positive $S$ means pairs are mostly increasing."
+  "explanation": "$S=\\sum_{i<j}\\mathrm{sign}(x_j-x_i)$ is Kendall's $\\tau$ between the series and time; a large positive $S$ means pairs are mostly increasing.",
+  "section": 2
  },
  {
-  "id": "np-14.1",
-  "lecture": 14,
+  "id": "np-7.1",
+  "lecture": 7,
   "stem": "What is the nonparametric bootstrap?",
   "correct": [
    "Resample with replacement and recompute the statistic each time.",
@@ -2173,11 +2240,12 @@
     "misconception": "confuses resampling with more information"
    }
   ],
-  "explanation": "The bootstrap standard error is the standard deviation of the bootstrap replicates $\\hat\\theta^*_1,\\dots,\\hat\\theta^*_B$."
+  "explanation": "The bootstrap standard error is the standard deviation of the bootstrap replicates $\\hat\\theta^*_1,\\dots,\\hat\\theta^*_B$.",
+  "section": 1
  },
  {
-  "id": "np-14.2",
-  "lecture": 14,
+  "id": "np-7.2",
+  "lecture": 7,
   "stem": "How is a percentile bootstrap confidence interval formed?",
   "correct": [
    "The $\\alpha/2$ and $1-\\alpha/2$ quantiles of the replicates.",
@@ -2205,11 +2273,12 @@
     "misconception": "gives an arbitrary interval"
    }
   ],
-  "explanation": "The percentile interval is transformation-respecting; BCa refines it by correcting for bias and skewness."
+  "explanation": "The percentile interval is transformation-respecting; BCa refines it by correcting for bias and skewness.",
+  "section": 1
  },
  {
-  "id": "np-14.3",
-  "lecture": 14,
+  "id": "np-7.3",
+  "lecture": 7,
   "stem": "In a sample of size $n$, what is the probability that a given observation does not appear in a bootstrap resample?",
   "correct": [
    "$(1-1/n)^n$, about $e^{-1}\\approx0.368$ for large $n$, so roughly a third is left out.",
@@ -2237,11 +2306,12 @@
     "misconception": "gives the probability of drawing it every time"
    }
   ],
-  "explanation": "The remaining 63% of observations appear at least once; this is why out-of-bag error is based on roughly a third of the trees in bagging."
+  "explanation": "The remaining 63% of observations appear at least once; this is why out-of-bag error is based on roughly a third of the trees in bagging.",
+  "section": 1
  },
  {
-  "id": "np-14.4",
-  "lecture": 14,
+  "id": "np-7.4",
+  "lecture": 7,
   "stem": "How are the bootstrap standard error and bias of $\\hat\\theta$ estimated from replicates $\\hat\\theta^*_1,\\dots,\\hat\\theta^*_B$?",
   "correct": [
    "The SE is the standard deviation of the replicates, and the bias is their mean minus $\\hat\\theta$.",
@@ -2269,11 +2339,12 @@
     "misconception": "confuses bias with Monte Carlo error"
    }
   ],
-  "explanation": "The bootstrap mimics sampling from $F$ by resampling from $\\hat F_n$: the replicates $\\hat\\theta^*_b$ play the role of repeated estimates, so their standard deviation estimates the SE and their mean minus $\\hat\\theta$ estimates the bias."
+  "explanation": "The bootstrap mimics sampling from $F$ by resampling from $\\hat F_n$: the replicates $\\hat\\theta^*_b$ play the role of repeated estimates, so their standard deviation estimates the SE and their mean minus $\\hat\\theta$ estimates the bias.",
+  "section": 1
  },
  {
-  "id": "np-14.5",
-  "lecture": 14,
+  "id": "np-7.5",
+  "lecture": 7,
   "stem": "How does the basic (residual) bootstrap interval differ from the percentile interval?",
   "correct": [
    "It reflects the percentile interval about $\\hat\\theta$, so the two differ for skewed replicates.",
@@ -2301,11 +2372,12 @@
     "misconception": "describes the studentised interval"
    }
   ],
-  "explanation": "The residual (basic) method treats $\\delta^*_b=\\hat\\theta^*_b-\\hat\\theta$ as a stand-in for $\\hat\\theta-\\theta$, giving $[\\,2\\hat\\theta-\\hat\\theta^*_{1-\\alpha/2},\\,2\\hat\\theta-\\hat\\theta^*_{\\alpha/2}]$; the percentile interval uses the replicate percentiles directly."
+  "explanation": "The residual (basic) method treats $\\delta^*_b=\\hat\\theta^*_b-\\hat\\theta$ as a stand-in for $\\hat\\theta-\\theta$, giving $[\\,2\\hat\\theta-\\hat\\theta^*_{1-\\alpha/2},\\,2\\hat\\theta-\\hat\\theta^*_{\\alpha/2}]$; the percentile interval uses the replicate percentiles directly.",
+  "section": 1
  },
  {
-  "id": "np-15.1",
-  "lecture": 15,
+  "id": "np-8.1",
+  "lecture": 8,
   "stem": "Why use a studentised (bootstrap-$t$) interval rather than a percentile interval?",
   "correct": [
    "The studentised statistic is nearly pivotal, so its bootstrap distribution gives more accurate coverage.",
@@ -2333,11 +2405,12 @@
     "misconception": "thinks the pivot has a known null distribution"
    }
   ],
-  "explanation": "Studentising by $SE^*_b$ makes the statistic nearly pivotal. This is usually more accurate than percentile or normal intervals, at the cost of a standard error for every resample."
+  "explanation": "Studentising by $SE^*_b$ makes the statistic nearly pivotal. This is usually more accurate than percentile or normal intervals, at the cost of a standard error for every resample.",
+  "section": 1
  },
  {
-  "id": "np-15.2",
-  "lecture": 15,
+  "id": "np-8.2",
+  "lecture": 8,
   "stem": "In the bootstrap-$t$ interval for a mean, which percentiles of the $t^*_b$ values are used, and how?",
   "correct": [
    "The interval is $\\bar x-t^*_{1-\\alpha/2}S/\\sqrt n$ to $\\bar x-t^*_{\\alpha/2}S/\\sqrt n$, upper percentile first.",
@@ -2365,11 +2438,12 @@
     "misconception": "forces symmetry"
    }
   ],
-  "explanation": "The pivot is $t=(\\bar X-\\mu)/(S/\\sqrt n)$. Solving $t^*_{\\alpha/2}<t<t^*_{1-\\alpha/2}$ for $\\mu$ reverses the order of the percentiles."
+  "explanation": "The pivot is $t=(\\bar X-\\mu)/(S/\\sqrt n)$. Solving $t^*_{\\alpha/2}<t<t^*_{1-\\alpha/2}$ for $\\mu$ reverses the order of the percentiles.",
+  "section": 1
  },
  {
-  "id": "np-15.3",
-  "lecture": 15,
+  "id": "np-8.3",
+  "lecture": 8,
   "stem": "What problem does the BCa interval address?",
   "correct": [
    "Bias and skewness in the bootstrap distribution, handled by shifting the percentile levels used.",
@@ -2397,11 +2471,12 @@
     "misconception": "believes BCa avoids standard errors"
    }
   ],
-  "explanation": "BCa corrects the percentile levels for a bias constant $z_0$ and an acceleration constant $a$, giving better coverage when the estimator is biased or its variance depends on the parameter."
+  "explanation": "BCa corrects the percentile levels for a bias constant $z_0$ and an acceleration constant $a$, giving better coverage when the estimator is biased or its variance depends on the parameter.",
+  "section": 1
  },
  {
-  "id": "np-15.4",
-  "lecture": 15,
+  "id": "np-8.4",
+  "lecture": 8,
   "stem": "In the BCa interval, what do the constants $z_0$ and $a$ represent?",
   "correct": [
    "$z_0$ measures median bias of the replicates and $a$ the acceleration of the standard error.",
@@ -2429,11 +2504,12 @@
     "misconception": "thinks symmetric data force zero constants"
    }
   ],
-  "explanation": "$\\hat z_0=\\Phi^{-1}\\big(\\#\\{\\hat\\theta^*_b<\\hat\\theta\\}/B\\big)$ and $\\hat a$ is estimated from the jackknife; the interval ends are percentiles at levels $\\Phi\\big(z_0+\\frac{z_0+z}{1-a(z_0+z)}\\big)$."
+  "explanation": "$\\hat z_0=\\Phi^{-1}\\big(\\#\\{\\hat\\theta^*_b<\\hat\\theta\\}/B\\big)$ and $\\hat a$ is estimated from the jackknife; the interval ends are percentiles at levels $\\Phi\\big(z_0+\\frac{z_0+z}{1-a(z_0+z)}\\big)$.",
+  "section": 1
  },
  {
-  "id": "np-15.5",
-  "lecture": 15,
+  "id": "np-8.5",
+  "lecture": 8,
   "stem": "When $z_0=0$ and $a=0$, what does the BCa interval reduce to?",
   "correct": [
    "The percentile interval, with the $\\alpha/2$ and $1-\\alpha/2$ percentiles.",
@@ -2461,11 +2537,12 @@
     "misconception": "thinks all replicates are included"
    }
   ],
-  "explanation": "With $z_0=a=0$ the adjusted level is $\\Phi(z_{\\alpha/2})=\\alpha/2$ (and $1-\\alpha/2$ for the upper end), which are the percentile levels."
+  "explanation": "With $z_0=a=0$ the adjusted level is $\\Phi(z_{\\alpha/2})=\\alpha/2$ (and $1-\\alpha/2$ for the upper end), which are the percentile levels.",
+  "section": 1
  },
  {
-  "id": "np-16.1",
-  "lecture": 16,
+  "id": "np-8.6",
+  "lecture": 8,
   "stem": "What is resampled in the paired (case) bootstrap for a regression?",
   "correct": [
    "Whole observations $(x_i,y_i)$ are drawn with replacement and the regression is refitted.",
@@ -2493,11 +2570,12 @@
     "misconception": "mixes resampling and simulation"
    }
   ],
-  "explanation": "In the paired bootstrap each resample is a set of $n$ pairs drawn with replacement; the regression is refitted to get $\\hat\\beta^*$."
+  "explanation": "In the paired bootstrap each resample is a set of $n$ pairs drawn with replacement; the regression is refitted to get $\\hat\\beta^*$.",
+  "section": 2
  },
  {
-  "id": "np-16.2",
-  "lecture": 16,
+  "id": "np-8.7",
+  "lecture": 8,
   "stem": "How does the residual bootstrap build a resample for a regression?",
   "correct": [
    "Fit, resample the residuals, form $y^*_i=\\hat y_i+e^*_i$ with $x_i$ fixed, and refit.",
@@ -2525,11 +2603,12 @@
     "misconception": "describes the jackknife"
    }
   ],
-  "explanation": "The residual bootstrap treats the fitted values as fixed and resamples the residuals: $y^*_i=\\hat\\beta_0+\\hat\\beta_1x_i+e^*_i$. It assumes exchangeable (homoscedastic) errors."
+  "explanation": "The residual bootstrap treats the fitted values as fixed and resamples the residuals: $y^*_i=\\hat\\beta_0+\\hat\\beta_1x_i+e^*_i$. It assumes exchangeable (homoscedastic) errors.",
+  "section": 2
  },
  {
-  "id": "np-16.3",
-  "lecture": 16,
+  "id": "np-8.8",
+  "lecture": 8,
   "stem": "How is a bootstrap hypothesis test carried out?",
   "correct": [
    "Resample from data adjusted so that $H_0$ holds, and take the share of statistics at least as extreme as observed.",
@@ -2557,11 +2636,12 @@
     "misconception": "ignores the alternative hypothesis"
    }
   ],
-  "explanation": "The resampling must reflect $H_0$ (for example shifting each group to a common mean). The p-value is $\\#\\{t^*_b\\ge t_{\\text{obs}}\\}/B$, or $(1+\\#)/(B+1)$."
+  "explanation": "The resampling must reflect $H_0$ (for example shifting each group to a common mean). The p-value is $\\#\\{t^*_b\\ge t_{\\text{obs}}\\}/B$, or $(1+\\#)/(B+1)$.",
+  "section": 2
  },
  {
-  "id": "np-16.4",
-  "lecture": 16,
+  "id": "np-8.9",
+  "lecture": 8,
   "stem": "Why does the bootstrap perform poorly for the sample maximum?",
   "correct": [
    "A resample contains the observed maximum with probability $1-(1-1/n)^n\\approx0.63$, giving a large atom there.",
@@ -2589,11 +2669,12 @@
     "misconception": "overgeneralises the failure to all order statistics"
    }
   ],
-  "explanation": "For the sample maximum of a continuous distribution the bootstrap distribution has mass $1-(1-1/n)^n\\to1-e^{-1}$ at $X_{(n)}$, but the true distribution has no atom."
+  "explanation": "For the sample maximum of a continuous distribution the bootstrap distribution has mass $1-(1-1/n)^n\\to1-e^{-1}$ at $X_{(n)}$, but the true distribution has no atom.",
+  "section": 2
  },
  {
-  "id": "np-16.5",
-  "lecture": 16,
+  "id": "np-8.10",
+  "lecture": 8,
   "stem": "When is the paired bootstrap preferable to the residual bootstrap in regression?",
   "correct": [
    "When the error variance may depend on $x$ or the model may be misspecified.",
@@ -2621,11 +2702,12 @@
     "misconception": "restricts it to binary responses"
    }
   ],
-  "explanation": "The residual bootstrap assumes exchangeable errors; the paired bootstrap makes weaker assumptions and so is more robust to heteroscedasticity or an incorrect model."
+  "explanation": "The residual bootstrap assumes exchangeable errors; the paired bootstrap makes weaker assumptions and so is more robust to heteroscedasticity or an incorrect model.",
+  "section": 2
  },
  {
-  "id": "np-17.1",
-  "lecture": 17,
+  "id": "np-9.1",
+  "lecture": 9,
   "stem": "How does the jackknife estimate the bias of a statistic $\\hat\\theta$?",
   "correct": [
    "$(n-1)(\\bar\\theta_{(\\cdot)}-\\hat\\theta)$, from leave-one-out estimates.",
@@ -2653,11 +2735,12 @@
     "misconception": "denies the use"
    }
   ],
-  "explanation": "The jackknife-corrected estimate is $n\\hat\\theta-(n-1)\\bar\\theta_{(\\cdot)}$, which removes the $O(1/n)$ bias."
+  "explanation": "The jackknife-corrected estimate is $n\\hat\\theta-(n-1)\\bar\\theta_{(\\cdot)}$, which removes the $O(1/n)$ bias.",
+  "section": 1
  },
  {
-  "id": "np-17.2",
-  "lecture": 17,
+  "id": "np-9.2",
+  "lecture": 9,
   "stem": "Where does the jackknife fail?",
   "correct": [
    "For non-smooth statistics such as the median.",
@@ -2685,11 +2768,12 @@
     "misconception": "invents a condition"
    }
   ],
-  "explanation": "Bootstrap works for the median; neither works for the sample maximum."
+  "explanation": "Bootstrap works for the median; neither works for the sample maximum.",
+  "section": 1
  },
  {
-  "id": "np-17.3",
-  "lecture": 17,
+  "id": "np-9.3",
+  "lecture": 9,
   "stem": "How does the jackknife estimate the standard error of $\\hat\\theta$?",
   "correct": [
    "From the leave-one-out estimates, $\\sqrt{\\tfrac{n-1}n\\sum(\\hat\\theta_{(i)}-\\bar\\theta_{(\\cdot)})^2}$.",
@@ -2717,11 +2801,12 @@
     "misconception": "uses the full range as the standard error"
    }
   ],
-  "explanation": "Leave-one-out estimates vary much less than independent estimates, and the factor $(n-1)/n$ restores the scale: $\\widehat{SE}=\\sqrt{\\frac{n-1}n\\sum(\\hat\\theta_{(i)}-\\bar\\theta_{(\\cdot)})^2}$."
+  "explanation": "Leave-one-out estimates vary much less than independent estimates, and the factor $(n-1)/n$ restores the scale: $\\widehat{SE}=\\sqrt{\\frac{n-1}n\\sum(\\hat\\theta_{(i)}-\\bar\\theta_{(\\cdot)})^2}$.",
+  "section": 1
  },
  {
-  "id": "np-17.4",
-  "lecture": 17,
+  "id": "np-9.4",
+  "lecture": 9,
   "stem": "What is the bias-corrected jackknife estimate of $\\theta$?",
   "correct": [
    "$n\\hat\\theta-(n-1)\\bar\\theta_{(\\cdot)}$, which removes the leading $1/n$ term of the bias.",
@@ -2749,11 +2834,12 @@
     "misconception": "interchanges the weights"
    }
   ],
-  "explanation": "The jackknife bias estimate is $(n-1)(\\bar\\theta_{(\\cdot)}-\\hat\\theta)$; subtracting it gives $n\\hat\\theta-(n-1)\\bar\\theta_{(\\cdot)}$."
+  "explanation": "The jackknife bias estimate is $(n-1)(\\bar\\theta_{(\\cdot)}-\\hat\\theta)$; subtracting it gives $n\\hat\\theta-(n-1)\\bar\\theta_{(\\cdot)}$.",
+  "section": 1
  },
  {
-  "id": "np-17.5",
-  "lecture": 17,
+  "id": "np-9.5",
+  "lecture": 9,
   "stem": "How does the jackknife differ from the bootstrap?",
   "correct": [
    "The jackknife is deterministic, using the $n$ leave-one-out samples; the bootstrap resamples at random.",
@@ -2781,11 +2867,12 @@
     "misconception": "assumes the methods always agree"
    }
   ],
-  "explanation": "The jackknife is the original resampling method: deterministic, $n$ recomputations. It fails for non-smooth statistics such as the median, where the bootstrap is better."
+  "explanation": "The jackknife is the original resampling method: deterministic, $n$ recomputations. It fails for non-smooth statistics such as the median, where the bootstrap is better.",
+  "section": 1
  },
  {
-  "id": "np-18.1",
-  "lecture": 18,
+  "id": "np-9.6",
+  "lecture": 9,
   "stem": "Let $\\hat F_n$ be the empirical cdf of $n$ iid observations from an arbitrary distribution $F$. What does the Glivenko-Cantelli theorem state?",
   "correct": [
    "$\\sup_x|\\hat F_n(x)-F(x)|\\to0$ almost surely, for every $F$.",
@@ -2813,11 +2900,12 @@
     "misconception": "confuses the rate of convergence"
    }
   ],
-  "explanation": "The theorem holds for every $F$, discrete or continuous, with no moment condition. The supremum is of order $1/\\sqrt n$, so after multiplying by $\\sqrt n$ it does not vanish."
+  "explanation": "The theorem holds for every $F$, discrete or continuous, with no moment condition. The supremum is of order $1/\\sqrt n$, so after multiplying by $\\sqrt n$ it does not vanish.",
+  "section": 2
  },
  {
-  "id": "np-18.2",
-  "lecture": 18,
+  "id": "np-9.7",
+  "lecture": 9,
   "stem": "What is the plug-in estimator of the variance functional $T(F)=\\int(x-\\mu)^2\\,dF(x)$ with $\\mu=\\int x\\,dF(x)$?",
   "correct": [
    "$T(\\hat F_n)=\\frac1n\\sum_i(X_i-\\bar X)^2$, the variance with divisor $n$.",
@@ -2845,11 +2933,12 @@
     "misconception": "confuses the variance with the squared mean"
    }
   ],
-  "explanation": "The plug-in estimator evaluates $T$ at $\\hat F_n$. For the variance this has divisor $n$, so it is biased by the factor $(n-1)/n$ but still consistent."
+  "explanation": "The plug-in estimator evaluates $T$ at $\\hat F_n$. For the variance this has divisor $n$, so it is biased by the factor $(n-1)/n$ but still consistent.",
+  "section": 2
  },
  {
-  "id": "np-18.3",
-  "lecture": 18,
+  "id": "np-9.8",
+  "lecture": 9,
   "stem": "The influence function of a functional $T$ at $x$ is $L_T(x)=\\lim_{\\varepsilon\\to0}\\{T((1-\\varepsilon)F+\\varepsilon\\delta_x)-T(F)\\}/\\varepsilon$. What does it measure?",
   "correct": [
    "The effect on $T$ of a tiny contamination at $x$; for the mean it is $x-\\mu$, unbounded.",
@@ -2877,11 +2966,12 @@
     "misconception": "confuses influence with the sampling variance"
    }
   ],
-  "explanation": "The influence function is the derivative of $T$ along the path from $F$ towards $\\delta_x$. For the mean, $T=\\mu$ moves linearly, giving $x-\\mu$; the median has a bounded influence function."
+  "explanation": "The influence function is the derivative of $T$ along the path from $F$ towards $\\delta_x$. For the mean, $T=\\mu$ moves linearly, giving $x-\\mu$; the median has a bounded influence function.",
+  "section": 2
  },
  {
-  "id": "np-18.4",
-  "lecture": 18,
+  "id": "np-9.9",
+  "lecture": 9,
   "stem": "Using the influence function $L_T$, the standard error of $T(\\hat F_n)$ is approximated by $\\hat\\tau/\\sqrt n$. How is $\\hat\\tau^2$ computed?",
   "correct": [
    "$\\hat\\tau^2=\\frac1n\\sum_i\\hat L(X_i)^2$, the mean of the squared influence values at the data.",
@@ -2909,11 +2999,12 @@
     "misconception": "thinks the influence function needs a parametric model"
    }
   ],
-  "explanation": "For the mean $L(x)=x-\\mu$, so $\\hat\\tau^2=\\frac1n\\sum(X_i-\\bar X)^2$ and the standard error is about $\\hat\\sigma/\\sqrt n$, as expected."
+  "explanation": "For the mean $L(x)=x-\\mu$, so $\\hat\\tau^2=\\frac1n\\sum(X_i-\\bar X)^2$ and the standard error is about $\\hat\\sigma/\\sqrt n$, as expected.",
+  "section": 2
  },
  {
-  "id": "np-18.5",
-  "lecture": 18,
+  "id": "np-9.10",
+  "lecture": 9,
   "stem": "Which statement about the Dvoretzky-Kiefer-Wolfowitz (DKW) inequality is true?",
   "correct": [
    "$P(\\sup_x|\\hat F_n-F|>\\varepsilon)\\le2e^{-2n\\varepsilon^2}$ for every $F$ and every $n$.",
@@ -2941,11 +3032,12 @@
     "misconception": "confuses a uniform bound with a pointwise one"
    }
   ],
-  "explanation": "The half-width is of order $n^{-1/2}$, and the inequality holds for all $n$ and all $F$. To make it at most $\\varepsilon$ one needs $n\\ge\\log(2/\\alpha)/(2\\varepsilon^2)$."
+  "explanation": "The half-width is of order $n^{-1/2}$, and the inequality holds for all $n$ and all $F$. To make it at most $\\varepsilon$ one needs $n\\ge\\log(2/\\alpha)/(2\\varepsilon^2)$.",
+  "section": 2
  },
  {
-  "id": "np-19.1",
-  "lecture": 19,
+  "id": "np-10.1",
+  "lecture": 10,
   "stem": "How does a kernel density estimator with kernel $K$ and bandwidth $h$ work?",
   "correct": [
    "$\\hat f(x)=\\frac1{nh}\\sum_iK\\{(x-X_i)/h\\}$, a smooth bump averaged over the observations.",
@@ -2973,11 +3065,12 @@
     "misconception": "omits $1/h$ and does not integrate to one"
    }
   ],
-  "explanation": "The factor $1/h$ keeps the area at 1, since $\\int K\\{(x-X_i)/h\\}dx=h$."
+  "explanation": "The factor $1/h$ keeps the area at 1, since $\\int K\\{(x-X_i)/h\\}dx=h$.",
+  "section": 1
  },
  {
-  "id": "np-19.2",
-  "lecture": 19,
+  "id": "np-10.2",
+  "lecture": 10,
   "stem": "What is the effect of the bandwidth $h$ on a kernel density estimate?",
   "correct": [
    "Small $h$ is wiggly and noisy; large $h$ oversmooths and adds bias.",
@@ -3005,11 +3098,12 @@
     "misconception": "ignores the trade-off"
    }
   ],
-  "explanation": "$\\text{bias}\\approx h^2f''(x)\\mu_2(K)/2$ and $\\text{variance}\\approx f(x)R(K)/(nh)$; both are balanced by $h\\propto n^{-1/5}$."
+  "explanation": "$\\text{bias}\\approx h^2f''(x)\\mu_2(K)/2$ and $\\text{variance}\\approx f(x)R(K)/(nh)$; both are balanced by $h\\propto n^{-1/5}$.",
+  "section": 1
  },
  {
-  "id": "np-19.3",
-  "lecture": 19,
+  "id": "np-10.3",
+  "lecture": 10,
   "stem": "How does the asymptotically optimal bandwidth (for mean integrated squared error) scale with the sample size $n$?",
   "correct": [
    "In proportion to $n^{-1/5}$.",
@@ -3037,11 +3131,12 @@
     "misconception": "gives an unrelated rate"
    }
   ],
-  "explanation": "Parametric densities converge at rate $n^{-1}$ in MISE; this slower rate is the price of flexibility. Silverman's rule is $h=1.06\\,\\hat\\sigma n^{-1/5}$."
+  "explanation": "Parametric densities converge at rate $n^{-1}$ in MISE; this slower rate is the price of flexibility. Silverman's rule is $h=1.06\\,\\hat\\sigma n^{-1/5}$.",
+  "section": 1
  },
  {
-  "id": "np-19.4",
-  "lecture": 19,
+  "id": "np-10.4",
+  "lecture": 10,
   "stem": "Which is true of the choice of kernel in density estimation?",
   "correct": [
    "It matters little next to the bandwidth.",
@@ -3069,11 +3164,12 @@
     "misconception": "confuses tails with bias"
    }
   ],
-  "explanation": "Kernels are nonnegative, symmetric and integrate to one; they differ in efficiency by under 5%."
+  "explanation": "Kernels are nonnegative, symmetric and integrate to one; they differ in efficiency by under 5%.",
+  "section": 1
  },
  {
-  "id": "np-19.5",
-  "lecture": 19,
+  "id": "np-10.5",
+  "lecture": 10,
   "stem": "What is a known weakness of the kernel density estimator near the boundary of a bounded support?",
   "correct": [
    "It leaks mass outside the support and is biased near the edge.",
@@ -3101,11 +3197,12 @@
     "misconception": "overstates"
    }
   ],
-  "explanation": "Examples: densities of returns' absolute values or durations, supported on $[0,\\infty)$. Reflecting the data or using log transformations helps."
+  "explanation": "Examples: densities of returns' absolute values or durations, supported on $[0,\\infty)$. Reflecting the data or using log transformations helps.",
+  "section": 1
  },
  {
-  "id": "np-20.1",
-  "lecture": 20,
+  "id": "np-11.1",
+  "lecture": 11,
   "stem": "What does the Nadaraya-Watson estimator of the regression function compute at $x$?",
   "correct": [
    "A kernel-weighted average of the responses.",
@@ -3133,11 +3230,12 @@
     "misconception": "confuses with a slope"
    }
   ],
-  "explanation": "It is a locally constant fit; as $h\\to\\infty$ it tends to the sample mean, and as $h\\to0$ it interpolates the data."
+  "explanation": "It is a locally constant fit; as $h\\to\\infty$ it tends to the sample mean, and as $h\\to0$ it interpolates the data.",
+  "section": 1
  },
  {
-  "id": "np-20.2",
-  "lecture": 20,
+  "id": "np-11.2",
+  "lecture": 11,
   "stem": "Why is local linear regression often preferred to Nadaraya-Watson?",
   "correct": [
    "Less bias at boundaries, as it fits a line.",
@@ -3165,11 +3263,12 @@
     "misconception": "reverses the benefit"
    }
   ],
-  "explanation": "Local linear regression reproduces linear functions exactly, so its bias depends on the curvature only, not on the design density."
+  "explanation": "Local linear regression reproduces linear functions exactly, so its bias depends on the curvature only, not on the design density.",
+  "section": 1
  },
  {
-  "id": "np-20.3",
-  "lecture": 20,
+  "id": "np-11.3",
+  "lecture": 11,
   "stem": "What is LOESS (LOWESS)?",
   "correct": [
    "Local regression with weights falling with distance.",
@@ -3197,11 +3296,12 @@
     "misconception": "describes a simpler smoother"
    }
   ],
-  "explanation": "The span (the fraction of points used) plays the role of the bandwidth; a larger span gives a smoother curve."
+  "explanation": "The span (the fraction of points used) plays the role of the bandwidth; a larger span gives a smoother curve.",
+  "section": 1
  },
  {
-  "id": "np-20.4",
-  "lecture": 20,
+  "id": "np-11.4",
+  "lecture": 11,
   "stem": "How is the bandwidth of a kernel regression typically chosen?",
   "correct": [
    "By cross-validation, minimising leave-one-out prediction error.",
@@ -3229,11 +3329,12 @@
     "misconception": "gives an arbitrary rule"
    }
   ],
-  "explanation": "The in-sample squared error decreases as $h\\to0$, so a held-out criterion (leave-one-out CV, GCV) is needed."
+  "explanation": "The in-sample squared error decreases as $h\\to0$, so a held-out criterion (leave-one-out CV, GCV) is needed.",
+  "section": 1
  },
  {
-  "id": "np-20.5",
-  "lecture": 20,
+  "id": "np-11.5",
+  "lecture": 11,
   "stem": "How do nonparametric regression estimators behave as the number of predictors grows?",
   "correct": [
    "They suffer the curse of dimensionality: neighbourhoods empty out.",
@@ -3261,11 +3362,12 @@
     "misconception": "restricts it wrongly"
    }
   ],
-  "explanation": "Additive or single-index models restore reasonable rates by imposing structure."
+  "explanation": "Additive or single-index models restore reasonable rates by imposing structure.",
+  "section": 1
  },
  {
-  "id": "np-21.1",
-  "lecture": 21,
+  "id": "np-12.1",
+  "lecture": 12,
   "stem": "Which statement correctly contrasts the Kendall and Spearman distances between two rankings of $n$ items?",
   "correct": [
    "Kendall counts discordant pairs of items; Spearman sums squared rank differences.",
@@ -3293,11 +3395,12 @@
     "misconception": "confuses zero distance with reversal"
    }
   ],
-  "explanation": "Both are zero only for identical rankings. The reversed ranking is at the maximum Kendall distance $n(n-1)/2$."
+  "explanation": "Both are zero only for identical rankings. The reversed ranking is at the maximum Kendall distance $n(n-1)/2$.",
+  "section": 1
  },
  {
-  "id": "np-21.2",
-  "lecture": 21,
+  "id": "np-12.2",
+  "lecture": 12,
   "stem": "In the Mallows model $P(\\pi)\\propto\\exp\\{-\\theta\\,d(\\pi,\\pi_0)\\}$ with $\\theta>0$ and $d$ the Kendall distance, which statement is true?",
   "correct": [
    "The centre $\\pi_0$ is the mode, and $\\theta\\to0$ gives the uniform law.",
@@ -3325,11 +3428,12 @@
     "misconception": "ignores that only the distance matters"
    }
   ],
-  "explanation": "The probability depends on $\\pi$ only through $d(\\pi,\\pi_0)$, so rankings at equal distance are equally likely. The model has the centre and one concentration parameter."
+  "explanation": "The probability depends on $\\pi$ only through $d(\\pi,\\pi_0)$, so rankings at equal distance are equally likely. The model has the centre and one concentration parameter.",
+  "section": 1
  },
  {
-  "id": "np-21.3",
-  "lecture": 21,
+  "id": "np-12.3",
+  "lecture": 12,
   "stem": "In a Plackett-Luce model with positive weights $w_1,\\dots,w_n$, what is the probability of the ranking $\\pi=(\\pi_1,\\dots,\\pi_n)$, listed best first?",
   "correct": [
    "$\\prod_{i=1}^{n}w_{\\pi_i}/\\sum_{j\\ge i}w_{\\pi_j}$.",
@@ -3357,11 +3461,12 @@
     "misconception": "confuses the probability with a Borda-type score"
    }
   ],
-  "explanation": "With weights $3,2,1$ the ranking $(1,2,3)$ has probability $\\frac36\\cdot\\frac23\\cdot1=\\frac13$. The factors are renormalised over the remaining items at each place."
+  "explanation": "With weights $3,2,1$ the ranking $(1,2,3)$ has probability $\\frac36\\cdot\\frac23\\cdot1=\\frac13$. The factors are renormalised over the remaining items at each place.",
+  "section": 1
  },
  {
-  "id": "np-21.4",
-  "lecture": 21,
+  "id": "np-12.4",
+  "lecture": 12,
   "stem": "How does the Plackett-Luce model relate to Thurstone's model of latent utilities?",
   "correct": [
    "Plackett-Luce is the Thurstone model with iid Gumbel errors, taking $w_i=e^{\\mu_i}$.",
@@ -3389,11 +3494,12 @@
     "misconception": "thinks Thurstone gives only a best-choice model"
    }
   ],
-  "explanation": "Thurstone uses latent utilities with noise and ranks by realised value. With normal noise the probabilities have no closed form; with Gumbel noise they reduce to the Plackett-Luce product."
+  "explanation": "Thurstone uses latent utilities with noise and ranks by realised value. With normal noise the probabilities have no closed form; with Gumbel noise they reduce to the Plackett-Luce product.",
+  "section": 1
  },
  {
-  "id": "np-21.5",
-  "lecture": 21,
+  "id": "np-12.5",
+  "lecture": 12,
   "stem": "Several judges each rank the same $m$ items. How do the Borda count and the Kemeny consensus ranking compare?",
   "correct": [
    "Borda sorts by total points; Kemeny minimises total Kendall distance; they can differ.",
@@ -3421,6 +3527,7 @@
     "misconception": "believes Borda always elects a Condorcet winner"
    }
   ],
-  "explanation": "Borda is a score rule; Kemeny is the median ranking under Kendall distance and is hard to compute in general. With a Condorcet winner Kemeny puts it first, but Borda may not."
+  "explanation": "Borda is a score rule; Kemeny is the median ranking under Kendall distance and is hard to compute in general. With a Condorcet winner Kemeny puts it first, but Borda may not.",
+  "section": 1
  }
 ]

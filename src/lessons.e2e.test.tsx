@@ -57,9 +57,9 @@ describe('lecture page and quiz', () => {
   it('shows the lesson, a worked sample with answers, and the quiz button', () => {
     window.location.hash = '#/topic/np/lecture/1'
     render(<App />)
-    expect(screen.getByRole('heading', { name: /Lecture 1: Parametric versus nonparametric/ })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: /Lecture 1: Why nonparametric/ })).toBeTruthy()
     expect(screen.getByRole('heading', { name: 'Lesson' })).toBeTruthy()
-    expect(screen.getByRole('heading', { name: 'Worked sample' })).toBeTruthy()
+    expect(screen.getAllByRole('heading', { name: /^Worked sample/ }).length).toBe(3) // np lecture 1 has three sections
     expect(screen.getAllByText('Working:').length).toBeGreaterThanOrEqual(2)
     expect(screen.getByRole('link', { name: /take the quiz/i })).toBeTruthy()
   })
@@ -72,7 +72,7 @@ describe('lecture page and quiz', () => {
     window.location.hash = '#/topic/np/lecture/3'
     cleanup()
     render(<App />)
-    expect(screen.getByRole('heading', { name: /Lecture 3: Confidence intervals for the median/ })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: /Lecture 3: Two-sample scale and distribution/ })).toBeTruthy()
   })
 
   it('the quiz has 5 MC and 1 long question; a blank submission fails, is recorded, and does not unlock lecture 2', async () => {

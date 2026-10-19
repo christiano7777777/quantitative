@@ -24,27 +24,27 @@ export function build({ u, lam, lamW }: Params): LQInstance {
     parts: [
       {
         prompt: 'Exponential with rate ' + tex('\\lambda=' + dec(lam)) + ': ' + tex('F(x)=1-e^{-\\lambda x}') + ', so one may use ' + tex('X=-\\ln(U)/\\lambda') + ' (since ' + tex('1-U') + ' is also uniform). Find ' + tex('X') + ' for ' + tex('u=' + dec(u[0])) + '.',
-        answer: xe, tolerance: tol4, lecture: 7,
+        answer: xe, tolerance: tol4, lecture: 4,
         explanation: tex('-\\ln(' + dec(u[0]) + ')/' + dec(lam) + '=' + dec(-Math.log(u[0])) + '/' + dec(lam)) + ' = ' + dec(xe) + '.',
       },
       {
         prompt: 'Weibull with shape ' + tex('k=2') + ' and rate ' + tex('\\lambda=' + dec(lamW)) + ': ' + tex('F(t)=1-e^{-\\lambda t^2}') + '. Use ' + tex('T=\\{-\\ln(U)/\\lambda\\}^{1/2}') + ' for ' + tex('u=' + dec(u[1])) + '.',
-        answer: xw, tolerance: tol4, lecture: 7,
+        answer: xw, tolerance: tol4, lecture: 4,
         explanation: tex('\\{-\\ln(' + dec(u[1]) + ')/' + dec(lamW) + '\\}^{1/2}=\\sqrt{' + dec(-Math.log(u[1]) / lamW) + '}') + ' = ' + dec(xw) + '.',
       },
       {
         prompt: 'Standard logistic: ' + tex('F(x)=1/(1+e^{-x})') + ', so ' + tex('F^{-1}(u)=\\ln\\{u/(1-u)\\}') + '. Find ' + tex('X') + ' for ' + tex('u=' + dec(u[2])) + '.',
-        answer: xl, tolerance: tol4, lecture: 7,
+        answer: xl, tolerance: tol4, lecture: 4,
         explanation: tex('\\ln(' + dec(u[2]) + '/' + dec(1 - u[2]) + ')') + ' = ' + dec(xl) + '.',
       },
       {
         prompt: 'Standard Cauchy: ' + tex('F(x)=\\tfrac12+\\arctan(x)/\\pi') + ', so ' + tex('F^{-1}(u)=\\tan\\{\\pi(u-\\tfrac12)\\}') + '. Find ' + tex('X') + ' for ' + tex('u=' + dec(u[3])) + '.',
-        answer: xc, tolerance: tol4, lecture: 7,
+        answer: xc, tolerance: tol4, lecture: 4,
         explanation: tex('\\tan(\\pi\\times' + dec(u[3] - 0.5) + ')') + ' = ' + dec(xc) + '.',
       },
       {
         prompt: 'Standard Laplace (double exponential): ' + tex('F(x)=\\tfrac12e^{x}') + ' for ' + tex('x<0') + ' and ' + tex('1-\\tfrac12e^{-x}') + ' for ' + tex('x\\ge0') + ', so ' + tex('F^{-1}(u)=\\ln(2u)') + ' if ' + tex('u<\\tfrac12') + ' and ' + tex('-\\ln\\{2(1-u)\\}') + ' otherwise. Find ' + tex('X') + ' for ' + tex('u=' + dec(u[4])) + '.',
-        answer: xp, tolerance: tol4, lecture: 7,
+        answer: xp, tolerance: tol4, lecture: 4,
         explanation: (u[4] < 0.5 ? 'Since ' + tex('u<\\tfrac12') + ', ' + tex('\\ln(2\\times' + dec(u[4]) + ')') : 'Since ' + tex('u\\ge\\tfrac12') + ', ' + tex('-\\ln(2\\times' + dec(1 - u[4]) + ')')) + ' = ' + dec(xp) + '.',
       },
     ],

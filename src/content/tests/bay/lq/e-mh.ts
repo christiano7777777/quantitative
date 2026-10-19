@@ -27,27 +27,27 @@ export function build({ x, xp, gx, gxp, pi }: Params): LQInstance {
     parts: [
       {
         prompt: 'A random-walk Metropolis sampler targets ' + tex('\\pi(x)\\propto e^{-x^2/2}') + ' with a symmetric proposal. The chain is at ' + tex('x=' + dec(x)) + ' and proposes ' + tex('x\'=' + dec(xp)) + '. Find the acceptance probability ' + tex('\\min\\{1,\\pi(x\')/\\pi(x)\\}') + '.',
-        answer: acc1, tolerance: tol4, lecture: 10,
+        answer: acc1, tolerance: tol4, lecture: 6,
         explanation: tex('\\exp\\{-(' + dec(xp * xp) + '-' + dec(x * x) + ')/2\\}=' + dec(Math.exp(-(xp * xp - x * x) / 2))) + ', capped at 1: ' + dec(acc1) + '.',
       },
       {
         prompt: 'The target is now known only up to a constant, ' + tex('\\pi(t)\\propto t^2e^{-t}') + ' for ' + tex('t>0') + ' (a Gamma(3,1) kernel). The chain is at ' + tex(dec(gx)) + ' and proposes ' + tex(dec(gxp)) + ' with a symmetric proposal. Find the acceptance probability. (The normalising constant cancels.)',
-        answer: acc2, tolerance: tol4, lecture: 10,
+        answer: acc2, tolerance: tol4, lecture: 6,
         explanation: tex('\\dfrac{' + dec(gxp) + '^2e^{-' + dec(gxp) + '}}{' + dec(gx) + '^2e^{-' + dec(gx) + '}}') + ' = ' + dec(kern(gxp) / kern(gx)) + ', capped at 1: ' + dec(acc2) + '.',
       },
       {
         prompt: 'An independence sampler proposes ' + tex('x\'') + ' from a ' + tex('N(0,4)') + ' density ' + tex('q') + ' regardless of the current state, for the target ' + tex('\\pi(x)\\propto e^{-x^2/2}') + '. With current ' + tex('x=' + dec(x)) + ' and proposal ' + tex('x\'=' + dec(xp)) + ', find the acceptance probability ' + tex('\\min\\{1,\\frac{\\pi(x\')q(x)}{\\pi(x)q(x\')}\\}') + '.',
-        answer: acc3, tolerance: tol4, lecture: 10,
+        answer: acc3, tolerance: tol4, lecture: 6,
         explanation: 'The ratio ' + tex('\\dfrac{e^{-x\'^2/2}e^{-x^2/8}}{e^{-x^2/2}e^{-x\'^2/8}}') + ' = ' + dec((target(xp) * qd(x)) / (target(x) * qd(xp))) + ', capped at 1: ' + dec(acc3) + '.',
       },
       {
         prompt: 'A sampler on three states has target probabilities proportional to ' + tex(pi.join(':')) + '. From any state it proposes each of the other two states with probability ' + tex('1/2') + ' and accepts with probability ' + tex('\\min\\{1,\\pi_j/\\pi_i\\}') + '. Find the transition probability from state 1 to state 2.',
-        answer: move(0, 1), tolerance: tol4, lecture: 10,
+        answer: move(0, 1), tolerance: tol4, lecture: 6,
         explanation: 'Normalised target ' + tex(pr.map(dec).join(',')) + '; ' + tex('P(1\\to2)=\\tfrac12\\min\\{1,' + dec(pr[1]) + '/' + dec(pr[0]) + '\\}') + ' = ' + dec(move(0, 1)) + '.',
       },
       {
         prompt: 'Find the probability that the chain stays in state 1 on the next step (the sum of the rejection probabilities), ' + tex('1-P(1\\to2)-P(1\\to3)') + '.',
-        answer: rej0, tolerance: tol4, lecture: 10,
+        answer: rej0, tolerance: tol4, lecture: 6,
         explanation: tex('1-' + dec(move(0, 1)) + '-' + dec(move(0, 2))) + ' = ' + dec(rej0) + '. Detailed balance ' + tex('\\pi_iP_{ij}=\\pi_jP_{ji}') + ' holds by construction.',
       },
     ],

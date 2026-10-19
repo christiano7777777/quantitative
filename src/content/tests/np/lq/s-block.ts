@@ -28,27 +28,27 @@ export function build({ data, focus }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the rank sum ' + tex('R_{' + focus + '+}') + ' of treatment ' + tex(focus) + '. Give a whole number.',
-        answer: Rp[focus - 1], tolerance: tolInt, lecture: 11,
+        answer: Rp[focus - 1], tolerance: tolInt, lecture: 5,
         explanation: 'Within-subject ranks of treatment ' + tex(focus) + ': ' + ranks.map((r) => r[focus - 1]).join(', ') + ', summing to ' + Rp[focus - 1] + '. (All three rank sums: ' + Rp.join(', ') + ', adding to ' + tex(b * k * (k + 1) / 2) + '.)',
       },
       {
         prompt: 'Find the Friedman statistic ' + tex('FM=\\dfrac{12}{bk(k+1)}\\sum_iR_{i+}^2-3b(k+1)') + '.',
-        answer: FM, tolerance: tol4, lecture: 11,
+        answer: FM, tolerance: tol4, lecture: 5,
         explanation: tex('\\dfrac{12}{' + b * k * (k + 1) + '}(' + Rp.map((r) => r + '^2').join('+') + ')-' + 3 * b * (k + 1)) + ' = ' + dec(FM) + '. Compare with ' + tex('\\chi^2_{' + (k - 1) + '}') + '.',
       },
       {
         prompt: 'Page\'s statistic for the ordered alternative ' + tex('t_1\\le t_2\\le t_3') + ' is ' + tex('PG=\\sum_i iR_{i+}') + '. Find it. Give a whole number.',
-        answer: PG, tolerance: tolInt, lecture: 11,
+        answer: PG, tolerance: tolInt, lecture: 5,
         explanation: tex('1\\times' + Rp[0] + '+2\\times' + Rp[1] + '+3\\times' + Rp[2]) + ' = ' + PG + '.',
       },
       {
         prompt: 'Find the null mean of Page\'s statistic, ' + tex('E(PG)=bk(k+1)^2/4') + '.',
-        answer: EPG, tolerance: tol4, lecture: 11,
+        answer: EPG, tolerance: tol4, lecture: 5,
         explanation: tex(b + '\\times' + k + '\\times' + (k + 1) + '^2/4') + ' = ' + dec(EPG) + '. ' + tex('PG') + ' well above this supports an increasing order.',
       },
       {
         prompt: 'Find Kendall\'s coefficient of concordance ' + tex('W=FM/\\{b(k-1)\\}') + '. (It is ' + tex('1') + ' when all subjects rank the treatments identically.)',
-        answer: W, tolerance: tol4, lecture: 11,
+        answer: W, tolerance: tol4, lecture: 5,
         explanation: tex(dec(FM) + '/(' + b + '\\times' + (k - 1) + ')') + ' = ' + dec(W) + '.',
       },
     ],

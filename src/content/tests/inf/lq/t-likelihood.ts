@@ -43,27 +43,27 @@ export function build({ A, B, C, lam0, mx, th, r, p }: Params): LQInstance {
     parts: [
       {
         prompt: 'Poisson(' + tex('\\lambda') + ') samples are ' + tex('x=(' + A.join(',') + ')') + ' and ' + tex('x\'=(' + B.join(',') + ')') + ', which have the same total ' + tex(sA) + '. Find the likelihood ratio ' + tex('L(\\lambda;x)/L(\\lambda;x\'\\,)') + ', which does not depend on ' + tex('\\lambda') + '.',
-        answer: eqRatio, tolerance: tol4, lecture: 11,
+        answer: eqRatio, tolerance: tol4, lecture: 6,
         explanation: 'The terms ' + tex('e^{-n\\lambda}\\lambda^{\\sum x_i}') + ' are equal, so the ratio is ' + tex('\\prod x_i\'!/\\prod x_i!=' + prod(B) + '/' + prod(A)) + ' = ' + dec(eqRatio) + '.',
       },
       {
         prompt: 'For ' + tex('x=(' + A.join(',') + ')') + ' (total ' + tex(sA) + ') and ' + tex('x\'\'=(' + C.join(',') + ')') + ' (total ' + tex(sC) + ') find the likelihood ratio ' + tex('L(\\lambda;x)/L(\\lambda;x\'\'\\,)') + ' at ' + tex('\\lambda=' + dec(lam0)) + '. (It depends on ' + tex('\\lambda') + ', as the totals differ.)',
-        answer: neRatio, tolerance: tol4, lecture: 11,
+        answer: neRatio, tolerance: tol4, lecture: 6,
         explanation: tex('\\lambda^{\\sum x_i-\\sum x\'\'_i}\\prod x\'\'_i!/\\prod x_i!=' + dec(lam0) + '^{' + (sA - sC) + '}\\times' + prod(C) + '/' + prod(A)) + ' = ' + dec(neRatio) + '.',
       },
       {
         prompt: 'A sample from ' + tex('U(0,\\theta)') + ' is ' + tex(mx.map(dec).join(',\\ ')) + '. Its likelihood is ' + tex('\\theta^{-n}\\mathbf 1\\{\\max x_i\\le\\theta\\}') + '. Find ' + tex('L(\\theta)') + ' at ' + tex('\\theta=' + dec(th[0])) + ' (6 decimal places).',
-        answer: lik, tolerance: { abs: 5e-7 }, lecture: 11,
+        answer: lik, tolerance: { abs: 5e-7 }, lecture: 6,
         explanation: 'The maximum ' + dec(Math.max(...mx)) + ' is at most ' + dec(th[0]) + ', so ' + tex('L=' + dec(th[0]) + '^{-' + n + '}') + ' = ' + dec(lik) + '. The statistic ' + tex('\\max_iX_i') + ' is minimal sufficient.',
       },
       {
         prompt: 'For the same sample find the likelihood ratio ' + tex('L(' + dec(th[1]) + ')/L(' + dec(th[0]) + ')') + '.',
-        answer: lr, tolerance: tol4, lecture: 11,
+        answer: lr, tolerance: tol4, lecture: 6,
         explanation: tex('(' + dec(th[0]) + '/' + dec(th[1]) + ')^{' + n + '}') + ' = ' + dec(lr) + ' (both values are at least the maximum). The likelihood is decreasing in ' + tex('\\theta') + ' above the maximum, so the MLE is the sample maximum.',
       },
       {
         prompt: 'Experiment 1 observes ' + tex(kSucc) + ' successes in ' + tex(nTrials) + ' Bernoulli trials (binomial). Experiment 2 keeps going until ' + tex(kSucc) + ' successes and happens to need ' + tex(nTrials) + ' trials (negative binomial). Under the likelihood principle the two give the same evidence about ' + tex('p') + '. Find the likelihood ratio ' + tex('L(' + dec(p[0]) + ')/L(' + dec(p[1]) + ')') + ', which is the same in both experiments.',
-        answer: binRatio, tolerance: tol4, lecture: 11,
+        answer: binRatio, tolerance: tol4, lecture: 6,
         explanation: 'In both experiments ' + tex('L(p)\\propto p^{' + kSucc + '}(1-p)^{' + (nTrials - kSucc) + '}') + ' (the binomial coefficients differ but cancel in the ratio), so the ratio is ' + tex('(' + dec(p[0]) + '/' + dec(p[1]) + ')^{' + kSucc + '}(' + dec(1 - p[0]) + '/' + dec(1 - p[1]) + ')^{' + (nTrials - kSucc) + '}') + ' = ' + dec(binRatio) + '.',
       },
     ],

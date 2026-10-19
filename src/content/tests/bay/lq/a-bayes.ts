@@ -44,12 +44,12 @@ export function build({ n, k, prior, a, b }: Params): LQInstance {
       },
       {
         prompt: 'Now ' + tex('\\theta') + ' is continuous with a ' + tex('\\mathrm{Beta}(' + a + ',' + b + ')') + ' prior. Find the posterior mean after ' + tex(k) + ' successes in ' + tex(n) + ' tosses.',
-        answer: pm, tolerance: tol4, lecture: 3,
+        answer: pm, tolerance: tol4, lecture: 2,
         explanation: 'The posterior is ' + tex('\\mathrm{Beta}(' + (a + k) + ',' + (b + n - k) + ')') + ', with mean ' + tex((a + k) + '/' + (a + b + n)) + ' = ' + dec(pm) + '.',
       },
       {
         prompt: 'The posterior mean is a weighted average of the prior mean and the sample proportion ' + tex('k/n') + '. Find the weight on the sample proportion, ' + tex('n/(\\alpha+\\beta+n)') + '.',
-        answer: w, tolerance: tol4, lecture: 3,
+        answer: w, tolerance: tol4, lecture: 2,
         explanation: tex(n + '/(' + a + '+' + b + '+' + n + ')') + ' = ' + dec(w) + '; check: ' + dec(w) + '\\cdot' + dec(k / n) + ' + ' + dec(1 - w) + '\\cdot' + dec(a / (a + b)) + ' = ' + dec(pm) + '.',
       },
     ],

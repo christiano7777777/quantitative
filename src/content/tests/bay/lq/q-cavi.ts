@@ -29,27 +29,27 @@ export function build({ y, pi1, l1, l2, a1, a2 }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find ' + tex('r_1=q(z_1=1)') + ' for ' + tex('y_1=' + y[0]) + '.',
-        answer: r[0], tolerance: tol4, lecture: 14,
+        answer: r[0], tolerance: tol4, lecture: 9,
         explanation: tex('\\dfrac{' + dec(pi1) + '\\times' + dec(pois(l1, y[0])) + '}{' + dec(pi1) + '\\times' + dec(pois(l1, y[0])) + '+' + dec(1 - pi1) + '\\times' + dec(pois(l2, y[0])) + '}') + ' = ' + dec(r[0]) + '.',
       },
       {
         prompt: 'Find ' + tex('r_2=q(z_2=1)') + ' for ' + tex('y_2=' + y[1]) + '.',
-        answer: r[1], tolerance: tol4, lecture: 14,
+        answer: r[1], tolerance: tol4, lecture: 9,
         explanation: 'With ' + tex('y_2=' + y[1]) + ': ' + tex('\\dfrac{' + dec(pi1) + '\\times' + dec(pois(l1, y[1])) + '}{' + dec(pi1) + '\\times' + dec(pois(l1, y[1])) + '+' + dec(1 - pi1) + '\\times' + dec(pois(l2, y[1])) + '}') + ' = ' + dec(r[1]) + '.',
       },
       {
         prompt: 'Find the expected number of observations in component 1, ' + tex('N_1=\\sum_{i=1}^4r_i') + ', using all four counts.',
-        answer: N1, tolerance: tol4, lecture: 14,
+        answer: N1, tolerance: tol4, lecture: 9,
         explanation: 'The responsibilities are ' + r.map(dec).join(', ') + ', which add to ' + dec(N1) + '.',
       },
       {
         prompt: 'With a ' + tex('\\mathrm{Beta}(' + a1 + ',' + a2 + ')') + ' prior on ' + tex('\\pi_1') + ', the variational update of its first parameter is ' + tex('\\alpha_1+N_1') + '. Find it.',
-        answer: aq, tolerance: tol4, lecture: 14,
+        answer: aq, tolerance: tol4, lecture: 9,
         explanation: tex(a1 + '+' + dec(N1)) + ' = ' + dec(aq) + ' (the second parameter becomes ' + tex(a2 + '+' + dec(y.length - N1) + '=' + dec(a2 + y.length - N1)) + ').',
       },
       {
         prompt: 'Find the updated mean of ' + tex('\\pi_1') + ' under ' + tex('q') + ', ' + tex('(\\alpha_1+N_1)/(\\alpha_1+\\alpha_2+4)') + '.',
-        answer: mean, tolerance: tol4, lecture: 14,
+        answer: mean, tolerance: tol4, lecture: 9,
         explanation: tex(dec(aq) + '/(' + a1 + '+' + a2 + '+4)') + ' = ' + dec(mean) + '. In full CAVI the update of ' + tex('q(z_i)') + ' uses ' + tex('E_q[\\ln\\pi_k]') + ' in place of the fixed ' + tex('\\ln\\pi_k') + ' and the two updates alternate until the ELBO stops increasing.',
       },
     ],

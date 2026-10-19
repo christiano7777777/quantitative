@@ -6,6 +6,7 @@ import { lectureRules, localGrader } from './grader'
 import {
   hasLessons, lectureKey, lecturePassed, lectureUnlocked, lessons, lessonsDone, selectLecturePaper, workedExample,
 } from './lessons'
+import { quizLqId } from './lq-composite'
 import { createLocalProgress } from './progress'
 import { makeRng } from './rng'
 import { findGenerator, renderPaper } from './test-builder'
@@ -33,6 +34,11 @@ describe.each(Object.keys(lessons))('lessons for %s', (id) => {
     expect(ls.length).toBe(topic.lectures.length)
   })
 
+  it('has between 8 and 12 lectures (owner rule)', () => {
+    expect(ls.length).toBeGreaterThanOrEqual(8)
+    expect(ls.length).toBeLessThanOrEqual(12)
+  })
+
   it.each(ls.map((l, i) => [i + 1, l] as const))('lecture %i: well-formed teaching text and worked sample', (n, lesson) => {
     expect(lesson.teach.length).toBeGreaterThanOrEqual(5)
     for (const p of lesson.teach) {
@@ -40,40 +46,54 @@ describe.each(Object.keys(lessons))('lessons for %s', (id) => {
       expect(balanced(p), p).toBe(true)
       expect(/[\u0000-\u0008\u000b-\u001f]/.test(p), p).toBe(false)
     }
-    const g = findGenerator(bank, lesson.lqId)
-    expect(g, `generator ${lesson.lqId}`).toBeDefined()
-    const full = [...bank.lq, ...(bank.lectureLq ?? [])].find((x) => x.id === lesson.lqId.split('#')[0])!
-    const keep = lesson.lqId.includes('#') ? lesson.lqId.split('#')[1].split(',').map(Number) : null
-    for (let s = 0; s < 30; s++) {
-      const rng = makeRng(`check-${s}`)
-      const inst = g!.generate(rng.fork('x'))
-      const all = full.generate(rng.fork('x'))
-      expect(inst.parts.length).toBe(keep ? keep.length : all.parts.length)
-      inst.parts.forEach((p, i) => {
-        // a kept part is the same part, with the same numbers, as in the full question
-        expect(p).toEqual(all.parts[keep ? keep[i] : i])
-        expect(p.lecture, `part ${i} of ${lesson.lqId} is tagged lecture ${p.lecture}`).toBe(n)
-        expect(Number.isFinite(p.answer)).toBe(true)
-      })
+    expect(lesson.samples.length).toBeGreaterThanOrEqual(1)
+    expect(lesson.samples.length).toBeLessThanOrEqual(3)
+    for (const sample of lesson.samples) {
+      const g = findGenerator(bank, sample.lqId)
+      expect(g, `generator ${sample.lqId}`).toBeDefined()
+      const full = [...bank.lq, ...(bank.lectureLq ?? [])].find((x) => x.id === sample.lqId.split('#')[0])!
+      const keep = sample.lqId.includes('#') ? sample.lqId.split('#')[1].split(',').map(Number) : null
+      for (let s = 0; s < 30; s++) {
+        const rng = makeRng(`check-${s}`)
+        const inst = g!.generate(rng.fork('x'))
+        const all = full.generate(rng.fork('x'))
+        expect(inst.parts.length).toBe(keep ? keep.length : all.parts.length)
+        inst.parts.forEach((p, i) => {
+          // a kept part is the same part, with the same numbers, as in the full question
+          expect(p).toEqual(all.parts[keep ? keep[i] : i])
+          expect(p.lecture, `part ${i} of ${sample.lqId} is tagged lecture ${p.lecture}`).toBe(n)
+          expect(Number.isFinite(p.answer)).toBe(true)
+        })
+      }
+      const w = workedExample(bank, sample)
+      expect(w.parts.length).toBeGreaterThanOrEqual(2)
+      w.parts.forEach((p) => expect(p.explanation.trim().length).toBeGreaterThan(0))
     }
-    const w = workedExample(bank, lesson)
-    expect(w.parts.length).toBeGreaterThanOrEqual(2)
-    w.parts.forEach((p) => expect(p.explanation.trim().length).toBeGreaterThan(0))
   })
 
-  it.each(ls.map((l, i) => [i + 1, l] as const))('lecture %i: quiz paper has 5 distinct MC of this lecture and 1 LQ', (n, lesson) => {
-    const spec = selectLecturePaper(bank, lesson, n, `seed-${n}`)
-    expect(spec.mcIds.length).toBe(5)
-    expect(new Set(spec.mcIds).size).toBe(5)
-    for (const mid of spec.mcIds) expect(bank.mc.find((q) => q.id === mid)!.lecture).toBe(n)
-    expect(spec.lqIds).toEqual([lesson.lqId])
-    const paper = renderPaper(bank, spec)
-    expect(paper.mc.length).toBe(5)
-    expect(paper.lq.length).toBe(1)
-    // the quiz does not repeat the worked sample's numbers
-    const w = workedExample(bank, lesson)
-    const text = (q: { intro: string; parts: { prompt: string }[] }) => q.intro + '|' + q.parts.map((p) => p.prompt).join('|')
-    expect(text(paper.lq[0])).not.toBe(text(w))
+  it.each(ls.map((l, i) => [i + 1, l] as const))('lecture %i: the quiz covers every section of the lecture', (n, lesson) => {
+    const poolSections = new Set(bank.mc.filter((q) => q.lecture === n).map((q) => q.section ?? 0))
+    for (let k = 0; k < 40; k++) {
+      const spec = selectLecturePaper(bank, lesson, n, `seed-${n}-${k}`)
+      expect(spec.mcIds.length).toBe(5)
+      expect(new Set(spec.mcIds).size).toBe(5)
+      for (const mid of spec.mcIds) expect(bank.mc.find((q) => q.id === mid)!.lecture).toBe(n)
+      // the 5 MC are spread over the sections of the lecture
+      const sections = new Set(spec.mcIds.map((mid) => bank.mc.find((q) => q.id === mid)!.section ?? 0))
+      expect(sections.size, `lecture ${n} MC sections`).toBe(Math.min(5, poolSections.size))
+      expect(spec.lqIds).toEqual([quizLqId(bank, lesson)])
+      const paper = renderPaper(bank, spec)
+      expect(paper.mc.length).toBe(5)
+      expect(paper.lq.length).toBe(1)
+      // one question with parts from every sample (section) of the lecture, all tagged with this lecture
+      const q = paper.lq[0]
+      expect(q.parts.length).toBeGreaterThanOrEqual(3)
+      expect(q.parts.length).toBeLessThanOrEqual(9)
+      q.parts.forEach((p) => expect(p.lecture).toBe(n))
+      if (lesson.samples.length > 1) {
+        for (let i = 1; i <= lesson.samples.length; i++) expect(q.parts.some((p) => p.prompt.startsWith(`[Setting ${i}]`)), `setting ${i}`).toBe(true)
+      }
+    }
   })
 
   it('retakes prefer unseen MC questions when the lecture has enough of them', () => {

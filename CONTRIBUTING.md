@@ -111,14 +111,20 @@ A topic can also have a teaching layer: `src/content/lessons/<topicId>/index.ts`
 lecture, in the order of `topics.json`. Without that folder the topic goes straight to its test.
 
 ```ts
-{ teach: ['## Heading', 'A paragraph with $KaTeX$.'],   // at least 5 entries; "## " starts a sub-heading
-  workedSeed: 'np-3-worked',                          // fixed seed for the worked sample
-  lqId: 'np-lq-a-signed#0,1,2,3' }                    // generator id, optionally "#" + 0-based parts to keep
+{ teach: ['## Heading', 'A paragraph with $KaTeX$.'],        // at least 5 entries; "## " starts a sub-heading
+  samples: [{ workedSeed: 'np-3-1-worked', lqId: 'np-lq-a-signed#0,1,2,3' }] }  // one worked sample per section of the lecture
 ```
 
-- Each lecture page shows the lesson, one **worked sample** (the generator `lqId` at `workedSeed`, with the working and
-  answers shown), then the quiz. The quiz has **5 MC** (all with `lecture` = this lecture, unseen first) and **1 LQ**
-  (the same generator with fresh numbers), 15 marks, pass at 12 (`lectureConfig` in `test.config.ts`).
+- **A lecture is a real lecture** of the course (about one weekly 3-hour block of the notes), so a topic has 8 to 12 lectures (a test
+  enforces this). A lecture usually merges several sections of the notes; give it one **sample** (generator `lqId`, optionally
+  `id#0,2,3` to keep only some parts, plus a fixed `workedSeed`) per section.
+- Each lecture page shows the lesson, one **worked sample** per section (with the working and answers shown), then the quiz.
+  The quiz has **5 MC** (all with `lecture` = this lecture, spread over its sections using the optional `section` field of
+  `mc.json`, unseen first) and **1 LQ** that combines the first three parts of every sample into one question (a composite id
+  `a#0,1,2+b#0,1,2`, see `findGenerator` and `quizLqId`), so the quiz covers every section. 15 marks, pass at 12.
+- The **final test** covers every lecture: its MC quota is per lecture, and its three long questions come from `examSlots`
+  (built with `buildExamSlots`): each slot covers a range of lectures with composite questions made of the first two parts
+  of one section of every lecture in the range. A test checks that every attempt asks something from every lecture.
 - Lecture n unlocks when lecture n-1 is passed. The topic test unlocks when every lecture quiz is passed. Dev mode
   opens everything. Lecture attempts are stored under the key `<topicId>#L<n>`.
 - A generator can serve two lectures by keeping only some parts: `id#0,1,2` keeps parts 0-2 with the numbers of the full

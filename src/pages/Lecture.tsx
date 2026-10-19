@@ -24,7 +24,7 @@ export function LecturePage() {
   const key = lectureKey(id, n)
   const attempts = store.attempts(key)
   const done = store.isPassed(key)
-  const worked = workedExample(bank, lesson)
+  const workedList = lesson.samples.map((s) => workedExample(bank, s))
 
   return (
     <>
@@ -45,9 +45,14 @@ export function LecturePage() {
           : <p key={i}><Math text={p} /></p>)}
       </section>
 
-      <section className="card">
-        <h2>Worked sample</h2>
-        <p className="muted small">The quiz asks a question of this kind with different numbers. Work through it before you start.</p>
+      {workedList.map((worked, wi) => (
+      <section className="card" key={wi}>
+        <h2>{workedList.length > 1 ? `Worked sample ${wi + 1} of ${workedList.length}` : 'Worked sample'}</h2>
+        <p className="muted small">
+          {workedList.length > 1
+            ? 'The quiz asks a question of one of these kinds, with different numbers. Work through each before you start.'
+            : 'The quiz asks a question of this kind with different numbers. Work through it before you start.'}
+        </p>
         <p><Math text={worked.intro} /></p>
         <ol type="a">
           {worked.parts.map((p, i) => (
@@ -59,11 +64,12 @@ export function LecturePage() {
           ))}
         </ol>
       </section>
+      ))}
 
       <section className="card">
         <h2>Quiz</h2>
         <p className="muted small">
-          {lectureConfig.mcCount} multiple-choice questions (1 mark each) + 1 long question ({lectureConfig.lqMarks} marks),
+          {lectureConfig.mcCount} multiple-choice questions (1 mark each, spread over the sections of this lecture) + 1 long question ({lectureConfig.lqMarks} marks, with parts from every section),
           {' '}{lectureTotal()} marks; pass at {lecturePassMark()}/{lectureTotal()}. Closed book, scientific calculator, unlimited retakes.
         </p>
         <p><Link className="btn primary" to={`/topic/${id}/lecture/${n}/quiz`}>{attempts.length ? 'Retake the quiz' : 'Take the quiz'}</Link></p>
