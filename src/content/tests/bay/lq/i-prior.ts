@@ -24,27 +24,27 @@ export function build({ p0, s, n, k }: Params): LQInstance {
     parts: [
       {
         prompt: 'Encode the expert\'s belief as a ' + tex('\\mathrm{Beta}(a,b)') + ' prior whose mean is ' + tex(dec(p0)) + ' and whose ' + tex('a+b') + ' equals ' + tex(s) + '. Find ' + tex('a') + '.',
-        answer: a, tolerance: tol4, lecture: 3,
+        answer: a, tolerance: tol4, lecture: 5,
         explanation: 'The mean is ' + tex('a/(a+b)') + ' and ' + tex('a+b=' + s) + ', so ' + tex('a=' + dec(p0) + '\\times' + s) + ' = ' + dec(a) + ' (and ' + tex('b=' + dec(b)) + ').',
       },
       {
         prompt: 'Find the posterior mean of ' + tex('\\theta') + ' under this prior after the data.',
-        answer: post, tolerance: tol4, lecture: 3,
+        answer: post, tolerance: tol4, lecture: 5,
         explanation: 'The posterior is ' + tex('\\mathrm{Beta}(' + dec(a + k) + ',' + dec(b + n - k) + ')') + ', with mean ' + tex('\\dfrac{' + dec(a + k) + '}{' + (s + n) + '}') + ' = ' + dec(post) + '.',
       },
       {
         prompt: 'The posterior mean is a weighted average of the prior mean and the sample proportion ' + tex('k/n') + '. Find the weight on the prior mean, ' + tex('(a+b)/(a+b+n)') + '.',
-        answer: w, tolerance: tol4, lecture: 3,
+        answer: w, tolerance: tol4, lecture: 5,
         explanation: tex('\\dfrac{' + s + '}{' + s + '+' + n + '}') + ' = ' + dec(w) + '. The prior counts as ' + tex(s) + ' observations against ' + tex(n) + ' real ones.',
       },
       {
         prompt: 'A weakly informative alternative is the Jeffreys prior ' + tex('\\mathrm{Beta}(\\tfrac12,\\tfrac12)') + '. Find the posterior mean of ' + tex('\\theta') + ' under it.',
-        answer: jeff, tolerance: tol4, lecture: 3,
+        answer: jeff, tolerance: tol4, lecture: 5,
         explanation: 'The posterior is ' + tex('\\mathrm{Beta}(' + dec(k + 0.5) + ',' + dec(n - k + 0.5) + ')') + ', with mean ' + tex('\\dfrac{' + dec(k + 0.5) + '}{' + (n + 1) + '}') + ' = ' + dec(jeff) + '.',
       },
       {
         prompt: 'As a prior sensitivity check find the difference between the posterior means: the expert prior minus the Jeffreys prior.',
-        answer: post - jeff, tolerance: tol4, lecture: 3,
+        answer: post - jeff, tolerance: tol4, lecture: 5,
         explanation: tex(dec(post) + '-' + dec(jeff)) + ' = ' + dec(post - jeff) + '. A difference this size, compared with the posterior spread, tells you whether the prior choice matters for your conclusion.',
       },
     ],

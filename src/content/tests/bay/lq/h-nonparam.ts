@@ -26,27 +26,27 @@ export function build({ alpha, sizes, j, ell, sf, sn, yobs, d }: Params): LQInst
     parts: [
       {
         prompt: 'In a Chinese restaurant process with concentration ' + tex('\\alpha=' + dec(alpha)) + ', ' + tex(n) + ' customers have been seated at three tables of sizes ' + tex(sizes.join(',')) + '. Find the probability that the next customer starts a new table, ' + tex('\\alpha/(n+\\alpha)') + '.',
-        answer: pNew, tolerance: tol4, lecture: 12,
+        answer: pNew, tolerance: tol4, lecture: 15,
         explanation: tex(dec(alpha) + '/(' + n + '+' + dec(alpha) + ')') + ' = ' + dec(pNew) + '.',
       },
       {
         prompt: 'Find the probability that the next customer joins the first table (size ' + tex(sizes[0]) + '), ' + tex('n_1/(n+\\alpha)') + '.',
-        answer: pJoin, tolerance: tol4, lecture: 12,
+        answer: pJoin, tolerance: tol4, lecture: 15,
         explanation: tex(sizes[0] + '/(' + n + '+' + dec(alpha) + ')') + ' = ' + dec(pJoin) + '. Larger tables attract new customers (rich get richer).',
       },
       {
         prompt: 'The expected number of occupied tables after ' + tex(n) + ' customers is ' + tex('\\sum_{i=1}^n\\alpha/(\\alpha+i-1)') + '. Find it.',
-        answer: tables, tolerance: tol4, lecture: 12,
+        answer: tables, tolerance: tol4, lecture: 15,
         explanation: 'Customer ' + tex('i') + ' opens a new table with probability ' + tex('\\alpha/(\\alpha+i-1)') + '; summing gives ' + dec(tables) + '.',
       },
       {
         prompt: 'In the stick-breaking construction the stick fractions are ' + tex('\\beta_k\\sim\\mathrm{Beta}(1,' + dec(alpha) + ')') + ', so ' + tex('E[\\beta_k]=1/(1+\\alpha)') + '. Find the expected weight of atom ' + tex(j) + ', ' + tex('E[w_j]=\\big(\\tfrac{\\alpha}{1+\\alpha}\\big)^{j-1}\\tfrac1{1+\\alpha}') + '.',
-        answer: stick, tolerance: tol4, lecture: 12,
+        answer: stick, tolerance: tol4, lecture: 15,
         explanation: tex('(' + dec(alpha / (1 + alpha)) + ')^{' + (j - 1) + '}\\cdot' + dec(1 / (1 + alpha))) + ' = ' + dec(stick) + '.',
       },
       {
         prompt: 'A Gaussian process has kernel ' + tex('k(x,x\')=' + dec(sf * sf) + '\\exp\\{-(x-x\')^2/(2\\cdot' + dec(ell * ell) + ')\\}') + '. One observation ' + tex('y=' + dec(yobs)) + ' with noise variance ' + tex(dec(sn * sn)) + ' is made at ' + tex('x=0') + '. Find the posterior mean of ' + tex('f') + ' at ' + tex('x_*=' + dec(d)) + ': ' + tex('k(x_*,0)\\,y/(k(0,0)+\\sigma_n^2)') + '.',
-        answer: mean, tolerance: tol4, lecture: 12,
+        answer: mean, tolerance: tol4, lecture: 15,
         explanation: tex('k(x_*,0)=' + dec(kxs) + ',\\ k(0,0)+\\sigma_n^2=' + dec(kxx + sn * sn)) + ', so the mean is ' + tex(dec(kxs) + '\\cdot' + dec(yobs) + '/' + dec(kxx + sn * sn)) + ' = ' + dec(mean) + '; the posterior variance is ' + dec(varp) + ', below the prior variance ' + dec(kxx) + '.',
       },
     ],

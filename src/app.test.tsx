@@ -34,7 +34,7 @@ describe('skill tree', () => {
   it('career dropdown shows effective topic count and hours', async () => {
     render(<App />)
     await userEvent.selectOptions(screen.getByRole('combobox'), 'Quant Researcher')
-    expect(screen.getByText(/topics needed/).textContent).toMatch(/21.*topics needed.*693.*h/)
+    expect(screen.getByText(/topics needed/).textContent).toMatch(/21.*topics needed.*702.*h/)
   })
 
   it('shows a progress bar for every career, which moves when topics are passed', () => {

@@ -34,38 +34,6 @@
  {
   "id": "bay-1.2",
   "lecture": 1,
-  "stem": "What is the posterior predictive distribution of a new observation $\\tilde y$?",
-  "correct": [
-   "$p(\\tilde y\\mid y)=\\int p(\\tilde y\\mid\\theta)p(\\theta\\mid y)d\\theta$.",
-   "Future data averaged over the posterior."
-  ],
-  "distractors": [
-   {
-    "text": "$p(\\tilde y\\mid\\hat\\theta)$ with $\\hat\\theta$ the posterior mean plugged in.",
-    "misconception": "ignores parameter uncertainty"
-   },
-   {
-    "text": "$p(\\tilde y\\mid\\theta)$ for the true $\\theta$.",
-    "misconception": "uses an unknown quantity"
-   },
-   {
-    "text": "The posterior distribution of $\\theta$ itself.",
-    "misconception": "confuses the parameter with future data"
-   },
-   {
-    "text": "The prior predictive distribution $\\int p(\\tilde y\\mid\\theta)p(\\theta)d\\theta$.",
-    "misconception": "uses the prior instead of the posterior"
-   },
-   {
-    "text": "The likelihood of the observed data.",
-    "misconception": "confuses with the likelihood"
-   }
-  ],
-  "explanation": "It is wider than the plug-in distribution, because it includes both sampling noise and parameter uncertainty."
- },
- {
-  "id": "bay-1.3",
-  "lecture": 1,
   "stem": "With a discrete parameter taking values $\\theta_1,\\dots,\\theta_m$, how is the posterior probability of $\\theta_j$ computed?",
   "correct": [
    "Prior times likelihood, over the sum across values.",
@@ -96,7 +64,7 @@
   "explanation": "The denominator is the marginal likelihood of the data; it is the same for every $j$ and only normalises."
  },
  {
-  "id": "bay-1.4",
+  "id": "bay-1.3",
   "lecture": 1,
   "stem": "What does sequential updating mean in Bayesian inference?",
   "correct": [
@@ -128,71 +96,103 @@
   "explanation": "For independent observations, $p(\\theta\\mid y_1,y_2)\\propto p(y_2\\mid\\theta)p(\\theta\\mid y_1)$; the order does not matter."
  },
  {
-  "id": "bay-2.1",
-  "lecture": 2,
-  "stem": "A binomial likelihood with $k$ successes in $n$ trials is combined with a $\\mathrm{Beta}(\\alpha,\\beta)$ prior. What is the posterior?",
+  "id": "bay-1.4",
+  "lecture": 1,
+  "stem": "Once the data $y$ have been observed, how is the likelihood $p(y\\mid\\theta)$ used in a Bayesian analysis?",
   "correct": [
-   "$\\mathrm{Beta}(\\alpha+k,\\ \\beta+n-k)$.",
-   "Successes go to $\\alpha$, failures to $\\beta$."
+   "It is read as a function of $\\theta$ that shows how well each value explains the observed data.",
+   "Held at the observed $y$, it ranks values of $\\theta$ by how well they fit."
   ],
   "distractors": [
    {
-    "text": "$\\mathrm{Beta}(\\alpha+n,\\ \\beta+k)$.",
-    "misconception": "adds the wrong counts"
+    "text": "It is a probability distribution for $\\theta$, so it integrates to one over the parameter space.",
+    "misconception": "treats the likelihood as a density in $\\theta$"
    },
    {
-    "text": "$\\mathrm{Beta}(\\alpha k,\\ \\beta(n-k))$.",
-    "misconception": "multiplies instead of adding"
+    "text": "It is the belief about $\\theta$ after seeing the data, obtained by updating the prior.",
+    "misconception": "confuses the likelihood with the posterior"
    },
    {
-    "text": "$\\mathrm{Binomial}(n,k/n)$.",
-    "misconception": "confuses the posterior with a data model"
+    "text": "It is the probability of the data averaged over the prior, so it no longer depends on $\\theta$.",
+    "misconception": "confuses the likelihood with the marginal likelihood"
    },
    {
-    "text": "$\\mathrm{Beta}(k,\\ n-k)$, whatever the prior.",
-    "misconception": "ignores the prior"
+    "text": "It stays a function of $y$ with $\\theta$ fixed, so it cannot be used to compare parameter values.",
+    "misconception": "reverses which argument is held fixed"
    },
    {
-    "text": "$\\mathrm{Normal}$ for every $n$.",
-    "misconception": "ignores conjugacy"
+    "text": "It serves only to normalise the posterior and says nothing about which $\\theta$ values are likely.",
+    "misconception": "confuses the likelihood with the normalising constant"
    }
   ],
-  "explanation": "The prior acts like $\\alpha+\\beta$ pseudo-observations, with $\\alpha$ successes among them."
+  "explanation": "After the data are seen, $y$ is fixed and $p(y\\mid\\theta)$ is a function of $\\theta$. It need not integrate to one in $\\theta$, and multiplying it by the prior gives the unnormalised posterior."
+ },
+ {
+  "id": "bay-1.5",
+  "lecture": 1,
+  "stem": "How do the frequentist and Bayesian frameworks differ in their treatment of the parameter $\\theta$?",
+  "correct": [
+   "The frequentist treats it as a fixed unknown; the Bayesian gives it a distribution.",
+   "Only Bayesians put a probability distribution on $\\theta$."
+  ],
+  "distractors": [
+   {
+    "text": "The Bayesian estimates $\\theta$ by the MLE and the frequentist by the posterior mean.",
+    "misconception": "swaps the typical estimators"
+   },
+   {
+    "text": "The frequentist cannot make predictions about future observations at all.",
+    "misconception": "claims frequentists cannot predict"
+   },
+   {
+    "text": "The frequentist uses a prior distribution but the Bayesian does not.",
+    "misconception": "reverses the role of the prior"
+   },
+   {
+    "text": "The two frameworks always give the same intervals and the same conclusions.",
+    "misconception": "claims the frameworks coincide"
+   },
+   {
+    "text": "The Bayesian treats the observed data as random even after they are seen.",
+    "misconception": "reverses which quantity is held fixed"
+   }
+  ],
+  "explanation": "Frequentists regard the data as random and $\\theta_0$ as a fixed unknown; Bayesians condition on the observed data and describe their uncertainty about $\\theta$ with the posterior."
+ },
+ {
+  "id": "bay-2.1",
+  "lecture": 2,
+  "stem": "What is the posterior predictive distribution of a new observation $\\tilde y$?",
+  "correct": [
+   "$p(\\tilde y\\mid y)=\\int p(\\tilde y\\mid\\theta)p(\\theta\\mid y)d\\theta$.",
+   "Future data averaged over the posterior."
+  ],
+  "distractors": [
+   {
+    "text": "$p(\\tilde y\\mid\\hat\\theta)$ with $\\hat\\theta$ the posterior mean plugged in.",
+    "misconception": "ignores parameter uncertainty"
+   },
+   {
+    "text": "$p(\\tilde y\\mid\\theta)$ for the true $\\theta$.",
+    "misconception": "uses an unknown quantity"
+   },
+   {
+    "text": "The posterior distribution of $\\theta$ itself.",
+    "misconception": "confuses the parameter with future data"
+   },
+   {
+    "text": "The prior predictive distribution $\\int p(\\tilde y\\mid\\theta)p(\\theta)d\\theta$.",
+    "misconception": "uses the prior instead of the posterior"
+   },
+   {
+    "text": "The likelihood of the observed data.",
+    "misconception": "confuses with the likelihood"
+   }
+  ],
+  "explanation": "It is wider than the plug-in distribution, because it includes both sampling noise and parameter uncertainty."
  },
  {
   "id": "bay-2.2",
-  "lecture": 2,
-  "stem": "How is the posterior mean of a Beta-binomial model related to the prior mean and the sample proportion?",
-  "correct": [
-   "A weighted average, with weight $n/(\\alpha+\\beta+n)$ on the sample proportion.",
-   "It shrinks $k/n$ towards the prior mean, less as $n$ grows."
-  ],
-  "distractors": [
-   {
-    "text": "It equals the sample proportion $k/n$ for every prior.",
-    "misconception": "ignores the prior"
-   },
-   {
-    "text": "It is the prior mean, since the prior is chosen first.",
-    "misconception": "ignores the data"
-   },
-   {
-    "text": "It is the simple average of the prior mean and the sample proportion, whatever $n$.",
-    "misconception": "ignores the weights"
-   },
-   {
-    "text": "It moves away from the prior mean as $\\alpha+\\beta$ grows.",
-    "misconception": "reverses the effect of the prior strength"
-   },
-   {
-    "text": "It is the mode of the sample proportions.",
-    "misconception": "confuses with a mode"
-   }
-  ],
-  "explanation": "Posterior mean $=\\dfrac{\\alpha+k}{\\alpha+\\beta+n}$; with a strong prior (large $\\alpha+\\beta$) it moves little, and as $n\\to\\infty$ it tends to $k/n$."
- },
- {
-  "id": "bay-2.3",
   "lecture": 2,
   "stem": "For normal data with known variance $\\sigma^2$ and a normal prior $N(\\mu_0,\\tau^2)$ on the mean, how do the prior and the data combine?",
   "correct": [
@@ -224,8 +224,168 @@
   "explanation": "Posterior variance $=(1/\\tau^2+n/\\sigma^2)^{-1}$, always below both $\\tau^2$ and $\\sigma^2/n$."
  },
  {
+  "id": "bay-2.3",
+  "lecture": 2,
+  "stem": "What happens to the influence of a conjugate prior as the sample size grows?",
+  "correct": [
+   "It fades as the likelihood dominates.",
+   "Pseudo-observations become negligible."
+  ],
+  "distractors": [
+   {
+    "text": "It grows, since a prior accumulates over time.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It stays constant, because the prior is fixed.",
+    "misconception": "ignores the washing out"
+   },
+   {
+    "text": "The posterior becomes identical to the prior.",
+    "misconception": "ignores the data"
+   },
+   {
+    "text": "It disappears only for flat priors.",
+    "misconception": "restricts the effect wrongly"
+   },
+   {
+    "text": "The posterior variance stays at the prior variance.",
+    "misconception": "ignores the shrinking variance"
+   }
+  ],
+  "explanation": "For $\\mathrm{Beta}(\\alpha,\\beta)$ the weight of the prior mean is $(\\alpha+\\beta)/(\\alpha+\\beta+n)\\to0$."
+ },
+ {
   "id": "bay-2.4",
   "lecture": 2,
+  "stem": "A $\\mathrm{Beta}(a,b)$ prior for a proportion can be read as $a+b$ prior observations. How does its influence on the posterior mean change as the sample size $n$ grows?",
+  "correct": [
+   "The weight on the prior mean, $(a+b)/(a+b+n)$, shrinks toward zero as $n$ grows, so the data dominate.",
+   "More data make the prior counts a small share, so the mean nears $k/n$."
+  ],
+  "distractors": [
+   {
+    "text": "The weight on the prior mean stays at $a/(a+b)$ however large $n$ becomes, so the prior never fades.",
+    "misconception": "confuses the prior mean with the weight given to it"
+   },
+   {
+    "text": "The weight on the prior mean grows with $n$, because more data make the prior assumptions more credible.",
+    "misconception": "thinks data strengthen the prior's influence"
+   },
+   {
+    "text": "The influence vanishes only for an improper prior, because a proper prior keeps a fixed share of the posterior.",
+    "misconception": "thinks a proper prior is never overwhelmed by data"
+   },
+   {
+    "text": "The posterior mean moves toward the prior mean as $n$ grows, since the prior is averaged over more data.",
+    "misconception": "gets the direction of the shrinkage backwards"
+   },
+   {
+    "text": "The prior stops mattering only once $n$ exceeds $a+b$, after which the posterior equals the likelihood.",
+    "misconception": "believes the prior switches off at a threshold"
+   }
+  ],
+  "explanation": "The posterior mean is $\\dfrac{a+b}{a+b+n}\\cdot\\dfrac{a}{a+b}+\\dfrac{n}{a+b+n}\\cdot\\dfrac kn$. The weight on the prior mean falls smoothly to zero as $n$ increases, but never switches off at a threshold."
+ },
+ {
+  "id": "bay-2.5",
+  "lecture": 2,
+  "stem": "In the normal model with known $\\sigma^2$, what is the variance of the posterior predictive distribution of a new observation?",
+  "correct": [
+   "The sampling variance $\\sigma^2$ plus the posterior variance $s_n^2$ of $\\mu$.",
+   "$\\sigma^2+s_n^2$."
+  ],
+  "distractors": [
+   {
+    "text": "Only $\\sigma^2$, since a new observation is independent of the old data.",
+    "misconception": "ignores the posterior uncertainty about the mean"
+   },
+   {
+    "text": "Only $s_n^2$, since all the uncertainty is about $\\mu$.",
+    "misconception": "ignores the sampling variance of a new observation"
+   },
+   {
+    "text": "$\\sigma^2/n+s_n^2$, using the variance of the sample mean.",
+    "misconception": "uses the variance of a mean for a single observation"
+   },
+   {
+    "text": "$\\sigma^2s_n^2$, the product of the two variances.",
+    "misconception": "multiplies instead of adding"
+   },
+   {
+    "text": "The larger of $\\sigma^2$ and $s_n^2$.",
+    "misconception": "takes a maximum instead of a sum"
+   }
+  ],
+  "explanation": "$\\tilde y=\\mu+\\varepsilon$ with $\\mu\\mid y\\sim N(m_n,s_n^2)$ and $\\varepsilon\\sim N(0,\\sigma^2)$ independent, so $\\tilde y\\mid y\\sim N(m_n,\\sigma^2+s_n^2)$."
+ },
+ {
+  "id": "bay-3.1",
+  "lecture": 3,
+  "stem": "A binomial likelihood with $k$ successes in $n$ trials is combined with a $\\mathrm{Beta}(\\alpha,\\beta)$ prior. What is the posterior?",
+  "correct": [
+   "$\\mathrm{Beta}(\\alpha+k,\\ \\beta+n-k)$.",
+   "Successes go to $\\alpha$, failures to $\\beta$."
+  ],
+  "distractors": [
+   {
+    "text": "$\\mathrm{Beta}(\\alpha+n,\\ \\beta+k)$.",
+    "misconception": "adds the wrong counts"
+   },
+   {
+    "text": "$\\mathrm{Beta}(\\alpha k,\\ \\beta(n-k))$.",
+    "misconception": "multiplies instead of adding"
+   },
+   {
+    "text": "$\\mathrm{Binomial}(n,k/n)$.",
+    "misconception": "confuses the posterior with a data model"
+   },
+   {
+    "text": "$\\mathrm{Beta}(k,\\ n-k)$, whatever the prior.",
+    "misconception": "ignores the prior"
+   },
+   {
+    "text": "$\\mathrm{Normal}$ for every $n$.",
+    "misconception": "ignores conjugacy"
+   }
+  ],
+  "explanation": "The prior acts like $\\alpha+\\beta$ pseudo-observations, with $\\alpha$ successes among them."
+ },
+ {
+  "id": "bay-3.2",
+  "lecture": 3,
+  "stem": "How is the posterior mean of a Beta-binomial model related to the prior mean and the sample proportion?",
+  "correct": [
+   "A weighted average, with weight $n/(\\alpha+\\beta+n)$ on the sample proportion.",
+   "It shrinks $k/n$ towards the prior mean, less as $n$ grows."
+  ],
+  "distractors": [
+   {
+    "text": "It equals the sample proportion $k/n$ for every prior.",
+    "misconception": "ignores the prior"
+   },
+   {
+    "text": "It is the prior mean, since the prior is chosen first.",
+    "misconception": "ignores the data"
+   },
+   {
+    "text": "It is the simple average of the prior mean and the sample proportion, whatever $n$.",
+    "misconception": "ignores the weights"
+   },
+   {
+    "text": "It moves away from the prior mean as $\\alpha+\\beta$ grows.",
+    "misconception": "reverses the effect of the prior strength"
+   },
+   {
+    "text": "It is the mode of the sample proportions.",
+    "misconception": "confuses with a mode"
+   }
+  ],
+  "explanation": "Posterior mean $=\\dfrac{\\alpha+k}{\\alpha+\\beta+n}$; with a strong prior (large $\\alpha+\\beta$) it moves little, and as $n\\to\\infty$ it tends to $k/n$."
+ },
+ {
+  "id": "bay-3.3",
+  "lecture": 3,
   "stem": "What does conjugacy of a prior mean?",
   "correct": [
    "The posterior is in the same family as the prior.",
@@ -256,8 +416,8 @@
   "explanation": "Beta-binomial, normal-normal and gamma-Poisson are conjugate pairs; most realistic models are not conjugate and need simulation."
  },
  {
-  "id": "bay-2.5",
-  "lecture": 2,
+  "id": "bay-3.4",
+  "lecture": 3,
   "stem": "For Poisson counts $y_1,\\dots,y_n$ with rate $\\lambda$ and a $\\mathrm{Gamma}(a,b)$ prior (shape $a$, rate $b$), what is the posterior?",
   "correct": [
    "$\\mathrm{Gamma}(a+\\sum y_i,\\ b+n)$.",
@@ -288,36 +448,36 @@
   "explanation": "The posterior mean is $(a+\\sum y_i)/(b+n)$, a compromise between the prior mean $a/b$ and the sample mean $\\bar y$."
  },
  {
-  "id": "bay-2.6",
-  "lecture": 2,
-  "stem": "What happens to the influence of a conjugate prior as the sample size grows?",
+  "id": "bay-3.5",
+  "lecture": 3,
+  "stem": "In the Dirichlet-multinomial model, what is the posterior predictive probability that the next observation falls in category $j$?",
   "correct": [
-   "It fades as the likelihood dominates.",
-   "Pseudo-observations become negligible."
+   "$(\\alpha_j+n_j)/(\\sum_k\\alpha_k+n)$, the posterior mean of $\\theta_j$.",
+   "The posterior mean of the category probability $\\theta_j$."
   ],
   "distractors": [
    {
-    "text": "It grows, since a prior accumulates over time.",
-    "misconception": "reverses the effect"
+    "text": "$n_j/n$, the sample proportion of the category.",
+    "misconception": "ignores the prior counts"
    },
    {
-    "text": "It stays constant, because the prior is fixed.",
-    "misconception": "ignores the washing out"
-   },
-   {
-    "text": "The posterior becomes identical to the prior.",
+    "text": "$\\alpha_j/\\sum_k\\alpha_k$, the prior mean of the category.",
     "misconception": "ignores the data"
    },
    {
-    "text": "It disappears only for flat priors.",
-    "misconception": "restricts the effect wrongly"
+    "text": "$(\\alpha_j+n_j)/n$, with the prior counts missing from the denominator.",
+    "misconception": "forgets the prior total in the denominator"
    },
    {
-    "text": "The posterior variance stays at the prior variance.",
-    "misconception": "ignores the shrinking variance"
+    "text": "$(\\alpha_j+n_j)/(\\alpha_j+n)$, using only its own prior count.",
+    "misconception": "uses only one prior count in the denominator"
+   },
+   {
+    "text": "$\\alpha_j+n_j$, the posterior parameter itself.",
+    "misconception": "reports a parameter as a probability"
    }
   ],
-  "explanation": "For $\\mathrm{Beta}(\\alpha,\\beta)$ the weight of the prior mean is $(\\alpha+\\beta)/(\\alpha+\\beta+n)\\to0$."
+  "explanation": "Given the data, the next category is multinomial with probabilities $E[\\theta_j\\mid\\text{data}]=(\\alpha_j+n_j)/(\\alpha_0+n)$ where $\\alpha_0=\\sum_k\\alpha_k$."
  },
  {
   "id": "bay-4.1",
@@ -448,8 +608,40 @@
   "explanation": "For a skewed posterior the HPD interval is shorter than the equal-tailed one and not symmetric in probability."
  },
  {
-  "id": "bay-3.1",
-  "lecture": 3,
+  "id": "bay-4.5",
+  "lecture": 4,
+  "stem": "How do the posterior mean, posterior median and MAP estimate compare when the posterior is skewed?",
+  "correct": [
+   "They generally differ, because each summarises differently and the mean is pulled toward the long tail.",
+   "Skewness separates them; the mean is dragged furthest into the long tail."
+  ],
+  "distractors": [
+   {
+    "text": "They coincide for every unimodal posterior, because each of them sits at the centre of the distribution.",
+    "misconception": "thinks unimodal implies symmetric"
+   },
+   {
+    "text": "The MAP lies far out in the long tail while the mean sits at the peak, since the mode reacts strongly to skew.",
+    "misconception": "swaps the roles of the mode and the mean"
+   },
+   {
+    "text": "The median is always the largest of the three, because it minimises the posterior expected absolute error.",
+    "misconception": "confuses the optimal loss with the size of the estimate"
+   },
+   {
+    "text": "They differ only when the prior is improper, because a proper prior makes the posterior symmetric.",
+    "misconception": "believes a proper prior forces a symmetric posterior"
+   },
+   {
+    "text": "The mean and the MAP agree whenever the posterior is skewed, and differ only for symmetric posteriors.",
+    "misconception": "reverses the effect of skewness"
+   }
+  ],
+  "explanation": "For a right-skewed posterior the order is typically mode < median < mean, and the reverse for a left-skewed one. They agree exactly for a symmetric unimodal posterior."
+ },
+ {
+  "id": "bay-5.1",
+  "lecture": 5,
   "stem": "What is a weakly informative prior?",
   "correct": [
    "A prior that rules out absurd values only.",
@@ -480,8 +672,8 @@
   "explanation": "A weakly informative prior helps with separation in logistic regression or sparse data, where flat priors give unstable estimates."
  },
  {
-  "id": "bay-3.2",
-  "lecture": 3,
+  "id": "bay-5.2",
+  "lecture": 5,
   "stem": "What is a drawback of an improper flat prior $p(\\theta)\\propto1$?",
   "correct": [
    "It is not a proper density and is not reparametrisation invariant.",
@@ -512,8 +704,8 @@
   "explanation": "A flat prior on a variance is not flat on the standard deviation; Jeffreys priors are designed to be invariant."
  },
  {
-  "id": "bay-3.3",
-  "lecture": 3,
+  "id": "bay-5.3",
+  "lecture": 5,
   "stem": "What is the Jeffreys prior?",
   "correct": [
    "A prior proportional to $\\sqrt{I(\\theta)}$.",
@@ -544,8 +736,8 @@
   "explanation": "For the binomial it is $\\mathrm{Beta}(\\tfrac12,\\tfrac12)$; for a normal mean with known variance it is flat."
  },
  {
-  "id": "bay-3.4",
-  "lecture": 3,
+  "id": "bay-5.4",
+  "lecture": 5,
   "stem": "What is a prior sensitivity analysis?",
   "correct": [
    "Repeat the analysis under several reasonable priors.",
@@ -576,132 +768,36 @@
   "explanation": "If conclusions differ across plausible priors, the data are not informative enough, and this should be reported."
  },
  {
-  "id": "bay-5.1",
+  "id": "bay-5.5",
   "lecture": 5,
-  "stem": "What does a posterior predictive check assess?",
+  "stem": "What does the effective sample size of a $\\mathrm{Beta}(\\alpha,\\beta)$ prior tell us?",
   "correct": [
-   "Whether data simulated from the model resemble the observed data.",
-   "Replicated data are compared with observed data."
+   "It is $\\alpha+\\beta$: the prior carries about as much information as that many observations.",
+   "The number of observations the prior is equivalent to."
   ],
   "distractors": [
    {
-    "text": "Whether the prior is correct.",
-    "misconception": "priors are not checked this way"
+    "text": "The probability that $\\theta$ lies close to the prior mean.",
+    "misconception": "confuses it with a coverage probability"
    },
    {
-    "text": "Whether the MCMC chain has converged.",
-    "misconception": "describes a convergence diagnostic"
+    "text": "The number of observations needed before the prior can be dropped.",
+    "misconception": "turns it into a stopping rule"
    },
    {
-    "text": "Whether the posterior mean equals the maximum likelihood estimate.",
-    "misconception": "describes a comparison of estimates"
+    "text": "The variance of the prior distribution.",
+    "misconception": "confuses it with the prior variance"
    },
    {
-    "text": "Which of two models has the higher marginal likelihood.",
-    "misconception": "describes a Bayes factor"
+    "text": "The product of the prior mean and the prior mode.",
+    "misconception": "invents an algebraic definition"
    },
    {
-    "text": "Whether the parameters are identified.",
-    "misconception": "confuses with identifiability"
+    "text": "The number of parameters in the prior distribution.",
+    "misconception": "confuses it with the number of parameters"
    }
   ],
-  "explanation": "A systematic discrepancy (for example too few extreme values in the replicated data) indicates model misfit."
- },
- {
-  "id": "bay-5.2",
-  "lecture": 5,
-  "stem": "What is the Bayes factor $BF_{12}$ for comparing models $M_1$ and $M_2$?",
-  "correct": [
-   "The ratio of marginal likelihoods.",
-   "How much likelier the data are under $M_1$."
-  ],
-  "distractors": [
-   {
-    "text": "The ratio of the maximised likelihoods of the two models.",
-    "misconception": "describes a likelihood ratio"
-   },
-   {
-    "text": "The ratio of the posterior means.",
-    "misconception": "gives an unrelated ratio"
-   },
-   {
-    "text": "The difference in their AIC values.",
-    "misconception": "confuses with a criterion"
-   },
-   {
-    "text": "The ratio of the prior probabilities.",
-    "misconception": "gives the prior odds"
-   },
-   {
-    "text": "The probability that $M_1$ is true.",
-    "misconception": "confuses with a posterior probability"
-   }
-  ],
-  "explanation": "Posterior odds $=BF_{12}\\times$ prior odds. Because the likelihood is averaged over the prior, the Bayes factor automatically penalises complexity."
- },
- {
-  "id": "bay-5.3",
-  "lecture": 5,
-  "stem": "Why are Bayes factors sensitive to the prior on the parameters?",
-  "correct": [
-   "The marginal likelihood averages over the prior, so diffuse priors lower the evidence.",
-   "Widening a prior favours the simpler model."
-  ],
-  "distractors": [
-   {
-    "text": "They are not sensitive, because the data dominate.",
-    "misconception": "ignores the averaging over the prior"
-   },
-   {
-    "text": "Bayes factors use only the posterior mode.",
-    "misconception": "misdescribes the computation"
-   },
-   {
-    "text": "They depend on the prior only for improper priors.",
-    "misconception": "restricts the effect wrongly"
-   },
-   {
-    "text": "Diffuse priors always favour the more complex model.",
-    "misconception": "reverses the effect"
-   },
-   {
-    "text": "The prior cancels in the ratio.",
-    "misconception": "forgets that each model has its own prior"
-   }
-  ],
-  "explanation": "Improper priors leave the Bayes factor undefined up to an arbitrary constant, which is why proper priors are required for model comparison."
- },
- {
-  "id": "bay-5.4",
-  "lecture": 5,
-  "stem": "What does the WAIC estimate?",
-  "correct": [
-   "Out-of-sample predictive accuracy.",
-   "A cross-validation proxy."
-  ],
-  "distractors": [
-   {
-    "text": "The marginal likelihood of the model.",
-    "misconception": "confuses with the evidence"
-   },
-   {
-    "text": "The posterior probability of each model.",
-    "misconception": "confuses with model probabilities"
-   },
-   {
-    "text": "The in-sample fit only, without a penalty.",
-    "misconception": "forgets the penalty"
-   },
-   {
-    "text": "The prior predictive distribution.",
-    "misconception": "confuses with the prior predictive"
-   },
-   {
-    "text": "The number of parameters.",
-    "misconception": "confuses with a count"
-   }
-  ],
-  "explanation": "$p_{\\text{WAIC}}$ is the sum over observations of the posterior variance of the log-likelihood, a measure of flexibility."
+  "explanation": "A $\\mathrm{Beta}(\\alpha,\\beta)$ prior acts like $\\alpha$ prior successes and $\\beta$ prior failures. For a power prior $\\mathrm{Beta}(\\delta x,\\delta(m-x))$ the effective sample size is $\\delta m$."
  },
  {
   "id": "bay-6.1",
@@ -738,38 +834,6 @@
  {
   "id": "bay-6.2",
   "lecture": 6,
-  "stem": "How does inverse transform sampling generate a draw from a distribution with cdf $F$?",
-  "correct": [
-   "Draw $U\\sim\\mathrm{Uniform}(0,1)$ and return $F^{-1}(U)$.",
-   "Apply the quantile function."
-  ],
-  "distractors": [
-   {
-    "text": "Draw $U$ uniform and return $F(U)$.",
-    "misconception": "applies the cdf instead of its inverse"
-   },
-   {
-    "text": "Draw from a normal distribution and rescale.",
-    "misconception": "describes a different transform"
-   },
-   {
-    "text": "Reject draws of $U$ that exceed $F$.",
-    "misconception": "describes rejection sampling"
-   },
-   {
-    "text": "Return the average of several uniforms.",
-    "misconception": "describes a different transformation"
-   },
-   {
-    "text": "It only works for normal distributions.",
-    "misconception": "restricts the method"
-   }
-  ],
-  "explanation": "For the exponential with rate $\\lambda$, $F^{-1}(u)=-\\ln(1-u)/\\lambda$, and since $1-U$ is also uniform one may use $-\\ln(U)/\\lambda$."
- },
- {
-  "id": "bay-6.3",
-  "lecture": 6,
   "stem": "How many Monte Carlo draws are needed to estimate a mean within $\\varepsilon$ with 95% confidence?",
   "correct": [
    "About $n=(1.96\\,\\sigma/\\varepsilon)^2$.",
@@ -800,7 +864,7 @@
   "explanation": "$\\mathrm{SE}=\\sigma/\\sqrt n\\le\\varepsilon/1.96$ gives $n\\ge(1.96\\sigma/\\varepsilon)^2$."
  },
  {
-  "id": "bay-6.4",
+  "id": "bay-6.3",
   "lecture": 6,
   "stem": "What is the role of the law of large numbers in Monte Carlo estimation?",
   "correct": [
@@ -832,7 +896,7 @@
   "explanation": "The CLT gives the rate and the error distribution; the LAW tells us only that the estimator is consistent."
  },
  {
-  "id": "bay-6.5",
+  "id": "bay-6.4",
   "lecture": 6,
   "stem": "Why is simple Monte Carlo attractive for high-dimensional integrals compared with grid-based quadrature?",
   "correct": [
@@ -864,8 +928,200 @@
   "explanation": "The variance $\\sigma_f^2$ may still grow with dimension, but the rate in $n$ does not deteriorate."
  },
  {
+  "id": "bay-6.5",
+  "lecture": 6,
+  "stem": "Why does the standard error of a Monte Carlo estimate fall only like $1/\\sqrt n$?",
+  "correct": [
+   "Its variance is $\\mathrm{Var}[h(X)]/n$, so halving the error needs four times as many draws.",
+   "A variance of $\\sigma^2/n$ gives a standard error of $\\sigma/\\sqrt n$."
+  ],
+  "distractors": [
+   {
+    "text": "Because successive draws are strongly correlated with each other.",
+    "misconception": "assumes correlated draws in standard Monte Carlo"
+   },
+   {
+    "text": "Because the estimator is biased and the bias shrinks slowly.",
+    "misconception": "claims bias, which standard Monte Carlo does not have"
+   },
+   {
+    "text": "Because the error depends on the dimension of $X$ in the same way as a grid.",
+    "misconception": "confuses Monte Carlo with grid integration"
+   },
+   {
+    "text": "It falls like $1/n$, so doubling $n$ halves the standard error.",
+    "misconception": "uses the wrong rate"
+   },
+   {
+    "text": "Because the law of large numbers is always slow for every estimator.",
+    "misconception": "makes a vague universal claim"
+   }
+  ],
+  "explanation": "$\\mathrm{Var}(\\hat\\mu_n)=\\sigma^2/n$ so $\\mathrm{SE}=\\sigma/\\sqrt n$. The rate does not depend on the dimension of $X$, unlike a grid with $n^d$ points."
+ },
+ {
   "id": "bay-7.1",
   "lecture": 7,
+  "stem": "How does inverse transform sampling generate a draw from a distribution with cdf $F$?",
+  "correct": [
+   "Draw $U\\sim\\mathrm{Uniform}(0,1)$ and return $F^{-1}(U)$.",
+   "Apply the quantile function."
+  ],
+  "distractors": [
+   {
+    "text": "Draw $U$ uniform and return $F(U)$.",
+    "misconception": "applies the cdf instead of its inverse"
+   },
+   {
+    "text": "Draw from a normal distribution and rescale.",
+    "misconception": "describes a different transform"
+   },
+   {
+    "text": "Reject draws of $U$ that exceed $F$.",
+    "misconception": "describes rejection sampling"
+   },
+   {
+    "text": "Return the average of several uniforms.",
+    "misconception": "describes a different transformation"
+   },
+   {
+    "text": "It only works for normal distributions.",
+    "misconception": "restricts the method"
+   }
+  ],
+  "explanation": "For the exponential with rate $\\lambda$, $F^{-1}(u)=-\\ln(1-u)/\\lambda$, and since $1-U$ is also uniform one may use $-\\ln(U)/\\lambda$."
+ },
+ {
+  "id": "bay-7.2",
+  "lecture": 7,
+  "stem": "Why does $X=F^{-1}(U)$ with $U\\sim U(0,1)$ have cdf $F$?",
+  "correct": [
+   "Because $P(F^{-1}(U)\\le x)=P(U\\le F(x))=F(x)$ for every $x$.",
+   "Since $P(U\\le u)=u$ for a uniform $U$, and the cdf is monotone."
+  ],
+  "distractors": [
+   {
+    "text": "Because $F^{-1}$ is always a linear function of $U$.",
+    "misconception": "assumes a linear inverse cdf"
+   },
+   {
+    "text": "Because $F(X)$ is always normally distributed.",
+    "misconception": "confuses the probability integral transform with normality"
+   },
+   {
+    "text": "Because $U$ and $X$ have the same density function.",
+    "misconception": "claims equal densities"
+   },
+   {
+    "text": "Because $F^{-1}(U)$ is uniform whenever $U$ is uniform.",
+    "misconception": "confuses $F^{-1}(U)$ with $F(X)$"
+   },
+   {
+    "text": "Because the quantile function is always continuous.",
+    "misconception": "gives an irrelevant property"
+   }
+  ],
+  "explanation": "$P(F^{-1}(U)\\le x)=P(U\\le F(x))=F(x)$. Equivalently $F(X)\\sim U(0,1)$ for continuous $X$."
+ },
+ {
+  "id": "bay-7.3",
+  "lecture": 7,
+  "stem": "For an exponential distribution with rate $\\lambda$, which formula turns a uniform draw $U$ into a draw?",
+  "correct": [
+   "$X=-\\ln(U)/\\lambda$, or equally $-\\ln(1-U)/\\lambda$.",
+   "The inverse of $F(x)=1-e^{-\\lambda x}$."
+  ],
+  "distractors": [
+   {
+    "text": "$X=-\\lambda\\ln U$, with $\\lambda$ multiplying the logarithm.",
+    "misconception": "puts the rate in the wrong place"
+   },
+   {
+    "text": "$X=\\ln(U)/\\lambda$, without the minus sign.",
+    "misconception": "drops the sign, giving negative values"
+   },
+   {
+    "text": "$X=U^{1/\\lambda}$, a power of the uniform draw.",
+    "misconception": "uses a power transform"
+   },
+   {
+    "text": "$X=\\lambda U$, a rescaled uniform draw.",
+    "misconception": "rescales the uniform instead of inverting the cdf"
+   },
+   {
+    "text": "$X=-\\ln(U)\\lambda^2$, with the rate squared.",
+    "misconception": "squares the rate"
+   }
+  ],
+  "explanation": "Solve $u=1-e^{-\\lambda x}$ for $x$: $x=-\\ln(1-u)/\\lambda$. Since $1-U$ is also uniform, $-\\ln(U)/\\lambda$ works too. For rate $2$ and $u=0.5$ the draw is $\\ln2/2=0.3466$."
+ },
+ {
+  "id": "bay-7.4",
+  "lecture": 7,
+  "stem": "Why can inverse transform sampling not be used directly for a posterior known only up to a constant?",
+  "correct": [
+   "Without the normalising constant the cdf, and so its inverse, cannot be computed.",
+   "The unnormalised cdf does not reach $1$, so $F^{-1}$ is unavailable."
+  ],
+  "distractors": [
+   {
+    "text": "Because a posterior distribution has no cdf.",
+    "misconception": "claims no cdf exists"
+   },
+   {
+    "text": "Because uniform random numbers cannot be generated on a computer.",
+    "misconception": "claims uniform numbers are unavailable"
+   },
+   {
+    "text": "Because every posterior is a discrete distribution.",
+    "misconception": "thinks posteriors are discrete"
+   },
+   {
+    "text": "Because the inverse cdf of a continuous variable is never monotone.",
+    "misconception": "claims the inverse is not monotone"
+   },
+   {
+    "text": "Because inverse transform sampling works only for discrete distributions.",
+    "misconception": "restricts the method to discrete cases"
+   }
+  ],
+  "explanation": "$F(x)\\propto\\int_{-\\infty}^x\\tilde f(t)dt$ is known only up to the unknown constant $\\int\\tilde f$, so $F^{-1}(u)$ cannot be computed; this motivates importance sampling and MCMC."
+ },
+ {
+  "id": "bay-7.5",
+  "lecture": 7,
+  "stem": "In posterior predictive sampling for a conjugate model, what are the two stages of the algorithm?",
+  "correct": [
+   "Draw $\\theta_j$ from the posterior, then draw $\\tilde y_j$ from the model given $\\theta_j$.",
+   "Sample $\\theta_j\\sim\\pi(\\theta\\mid y)$ and then $\\tilde y_j\\sim f(\\tilde y\\mid\\theta_j)$."
+  ],
+  "distractors": [
+   {
+    "text": "Draw $\\tilde y$ from the prior and then update the draw with the data.",
+    "misconception": "updates a draw instead of the distribution"
+   },
+   {
+    "text": "Draw $\\theta$ from the prior and then $\\tilde y$ from the posterior.",
+    "misconception": "swaps prior and posterior"
+   },
+   {
+    "text": "Draw $\\tilde y$ from the model at the MLE $\\hat\\theta$ only.",
+    "misconception": "ignores the uncertainty about $\\theta$"
+   },
+   {
+    "text": "Draw $\\theta$ from the posterior and report $\\tilde y=\\theta$.",
+    "misconception": "reports the parameter as the prediction"
+   },
+   {
+    "text": "Draw $\\tilde y$ first and then $\\theta$ from the prior.",
+    "misconception": "reverses the order of the stages"
+   }
+  ],
+  "explanation": "Marginalising $\\theta$ is done by simulation: each retained $\\tilde y_j$ is a draw from $f(\\tilde y\\mid y)=\\int f(\\tilde y\\mid\\theta)\\pi(\\theta\\mid y)d\\theta$. For a Weibull model the second stage uses inverse transform sampling."
+ },
+ {
+  "id": "bay-8.1",
+  "lecture": 8,
   "stem": "What is the importance sampling identity for $E_p[f(X)]$ with proposal density $q$?",
   "correct": [
    "$E_p[f(X)]=E_q[f(X)w(X)]$ with $w=p/q$.",
@@ -896,8 +1152,8 @@
   "explanation": "Importance sampling needs $q>0$ wherever $pf\\ne0$. For rare events, shifting $q$ towards the event reduces variance."
  },
  {
-  "id": "bay-7.2",
-  "lecture": 7,
+  "id": "bay-8.2",
+  "lecture": 8,
   "stem": "Why should the proposal $q$ have heavier tails than the target $p$ in importance sampling?",
   "correct": [
    "If $p/q$ is unbounded in the tails, weights have infinite variance.",
@@ -928,8 +1184,8 @@
   "explanation": "A normal proposal for a Cauchy target is safe in one direction only: a Cauchy proposal for a normal target is fine, but not the reverse."
  },
  {
-  "id": "bay-7.3",
-  "lecture": 7,
+  "id": "bay-8.3",
+  "lecture": 8,
   "stem": "What does the effective sample size $(\\sum w_i)^2/\\sum w_i^2$ of importance weights measure?",
   "correct": [
    "How many equal-weight draws match the precision.",
@@ -960,8 +1216,8 @@
   "explanation": "ESS $=n/(1+\\mathrm{CV}^2)$ with $\\mathrm{CV}$ the coefficient of variation of the weights."
  },
  {
-  "id": "bay-7.4",
-  "lecture": 7,
+  "id": "bay-8.4",
+  "lecture": 8,
   "stem": "What is self-normalised importance sampling?",
   "correct": [
    "Use $\\sum f(x_i)w_i/\\sum w_i$, valid when $p$ is known up to a constant.",
@@ -992,872 +1248,8 @@
   "explanation": "Posterior distributions are known only up to the marginal likelihood, so the self-normalised form is the one used in Bayesian computation."
  },
  {
-  "id": "bay-8.1",
-  "lecture": 8,
-  "stem": "What is the acceptance probability of the Metropolis-Hastings algorithm for a move from $x$ to $x'$?",
-  "correct": [
-   "$\\min\\{1,\\ \\pi(x')q(x\\mid x')/(\\pi(x)q(x'\\mid x))\\}$.",
-   "Hastings ratio, capped at one."
-  ],
-  "distractors": [
-   {
-    "text": "$\\pi(x')/\\pi(x)$ without capping at one.",
-    "misconception": "can exceed one"
-   },
-   {
-    "text": "$\\min\\{1,\\pi(x)/\\pi(x')\\}$.",
-    "misconception": "inverts the ratio"
-   },
-   {
-    "text": "Always one for a normal proposal.",
-    "misconception": "ignores the target"
-   },
-   {
-    "text": "$q(x'\\mid x)$ alone.",
-    "misconception": "ignores the target"
-   },
-   {
-    "text": "It must be less than 0.5.",
-    "misconception": "invents a bound"
-   }
-  ],
-  "explanation": "Only a ratio of target densities enters, so the target needs to be known only up to a constant."
- },
- {
-  "id": "bay-8.2",
-  "lecture": 8,
-  "stem": "What does detailed balance say, and why does it matter?",
-  "correct": [
-   "$\\pi(x)P(x,y)=\\pi(y)P(y,x)$, which makes $\\pi$ stationary.",
-   "Balanced flow under $\\pi$."
-  ],
-  "distractors": [
-   {
-    "text": "The chain moves back to its starting point after every step.",
-    "misconception": "confuses with returning"
-   },
-   {
-    "text": "The transition probabilities are all equal.",
-    "misconception": "confuses with uniformity"
-   },
-   {
-    "text": "The chain is independent from step to step.",
-    "misconception": "confuses with independence"
-   },
-   {
-    "text": "It guarantees that the chain converges quickly.",
-    "misconception": "confuses stationarity with speed"
-   },
-   {
-    "text": "It is needed only for discrete chains.",
-    "misconception": "restricts it wrongly"
-   }
-  ],
-  "explanation": "Detailed balance is sufficient but not necessary for stationarity. Irreducibility and aperiodicity then give convergence."
- },
- {
-  "id": "bay-8.3",
-  "lecture": 8,
-  "stem": "What happens in a random-walk Metropolis sampler when the proposal step is very small?",
-  "correct": [
-   "Almost every move is accepted, but the chain crawls.",
-   "Slow mixing."
-  ],
-  "distractors": [
-   {
-    "text": "Almost every move is rejected.",
-    "misconception": "describes a very large step"
-   },
-   {
-    "text": "The chain converges faster.",
-    "misconception": "reverses the effect"
-   },
-   {
-    "text": "The acceptance rate is zero.",
-    "misconception": "is false"
-   },
-   {
-    "text": "The draws are independent.",
-    "misconception": "reverses the effect"
-   },
-   {
-    "text": "The stationary distribution changes.",
-    "misconception": "confuses with speed"
-   }
-  ],
-  "explanation": "Very large steps cause many rejections; an intermediate step balances the two (acceptance about 23% in high dimensions, 44% in one dimension)."
- },
- {
-  "id": "bay-8.4",
-  "lecture": 8,
-  "stem": "What does the Markov chain in MCMC produce, and how does that differ from independent sampling?",
-  "correct": [
-   "Dependent draws from the target, so ESS is below $n$.",
-   "Correlated samples with consistent averages."
-  ],
-  "distractors": [
-   {
-    "text": "Independent draws from the target at every step.",
-    "misconception": "ignores the dependence"
-   },
-   {
-    "text": "Exactly the target distribution from the first step.",
-    "misconception": "ignores convergence"
-   },
-   {
-    "text": "Draws whose averages are biased for every length.",
-    "misconception": "overlooks consistency"
-   },
-   {
-    "text": "Draws that are uncorrelated if the acceptance rate is high.",
-    "misconception": "confuses with mixing"
-   },
-   {
-    "text": "Draws from the proposal distribution.",
-    "misconception": "confuses the proposal with the target"
-   }
-  ],
-  "explanation": "Because of autocorrelation the standard error of an MCMC average is larger than for independent draws of the same number."
- },
- {
   "id": "bay-8.5",
   "lecture": 8,
-  "stem": "Why can MH be used when the posterior density is known only up to a constant?",
-  "correct": [
-   "The acceptance ratio cancels the normalising constant.",
-   "The marginal likelihood drops out."
-  ],
-  "distractors": [
-   {
-    "text": "MH estimates the constant by simulation first.",
-    "misconception": "misdescribes the algorithm"
-   },
-   {
-    "text": "The constant is assumed to be one.",
-    "misconception": "makes an unjustified assumption"
-   },
-   {
-    "text": "MH needs the normalised density to compute probabilities.",
-    "misconception": "reverses the benefit"
-   },
-   {
-    "text": "The constant is absorbed by the proposal.",
-    "misconception": "gives a wrong reason"
-   },
-   {
-    "text": "It works only for uniform targets.",
-    "misconception": "restricts it wrongly"
-   }
-  ],
-  "explanation": "Posterior $\\propto$ likelihood $\\times$ prior is all that is needed, which is why MCMC revolutionised Bayesian statistics."
- },
- {
-  "id": "bay-9.1",
-  "lecture": 9,
-  "stem": "What is a Gibbs sampler?",
-  "correct": [
-   "A chain drawing each variable from its full conditional.",
-   "Gibbs updates one variable at a time."
-  ],
-  "distractors": [
-   {
-    "text": "A sampler that draws all variables jointly from a proposal.",
-    "misconception": "describes a joint proposal"
-   },
-   {
-    "text": "A rejection sampler for conditional distributions.",
-    "misconception": "misdescribes the method"
-   },
-   {
-    "text": "It needs the joint density to be normalised.",
-    "misconception": "is not required"
-   },
-   {
-    "text": "It draws each variable independently of the others.",
-    "misconception": "ignores the conditioning"
-   },
-   {
-    "text": "It works only with two variables.",
-    "misconception": "restricts it wrongly"
-   }
-  ],
-  "explanation": "Gibbs is convenient with conjugate conditionals; strong posterior correlations slow it down because it moves along coordinate axes."
- },
- {
-  "id": "bay-9.2",
-  "lecture": 9,
-  "stem": "What is the purpose of burn-in?",
-  "correct": [
-   "To drop early draws that reflect the starting value.",
-   "The early chain has not converged."
-  ],
-  "distractors": [
-   {
-    "text": "To increase the number of effective draws.",
-    "misconception": "confuses with thinning"
-   },
-   {
-    "text": "To make the draws independent.",
-    "misconception": "confuses with thinning"
-   },
-   {
-    "text": "To change the stationary distribution.",
-    "misconception": "misunderstands the aim"
-   },
-   {
-    "text": "To reduce the dimension of the problem.",
-    "misconception": "confuses with a different task"
-   },
-   {
-    "text": "To check convergence.",
-    "misconception": "confuses with a diagnostic"
-   }
-  ],
-  "explanation": "Running several chains from dispersed starts and checking that they agree helps decide how much to discard."
- },
- {
-  "id": "bay-9.3",
-  "lecture": 9,
-  "stem": "How is the effective sample size (ESS) of an MCMC run defined?",
-  "correct": [
-   "$n/(1+2\\sum_{k\\ge1}\\rho_k)$.",
-   "The independent draws giving equal precision."
-  ],
-  "distractors": [
-   {
-    "text": "The number of draws after burn-in.",
-    "misconception": "confuses with the retained length"
-   },
-   {
-    "text": "The number of distinct values in the chain.",
-    "misconception": "confuses with a count"
-   },
-   {
-    "text": "$n$ times the acceptance rate.",
-    "misconception": "confuses with acceptance"
-   },
-   {
-    "text": "Always equal to $n$ for Gibbs samplers.",
-    "misconception": "ignores correlation"
-   },
-   {
-    "text": "It does not depend on the autocorrelation.",
-    "misconception": "ignores correlation"
-   }
-  ],
-  "explanation": "For an AR(1) chain with correlation $\\rho$, ESS $=n(1-\\rho)/(1+\\rho)$."
- },
- {
-  "id": "bay-9.4",
-  "lecture": 9,
-  "stem": "What does the Gelman-Rubin statistic $\\hat R$ compare?",
-  "correct": [
-   "Between-chain against within-chain variability, near 1 at convergence.",
-   "Variance across chains versus within."
-  ],
-  "distractors": [
-   {
-    "text": "The acceptance rates of different chains.",
-    "misconception": "confuses with acceptance"
-   },
-   {
-    "text": "The posterior mean with the maximum likelihood estimate.",
-    "misconception": "gives an unrelated comparison"
-   },
-   {
-    "text": "The first and second halves of a single chain only.",
-    "misconception": "describes a different diagnostic"
-   },
-   {
-    "text": "The effective sample size with the number of draws.",
-    "misconception": "confuses with ESS"
-   },
-   {
-    "text": "Values far above 1 indicate convergence.",
-    "misconception": "reverses the interpretation"
-   }
-  ],
-  "explanation": "A common rule is $\\hat R<1.01$; $\\hat R$ well above 1 means the chains have not mixed."
- },
- {
-  "id": "bay-9.5",
-  "lecture": 9,
-  "stem": "What is the main idea of Hamiltonian Monte Carlo (HMC)?",
-  "correct": [
-   "It uses gradients to simulate dynamics and propose distant moves.",
-   "Momentum reduces random-walk behaviour."
-  ],
-  "distractors": [
-   {
-    "text": "It uses a symmetric random-walk proposal.",
-    "misconception": "describes random-walk Metropolis"
-   },
-   {
-    "text": "It samples each variable from its full conditional.",
-    "misconception": "describes Gibbs"
-   },
-   {
-    "text": "It requires no derivative information.",
-    "misconception": "reverses the requirement"
-   },
-   {
-    "text": "It is limited to discrete distributions.",
-    "misconception": "restricts it wrongly"
-   },
-   {
-    "text": "It always accepts every proposal.",
-    "misconception": "describes Gibbs"
-   }
-  ],
-  "explanation": "Stan's NUTS automatically tunes the trajectory length of HMC."
- },
- {
-  "id": "bay-10.1",
-  "lecture": 10,
-  "stem": "What is the Laplace approximation to a posterior?",
-  "correct": [
-   "A normal at the mode with covariance from the inverse negative Hessian.",
-   "A second-order Taylor expansion of the log-posterior."
-  ],
-  "distractors": [
-   {
-    "text": "A normal distribution centred at the posterior mean with the prior variance.",
-    "misconception": "mixes up the centre and the spread"
-   },
-   {
-    "text": "A sample from the posterior by Markov chains.",
-    "misconception": "describes MCMC"
-   },
-   {
-    "text": "A uniform distribution on the credible interval.",
-    "misconception": "gives an unrelated shape"
-   },
-   {
-    "text": "A distribution that matches all moments of the posterior.",
-    "misconception": "overstates"
-   },
-   {
-    "text": "An exact result for any posterior.",
-    "misconception": "overstates"
-   }
-  ],
-  "explanation": "The approximation improves with more data (Bernstein-von Mises) and is poor for skewed, bounded or multimodal posteriors."
- },
- {
-  "id": "bay-10.2",
-  "lecture": 10,
-  "stem": "When does the Laplace approximation work poorly?",
-  "correct": [
-   "When the posterior is skewed, multimodal or near a boundary.",
-   "With a variance near zero."
-  ],
-  "distractors": [
-   {
-    "text": "When the sample size is very large.",
-    "misconception": "is when it works well"
-   },
-   {
-    "text": "When the posterior is unimodal and symmetric.",
-    "misconception": "is when it works well"
-   },
-   {
-    "text": "When the likelihood is Gaussian.",
-    "misconception": "is when it works well"
-   },
-   {
-    "text": "Only when the prior is flat.",
-    "misconception": "restricts it wrongly"
-   },
-   {
-    "text": "Only when the parameter is discrete.",
-    "misconception": "restricts it wrongly"
-   }
-  ],
-  "explanation": "For a $\\mathrm{Beta}(2,20)$ posterior near 0, the Gaussian puts mass below zero."
- },
- {
-  "id": "bay-10.3",
-  "lecture": 10,
-  "stem": "How can the Laplace approximation be used to estimate the marginal likelihood?",
-  "correct": [
-   "Evaluate the integrand at the mode, times the Gaussian integral.",
-   "Integrate the quadratic expansion."
-  ],
-  "distractors": [
-   {
-    "text": "Take the maximum of the likelihood.",
-    "misconception": "ignores the integration"
-   },
-   {
-    "text": "Use the posterior mean of the likelihood.",
-    "misconception": "gives a different quantity"
-   },
-   {
-    "text": "Average the likelihood over the data.",
-    "misconception": "confuses the integral variable"
-   },
-   {
-    "text": "It cannot be used for the marginal likelihood.",
-    "misconception": "denies the use"
-   },
-   {
-    "text": "Use the prior density at the mode only.",
-    "misconception": "ignores the likelihood"
-   }
-  ],
-  "explanation": "This leads to the BIC as a rougher approximation, keeping only the leading terms."
- },
- {
-  "id": "bay-10.4",
-  "lecture": 10,
-  "stem": "How is the Laplace approximation related to the sample size?",
-  "correct": [
-   "As $n$ grows the posterior turns normal with variance of order $1/n$.",
-   "Bernstein-von Mises."
-  ],
-  "distractors": [
-   {
-    "text": "It gets worse with larger $n$.",
-    "misconception": "reverses the effect"
-   },
-   {
-    "text": "It is independent of $n$.",
-    "misconception": "ignores the asymptotics"
-   },
-   {
-    "text": "It improves only if the prior is informative.",
-    "misconception": "restricts it wrongly"
-   },
-   {
-    "text": "It is exact for every $n$ when the model is correct.",
-    "misconception": "overstates"
-   },
-   {
-    "text": "It requires $n<p$.",
-    "misconception": "invents a condition"
-   }
-  ],
-  "explanation": "Regularity includes a parameter in the interior of the space and a nonsingular information matrix."
- },
- {
-  "id": "bay-11.1",
-  "lecture": 11,
-  "stem": "What is the evidence lower bound (ELBO) in variational Bayes?",
-  "correct": [
-   "$E_q[\\log p(y,\\theta)]-E_q[\\log q(\\theta)]$, a bound on $\\log p(y)$.",
-   "Expected log joint plus entropy of $q$."
-  ],
-  "distractors": [
-   {
-    "text": "An upper bound on the marginal likelihood.",
-    "misconception": "reverses the direction"
-   },
-   {
-    "text": "The log-likelihood at the posterior mode.",
-    "misconception": "describes a different quantity"
-   },
-   {
-    "text": "The KL divergence from the prior to the posterior.",
-    "misconception": "confuses with a prior-posterior divergence"
-   },
-   {
-    "text": "The posterior variance.",
-    "misconception": "gives an unrelated quantity"
-   },
-   {
-    "text": "A bound that does not depend on $q$.",
-    "misconception": "ignores the dependence"
-   }
-  ],
-  "explanation": "$\\log p(y)=\\mathrm{ELBO}(q)+\\mathrm{KL}(q\\|p(\\cdot\\mid y))$, so the gap is exactly the KL divergence."
- },
- {
-  "id": "bay-11.2",
-  "lecture": 11,
-  "stem": "What assumption does mean-field variational inference make?",
-  "correct": [
-   "The approximation factorises across parameters.",
-   "Factorised posterior."
-  ],
-  "distractors": [
-   {
-    "text": "The true posterior is Gaussian.",
-    "misconception": "describes the Laplace approximation"
-   },
-   {
-    "text": "The prior is flat.",
-    "misconception": "is unrelated"
-   },
-   {
-    "text": "The data are independent.",
-    "misconception": "confuses with data independence"
-   },
-   {
-    "text": "The parameters are all discrete.",
-    "misconception": "restricts it wrongly"
-   },
-   {
-    "text": "The posterior is unimodal.",
-    "misconception": "is a different assumption"
-   }
-  ],
-  "explanation": "With correlated posterior parameters the factorisation loses the correlation and typically underestimates the posterior variances."
- },
- {
-  "id": "bay-11.3",
-  "lecture": 11,
-  "stem": "Which statement compares variational inference with MCMC correctly?",
-  "correct": [
-   "VI is faster but biased; MCMC is exact but slower.",
-   "VI optimises; MCMC samples."
-  ],
-  "distractors": [
-   {
-    "text": "VI is exact for any family.",
-    "misconception": "overstates"
-   },
-   {
-    "text": "MCMC is always faster.",
-    "misconception": "reverses the comparison"
-   },
-   {
-    "text": "VI estimates are unbiased for the posterior moments.",
-    "misconception": "ignores the bias"
-   },
-   {
-    "text": "They give identical answers for every model.",
-    "misconception": "ignores the difference"
-   },
-   {
-    "text": "MCMC requires the posterior to be Gaussian.",
-    "misconception": "reverses the requirement"
-   }
-  ],
-  "explanation": "Mean-field VI often gives good posterior means but too narrow intervals; use MCMC when calibrated uncertainty matters."
- },
- {
-  "id": "bay-11.4",
-  "lecture": 11,
-  "stem": "Which divergence does variational inference minimise?",
-  "correct": [
-   "$\\mathrm{KL}(q\\|p)$, from approximation to posterior.",
-   "The reverse KL."
-  ],
-  "distractors": [
-   {
-    "text": "$\\mathrm{KL}(p\\|q)$, which forces $q$ to cover all the posterior mass.",
-    "misconception": "gives the other direction"
-   },
-   {
-    "text": "The total variation distance.",
-    "misconception": "names a different distance"
-   },
-   {
-    "text": "The Euclidean distance between means.",
-    "misconception": "names a different criterion"
-   },
-   {
-    "text": "The Hellinger distance.",
-    "misconception": "names a different distance"
-   },
-   {
-    "text": "It minimises no divergence.",
-    "misconception": "denies the criterion"
-   }
-  ],
-  "explanation": "$\\mathrm{KL}(q\\|p)$ penalises $q$ for placing mass where $p$ is small, so $q$ locks onto one mode and is too narrow."
- },
- {
-  "id": "bay-12.1",
-  "lecture": 12,
-  "stem": "What does the Chinese restaurant process describe?",
-  "correct": [
-   "A rule: join a table in proportion to its size, or start a new one.",
-   "Cluster assignments under a Dirichlet process."
-  ],
-  "distractors": [
-   {
-    "text": "A fixed number of clusters chosen in advance.",
-    "misconception": "contradicts the process"
-   },
-   {
-    "text": "A process in which each customer picks a table at random with equal probability.",
-    "misconception": "ignores the rich-get-richer rule"
-   },
-   {
-    "text": "A Gaussian process on tables.",
-    "misconception": "confuses processes"
-   },
-   {
-    "text": "A Markov chain on the integers.",
-    "misconception": "confuses with a different process"
-   },
-   {
-    "text": "A method of generating normal draws.",
-    "misconception": "confuses with a sampler"
-   }
-  ],
-  "explanation": "P(new table) $=\\alpha/(n+\\alpha)$; the number of occupied tables grows like $\\alpha\\ln n$."
- },
- {
-  "id": "bay-12.2",
-  "lecture": 12,
-  "stem": "What is a Dirichlet process $\\mathrm{DP}(\\alpha,G_0)$?",
-  "correct": [
-   "A distribution over discrete measures, with base $G_0$ and concentration $\\alpha$.",
-   "A random discrete distribution."
-  ],
-  "distractors": [
-   {
-    "text": "A distribution over continuous densities.",
-    "misconception": "ignores that draws are discrete"
-   },
-   {
-    "text": "A distribution over a finite set of weights.",
-    "misconception": "misses the infinite support"
-   },
-   {
-    "text": "A Gaussian process for functions.",
-    "misconception": "confuses processes"
-   },
-   {
-    "text": "A prior on the number of parameters only.",
-    "misconception": "gives an incomplete description"
-   },
-   {
-    "text": "A mixture of two normal distributions.",
-    "misconception": "confuses with a mixture model"
-   }
-  ],
-  "explanation": "Larger $\\alpha$ spreads mass over more atoms; as $\\alpha\\to\\infty$ draws look like $G_0$. For density estimation one convolves it with a kernel."
- },
- {
-  "id": "bay-12.3",
-  "lecture": 12,
-  "stem": "In the stick-breaking construction of the Dirichlet process, how are the weights built?",
-  "correct": [
-   "Break a unit stick: $\\beta_k\\sim\\mathrm{Beta}(1,\\alpha)$.",
-   "Weights are fractions of the remaining stick."
-  ],
-  "distractors": [
-   {
-    "text": "All weights are equal to $1/K$.",
-    "misconception": "describes a finite uniform mixture"
-   },
-   {
-    "text": "The weights are drawn from a normal distribution.",
-    "misconception": "gives an invalid weight distribution"
-   },
-   {
-    "text": "Weights are $\\beta_k\\sim\\mathrm{Beta}(\\alpha,1)$ times the previous weight.",
-    "misconception": "swaps the parameters"
-   },
-   {
-    "text": "The weights are all equal to $\\alpha$.",
-    "misconception": "invents a rule"
-   },
-   {
-    "text": "The weights increase with $k$.",
-    "misconception": "reverses the order"
-   }
-  ],
-  "explanation": "$E[\\beta_k]=1/(1+\\alpha)$, so a small $\\alpha$ puts most mass on the first few atoms."
- },
- {
-  "id": "bay-12.4",
-  "lecture": 12,
-  "stem": "What is a Gaussian process prior for a function $f$?",
-  "correct": [
-   "A distribution over functions with multivariate normal finite sets.",
-   "A prior where the kernel sets smoothness."
-  ],
-  "distractors": [
-   {
-    "text": "A prior that assumes the function is linear.",
-    "misconception": "confuses with a linear model"
-   },
-   {
-    "text": "A prior over a finite number of coefficients.",
-    "misconception": "confuses with parametric models"
-   },
-   {
-    "text": "A prior that makes outputs independent of the inputs.",
-    "misconception": "ignores the kernel"
-   },
-   {
-    "text": "A prior on random numbers, not functions.",
-    "misconception": "misdescribes"
-   },
-   {
-    "text": "A distribution on the discrete values of the function.",
-    "misconception": "misdescribes"
-   }
-  ],
-  "explanation": "The posterior given Gaussian noisy observations is again a GP, in closed form, with cost cubic in the number of observations."
- },
- {
-  "id": "bay-12.5",
-  "lecture": 12,
-  "stem": "How does Gaussian process regression produce a prediction at a new input?",
-  "correct": [
-   "A kernel-weighted mix of training outputs; variance shrinks near data.",
-   "Conditioning a joint normal."
-  ],
-  "distractors": [
-   {
-    "text": "By fitting a straight line to the data.",
-    "misconception": "confuses with a linear model"
-   },
-   {
-    "text": "The prediction ignores the training inputs.",
-    "misconception": "ignores the conditioning"
-   },
-   {
-    "text": "The variance is the same everywhere.",
-    "misconception": "ignores the effect of nearby data"
-   },
-   {
-    "text": "By simulation only.",
-    "misconception": "ignores the closed form"
-   },
-   {
-    "text": "The variance is larger near the training inputs.",
-    "misconception": "reverses the effect"
-   }
-  ],
-  "explanation": "Far from the data the posterior mean returns to the prior mean and the variance to the prior variance."
- },
- {
-  "id": "bay-1.5",
-  "lecture": 1,
-  "stem": "Once the data $y$ have been observed, how is the likelihood $p(y\\mid\\theta)$ used in a Bayesian analysis?",
-  "correct": [
-   "It is read as a function of $\\theta$ that shows how well each value explains the observed data.",
-   "Held at the observed $y$, it ranks values of $\\theta$ by how well they fit."
-  ],
-  "distractors": [
-   {
-    "text": "It is a probability distribution for $\\theta$, so it integrates to one over the parameter space.",
-    "misconception": "treats the likelihood as a density in $\\theta$"
-   },
-   {
-    "text": "It is the belief about $\\theta$ after seeing the data, obtained by updating the prior.",
-    "misconception": "confuses the likelihood with the posterior"
-   },
-   {
-    "text": "It is the probability of the data averaged over the prior, so it no longer depends on $\\theta$.",
-    "misconception": "confuses the likelihood with the marginal likelihood"
-   },
-   {
-    "text": "It stays a function of $y$ with $\\theta$ fixed, so it cannot be used to compare parameter values.",
-    "misconception": "reverses which argument is held fixed"
-   },
-   {
-    "text": "It serves only to normalise the posterior and says nothing about which $\\theta$ values are likely.",
-    "misconception": "confuses the likelihood with the normalising constant"
-   }
-  ],
-  "explanation": "After the data are seen, $y$ is fixed and $p(y\\mid\\theta)$ is a function of $\\theta$. It need not integrate to one in $\\theta$, and multiplying it by the prior gives the unnormalised posterior."
- },
- {
-  "id": "bay-3.5",
-  "lecture": 3,
-  "stem": "A $\\mathrm{Beta}(a,b)$ prior for a proportion can be read as $a+b$ prior observations. How does its influence on the posterior mean change as the sample size $n$ grows?",
-  "correct": [
-   "The weight on the prior mean, $(a+b)/(a+b+n)$, shrinks toward zero as $n$ grows, so the data dominate.",
-   "More data make the prior counts a small share, so the mean nears $k/n$."
-  ],
-  "distractors": [
-   {
-    "text": "The weight on the prior mean stays at $a/(a+b)$ however large $n$ becomes, so the prior never fades.",
-    "misconception": "confuses the prior mean with the weight given to it"
-   },
-   {
-    "text": "The weight on the prior mean grows with $n$, because more data make the prior assumptions more credible.",
-    "misconception": "thinks data strengthen the prior's influence"
-   },
-   {
-    "text": "The influence vanishes only for an improper prior, because a proper prior keeps a fixed share of the posterior.",
-    "misconception": "thinks a proper prior is never overwhelmed by data"
-   },
-   {
-    "text": "The posterior mean moves toward the prior mean as $n$ grows, since the prior is averaged over more data.",
-    "misconception": "gets the direction of the shrinkage backwards"
-   },
-   {
-    "text": "The prior stops mattering only once $n$ exceeds $a+b$, after which the posterior equals the likelihood.",
-    "misconception": "believes the prior switches off at a threshold"
-   }
-  ],
-  "explanation": "The posterior mean is $\\dfrac{a+b}{a+b+n}\\cdot\\dfrac{a}{a+b}+\\dfrac{n}{a+b+n}\\cdot\\dfrac kn$. The weight on the prior mean falls smoothly to zero as $n$ increases, but never switches off at a threshold."
- },
- {
-  "id": "bay-4.5",
-  "lecture": 4,
-  "stem": "How do the posterior mean, posterior median and MAP estimate compare when the posterior is skewed?",
-  "correct": [
-   "They generally differ, because each summarises differently and the mean is pulled toward the long tail.",
-   "Skewness separates them; the mean is dragged furthest into the long tail."
-  ],
-  "distractors": [
-   {
-    "text": "They coincide for every unimodal posterior, because each of them sits at the centre of the distribution.",
-    "misconception": "thinks unimodal implies symmetric"
-   },
-   {
-    "text": "The MAP lies far out in the long tail while the mean sits at the peak, since the mode reacts strongly to skew.",
-    "misconception": "swaps the roles of the mode and the mean"
-   },
-   {
-    "text": "The median is always the largest of the three, because it minimises the posterior expected absolute error.",
-    "misconception": "confuses the optimal loss with the size of the estimate"
-   },
-   {
-    "text": "They differ only when the prior is improper, because a proper prior makes the posterior symmetric.",
-    "misconception": "believes a proper prior forces a symmetric posterior"
-   },
-   {
-    "text": "The mean and the MAP agree whenever the posterior is skewed, and differ only for symmetric posteriors.",
-    "misconception": "reverses the effect of skewness"
-   }
-  ],
-  "explanation": "For a right-skewed posterior the order is typically mode < median < mean, and the reverse for a left-skewed one. They agree exactly for a symmetric unimodal posterior."
- },
- {
-  "id": "bay-5.5",
-  "lecture": 5,
-  "stem": "A Bayes factor $BF_{12}=0.2$ is reported when comparing model $M_1$ with model $M_2$. What does it say?",
-  "correct": [
-   "The data are five times more likely under $M_2$ than $M_1$, with each model averaged over its prior.",
-   "The marginal likelihood of $M_2$ is five times that of $M_1$."
-  ],
-  "distractors": [
-   {
-    "text": "The posterior probability of $M_1$ is $0.2$, whatever the prior probabilities of the two models were.",
-    "misconception": "mistakes the Bayes factor for a posterior probability"
-   },
-   {
-    "text": "The data are five times more likely under $M_1$, because a value below one favours the first model.",
-    "misconception": "reads the ratio the wrong way round"
-   },
-   {
-    "text": "$M_1$ is rejected at the $20\\%$ level, in the same way as a frequentist p-value of $0.2$.",
-    "misconception": "interprets the Bayes factor as a p-value"
-   },
-   {
-    "text": "$M_2$ has five times the maximised likelihood, so the penalty for complexity has already been removed.",
-    "misconception": "confuses averaged with maximised likelihood"
-   },
-   {
-    "text": "The prior odds of $M_1$ against $M_2$ are $0.2$, and the observed data have not changed these odds.",
-    "misconception": "confuses the Bayes factor with the prior odds"
-   }
-  ],
-  "explanation": "$BF_{12}=p(y\\mid M_1)/p(y\\mid M_2)=0.2$, so $BF_{21}=5$. Posterior odds equal the Bayes factor times the prior odds."
- },
- {
-  "id": "bay-7.5",
-  "lecture": 7,
   "stem": "In importance sampling one proposal draw has a weight much larger than all the others. What is the likely consequence?",
   "correct": [
    "The effective sample size is small, so the estimate acts like only a few draws and has a high variance.",
@@ -1888,8 +1280,776 @@
   "explanation": "Weights with one huge value give $(\\sum w_i)^2/\\sum w_i^2$ close to $1$: the average is essentially one draw. This usually means the proposal has lighter tails than the target."
  },
  {
+  "id": "bay-9.1",
+  "lecture": 9,
+  "stem": "What does detailed balance say, and why does it matter?",
+  "correct": [
+   "$\\pi(x)P(x,y)=\\pi(y)P(y,x)$, which makes $\\pi$ stationary.",
+   "Balanced flow under $\\pi$."
+  ],
+  "distractors": [
+   {
+    "text": "The chain moves back to its starting point after every step.",
+    "misconception": "confuses with returning"
+   },
+   {
+    "text": "The transition probabilities are all equal.",
+    "misconception": "confuses with uniformity"
+   },
+   {
+    "text": "The chain is independent from step to step.",
+    "misconception": "confuses with independence"
+   },
+   {
+    "text": "It guarantees that the chain converges quickly.",
+    "misconception": "confuses stationarity with speed"
+   },
+   {
+    "text": "It is needed only for discrete chains.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "Detailed balance is sufficient but not necessary for stationarity. Irreducibility and aperiodicity then give convergence."
+ },
+ {
+  "id": "bay-9.2",
+  "lecture": 9,
+  "stem": "What does the Markov chain in MCMC produce, and how does that differ from independent sampling?",
+  "correct": [
+   "Dependent draws from the target, so ESS is below $n$.",
+   "Correlated samples with consistent averages."
+  ],
+  "distractors": [
+   {
+    "text": "Independent draws from the target at every step.",
+    "misconception": "ignores the dependence"
+   },
+   {
+    "text": "Exactly the target distribution from the first step.",
+    "misconception": "ignores convergence"
+   },
+   {
+    "text": "Draws whose averages are biased for every length.",
+    "misconception": "overlooks consistency"
+   },
+   {
+    "text": "Draws that are uncorrelated if the acceptance rate is high.",
+    "misconception": "confuses with mixing"
+   },
+   {
+    "text": "Draws from the proposal distribution.",
+    "misconception": "confuses the proposal with the target"
+   }
+  ],
+  "explanation": "Because of autocorrelation the standard error of an MCMC average is larger than for independent draws of the same number."
+ },
+ {
+  "id": "bay-9.3",
+  "lecture": 9,
+  "stem": "What does the transition matrix $P$ of a finite Markov chain contain?",
+  "correct": [
+   "$P_{ij}=P(X_n=j\\mid X_{n-1}=i)$, with every row summing to one.",
+   "One-step probabilities whose rows are probability functions."
+  ],
+  "distractors": [
+   {
+    "text": "$P_{ij}=P(X_n=i\\mid X_{n-1}=j)$, with every column summing to one.",
+    "misconception": "swaps the indices and the summing direction"
+   },
+   {
+    "text": "The stationary probabilities of the states.",
+    "misconception": "confuses $P$ with $\\pi$"
+   },
+   {
+    "text": "Joint probabilities of pairs of states, summing to one over the whole matrix.",
+    "misconception": "describes a joint distribution"
+   },
+   {
+    "text": "The probability of returning to each state in $n$ steps.",
+    "misconception": "describes return probabilities"
+   },
+   {
+    "text": "The expected number of steps to reach each state.",
+    "misconception": "describes hitting times"
+   }
+  ],
+  "explanation": "Row $i$ of $P$ is the conditional distribution of the next state given the current state $i$. The $n$-step matrix is $P^n$."
+ },
+ {
+  "id": "bay-9.4",
+  "lecture": 9,
+  "stem": "What does it mean for $\\pi$ to be a stationary distribution of a Markov chain with transition matrix $P$?",
+  "correct": [
+   "$\\pi=\\pi P$: if $X_0\\sim\\pi$ then $X_n\\sim\\pi$ for every $n$.",
+   "One step of the chain leaves the distribution unchanged."
+  ],
+  "distractors": [
+   {
+    "text": "$\\pi_iP_{ij}=1$ for every pair of states $i,j$.",
+    "misconception": "invents a product condition"
+   },
+   {
+    "text": "A chain started at any state is distributed as $\\pi$ after one step.",
+    "misconception": "claims instant convergence"
+   },
+   {
+    "text": "The chain never leaves the states with positive $\\pi$ probability.",
+    "misconception": "describes absorption"
+   },
+   {
+    "text": "$P^n$ equals the identity matrix for large $n$.",
+    "misconception": "describes a frozen chain"
+   },
+   {
+    "text": "$\\pi$ is the distribution of the initial state $X_0$ only.",
+    "misconception": "confuses stationarity with the initial law"
+   }
+  ],
+  "explanation": "Stationarity: $\\pi_j=\\sum_i\\pi_iP_{ij}$. Detailed balance $\\pi_iP_{ij}=\\pi_jP_{ji}$ is sufficient for it."
+ },
+ {
+  "id": "bay-9.5",
+  "lecture": 9,
+  "stem": "Why can the ordinary law of large numbers not be used to justify averages over MCMC output?",
+  "correct": [
+   "Successive chain values are correlated, so an ergodic theorem for Markov chains is needed.",
+   "The samples are dependent, not i.i.d."
+  ],
+  "distractors": [
+   {
+    "text": "Because MCMC output is exactly independent, which breaks the theorem.",
+    "misconception": "claims exact independence"
+   },
+   {
+    "text": "Because the target density is unnormalised.",
+    "misconception": "confuses normalisation with dependence"
+   },
+   {
+    "text": "Because the average is biased in every finite sample.",
+    "misconception": "claims a universal finite-sample bias"
+   },
+   {
+    "text": "Because the chain never converges to anything.",
+    "misconception": "claims non-convergence"
+   },
+   {
+    "text": "Because the values are not identically distributed even asymptotically.",
+    "misconception": "claims the marginal laws never settle"
+   }
+  ],
+  "explanation": "$(X_n,X_{n+1})$ are correlated, so the i.i.d. law of large numbers does not apply; ergodic theorems give $\\frac1T\\sum h(X_n)\\to E_\\pi h(X)$ for regular chains."
+ },
+ {
+  "id": "bay-10.1",
+  "lecture": 10,
+  "stem": "What is the acceptance probability of the Metropolis-Hastings algorithm for a move from $x$ to $x'$?",
+  "correct": [
+   "$\\min\\{1,\\ \\pi(x')q(x\\mid x')/(\\pi(x)q(x'\\mid x))\\}$.",
+   "Hastings ratio, capped at one."
+  ],
+  "distractors": [
+   {
+    "text": "$\\pi(x')/\\pi(x)$ without capping at one.",
+    "misconception": "can exceed one"
+   },
+   {
+    "text": "$\\min\\{1,\\pi(x)/\\pi(x')\\}$.",
+    "misconception": "inverts the ratio"
+   },
+   {
+    "text": "Always one for a normal proposal.",
+    "misconception": "ignores the target"
+   },
+   {
+    "text": "$q(x'\\mid x)$ alone.",
+    "misconception": "ignores the target"
+   },
+   {
+    "text": "It must be less than 0.5.",
+    "misconception": "invents a bound"
+   }
+  ],
+  "explanation": "Only a ratio of target densities enters, so the target needs to be known only up to a constant."
+ },
+ {
+  "id": "bay-10.2",
+  "lecture": 10,
+  "stem": "What happens in a random-walk Metropolis sampler when the proposal step is very small?",
+  "correct": [
+   "Almost every move is accepted, but the chain crawls.",
+   "Slow mixing."
+  ],
+  "distractors": [
+   {
+    "text": "Almost every move is rejected.",
+    "misconception": "describes a very large step"
+   },
+   {
+    "text": "The chain converges faster.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The acceptance rate is zero.",
+    "misconception": "is false"
+   },
+   {
+    "text": "The draws are independent.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The stationary distribution changes.",
+    "misconception": "confuses with speed"
+   }
+  ],
+  "explanation": "Very large steps cause many rejections; an intermediate step balances the two (acceptance about 23% in high dimensions, 44% in one dimension)."
+ },
+ {
+  "id": "bay-10.3",
+  "lecture": 10,
+  "stem": "Why can MH be used when the posterior density is known only up to a constant?",
+  "correct": [
+   "The acceptance ratio cancels the normalising constant.",
+   "The marginal likelihood drops out."
+  ],
+  "distractors": [
+   {
+    "text": "MH estimates the constant by simulation first.",
+    "misconception": "misdescribes the algorithm"
+   },
+   {
+    "text": "The constant is assumed to be one.",
+    "misconception": "makes an unjustified assumption"
+   },
+   {
+    "text": "MH needs the normalised density to compute probabilities.",
+    "misconception": "reverses the benefit"
+   },
+   {
+    "text": "The constant is absorbed by the proposal.",
+    "misconception": "gives a wrong reason"
+   },
+   {
+    "text": "It works only for uniform targets.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "Posterior $\\propto$ likelihood $\\times$ prior is all that is needed, which is why MCMC revolutionised Bayesian statistics."
+ },
+ {
+  "id": "bay-10.4",
+  "lecture": 10,
+  "stem": "In the Metropolis-Hastings algorithm, what happens when a proposed move is rejected?",
+  "correct": [
+   "The chain stays at the current value, which is repeated in the sequence.",
+   "The value $x_t$ is recorded again as $x_{t+1}$."
+  ],
+  "distractors": [
+   {
+    "text": "The proposal is redrawn until one of them is accepted.",
+    "misconception": "turns it into a rejection loop"
+   },
+   {
+    "text": "The chain restarts from its initial value $x_0$.",
+    "misconception": "restarts the chain"
+   },
+   {
+    "text": "The rejected value is kept with probability one half.",
+    "misconception": "invents a coin flip"
+   },
+   {
+    "text": "The step is discarded, so the stored sequence is shorter.",
+    "misconception": "drops the step from the sequence"
+   },
+   {
+    "text": "The acceptance ratio is replaced by one for the next step.",
+    "misconception": "changes the ratio after a rejection"
+   }
+  ],
+  "explanation": "Setting $X_{t+1}=x_t$ after a rejection is essential for detailed balance. Repeated values appear in the output, and a high rejection rate (a very large proposal scale) gives many repeats."
+ },
+ {
   "id": "bay-10.5",
   "lecture": 10,
+  "stem": "What does a random-walk proposal $g(y\\mid x)=N(y\\mid x,\\tau^2)$ imply for the acceptance ratio?",
+  "correct": [
+   "The proposal is symmetric, so $\\alpha=\\min\\{1,\\tilde f(y)/\\tilde f(x)\\}$.",
+   "The proposal terms cancel in the ratio."
+  ],
+  "distractors": [
+   {
+    "text": "$\\alpha=\\min\\{1,\\tilde f(x)/\\tilde f(y)\\}$, with the target ratio inverted.",
+    "misconception": "inverts the target ratio"
+   },
+   {
+    "text": "$\\alpha=\\tilde f(y)\\,g(x\\mid y)$, with no minimum taken.",
+    "misconception": "drops the ratio structure"
+   },
+   {
+    "text": "$\\alpha=1$ for every proposed move, whatever the target.",
+    "misconception": "claims every move is accepted"
+   },
+   {
+    "text": "The ratio depends on $\\tau$ only and not on the target.",
+    "misconception": "ignores the target density"
+   },
+   {
+    "text": "$\\alpha=\\min\\{1,g(y\\mid x)/g(x\\mid y)\\}$, the proposal ratio alone.",
+    "misconception": "keeps only the proposal ratio"
+   }
+  ],
+  "explanation": "$g(y\\mid x)=g(x\\mid y)$ for the normal random walk, so $\\alpha=\\min\\{1,\\tilde f(y)g(x\\mid y)/(\\tilde f(x)g(y\\mid x))\\}=\\min\\{1,\\tilde f(y)/\\tilde f(x)\\}$: moves to higher density are always accepted."
+ },
+ {
+  "id": "bay-11.1",
+  "lecture": 11,
+  "stem": "What is a Gibbs sampler?",
+  "correct": [
+   "A chain drawing each variable from its full conditional.",
+   "Gibbs updates one variable at a time."
+  ],
+  "distractors": [
+   {
+    "text": "A sampler that draws all variables jointly from a proposal.",
+    "misconception": "describes a joint proposal"
+   },
+   {
+    "text": "A rejection sampler for conditional distributions.",
+    "misconception": "misdescribes the method"
+   },
+   {
+    "text": "It needs the joint density to be normalised.",
+    "misconception": "is not required"
+   },
+   {
+    "text": "It draws each variable independently of the others.",
+    "misconception": "ignores the conditioning"
+   },
+   {
+    "text": "It works only with two variables.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "Gibbs is convenient with conjugate conditionals; strong posterior correlations slow it down because it moves along coordinate axes."
+ },
+ {
+  "id": "bay-11.2",
+  "lecture": 11,
+  "stem": "What is the purpose of burn-in?",
+  "correct": [
+   "To drop early draws that reflect the starting value.",
+   "The early chain has not converged."
+  ],
+  "distractors": [
+   {
+    "text": "To increase the number of effective draws.",
+    "misconception": "confuses with thinning"
+   },
+   {
+    "text": "To make the draws independent.",
+    "misconception": "confuses with thinning"
+   },
+   {
+    "text": "To change the stationary distribution.",
+    "misconception": "misunderstands the aim"
+   },
+   {
+    "text": "To reduce the dimension of the problem.",
+    "misconception": "confuses with a different task"
+   },
+   {
+    "text": "To check convergence.",
+    "misconception": "confuses with a diagnostic"
+   }
+  ],
+  "explanation": "Running several chains from dispersed starts and checking that they agree helps decide how much to discard."
+ },
+ {
+  "id": "bay-11.3",
+  "lecture": 11,
+  "stem": "How is the effective sample size (ESS) of an MCMC run defined?",
+  "correct": [
+   "$n/(1+2\\sum_{k\\ge1}\\rho_k)$.",
+   "The independent draws giving equal precision."
+  ],
+  "distractors": [
+   {
+    "text": "The number of draws after burn-in.",
+    "misconception": "confuses with the retained length"
+   },
+   {
+    "text": "The number of distinct values in the chain.",
+    "misconception": "confuses with a count"
+   },
+   {
+    "text": "$n$ times the acceptance rate.",
+    "misconception": "confuses with acceptance"
+   },
+   {
+    "text": "Always equal to $n$ for Gibbs samplers.",
+    "misconception": "ignores correlation"
+   },
+   {
+    "text": "It does not depend on the autocorrelation.",
+    "misconception": "ignores correlation"
+   }
+  ],
+  "explanation": "For an AR(1) chain with correlation $\\rho$, ESS $=n(1-\\rho)/(1+\\rho)$."
+ },
+ {
+  "id": "bay-11.4",
+  "lecture": 11,
+  "stem": "What does the Gelman-Rubin statistic $\\hat R$ compare?",
+  "correct": [
+   "Between-chain against within-chain variability, near 1 at convergence.",
+   "Variance across chains versus within."
+  ],
+  "distractors": [
+   {
+    "text": "The acceptance rates of different chains.",
+    "misconception": "confuses with acceptance"
+   },
+   {
+    "text": "The posterior mean with the maximum likelihood estimate.",
+    "misconception": "gives an unrelated comparison"
+   },
+   {
+    "text": "The first and second halves of a single chain only.",
+    "misconception": "describes a different diagnostic"
+   },
+   {
+    "text": "The effective sample size with the number of draws.",
+    "misconception": "confuses with ESS"
+   },
+   {
+    "text": "Values far above 1 indicate convergence.",
+    "misconception": "reverses the interpretation"
+   }
+  ],
+  "explanation": "A common rule is $\\hat R<1.01$; $\\hat R$ well above 1 means the chains have not mixed."
+ },
+ {
+  "id": "bay-11.5",
+  "lecture": 11,
+  "stem": "What is the main idea of Hamiltonian Monte Carlo (HMC)?",
+  "correct": [
+   "It uses gradients to simulate dynamics and propose distant moves.",
+   "Momentum reduces random-walk behaviour."
+  ],
+  "distractors": [
+   {
+    "text": "It uses a symmetric random-walk proposal.",
+    "misconception": "describes random-walk Metropolis"
+   },
+   {
+    "text": "It samples each variable from its full conditional.",
+    "misconception": "describes Gibbs"
+   },
+   {
+    "text": "It requires no derivative information.",
+    "misconception": "reverses the requirement"
+   },
+   {
+    "text": "It is limited to discrete distributions.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It always accepts every proposal.",
+    "misconception": "describes Gibbs"
+   }
+  ],
+  "explanation": "Stan's NUTS automatically tunes the trajectory length of HMC."
+ },
+ {
+  "id": "bay-12.1",
+  "lecture": 12,
+  "stem": "What does a posterior predictive check assess?",
+  "correct": [
+   "Whether data simulated from the model resemble the observed data.",
+   "Replicated data are compared with observed data."
+  ],
+  "distractors": [
+   {
+    "text": "Whether the prior is correct.",
+    "misconception": "priors are not checked this way"
+   },
+   {
+    "text": "Whether the MCMC chain has converged.",
+    "misconception": "describes a convergence diagnostic"
+   },
+   {
+    "text": "Whether the posterior mean equals the maximum likelihood estimate.",
+    "misconception": "describes a comparison of estimates"
+   },
+   {
+    "text": "Which of two models has the higher marginal likelihood.",
+    "misconception": "describes a Bayes factor"
+   },
+   {
+    "text": "Whether the parameters are identified.",
+    "misconception": "confuses with identifiability"
+   }
+  ],
+  "explanation": "A systematic discrepancy (for example too few extreme values in the replicated data) indicates model misfit."
+ },
+ {
+  "id": "bay-12.2",
+  "lecture": 12,
+  "stem": "What is the Bayes factor $BF_{12}$ for comparing models $M_1$ and $M_2$?",
+  "correct": [
+   "The ratio of marginal likelihoods.",
+   "How much likelier the data are under $M_1$."
+  ],
+  "distractors": [
+   {
+    "text": "The ratio of the maximised likelihoods of the two models.",
+    "misconception": "describes a likelihood ratio"
+   },
+   {
+    "text": "The ratio of the posterior means.",
+    "misconception": "gives an unrelated ratio"
+   },
+   {
+    "text": "The difference in their AIC values.",
+    "misconception": "confuses with a criterion"
+   },
+   {
+    "text": "The ratio of the prior probabilities.",
+    "misconception": "gives the prior odds"
+   },
+   {
+    "text": "The probability that $M_1$ is true.",
+    "misconception": "confuses with a posterior probability"
+   }
+  ],
+  "explanation": "Posterior odds $=BF_{12}\\times$ prior odds. Because the likelihood is averaged over the prior, the Bayes factor automatically penalises complexity."
+ },
+ {
+  "id": "bay-12.3",
+  "lecture": 12,
+  "stem": "Why are Bayes factors sensitive to the prior on the parameters?",
+  "correct": [
+   "The marginal likelihood averages over the prior, so diffuse priors lower the evidence.",
+   "Widening a prior favours the simpler model."
+  ],
+  "distractors": [
+   {
+    "text": "They are not sensitive, because the data dominate.",
+    "misconception": "ignores the averaging over the prior"
+   },
+   {
+    "text": "Bayes factors use only the posterior mode.",
+    "misconception": "misdescribes the computation"
+   },
+   {
+    "text": "They depend on the prior only for improper priors.",
+    "misconception": "restricts the effect wrongly"
+   },
+   {
+    "text": "Diffuse priors always favour the more complex model.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "The prior cancels in the ratio.",
+    "misconception": "forgets that each model has its own prior"
+   }
+  ],
+  "explanation": "Improper priors leave the Bayes factor undefined up to an arbitrary constant, which is why proper priors are required for model comparison."
+ },
+ {
+  "id": "bay-12.4",
+  "lecture": 12,
+  "stem": "What does the WAIC estimate?",
+  "correct": [
+   "Out-of-sample predictive accuracy.",
+   "A cross-validation proxy."
+  ],
+  "distractors": [
+   {
+    "text": "The marginal likelihood of the model.",
+    "misconception": "confuses with the evidence"
+   },
+   {
+    "text": "The posterior probability of each model.",
+    "misconception": "confuses with model probabilities"
+   },
+   {
+    "text": "The in-sample fit only, without a penalty.",
+    "misconception": "forgets the penalty"
+   },
+   {
+    "text": "The prior predictive distribution.",
+    "misconception": "confuses with the prior predictive"
+   },
+   {
+    "text": "The number of parameters.",
+    "misconception": "confuses with a count"
+   }
+  ],
+  "explanation": "$p_{\\text{WAIC}}$ is the sum over observations of the posterior variance of the log-likelihood, a measure of flexibility."
+ },
+ {
+  "id": "bay-12.5",
+  "lecture": 12,
+  "stem": "A Bayes factor $BF_{12}=0.2$ is reported when comparing model $M_1$ with model $M_2$. What does it say?",
+  "correct": [
+   "The data are five times more likely under $M_2$ than $M_1$, with each model averaged over its prior.",
+   "The marginal likelihood of $M_2$ is five times that of $M_1$."
+  ],
+  "distractors": [
+   {
+    "text": "The posterior probability of $M_1$ is $0.2$, whatever the prior probabilities of the two models were.",
+    "misconception": "mistakes the Bayes factor for a posterior probability"
+   },
+   {
+    "text": "The data are five times more likely under $M_1$, because a value below one favours the first model.",
+    "misconception": "reads the ratio the wrong way round"
+   },
+   {
+    "text": "$M_1$ is rejected at the $20\\%$ level, in the same way as a frequentist p-value of $0.2$.",
+    "misconception": "interprets the Bayes factor as a p-value"
+   },
+   {
+    "text": "$M_2$ has five times the maximised likelihood, so the penalty for complexity has already been removed.",
+    "misconception": "confuses averaged with maximised likelihood"
+   },
+   {
+    "text": "The prior odds of $M_1$ against $M_2$ are $0.2$, and the observed data have not changed these odds.",
+    "misconception": "confuses the Bayes factor with the prior odds"
+   }
+  ],
+  "explanation": "$BF_{12}=p(y\\mid M_1)/p(y\\mid M_2)=0.2$, so $BF_{21}=5$. Posterior odds equal the Bayes factor times the prior odds."
+ },
+ {
+  "id": "bay-13.1",
+  "lecture": 13,
+  "stem": "What is the Laplace approximation to a posterior?",
+  "correct": [
+   "A normal at the mode with covariance from the inverse negative Hessian.",
+   "A second-order Taylor expansion of the log-posterior."
+  ],
+  "distractors": [
+   {
+    "text": "A normal distribution centred at the posterior mean with the prior variance.",
+    "misconception": "mixes up the centre and the spread"
+   },
+   {
+    "text": "A sample from the posterior by Markov chains.",
+    "misconception": "describes MCMC"
+   },
+   {
+    "text": "A uniform distribution on the credible interval.",
+    "misconception": "gives an unrelated shape"
+   },
+   {
+    "text": "A distribution that matches all moments of the posterior.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "An exact result for any posterior.",
+    "misconception": "overstates"
+   }
+  ],
+  "explanation": "The approximation improves with more data (Bernstein-von Mises) and is poor for skewed, bounded or multimodal posteriors."
+ },
+ {
+  "id": "bay-13.2",
+  "lecture": 13,
+  "stem": "When does the Laplace approximation work poorly?",
+  "correct": [
+   "When the posterior is skewed, multimodal or near a boundary.",
+   "With a variance near zero."
+  ],
+  "distractors": [
+   {
+    "text": "When the sample size is very large.",
+    "misconception": "is when it works well"
+   },
+   {
+    "text": "When the posterior is unimodal and symmetric.",
+    "misconception": "is when it works well"
+   },
+   {
+    "text": "When the likelihood is Gaussian.",
+    "misconception": "is when it works well"
+   },
+   {
+    "text": "Only when the prior is flat.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "Only when the parameter is discrete.",
+    "misconception": "restricts it wrongly"
+   }
+  ],
+  "explanation": "For a $\\mathrm{Beta}(2,20)$ posterior near 0, the Gaussian puts mass below zero."
+ },
+ {
+  "id": "bay-13.3",
+  "lecture": 13,
+  "stem": "How can the Laplace approximation be used to estimate the marginal likelihood?",
+  "correct": [
+   "Evaluate the integrand at the mode, times the Gaussian integral.",
+   "Integrate the quadratic expansion."
+  ],
+  "distractors": [
+   {
+    "text": "Take the maximum of the likelihood.",
+    "misconception": "ignores the integration"
+   },
+   {
+    "text": "Use the posterior mean of the likelihood.",
+    "misconception": "gives a different quantity"
+   },
+   {
+    "text": "Average the likelihood over the data.",
+    "misconception": "confuses the integral variable"
+   },
+   {
+    "text": "It cannot be used for the marginal likelihood.",
+    "misconception": "denies the use"
+   },
+   {
+    "text": "Use the prior density at the mode only.",
+    "misconception": "ignores the likelihood"
+   }
+  ],
+  "explanation": "This leads to the BIC as a rougher approximation, keeping only the leading terms."
+ },
+ {
+  "id": "bay-13.4",
+  "lecture": 13,
+  "stem": "How is the Laplace approximation related to the sample size?",
+  "correct": [
+   "As $n$ grows the posterior turns normal with variance of order $1/n$.",
+   "Bernstein-von Mises."
+  ],
+  "distractors": [
+   {
+    "text": "It gets worse with larger $n$.",
+    "misconception": "reverses the effect"
+   },
+   {
+    "text": "It is independent of $n$.",
+    "misconception": "ignores the asymptotics"
+   },
+   {
+    "text": "It improves only if the prior is informative.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "It is exact for every $n$ when the model is correct.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "It requires $n<p$.",
+    "misconception": "invents a condition"
+   }
+  ],
+  "explanation": "Regularity includes a parameter in the interior of the space and a nonsingular information matrix."
+ },
+ {
+  "id": "bay-13.5",
+  "lecture": 13,
   "stem": "The Laplace approximation of a posterior is centred at the mode $\\hat\\theta$. Where does its variance come from?",
   "correct": [
    "It comes from the curvature of the log-posterior at the mode: the inverse of minus its second derivative.",
@@ -1920,8 +2080,136 @@
   "explanation": "A Taylor expansion of $\\log p(\\theta\\mid y)$ about the mode has no linear term, and the quadratic term gives a normal with variance $\\{-(\\log p)''(\\hat\\theta)\\}^{-1}$."
  },
  {
-  "id": "bay-11.5",
-  "lecture": 11,
+  "id": "bay-14.1",
+  "lecture": 14,
+  "stem": "What is the evidence lower bound (ELBO) in variational Bayes?",
+  "correct": [
+   "$E_q[\\log p(y,\\theta)]-E_q[\\log q(\\theta)]$, a bound on $\\log p(y)$.",
+   "Expected log joint plus entropy of $q$."
+  ],
+  "distractors": [
+   {
+    "text": "An upper bound on the marginal likelihood.",
+    "misconception": "reverses the direction"
+   },
+   {
+    "text": "The log-likelihood at the posterior mode.",
+    "misconception": "describes a different quantity"
+   },
+   {
+    "text": "The KL divergence from the prior to the posterior.",
+    "misconception": "confuses with a prior-posterior divergence"
+   },
+   {
+    "text": "The posterior variance.",
+    "misconception": "gives an unrelated quantity"
+   },
+   {
+    "text": "A bound that does not depend on $q$.",
+    "misconception": "ignores the dependence"
+   }
+  ],
+  "explanation": "$\\log p(y)=\\mathrm{ELBO}(q)+\\mathrm{KL}(q\\|p(\\cdot\\mid y))$, so the gap is exactly the KL divergence."
+ },
+ {
+  "id": "bay-14.2",
+  "lecture": 14,
+  "stem": "What assumption does mean-field variational inference make?",
+  "correct": [
+   "The approximation factorises across parameters.",
+   "Factorised posterior."
+  ],
+  "distractors": [
+   {
+    "text": "The true posterior is Gaussian.",
+    "misconception": "describes the Laplace approximation"
+   },
+   {
+    "text": "The prior is flat.",
+    "misconception": "is unrelated"
+   },
+   {
+    "text": "The data are independent.",
+    "misconception": "confuses with data independence"
+   },
+   {
+    "text": "The parameters are all discrete.",
+    "misconception": "restricts it wrongly"
+   },
+   {
+    "text": "The posterior is unimodal.",
+    "misconception": "is a different assumption"
+   }
+  ],
+  "explanation": "With correlated posterior parameters the factorisation loses the correlation and typically underestimates the posterior variances."
+ },
+ {
+  "id": "bay-14.3",
+  "lecture": 14,
+  "stem": "Which statement compares variational inference with MCMC correctly?",
+  "correct": [
+   "VI is faster but biased; MCMC is exact but slower.",
+   "VI optimises; MCMC samples."
+  ],
+  "distractors": [
+   {
+    "text": "VI is exact for any family.",
+    "misconception": "overstates"
+   },
+   {
+    "text": "MCMC is always faster.",
+    "misconception": "reverses the comparison"
+   },
+   {
+    "text": "VI estimates are unbiased for the posterior moments.",
+    "misconception": "ignores the bias"
+   },
+   {
+    "text": "They give identical answers for every model.",
+    "misconception": "ignores the difference"
+   },
+   {
+    "text": "MCMC requires the posterior to be Gaussian.",
+    "misconception": "reverses the requirement"
+   }
+  ],
+  "explanation": "Mean-field VI often gives good posterior means but too narrow intervals; use MCMC when calibrated uncertainty matters."
+ },
+ {
+  "id": "bay-14.4",
+  "lecture": 14,
+  "stem": "Which divergence does variational inference minimise?",
+  "correct": [
+   "$\\mathrm{KL}(q\\|p)$, from approximation to posterior.",
+   "The reverse KL."
+  ],
+  "distractors": [
+   {
+    "text": "$\\mathrm{KL}(p\\|q)$, which forces $q$ to cover all the posterior mass.",
+    "misconception": "gives the other direction"
+   },
+   {
+    "text": "The total variation distance.",
+    "misconception": "names a different distance"
+   },
+   {
+    "text": "The Euclidean distance between means.",
+    "misconception": "names a different criterion"
+   },
+   {
+    "text": "The Hellinger distance.",
+    "misconception": "names a different distance"
+   },
+   {
+    "text": "It minimises no divergence.",
+    "misconception": "denies the criterion"
+   }
+  ],
+  "explanation": "$\\mathrm{KL}(q\\|p)$ penalises $q$ for placing mass where $p$ is small, so $q$ locks onto one mode and is too narrow."
+ },
+ {
+  "id": "bay-14.5",
+  "lecture": 14,
   "stem": "Why is the ELBO useful for choosing the variational approximation $q$ to a posterior?",
   "correct": [
    "Maximising it over $q$ minimises $KL(q\\|p)$, and it needs the posterior only up to a constant.",
@@ -1950,5 +2238,165 @@
    }
   ],
   "explanation": "$\\log p(y)=\\mathrm{ELBO}(q)+KL(q\\|p)$, so maximising the ELBO minimises the divergence. The ELBO uses only the joint $p(y,\\theta)$, not the normalised posterior."
+ },
+ {
+  "id": "bay-15.1",
+  "lecture": 15,
+  "stem": "What does the Chinese restaurant process describe?",
+  "correct": [
+   "A rule: join a table in proportion to its size, or start a new one.",
+   "Cluster assignments under a Dirichlet process."
+  ],
+  "distractors": [
+   {
+    "text": "A fixed number of clusters chosen in advance.",
+    "misconception": "contradicts the process"
+   },
+   {
+    "text": "A process in which each customer picks a table at random with equal probability.",
+    "misconception": "ignores the rich-get-richer rule"
+   },
+   {
+    "text": "A Gaussian process on tables.",
+    "misconception": "confuses processes"
+   },
+   {
+    "text": "A Markov chain on the integers.",
+    "misconception": "confuses with a different process"
+   },
+   {
+    "text": "A method of generating normal draws.",
+    "misconception": "confuses with a sampler"
+   }
+  ],
+  "explanation": "P(new table) $=\\alpha/(n+\\alpha)$; the number of occupied tables grows like $\\alpha\\ln n$."
+ },
+ {
+  "id": "bay-15.2",
+  "lecture": 15,
+  "stem": "What is a Dirichlet process $\\mathrm{DP}(\\alpha,G_0)$?",
+  "correct": [
+   "A distribution over discrete measures, with base $G_0$ and concentration $\\alpha$.",
+   "A random discrete distribution."
+  ],
+  "distractors": [
+   {
+    "text": "A distribution over continuous densities.",
+    "misconception": "ignores that draws are discrete"
+   },
+   {
+    "text": "A distribution over a finite set of weights.",
+    "misconception": "misses the infinite support"
+   },
+   {
+    "text": "A Gaussian process for functions.",
+    "misconception": "confuses processes"
+   },
+   {
+    "text": "A prior on the number of parameters only.",
+    "misconception": "gives an incomplete description"
+   },
+   {
+    "text": "A mixture of two normal distributions.",
+    "misconception": "confuses with a mixture model"
+   }
+  ],
+  "explanation": "Larger $\\alpha$ spreads mass over more atoms; as $\\alpha\\to\\infty$ draws look like $G_0$. For density estimation one convolves it with a kernel."
+ },
+ {
+  "id": "bay-15.3",
+  "lecture": 15,
+  "stem": "In the stick-breaking construction of the Dirichlet process, how are the weights built?",
+  "correct": [
+   "Break a unit stick: $\\beta_k\\sim\\mathrm{Beta}(1,\\alpha)$.",
+   "Weights are fractions of the remaining stick."
+  ],
+  "distractors": [
+   {
+    "text": "All weights are equal to $1/K$.",
+    "misconception": "describes a finite uniform mixture"
+   },
+   {
+    "text": "The weights are drawn from a normal distribution.",
+    "misconception": "gives an invalid weight distribution"
+   },
+   {
+    "text": "Weights are $\\beta_k\\sim\\mathrm{Beta}(\\alpha,1)$ times the previous weight.",
+    "misconception": "swaps the parameters"
+   },
+   {
+    "text": "The weights are all equal to $\\alpha$.",
+    "misconception": "invents a rule"
+   },
+   {
+    "text": "The weights increase with $k$.",
+    "misconception": "reverses the order"
+   }
+  ],
+  "explanation": "$E[\\beta_k]=1/(1+\\alpha)$, so a small $\\alpha$ puts most mass on the first few atoms."
+ },
+ {
+  "id": "bay-15.4",
+  "lecture": 15,
+  "stem": "What is a Gaussian process prior for a function $f$?",
+  "correct": [
+   "A distribution over functions with multivariate normal finite sets.",
+   "A prior where the kernel sets smoothness."
+  ],
+  "distractors": [
+   {
+    "text": "A prior that assumes the function is linear.",
+    "misconception": "confuses with a linear model"
+   },
+   {
+    "text": "A prior over a finite number of coefficients.",
+    "misconception": "confuses with parametric models"
+   },
+   {
+    "text": "A prior that makes outputs independent of the inputs.",
+    "misconception": "ignores the kernel"
+   },
+   {
+    "text": "A prior on random numbers, not functions.",
+    "misconception": "misdescribes"
+   },
+   {
+    "text": "A distribution on the discrete values of the function.",
+    "misconception": "misdescribes"
+   }
+  ],
+  "explanation": "The posterior given Gaussian noisy observations is again a GP, in closed form, with cost cubic in the number of observations."
+ },
+ {
+  "id": "bay-15.5",
+  "lecture": 15,
+  "stem": "How does Gaussian process regression produce a prediction at a new input?",
+  "correct": [
+   "A kernel-weighted mix of training outputs; variance shrinks near data.",
+   "Conditioning a joint normal."
+  ],
+  "distractors": [
+   {
+    "text": "By fitting a straight line to the data.",
+    "misconception": "confuses with a linear model"
+   },
+   {
+    "text": "The prediction ignores the training inputs.",
+    "misconception": "ignores the conditioning"
+   },
+   {
+    "text": "The variance is the same everywhere.",
+    "misconception": "ignores the effect of nearby data"
+   },
+   {
+    "text": "By simulation only.",
+    "misconception": "ignores the closed form"
+   },
+   {
+    "text": "The variance is larger near the training inputs.",
+    "misconception": "reverses the effect"
+   }
+  ],
+  "explanation": "Far from the data the posterior mean returns to the prior mean and the variance to the prior variance."
  }
 ]
