@@ -38,27 +38,27 @@ export function build({ a, b }: Params): LQInstance {
     parts: [
       {
         prompt: 'How many distinct assignments of the six values to groups A and B (three each) are there?',
-        answer: 20, tolerance: tolInt, lecture: 6,
+        answer: 20, tolerance: tolInt, lecture: 4,
         explanation: tex('\\binom63=20') + '.',
       },
       {
         prompt: 'Find the observed difference in means, ' + tex('\\bar x_A-\\bar x_B') + '.',
-        answer: obs, tolerance: tol3, lecture: 6,
+        answer: obs, tolerance: tol3, lecture: 4,
         explanation: tex(dec(a.reduce((s, v) => s + v, 0) / 3) + '-' + dec(b.reduce((s, v) => s + v, 0) / 3)) + ' = ' + dec(obs) + '.',
       },
       {
         prompt: 'In how many of the 20 assignments (the observed one included) is the difference in means at least as large as the observed difference?',
-        answer: oneSided, tolerance: tolInt, lecture: 6,
+        answer: oneSided, tolerance: tolInt, lecture: 4,
         explanation: 'Because the total is fixed, the difference is large exactly when group A\'s sum is large; counting the splits with sum at least ' + dec(a.reduce((s, v) => s + v, 0)) + ' gives ' + oneSided + '.',
       },
       {
         prompt: 'Find the exact one-sided p-value.',
-        answer: oneSided / 20, tolerance: tol3, lecture: 6,
+        answer: oneSided / 20, tolerance: tol3, lecture: 4,
         explanation: tex(oneSided + '/20') + ' = ' + dec(oneSided / 20) + '.',
       },
       {
         prompt: 'Find the exact two-sided p-value: the proportion of assignments with ' + tex('|\\bar x_A-\\bar x_B|') + ' at least as large as the observed absolute difference.',
-        answer: twoSided / 20, tolerance: tol3, lecture: 6,
+        answer: twoSided / 20, tolerance: tol3, lecture: 4,
         explanation: tex(twoSided + '/20') + ' = ' + dec(twoSided / 20) + '. The smallest possible two-sided p-value here is 0.1.',
       },
     ],

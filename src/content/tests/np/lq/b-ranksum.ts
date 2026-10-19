@@ -40,27 +40,27 @@ export function build({ x, y, groups, blocks }: Params): LQInstance {
     parts: [
       {
         prompt: 'Sample 1 is ' + tex(x.join(',')) + ' and sample 2 is ' + tex(y.join(',')) + '. Rank the nine values together (1 = smallest) and find the rank sum ' + tex('W') + ' of sample 1.',
-        answer: W, tolerance: { abs: 0.25 }, lecture: 4,
+        answer: W, tolerance: { abs: 0.25 }, lecture: 5,
         explanation: 'The pooled ranks of sample 1 are ' + tex(r.slice(0, n1).join(',')) + ', which sum to ' + W + '.',
       },
       {
         prompt: 'Find the Mann-Whitney statistic ' + tex('U_1=W-n_1(n_1+1)/2') + ' (the number of pairs in which a sample-1 value exceeds a sample-2 value).',
-        answer: U1, tolerance: { abs: 0.25 }, lecture: 4,
+        answer: U1, tolerance: { abs: 0.25 }, lecture: 5,
         explanation: tex(W + '-' + (n1 * (n1 + 1)) / 2) + ' = ' + U1 + ' of the ' + n1 * n2 + ' pairs.',
       },
       {
         prompt: 'Find the normal approximation ' + tex('z=(U_1-n_1n_2/2)/\\sqrt{n_1n_2(n_1+n_2+1)/12}') + '.',
-        answer: z, tolerance: tol4, lecture: 4,
+        answer: z, tolerance: tol4, lecture: 5,
         explanation: tex('(' + U1 + '-' + (n1 * n2) / 2 + ')/\\sqrt{' + dec((n1 * n2 * (n1 + n2 + 1)) / 12) + '}') + ' = ' + dec(z) + '.',
       },
       {
         prompt: 'Three groups of three observations are ' + groups.map((g, j) => 'group ' + (j + 1) + ': ' + tex(g.join(','))).join('; ') + '. Rank all nine values together and compute the Kruskal-Wallis statistic ' + tex('H=\\frac{12}{N(N+1)}\\sum_iR_i^2/n_i-3(N+1)') + '.',
-        answer: H, tolerance: tol4, lecture: 5,
+        answer: H, tolerance: tol4, lecture: 8,
         explanation: 'Group rank sums are ' + tex(Rsum.join(',')) + ', so ' + tex('H=\\frac{12}{90}(' + Rsum.map((v) => v * v + '/3').join('+') + ')-30') + ' = ' + dec(H) + ', to be compared with ' + tex('\\chi^2_2') + '.',
       },
       {
         prompt: 'Four subjects each try three treatments, with scores (treatment 1, 2, 3) ' + blocks.map((row, i) => 'subject ' + (i + 1) + ': ' + tex(row.join(','))).join('; ') + '. Rank the three scores within each subject and compute the Friedman statistic ' + tex('\\frac{12}{bk(k+1)}\\sum_jR_j^2-3b(k+1)') + ' from the treatment rank sums ' + tex('R_j') + '.',
-        answer: chi, tolerance: tol4, lecture: 5,
+        answer: chi, tolerance: tol4, lecture: 11,
         explanation: 'Treatment rank sums are ' + tex(R.join(',')) + ', so ' + tex('\\frac{12}{48}(' + R.map((v) => v * v).join('+') + ')-48') + ' = ' + dec(chi) + ', compared with ' + tex('\\chi^2_2') + '.',
       },
     ],

@@ -4,6 +4,7 @@ import { cleanup, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { App } from './App'
+import { topics } from './data'
 import { lectureKey } from './lib/lessons'
 import { createLocalProgress } from './lib/progress'
 import type { GradeResult } from './lib/types'
@@ -11,6 +12,8 @@ import type { GradeResult } from './lib/types'
 const pass = { mcScore: 5, lqScore: 10, total: 15, max: 15, passed: true } as GradeResult
 const seed = (key: string) =>
   createLocalProgress(window.localStorage).record(key, { seed: 's', mcIds: [], lqIds: [] }, { mc: [], lq: [] }, pass)
+
+const NL = topics.find((t) => t.id === 'np')!.lectures.length // lectures of the np topic
 
 beforeEach(() => {
   window.localStorage.clear()
@@ -22,21 +25,21 @@ afterEach(cleanup)
 describe('topic page with lessons', () => {
   it('lists the lectures, opens only lecture 1 and locks the topic test', () => {
     render(<App />)
-    expect(screen.getByText(/Locked until you pass all 12 lecture quizzes \(0\/12 passed\)/)).toBeTruthy()
+    expect(screen.getByText(new RegExp(`Locked until you pass all ${NL} lecture quizzes \\(0/${NL} passed\\)`))).toBeTruthy()
     expect(screen.queryByRole('link', { name: /take the test/i })).toBeNull()
     const list = screen.getByRole('heading', { name: 'Lectures' }).closest('section')!
     expect(within(list).getAllByRole('link')).toHaveLength(1) // only lecture 1 is a link
-    expect(within(list).getAllByText('locked')).toHaveLength(11)
+    expect(within(list).getAllByText('locked')).toHaveLength(NL - 1)
   })
 
-  it('passing lecture quizzes opens the next lecture, and all 12 unlock the test', () => {
+  it('passing lecture quizzes opens the next lecture, and all of them unlock the test', () => {
     seed(lectureKey('np', 1))
     render(<App />)
     const list = screen.getByRole('heading', { name: 'Lectures' }).closest('section')!
     expect(within(list).getAllByRole('link')).toHaveLength(2)
-    expect(screen.getByText(/\(1\/12 passed\)/)).toBeTruthy()
+    expect(screen.getByText(new RegExp(`\\(1/${NL} passed\\)`))).toBeTruthy()
     cleanup()
-    for (let n = 2; n <= 12; n++) seed(lectureKey('np', n))
+    for (let n = 2; n <= NL; n++) seed(lectureKey('np', n))
     render(<App />)
     expect(screen.getByRole('link', { name: /take the test/i })).toBeTruthy()
   })
@@ -54,7 +57,7 @@ describe('lecture page and quiz', () => {
   it('shows the lesson, a worked sample with answers, and the quiz button', () => {
     window.location.hash = '#/topic/np/lecture/1'
     render(<App />)
-    expect(screen.getByRole('heading', { name: /Lecture 1: Why nonparametric/ })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: /Lecture 1: Parametric versus nonparametric/ })).toBeTruthy()
     expect(screen.getByRole('heading', { name: 'Lesson' })).toBeTruthy()
     expect(screen.getByRole('heading', { name: 'Worked sample' })).toBeTruthy()
     expect(screen.getAllByText('Working:').length).toBeGreaterThanOrEqual(2)
@@ -69,7 +72,7 @@ describe('lecture page and quiz', () => {
     window.location.hash = '#/topic/np/lecture/3'
     cleanup()
     render(<App />)
-    expect(screen.getByRole('heading', { name: /Lecture 3: Sign and signed-rank/ })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: /Lecture 3: Confidence intervals for the median/ })).toBeTruthy()
   })
 
   it('the quiz has 5 MC and 1 long question; a blank submission fails, is recorded, and does not unlock lecture 2', async () => {

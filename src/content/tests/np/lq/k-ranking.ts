@@ -42,27 +42,27 @@ export function build({ pi, centre, q, w, voters, item }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the Kendall distance ' + tex('d_K(\\pi,\\pi_0)') + ', the number of pairs of items that the two rankings put in opposite orders. Give a whole number.',
-        answer: dK, tolerance: tolInt, lecture: 10,
+        answer: dK, tolerance: tolInt, lecture: 21,
         explanation: 'Ranks in ' + tex('\\pi') + ' (A,B,C,D): ' + rp.join(',') + '; in ' + tex('\\pi_0') + ': ' + rc.join(',') + '. Of the 6 pairs, ' + dK + ' are in opposite order.',
       },
       {
         prompt: 'Find the Spearman distance ' + tex('d_S(\\pi,\\pi_0)=\\sum_{i}(r_i-r_i^0)^2') + ', where ' + tex('r_i') + ' and ' + tex('r_i^0') + ' are the ranks of item ' + tex('i') + ' (best item has rank 1). Give a whole number.',
-        answer: dS, tolerance: tolInt, lecture: 10,
+        answer: dS, tolerance: tolInt, lecture: 21,
         explanation: 'Rank differences (A,B,C,D): ' + rp.map((r, i) => r - rc[i]).join(',') + ', so the sum of squares is ' + dS + '.',
       },
       {
         prompt: 'Under a Mallows model with centre ' + tex('\\pi_0') + ', ' + tex('P(\\sigma)=q^{d_K(\\sigma,\\pi_0)}/Z') + ' with ' + tex('q=' + q[0] + '/' + q[1]) + ' and normalising constant ' + tex('Z=\\prod_{j=1}^{4}(1+q+\\cdots+q^{j-1})') + '. Find ' + tex('P(\\pi)') + '.',
-        answer: pM, tolerance: tol4, lecture: 10,
+        answer: pM, tolerance: tol4, lecture: 21,
         explanation: tex('d_K=' + dK) + ' and ' + tex('Z=1\\cdot(1+q)(1+q+q^2)(1+q+q^2+q^3)=' + dec(Z)) + ', so ' + tex('P(\\pi)=q^{' + dK + '}/Z') + ' = ' + dec(pM) + '.',
       },
       {
         prompt: 'In a Plackett-Luce model the items have weights ' + tex('w_A=' + w[0] + ',\\ w_B=' + w[1] + ',\\ w_C=' + w[2] + ',\\ w_D=' + w[3]) + '. The first place goes to item ' + tex('i') + ' with probability proportional to ' + tex('w_i') + ', then the next place is chosen the same way among the remaining items, and so on. Find the probability that the ranking is ' + tex('\\pi') + '.',
-        answer: pPL, tolerance: tol4, lecture: 10,
+        answer: pPL, tolerance: tol4, lecture: 21,
         explanation: 'Product of weight over total weight of the items still unranked: ' + tex(pi.map((i, t) => w[i] + '/' + pi.slice(t).reduce((s, j) => s + w[j], 0)).join('\\cdot')) + ' = ' + dec(pPL) + '. (Total weight ' + wTot + '.)',
       },
       {
         prompt: 'Five voters rank the items. Their rankings (best first) are ' + tex(voters.map(show).join(';\\ ')) + '. Borda gives 3 points to the item ranked first, 2 to the second, 1 to the third and 0 to the last. Find the total Borda score of item ' + tex(ITEMS[item]) + '. Give a whole number.',
-        answer: borda, tolerance: tolInt, lecture: 10,
+        answer: borda, tolerance: tolInt, lecture: 21,
         explanation: 'Points for ' + tex(ITEMS[item]) + ' voter by voter: ' + voters.map((v) => n - rankOf(v)[item]).join(' + ') + ' = ' + borda + '.',
       },
     ],
