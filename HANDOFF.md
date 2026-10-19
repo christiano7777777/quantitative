@@ -74,6 +74,8 @@ passing lecture n opens n+1; all lectures passed unlock the topic test (40/50); 
   efficiency bounds (np 1), Friedman and Kruskal-Wallis formulas (np 5), the Mallows normalising constant (np 10), the
   Beta-tail/binomial identity (bay 4), the R-hat and ESS formulas (bay 9), the Basu statement (inf 4), the bootstrap-maximum
   remark (inf 11).
+- **np was restructured to follow the HKU lecture notes** (Downloads: `Chap0`-`Chap6`, T0-T4, midterm, assignments). Lecture quiz progress saved before the restructure is ignored (`lessonRevision` in `src/lib/lessons.ts`; bump it again whenever a topic's lectures are re-split). Lecture boundaries are my split of the chapters by section; check them against the real timetable. Slide items with no quiz yet: bootstrap hypothesis-test details beyond the p-value rule, the chi-square test in lecture 7, Cochran's Q / McNemar numerics.
+- **inf was restructured the same way** (revision 2). Career hour totals changed because inf has 18 lectures instead of 11 (QR path 672 -> 693 h). Notation follows the notes: natural parameter of the normal is eta=(-1/(2 sigma^2), mu/sigma^2) with natural statistic (x^2, x). Lectures 13-18 are from the outline only.
 - `lq` quiz parts reuse the existing independent tests; the five new generators have `lq/lecture.test.ts` in their topic and
   were mutation-checked (every part's answer changed to `ans*1.02+0.02` makes a test fail).
 - Not yet checked in a real browser: a full quiz played through with typed answers on a phone-width screen.
