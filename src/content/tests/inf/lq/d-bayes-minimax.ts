@@ -26,27 +26,27 @@ export function build({ n, x, al, be }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the Bayes estimate of ' + tex('\\theta') + ' (the posterior mean) at ' + tex('x=' + x) + '.',
-        answer: est, tolerance: tol4, lecture: 2,
+        answer: est, tolerance: tol4, lecture: 6,
         explanation: 'The posterior is ' + tex('\\mathrm{Beta}(' + a + ',' + b + ')') + ', with mean ' + tex(a + '/' + N + '=' + dec(est)) + '.',
       },
       {
         prompt: 'Find the posterior expected loss of this estimate, that is the posterior variance of ' + tex('\\theta') + '.',
-        answer: postVar, tolerance: tol4, lecture: 2,
+        answer: postVar, tolerance: tol4, lecture: 5,
         explanation: tex('\\dfrac{ab}{(a+b)^2(a+b+1)}=\\dfrac{' + a * b + '}{' + (a + b) ** 2 * (a + b + 1) + '}=' + dec(postVar)) + ' with ' + tex('a=' + a + ',\\ b=' + b) + '.',
       },
       {
         prompt: 'The Bayes risk of the Bayes estimator (averaging its risk over the prior) equals ' + tex('\\dfrac{\\alpha\\beta}{(\\alpha+\\beta)(\\alpha+\\beta+1)(\\alpha+\\beta+n)}') + '. Evaluate it.',
-        answer: bayesRisk, tolerance: tol4, lecture: 2,
+        answer: bayesRisk, tolerance: tol4, lecture: 3,
         explanation: tex('\\dfrac{' + al * be + '}{' + (al + be) * (al + be + 1) * N + '}=' + dec(bayesRisk)) + '. This is the average of the posterior variance over the marginal distribution of ' + tex('X') + '.',
       },
       {
         prompt: 'For ' + tex('n=' + n) + ' the Bayes rule for the prior ' + tex('\\mathrm{Beta}(\\sqrt n/2,\\sqrt n/2)') + ' has constant risk, hence is minimax: ' + tex('\\delta(x)=(x+\\sqrt n/2)/(n+\\sqrt n)') + '. Find its value at ' + tex('x=' + x) + '.',
-        answer: minimax, tolerance: tol4, lecture: 2,
+        answer: minimax, tolerance: tol4, lecture: 3,
         explanation: tex('\\sqrt n=' + rn) + ', so ' + tex('\\delta(' + x + ')=(' + x + '+' + rn / 2 + ')/(' + n + '+' + rn + ')=' + dec(minimax)) + '.',
       },
       {
         prompt: 'Find the constant risk of this minimax estimator, ' + tex('n/\\{4(n+\\sqrt n)^2\\}') + '. (The maximum risk of the sample proportion ' + tex('x/n') + ' is ' + tex('1/(4n)=' + dec(1 / (4 * n))) + '.)',
-        answer: constRisk, tolerance: tol4, lecture: 2,
+        answer: constRisk, tolerance: tol4, lecture: 3,
         explanation: tex(n + '/\\{4(' + n + '+' + rn + ')^2\\}=' + dec(constRisk)) + ', smaller than the worst-case risk ' + dec(1 / (4 * n)) + ' of ' + tex('x/n') + ', although ' + tex('x/n') + ' is better near ' + tex('\\theta=0') + ' and ' + tex('1') + '.',
       },
     ],

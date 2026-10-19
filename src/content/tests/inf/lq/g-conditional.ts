@@ -31,27 +31,27 @@ export function build({ m, x, rho, r1, r2, a, b }: Params): LQInstance {
     parts: [
       {
         prompt: 'Under ' + tex('H_0') + ', find the conditional probability ' + tex('P(X=' + x + '\\mid X+Y=' + m + ')') + '.',
-        answer: pt, tolerance: tol4, lecture: 9,
+        answer: pt, tolerance: tol4, lecture: 16,
         explanation: 'Under ' + tex('H_0') + ' the conditional law is ' + tex('\\mathrm{Bin}(' + m + ',\\tfrac12)') + ', free of the common rate: ' + tex('\\binom{' + m + '}{' + x + '}/2^{' + m + '}=' + choose(m, x) + '/' + 2 ** m + '=' + dec(pt)) + '.',
       },
       {
         prompt: 'Find the one-sided conditional p-value ' + tex('P(X\\ge' + x + '\\mid X+Y=' + m + ')') + ' for ' + tex('H_1:\\lambda_1>\\lambda_2') + '.',
-        answer: upper, tolerance: tol4, lecture: 8,
+        answer: upper, tolerance: tol4, lecture: 16,
         explanation: 'Sum ' + tex('\\binom{' + m + '}{k}/2^{' + m + '}') + ' for ' + tex('k=' + x + ',\\dots,' + m) + ': ' + dec(upper) + '. The conditional test is UMP among conditional level-' + tex('\\alpha') + ' tests for the one-sided alternative.',
       },
       {
         prompt: 'The UMP unbiased test of ' + tex('H_0') + ' against ' + tex('\\lambda_1\\ne\\lambda_2') + ' has a two-sided p-value. Because ' + tex('\\mathrm{Bin}(m,\\frac12)') + ' is symmetric, it is ' + tex('P(X\\ge' + x + ')+P(X\\le' + (m - x) + ')') + '. Find it.',
-        answer: two, tolerance: tol4, lecture: 9,
+        answer: two, tolerance: tol4, lecture: 16,
         explanation: 'By symmetry the two tails are equal: ' + tex('2\\cdot' + dec(upper) + '=' + dec(two)) + '. For an asymmetric null law the two tails would be chosen to satisfy the unbiasedness condition instead.',
       },
       {
         prompt: 'In a ' + tex('2\\times2') + ' table, group 1 has ' + tex(a) + ' successes out of ' + tex(r1) + ' and group 2 has ' + tex(b) + ' successes out of ' + tex(r2) + '. With all margins fixed and independence, the count in the top-left cell is hypergeometric. Find the one-sided Fisher exact p-value ' + tex('P(A\\ge' + a + ')') + '.',
-        answer: fisher, tolerance: tol4, lecture: 9,
+        answer: fisher, tolerance: tol4, lecture: 16,
         explanation: tex('\\sum_{k\\ge' + a + '}\\binom{' + r1 + '}{k}\\binom{' + r2 + '}{' + c1 + '-k}\\Big/\\binom{' + (r1 + r2) + '}{' + c1 + '}=' + dec(fisher)) + ' with ' + tex(c1) + ' successes in total.',
       },
       {
         prompt: 'Now suppose ' + tex('\\lambda_1/\\lambda_2=' + rho) + '. Find the conditional probability ' + tex('P(X=' + x + '\\mid X+Y=' + m + ')') + ' under this alternative.',
-        answer: alt, tolerance: tol4, lecture: 9,
+        answer: alt, tolerance: tol4, lecture: 16,
         explanation: 'Given the total, ' + tex('X\\sim\\mathrm{Bin}(' + m + ',' + rho + '/' + (1 + rho) + ')') + ': ' + tex('\\binom{' + m + '}{' + x + '}(' + dec(q) + ')^{' + x + '}(' + dec(1 - q) + ')^{' + (m - x) + '}=' + dec(alt)) + '. The alternative shifts the conditional law towards larger ' + tex('X') + ', which is what the test exploits.',
       },
     ],

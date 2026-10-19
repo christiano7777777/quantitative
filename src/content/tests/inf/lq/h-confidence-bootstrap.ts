@@ -38,27 +38,27 @@ export function build({ n, mx, alpha, th, n2, k, data }: Params): LQInstance {
     parts: [
       {
         prompt: 'Part A. Inverting the level-' + tex('\\alpha') + ' test of ' + tex('H_0:\\theta=\\theta_0') + ' that rejects when ' + tex('M>\\theta_0') + ' or ' + tex('M<\\theta_0\\alpha^{1/n}') + ' gives the confidence interval ' + tex('[M,\\ M\\alpha^{-1/n}]') + ' at level ' + tex('1-\\alpha=' + dec(1 - alpha)) + '. Find its upper limit.',
-        answer: upper, tolerance: tol4, lecture: 10,
+        answer: upper, tolerance: tol4, lecture: 17,
         explanation: tex('\\theta_0') + ' is accepted iff ' + tex('M\\le\\theta_0\\le M\\alpha^{-1/n}') + ', since ' + tex('P_{\\theta_0}(M<\\theta_0\\alpha^{1/n})=\\alpha') + '. The upper limit is ' + tex(mx + '\\cdot' + dec(alpha) + '^{-1/' + n + '}=' + mx + '\\cdot' + dec(c) + '=' + dec(upper)) + '.',
       },
       {
         prompt: 'Part A. If the true value is ' + tex('\\theta=' + th) + ', the maximum has mean ' + tex('E[M]=\\theta n/(n+1)') + '. Find the expected length of the interval ' + tex('[M,M\\alpha^{-1/n}]') + '.',
-        answer: expLen, tolerance: tol4, lecture: 10,
+        answer: expLen, tolerance: tol4, lecture: 17,
         explanation: 'Length ' + tex('M(\\alpha^{-1/n}-1)') + ' has expectation ' + tex('(' + dec(c) + '-1)\\cdot' + th + '\\cdot' + n + '/' + (n + 1) + '=' + dec(expLen)) + '.',
       },
       {
         prompt: 'Part B. The interval from the ' + tex(k) + '-th smallest to the ' + tex(k) + '-th largest observation is a confidence interval for the median, obtained by inverting the sign test. Find its exact coverage probability ' + tex('1-2P(\\mathrm{Bin}(' + n2 + ',\\tfrac12)\\le' + (k - 1) + ')') + '.',
-        answer: cover, tolerance: tol4, lecture: 10,
+        answer: cover, tolerance: tol4, lecture: 17,
         explanation: tex('P(\\mathrm{Bin}(' + n2 + ',0.5)\\le' + (k - 1) + ')=' + dec(tailP)) + ', so the coverage is ' + tex('1-2\\cdot' + dec(tailP) + '=' + dec(cover)) + ', whatever the continuous distribution.',
       },
       {
         prompt: 'Part C. The bootstrap resamples ' + tex(nb) + ' values with replacement from the data. Find the exact bootstrap standard error of the resample mean, ' + tex('\\sqrt{\\sum_i(x_i-\\bar x)^2}\\big/n') + '.',
-        answer: se, tolerance: tol4, lecture: 11,
+        answer: se, tolerance: tol4, lecture: 18,
         explanation: tex('\\bar x=' + dec(mean) + ',\\ \\sum(x_i-\\bar x)^2=' + dec(ss)) + ' (sorted data ' + sorted.join(', ') + '), so the standard error is ' + tex('\\sqrt{' + dec(ss) + '}/' + nb + '=' + dec(se)) + '. This is the plug-in value with divisor ' + tex('n') + ', slightly below ' + tex('s/\\sqrt n') + '.',
       },
       {
         prompt: 'Part C. For the plug-in variance ' + tex('\\hat\\sigma^2=\\frac1n\\sum(x_i-\\bar x)^2') + ', the bootstrap expectation of ' + tex('\\hat\\sigma^{*2}') + ' is ' + tex('(1-1/n)\\hat\\sigma^2') + '. Find the bootstrap bias estimate ' + tex('E^*[\\hat\\sigma^{*2}]-\\hat\\sigma^2') + '.',
-        answer: bias, tolerance: tol4, lecture: 11,
+        answer: bias, tolerance: tol4, lecture: 18,
         explanation: tex('\\hat\\sigma^2=' + dec(ss / nb)) + ', so the bias estimate is ' + tex('-\\hat\\sigma^2/n=-' + dec(ss / nb) + '/' + nb + '=' + dec(bias)) + '. The bias-corrected estimate is ' + tex('2\\hat\\sigma^2-E^*\\hat\\sigma^{*2}') + '.',
       },
     ],

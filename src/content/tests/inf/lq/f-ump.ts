@@ -29,27 +29,27 @@ export function build({ n, p0: q0, p1: q1, alpha: al }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the critical value ' + tex('c') + ': the smallest integer with ' + tex('P_{p_0}(Y>c)\\le\\alpha') + ' at ' + tex('p_0=' + fr(q0)) + ' (the size is controlled at the boundary of ' + tex('H_0') + ').',
-        answer: c, tolerance: tolInt, lecture: 8,
+        answer: c, tolerance: tolInt, lecture: 15,
         explanation: 'Upper tail probabilities at ' + tex('p_0') + ': ' + tex('P(Y>' + (c - 1) + ')=' + dec(tail(p0, c - 1))) + ' exceeds ' + dec(alpha) + ' while ' + tex('P(Y>' + c + ')=' + dec(size)) + ' does not, so ' + tex('c=' + c) + '.',
       },
       {
         prompt: 'Find ' + tex('P_{p_0}(Y>c)') + '.',
-        answer: size, tolerance: tol4, lecture: 8,
+        answer: size, tolerance: tol4, lecture: 15,
         explanation: 'Sum the binomial probabilities of ' + tex(c + 1) + ' to ' + tex(n) + ' successes at ' + tex('p_0') + ': ' + dec(size) + '.',
       },
       {
         prompt: 'Find the randomisation probability ' + tex('\\gamma=\\dfrac{\\alpha-P_{p_0}(Y>c)}{P_{p_0}(Y=c)}') + '.',
-        answer: gamma, tolerance: tol4, lecture: 8,
+        answer: gamma, tolerance: tol4, lecture: 15,
         explanation: tex('P_{p_0}(Y=' + c + ')=' + dec(pmf(n, p0, c))) + ', so ' + tex('\\gamma=(' + dec(alpha) + '-' + dec(size) + ')/' + dec(pmf(n, p0, c)) + '=' + dec(gamma)) + '. This makes the size exactly ' + tex('\\alpha') + '.',
       },
       {
         prompt: 'Find the power of the test at ' + tex('p=' + fr(q1)) + ': ' + tex('P_p(Y>c)+\\gamma P_p(Y=c)') + '.',
-        answer: power, tolerance: tol4, lecture: 8,
+        answer: power, tolerance: tol4, lecture: 15,
         explanation: tex('P(Y>' + c + ')=' + dec(tail(p1, c)) + ',\\ P(Y=' + c + ')=' + dec(pmf(n, p1, c))) + ', so the power is ' + tex(dec(tail(p1, c)) + '+' + dec(gamma) + '\\cdot' + dec(pmf(n, p1, c)) + '=' + dec(power)) + '.',
       },
       {
         prompt: 'The test is the Neyman-Pearson test of ' + tex('p_0') + ' against ' + tex('p_1=' + fr(q1)) + ' that rejects for large likelihood ratio. Find the likelihood ratio ' + tex('f_{p_1}(c)/f_{p_0}(c)') + ' at the boundary value ' + tex('y=c') + ' (4 significant figures).',
-        answer: k, tolerance: { rel: 0.001 }, lecture: 8,
+        answer: k, tolerance: { rel: 0.001 }, lecture: 15,
         explanation: tex('(p_1/p_0)^c\\{(1-p_1)/(1-p_0)\\}^{n-c}') + ' at ' + tex('c=' + c) + ' equals ' + dec(k) + '. The ratio increases in ' + tex('y') + ', so rejecting for ' + tex('Y>c') + ' is the same as rejecting for ratio above this ' + tex('k') + '.',
       },
     ],

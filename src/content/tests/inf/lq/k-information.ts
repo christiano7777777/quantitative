@@ -24,27 +24,27 @@ export function build({ p, n, m }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the Fisher information of one observation, ' + tex('I_1(p)=1/\\{p(1-p)\\}') + '.',
-        answer: info, tolerance: tol4, lecture: 6,
+        answer: info, tolerance: tol4, lecture: 13,
         explanation: 'The score is ' + tex('x/p-(1-x)/(1-p)') + ' and its variance is ' + tex('1/\\{p(1-p)\\}') + ' = ' + tex('1/(' + dec(p) + '\\times' + dec(q) + ')') + ' = ' + dec(info) + '.',
       },
       {
         prompt: 'Find the Cramer-Rao lower bound for the variance of an unbiased estimator of ' + tex('p') + ' from all ' + tex(n) + ' observations, ' + tex('1/\\{nI_1(p)\\}') + '.',
-        answer: bound, tolerance: tol4, lecture: 6,
+        answer: bound, tolerance: tol4, lecture: 13,
         explanation: 'The information of ' + tex(n) + ' independent observations adds: ' + tex('1/(' + n + '\\times' + dec(info) + ')') + ' = ' + dec(bound) + '. The sample proportion attains it.',
       },
       {
         prompt: 'Find the Cramer-Rao lower bound for an unbiased estimator of ' + tex('g(p)=p^2') + ', ' + tex('\\{g\'(p)\\}^2/\\{nI_1(p)\\}') + '.',
-        answer: boundSq, tolerance: tol4, lecture: 6,
+        answer: boundSq, tolerance: tol4, lecture: 13,
         explanation: tex('g\'(p)=2p=' + dec(2 * p)) + ', so the bound is ' + tex('(' + dec(2 * p) + ')^2\\times' + dec(bound)) + ' = ' + dec(boundSq) + '.',
       },
       {
         prompt: 'An estimator uses only the first ' + tex(m) + ' of the ' + tex(n) + ' observations: ' + tex('\\bar X_{' + m + '}') + '. Find its efficiency, the Cramer-Rao bound for ' + tex('p') + ' divided by its variance.',
-        answer: eff, tolerance: tol4, lecture: 6,
+        answer: eff, tolerance: tol4, lecture: 13,
         explanation: tex('\\mathrm{Var}(\\bar X_{' + m + '})=pq/' + m) + ', so the efficiency is ' + tex('(pq/' + n + ')/(pq/' + m + ')=' + m + '/' + n) + ' = ' + dec(eff) + '.',
       },
       {
         prompt: 'Reparametrise by the log-odds ' + tex('\\eta=\\log\\{p/(1-p)\\}') + '. Find the Fisher information of one observation about ' + tex('\\eta') + ', ' + tex('I_1(p)\\{dp/d\\eta\\}^2') + ' with ' + tex('dp/d\\eta=p(1-p)') + '.',
-        answer: infoLogit, tolerance: tol4, lecture: 6,
+        answer: infoLogit, tolerance: tol4, lecture: 13,
         explanation: tex(dec(info) + '\\times(' + dec(p * q) + ')^2') + ' = ' + dec(infoLogit) + ', that is ' + tex('p(1-p)') + '. Information changes with the parametrisation by the squared derivative.',
       },
     ],

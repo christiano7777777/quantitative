@@ -1049,62 +1049,97 @@
    "State and apply decision-theoretic ideas: risk, admissibility, Bayes and minimax rules",
    "Construct UMP and UMP unbiased tests and the matching confidence sets"
   ],
-  "note": "Anchored on the HKU STAT3602/SDST3602 course outline (Statistical Inference): decision problem (frequentist and Bayesian), estimation theory (exponential families, sufficiency, completeness, UMVU, information inequality, large-sample MLE), hypothesis testing (UMP, monotone likelihood ratio, UMPU, conditional tests, large-sample likelihood ratio, confidence sets) and bootstrap. Assumes Probability II.",
+  "note": "Follows the HKU STAT3602 lecture notes chapter by chapter (decision problem, frequentist approach: lectures 1-4; Bayesian approach: 5-7; exponential families: 8-9; sufficiency, likelihood and completeness: 10-12), then the outline topics the notes have not reached yet: information inequality, large-sample MLE, UMP and UMPU tests, likelihood ratio tests and confidence sets, bootstrap.",
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
-    "title": "Decision theory",
-    "theory": "Loss, risk, admissibility, randomised rules",
-    "computation": "Risk functions and comparing rules"
+    "title": "The decision problem",
+    "theory": "Parameter space, sample space, statistical model, action space, loss function, decision rules, the frequentist risk function, a finite motivating example",
+    "computation": "Counting decision rules and computing risk functions in a finite problem"
    },
    {
-    "title": "Bayes and minimax rules",
-    "theory": "Bayes risk, posterior expected loss, minimax and least favourable priors",
-    "computation": "Bayes estimators under squared and absolute loss"
+    "title": "Admissibility and minimax rules",
+    "theory": "Strict dominance, admissible and inadmissible rules, the minimax criterion, comparing risk functions that cross",
+    "computation": "Dominance between rules, maximum risk, minimax rule among a class of rules"
    },
    {
-    "title": "Prior and posterior inference",
-    "theory": "Conjugate priors, credible sets, Bayes versus frequentist",
-    "computation": "Posterior means and intervals"
+    "title": "Unbiased rules and Bayes rules",
+    "theory": "Unbiased decision rules (and unbiased estimators as a special case), prior weights, Bayes risk, the Bayes rule found by minimising the posterior expected loss",
+    "computation": "Bayes risk, posterior probabilities and Bayes actions in a finite problem, checking unbiasedness"
    },
    {
-    "title": "Exponential families and sufficiency",
-    "theory": "Exponential families, minimal sufficiency, ancillarity",
-    "computation": "Identifying natural parameters and sufficient statistics"
+    "title": "Randomised rules and the risk set",
+    "theory": "Randomised decision rules, convexity of the risk set, lower boundary and admissible rules, minimax and Bayes rules from the risk set",
+    "computation": "Risk of a mixture of two rules, the equalising mixture, prior weights for which two rules tie"
+   },
+   {
+    "title": "From prior to posterior",
+    "theory": "Prior and posterior probability functions, conjugate updating, the expected posterior loss and the Bayesian decision",
+    "computation": "Posterior distributions, posterior means, variances and shrinkage weights"
+   },
+   {
+    "title": "Bayesian inference: estimation and testing",
+    "theory": "Point estimation under squared and absolute error loss, Bayesian hypothesis testing with unequal losses, posterior odds",
+    "computation": "Posterior means and odds, posterior probability of a hypothesis, expected posterior losses of the two actions"
+   },
+   {
+    "title": "Bayesian intervals, prediction and nuisance parameters",
+    "theory": "Credible sets of maximum coverage, shortest and equal-tailed intervals, the posterior predictive distribution, marginal posterior distributions for a parameter of interest",
+    "computation": "Marginals from a joint posterior, smallest sets, predictive probabilities, posterior means"
+   },
+   {
+    "title": "Exponential families",
+    "theory": "Definition, natural parameter and natural statistic, natural parameter space, i.i.d. samples, normal and Poisson examples",
+    "computation": "Identifying natural parameters and natural statistics, moments of the natural statistic"
+   },
+   {
+    "title": "Distributional properties of the natural statistic",
+    "theory": "The natural statistic is again of exponential family form, conditional distributions of parts of the natural statistic, removing a nuisance parameter by conditioning",
+    "computation": "Conditional distribution of one Poisson total given the grand total, conditional p-values"
+   },
+   {
+    "title": "Sufficiency",
+    "theory": "Information in data, comparing statistics, sufficient statistics and the factorisation theorem, the likelihood function and its equivalent forms",
+    "computation": "Finding sufficient statistics and checking sufficiency through conditional distributions"
+   },
+   {
+    "title": "Minimal sufficiency, the likelihood principle and ancillarity",
+    "theory": "Minimal sufficient statistics and the likelihood-ratio characterisation, exponential families, the likelihood principle, ancillary statistics",
+    "computation": "Likelihood ratios for pairs of samples, maximum of a uniform sample, comparing experiments with the same likelihood"
    },
    {
     "title": "Completeness and UMVU estimation",
-    "theory": "Completeness, Rao-Blackwell, Lehmann-Scheffe, Basu theorem",
+    "theory": "Completeness, Rao-Blackwell, Lehmann-Scheffe, completeness in exponential families, Basu theorem",
     "computation": "Finding UMVUEs"
    },
    {
     "title": "Information inequality",
-    "theory": "Fisher information, Cramer-Rao bound, attainment",
+    "theory": "Fisher information, Cramer-Rao bound, attainment, reparametrisation",
     "computation": "Computing information and bounds"
    },
    {
     "title": "Likelihood and large-sample theory of the MLE",
-    "theory": "Consistency, asymptotic normality, efficiency, Wald and score statistics",
-    "computation": "Asymptotic variances and standard errors"
+    "theory": "Consistency, asymptotic normality, efficiency, Wald and score statistics, the delta method",
+    "computation": "Asymptotic variances and standard errors, Wald and score statistics"
    },
    {
     "title": "Uniformly most powerful tests",
-    "theory": "Neyman-Pearson revisited, monotone likelihood ratio, Karlin-Rubin",
-    "computation": "Constructing UMP tests"
+    "theory": "Neyman-Pearson revisited, monotone likelihood ratio, Karlin-Rubin, randomised tests for discrete data",
+    "computation": "Constructing UMP tests, critical values, randomisation probabilities and power"
    },
    {
     "title": "UMP unbiased and conditional tests",
-    "theory": "Unbiased tests, two-sided tests in exponential families, conditional tests",
+    "theory": "Unbiased tests, two-sided tests in exponential families, conditional tests that remove nuisance parameters, Fisher's exact test",
     "computation": "Two-sided and conditional tests"
    },
    {
     "title": "Large-sample likelihood ratio tests and confidence sets",
-    "theory": "Wilks theorem, inversion of tests, optimal and unbiased confidence sets",
+    "theory": "Wilks theorem, inversion of tests, optimal and unbiased confidence sets, Wald, score and likelihood ratio intervals",
     "computation": "Asymptotic LRT, confidence sets from tests"
    },
    {
     "title": "Bootstrap",
-    "theory": "Plug-in principle, bootstrap standard errors and intervals, consistency",
+    "theory": "Plug-in principle, bootstrap standard errors and intervals, consistency and failures of the bootstrap",
     "computation": "Bootstrap bias and standard error"
    }
   ]
