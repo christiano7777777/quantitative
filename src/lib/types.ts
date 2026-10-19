@@ -38,6 +38,11 @@ export interface MCQuestion {
   correct: string[] // exactly 2 paraphrases of the same true statement
   distractors: { text: string; misconception: string }[] // exactly 5
   explanation: string
+  /**
+   * For a lecture that merges several sections of the course notes: the 1-based section of the lecture this question
+   * belongs to. The lecture quiz spreads its MC questions across the sections.
+   */
+  section?: number
 }
 
 export interface Tolerance {
@@ -74,18 +79,32 @@ export interface TestBank {
   lqSlots?: string[][]
   /** extra long-question generators used only by lecture quizzes; never drawn for the topic test */
   lectureLq?: LQGenerator[]
+  /**
+   * Blueprint of the final test: one list of long-question ids per LQ slot (there must be testConfig.lqCount slots). Each
+   * attempt draws one id from each slot. An id may be a composite (`a#0,1+b#0,1`, see findGenerator) that asks parts from
+   * several lectures at once, so that every lecture is covered. When present it replaces `lqSlots`.
+   */
+  examSlots?: string[][]
+}
+
+/**
+ * A worked sample: the long-question generator `lqId` at the fixed seed `workedSeed`, so it is the same kind of question
+ * as the quiz, with different numbers and the full working shown.
+ */
+export interface LessonSample {
+  workedSeed: string
+  /** generator id, optionally `id#0,2,3` to keep only those parts (0-based); see findGenerator */
+  lqId: string
 }
 
 /**
  * One lecture's teaching page. `teach` is a list of paragraphs ($...$ KaTeX; a paragraph starting with "## " is a
- * sub-heading). The worked sample is built from the long-question generator `lqId` with the fixed seed `workedSeed`,
- * so it is the same kind of question as the quiz, with different numbers and the full working shown.
+ * sub-heading). `samples` has one worked sample per section of the lecture (usually one; a lecture that merges two or
+ * three sections of the course notes has one each). The quiz draws its long question from one of the samples' generators.
  */
 export interface Lesson {
   teach: string[]
-  workedSeed: string
-  /** generator id, optionally `id#0,2,3` to keep only those parts (0-based); see findGenerator */
-  lqId: string
+  samples: LessonSample[]
 }
 
 // ---- a concrete attempt ----

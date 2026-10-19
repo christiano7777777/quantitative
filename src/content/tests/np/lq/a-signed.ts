@@ -33,22 +33,22 @@ export function build({ d, nt }: Params): LQInstance {
     parts: [
       {
         prompt: 'How many of the differences are positive?',
-        answer: pos, tolerance: tolInt, lecture: 10,
+        answer: pos, tolerance: tolInt, lecture: 5,
         explanation: 'Positive values: ' + d.filter((v) => v > 0).join(', ') + ' (' + pos + ' of 8).',
       },
       {
         prompt: 'Find the exact two-sided p-value of the sign test: ' + tex('2P(\\mathrm{Bin}(8,\\tfrac12)\\le\\min(\\#{+},\\#{-}))') + ' (capped at 1).',
-        answer: pSign, tolerance: tol4, lecture: 10,
+        answer: pSign, tolerance: tol4, lecture: 5,
         explanation: 'The smaller count is ' + k + ', ' + tex('P(\\mathrm{Bin}(8,0.5)\\le' + k + ')=' + dec(tail)) + ', so ' + tex('p=' + dec(pSign)) + '.',
       },
       {
         prompt: 'Find the Wilcoxon signed-rank statistic ' + tex('W^+') + ': the sum of the ranks of the absolute differences belonging to the positive differences.',
-        answer: wPlus, tolerance: tolInt, lecture: 10,
+        answer: wPlus, tolerance: tolInt, lecture: 5,
         explanation: 'Ordering by absolute value gives ranks 1 to 8; the positive differences have ranks ' + order.map((v, i) => (v > 0 ? i + 1 : 0)).filter((r) => r > 0).join(', ') + ', which sum to ' + wPlus + '.',
       },
       {
         prompt: 'Find the normal approximation ' + tex('z=(W^+-n(n+1)/4)/\\sqrt{n(n+1)(2n+1)/24}') + ' (no continuity correction).',
-        answer: z, tolerance: tol4, lecture: 10,
+        answer: z, tolerance: tol4, lecture: 5,
         explanation: 'Mean ' + dec(mean) + ', standard deviation ' + dec(sd) + ', so ' + tex('z=(' + wPlus + '-' + dec(mean) + ')/' + dec(sd)) + ' = ' + dec(z) + '.',
       },
       {

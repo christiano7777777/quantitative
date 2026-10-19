@@ -1,15 +1,14 @@
-// Lessons for Statistical Inference, following the HKU STAT3602 lecture notes chapter by chapter (lectures 1-12), then the
-// outline topics the notes have not reached yet (lectures 13-18). One entry per lecture, in order.
-// `lqId` names a generator in src/content/tests/inf/lq; "#0,1,2" keeps only those parts (0-based), so a shared generator is
-// split by lecture. The worked sample is that generator at `workedSeed`; the quiz draws fresh numbers.
+// Lessons for Statistical Inference, following the HKU STAT3602 lecture notes (lectures 1-7), then the outline topics the notes have not
+// reached yet (lectures 8-11). A lecture that merges two sections of the notes has one lesson part and one worked sample per section; its quiz
+// draws its long question from one of them.
 import type { Lesson } from '../../../lib/types'
 
 const lessons: Lesson[] = [
   {
-    // 1. The decision problem
-    workedSeed: 'inf-1-worked',
-    lqId: 'inf-lq-m-decision',
+    // 1. The decision problem, admissibility and minimax rules
+    samples: [{"workedSeed":"inf-1-1-worked","lqId":"inf-lq-m-decision"},{"workedSeed":"inf-1-2-worked","lqId":"inf-lq-c-risk#1,2,3,4"}],
     teach: [
+      "## Part 1: The decision problem",
       "## The ingredients",
       "A statistical decision problem has: a parameter space $\\Theta$ (the unknown $\\theta$), a sample space $S$ (where the data $X$ live), a statistical model $f(x\\mid\\theta)$ linking the two, an action space $A$ (what the statistician may do), and a loss function $L(\\theta,a)\\ge0$ giving the cost of action $a$ when $\\theta$ is true.",
       "A decision rule is a map $d:S\\to A$: it tells you which action to take for each possible observation. With $|S|$ possible outcomes and $|A|$ actions there are $|A|^{|S|}$ non-randomised rules. For example, one binary observation and $3$ actions give $3^2=9$ rules $d_{ij}=(d(0),d(1))=(a_i,a_j)$.",
@@ -23,13 +22,7 @@ const lessons: Lesson[] = [
       "3. Weight these by $P(X=0\\mid\\theta)$ and $P(X=1\\mid\\theta)$ and add. Do this once for each parameter value to get the risk pair $(R(\\theta_1,d),R(\\theta_2,d))$.",
       "## Typical mistakes",
       "Weighting by the wrong probabilities (use the model under the parameter value of the row); counting rules as $|S||A|$ instead of $|A|^{|S|}$; and confusing the loss (a single outcome) with the risk (an average over the data).",
-    ],
-  },
-  {
-    // 2. Admissibility and minimax
-    workedSeed: 'inf-2-worked',
-    lqId: 'inf-lq-c-risk#1,2,3,4',
-    teach: [
+      "## Part 2: Admissibility and minimax rules",
       "## Dominance and admissibility",
       "Rule $d$ strictly dominates rule $d'$ if $R(\\theta,d)\\le R(\\theta,d')$ for every $\\theta$, with strict inequality for at least one $\\theta$. A rule that is strictly dominated by another rule is inadmissible, which is obviously foolish; a rule that is not is admissible. Admissibility is a weak condition: many silly rules are admissible, and it only rules out the dominated ones.",
       "In the motivating example the risk functions are polynomials in $\\theta$ and checking dominance means checking the sign of a difference such as $R(\\theta,d_{GB})-R(\\theta,d_{MG})\\ge0$ on the whole parameter space.",
@@ -38,14 +31,14 @@ const lessons: Lesson[] = [
       "## Example: shrinking a normal mean",
       "For $\\bar X\\sim N(\\theta,v)$ and $\\delta_a=a\\bar X$, $R(\\theta,\\delta_a)=a^2v+(1-a)^2\\theta^2$ and $R(\\theta,\\bar X)=v$. Then $\\delta_a$ beats $\\bar X$ exactly when $\\theta^2<v(1+a)/(1-a)$ ($0<a<1$). If $|\\theta|\\le m$ is known, $\\max_{|\\theta|\\le m}R(\\theta,\\delta_c)=c^2v+(1-c)^2m^2$ with $\\delta_c=c\\bar X$, which is smallest at $c=m^2/(m^2+v)$: the minimax rule within the linear class.",
       "## Typical mistakes",
-      "Declaring dominance after comparing the risks at one parameter value; taking the maximum of the risk over the wrong range of $\\theta$; and forgetting that $(1-a)^2\\theta^2$ is squared bias, not bias.",
+      "Declaring dominance after comparing the risks at one parameter value; taking the maximum of the risk over the wrong range of $\\theta$; and forgetting that $(1-a)^2\\theta^2$ is squared bias, not bias."
     ],
   },
   {
-    // 3. Unbiased rules and Bayes rules
-    workedSeed: 'inf-3-worked',
-    lqId: 'inf-lq-n-bayes',
+    // 2. Unbiased and Bayes rules, randomised rules and the risk set
+    samples: [{"workedSeed":"inf-2-1-worked","lqId":"inf-lq-n-bayes"},{"workedSeed":"inf-2-2-worked","lqId":"inf-lq-o-riskset"}],
     teach: [
+      "## Part 1: Unbiased rules and Bayes rules",
       "## Unbiased rules",
       "A rule $d$ is unbiased if $E_{\\theta'}L(\\theta,d(X))\\ge R(\\theta,d)$ for all $\\theta,\\theta'$: the loss measured against $\\theta$ is smallest when the data come from $\\theta$ itself. For squared error loss this holds iff $E_\\theta d(X)=\\theta$ for all $\\theta$, that is iff $d$ is an unbiased estimator. To show a rule is not unbiased, find $\\theta,\\theta'$ with $E_{\\theta'}L(\\theta,d(X))-R(\\theta,d)<0$. Restricting to unbiased rules can make the best rule easier to find.",
       "## Bayes risk and Bayes rules",
@@ -59,13 +52,7 @@ const lessons: Lesson[] = [
       "3. Take the action with the smaller value.",
       "## Typical mistakes",
       "Using prior weights as if they were posterior probabilities; forgetting to normalise the posterior; and reading a positive value of $E_{\\theta'}L-R$ as evidence of bias (bias needs it to be negative for some pair).",
-    ],
-  },
-  {
-    // 4. Randomised rules and the risk set
-    workedSeed: 'inf-4-worked',
-    lqId: 'inf-lq-o-riskset',
-    teach: [
+      "## Part 2: Randomised rules and the risk set",
       "## Randomised rules",
       "A randomised rule uses rule $d_i$ with probability $p_i$ ($\\sum p_i=1$). Its risk is the mixture $R(\\theta,d)=\\sum_ip_iR(\\theta,d_i)$ and its Bayes risk is $\\sum_ip_ir(\\pi,d_i)\\ge\\min_ir(\\pi,d_i)$, so randomisation never improves the Bayes risk, but it helps for minimax and for the geometry.",
       "## The risk set",
@@ -76,14 +63,14 @@ const lessons: Lesson[] = [
       "## Equalising two rules",
       "For $A=(a_1,a_2)$ and $B=(b_1,b_2)$ with $a_1<b_1$ and $b_2<a_2$, the mixture with probability $p$ on $A$ has risks $pa_i+(1-p)b_i$. Setting the two equal gives $p^*=\\dfrac{b_2-b_1}{a_1-a_2-b_1+b_2}$ and the common risk is the minimax risk among these mixtures. The prior weight $w$ on $\\theta_1$ that makes $A$ and $B$ tie in Bayes risk solves $wa_1+(1-w)a_2=wb_1+(1-w)b_2$.",
       "## Typical mistakes",
-      "Mixing the probabilities and the prior weights (they play different roles); using the equaliser point when it is not on the lower boundary; and forgetting that mixtures lie on the straight segment between risk points.",
+      "Mixing the probabilities and the prior weights (they play different roles); using the equaliser point when it is not on the lower boundary; and forgetting that mixtures lie on the straight segment between risk points."
     ],
   },
   {
-    // 5. From prior to posterior
-    workedSeed: 'inf-5-worked',
-    lqId: 'inf-lq-e-gamma-poisson#0,1,2',
+    // 3. The Bayesian approach: prior to posterior, estimation and testing
+    samples: [{"workedSeed":"inf-3-1-worked","lqId":"inf-lq-e-gamma-poisson#0,1,2"},{"workedSeed":"inf-3-2-worked","lqId":"inf-lq-p-bayestest"}],
     teach: [
+      "## Part 1: From prior to posterior",
       "## Bayesian approach",
       "In the Bayesian approach $\\theta$ is treated as random with a prior probability function $\\pi(\\theta)$ expressing belief before the data. Inference revises that belief in the light of data $x$. The joint probability function of $(x,\\theta)$ is $f(x\\mid\\theta)\\pi(\\theta)$, the marginal of $X$ is $f_X(x)=\\int f(x\\mid\\theta)\\pi(\\theta)d\\theta$, and the posterior is",
       "$$\\pi(\\theta\\mid x)=\\frac{f(x\\mid\\theta)\\pi(\\theta)}{\\int f(x\\mid\\theta')\\pi(\\theta')d\\theta'}\\propto f(x\\mid\\theta)\\pi(\\theta).$$",
@@ -96,13 +83,7 @@ const lessons: Lesson[] = [
       "Given the loss $L(\\theta,a)$, the expected posterior loss of action $a$ is $E[L(\\theta,a)\\mid x]$; a Bayesian decision minimises it. Doing this for every $x$ gives the Bayes rule of lecture 3. In the 'continue or stop' example with a Beta$(a,b)$ prior and $x$ failures in $n$ trials, the expected loss of continuing is $\\{(a+x)L-(b+n-x)G\\}/(a+b+n)$.",
       "## Typical mistakes",
       "Adding $\\sum x_i$ to the rate (it goes to the shape; the rate gets $+n$); treating the rate as a scale; and forgetting that the weight on the data is $n/(b+n)$, not $1/(b+n)$.",
-    ],
-  },
-  {
-    // 6. Bayesian inference: estimation and testing
-    workedSeed: 'inf-6-worked',
-    lqId: 'inf-lq-p-bayestest',
-    teach: [
+      "## Part 2: Bayesian inference: estimation and testing",
       "## Point estimation",
       "The Bayesian estimate depends on the loss. Under squared error $\\|\\theta-a\\|_2^2$ it is the posterior mean $E[\\theta\\mid x]$ (the expected loss is the posterior variance plus $(E[\\theta\\mid x]-a)^2$). Under absolute error $\\|\\theta-a\\|_1$ each component is the posterior median, solving $P(\\theta_i\\le a_i\\mid x)=\\tfrac12$.",
       "For a $\\mathrm{Beta}(A,B)$ posterior (prior $\\mathrm{Beta}(a,b)$, $x$ successes in $n$ trials: $A=a+x$, $B=b+n-x$) the posterior mean is $A/(A+B)$, and the posterior mean of the odds $\\omega=\\theta/(1-\\theta)$ is $A/(B-1)$ provided $B>1$. Because odds are a nonlinear function of $\\theta$ this differs from the odds of the posterior mean.",
@@ -113,13 +94,12 @@ const lessons: Lesson[] = [
       "## Computing $P(\\theta\\le\\tfrac12\\mid x)$",
       "For integer Beta parameters, $P(\\mathrm{Beta}(A,B)\\le c)=P(\\mathrm{Bin}(A+B-1,c)\\ge A)$. With $c=\\tfrac12$ add $\\binom{A+B-1}{j}/2^{A+B-1}$ for $j=A,\\dots,A+B-1$.",
       "## Typical mistakes",
-      "Using the posterior median when the loss is squared error; swapping $L_0$ and $L_1$ in the threshold; and dividing by $B$ instead of $B-1$ in the mean odds.",
+      "Using the posterior median when the loss is squared error; swapping $L_0$ and $L_1$ in the threshold; and dividing by $B$ instead of $B-1$ in the mean odds."
     ],
   },
   {
-    // 7. Bayesian intervals, prediction and nuisance parameters
-    workedSeed: 'inf-7-worked',
-    lqId: 'inf-lq-q-nuisance',
+    // 4. Bayesian intervals, prediction and nuisance parameters
+    samples: [{"workedSeed":"inf-4-1-worked","lqId":"inf-lq-q-nuisance"}],
     teach: [
       "## Interval estimates",
       "- Maximum coverage for a fixed length $2\\ell$: choose the mid-point $a$ maximising $P(\\theta\\in[a-\\ell,a+\\ell]\\mid x)$; for a unimodal posterior this gives $\\pi(a-\\ell\\mid x)=\\pi(a+\\ell\\mid x)$, close to the mode.",
@@ -133,14 +113,14 @@ const lessons: Lesson[] = [
       "## Nuisance parameters",
       "If $\\theta=(\\theta_1,\\theta_2)$ and interest is only in $\\theta_1$, integrate (or sum) $\\theta_2$ out of the joint posterior: $\\pi(\\theta_1\\mid x)=\\int\\pi(\\theta_1,\\theta_2\\mid x)d\\theta_2$. With a table of posterior weights, the marginal of $\\theta_1$ is the row sum divided by the grand total.",
       "## Typical mistakes",
-      "Forgetting to divide by the grand total; taking the values in index order instead of decreasing posterior probability for the smallest set; and predicting with the prior instead of the posterior.",
+      "Forgetting to divide by the grand total; taking the values in index order instead of decreasing posterior probability for the smallest set; and predicting with the prior instead of the posterior."
     ],
   },
   {
-    // 8. Exponential families
-    workedSeed: 'inf-8-worked',
-    lqId: 'inf-lq-r-expfam',
+    // 5. Exponential families and their natural statistic
+    samples: [{"workedSeed":"inf-5-1-worked","lqId":"inf-lq-r-expfam"},{"workedSeed":"inf-5-2-worked","lqId":"inf-lq-s-natural"}],
     teach: [
+      "## Part 1: Exponential families",
       "## Definition",
       "A family $\\{P_\\theta\\}$ on a sample space $S$ free of $\\theta$ is an exponential family if its probability functions have the form",
       "$$f(x\\mid\\theta)\\propto h(x)\\exp\\Big\\{\\sum_{j=1}^k\\eta_j(\\theta)t_j(x)\\Big\\},\\quad x\\in S,$$",
@@ -152,13 +132,7 @@ const lessons: Lesson[] = [
       "Because $A(\\eta)$ is the log normalising constant, $E[T]=A'(\\eta)$ and $\\mathrm{Var}(T)=A''(\\eta)$ in one dimension. For $n$ Bernoulli$(p)$ observations $\\eta=\\ln\\{p/(1-p)\\}$, $A_n(\\eta)=n\\ln(1+e^\\eta)$, so $E[T]=np$ and $\\mathrm{Var}(T)=np(1-p)$.",
       "## Typical mistakes",
       "Writing the natural parameter in the original parameters instead of the coefficients (for example using $\\mu$ instead of $\\mu/\\sigma^2$); forgetting the factor $\\tfrac12$ in $-1/(2\\sigma^2)$; and counting $h(x)$ as part of the natural statistic.",
-    ],
-  },
-  {
-    // 9. Distributional properties of the natural statistic
-    workedSeed: 'inf-9-worked',
-    lqId: 'inf-lq-s-natural',
-    teach: [
+      "## Part 2: Distributional properties of the natural statistic",
       "## The natural statistic is again exponential family",
       "If $X$ has probability function $h(x)\\exp\\{\\eta\\cdot t(x)-A(\\eta)\\}$, the natural statistic $T=t(X)$ has a probability function $h^*(t)\\exp\\{\\eta\\cdot t-A(\\eta)\\}$: again of exponential family form, with the same natural parameter $\\eta$ (sum over $\\{x:t(x)=t\\}$).",
       "## Conditioning on part of the natural statistic",
@@ -168,14 +142,14 @@ const lessons: Lesson[] = [
       "$$\\sum X_i\\ \\Big|\\ \\sum X_i+\\sum Y_j=t\\ \\sim\\ \\mathrm{Bin}\\Big(t,\\ \\frac{m\\lambda}{m\\lambda+n\\mu}\\Big).$$",
       "This depends on the rates only through $\\lambda/\\mu$. Under $H_0$ it is $\\mathrm{Bin}(t,m/(m+n))$, completely known, so the critical value or p-value can be computed: reject for large $\\sum X_i$, with p-value $P(S\\ge k\\mid t)=\\sum_{j\\ge k}\\binom tj\\big(\\tfrac m{m+n}\\big)^j\\big(\\tfrac n{m+n}\\big)^{t-j}$.",
       "## Typical mistakes",
-      "Using the unconditional Poisson laws, which still involve the nuisance parameter; using $p=\\lambda/\\mu$ instead of $m\\lambda/(m\\lambda+n\\mu)$; and forgetting the sample sizes $m,n$ in the success probability.",
+      "Using the unconditional Poisson laws, which still involve the nuisance parameter; using $p=\\lambda/\\mu$ instead of $m\\lambda/(m\\lambda+n\\mu)$; and forgetting the sample sizes $m,n$ in the success probability."
     ],
   },
   {
-    // 10. Sufficiency
-    workedSeed: 'inf-10-worked',
-    lqId: 'inf-lq-j-sufficiency',
+    // 6. Sufficiency, minimal sufficiency and the likelihood principle
+    samples: [{"workedSeed":"inf-6-1-worked","lqId":"inf-lq-j-sufficiency"},{"workedSeed":"inf-6-2-worked","lqId":"inf-lq-t-likelihood"}],
     teach: [
+      "## Part 1: Sufficiency",
       "## Information in the data",
       "A statistic $T=T(X)$ is sufficient for $\\theta$ if the conditional distribution of $X$ given $T$ does not depend on $\\theta$: once $T$ is known, the rest of the data carries no further information about $\\theta$. If $T_2=\\phi(T_1)$ then $T_2$ carries no more information than $T_1$. The sample $X$ itself is always sufficient, so the aim is a sufficient statistic of lower dimension. A sufficient statistic is not unique.",
       "## Factorisation theorem",
@@ -184,13 +158,7 @@ const lessons: Lesson[] = [
       "For Bernoulli$(p)$ data with $T=\\sum X_i=t$, $P(X=x\\mid T=t)=p^t(1-p)^{n-t}\\big/\\binom ntp^t(1-p)^{n-t}=1/\\binom nt$ for every arrangement with $t$ successes: free of $p$, so $T$ is sufficient. Counting arrangements gives, for example, $P(X_1=1,X_2=0\\mid T=t)=\\binom{n-2}{t-1}\\big/\\binom nt=\\dfrac{t(n-t)}{n(n-1)}$.",
       "## Typical mistakes",
       "Confusing sufficient with unbiased or with the MLE; using the divisor $n-1$ instead of $n$ for the MLE of the variance; and counting arrangements out of $n^2$ instead of $n(n-1)$.",
-    ],
-  },
-  {
-    // 11. Minimal sufficiency, likelihood principle, ancillarity
-    workedSeed: 'inf-11-worked',
-    lqId: 'inf-lq-t-likelihood',
-    teach: [
+      "## Part 2: Minimal sufficiency, the likelihood principle and ancillarity",
       "## Minimal sufficiency",
       "Among sufficient statistics we want the most economical. $T$ is minimal sufficient if it is sufficient and a function of every other sufficient statistic. Equivalent characterisation: $T$ is minimal sufficient iff, for any two samples $x,x'$, the likelihood ratio $L(\\theta;x)/L(\\theta;x')$ is free of $\\theta$ exactly when $T(x)=T(x')$. For a full-rank exponential family the natural statistic $\\sum_iT(X_i)$ is minimal sufficient.",
       "Examples: for Poisson samples with the same total, $L(\\lambda;x)/L(\\lambda;x')=\\prod x_i'!/\\prod x_i!$ is free of $\\lambda$, while samples with different totals give a ratio $\\lambda^{\\sum x_i-\\sum x_i'}\\prod x_i'!/\\prod x_i!$ that depends on $\\lambda$. For $U(0,\\theta)$ the likelihood is $\\theta^{-n}\\mathbf 1\\{\\max x_i\\le\\theta\\}$, so $\\max_iX_i$ is minimal sufficient and is the MLE; for $\\theta_1,\\theta_2\\ge\\max x_i$ the ratio $L(\\theta_1)/L(\\theta_2)=(\\theta_2/\\theta_1)^n$.",
@@ -199,14 +167,14 @@ const lessons: Lesson[] = [
       "## Ancillary statistics",
       "A statistic whose distribution does not depend on $\\theta$ is ancillary; for $X_i$ i.i.d. $N(\\theta,1)$, $X_1-X_2$ (or the sample range) is ancillary. By itself it carries no information about $\\theta$ but it can tell you how precise the data are.",
       "## Typical mistakes",
-      "Inverting the likelihood ratio (check which sample is in the numerator); evaluating $L(\\theta)$ at a $\\theta$ below the sample maximum (it is zero); and counting the binomial coefficients as part of the ratio (they cancel).",
+      "Inverting the likelihood ratio (check which sample is in the numerator); evaluating $L(\\theta)$ at a $\\theta$ below the sample maximum (it is zero); and counting the binomial coefficients as part of the ratio (they cancel)."
     ],
   },
   {
-    // 12. Completeness and UMVU estimation
-    workedSeed: 'inf-12-worked',
-    lqId: 'inf-lq-a-poisson#1,2,3',
+    // 7. Completeness, UMVU estimation and the information inequality
+    samples: [{"workedSeed":"inf-7-1-worked","lqId":"inf-lq-a-poisson#1,2,3"},{"workedSeed":"inf-7-2-worked","lqId":"inf-lq-k-information"}],
     teach: [
+      "## Part 1: Completeness and UMVU estimation",
       "## Completeness and the UMVUE",
       "A statistic $T$ is complete if $E_\\theta g(T)=0$ for all $\\theta$ implies $g(T)=0$ with probability one. For an exponential family whose natural parameter space contains an open set, the natural statistic is complete and sufficient. Two theorems do the work:",
       "- Rao-Blackwell: if $U$ is unbiased for $g(\\theta)$ and $T$ is sufficient, then $E[U\\mid T]$ is unbiased and has variance no larger than $U$.",
@@ -219,13 +187,7 @@ const lessons: Lesson[] = [
       "- UMVUE of $\\lambda e^{-\\lambda}=P(X_1=1)$: $P(X_1=1\\mid T=t)=t\\cdot\\dfrac1n\\Big(1-\\dfrac1n\\Big)^{t-1}$.",
       "## Typical mistakes",
       "Using $T^2/n^2$ for $\\lambda^2$ (it is biased); writing the conditional distribution of $X_1$ given $T$ with success probability $\\lambda$ instead of $1/n$; and dropping a factor in the exponent $t-1$.",
-    ],
-  },
-  {
-    // 13. Information inequality
-    workedSeed: 'inf-13-worked',
-    lqId: 'inf-lq-k-information',
-    teach: [
+      "## Part 2: Information inequality",
       "## Fisher information",
       "The score is $U(\\theta)=\\partial\\log f(X\\mid\\theta)/\\partial\\theta$. Under regularity conditions $E_\\theta U=0$ and the Fisher information is",
       "$$I(\\theta)=\\mathrm{Var}_\\theta(U)=E_\\theta(U^2)=-E_\\theta\\Big[\\frac{\\partial^2}{\\partial\\theta^2}\\log f\\Big].$$",
@@ -238,13 +200,12 @@ const lessons: Lesson[] = [
       "If $\\eta=h(\\theta)$ then $I(\\eta)=I(\\theta)\\{d\\theta/d\\eta\\}^2$. For the log-odds $\\eta=\\log\\{p/(1-p)\\}$, $dp/d\\eta=p(1-p)$, so $I_1(\\eta)=p(1-p)$.",
       "The bound needs regularity: it fails when the support depends on $\\theta$, for example for the uniform on $(0,\\theta)$.",
       "## Typical mistakes",
-      "Forgetting the factor $\\{g'(\\theta)\\}^2$; using $I_1$ instead of $nI_1$; and inverting the efficiency (it is bound over variance).",
+      "Forgetting the factor $\\{g'(\\theta)\\}^2$; using $I_1$ instead of $nI_1$; and inverting the efficiency (it is bound over variance)."
     ],
   },
   {
-    // 14. Likelihood and large-sample theory of the MLE
-    workedSeed: 'inf-14-worked',
-    lqId: 'inf-lq-b-exponential#2,3,4',
+    // 8. Likelihood and large-sample theory of the MLE
+    samples: [{"workedSeed":"inf-8-1-worked","lqId":"inf-lq-b-exponential#2,3,4"}],
     teach: [
       "## Large-sample behaviour of the MLE",
       "Under regularity conditions the MLE $\\hat\\theta$ is consistent and asymptotically normal and efficient:",
@@ -257,14 +218,14 @@ const lessons: Lesson[] = [
       "## Exponential example",
       "For i.i.d. exponential observations with mean $\\theta$: the MLE is $\\bar X$, $I_n(\\theta)=n/\\theta^2$, and the score is $U(\\theta)=n(\\bar x-\\theta)/\\theta^2$. So the standard error at $\\bar x$ is $\\bar x/\\sqrt n$, the Wald statistic is $n(\\bar x-\\theta_0)^2/\\bar x^2$, and the score statistic is $U(\\theta_0)^2\\theta_0^2/n=n(\\bar x-\\theta_0)^2/\\theta_0^2$.",
       "## Typical mistakes",
-      "Using the information at $\\theta_0$ in the Wald statistic (or at $\\hat\\theta$ in the score statistic); forgetting that $I_n=n\\,I_1$; and comparing the statistic with a normal critical value instead of $\\chi^2_1$.",
+      "Using the information at $\\theta_0$ in the Wald statistic (or at $\\hat\\theta$ in the score statistic); forgetting that $I_n=n\\,I_1$; and comparing the statistic with a normal critical value instead of $\\chi^2_1$."
     ],
   },
   {
-    // 15. Uniformly most powerful tests
-    workedSeed: 'inf-15-worked',
-    lqId: 'inf-lq-f-ump',
+    // 9. UMP, UMP unbiased and conditional tests
+    samples: [{"workedSeed":"inf-9-1-worked","lqId":"inf-lq-f-ump"},{"workedSeed":"inf-9-2-worked","lqId":"inf-lq-g-conditional"}],
     teach: [
+      "## Part 1: Uniformly most powerful tests",
       "## Neyman-Pearson and monotone likelihood ratio",
       "For a simple null against a simple alternative, the most powerful level-$\\alpha$ test rejects for large likelihood ratio $f_{\\theta_1}(x)/f_{\\theta_0}(x)$ (Neyman-Pearson lemma). A family has monotone likelihood ratio (MLR) in $T$ if that ratio is nondecreasing in $T$ for $\\theta_1>\\theta_0$. By the Karlin-Rubin theorem, for $H_0:\\theta\\le\\theta_0$ against $H_1:\\theta>\\theta_0$ the test that rejects for large $T$ is uniformly most powerful (UMP); its size is attained at the boundary $\\theta_0$ and its power increases in $\\theta$.",
       "## Discrete data: randomisation",
@@ -275,13 +236,7 @@ const lessons: Lesson[] = [
       "The same test is the Neyman-Pearson test for each simple alternative $p_1>p_0$, which is why it is UMP. At the boundary value $y=c$ the likelihood ratio is $\\dfrac{f_{p_1}(c)}{f_{p_0}(c)}=\\Big(\\dfrac{p_1}{p_0}\\Big)^c\\Big(\\dfrac{1-p_1}{1-p_0}\\Big)^{n-c}$.",
       "## Typical mistakes",
       "Choosing $c$ so that $P(Y\\ge c)\\le\\alpha$ rather than $P(Y>c)\\le\\alpha$ and then also randomising at $c$; computing the size at the alternative instead of at $p_0$; and forgetting that $\\gamma$ lies between $0$ and $1$.",
-    ],
-  },
-  {
-    // 16. UMP unbiased and conditional tests
-    workedSeed: 'inf-16-worked',
-    lqId: 'inf-lq-g-conditional',
-    teach: [
+      "## Part 2: UMP unbiased and conditional tests",
       "## When no UMP test exists",
       "For a two-sided alternative $\\theta\\ne\\theta_0$ no UMP test exists. Restrict to unbiased tests, whose power is at least $\\alpha$ everywhere under the alternative. In exponential families there is a UMP unbiased (UMPU) test, and when there are nuisance parameters it is obtained by conditioning on the sufficient statistic for the nuisance parameter (lecture 9).",
       "## Two Poisson counts",
@@ -291,13 +246,12 @@ const lessons: Lesson[] = [
       "## Fisher's exact test",
       "For a $2\\times2$ table with all margins fixed and no association, the top-left cell is hypergeometric: with group sizes $r_1,r_2$ and $c_1$ successes in total, $P(A=a)=\\binom{r_1}{a}\\binom{r_2}{c_1-a}\\big/\\binom{r_1+r_2}{c_1}$. The one-sided p-value is the sum of these probabilities for $a$ and all larger values.",
       "## Typical mistakes",
-      "Using the unconditional Poisson probabilities instead of the binomial given the total; using $p=\\lambda_1/\\lambda_2$ instead of $\\lambda_1/(\\lambda_1+\\lambda_2)$; and adding the wrong tail in the two-sided p-value.",
+      "Using the unconditional Poisson probabilities instead of the binomial given the total; using $p=\\lambda_1/\\lambda_2$ instead of $\\lambda_1/(\\lambda_1+\\lambda_2)$; and adding the wrong tail in the two-sided p-value."
     ],
   },
   {
-    // 17. Large-sample LRT and confidence sets
-    workedSeed: 'inf-17-worked',
-    lqId: 'inf-lq-i-wilks#0,3,4',
+    // 10. Large-sample likelihood ratio tests and confidence sets
+    samples: [{"workedSeed":"inf-10-1-worked","lqId":"inf-lq-i-wilks#0,3,4"}],
     teach: [
       "## Wilks' theorem",
       "The likelihood ratio is $\\Lambda=\\sup_{H_0}L/\\sup L$. Under $H_0$ and regularity conditions, $-2\\log\\Lambda\\to\\chi^2_r$ where $r$ is the number of free parameters removed by $H_0$. Reject for large $-2\\log\\Lambda$. For a Poisson sample with total $T$ and $n$ observations, $\\hat\\lambda=T/n$ and",
@@ -311,13 +265,12 @@ const lessons: Lesson[] = [
       "To test whether two independent Poisson samples have equal means, $H_0$ removes one of two free parameters, so $r=1$. With group totals $T_1,T_2$, group MLEs $\\hat\\lambda_1,\\hat\\lambda_2$ and pooled MLE $\\hat\\lambda_0=(T_1+T_2)/(n_1+n_2)$,",
       "$$-2\\log\\Lambda=2\\Big\\{T_1\\log\\frac{\\hat\\lambda_1}{\\hat\\lambda_0}+T_2\\log\\frac{\\hat\\lambda_2}{\\hat\\lambda_0}\\Big\\}\\ \\approx\\ \\chi^2_1.$$",
       "## Typical mistakes",
-      "Using the wrong degrees of freedom (count the parameters removed by $H_0$, not those in the model); taking the logarithm of the ratio the wrong way round; and using the full-model MLE as the null estimate.",
+      "Using the wrong degrees of freedom (count the parameters removed by $H_0$, not those in the model); taking the logarithm of the ratio the wrong way round; and using the full-model MLE as the null estimate."
     ],
   },
   {
-    // 18. Bootstrap
-    workedSeed: 'inf-18-worked',
-    lqId: 'inf-lq-l-bootstrap',
+    // 11. Bootstrap
+    samples: [{"workedSeed":"inf-11-1-worked","lqId":"inf-lq-l-bootstrap"}],
     teach: [
       "## The plug-in principle",
       "Replace the unknown distribution $F$ by the empirical distribution $\\hat F_n$ (mass $1/n$ on each observation). A bootstrap resample is a sample of size $n$ drawn with replacement from the data. To study an estimator $\\hat\\theta$, recompute it on many resamples: the standard deviation of the replicates estimates its standard error, their mean minus $\\hat\\theta$ estimates its bias, and the $2.5\\%$ and $97.5\\%$ points give a percentile interval.",
@@ -330,7 +283,7 @@ const lessons: Lesson[] = [
       "## When it works",
       "The bootstrap is consistent for smooth functionals such as means, variances and correlations. It can fail for non-smooth ones: for the sample maximum of a uniform sample the bootstrap distribution is wrong, because it puts mass $1-(1-1/n)^n\\to1-e^{-1}\\approx0.632$ on the observed maximum while the true distribution of the maximum is continuous.",
       "## Typical mistakes",
-      "Using $\\sqrt{\\hat\\sigma^2}\\,n$ instead of $\\hat\\sigma/\\sqrt n$; using the divisor $n-1$ for the plug-in variance; and confusing the number of ordered resamples $n^n$ with the number of distinct multisets $\\binom{2n-1}{n}$.",
+      "Using $\\sqrt{\\hat\\sigma^2}\\,n$ instead of $\\hat\\sigma/\\sqrt n$; using the divisor $n-1$ for the plug-in variance; and confusing the number of ordered resamples $n^n$ with the number of distinct multisets $\\binom{2n-1}{n}$."
     ],
   },
 ]

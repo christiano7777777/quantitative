@@ -33,27 +33,27 @@ export function build({ loss, p, w, d }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the Bayes risk ' + tex('r(\\pi,d)=\\pi(\\theta_1)R(\\theta_1,d)+\\pi(\\theta_2)R(\\theta_2,d)') + ' of ' + tex('d') + '.',
-        answer: bayesRisk, tolerance: tol4, lecture: 3,
+        answer: bayesRisk, tolerance: tol4, lecture: 2,
         explanation: tex('R(\\theta_1,d)=' + dec(R(0, d)) + ',\\ R(\\theta_2,d)=' + dec(R(1, d))) + ', so ' + tex('r=' + dec(w[0]) + '\\times' + dec(R(0, d)) + '+' + dec(w[1]) + '\\times' + dec(R(1, d))) + ' = ' + dec(bayesRisk) + '.',
       },
       {
         prompt: 'Given the observation ' + tex('X=1') + ', find the posterior probability ' + tex('\\pi(\\theta_1\\mid X=1)') + '.',
-        answer: post1, tolerance: tol4, lecture: 3,
+        answer: post1, tolerance: tol4, lecture: 2,
         explanation: 'The joint weights are ' + tex(dec(w[0]) + '\\times' + dec(p[0]) + '=' + dec(m1)) + ' and ' + tex(dec(w[1]) + '\\times' + dec(p[1]) + '=' + dec(m2)) + ', so the posterior is ' + tex(dec(m1) + '/' + dec(m1 + m2)) + ' = ' + dec(post1) + '.',
       },
       {
         prompt: 'Find the expected posterior loss of action ' + tex('a_1') + ' given ' + tex('X=1') + '.',
-        answer: eloss(0), tolerance: tol4, lecture: 3,
+        answer: eloss(0), tolerance: tol4, lecture: 2,
         explanation: tex(dec(post1) + '\\times' + loss[0][0] + '+' + dec(1 - post1) + '\\times' + loss[1][0]) + ' = ' + dec(eloss(0)) + '.',
       },
       {
         prompt: 'Find the expected posterior loss of action ' + tex('a_2') + ' given ' + tex('X=1') + '. (The Bayes rule takes the action with the smaller expected posterior loss.)',
-        answer: eloss(1), tolerance: tol4, lecture: 3,
+        answer: eloss(1), tolerance: tol4, lecture: 2,
         explanation: tex(dec(post1) + '\\times' + loss[0][1] + '+' + dec(1 - post1) + '\\times' + loss[1][1]) + ' = ' + dec(eloss(1)) + ', so the Bayes action at ' + tex('x=1') + ' is ' + tex('a_' + (best + 1)) + '.',
       },
       {
         prompt: 'A rule is unbiased if ' + tex('E_{\\theta\'}L(\\theta,d(X))\\ge R(\\theta,d)') + ' for all ' + tex('\\theta,\\theta\'') + '. Find ' + tex('E_{\\theta_2}L(\\theta_1,d(X))-R(\\theta_1,d)') + ' for this rule. (A negative value shows that ' + tex('d') + ' is not unbiased.)',
-        answer: gap, tolerance: tol4, lecture: 3,
+        answer: gap, tolerance: tol4, lecture: 2,
         explanation: tex('E_{\\theta_2}L(\\theta_1,d(X))=' + loss[0][d[0]] + '\\times' + dec(1 - p[1]) + '+' + loss[0][d[1]] + '\\times' + dec(p[1]) + '=' + dec(gap + R(0, d))) + ' and ' + tex('R(\\theta_1,d)=' + dec(R(0, d))) + ', so the difference is ' + dec(gap) + (gap < 0 ? ', which is negative: the rule is not unbiased.' : '.'),
       },
     ],

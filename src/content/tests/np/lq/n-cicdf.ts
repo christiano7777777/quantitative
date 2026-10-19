@@ -38,27 +38,27 @@ export function build({ n, r, m, c, x0 }: Params): LQInstance {
     parts: [
       {
         prompt: 'With ' + tex('n=' + n) + ' find the exact coverage of the interval ' + tex('(X_{(' + r + ')},\\ X_{(' + (n + 1 - r) + ')})') + ' as a confidence interval for ' + tex('\\theta') + ', ' + tex('1-2P(\\mathrm{Bin}(' + n + ',\\tfrac12)\\le' + (r - 1) + ')') + '.',
-        answer: cover, tolerance: tol4, lecture: 3,
+        answer: cover, tolerance: tol4, lecture: 1,
         explanation: tex('P(\\mathrm{Bin}(' + n + ',\\tfrac12)\\le' + (r - 1) + ')=' + dec(cdfHalf(n, r - 1))) + ', so the coverage is ' + tex('1-2\\times' + dec(cdfHalf(n, r - 1))) + ' = ' + dec(cover) + '.',
       },
       {
         prompt: 'For ' + tex('n=' + n) + ' find the largest ' + tex('k') + ' such that ' + tex('(X_{(k)},\\ X_{(' + (n + 1) + '-k)})') + ' has coverage at least ' + tex('0.95') + ' (the shortest such symmetric interval). Give ' + tex('k') + ' as a whole number, or ' + tex('0') + ' if no such interval exists.',
-        answer: rBest, tolerance: tolInt, lecture: 3,
+        answer: rBest, tolerance: tolInt, lecture: 1,
         explanation: 'The coverage ' + tex('1-2P(\\mathrm{Bin}(' + n + ',\\tfrac12)\\le k-1)') + ' falls as ' + tex('k') + ' grows. ' + (have ? 'It is still at least 0.95 at ' + tex('k=' + rBest) + ' (' + dec(1 - 2 * cdfHalf(n, rBest - 1)) + ') and drops below at ' + tex('k=' + (rBest + 1)) + '.' : 'Even ' + tex('(X_{(1)},X_{(' + n + ')})') + ' only covers ' + dec(1 - 2 * cdfHalf(n, 0)) + ', so no interval reaches 0.95.'),
       },
       {
         prompt: 'In a sample of ' + tex(m) + ' observations, ' + tex(c) + ' are at most ' + tex(x0) + '. Find the empirical cdf value ' + tex('\\hat F(' + x0 + ')') + '.',
-        answer: f, tolerance: tol4, lecture: 3,
+        answer: f, tolerance: tol4, lecture: 1,
         explanation: tex('\\hat F(' + x0 + ')=' + c + '/' + m) + ' = ' + dec(f) + '. The count of observations at most ' + tex(x0) + ' is ' + tex('\\mathrm{Bin}(' + m + ',F(' + x0 + '))') + '.',
       },
       {
         prompt: 'Find the estimated standard error of ' + tex('\\hat F(' + x0 + ')') + ', ' + tex('\\sqrt{\\hat F(1-\\hat F)/' + m + '}') + '.',
-        answer: se, tolerance: tol4, lecture: 3,
+        answer: se, tolerance: tol4, lecture: 1,
         explanation: tex('\\sqrt{' + dec(f) + '\\times' + dec(1 - f) + '/' + m + '}') + ' = ' + dec(se) + '.',
       },
       {
         prompt: 'Find the upper end of the approximate 95% confidence interval for ' + tex('F(' + x0 + ')') + ', ' + tex('\\hat F+1.96\\,\\mathrm{SE}') + '.',
-        answer: upper, tolerance: tol4, lecture: 3,
+        answer: upper, tolerance: tol4, lecture: 1,
         explanation: tex(dec(f) + '+1.96\\times' + dec(se)) + ' = ' + dec(upper) + '.',
       },
     ],

@@ -25,27 +25,27 @@ export function build({ x, r }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the weight ' + tex('\\tilde w(x_1)') + ' of the first draw ' + tex('x_1=' + dec(x[0])) + '.',
-        answer: w[0], tolerance: tol4, lecture: 8,
+        answer: w[0], tolerance: tol4, lecture: 5,
         explanation: tex('\\tilde w=\\dfrac{' + dec(x[0]) + '^2e^{-' + dec(x[0]) + '}}{' + dec(r) + 'e^{-' + dec(r * x[0]) + '}}') + ' = ' + dec(w[0]) + '.',
       },
       {
         prompt: 'Find the sum of the four weights ' + tex('\\sum_i\\tilde w(x_i)') + '.',
-        answer: sw, tolerance: tol4, lecture: 8,
+        answer: sw, tolerance: tol4, lecture: 5,
         explanation: 'The weights are ' + w.map(dec).join(', ') + ', which add to ' + dec(sw) + '.',
       },
       {
         prompt: 'Find the self-normalised estimate ' + tex('\\sum_i\\tilde w(x_i)x_i\\big/\\sum_i\\tilde w(x_i)') + ' of ' + tex('E[X]') + '. (The unknown constant in ' + tex('\\tilde f') + ' cancels.)',
-        answer: est, tolerance: tol4, lecture: 8,
+        answer: est, tolerance: tol4, lecture: 5,
         explanation: tex('(' + w.map((v, i) => dec(v) + '\\times' + dec(x[i])).join('+') + ')/' + dec(sw)) + ' = ' + dec(est) + '. The true mean of a Gamma(3,1) is ' + tex('3') + '.',
       },
       {
         prompt: 'Find the effective sample size ' + tex('(\\sum\\tilde w_i)^2/\\sum\\tilde w_i^2') + '.',
-        answer: ess, tolerance: tol4, lecture: 8,
+        answer: ess, tolerance: tol4, lecture: 5,
         explanation: tex('(' + dec(sw) + ')^2/' + dec(w.reduce((a, b) => a + b * b, 0))) + ' = ' + dec(ess) + ', out of ' + tex('4') + ' draws; it equals ' + tex('4') + ' only for equal weights.',
       },
       {
         prompt: 'Find the largest normalised weight ' + tex('\\max_i\\tilde w_i/\\sum_j\\tilde w_j') + '. A value near ' + tex('1') + ' means one draw dominates.',
-        answer: wmax, tolerance: tol4, lecture: 8,
+        answer: wmax, tolerance: tol4, lecture: 5,
         explanation: 'The largest weight is ' + dec(w[imax]) + ' (at ' + tex('x=' + dec(x[imax])) + '), so ' + tex(dec(w[imax]) + '/' + dec(sw)) + ' = ' + dec(wmax) + '.',
       },
     ],

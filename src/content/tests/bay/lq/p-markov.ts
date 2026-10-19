@@ -30,27 +30,27 @@ export function build({ a, b, c, d }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the two-step transition probability ' + tex('P(X_2=3\\mid X_0=1)=(P^2)_{13}') + '.',
-        answer: sq(0, 2), tolerance: tol4, lecture: 9,
+        answer: sq(0, 2), tolerance: tol4, lecture: 6,
         explanation: 'Marginalise over the middle state: ' + tex('\\sum_kP_{1k}P_{k3}=' + dec(P[0][0]) + '\\times0+' + dec(P[0][1]) + '\\times' + dec(P[1][2]) + '+0\\times' + dec(P[2][2])) + ' = ' + dec(sq(0, 2)) + '.',
       },
       {
         prompt: 'Find ' + tex('P(X_2=2\\mid X_0=2)=(P^2)_{22}') + '.',
-        answer: sq(1, 1), tolerance: tol4, lecture: 9,
+        answer: sq(1, 1), tolerance: tol4, lecture: 6,
         explanation: tex(dec(P[1][0]) + '\\times' + dec(P[0][1]) + '+' + dec(P[1][1]) + '^2+' + dec(P[1][2]) + '\\times' + dec(P[2][1])) + ' = ' + dec(sq(1, 1)) + '.',
       },
       {
         prompt: 'Using detailed balance ' + tex('\\pi_1P_{12}=\\pi_2P_{21}') + ' and ' + tex('\\pi_2P_{23}=\\pi_3P_{32}') + ', find the stationary probability ' + tex('\\pi_1') + '.',
-        answer: pi[0], tolerance: tol4, lecture: 9,
+        answer: pi[0], tolerance: tol4, lecture: 6,
         explanation: 'Up to a constant ' + tex('\\pi\\propto(1,\\ P_{12}/P_{21},\\ P_{12}P_{23}/(P_{21}P_{32}))=(1,' + dec(raw[1]) + ',' + dec(raw[2]) + ')') + ', whose sum is ' + dec(tot) + ', so ' + tex('\\pi_1=1/' + dec(tot)) + ' = ' + dec(pi[0]) + '.',
       },
       {
         prompt: 'Find the stationary probability ' + tex('\\pi_3') + '.',
-        answer: pi[2], tolerance: tol4, lecture: 9,
+        answer: pi[2], tolerance: tol4, lecture: 6,
         explanation: tex(dec(raw[2]) + '/' + dec(tot)) + ' = ' + dec(pi[2]) + '. (Check ' + tex('\\pi_1+\\pi_2+\\pi_3=' + dec(pi[0] + pi[1] + pi[2])) + '.)',
       },
       {
         prompt: 'The long-run average of the state, ' + tex('\\frac1T\\sum_{n\\le T}X_n\\to E_\\pi[X]=\\sum_jj\\pi_j') + ', is what MCMC-style averaging estimates. Find it.',
-        answer: mean, tolerance: tol4, lecture: 9,
+        answer: mean, tolerance: tol4, lecture: 6,
         explanation: tex('1\\times' + dec(pi[0]) + '+2\\times' + dec(pi[1]) + '+3\\times' + dec(pi[2])) + ' = ' + dec(mean) + '. The samples are correlated, so the ordinary law of large numbers does not apply; an ergodic theorem does.',
       },
     ],

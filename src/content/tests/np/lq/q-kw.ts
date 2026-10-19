@@ -59,27 +59,27 @@ export function build({ g }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the rank sum ' + tex('R_A') + ' of group ' + tex('A') + '.',
-        answer: rs[0], tolerance: tol4, lecture: 8,
+        answer: rs[0], tolerance: tol4, lecture: 4,
         explanation: 'Ranks of group ' + tex('A') + ': ' + R.slice(0, sizes[0]).map(dec).join(', ') + '. They sum to ' + dec(rs[0]) + '. (The rank sums of the three groups are ' + rs.map(dec).join(', ') + ', adding to ' + tex(N * (N + 1) / 2) + '.)',
       },
       {
         prompt: 'Find the Kruskal-Wallis statistic without any tie correction, ' + tex('KW=\\dfrac{12}{N(N+1)}\\sum_iR_i^2/n_i-3(N+1)') + ', using the mid-ranks.',
-        answer: KW, tolerance: tol4, lecture: 8,
+        answer: KW, tolerance: tol4, lecture: 4,
         explanation: tex('\\dfrac{12}{' + N * (N + 1) + '}(' + rs.map((r, i) => dec(r) + '^2/' + sizes[i]).join('+') + ')-' + 3 * (N + 1)) + ' = ' + dec(KW) + '.',
       },
       {
         prompt: 'Find the tie correction factor ' + tex('C=1-\\sum_{\\text{ties}}(t^3-t)/(N^3-N)') + ', where ' + tex('t') + ' is the size of each group of tied values.',
-        answer: C, tolerance: tol4, lecture: 8,
+        answer: C, tolerance: tol4, lecture: 4,
         explanation: 'One tied pair has ' + tex('t=2') + ', so ' + tex('\\sum(t^3-t)=6') + ' and ' + tex('C=1-6/(' + N + '^3-' + N + ')=1-6/' + (N ** 3 - N)) + ' = ' + dec(C) + '.',
       },
       {
         prompt: 'Find the tie-adjusted statistic ' + tex('KW_{\\text{ties}}=KW/C') + '. (Compare it with a ' + tex('\\chi^2_{' + (k - 1) + '}') + ' critical value.)',
-        answer: KWt, tolerance: tol4, lecture: 8,
+        answer: KWt, tolerance: tol4, lecture: 4,
         explanation: tex(dec(KW) + '/' + dec(C)) + ' = ' + dec(KWt) + '. The correction is small here but always increases the statistic.',
       },
       {
         prompt: 'How many distinct ways can the ' + tex(N) + ' observations be assigned to the three groups of sizes ' + tex(sizes.join(',')) + ' (the permutations used for an exact test)? Give a whole number.',
-        answer: perms, tolerance: tolInt, lecture: 8,
+        answer: perms, tolerance: tolInt, lecture: 4,
         explanation: tex('\\dfrac{' + N + '!}{' + sizes.map((s) => s + '!').join('\\,') + '}=' + perms) + '.',
       },
     ],

@@ -1,15 +1,14 @@
-// Lessons for Nonparametric Statistics, following the HKU SDST3620/STAT3620 lecture notes chapter by chapter
-// (lectures 1-16), then the outline topics the notes have not reached yet (lectures 17-21). One entry per lecture.
-// `lqId` names a generator in src/content/tests/np/lq; "#0,1,2" keeps only those parts (0-based), so a shared
-// generator is split by lecture. The worked sample is that generator at `workedSeed`; the quiz draws fresh numbers.
+// Lessons for Nonparametric Statistics, following the HKU SDST3620/STAT3620 lecture notes (lectures 1-8), then the outline topics the
+// notes have not reached yet (lectures 9-12). A lecture that merges two sections of the notes has one lesson part and one worked sample per
+// section; its quiz draws its long question from one of them.
 import type { Lesson } from '../../../lib/types'
 
 const lessons: Lesson[] = [
   {
-    // 1. Parametric versus nonparametric methods
-    workedSeed: 'np-1-worked',
-    lqId: 'np-lq-l-intro',
+    // 1. Why nonparametric: the sign test and confidence intervals for the median and the cdf
+    samples: [{"workedSeed":"np-1-1-worked","lqId":"np-lq-l-intro"},{"workedSeed":"np-1-2-worked","lqId":"np-lq-m-sign"},{"workedSeed":"np-1-3-worked","lqId":"np-lq-n-cicdf"}],
     teach: [
+      "## Part 1: Parametric versus nonparametric methods",
       "## The idea",
       "A parametric method assumes the data come from a named family (normal, exponential, ...) with a few unknown parameters. A nonparametric (distribution-free) method assumes much less, often only that the distribution is continuous, and the null distribution of its statistic does not depend on which continuous distribution generated the data.",
       "Why it matters: the $t$ test is derived for normal data. If the data have heavy tails the sample mean is unstable, the $t$ statistic no longer has a $t$ distribution, and both the size and the power of the test can be wrong. Rank-based tests keep a correct null distribution whatever the (continuous) population.",
@@ -21,13 +20,7 @@ const lessons: Lesson[] = [
       "An exact sign test with $n$ observations has only $2^n$ equally likely sign patterns, so its smallest two-sided p-value is $2\\cdot(1/2)^n=2^{1-n}$. To be able to reject at level $\\alpha$ you need $2^{1-n}\\le\\alpha$; at $\\alpha=0.05$ that means $n\\ge6$.",
       "## Typical mistakes",
       "Reading distribution-free as assumption-free (independence and continuity are still assumed); rounding a required sample size down; and treating ARE as a finite-sample power ratio.",
-    ],
-  },
-  {
-    // 2. One-sample sign test
-    workedSeed: 'np-2-worked',
-    lqId: 'np-lq-m-sign',
-    teach: [
+      "## Part 2: One-sample sign (binomial) test for the median",
       "## The test",
       "To test $H_0:\\text{median}=\\theta_0$, count the observations above $\\theta_0$. Drop any observation equal to $\\theta_0$ (it carries no sign), let $n$ be the number left and $B$ the number above $\\theta_0$. By the definition of the median, each remaining observation is above $\\theta_0$ with probability $\\tfrac12$ under $H_0$, independently, so",
       "$$B\\sim\\mathrm{Bin}\\big(n,\\tfrac12\\big)\\quad\\text{under }H_0,\\text{ for every continuous distribution.}$$",
@@ -39,13 +32,7 @@ const lessons: Lesson[] = [
       "The sign test uses only signs. For normal data it needs about $\\pi/2\\approx1.57$ times the observations of the $t$ test (ARE $2/\\pi$); for heavy-tailed data, such as the double exponential, it is more efficient (ARE $2$). It needs no symmetry assumption, unlike the signed-rank test.",
       "## Typical mistakes",
       "Keeping observations equal to $\\theta_0$ in $n$; doubling the larger tail; and using $P(B'=B)$ instead of a tail probability.",
-    ],
-  },
-  {
-    // 3. Confidence intervals for the median and the cdf
-    workedSeed: 'np-3-worked',
-    lqId: 'np-lq-n-cicdf',
-    teach: [
+      "## Part 3: Confidence intervals for the median and the cdf",
       "## Order statistics",
       "Sort an i.i.d. sample from a continuous distribution with cdf $F$: $X_{(1)}<\\cdots<X_{(n)}$. The event $X_{(k)}\\le x$ means at least $k$ observations are $\\le x$, so $P(X_{(k)}\\le x)=\\sum_{j=k}^n\\binom nj F(x)^j(1-F(x))^{n-j}$. In particular $P(X_{(n)}\\le x)=F(x)^n$ and $P(X_{(1)}\\le x)=1-(1-F(x))^n$.",
       "## Interval for the median (or any quantile)",
@@ -57,14 +44,14 @@ const lessons: Lesson[] = [
       "$$\\hat F(x_0)\\pm1.96\\sqrt{\\hat F(x_0)\\{1-\\hat F(x_0)\\}/n}.$$",
       "It is a pointwise interval; the Kolmogorov-Smirnov or DKW bands cover the whole function at once and are wider.",
       "## Typical mistakes",
-      "Summing the binomial to $s$ instead of $s-1$; using the pointwise interval as if it covered the whole cdf; and reading the exact coverage as the nominal level.",
+      "Summing the binomial to $s$ instead of $s-1$; using the pointwise interval as if it covered the whole cdf; and reading the exact coverage as the nominal level."
     ],
   },
   {
-    // 4. Permutation tests and the Wilcoxon rank-sum test
-    workedSeed: 'np-4-worked',
-    lqId: 'np-lq-e-permutation',
+    // 2. Two-sample location: permutation, Wilcoxon rank-sum, Mann-Whitney and Hodges-Lehmann
+    samples: [{"workedSeed":"np-2-1-worked","lqId":"np-lq-e-permutation"},{"workedSeed":"np-2-2-worked","lqId":"np-lq-o-hl"}],
     teach: [
+      "## Part 1: Permutation tests and the Wilcoxon rank-sum test",
       "## The idea",
       "If the group labels carry no information under $H_0$, every relabelling of the pooled observations is equally likely, so the null distribution of a statistic can be built from the data themselves. No distributional assumption is needed and the test is exact.",
       "## Procedure for two groups (sizes $m$ and $n$)",
@@ -78,13 +65,7 @@ const lessons: Lesson[] = [
       "Large $W$ means $X$ tends to be larger. With small samples use the exact permutation distribution (or a table); with ties use mid-ranks.",
       "## Typical mistakes",
       "Leaving the observed split out of the count (a p-value cannot be $0$); permuting within groups instead of across them; and ranking each sample separately instead of the pooled data.",
-    ],
-  },
-  {
-    // 5. Mann-Whitney, Hodges-Lehmann and test comparison
-    workedSeed: 'np-5-worked',
-    lqId: 'np-lq-o-hl',
-    teach: [
+      "## Part 2: Mann-Whitney test, Hodges-Lehmann estimate and test comparison",
       "## Mann-Whitney statistic",
       "The Mann-Whitney statistic counts pairs: $U_1=\\#\\{(i,j):X_i>Y_j\\}$. It is tied to the rank sum $W$ of $X$ by",
       "$$U_1=W-\\frac{m(m+1)}2,\\qquad U_1+U_2=mn,$$",
@@ -94,14 +75,14 @@ const lessons: Lesson[] = [
       "## Comparing two-sample tests",
       "Simulation (normal, heavy-tailed, unequal variances) shows the pattern: for normal data the $t$ test, the permutation test and Wilcoxon are close; for heavy tails or skew the rank test keeps its size and is often much more powerful; none of these tests is reliable when the two variances are very different.",
       "## Typical mistakes",
-      "Forgetting to subtract $m(m+1)/2$ when converting $W$ to $U$; using the difference of sample medians instead of the median of pairwise differences; and taking the $k$-th order statistic from the pooled sample instead of the differences.",
+      "Forgetting to subtract $m(m+1)/2$ when converting $W$ to $U$; using the difference of sample medians instead of the median of pairwise differences; and taking the $k$-th order statistic from the pooled sample instead of the differences."
     ],
   },
   {
-    // 6. Tests for scale
-    workedSeed: 'np-6-worked',
-    lqId: 'np-lq-p-scale',
+    // 3. Two-sample scale and distribution: Siegel-Tukey, Ansari-Bradley and Kolmogorov-Smirnov
+    samples: [{"workedSeed":"np-3-1-worked","lqId":"np-lq-p-scale"},{"workedSeed":"np-3-2-worked","lqId":"np-lq-c-ks"}],
     teach: [
+      "## Part 1: Tests for scale: Siegel-Tukey, Ansari-Bradley and deviances",
       "## The problem",
       "The location tests so far detect that one treatment tends to give larger values. Sometimes the variability matters instead, for example two machines filling cans to the same centre but with different spread. Model $X_i=\\mu+\\sigma_1\\varepsilon_{i1}$ and $Y_j=\\mu+\\sigma_2\\varepsilon_{j2}$ with the same location $\\mu$, and test $H_0:\\sigma_1=\\sigma_2$.",
       "## Siegel-Tukey test",
@@ -114,13 +95,7 @@ const lessons: Lesson[] = [
       "with a permutation null distribution. The $F$ test for a variance ratio is unreliable for non-normal data because it rejects a true null far too often.",
       "## Typical mistakes",
       "Running Siegel-Tukey or Ansari-Bradley when the locations differ (subtract the sample medians first); using ordinary ranks; and using the normal-theory $F$ test for heavy-tailed data.",
-    ],
-  },
-  {
-    // 7. Kolmogorov-Smirnov and goodness of fit
-    workedSeed: 'np-7-worked',
-    lqId: 'np-lq-c-ks',
-    teach: [
+      "## Part 2: Kolmogorov-Smirnov tests and goodness of fit",
       "## The question",
       "Does a sample come from a completely specified continuous distribution $F_0$ (one-sample), or do two samples come from the same distribution (two-sample)? Compare empirical distribution functions $F_n(x)=\\frac1n\\#\\{i:X_i\\le x\\}$.",
       "## One-sample Kolmogorov-Smirnov",
@@ -132,14 +107,14 @@ const lessons: Lesson[] = [
       "## Other tests",
       "Anderson-Darling weights the squared distance more heavily in the tails, so it is more powerful against tail alternatives. The chi-square test groups the data into $k$ cells and uses $\\sum(O_j-E_j)^2/E_j\\approx\\chi^2_{k-1-m}$, where $m$ counts parameters estimated from the grouped data; it also works for discrete data.",
       "## Typical mistakes",
-      "Computing only $D^+$ or only $D^-$; using $i/n$ in both formulas; and using the standard critical values when the parameters of $F_0$ were estimated from the same data (the test is then too conservative).",
+      "Computing only $D^+$ or only $D^-$; using $i/n$ in both formulas; and using the standard critical values when the parameters of $F_0$ were estimated from the same data (the test is then too conservative)."
     ],
   },
   {
-    // 8. K-sample methods
-    workedSeed: 'np-8-worked',
-    lqId: 'np-lq-q-kw',
+    // 4. K samples: Kruskal-Wallis, multiple comparisons and ordered alternatives
+    samples: [{"workedSeed":"np-4-1-worked","lqId":"np-lq-q-kw"},{"workedSeed":"np-4-2-worked","lqId":"np-lq-r-mult"}],
     teach: [
+      "## Part 1: K-sample methods: permutation F test and Kruskal-Wallis",
       "## Parametric starting point and permutation $F$ test",
       "One-way ANOVA compares $k$ group means with $F=\\mathrm{MSB}/\\mathrm{MSE}$, assuming normal errors with equal variance. The permutation $F$ test keeps the statistic but builds its null distribution by relabelling: compute $F_{\\text{obs}}$, recompute $F$ for all (or a random sample of the) $N!/(n_1!\\cdots n_k!)$ ways of assigning the observations to groups of the original sizes, and take the fraction with $F\\ge F_{\\text{obs}}$.",
       "## Kruskal-Wallis test",
@@ -151,13 +126,7 @@ const lessons: Lesson[] = [
       "$$C=1-\\frac{\\sum_{\\text{ties}}(t^3-t)}{N^3-N},\\qquad KW_{\\text{ties}}=\\frac{KW}{C}.$$",
       "## Typical mistakes",
       "Ranking within groups; using $k$ instead of $k-1$ degrees of freedom; and multiplying by $C$ instead of dividing.",
-    ],
-  },
-  {
-    // 9. Multiple comparisons and ordered alternatives
-    workedSeed: 'np-9-worked',
-    lqId: 'np-lq-r-mult',
-    teach: [
+      "## Part 2: Multiple comparisons and ordered alternatives",
       "## The multiple comparison problem",
       "An omnibus test says some groups differ but not which. Running all $k(k-1)/2$ pairwise tests at level $\\alpha$ inflates the overall (family-wise) error rate: for $m$ independent true nulls the chance of at least one false rejection is $1-(1-\\alpha)^m$, above $\\alpha$ but below $m\\alpha$.",
       "## Procedures",
@@ -169,14 +138,14 @@ const lessons: Lesson[] = [
       "$$JT=\\sum_{i<j}T_{ij},\\quad T_{ij}=\\#\\{(a,b):X_{ia}<X_{jb}\\}.$$",
       "It ranges from $0$ to $\\sum_{i<j}n_in_j$. Under $H_0$ with no ties, $E(JT)=\\dfrac{N^2-\\sum n_i^2}4$ and $\\mathrm{Var}(JT)=\\dfrac{N^2(2N+3)-\\sum n_i^2(2n_i+3)}{72}$, and $z=(JT-E(JT))/\\sqrt{\\mathrm{Var}(JT)}$ is approximately normal. The exact test permutes the data.",
       "## Typical mistakes",
-      "Dividing by the number of groups instead of the number of pairs for Bonferroni; choosing the direction of the order after seeing the data; and counting $X_{ia}>X_{jb}$ when the hypothesised order is increasing.",
+      "Dividing by the number of groups instead of the number of pairs for Bonferroni; choosing the direction of the order after seeing the data; and counting $X_{ia}>X_{jb}$ when the hypothesised order is increasing."
     ],
   },
   {
-    // 10. Paired comparisons: sign and signed-rank
-    workedSeed: 'np-10-worked',
-    lqId: 'np-lq-a-signed#0,1,2,3',
+    // 5. Paired samples and blocks: signed-rank, Friedman, Page, Cochran and Kendall
+    samples: [{"workedSeed":"np-5-1-worked","lqId":"np-lq-a-signed#0,1,2,3"},{"workedSeed":"np-5-2-worked","lqId":"np-lq-s-block"}],
     teach: [
+      "## Part 1: Paired comparisons: sign and Wilcoxon signed-rank tests",
       "## The setting",
       "Paired data give differences $d_i$ (after minus before). Under $H_0$ there is no effect: the differences are centred at $0$. The parametric method is the paired $t$ test. Drop any $d_i=0$ and let $n$ be the number left.",
       "## Sign test",
@@ -187,13 +156,7 @@ const lessons: Lesson[] = [
       "For moderate $n$ use $z=\\{W^+-n(n+1)/4\\}/\\sqrt{n(n+1)(2n+1)/24}$ against the standard normal. The test uses the sizes through the ranks, so it is more powerful than the sign test, but it needs symmetry of the differences. Ties among the $|d_i|$ get mid-ranks.",
       "## Typical mistakes",
       "Ranking the signed values instead of the absolute values; including zero differences in $n$; and forgetting that the sign test counts the smaller of the two tails and doubles it.",
-    ],
-  },
-  {
-    // 11. Randomized complete blocks
-    workedSeed: 'np-11-worked',
-    lqId: 'np-lq-s-block',
-    teach: [
+      "## Part 2: Randomized complete blocks: Friedman, Page, Cochran's Q and Kendall's W",
       "## The design",
       "A randomized complete block design (RCB) applies all $k$ treatments within each of $b$ blocks (subjects, judges, batches). The parametric analysis is the two-way ANOVA $F$ test. Ranking within blocks removes block-to-block differences.",
       "## Friedman's test",
@@ -207,14 +170,14 @@ const lessons: Lesson[] = [
       "$$W=\\frac{12\\sum_i\\{R_{i+}-b(k+1)/2\\}^2}{b^2k(k^2-1)}=\\frac{FM}{b(k-1)},$$",
       "which is $1$ for perfect agreement and near $0$ when the rank sums are nearly equal.",
       "## Typical mistakes",
-      "Ranking across blocks instead of within blocks; using the wrong degrees of freedom ($k-1$, not $b-1$); and reading $W$ as a correlation that can be negative.",
+      "Ranking across blocks instead of within blocks; using the wrong degrees of freedom ($k-1$, not $b-1$); and reading $W$ as a correlation that can be negative."
     ],
   },
   {
-    // 12. Correlation and association: Pearson and Spearman
-    workedSeed: 'np-12-worked',
-    lqId: 'np-lq-d-rankcorr#0,4',
+    // 6. Association and trend: Pearson, Spearman and Kendall
+    samples: [{"workedSeed":"np-6-1-worked","lqId":"np-lq-d-rankcorr#0,4"},{"workedSeed":"np-6-2-worked","lqId":"np-lq-d-rankcorr#1,2,3"}],
     teach: [
+      "## Part 1: Correlation and association: Pearson and Spearman",
       "## Pearson correlation",
       "The Pearson correlation $r=\\sum(x_i-\\bar x)(y_i-\\bar y)/\\sqrt{\\sum(x_i-\\bar x)^2\\sum(y_i-\\bar y)^2}$ measures linear association. A perfectly monotone but curved relation can have $r$ well below $1$, and a single outlier can change $r$ a lot. A zero correlation does not mean independence.",
       "## Spearman's rank correlation",
@@ -225,13 +188,7 @@ const lessons: Lesson[] = [
       "Under independence every pairing of the ranks is equally likely, so the null distribution of $\\rho_S$ depends on $n$ only and is tabulated. For moderate $n$, $z=\\rho_S\\sqrt{n-1}$ is approximately standard normal. A small $|\\rho_S|$ only says there is no monotone association, not independence.",
       "## Typical mistakes",
       "Using the shortcut formula when there are ties (use the Pearson correlation of mid-ranks instead); computing $d_i$ from the raw values instead of the ranks; and reading a large Pearson $r$ as evidence of causation or of a straight line.",
-    ],
-  },
-  {
-    // 13. Kendall's tau and tests for trend
-    workedSeed: 'np-13-worked',
-    lqId: 'np-lq-d-rankcorr#1,2,3',
-    teach: [
+      "## Part 2: Kendall's tau and tests for trend",
       "## Kendall's tau",
       "For $n$ pairs $(X_i,Y_i)$ a pair of units $i<j$ is concordant if $X$ and $Y$ order it the same way and discordant if they order it in opposite ways. With $C$ and $D$ these counts and $\\binom n2$ pairs in total,",
       "$$\\tau=\\frac{C-D}{\\binom n2}.$$",
@@ -241,13 +198,12 @@ const lessons: Lesson[] = [
       "$$S=\\sum_{i<j}\\mathrm{sign}(x_j-x_i)=C-D,\\qquad E(S)=0,\\ \\mathrm{Var}(S)=\\frac{n(n-1)(2n+5)}{18}\\ (\\text{no ties}),$$",
       "with $z=(S\\mp1)/\\sqrt{\\mathrm{Var}(S)}$ (the continuity correction moves $S$ one unit towards $0$). A test based on Spearman's coefficient with time is called Daniels' test.",
       "## Typical mistakes",
-      "Dividing $C-D$ by $n^2$ instead of $\\binom n2$; counting a pair twice; and reading a significant Mann-Kendall statistic as evidence of a linear trend (it is a monotone trend).",
+      "Dividing $C-D$ by $n^2$ instead of $\\binom n2$; counting a pair twice; and reading a significant Mann-Kendall statistic as evidence of a linear trend (it is a monotone trend)."
     ],
   },
   {
-    // 14. The bootstrap: SE, bias, simple intervals
-    workedSeed: 'np-14-worked',
-    lqId: 'np-lq-t-bootci',
+    // 7. The bootstrap: standard errors, bias and simple intervals
+    samples: [{"workedSeed":"np-7-1-worked","lqId":"np-lq-t-bootci"}],
     teach: [
       "## The bootstrap",
       "To study the sampling distribution of $\\hat\\theta=g(X_1,\\dots,X_n)$, mimic the sampling process using the empirical cdf $\\hat F_n$ in place of $F$: draw $X^*_1,\\dots,X^*_n$ with replacement from the data, compute $\\hat\\theta^*=g(X^*_1,\\dots,X^*_n)$, and repeat $B$ times to get $\\hat\\theta^*_1,\\dots,\\hat\\theta^*_B$. The central analogy is that $\\hat\\theta^*-\\hat\\theta$ behaves like $\\hat\\theta-\\theta$.",
@@ -258,14 +214,14 @@ const lessons: Lesson[] = [
       "- Percentile interval: $\\big(\\hat\\theta^*_{\\alpha/2},\\ \\hat\\theta^*_{1-\\alpha/2}\\big)$. It is invariant to monotone transformations of $\\theta$.",
       "Here $\\hat\\theta^*_p$ is the $p$-th percentile of the replicates, the $(B+1)p$-th smallest value (interpolate if it is not an integer).",
       "## Typical mistakes",
-      "Using $B$ instead of $B-1$ in the standard error; reversing the reflection in the basic interval; and forgetting that a simple percentile of a skewed replicate distribution is not symmetric about $\\hat\\theta$.",
+      "Using $B$ instead of $B-1$ in the standard error; reversing the reflection in the basic interval; and forgetting that a simple percentile of a skewed replicate distribution is not symmetric about $\\hat\\theta$."
     ],
   },
   {
-    // 15. Bootstrap intervals: pivotal and BCa
-    workedSeed: 'np-15-worked',
-    lqId: 'np-lq-u-pivotal',
+    // 8. Bootstrap intervals (bootstrap-t, BCa), bootstrap for regression and tests
+    samples: [{"workedSeed":"np-8-1-worked","lqId":"np-lq-u-pivotal"},{"workedSeed":"np-8-2-worked","lqId":"np-lq-v-bootreg"}],
     teach: [
+      "## Part 1: Bootstrap intervals: pivotal and BCa",
       "## Pivotal quantities and the bootstrap-$t$ interval",
       "A pivotal quantity has a distribution that does not depend on the unknown parameter, for example $t=(\\bar X-\\mu)/(S/\\sqrt n)$ for normal data. Bootstrapping a studentised statistic usually gives more accurate intervals. For the mean: draw a resample, compute $t^*_b=(\\bar X^*_b-\\bar x)/(S^*_b/\\sqrt n)$, repeat $B$ times, and take the interval",
       "$$\\Big(\\bar x-t^*_{1-\\alpha/2}\\frac S{\\sqrt n},\\ \\ \\bar x-t^*_{\\alpha/2}\\frac S{\\sqrt n}\\Big),$$",
@@ -276,13 +232,7 @@ const lessons: Lesson[] = [
       "with $z_p$ the upper $p$-quantile of $N(0,1)$. The bias constant is estimated by $\\hat z_0=\\Phi^{-1}\\big(\\frac1B\\#\\{\\hat\\theta^*_b<\\hat\\theta\\}\\big)$; $a$ is estimated from jackknife values. With $z_0=a=0$ the levels are $\\alpha/2$ and $1-\\alpha/2$ and BCa is the percentile interval.",
       "## Typical mistakes",
       "Using the same percentile on both sides of the bootstrap-$t$ interval; forgetting that the percentiles are reversed; and confusing $z_0$ (bias) with $a$ (acceleration).",
-    ],
-  },
-  {
-    // 16. Bootstrap for regression, hypothesis testing, failures
-    workedSeed: 'np-16-worked',
-    lqId: 'np-lq-v-bootreg',
-    teach: [
+      "## Part 2: Bootstrap for regression, hypothesis testing and when it fails",
       "## Bootstrap for regression",
       "- Paired (case) bootstrap: resample whole pairs $(x_i,y_i)$ with replacement and refit the regression. It keeps whatever relation holds between the errors and $x$, so it is robust to non-constant variance and moderate misspecification.",
       "- Residual bootstrap: fit the model, compute residuals $e_i=y_i-\\hat\\beta_0-\\hat\\beta_1x_i$, resample the residuals with replacement as $e^*_i$, form $y^*_i=\\hat\\beta_0+\\hat\\beta_1x_i+e^*_i$ with the $x_i$ fixed, and refit. It assumes exchangeable (homoscedastic) errors and fixed predictors.",
@@ -292,14 +242,14 @@ const lessons: Lesson[] = [
       "## When the bootstrap does poorly",
       "The bootstrap needs the statistic to be smooth enough. For the sample maximum of a continuous distribution a resample contains the observed maximum with probability $1-(1-1/n)^n\\to1-e^{-1}\\approx0.632$, so the bootstrap distribution has a large atom at the observed maximum while the true distribution does not. Other failures include very small samples and heavy-tailed data with infinite variance.",
       "## Typical mistakes",
-      "Resampling the $y$ values and the $x$ values independently (this destroys the relation); resampling the data rather than the residuals in the residual bootstrap; and omitting the null adjustment in a bootstrap test.",
+      "Resampling the $y$ values and the $x$ values independently (this destroys the relation); resampling the data rather than the residuals in the residual bootstrap; and omitting the null adjustment in a bootstrap test."
     ],
   },
   {
-    // 17. Jackknife
-    workedSeed: 'np-17-worked',
-    lqId: 'np-lq-f-jackknife#0,1,2,3',
+    // 9. Jackknife and statistical functionals
+    samples: [{"workedSeed":"np-9-1-worked","lqId":"np-lq-f-jackknife#0,1,2,3"},{"workedSeed":"np-9-2-worked","lqId":"np-lq-j-functional"}],
     teach: [
+      "## Part 1: Jackknife",
       "## Leave-one-out",
       "Delete observation $i$ and recompute: $\\hat\\theta_{(i)}$, for $i=1,\\dots,n$. With $\\bar\\theta_{(\\cdot)}=\\frac1n\\sum_i\\hat\\theta_{(i)}$,",
       "$$\\widehat{\\mathrm{bias}}=(n-1)(\\bar\\theta_{(\\cdot)}-\\hat\\theta),\\qquad \\widehat{\\mathrm{SE}}=\\sqrt{\\frac{n-1}n\\sum_i(\\hat\\theta_{(i)}-\\bar\\theta_{(\\cdot)})^2}.$$",
@@ -310,13 +260,7 @@ const lessons: Lesson[] = [
       "The jackknife is deterministic and needs only $n$ recomputations, but it works for smooth statistics (means, variances, correlations) and fails for non-smooth ones such as the median. The bootstrap uses random resamples with replacement and is more flexible.",
       "## Typical mistakes",
       "Using $\\frac1n$ instead of $\\frac{n-1}n$ in the standard error; dropping the factor $(n-1)$ in the bias; and adding the bias instead of subtracting it.",
-    ],
-  },
-  {
-    // 18. Statistical functionals and the empirical distribution
-    workedSeed: 'np-18-worked',
-    lqId: 'np-lq-j-functional',
-    teach: [
+      "## Part 2: Statistical functionals and the empirical distribution",
       "## Parameters as functionals",
       "Many quantities are functions of the distribution $F$ itself: the mean $T(F)=\\int x\\,dF(x)$, the variance, a probability $P(a<X\\le b)=F(b)-F(a)$, a quantile. The plug-in estimator replaces $F$ by the empirical distribution $\\hat F_n$, which puts mass $1/n$ on each observation: $\\hat\\theta=T(\\hat F_n)$.",
       "So the plug-in mean is $\\bar x$, the plug-in variance is $\\frac1n\\sum(x_i-\\bar x)^2$ (divisor $n$, not $n-1$), and the plug-in probability is the fraction of observations in $(a,b]$.",
@@ -326,13 +270,12 @@ const lessons: Lesson[] = [
       "$$P\\Big(\\sup_x|\\hat F_n(x)-F(x)|>\\varepsilon\\Big)\\le2e^{-2n\\varepsilon^2}.$$",
       "Setting the right side equal to $\\alpha$ gives $\\varepsilon=\\sqrt{\\ln(2/\\alpha)/(2n)}$, so $\\hat F_n\\pm\\varepsilon$ is a distribution-free confidence band for all of $F$ at once. Solving the other way gives the sample size needed for a target half-width.",
       "## Typical mistakes",
-      "Using the divisor $n-1$ for the plug-in variance; taking $\\varepsilon=\\sqrt{\\ln(1/\\alpha)/(2n)}$ (the factor $2$ in $\\ln(2/\\alpha)$ matters); and evaluating $\\hat F_n(b)-\\hat F_n(a)$ with the wrong endpoint convention (it counts $a<x_i\\le b$).",
+      "Using the divisor $n-1$ for the plug-in variance; taking $\\varepsilon=\\sqrt{\\ln(1/\\alpha)/(2n)}$ (the factor $2$ in $\\ln(2/\\alpha)$ matters); and evaluating $\\hat F_n(b)-\\hat F_n(a)$ with the wrong endpoint convention (it counts $a<x_i\\le b$)."
     ],
   },
   {
-    // 19. Kernel density estimation
-    workedSeed: 'np-19-worked',
-    lqId: 'np-lq-g-kde',
+    // 10. Kernel density estimation
+    samples: [{"workedSeed":"np-10-1-worked","lqId":"np-lq-g-kde"}],
     teach: [
       "## The estimator",
       "A histogram's shape depends on arbitrary bin edges. A kernel density estimate puts a small bump on every observation and adds them up:",
@@ -343,13 +286,12 @@ const lessons: Lesson[] = [
       "## Choosing $h$ and boundaries",
       "Silverman's rule of thumb, derived for roughly normal data, is $h=1.06\\,s\\,n^{-1/5}$ with $s$ the sample standard deviation. Cross-validation chooses $h$ from the data and adapts to non-normal shapes. Near the boundary of a bounded support the estimator is biased, because part of each bump falls outside the support.",
       "## Typical mistakes",
-      "Omitting the $1/h$; forgetting that the Epanechnikov kernel is zero beyond $|u|=1$; and expecting the mean integrated squared error to fall like $n^{-1}$.",
+      "Omitting the $1/h$; forgetting that the Epanechnikov kernel is zero beyond $|u|=1$; and expecting the mean integrated squared error to fall like $n^{-1}$."
     ],
   },
   {
-    // 20. Nonparametric regression
-    workedSeed: 'np-20-worked',
-    lqId: 'np-lq-h-regression',
+    // 11. Nonparametric regression
+    samples: [{"workedSeed":"np-11-1-worked","lqId":"np-lq-h-regression"}],
     teach: [
       "## The idea",
       "Estimate $m(x)=E(Y\\mid X=x)$ without assuming a formula for $m$, by averaging the $y_i$ whose $x_i$ are near $x$.",
@@ -364,13 +306,12 @@ const lessons: Lesson[] = [
       "## Bandwidth and dimension",
       "A small $h$ gives low bias and high variance (a wiggly fit); a large $h$ gives high bias and low variance (an oversmoothed fit); it is usually chosen by cross-validation. With many predictors the neighbourhoods contain very few points (the curse of dimensionality) and the estimators degrade quickly.",
       "## Typical mistakes",
-      "Forgetting to divide by $\\sum w_i$; measuring $d_i$ from the wrong centre; and reading a fit at a point near the boundary as if it were as reliable as one in the middle.",
+      "Forgetting to divide by $\\sum w_i$; measuring $d_i$ from the wrong centre; and reading a fit at a point near the boundary as if it were as reliable as one in the middle."
     ],
   },
   {
-    // 21. Ranking data
-    workedSeed: 'np-21-worked',
-    lqId: 'np-lq-k-ranking',
+    // 12. Statistical modelling for ranking data
+    samples: [{"workedSeed":"np-12-1-worked","lqId":"np-lq-k-ranking"}],
     teach: [
       "## Ranking data",
       "Each observation is a ranking $\\pi$ of $m$ items (here $m=4$: A, B, C, D). We want a probability model on the $m!$ possible rankings.",
@@ -387,7 +328,7 @@ const lessons: Lesson[] = [
       "## Aggregating voters: Borda count",
       "Give $m-1$ points to the first-ranked item, $m-2$ to the second, ..., $0$ to the last, and add over voters. The highest total wins. With four items the points are $3,2,1,0$.",
       "## Typical mistakes",
-      "Using the Plackett-Luce denominator over all items at every stage instead of only the items not yet placed, and counting the Kendall distance as the sum of rank differences (that is closer to the Spearman distance).",
+      "Using the Plackett-Luce denominator over all items at every stage instead of only the items not yet placed, and counting the Kendall distance as the sum of rank differences (that is closer to the Spearman distance)."
     ],
   },
 ]

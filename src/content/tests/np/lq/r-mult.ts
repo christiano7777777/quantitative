@@ -37,27 +37,27 @@ export function build({ g, kc, alpha }: Params): LQInstance {
     parts: [
       {
         prompt: 'How many pairwise comparisons ' + tex('k(k-1)/2') + ' are there among the ' + tex(kc) + ' treatments? Give a whole number.',
-        answer: pairs, tolerance: tolInt, lecture: 9,
+        answer: pairs, tolerance: tolInt, lecture: 4,
         explanation: tex(kc + '\\times' + (kc - 1) + '/2=' + pairs) + '.',
       },
       {
         prompt: 'Find the Bonferroni level for each pairwise test, ' + tex('\\alpha/\\{k(k-1)/2\\}') + ' (4 decimal places; this guarantees family-wise error at most ' + tex(dec(alpha)) + ').',
-        answer: bon, tolerance: tol4, lecture: 9,
+        answer: bon, tolerance: tol4, lecture: 4,
         explanation: tex(dec(alpha) + '/' + pairs) + ' = ' + dec(bon) + '. The union bound ' + tex('P(\\cup E_j)\\le\\sum P(E_j)') + ' is what makes this work, and it is conservative when there are many pairs.',
       },
       {
         prompt: 'Find the Jonckheere-Terpstra statistic ' + tex('JT=\\sum_{i<j}T_{ij}') + ', where ' + tex('T_{ij}') + ' counts the pairs with the observation from treatment ' + tex('i') + ' smaller than the one from treatment ' + tex('j') + '. Give a whole number.',
-        answer: JT, tolerance: tolInt, lecture: 9,
+        answer: JT, tolerance: tolInt, lecture: 4,
         explanation: 'Pair counts: 1 vs 2: ' + g[0].reduce((s, a) => s + g[1].filter((b) => a < b).length, 0) + ', 1 vs 3: ' + g[0].reduce((s, a) => s + g[2].filter((b) => a < b).length, 0) + ', 2 vs 3: ' + g[1].reduce((s, a) => s + g[2].filter((b) => a < b).length, 0) + '. Their sum is ' + tex('JT=' + JT) + '.',
       },
       {
         prompt: 'Find the null mean ' + tex('E(JT)=(N^2-\\sum n_i^2)/4') + '.',
-        answer: E, tolerance: tol4, lecture: 9,
+        answer: E, tolerance: tol4, lecture: 4,
         explanation: tex('N=' + N + ',\\ \\sum n_i^2=' + s2) + ', so ' + tex('(' + N * N + '-' + s2 + ')/4') + ' = ' + dec(E) + '.',
       },
       {
         prompt: 'Find the normal approximation ' + tex('z=(JT-E(JT))/\\sqrt{\\mathrm{Var}(JT)}') + ' with ' + tex('\\mathrm{Var}(JT)=\\{N^2(2N+3)-\\sum n_i^2(2n_i+3)\\}/72') + '.',
-        answer: z, tolerance: tol4, lecture: 9,
+        answer: z, tolerance: tol4, lecture: 4,
         explanation: tex('\\mathrm{Var}(JT)=(' + N * N + '\\times' + (2 * N + 3) + '-' + sizes.reduce((s, n) => s + n * n * (2 * n + 3), 0) + ')/72=' + dec(V)) + ', so ' + tex('z=(' + JT + '-' + dec(E) + ')/' + dec(Math.sqrt(V))) + ' = ' + dec(z) + '. A large positive ' + tex('z') + ' supports an increasing order.',
       },
     ],

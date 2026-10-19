@@ -1053,34 +1053,19 @@
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
-    "title": "The decision problem",
-    "theory": "Parameter space, sample space, statistical model, action space, loss function, decision rules, the frequentist risk function, a finite motivating example",
-    "computation": "Counting decision rules and computing risk functions in a finite problem"
+    "title": "The decision problem, admissibility and minimax rules",
+    "theory": "Parameter space, sample space, statistical model, action space, loss function, decision rules, the frequentist risk function, a finite motivating example; Strict dominance, admissible and inadmissible rules, the minimax criterion, comparing risk functions that cross",
+    "computation": "Counting decision rules and computing risk functions in a finite problem; Dominance between rules, maximum risk, minimax rule among a class of rules"
    },
    {
-    "title": "Admissibility and minimax rules",
-    "theory": "Strict dominance, admissible and inadmissible rules, the minimax criterion, comparing risk functions that cross",
-    "computation": "Dominance between rules, maximum risk, minimax rule among a class of rules"
+    "title": "Unbiased and Bayes rules, randomised rules and the risk set",
+    "theory": "Unbiased decision rules (and unbiased estimators as a special case), prior weights, Bayes risk, the Bayes rule found by minimising the posterior expected loss; Randomised decision rules, convexity of the risk set, lower boundary and admissible rules, minimax and Bayes rules from the risk set",
+    "computation": "Bayes risk, posterior probabilities and Bayes actions in a finite problem, checking unbiasedness; Risk of a mixture of two rules, the equalising mixture, prior weights for which two rules tie"
    },
    {
-    "title": "Unbiased rules and Bayes rules",
-    "theory": "Unbiased decision rules (and unbiased estimators as a special case), prior weights, Bayes risk, the Bayes rule found by minimising the posterior expected loss",
-    "computation": "Bayes risk, posterior probabilities and Bayes actions in a finite problem, checking unbiasedness"
-   },
-   {
-    "title": "Randomised rules and the risk set",
-    "theory": "Randomised decision rules, convexity of the risk set, lower boundary and admissible rules, minimax and Bayes rules from the risk set",
-    "computation": "Risk of a mixture of two rules, the equalising mixture, prior weights for which two rules tie"
-   },
-   {
-    "title": "From prior to posterior",
-    "theory": "Prior and posterior probability functions, conjugate updating, the expected posterior loss and the Bayesian decision",
-    "computation": "Posterior distributions, posterior means, variances and shrinkage weights"
-   },
-   {
-    "title": "Bayesian inference: estimation and testing",
-    "theory": "Point estimation under squared and absolute error loss, Bayesian hypothesis testing with unequal losses, posterior odds",
-    "computation": "Posterior means and odds, posterior probability of a hypothesis, expected posterior losses of the two actions"
+    "title": "The Bayesian approach: prior to posterior, estimation and testing",
+    "theory": "Prior and posterior probability functions, conjugate updating, the expected posterior loss and the Bayesian decision; Point estimation under squared and absolute error loss, Bayesian hypothesis testing with unequal losses, posterior odds",
+    "computation": "Posterior distributions, posterior means, variances and shrinkage weights; Posterior means and odds, posterior probability of a hypothesis, expected posterior losses of the two actions"
    },
    {
     "title": "Bayesian intervals, prediction and nuisance parameters",
@@ -1088,34 +1073,19 @@
     "computation": "Marginals from a joint posterior, smallest sets, predictive probabilities, posterior means"
    },
    {
-    "title": "Exponential families",
-    "theory": "Definition, natural parameter and natural statistic, natural parameter space, i.i.d. samples, normal and Poisson examples",
-    "computation": "Identifying natural parameters and natural statistics, moments of the natural statistic"
+    "title": "Exponential families and their natural statistic",
+    "theory": "Definition, natural parameter and natural statistic, natural parameter space, i.i.d. samples, normal and Poisson examples; The natural statistic is again of exponential family form, conditional distributions of parts of the natural statistic, removing a nuisance parameter by conditioning",
+    "computation": "Identifying natural parameters and natural statistics, moments of the natural statistic; Conditional distribution of one Poisson total given the grand total, conditional p-values"
    },
    {
-    "title": "Distributional properties of the natural statistic",
-    "theory": "The natural statistic is again of exponential family form, conditional distributions of parts of the natural statistic, removing a nuisance parameter by conditioning",
-    "computation": "Conditional distribution of one Poisson total given the grand total, conditional p-values"
+    "title": "Sufficiency, minimal sufficiency and the likelihood principle",
+    "theory": "Information in data, comparing statistics, sufficient statistics and the factorisation theorem, the likelihood function and its equivalent forms; Minimal sufficient statistics and the likelihood-ratio characterisation, exponential families, the likelihood principle, ancillary statistics",
+    "computation": "Finding sufficient statistics and checking sufficiency through conditional distributions; Likelihood ratios for pairs of samples, maximum of a uniform sample, comparing experiments with the same likelihood"
    },
    {
-    "title": "Sufficiency",
-    "theory": "Information in data, comparing statistics, sufficient statistics and the factorisation theorem, the likelihood function and its equivalent forms",
-    "computation": "Finding sufficient statistics and checking sufficiency through conditional distributions"
-   },
-   {
-    "title": "Minimal sufficiency, the likelihood principle and ancillarity",
-    "theory": "Minimal sufficient statistics and the likelihood-ratio characterisation, exponential families, the likelihood principle, ancillary statistics",
-    "computation": "Likelihood ratios for pairs of samples, maximum of a uniform sample, comparing experiments with the same likelihood"
-   },
-   {
-    "title": "Completeness and UMVU estimation",
-    "theory": "Completeness, Rao-Blackwell, Lehmann-Scheffe, completeness in exponential families, Basu theorem",
-    "computation": "Finding UMVUEs"
-   },
-   {
-    "title": "Information inequality",
-    "theory": "Fisher information, Cramer-Rao bound, attainment, reparametrisation",
-    "computation": "Computing information and bounds"
+    "title": "Completeness, UMVU estimation and the information inequality",
+    "theory": "Completeness, Rao-Blackwell, Lehmann-Scheffe, completeness in exponential families, Basu theorem; Fisher information, Cramer-Rao bound, attainment, reparametrisation",
+    "computation": "Finding UMVUEs; Computing information and bounds"
    },
    {
     "title": "Likelihood and large-sample theory of the MLE",
@@ -1123,14 +1093,9 @@
     "computation": "Asymptotic variances and standard errors, Wald and score statistics"
    },
    {
-    "title": "Uniformly most powerful tests",
-    "theory": "Neyman-Pearson revisited, monotone likelihood ratio, Karlin-Rubin, randomised tests for discrete data",
-    "computation": "Constructing UMP tests, critical values, randomisation probabilities and power"
-   },
-   {
-    "title": "UMP unbiased and conditional tests",
-    "theory": "Unbiased tests, two-sided tests in exponential families, conditional tests that remove nuisance parameters, Fisher's exact test",
-    "computation": "Two-sided and conditional tests"
+    "title": "UMP, UMP unbiased and conditional tests",
+    "theory": "Neyman-Pearson revisited, monotone likelihood ratio, Karlin-Rubin, randomised tests for discrete data; Unbiased tests, two-sided tests in exponential families, conditional tests that remove nuisance parameters, Fisher's exact test",
+    "computation": "Constructing UMP tests, critical values, randomisation probabilities and power; Two-sided and conditional tests"
    },
    {
     "title": "Large-sample likelihood ratio tests and confidence sets",
@@ -1534,14 +1499,9 @@
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
-    "title": "Inference frameworks and probability",
-    "theory": "Frequentist and Bayesian philosophies, the joint distribution as prior times likelihood, marginal and conditional probability, expectations, Bayes' theorem",
-    "computation": "Posterior, evidence and predictive probability for a discrete parameter"
-   },
-   {
-    "title": "Likelihood, prior, posterior and prediction",
-    "theory": "Likelihood for an i.i.d. sample, prior and posterior, marginal likelihood, the normal-normal model, the posterior predictive distribution, non-conjugate priors",
-    "computation": "Posterior mean and variance of the normal model, predictive variance, prior pseudo-count"
+    "title": "Inference frameworks, likelihood, prior, posterior and prediction",
+    "theory": "Frequentist and Bayesian philosophies, the joint distribution as prior times likelihood, marginal and conditional probability, expectations, Bayes' theorem; Likelihood for an i.i.d. sample, prior and posterior, marginal likelihood, the normal-normal model, the posterior predictive distribution, non-conjugate priors",
+    "computation": "Posterior, evidence and predictive probability for a discrete parameter; Posterior mean and variance of the normal model, predictive variance, prior pseudo-count"
    },
    {
     "title": "Conjugate models",
@@ -1549,24 +1509,14 @@
     "computation": "Posterior parameters, posterior predictive probabilities, posterior mean and mode"
    },
    {
-    "title": "Posterior summaries and intervals",
-    "theory": "MAP versus MLE, posterior mean versus mode, credible (equal-tailed and HPD) versus confidence intervals",
-    "computation": "Posterior mean, mode, standard deviation, a 95% credible interval, posterior probabilities"
+    "title": "Posterior summaries, intervals and choosing priors",
+    "theory": "MAP versus MLE, posterior mean versus mode, credible (equal-tailed and HPD) versus confidence intervals; Elicitation, weakly informative and noninformative priors, Jeffreys prior and invariance, power priors and effective sample size, prior sensitivity",
+    "computation": "Posterior mean, mode, standard deviation, a 95% credible interval, posterior probabilities; Jeffreys posteriors, power prior parameters, effective sample sizes"
    },
    {
-    "title": "Choosing priors",
-    "theory": "Elicitation, weakly informative and noninformative priors, Jeffreys prior and invariance, power priors and effective sample size, prior sensitivity",
-    "computation": "Jeffreys posteriors, power prior parameters, effective sample sizes"
-   },
-   {
-    "title": "Monte Carlo basics",
-    "theory": "Law of large numbers, unbiasedness and variance of the Monte Carlo estimate, estimating pi, the curse of dimensionality",
-    "computation": "Standard error, required sample size, the circle estimate and its error"
-   },
-   {
-    "title": "Inverse transform sampling",
-    "theory": "Quantile function, why F(X) is uniform, exponential, Weibull, logistic, Cauchy and Laplace draws, posterior predictive sampling",
-    "computation": "Draws from a uniform value for several distributions"
+    "title": "Monte Carlo basics and inverse transform sampling",
+    "theory": "Law of large numbers, unbiasedness and variance of the Monte Carlo estimate, estimating pi, the curse of dimensionality; Quantile function, why F(X) is uniform, exponential, Weibull, logistic, Cauchy and Laplace draws, posterior predictive sampling",
+    "computation": "Standard error, required sample size, the circle estimate and its error; Draws from a uniform value for several distributions"
    },
    {
     "title": "Importance sampling",
@@ -1574,14 +1524,9 @@
     "computation": "Weights, self-normalised estimates and effective sample size"
    },
    {
-    "title": "Markov chains and stationary distributions",
-    "theory": "Markov property, transition matrix and n-step probabilities, regular chains, stationary distribution, detailed balance and reversibility, ergodic averages",
-    "computation": "Two-step probabilities, stationary distribution of a birth-death chain"
-   },
-   {
-    "title": "Metropolis-Hastings",
-    "theory": "Proposal density, acceptance probability, symmetric and independence proposals, unnormalised targets, Bayesian logistic regression, proposal scale",
-    "computation": "Acceptance probabilities and transition probabilities of a sampler"
+    "title": "Markov chains and Metropolis-Hastings",
+    "theory": "Markov property, transition matrix and n-step probabilities, regular chains, stationary distribution, detailed balance and reversibility, ergodic averages; Proposal density, acceptance probability, symmetric and independence proposals, unnormalised targets, Bayesian logistic regression, proposal scale",
+    "computation": "Two-step probabilities, stationary distribution of a birth-death chain; Acceptance probabilities and transition probabilities of a sampler"
    },
    {
     "title": "MCMC in practice: Gibbs, diagnostics and HMC",
@@ -1594,14 +1539,9 @@
     "computation": "Bayes factor, posterior model probability, WAIC from a table"
    },
    {
-    "title": "Laplace approximation",
-    "theory": "Normal approximation of the posterior at its mode, when it applies, marginal likelihood, behaviour with sample size",
-    "computation": "The Laplace mean and variance for a Beta posterior"
-   },
-   {
-    "title": "Variational Bayes",
-    "theory": "ELBO, mean-field families, coordinate ascent updates for a mixture model, comparison with MCMC",
-    "computation": "Responsibilities, updated pseudo-counts, the ELBO of a normal model"
+    "title": "Laplace approximation and variational Bayes",
+    "theory": "Normal approximation of the posterior at its mode, when it applies, marginal likelihood, behaviour with sample size; ELBO, mean-field families, coordinate ascent updates for a mixture model, comparison with MCMC",
+    "computation": "The Laplace mean and variance for a Beta posterior; Responsibilities, updated pseudo-counts, the ELBO of a normal model"
    },
    {
     "title": "Nonparametric Bayes",
@@ -1716,69 +1656,34 @@
   "proofsNote": "Proofs will be added later.",
   "lectures": [
    {
-    "title": "Parametric versus nonparametric methods",
-    "theory": "Advantages and disadvantages of distribution-free methods; when the t test fails; asymptotic relative efficiency; what a rank-based test costs",
-    "computation": "Efficiency-based sample sizes, the smallest attainable exact p-value"
+    "title": "Why nonparametric: the sign test and confidence intervals for the median and the cdf",
+    "theory": "Advantages and disadvantages of distribution-free methods; when the t test fails; asymptotic relative efficiency; what a rank-based test costs; Binomial/sign test for a median, treatment of ties and zeros, large-sample approximation, power comparison with the t test; Order statistics, distribution-free interval for a median or quantile from the binomial, confidence interval for the population cdf at a point",
+    "computation": "Efficiency-based sample sizes, the smallest attainable exact p-value; Exact and approximate sign-test p-values, probabilities under an alternative; Coverage of an order-statistic interval, empirical cdf and its standard error"
    },
    {
-    "title": "One-sample sign (binomial) test for the median",
-    "theory": "Binomial/sign test for a median, treatment of ties and zeros, large-sample approximation, power comparison with the t test",
-    "computation": "Exact and approximate sign-test p-values, probabilities under an alternative"
+    "title": "Two-sample location: permutation, Wilcoxon rank-sum, Mann-Whitney and Hodges-Lehmann",
+    "theory": "Exchangeability, exact and Monte Carlo permutation tests for two groups, Wilcoxon rank-sum statistic and its exact null distribution; Mann-Whitney U and its link to the rank sum, normal approximation, ties, Hodges-Lehmann shift estimate and confidence interval, comparing two-sample tests",
+    "computation": "Enumerating permutations, p-values, rank sums; U, z, Hodges-Lehmann estimate and interval from pairwise differences"
    },
    {
-    "title": "Confidence intervals for the median and the cdf",
-    "theory": "Order statistics, distribution-free interval for a median or quantile from the binomial, confidence interval for the population cdf at a point",
-    "computation": "Coverage of an order-statistic interval, empirical cdf and its standard error"
+    "title": "Two-sample scale and distribution: Siegel-Tukey, Ansari-Bradley and Kolmogorov-Smirnov",
+    "theory": "Equality of scale parameters, Siegel-Tukey and Ansari-Bradley ranks, ratio of mean deviances with a permutation null; One-sample and two-sample Kolmogorov-Smirnov statistics, Anderson-Darling and chi-square tests, permutation null for the two-sample statistic",
+    "computation": "Alternating-rank scores, rank sums, ratio of mean absolute deviations; KS statistic from small samples, empirical cdfs and their maximum difference"
    },
    {
-    "title": "Permutation tests and the Wilcoxon rank-sum test",
-    "theory": "Exchangeability, exact and Monte Carlo permutation tests for two groups, Wilcoxon rank-sum statistic and its exact null distribution",
-    "computation": "Enumerating permutations, p-values, rank sums"
+    "title": "K samples: Kruskal-Wallis, multiple comparisons and ordered alternatives",
+    "theory": "One-way ANOVA assumptions, permutation F test, Kruskal-Wallis statistic and chi-square approximation, adjustment for ties; Family-wise error rate, Bonferroni, Fisher LSD, Tukey HSD and their rank versions, Jonckheere-Terpstra test for ordered alternatives",
+    "computation": "Mean ranks, KW statistic, tie correction; Adjusted levels, pairwise differences of mean ranks, JT statistic and its normal approximation"
    },
    {
-    "title": "Mann-Whitney test, Hodges-Lehmann estimate and test comparison",
-    "theory": "Mann-Whitney U and its link to the rank sum, normal approximation, ties, Hodges-Lehmann shift estimate and confidence interval, comparing two-sample tests",
-    "computation": "U, z, Hodges-Lehmann estimate and interval from pairwise differences"
+    "title": "Paired samples and blocks: signed-rank, Friedman, Page, Cochran and Kendall",
+    "theory": "Paired t test, sign test for paired samples, Wilcoxon signed-rank statistic, exact null and normal approximation, zeros and ties; Friedman test, Page's test for ordered alternatives, Cochran's Q test for 0/1 data, McNemar, Kendall's coefficient of concordance",
+    "computation": "Sign counts, signed-rank statistic, exact and approximate tests; Within-block ranks, Friedman and Page statistics, Q, W"
    },
    {
-    "title": "Tests for scale: Siegel-Tukey, Ansari-Bradley and deviances",
-    "theory": "Equality of scale parameters, Siegel-Tukey and Ansari-Bradley ranks, ratio of mean deviances with a permutation null",
-    "computation": "Alternating-rank scores, rank sums, ratio of mean absolute deviations"
-   },
-   {
-    "title": "Kolmogorov-Smirnov tests and goodness of fit",
-    "theory": "One-sample and two-sample Kolmogorov-Smirnov statistics, Anderson-Darling and chi-square tests, permutation null for the two-sample statistic",
-    "computation": "KS statistic from small samples, empirical cdfs and their maximum difference"
-   },
-   {
-    "title": "K-sample methods: permutation F test and Kruskal-Wallis",
-    "theory": "One-way ANOVA assumptions, permutation F test, Kruskal-Wallis statistic and chi-square approximation, adjustment for ties",
-    "computation": "Mean ranks, KW statistic, tie correction"
-   },
-   {
-    "title": "Multiple comparisons and ordered alternatives",
-    "theory": "Family-wise error rate, Bonferroni, Fisher LSD, Tukey HSD and their rank versions, Jonckheere-Terpstra test for ordered alternatives",
-    "computation": "Adjusted levels, pairwise differences of mean ranks, JT statistic and its normal approximation"
-   },
-   {
-    "title": "Paired comparisons: sign and Wilcoxon signed-rank tests",
-    "theory": "Paired t test, sign test for paired samples, Wilcoxon signed-rank statistic, exact null and normal approximation, zeros and ties",
-    "computation": "Sign counts, signed-rank statistic, exact and approximate tests"
-   },
-   {
-    "title": "Randomized complete blocks: Friedman, Page, Cochran's Q and Kendall's W",
-    "theory": "Friedman test, Page's test for ordered alternatives, Cochran's Q test for 0/1 data, McNemar, Kendall's coefficient of concordance",
-    "computation": "Within-block ranks, Friedman and Page statistics, Q, W"
-   },
-   {
-    "title": "Correlation and association: Pearson and Spearman",
-    "theory": "Pearson correlation and its limits, Spearman rank correlation, tests of independence",
-    "computation": "Sample correlations, rank differences, Spearman's coefficient"
-   },
-   {
-    "title": "Kendall's tau and tests for trend",
-    "theory": "Concordant and discordant pairs, Kendall's tau, Mann-Kendall trend test, relation between tau and correlation",
-    "computation": "C, D, tau, the trend statistic and its null mean and variance"
+    "title": "Association and trend: Pearson, Spearman and Kendall",
+    "theory": "Pearson correlation and its limits, Spearman rank correlation, tests of independence; Concordant and discordant pairs, Kendall's tau, Mann-Kendall trend test, relation between tau and correlation",
+    "computation": "Sample correlations, rank differences, Spearman's coefficient; C, D, tau, the trend statistic and its null mean and variance"
    },
    {
     "title": "The bootstrap: standard errors, bias and simple intervals",
@@ -1786,24 +1691,14 @@
     "computation": "Interval endpoints from bootstrap replicates, bias-adjusted estimates"
    },
    {
-    "title": "Bootstrap intervals: pivotal and BCa",
-    "theory": "Bootstrap-t (studentised pivot), bias-corrected and accelerated (BCa) interval, bias and acceleration constants",
-    "computation": "Studentised intervals, BCa adjusted percentile levels"
+    "title": "Bootstrap intervals (bootstrap-t, BCa), bootstrap for regression and tests",
+    "theory": "Bootstrap-t (studentised pivot), bias-corrected and accelerated (BCa) interval, bias and acceleration constants; Paired and residual bootstrap for regression, bootstrap hypothesis tests, bootstrap failures (for example the sample maximum)",
+    "computation": "Studentised intervals, BCa adjusted percentile levels; Resampled slopes, bootstrap p-values, the probability of the observed maximum"
    },
    {
-    "title": "Bootstrap for regression, hypothesis testing and when it fails",
-    "theory": "Paired and residual bootstrap for regression, bootstrap hypothesis tests, bootstrap failures (for example the sample maximum)",
-    "computation": "Resampled slopes, bootstrap p-values, the probability of the observed maximum"
-   },
-   {
-    "title": "Jackknife",
-    "theory": "Leave-one-out estimates, jackknife bias and variance, bias correction, where the jackknife fails",
-    "computation": "Jackknife estimates, standard errors and bias-corrected estimates"
-   },
-   {
-    "title": "Statistical functionals and the empirical distribution",
-    "theory": "Empirical cdf, plug-in estimators of functionals, influence function, DKW inequality and confidence bands",
-    "computation": "Plug-in estimates and influence values"
+    "title": "Jackknife and statistical functionals",
+    "theory": "Leave-one-out estimates, jackknife bias and variance, bias correction, where the jackknife fails; Empirical cdf, plug-in estimators of functionals, influence function, DKW inequality and confidence bands",
+    "computation": "Jackknife estimates, standard errors and bias-corrected estimates; Plug-in estimates and influence values"
    },
    {
     "title": "Kernel density estimation",

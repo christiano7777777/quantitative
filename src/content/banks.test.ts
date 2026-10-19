@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { topics } from '../data'
 import { testConfig } from '../config/test.config'
 import { banks } from '../lib/content'
+import { makeRng } from '../lib/rng'
+import { findGenerator, renderPaper, selectPaper } from '../lib/test-builder'
 
 // Structural rules every MC bank must obey (CONTRIBUTING.md). These cannot check that a "correct"
 // option is true or that a distractor is false; that needs a human reader.
@@ -102,5 +104,37 @@ describe.each(Object.entries(banks))('bank %s: long-question blueprint', (_topic
     expect(new Set(used).size).toBe(used.length)
     expect([...used].sort()).toEqual([...ids].sort())
     for (const slot of bank.lqSlots) expect(slot.length).toBeGreaterThan(0)
+  })
+})
+
+describe.each(Object.entries(banks))('bank %s: final test blueprint', (topicId, bank) => {
+  it('if examSlots is present: one slot per LQ, composite questions that cover every lecture', () => {
+    if (!bank.examSlots) return
+    expect(bank.examSlots).toHaveLength(testConfig.lqCount)
+    const lectures = topics.find((t) => t.id === topicId)!.lectures.length
+    const seen = new Set<number>()
+    for (const slot of bank.examSlots) {
+      expect(slot.length).toBeGreaterThan(0)
+      const slotLectures = new Set<number>()
+      for (const id of slot) {
+        const g = findGenerator(bank, id)
+        expect(g, id).toBeDefined()
+        const inst = g!.generate(makeRng('exam-check'))
+        inst.parts.forEach((p) => { expect(p.lecture).toBeGreaterThanOrEqual(1); expect(p.lecture).toBeLessThanOrEqual(lectures); slotLectures.add(p.lecture) })
+        expect(inst.parts.length).toBeLessThanOrEqual(10)
+      }
+      slotLectures.forEach((l) => seen.add(l))
+    }
+    expect([...seen].sort((a, b) => a - b)).toEqual(Array.from({ length: lectures }, (_, i) => i + 1))
+  })
+
+  it('every final test attempt asks at least one long-question part from every lecture', () => {
+    if (!bank.examSlots) return
+    const lectures = topics.find((t) => t.id === topicId)!.lectures.length
+    for (let i = 0; i < 10; i++) {
+      const paper = renderPaper(bank, selectPaper(bank, `cover${i}`))
+      const asked = new Set(paper.lq.flatMap((q) => q.parts.map((p) => p.lecture)))
+      expect([...asked].sort((a, b) => a - b)).toEqual(Array.from({ length: lectures }, (_, k) => k + 1))
+    }
   })
 })

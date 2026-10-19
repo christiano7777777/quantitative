@@ -24,27 +24,27 @@ export function build({ n, total, a, b }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the posterior mean of ' + tex('\\lambda') + '.',
-        answer: mean, tolerance: tol4, lecture: 5,
+        answer: mean, tolerance: tol4, lecture: 3,
         explanation: 'The posterior is ' + tex('\\mathrm{Gamma}(a+\\sum x_i,\\ b+n)=\\mathrm{Gamma}(' + A + ',' + B + ')') + ' with mean ' + tex(A + '/' + B + '=' + dec(mean)) + '.',
       },
       {
         prompt: 'Find the posterior variance of ' + tex('\\lambda') + '.',
-        answer: variance, tolerance: tol4, lecture: 5,
+        answer: variance, tolerance: tol4, lecture: 3,
         explanation: tex('A/B^2=' + A + '/' + B * B + '=' + dec(variance)) + '.',
       },
       {
         prompt: 'The posterior mean is a weighted average of the prior mean ' + tex('a/b') + ' and the sample mean ' + tex('\\bar x=' + dec(total / n)) + '. Find the weight on the sample mean.',
-        answer: w, tolerance: tol4, lecture: 5,
+        answer: w, tolerance: tol4, lecture: 3,
         explanation: tex('n/(b+n)=' + n + '/' + B + '=' + dec(w)) + '; check: ' + tex(dec(w) + '\\cdot' + dec(total / n) + '+' + dec(1 - w) + '\\cdot' + dec(a / b) + '=' + dec(mean)) + '.',
       },
       {
         prompt: 'Find the posterior predictive probability that tomorrow\'s count is zero, ' + tex('\\left(\\dfrac{b+n}{b+n+1}\\right)^{a+\\sum x_i}') + '.',
-        answer: pred0, tolerance: tol4, lecture: 7,
+        answer: pred0, tolerance: tol4, lecture: 4,
         explanation: tex('E[e^{-\\lambda}\\mid x]=(B/(B+1))^{A}=(' + B + '/' + (B + 1) + ')^{' + A + '}=' + dec(pred0)) + ': the mean of ' + tex('e^{-\\lambda}') + ' under a Gamma posterior.',
       },
       {
         prompt: 'Approximating the posterior by a normal distribution, find the lower end of the 95% credible interval, posterior mean minus ' + tex('1.96') + ' posterior standard deviations.',
-        answer: lower, tolerance: tol4, lecture: 7,
+        answer: lower, tolerance: tol4, lecture: 4,
         explanation: tex(dec(mean) + '-1.96\\sqrt{' + dec(variance) + '}=' + dec(mean) + '-1.96\\cdot' + dec(Math.sqrt(variance)) + '=' + dec(lower)) + '. For large ' + tex('n') + ' this agrees with the Wald interval around ' + tex('\\bar x') + '.',
       },
     ],

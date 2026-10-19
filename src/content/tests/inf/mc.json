@@ -29,7 +29,8 @@
     "misconception": "confuses risk with the worst-case loss"
    }
   ],
-  "explanation": "Risk averages the loss over the sampling distribution of $X$, with $\\theta$ held fixed. A rule is judged by the whole function $\\theta\\mapsto R(\\theta,\\delta)$."
+  "explanation": "Risk averages the loss over the sampling distribution of $X$, with $\\theta$ held fixed. A rule is judged by the whole function $\\theta\\mapsto R(\\theta,\\delta)$.",
+  "section": 1
  },
  {
   "id": "inf-1.2",
@@ -61,7 +62,8 @@
     "misconception": "believes the decomposition needs normality"
    }
   ],
-  "explanation": "$E(\\delta-\\theta)^2=\\operatorname{Var}(\\delta)+(E\\delta-\\theta)^2$. A small bias can be worthwhile if it reduces the variance more, so unbiased rules are not always best."
+  "explanation": "$E(\\delta-\\theta)^2=\\operatorname{Var}(\\delta)+(E\\delta-\\theta)^2$. A small bias can be worthwhile if it reduces the variance more, so unbiased rules are not always best.",
+  "section": 1
  },
  {
   "id": "inf-1.3",
@@ -93,7 +95,8 @@
     "misconception": "describes the loss function"
    }
   ],
-  "explanation": "A decision rule $d:S\\to A$ chooses an action for each possible outcome $x$ of the data. Its quality is measured by the risk $R(\\theta,d)$."
+  "explanation": "A decision rule $d:S\\to A$ chooses an action for each possible outcome $x$ of the data. Its quality is measured by the risk $R(\\theta,d)$.",
+  "section": 1
  },
  {
   "id": "inf-1.4",
@@ -125,7 +128,8 @@
     "misconception": "invents a goodness-of-fit meaning"
    }
   ],
-  "explanation": "$L(\\theta,a)\\ge0$ measures the cost of action $a$ if $\\theta$ is true. Averaging it over the data gives the risk $R(\\theta,d)=E_\\theta L(\\theta,d(X))$."
+  "explanation": "$L(\\theta,a)\\ge0$ measures the cost of action $a$ if $\\theta$ is true. Averaging it over the data gives the risk $R(\\theta,d)=E_\\theta L(\\theta,d(X))$.",
+  "section": 1
  },
  {
   "id": "inf-1.5",
@@ -157,11 +161,12 @@
     "misconception": "counts orderings instead of maps"
    }
   ],
-  "explanation": "A rule specifies $d(0)$ and $d(1)$, each of which can be any of $k$ actions, so there are $k\\times k=k^2$ rules (for example $3^2=9$ when $k=3$)."
+  "explanation": "A rule specifies $d(0)$ and $d(1)$, each of which can be any of $k$ actions, so there are $k\\times k=k^2$ rules (for example $3^2=9$ when $k=3$).",
+  "section": 1
  },
  {
-  "id": "inf-2.1",
-  "lecture": 2,
+  "id": "inf-1.6",
+  "lecture": 1,
   "stem": "When is a decision rule $\\delta$ inadmissible?",
   "correct": [
    "Another rule has no larger risk anywhere and smaller risk somewhere.",
@@ -189,11 +194,12 @@
     "misconception": "confuses admissibility with a Bayes risk comparison"
    }
   ],
-  "explanation": "Admissibility is about domination across all $\\theta$. A rule beaten at some $\\theta$ and beating the other at another $\\theta$ is not dominated. Large maximum risk does not imply inadmissibility."
+  "explanation": "Admissibility is about domination across all $\\theta$. A rule beaten at some $\\theta$ and beating the other at another $\\theta$ is not dominated. Large maximum risk does not imply inadmissibility.",
+  "section": 2
  },
  {
-  "id": "inf-2.2",
-  "lecture": 2,
+  "id": "inf-1.7",
+  "lecture": 1,
   "stem": "Under squared error loss, with a model whose distributions are mutually absolutely continuous, is the constant estimator $\\delta(X)\\equiv c$ admissible for $\\theta$?",
   "correct": [
    "Yes: its risk is zero at $\\theta=c$, so any rival with no larger risk there must equal $c$.",
@@ -221,11 +227,12 @@
     "misconception": "the shrunk estimator has positive risk at $\\theta=c$"
    }
   ],
-  "explanation": "Admissibility is a weak property, satisfied by silly rules. A dominating rule would need zero risk at $\\theta=c$, and so would equal $c$ a.s. under $P_c$ and hence under all $P_\\theta$."
+  "explanation": "Admissibility is a weak property, satisfied by silly rules. A dominating rule would need zero risk at $\\theta=c$, and so would equal $c$ a.s. under $P_c$ and hence under all $P_\\theta$.",
+  "section": 2
  },
  {
-  "id": "inf-2.3",
-  "lecture": 2,
+  "id": "inf-1.8",
+  "lecture": 1,
   "stem": "What does it mean for a decision rule $\\delta^*$ to be minimax?",
   "correct": [
    "It minimises the worst-case risk, that is the supremum over $\\theta$ of $R(\\theta,\\delta)$ among all rules.",
@@ -253,11 +260,12 @@
     "misconception": "confuses minimaxity with having constant risk"
    }
   ],
-  "explanation": "Minimax guards against the worst case and is pessimistic. It can differ from the Bayes rule for any natural prior, and it need not be unique."
+  "explanation": "Minimax guards against the worst case and is pessimistic. It can differ from the Bayes rule for any natural prior, and it need not be unique.",
+  "section": 2
  },
  {
-  "id": "inf-2.4",
-  "lecture": 2,
+  "id": "inf-1.9",
+  "lecture": 1,
   "stem": "What does it mean for rule $d_1$ to strictly dominate rule $d_2$?",
   "correct": [
    "$R(\\theta,d_1)\\le R(\\theta,d_2)$ for every $\\theta$, with strict inequality for some $\\theta$.",
@@ -285,11 +293,12 @@
     "misconception": "confuses dominance with near equality"
    }
   ],
-  "explanation": "Strict dominance compares the whole risk functions: $d_1$ must be at least as good everywhere and better somewhere. A rule that is strictly dominated is inadmissible."
+  "explanation": "Strict dominance compares the whole risk functions: $d_1$ must be at least as good everywhere and better somewhere. A rule that is strictly dominated is inadmissible.",
+  "section": 2
  },
  {
-  "id": "inf-2.5",
-  "lecture": 2,
+  "id": "inf-1.10",
+  "lecture": 1,
   "stem": "Why can a minimax rule be a poor choice in practice?",
   "correct": [
    "It protects against the worst case and can do badly at likely values.",
@@ -317,11 +326,12 @@
     "misconception": "thinks minimax means ignoring the data"
    }
   ],
-  "explanation": "Minimax is a worst-case criterion. It can be very conservative, and its worst-case risk may be attained only at parameter values that are very unlikely."
+  "explanation": "Minimax is a worst-case criterion. It can be very conservative, and its worst-case risk may be attained only at parameter values that are very unlikely.",
+  "section": 2
  },
  {
-  "id": "inf-3.1",
-  "lecture": 3,
+  "id": "inf-2.1",
+  "lecture": 2,
   "stem": "How is a Bayes rule with respect to a prior $\\pi$ characterised?",
   "correct": [
    "It minimises the posterior expected loss at each observed $x$.",
@@ -349,11 +359,12 @@
     "misconception": "confuses a Bayes rule with an equaliser rule"
    }
   ],
-  "explanation": "Bayes risk equals the expected posterior expected loss, so minimising the posterior expected loss pointwise in $x$ minimises it. Maximum risk is the minimax criterion instead."
+  "explanation": "Bayes risk equals the expected posterior expected loss, so minimising the posterior expected loss pointwise in $x$ minimises it. Maximum risk is the minimax criterion instead.",
+  "section": 1
  },
  {
-  "id": "inf-3.2",
-  "lecture": 3,
+  "id": "inf-2.2",
+  "lecture": 2,
   "stem": "A Bayes rule $\\delta_\\pi$ has risk $R(\\theta,\\delta_\\pi)\\le r_\\pi$ for all $\\theta$, where $r_\\pi$ is its Bayes risk. What follows?",
   "correct": [
    "$\\delta_\\pi$ is minimax and $\\pi$ is a least favourable prior.",
@@ -381,11 +392,12 @@
     "misconception": "confuses a Bayes rule for one prior with one for all priors"
    }
   ],
-  "explanation": "For any rule $\\delta$, $\\sup_\\theta R(\\theta,\\delta)\\ge\\int R\\,d\\pi\\ge r_\\pi\\ge\\sup_\\theta R(\\theta,\\delta_\\pi)$. Hence $\\delta_\\pi$ is minimax and $\\pi$ least favourable. The converse need not hold."
+  "explanation": "For any rule $\\delta$, $\\sup_\\theta R(\\theta,\\delta)\\ge\\int R\\,d\\pi\\ge r_\\pi\\ge\\sup_\\theta R(\\theta,\\delta_\\pi)$. Hence $\\delta_\\pi$ is minimax and $\\pi$ least favourable. The converse need not hold.",
+  "section": 1
  },
  {
-  "id": "inf-3.3",
-  "lecture": 3,
+  "id": "inf-2.3",
+  "lecture": 2,
   "stem": "Which statement about Bayes rules, admissibility and minimaxity is correct?",
   "correct": [
    "A unique Bayes rule for a proper prior is admissible.",
@@ -413,11 +425,12 @@
     "misconception": "invents a condition"
    }
   ],
-  "explanation": "A dominating rule would have Bayes risk no larger, contradicting uniqueness. The converse fails: admissible rules may be only limits of Bayes rules (for example $\\bar X$ for a normal mean)."
+  "explanation": "A dominating rule would have Bayes risk no larger, contradicting uniqueness. The converse fails: admissible rules may be only limits of Bayes rules (for example $\\bar X$ for a normal mean).",
+  "section": 1
  },
  {
-  "id": "inf-3.4",
-  "lecture": 3,
+  "id": "inf-2.4",
+  "lecture": 2,
   "stem": "How is the Bayes risk of a rule $d$ with respect to a prior $\\pi$ defined?",
   "correct": [
    "It is the risk $R(\\theta,d)$ averaged over $\\theta$ with the prior weights.",
@@ -445,11 +458,12 @@
     "misconception": "fixes the parameter instead of averaging"
    }
   ],
-  "explanation": "The Bayes risk reduces the risk function to one number by averaging it over the prior. A Bayes rule minimises $r(\\pi,d)$, and can be found by minimising the posterior expected loss at each $x$."
+  "explanation": "The Bayes risk reduces the risk function to one number by averaging it over the prior. A Bayes rule minimises $r(\\pi,d)$, and can be found by minimising the posterior expected loss at each $x$.",
+  "section": 1
  },
  {
-  "id": "inf-3.5",
-  "lecture": 3,
+  "id": "inf-2.5",
+  "lecture": 2,
   "stem": "In what sense is an unbiased decision rule unbiased?",
   "correct": [
    "The loss measured against $\\theta$ is smallest when the data come from $\\theta$: $E_{\\theta'}L(\\theta,d(X))\\ge R(\\theta,d)$.",
@@ -477,11 +491,12 @@
     "misconception": "claims zero loss under the truth"
    }
   ],
-  "explanation": "For squared error loss, a rule is unbiased in this sense iff $E_\\theta d(X)=\\theta$, that is, iff $d$ is an unbiased estimator."
+  "explanation": "For squared error loss, a rule is unbiased in this sense iff $E_\\theta d(X)=\\theta$, that is, iff $d$ is an unbiased estimator.",
+  "section": 1
  },
  {
-  "id": "inf-4.1",
-  "lecture": 4,
+  "id": "inf-2.6",
+  "lecture": 2,
   "stem": "Under which condition can randomised rules be dispensed with, in the sense that some non-randomised rule has risk no larger?",
   "correct": [
    "When the loss $L(\\theta,a)$ is convex in the action $a$, by Jensen's inequality.",
@@ -509,11 +524,12 @@
     "misconception": "invents a condition on the sample space"
    }
   ],
-  "explanation": "For convex loss, replacing a random action by its mean does not increase expected loss (Jensen). With 0-1 loss the action set is not convex, which is why randomised tests are needed."
+  "explanation": "For convex loss, replacing a random action by its mean does not increase expected loss (Jensen). With 0-1 loss the action set is not convex, which is why randomised tests are needed.",
+  "section": 2
  },
  {
-  "id": "inf-4.2",
-  "lecture": 4,
+  "id": "inf-2.7",
+  "lecture": 2,
   "stem": "What is the risk set when there are two parameter values $\\theta_1,\\theta_2$?",
   "correct": [
    "All risk pairs achievable by rules, randomised ones included.",
@@ -541,11 +557,12 @@
     "misconception": "confuses the risk set with priors"
    }
   ],
-  "explanation": "Each rule is a point $(R(\\theta_1,d),R(\\theta_2,d))$ in the plane; with randomised rules included the set is convex."
+  "explanation": "Each rule is a point $(R(\\theta_1,d),R(\\theta_2,d))$ in the plane; with randomised rules included the set is convex.",
+  "section": 2
  },
  {
-  "id": "inf-4.3",
-  "lecture": 4,
+  "id": "inf-2.8",
+  "lecture": 2,
   "stem": "Why is the risk set convex?",
   "correct": [
    "Mixing two rules mixes their risk points in the same way.",
@@ -573,11 +590,12 @@
     "misconception": "misdescribes the shape of the boundary"
    }
   ],
-  "explanation": "For randomised $d=d_i$ with probability $p_i$, $R(\\theta,d)=\\sum_ip_iR(\\theta,d_i)$. So mixtures of risk points are risk points, which is convexity."
+  "explanation": "For randomised $d=d_i$ with probability $p_i$, $R(\\theta,d)=\\sum_ip_iR(\\theta,d_i)$. So mixtures of risk points are risk points, which is convexity.",
+  "section": 2
  },
  {
-  "id": "inf-4.4",
-  "lecture": 4,
+  "id": "inf-2.9",
+  "lecture": 2,
   "stem": "Where are the admissible rules located on the risk set?",
   "correct": [
    "On the lower boundary: points with no other point to their lower left.",
@@ -605,11 +623,12 @@
     "misconception": "keeps only one edge"
    }
   ],
-  "explanation": "A rule is admissible iff no other point of the risk set lies in the quadrant $\\{x\\le a,\\ y\\le b\\}$ other than itself: the lower-left boundary."
+  "explanation": "A rule is admissible iff no other point of the risk set lies in the quadrant $\\{x\\le a,\\ y\\le b\\}$ other than itself: the lower-left boundary.",
+  "section": 2
  },
  {
-  "id": "inf-4.5",
-  "lecture": 4,
+  "id": "inf-2.10",
+  "lecture": 2,
   "stem": "How is a minimax rule found from the risk set?",
   "correct": [
    "Take the point where the larger risk is smallest.",
@@ -637,11 +656,12 @@
     "misconception": "describes the Bayes rule for a prior"
    }
   ],
-  "explanation": "The minimax risk is the smallest $c$ for which the set meets $\\{\\max(x,y)\\le c\\}$. The Bayes rule for prior weights $\\pi_1,\\pi_2$ comes instead from sliding a line $\\pi_1x+\\pi_2y=c$."
+  "explanation": "The minimax risk is the smallest $c$ for which the set meets $\\{\\max(x,y)\\le c\\}$. The Bayes rule for prior weights $\\pi_1,\\pi_2$ comes instead from sliding a line $\\pi_1x+\\pi_2y=c$.",
+  "section": 2
  },
  {
-  "id": "inf-5.1",
-  "lecture": 5,
+  "id": "inf-3.1",
+  "lecture": 3,
   "stem": "What is a conjugate prior for a given likelihood?",
   "correct": [
    "A prior family such that the posterior also belongs to the same family for every sample.",
@@ -669,11 +689,12 @@
     "misconception": "confuses conjugacy with properness"
    }
   ],
-  "explanation": "Conjugacy is a convenience: for example Beta priors with binomial data give Beta posteriors. It is about closure under updating, not about neutrality of the prior."
+  "explanation": "Conjugacy is a convenience: for example Beta priors with binomial data give Beta posteriors. It is about closure under updating, not about neutrality of the prior.",
+  "section": 1
  },
  {
-  "id": "inf-5.2",
-  "lecture": 5,
+  "id": "inf-3.2",
+  "lecture": 3,
   "stem": "With a $\\mathrm{Beta}(\\alpha,\\beta)$ prior and $k$ successes in $n$ Bernoulli trials, how does the posterior mean relate to the prior mean and the sample proportion?",
   "correct": [
    "An average of prior mean and $k/n$, weight $n/(\\alpha+\\beta+n)$ on data.",
@@ -701,11 +722,12 @@
     "misconception": "uses the wrong prior mean, which is $\\alpha/(\\alpha+\\beta)$"
    }
   ],
-  "explanation": "The posterior is $\\mathrm{Beta}(\\alpha+k,\\beta+n-k)$ with mean $(\\alpha+k)/(\\alpha+\\beta+n)$, a convex combination of $\\alpha/(\\alpha+\\beta)$ and $k/n$ with data weight $n/(\\alpha+\\beta+n)$."
+  "explanation": "The posterior is $\\mathrm{Beta}(\\alpha+k,\\beta+n-k)$ with mean $(\\alpha+k)/(\\alpha+\\beta+n)$, a convex combination of $\\alpha/(\\alpha+\\beta)$ and $k/n$ with data weight $n/(\\alpha+\\beta+n)$.",
+  "section": 1
  },
  {
-  "id": "inf-5.3",
-  "lecture": 5,
+  "id": "inf-3.3",
+  "lecture": 3,
   "stem": "For $X_i\\sim N(\\theta,\\sigma^2)$ with known $\\sigma^2$ and the improper flat prior $\\pi(\\theta)\\propto1$, what is the posterior?",
   "correct": [
    "A proper normal posterior with mean $\\bar x$ and variance $\\sigma^2/n$, for every $n$.",
@@ -733,11 +755,12 @@
     "misconception": "Bayes' theorem can still be applied formally"
    }
   ],
-  "explanation": "The likelihood is proportional to a normal density in $\\theta$, which integrates to a finite value, so the posterior is proper. Improper priors can give improper posteriors in other models."
+  "explanation": "The likelihood is proportional to a normal density in $\\theta$, which integrates to a finite value, so the posterior is proper. Improper priors can give improper posteriors in other models.",
+  "section": 1
  },
  {
-  "id": "inf-5.4",
-  "lecture": 5,
+  "id": "inf-3.4",
+  "lecture": 3,
   "stem": "How is the posterior $\\pi(\\theta\\mid x)$ obtained from the prior and the model?",
   "correct": [
    "It is proportional to $f(x\\mid\\theta)\\pi(\\theta)$, normalised to integrate to one.",
@@ -765,11 +788,12 @@
     "misconception": "confuses the posterior with the marginal of the data"
    }
   ],
-  "explanation": "The posterior $\\pi(\\theta\\mid x)=f(x\\mid\\theta)\\pi(\\theta)/\\int f(x\\mid\\theta')\\pi(\\theta')\\,d\\theta'$. The denominator only normalises."
+  "explanation": "The posterior $\\pi(\\theta\\mid x)=f(x\\mid\\theta)\\pi(\\theta)/\\int f(x\\mid\\theta')\\pi(\\theta')\\,d\\theta'$. The denominator only normalises.",
+  "section": 1
  },
  {
-  "id": "inf-5.5",
-  "lecture": 5,
+  "id": "inf-3.5",
+  "lecture": 3,
   "stem": "What is the Bayesian decision at the observed data $x$?",
   "correct": [
    "The action that minimises the expected posterior loss $E[L(\\theta,a)\\mid x]$.",
@@ -797,11 +821,12 @@
     "misconception": "confuses decision rules with variance"
    }
   ],
-  "explanation": "A Bayesian decision minimises $E[L(\\theta,a)\\mid x]=\\int L(\\theta,a)\\pi(\\theta\\mid x)d\\theta$. Doing this for every $x$ gives the Bayes rule."
+  "explanation": "A Bayesian decision minimises $E[L(\\theta,a)\\mid x]=\\int L(\\theta,a)\\pi(\\theta\\mid x)d\\theta$. Doing this for every $x$ gives the Bayes rule.",
+  "section": 1
  },
  {
-  "id": "inf-6.1",
-  "lecture": 6,
+  "id": "inf-3.6",
+  "lecture": 3,
   "stem": "Under absolute error loss $|\\theta-a|$, what is the Bayes estimator?",
   "correct": [
    "The posterior median of $\\theta$ given the data.",
@@ -829,11 +854,12 @@
     "misconception": "confuses the centre of an interval with a Bayes estimator"
    }
   ],
-  "explanation": "Squared error gives the posterior mean, absolute error the posterior median and 0-1 loss the posterior mode. They coincide only for symmetric unimodal posteriors."
+  "explanation": "Squared error gives the posterior mean, absolute error the posterior median and 0-1 loss the posterior mode. They coincide only for symmetric unimodal posteriors.",
+  "section": 2
  },
  {
-  "id": "inf-6.2",
-  "lecture": 6,
+  "id": "inf-3.7",
+  "lecture": 3,
   "stem": "Under squared error loss, which summary of the posterior is the Bayesian estimate?",
   "correct": [
    "The posterior mean $E[\\theta\\mid x]$.",
@@ -861,11 +887,12 @@
     "misconception": "gives a measure of spread, not a location"
    }
   ],
-  "explanation": "$E[(\\theta-a)^2\\mid x]$ is minimised at $a=E[\\theta\\mid x]$, and its minimum is the posterior variance."
+  "explanation": "$E[(\\theta-a)^2\\mid x]$ is minimised at $a=E[\\theta\\mid x]$, and its minimum is the posterior variance.",
+  "section": 2
  },
  {
-  "id": "inf-6.3",
-  "lecture": 6,
+  "id": "inf-3.8",
+  "lecture": 3,
   "stem": "In a Bayesian test of $H_0$ against $H_1$ with loss $L_0$ for rejecting a true $H_0$ and $L_1$ for accepting a false $H_0$, when is $H_0$ rejected?",
   "correct": [
    "When $P(H_1\\mid x)>L_0/(L_0+L_1)$.",
@@ -893,11 +920,12 @@
     "misconception": "uses prior instead of posterior odds"
    }
   ],
-  "explanation": "Rejecting costs $L_0P(H_0\\mid x)$ in expectation and accepting costs $L_1P(H_1\\mid x)$; reject iff the first is smaller, that is $P(H_1\\mid x)>L_0/(L_0+L_1)$."
+  "explanation": "Rejecting costs $L_0P(H_0\\mid x)$ in expectation and accepting costs $L_1P(H_1\\mid x)$; reject iff the first is smaller, that is $P(H_1\\mid x)>L_0/(L_0+L_1)$.",
+  "section": 2
  },
  {
-  "id": "inf-6.4",
-  "lecture": 6,
+  "id": "inf-3.9",
+  "lecture": 3,
   "stem": "What do the posterior odds of $H_0$ compare?",
   "correct": [
    "The posterior probability of $H_0$ with that of $H_1$: $P(H_0\\mid x)/P(H_1\\mid x)$.",
@@ -925,11 +953,12 @@
     "misconception": "describes error rates"
    }
   ],
-  "explanation": "Posterior odds $=$ prior odds $\\times$ likelihood ratio (Bayes factor). They are a ratio of posterior probabilities, not of likelihoods."
+  "explanation": "Posterior odds $=$ prior odds $\\times$ likelihood ratio (Bayes factor). They are a ratio of posterior probabilities, not of likelihoods.",
+  "section": 2
  },
  {
-  "id": "inf-6.5",
-  "lecture": 6,
+  "id": "inf-3.10",
+  "lecture": 3,
   "stem": "Why can the posterior mean of the odds $\\theta/(1-\\theta)$ differ from the odds of the posterior mean?",
   "correct": [
    "The odds are a nonlinear function of $\\theta$, and in general $E[g(\\theta)\\mid x]\\ne g(E[\\theta\\mid x])$.",
@@ -957,11 +986,12 @@
     "misconception": "gets the direction of Jensen's inequality wrong"
    }
   ],
-  "explanation": "The odds $\\theta/(1-\\theta)$ are convex in $\\theta$, so by Jensen $E[\\theta/(1-\\theta)\\mid x]\\ge E[\\theta\\mid x]/(1-E[\\theta\\mid x])$. For a $\\mathrm{Beta}(A,B)$ posterior the mean odds are $A/(B-1)$."
+  "explanation": "The odds $\\theta/(1-\\theta)$ are convex in $\\theta$, so by Jensen $E[\\theta/(1-\\theta)\\mid x]\\ge E[\\theta\\mid x]/(1-E[\\theta\\mid x])$. For a $\\mathrm{Beta}(A,B)$ posterior the mean odds are $A/(B-1)$.",
+  "section": 2
  },
  {
-  "id": "inf-7.1",
-  "lecture": 7,
+  "id": "inf-4.1",
+  "lecture": 4,
   "stem": "How does a 95% credible interval differ from a 95% confidence interval?",
   "correct": [
    "Credible is a probability for $\\theta$ given the data; confidence is long-run coverage.",
@@ -989,11 +1019,12 @@
     "misconception": "credible intervals are exact in any sample size"
    }
   ],
-  "explanation": "The credible interval treats $\\theta$ as random given the data; the confidence interval treats the data as random for fixed $\\theta$. Credible intervals need not have exact frequentist coverage."
+  "explanation": "The credible interval treats $\\theta$ as random given the data; the confidence interval treats the data as random for fixed $\\theta$. Credible intervals need not have exact frequentist coverage.",
+  "section": 1
  },
  {
-  "id": "inf-7.2",
-  "lecture": 7,
+  "id": "inf-4.2",
+  "lecture": 4,
   "stem": "What does the Bernstein-von Mises theorem say about the posterior in regular models with a prior positive near the true value?",
   "correct": [
    "The posterior is about $N(\\hat\\theta,1/\\{nI_1(\\hat\\theta)\\})$ for large $n$.",
@@ -1021,11 +1052,12 @@
     "misconception": "the prior's influence vanishes"
    }
   ],
-  "explanation": "Under regularity, the posterior is asymptotically normal around the MLE with variance $1/(nI)$. Prior influence vanishes, so credible intervals have asymptotically correct frequentist coverage."
+  "explanation": "Under regularity, the posterior is asymptotically normal around the MLE with variance $1/(nI)$. Prior influence vanishes, so credible intervals have asymptotically correct frequentist coverage.",
+  "section": 1
  },
  {
-  "id": "inf-7.3",
-  "lecture": 7,
+  "id": "inf-4.3",
+  "lecture": 4,
   "stem": "How is the posterior predictive distribution of a future $Y$ obtained?",
   "correct": [
    "Average $g(y\\mid\\theta,x)$ over the posterior $\\pi(\\theta\\mid x)$.",
@@ -1053,11 +1085,12 @@
     "misconception": "updates twice with the same data"
    }
   ],
-  "explanation": "$g(y\\mid x)=\\int g(y\\mid\\theta,x)\\pi(\\theta\\mid x)\\,d\\theta$. It is wider than the plug-in distribution because it includes uncertainty about $\\theta$."
+  "explanation": "$g(y\\mid x)=\\int g(y\\mid\\theta,x)\\pi(\\theta\\mid x)\\,d\\theta$. It is wider than the plug-in distribution because it includes uncertainty about $\\theta$.",
+  "section": 1
  },
  {
-  "id": "inf-7.4",
-  "lecture": 7,
+  "id": "inf-4.4",
+  "lecture": 4,
   "stem": "What characterises the shortest interval with posterior probability $1-\\alpha$ for a unimodal posterior?",
   "correct": [
    "Its end points $a,b$ have equal posterior density, $\\pi(a\\mid x)=\\pi(b\\mid x)$, and it has probability $1-\\alpha$.",
@@ -1085,11 +1118,12 @@
     "misconception": "mislocates the density condition"
    }
   ],
-  "explanation": "Minimising the length $b-a$ subject to $P(a\\le\\theta\\le b\\mid x)=1-\\alpha$ gives equal density at the end points; for a symmetric unimodal posterior this equals the equal-tailed interval."
+  "explanation": "Minimising the length $b-a$ subject to $P(a\\le\\theta\\le b\\mid x)=1-\\alpha$ gives equal density at the end points; for a symmetric unimodal posterior this equals the equal-tailed interval.",
+  "section": 1
  },
  {
-  "id": "inf-7.5",
-  "lecture": 7,
+  "id": "inf-4.5",
+  "lecture": 4,
   "stem": "How is a nuisance parameter dealt with in the Bayesian approach?",
   "correct": [
    "Integrate it out of the joint posterior to get the marginal posterior of the parameter of interest.",
@@ -1117,11 +1151,12 @@
     "misconception": "describes the frequentist conditioning approach"
    }
   ],
-  "explanation": "$\\pi(\\theta_1\\mid x)=\\int\\pi(\\theta_1,\\theta_2\\mid x)\\,d\\theta_2$. The uncertainty about the nuisance parameter is carried into the answer."
+  "explanation": "$\\pi(\\theta_1\\mid x)=\\int\\pi(\\theta_1,\\theta_2\\mid x)\\,d\\theta_2$. The uncertainty about the nuisance parameter is carried into the answer.",
+  "section": 1
  },
  {
-  "id": "inf-8.1",
-  "lecture": 8,
+  "id": "inf-5.1",
+  "lecture": 5,
   "stem": "Why is $U(0,\\theta)$ not an exponential family in $\\theta$?",
   "correct": [
    "Its support $(0,\\theta)$ depends on $\\theta$, which a density $h(x)\\exp\\{\\eta(\\theta)T(x)-A(\\theta)\\}$ cannot produce.",
@@ -1149,11 +1184,12 @@
     "misconception": "the mean exists; support is the real issue"
    }
   ],
-  "explanation": "The exponential-family form has the same support for all $\\theta$. For $U(0,\\theta)$ the sample maximum is sufficient, but the support changes, so it is not in the family."
+  "explanation": "The exponential-family form has the same support for all $\\theta$. For $U(0,\\theta)$ the sample maximum is sufficient, but the support changes, so it is not in the family.",
+  "section": 1
  },
  {
-  "id": "inf-8.2",
-  "lecture": 8,
+  "id": "inf-5.2",
+  "lecture": 5,
   "stem": "When is a family of probability functions an exponential family?",
   "correct": [
    "When $f$ is $h(x)\\exp\\{\\sum\\eta_jt_j(x)\\}$ and the support is free of $\\theta$.",
@@ -1181,11 +1217,12 @@
     "misconception": "invents a polynomial condition"
    }
   ],
-  "explanation": "An exponential family has a density of the form $h(x)\\exp\\{\\sum\\eta_jt_j(x)-A(\\eta)\\}$ with support free of the parameter. The $U(0,\\theta)$ and Cauchy families are not of this form."
+  "explanation": "An exponential family has a density of the form $h(x)\\exp\\{\\sum\\eta_jt_j(x)-A(\\eta)\\}$ with support free of the parameter. The $U(0,\\theta)$ and Cauchy families are not of this form.",
+  "section": 1
  },
  {
-  "id": "inf-8.3",
-  "lecture": 8,
+  "id": "inf-5.3",
+  "lecture": 5,
   "stem": "What are the natural statistic and the natural parameter of a Poisson($\\lambda$) observation?",
   "correct": [
    "$t(x)=x$ and $\\eta=\\ln\\lambda$.",
@@ -1213,11 +1250,12 @@
     "misconception": "squares both"
    }
   ],
-  "explanation": "$f(x\\mid\\lambda)=\\frac1{x!}\\exp\\{x\\ln\\lambda-\\lambda\\}$, so $\\eta=\\ln\\lambda$, $t(x)=x$, $h(x)=1/x!$, and $A(\\eta)=e^\\eta$."
+  "explanation": "$f(x\\mid\\lambda)=\\frac1{x!}\\exp\\{x\\ln\\lambda-\\lambda\\}$, so $\\eta=\\ln\\lambda$, $t(x)=x$, $h(x)=1/x!$, and $A(\\eta)=e^\\eta$.",
+  "section": 1
  },
  {
-  "id": "inf-8.4",
-  "lecture": 8,
+  "id": "inf-5.4",
+  "lecture": 5,
   "stem": "What is the natural parameter of the normal family $N(\\mu,\\sigma^2)$ with natural statistic $(x^2,x)$?",
   "correct": [
    "$\\eta=(-1/(2\\sigma^2),\\ \\mu/\\sigma^2)$.",
@@ -1245,11 +1283,12 @@
     "misconception": "reduces the dimension to one"
    }
   ],
-  "explanation": "$-(x-\\mu)^2/(2\\sigma^2)=-\\frac{x^2}{2\\sigma^2}+\\frac{\\mu x}{\\sigma^2}-\\frac{\\mu^2}{2\\sigma^2}$, so $\\eta_1=-1/(2\\sigma^2)$ and $\\eta_2=\\mu/\\sigma^2$."
+  "explanation": "$-(x-\\mu)^2/(2\\sigma^2)=-\\frac{x^2}{2\\sigma^2}+\\frac{\\mu x}{\\sigma^2}-\\frac{\\mu^2}{2\\sigma^2}$, so $\\eta_1=-1/(2\\sigma^2)$ and $\\eta_2=\\mu/\\sigma^2$.",
+  "section": 1
  },
  {
-  "id": "inf-8.5",
-  "lecture": 8,
+  "id": "inf-5.5",
+  "lecture": 5,
   "stem": "Why is the Cauchy family not an exponential family?",
   "correct": [
    "Its log density is not a finite sum of such terms.",
@@ -1277,11 +1316,12 @@
     "misconception": "claims the density is discontinuous"
    }
   ],
-  "explanation": "$\\ln f=-\\ln\\pi-\\ln\\{1+(x-\\theta)^2\\}$ mixes $x$ and $\\theta$ in a way that cannot be written $\\sum\\eta_j(\\theta)t_j(x)$ with a finite sum; note that the normal location family is of exponential form."
+  "explanation": "$\\ln f=-\\ln\\pi-\\ln\\{1+(x-\\theta)^2\\}$ mixes $x$ and $\\theta$ in a way that cannot be written $\\sum\\eta_j(\\theta)t_j(x)$ with a finite sum; note that the normal location family is of exponential form.",
+  "section": 1
  },
  {
-  "id": "inf-9.1",
-  "lecture": 9,
+  "id": "inf-5.6",
+  "lecture": 5,
   "stem": "Let $X_1,\\dots,X_n$ be an i.i.d. sample from a full-rank exponential family with natural statistic $T$. What can be said about $\\sum_i T(X_i)$?",
   "correct": [
    "It is a minimal sufficient statistic for the natural parameter, and it is also complete.",
@@ -1309,11 +1349,12 @@
     "misconception": "restricts completeness to the normal family"
    }
   ],
-  "explanation": "For full-rank exponential families $\\sum T(X_i)$ is complete and sufficient, hence minimal sufficient. Completeness rests on uniqueness of Laplace transforms and needs an open natural parameter set."
+  "explanation": "For full-rank exponential families $\\sum T(X_i)$ is complete and sufficient, hence minimal sufficient. Completeness rests on uniqueness of Laplace transforms and needs an open natural parameter set.",
+  "section": 2
  },
  {
-  "id": "inf-9.2",
-  "lecture": 9,
+  "id": "inf-5.7",
+  "lecture": 5,
   "stem": "What is the distribution of the natural statistic $T$ of an exponential family?",
   "correct": [
    "It is again of exponential family form, with the same natural parameter.",
@@ -1341,11 +1382,12 @@
     "misconception": "rescales the natural parameter"
    }
   ],
-  "explanation": "If $f(x\\mid\\eta)=h(x)\\exp\\{\\eta\\cdot t(x)-A(\\eta)\\}$, summing over $\\{x:t(x)=t\\}$ gives $h^*(t)\\exp\\{\\eta\\cdot t-A(\\eta)\\}$: the same $\\eta$ and the same $A$."
+  "explanation": "If $f(x\\mid\\eta)=h(x)\\exp\\{\\eta\\cdot t(x)-A(\\eta)\\}$, summing over $\\{x:t(x)=t\\}$ gives $h^*(t)\\exp\\{\\eta\\cdot t-A(\\eta)\\}$: the same $\\eta$ and the same $A$.",
+  "section": 2
  },
  {
-  "id": "inf-9.3",
-  "lecture": 9,
+  "id": "inf-5.8",
+  "lecture": 5,
   "stem": "Conditional on some components of the natural statistic, what is the distribution of the remaining components?",
   "correct": [
    "It is of exponential form, with the matching sub-vector of $\\eta$.",
@@ -1373,11 +1415,12 @@
     "misconception": "claims uniformity"
    }
   ],
-  "explanation": "Conditioning on $(t_{r+1},\\dots,t_k)$ removes $\\eta_{r+1},\\dots,\\eta_k$ from the conditional law: the nuisance components disappear and only $(\\eta_1,\\dots,\\eta_r)$ remain."
+  "explanation": "Conditioning on $(t_{r+1},\\dots,t_k)$ removes $\\eta_{r+1},\\dots,\\eta_k$ from the conditional law: the nuisance components disappear and only $(\\eta_1,\\dots,\\eta_r)$ remain.",
+  "section": 2
  },
  {
-  "id": "inf-9.4",
-  "lecture": 9,
+  "id": "inf-5.9",
+  "lecture": 5,
   "stem": "For two independent Poisson samples with totals $S$ and $U$, why is the law of $S$ given $S+U=t$ useful for testing $\\lambda=\\mu$?",
   "correct": [
    "It is binomial with success probability depending only on $\\lambda/\\mu$.",
@@ -1405,11 +1448,12 @@
     "misconception": "claims the dependence on both rates remains"
    }
   ],
-  "explanation": "$S\\mid S+U=t\\sim\\mathrm{Bin}\\big(t,\\ m\\lambda/(m\\lambda+n\\mu)\\big)$ depends on $(\\lambda,\\mu)$ only through the ratio, so under $H_0:\\lambda=\\mu$ it is $\\mathrm{Bin}(t,m/(m+n))$."
+  "explanation": "$S\\mid S+U=t\\sim\\mathrm{Bin}\\big(t,\\ m\\lambda/(m\\lambda+n\\mu)\\big)$ depends on $(\\lambda,\\mu)$ only through the ratio, so under $H_0:\\lambda=\\mu$ it is $\\mathrm{Bin}(t,m/(m+n))$.",
+  "section": 2
  },
  {
-  "id": "inf-9.5",
-  "lecture": 9,
+  "id": "inf-5.10",
+  "lecture": 5,
   "stem": "Two independent Poisson samples have natural parameter $(\\ln\\lambda,\\ln\\mu)$. What is their natural statistic?",
   "correct": [
    "$(\\sum X_i,\\ \\sum Y_j)$, the two sample totals.",
@@ -1437,11 +1481,12 @@
     "misconception": "uses a product instead of the pair of totals"
    }
   ],
-  "explanation": "The joint probability function is $\\propto\\exp\\{(\\ln\\lambda)\\sum x_i+(\\ln\\mu)\\sum y_j\\}$, so the natural statistic is the pair of totals."
+  "explanation": "The joint probability function is $\\propto\\exp\\{(\\ln\\lambda)\\sum x_i+(\\ln\\mu)\\sum y_j\\}$, so the natural statistic is the pair of totals.",
+  "section": 2
  },
  {
-  "id": "inf-10.1",
-  "lecture": 10,
+  "id": "inf-6.1",
+  "lecture": 6,
   "stem": "What does the Fisher-Neyman factorization theorem say about a statistic $T(X)$?",
   "correct": [
    "$T$ is sufficient exactly when $f(x\\mid\\theta)=g(T(x),\\theta)\\,h(x)$ for some functions $g$ and $h$ with $h$ free of $\\theta$.",
@@ -1469,11 +1514,12 @@
     "misconception": "believes a sufficient statistic must match the parameter dimension"
    }
   ],
-  "explanation": "Factorization gives sufficiency: all dependence on $\\theta$ passes through $T$, and $h$ is free of $\\theta$. Dimensions need not match, and ancillarity is the opposite property."
+  "explanation": "Factorization gives sufficiency: all dependence on $\\theta$ passes through $T$, and $h$ is free of $\\theta$. Dimensions need not match, and ancillarity is the opposite property.",
+  "section": 1
  },
  {
-  "id": "inf-10.2",
-  "lecture": 10,
+  "id": "inf-6.2",
+  "lecture": 6,
   "stem": "What does it mean for a statistic $T(X)$ to be sufficient for $\\theta$?",
   "correct": [
    "The conditional law of the data given $T$ is free of $\\theta$.",
@@ -1501,11 +1547,12 @@
     "misconception": "confuses sufficiency with minimum variance"
    }
   ],
-  "explanation": "$T$ is sufficient iff $P(X=x\\mid T=t)$ is free of $\\theta$: all the information about $\\theta$ in the data is in $T$."
+  "explanation": "$T$ is sufficient iff $P(X=x\\mid T=t)$ is free of $\\theta$: all the information about $\\theta$ in the data is in $T$.",
+  "section": 1
  },
  {
-  "id": "inf-10.3",
-  "lecture": 10,
+  "id": "inf-6.3",
+  "lecture": 6,
   "stem": "Why is the full sample always sufficient, and why is that rarely useful?",
   "correct": [
    "It gives no data reduction, so it is rarely useful.",
@@ -1533,11 +1580,12 @@
     "misconception": "limits sufficiency to $n=1$"
    }
   ],
-  "explanation": "Conditional on $T(X)=X$ the data are known, so the conditional law is trivially free of $\\theta$. The aim is a $T$ of lower dimension, ideally minimal sufficient."
+  "explanation": "Conditional on $T(X)=X$ the data are known, so the conditional law is trivially free of $\\theta$. The aim is a $T$ of lower dimension, ideally minimal sufficient.",
+  "section": 1
  },
  {
-  "id": "inf-10.4",
-  "lecture": 10,
+  "id": "inf-6.4",
+  "lecture": 6,
   "stem": "For i.i.d. Bernoulli($p$) data, why is $\\sum X_i$ sufficient?",
   "correct": [
    "Given the total, all arrangements are equally likely.",
@@ -1565,11 +1613,12 @@
     "misconception": "treats the total as the parameter"
    }
   ],
-  "explanation": "$P(X=x\\mid\\sum X_i=t)=p^t(1-p)^{n-t}\\big/\\{\\binom ntp^t(1-p)^{n-t}\\}=1/\\binom nt$, which does not involve $p$."
+  "explanation": "$P(X=x\\mid\\sum X_i=t)=p^t(1-p)^{n-t}\\big/\\{\\binom ntp^t(1-p)^{n-t}\\}=1/\\binom nt$, which does not involve $p$.",
+  "section": 1
  },
  {
-  "id": "inf-10.5",
-  "lecture": 10,
+  "id": "inf-6.5",
+  "lecture": 6,
   "stem": "How can sufficiency of $T$ be checked from the likelihood?",
   "correct": [
    "The likelihood factors as $g(T(x),\\theta)\\,h(x)$.",
@@ -1597,11 +1646,12 @@
     "misconception": "invents a polynomial condition"
    }
   ],
-  "explanation": "By the factorisation theorem, $T$ is sufficient iff $f(x\\mid\\theta)=g(T(x),\\theta)h(x)$ for some $g,h$."
+  "explanation": "By the factorisation theorem, $T$ is sufficient iff $f(x\\mid\\theta)=g(T(x),\\theta)h(x)$ for some $g,h$.",
+  "section": 1
  },
  {
-  "id": "inf-11.1",
-  "lecture": 11,
+  "id": "inf-6.6",
+  "lecture": 6,
   "stem": "A statistic $S(X)$ is called ancillary for $\\theta$. What does this mean?",
   "correct": [
    "The distribution of $S(X)$ is exactly the same for every value of $\\theta$ in the parameter space.",
@@ -1629,11 +1679,12 @@
     "misconception": "confuses with data reduction by sufficiency"
    }
   ],
-  "explanation": "Ancillary means the law of $S$ does not involve $\\theta$. Ancillary statistics need not be independent of a sufficient one unless the sufficient statistic is complete (Basu)."
+  "explanation": "Ancillary means the law of $S$ does not involve $\\theta$. Ancillary statistics need not be independent of a sufficient one unless the sufficient statistic is complete (Basu).",
+  "section": 2
  },
  {
-  "id": "inf-11.2",
-  "lecture": 11,
+  "id": "inf-6.7",
+  "lecture": 6,
   "stem": "Let $X_1,\\dots,X_n$ be i.i.d. $N(\\theta,1)$ with $n\\ge2$. Which statistic is ancillary for $\\theta$?",
   "correct": [
    "$X_1-\\bar X$, since it has the $N(0,1-1/n)$ law whatever $\\theta$ is, and so is ancillary.",
@@ -1661,11 +1712,12 @@
     "misconception": "confuses sufficiency with ancillarity"
    }
   ],
-  "explanation": "Subtracting the mean removes the location: $X_1-\\bar X$ depends only on the $N(0,1)$ errors. By Basu it is independent of the complete sufficient $\\bar X$."
+  "explanation": "Subtracting the mean removes the location: $X_1-\\bar X$ depends only on the $N(0,1)$ errors. By Basu it is independent of the complete sufficient $\\bar X$.",
+  "section": 2
  },
  {
-  "id": "inf-11.3",
-  "lecture": 11,
+  "id": "inf-6.8",
+  "lecture": 6,
   "stem": "How is a minimal sufficient statistic characterised through likelihood ratios?",
   "correct": [
    "$T$ is minimal sufficient iff the ratio is free of $\\theta$ exactly when $T(x)=T(x')$.",
@@ -1693,11 +1745,12 @@
     "misconception": "confuses minimality with minimum variance"
    }
   ],
-  "explanation": "Minimal sufficiency means the coarsest sufficient summary: $x$ and $x'$ are identified exactly when the likelihood functions are proportional."
+  "explanation": "Minimal sufficiency means the coarsest sufficient summary: $x$ and $x'$ are identified exactly when the likelihood functions are proportional.",
+  "section": 2
  },
  {
-  "id": "inf-11.4",
-  "lecture": 11,
+  "id": "inf-6.9",
+  "lecture": 6,
   "stem": "What does the likelihood principle say?",
   "correct": [
    "Proportional likelihoods in $\\theta$ should give the same conclusions.",
@@ -1725,11 +1778,12 @@
     "misconception": "confuses it with a rule for choosing priors"
    }
   ],
-  "explanation": "For example, $k$ successes in $n$ trials (binomial) and $n$ trials needed for $k$ successes (negative binomial) have proportional likelihoods $p^k(1-p)^{n-k}$, so they carry the same evidence about $p$."
+  "explanation": "For example, $k$ successes in $n$ trials (binomial) and $n$ trials needed for $k$ successes (negative binomial) have proportional likelihoods $p^k(1-p)^{n-k}$, so they carry the same evidence about $p$.",
+  "section": 2
  },
  {
-  "id": "inf-11.5",
-  "lecture": 11,
+  "id": "inf-6.10",
+  "lecture": 6,
   "stem": "Which statistic is minimal sufficient for $\\theta$ in an i.i.d. $U(0,\\theta)$ sample?",
   "correct": [
    "The sample maximum $\\max_iX_i$.",
@@ -1757,11 +1811,12 @@
     "misconception": "uses the sum"
    }
   ],
-  "explanation": "$L(\\theta)=\\theta^{-n}\\mathbf 1\\{\\theta\\ge\\max x_i\\}$ depends on the data only through $\\max x_i$, and two samples with different maxima give non-proportional likelihoods."
+  "explanation": "$L(\\theta)=\\theta^{-n}\\mathbf 1\\{\\theta\\ge\\max x_i\\}$ depends on the data only through $\\max x_i$, and two samples with different maxima give non-proportional likelihoods.",
+  "section": 2
  },
  {
-  "id": "inf-12.1",
-  "lecture": 12,
+  "id": "inf-7.1",
+  "lecture": 7,
   "stem": "What does it mean for a statistic $T$ to be complete?",
   "correct": [
    "If $E_\\theta g(T)=0$ for every $\\theta$, then $g(T)=0$ with probability one under every $\\theta$.",
@@ -1789,11 +1844,12 @@
     "misconception": "misreads uniqueness of unbiased functions as equal variance"
    }
   ],
-  "explanation": "Completeness says the only unbiased estimator of zero based on $T$ is zero. It gives uniqueness of unbiased estimators that are functions of $T$."
+  "explanation": "Completeness says the only unbiased estimator of zero based on $T$ is zero. It gives uniqueness of unbiased estimators that are functions of $T$.",
+  "section": 1
  },
  {
-  "id": "inf-12.2",
-  "lecture": 12,
+  "id": "inf-7.2",
+  "lecture": 7,
   "stem": "Let $T$ be complete and sufficient and let $h(T)$ be unbiased for $g(\\theta)$. What does the Lehmann-Scheffe theorem conclude?",
   "correct": [
    "$h(T)$ is the unique UMVUE of $g(\\theta)$, having the smallest variance among all unbiased estimators.",
@@ -1821,11 +1877,12 @@
     "misconception": "confuses the UMVUE with the MLE"
    }
   ],
-  "explanation": "With completeness, Rao-Blackwell improves any unbiased estimator to a function of $T$, and completeness makes that function unique. So $h(T)$ is the best unbiased estimator."
+  "explanation": "With completeness, Rao-Blackwell improves any unbiased estimator to a function of $T$, and completeness makes that function unique. So $h(T)$ is the best unbiased estimator.",
+  "section": 1
  },
  {
-  "id": "inf-12.3",
-  "lecture": 12,
+  "id": "inf-7.3",
+  "lecture": 7,
   "stem": "Which statement about Rao-Blackwellization is correct? Here $\\delta(X)$ is unbiased for $g(\\theta)$ and $T$ is sufficient.",
   "correct": [
    "$E[\\delta\\mid T]$ is unbiased and has variance no larger than that of $\\delta$.",
@@ -1853,11 +1910,12 @@
     "misconception": "confuses Rao-Blackwellization with maximum likelihood"
    }
   ],
-  "explanation": "Sufficiency makes $E[\\delta\\mid T]$ free of $\\theta$, hence an estimator. Unbiasedness follows from the tower rule and variance does not increase by the law of total variance."
+  "explanation": "Sufficiency makes $E[\\delta\\mid T]$ free of $\\theta$, hence an estimator. Unbiasedness follows from the tower rule and variance does not increase by the law of total variance.",
+  "section": 1
  },
  {
-  "id": "inf-12.4",
-  "lecture": 12,
+  "id": "inf-7.4",
+  "lecture": 7,
   "stem": "Basu's theorem concerns a complete sufficient statistic $T$ and an ancillary statistic $S$. What does it assert?",
   "correct": [
    "$T$ and $S$ are independent under every value of $\\theta$.",
@@ -1885,11 +1943,12 @@
     "misconception": "confuses ancillary statistics with unbiased estimators"
    }
   ],
-  "explanation": "Basu gives full independence. A standard use: for normal samples with known variance, $\\bar X$ is complete sufficient and $S^2$ is ancillary, so $\\bar X$ and $S^2$ are independent."
+  "explanation": "Basu gives full independence. A standard use: for normal samples with known variance, $\\bar X$ is complete sufficient and $S^2$ is ancillary, so $\\bar X$ and $S^2$ are independent.",
+  "section": 1
  },
  {
-  "id": "inf-12.5",
-  "lecture": 12,
+  "id": "inf-7.5",
+  "lecture": 7,
   "stem": "For $X_1,\\dots,X_n$ i.i.d. Poisson($\\lambda$), why does $\\mathbf 1\\{X_1=0\\}$ help in finding the UMVUE of $e^{-\\lambda}$?",
   "correct": [
    "It is unbiased for $e^{-\\lambda}$, so conditioning it on the complete sufficient statistic $\\sum_iX_i$ gives the UMVUE.",
@@ -1917,11 +1976,12 @@
     "misconception": "confuses unbiased indicator with an MLE"
    }
   ],
-  "explanation": "The indicator is unbiased; $E[\\mathbf 1\\{X_1=0\\}\\mid\\sum X_i=s]=(1-1/n)^s$, a function of the complete sufficient statistic, hence the UMVUE. The plug-in $e^{-\\bar X}$ is biased."
+  "explanation": "The indicator is unbiased; $E[\\mathbf 1\\{X_1=0\\}\\mid\\sum X_i=s]=(1-1/n)^s$, a function of the complete sufficient statistic, hence the UMVUE. The plug-in $e^{-\\bar X}$ is biased.",
+  "section": 1
  },
  {
-  "id": "inf-13.1",
-  "lecture": 13,
+  "id": "inf-7.6",
+  "lecture": 7,
   "stem": "Under regularity conditions, which expression gives the Fisher information $I(\\theta)$ of one observation?",
   "correct": [
    "$I(\\theta)=\\operatorname{Var}_\\theta\\{\\partial_\\theta\\log f(X\\mid\\theta)\\}=-E_\\theta[\\partial^2_\\theta\\log f(X\\mid\\theta)]$.",
@@ -1949,11 +2009,12 @@
     "misconception": "confuses information with the variance of the data"
    }
   ],
-  "explanation": "Information is the variance of the score, which has mean zero, and equals the negative expected Hessian. The identity needs differentiation under the integral sign."
+  "explanation": "Information is the variance of the score, which has mean zero, and equals the negative expected Hessian. The identity needs differentiation under the integral sign.",
+  "section": 2
  },
  {
-  "id": "inf-13.2",
-  "lecture": 13,
+  "id": "inf-7.7",
+  "lecture": 7,
   "stem": "For $n$ i.i.d. observations with one-observation information $I_1(\\theta)$, what is the information $I_n(\\theta)$ in the whole sample?",
   "correct": [
    "$I_n(\\theta)=n\\,I_1(\\theta)$, since the scores of independent observations add and so do their variances.",
@@ -1981,11 +2042,12 @@
     "misconception": "turns the sum of log-likelihood terms into a power"
    }
   ],
-  "explanation": "The log-likelihood is a sum, so the score is a sum of independent terms with variance $nI_1(\\theta)$. The estimator's variance bound therefore shrinks like $1/n$."
+  "explanation": "The log-likelihood is a sum, so the score is a sum of independent terms with variance $nI_1(\\theta)$. The estimator's variance bound therefore shrinks like $1/n$.",
+  "section": 2
  },
  {
-  "id": "inf-13.3",
-  "lecture": 13,
+  "id": "inf-7.8",
+  "lecture": 7,
   "stem": "Which statement of the Cramer-Rao inequality is correct under regularity conditions?",
   "correct": [
    "Any unbiased estimator $T$ of $g(\\theta)$ satisfies $\\operatorname{Var}_\\theta(T)\\ge g'(\\theta)^2/I_n(\\theta)$.",
@@ -2013,11 +2075,12 @@
     "misconception": "forgets to square the derivative"
    }
   ],
-  "explanation": "Cauchy-Schwarz applied to $\\operatorname{Cov}(T,\\text{score})=g'(\\theta)$ gives the bound. Regularity requires a $\\theta$-free support so that integration and differentiation can be exchanged."
+  "explanation": "Cauchy-Schwarz applied to $\\operatorname{Cov}(T,\\text{score})=g'(\\theta)$ gives the bound. Regularity requires a $\\theta$-free support so that integration and differentiation can be exchanged.",
+  "section": 2
  },
  {
-  "id": "inf-13.4",
-  "lecture": 13,
+  "id": "inf-7.9",
+  "lecture": 7,
   "stem": "When does an unbiased estimator $T$ of $g(\\theta)$ attain the Cramer-Rao bound at every $\\theta$?",
   "correct": [
    "Exactly when the score equals $a(\\theta)\\{T-g(\\theta)\\}$ for some function $a(\\theta)$, i.e. equality in Cauchy-Schwarz.",
@@ -2045,11 +2108,12 @@
     "misconception": "confuses completeness with equality in Cauchy-Schwarz"
    }
   ],
-  "explanation": "Equality holds iff the score is proportional to $T-g(\\theta)$. This forces an exponential family in which $T$ estimates the mean of the natural statistic."
+  "explanation": "Equality holds iff the score is proportional to $T-g(\\theta)$. This forces an exponential family in which $T$ estimates the mean of the natural statistic.",
+  "section": 2
  },
  {
-  "id": "inf-13.5",
-  "lecture": 13,
+  "id": "inf-7.10",
+  "lecture": 7,
   "stem": "For a normal sample with unknown mean and variance, $S^2$ is the UMVUE of $\\sigma^2$. How does its variance compare with the Cramer-Rao bound for $\\sigma^2$?",
   "correct": [
    "Its variance $2\\sigma^4/(n-1)$ is strictly above the bound $2\\sigma^4/n$, so a UMVUE need not attain the bound.",
@@ -2077,11 +2141,12 @@
     "misconception": "transfers attainment from the mean to the variance"
    }
   ],
-  "explanation": "Var$(S^2)=2\\sigma^4/(n-1)$ while the bound is $2\\sigma^4/n$. Attainment needs the score to be linear in the estimator, which fails when the mean is unknown; $S^2$ is still UMVUE by Lehmann-Scheffe."
+  "explanation": "Var$(S^2)=2\\sigma^4/(n-1)$ while the bound is $2\\sigma^4/n$. Attainment needs the score to be linear in the estimator, which fails when the mean is unknown; $S^2$ is still UMVUE by Lehmann-Scheffe.",
+  "section": 2
  },
  {
-  "id": "inf-14.1",
-  "lecture": 14,
+  "id": "inf-8.1",
+  "lecture": 8,
   "stem": "Under regularity conditions, what is the asymptotic distribution of the MLE $\\hat\\theta_n$ from $n$ i.i.d. observations at the true value $\\theta_0$?",
   "correct": [
    "$\\sqrt n(\\hat\\theta_n-\\theta_0)$ converges in distribution to $N\\!\\left(0,\\,1/I_1(\\theta_0)\\right)$.",
@@ -2109,11 +2174,12 @@
     "misconception": "restricts a general theorem to the normal case"
    }
   ],
-  "explanation": "The MLE is consistent, asymptotically normal and asymptotically efficient, attaining the Cramer-Rao variance $1/\\{nI_1(\\theta_0)\\}$ in the limit. No finite-sample unbiasedness is needed."
+  "explanation": "The MLE is consistent, asymptotically normal and asymptotically efficient, attaining the Cramer-Rao variance $1/\\{nI_1(\\theta_0)\\}$ in the limit. No finite-sample unbiasedness is needed.",
+  "section": 1
  },
  {
-  "id": "inf-14.2",
-  "lecture": 14,
+  "id": "inf-8.2",
+  "lecture": 8,
   "stem": "Which of the Wald, score and likelihood ratio statistics for $H_0:\\theta=\\theta_0$ can be computed using only the fit under the null?",
   "correct": [
    "The score statistic $U(\\theta_0)^2/I_n(\\theta_0)$, which needs only the score and information under the null.",
@@ -2141,11 +2207,12 @@
     "misconception": "the Wald statistic still uses the unrestricted MLE in its numerator"
    }
   ],
-  "explanation": "Wald uses $(\\hat\\theta-\\theta_0)^2I_n(\\hat\\theta)$, the LRT uses the maximised likelihood, but the score test uses $U(\\theta_0)$ and $I_n(\\theta_0)$ only. All have a $\\chi^2_1$ limit under $H_0$."
+  "explanation": "Wald uses $(\\hat\\theta-\\theta_0)^2I_n(\\hat\\theta)$, the LRT uses the maximised likelihood, but the score test uses $U(\\theta_0)$ and $I_n(\\theta_0)$ only. All have a $\\chi^2_1$ limit under $H_0$.",
+  "section": 1
  },
  {
-  "id": "inf-14.3",
-  "lecture": 14,
+  "id": "inf-8.3",
+  "lecture": 8,
   "stem": "Neyman and Scott: $X_{i1},X_{i2}$ are independent $N(\\mu_i,\\sigma^2)$ for $i=1,\\dots,n$. The MLE of $\\sigma^2$ converges to $\\sigma^2/2$. What does this show?",
   "correct": [
    "Consistency of the MLE can fail when the nuisance parameters grow with $n$.",
@@ -2173,11 +2240,12 @@
     "misconception": "overgeneralises from a failure with growing dimension"
    }
   ],
-  "explanation": "Each $\\mu_i$ is estimated from only two observations, so the within-pair residual variance is underestimated by a factor 2 regardless of $n$. The fixed-dimension assumption fails."
+  "explanation": "Each $\\mu_i$ is estimated from only two observations, so the within-pair residual variance is underestimated by a factor 2 regardless of $n$. The fixed-dimension assumption fails.",
+  "section": 1
  },
  {
-  "id": "inf-14.4",
-  "lecture": 14,
+  "id": "inf-8.4",
+  "lecture": 8,
   "stem": "Let $g$ be differentiable with $g'(\\theta_0)\\neq0$ and let $\\hat\\theta_n$ be the MLE. What is the asymptotic distribution of $g(\\hat\\theta_n)$?",
   "correct": [
    "Approximately $N\\!\\left(g(\\theta_0),\\ g'(\\theta_0)^2/\\{nI_1(\\theta_0)\\}\\right)$, and $g(\\hat\\theta_n)$ is the MLE of $g(\\theta)$.",
@@ -2205,11 +2273,12 @@
     "misconception": "multiplies by the information instead of dividing"
    }
   ],
-  "explanation": "The delta method multiplies the variance by $g'(\\theta_0)^2$, and the MLE is invariant under reparametrization. Hence $g(\\hat\\theta_n)$ is asymptotically efficient for $g(\\theta)$."
+  "explanation": "The delta method multiplies the variance by $g'(\\theta_0)^2$, and the MLE is invariant under reparametrization. Hence $g(\\hat\\theta_n)$ is asymptotically efficient for $g(\\theta)$.",
+  "section": 1
  },
  {
-  "id": "inf-14.5",
-  "lecture": 14,
+  "id": "inf-8.5",
+  "lecture": 8,
   "stem": "For a Wald interval for $\\theta$, which choice of standard error is justified by the large-sample theory of the MLE?",
   "correct": [
    "Either observed information $-\\ell''(\\hat\\theta)$ or expected $nI_1(\\hat\\theta)$, both evaluated at the MLE.",
@@ -2237,11 +2306,12 @@
     "misconception": "confuses the height of the likelihood with its curvature"
    }
   ],
-  "explanation": "Both $-\\ell''(\\hat\\theta)/n$ and $I_1(\\hat\\theta)$ converge to $I_1(\\theta_0)$, so replacing the unknown information by either at the MLE preserves the normal limit by Slutsky."
+  "explanation": "Both $-\\ell''(\\hat\\theta)/n$ and $I_1(\\hat\\theta)$ converge to $I_1(\\theta_0)$, so replacing the unknown information by either at the MLE preserves the normal limit by Slutsky.",
+  "section": 1
  },
  {
-  "id": "inf-15.1",
-  "lecture": 15,
+  "id": "inf-9.1",
+  "lecture": 9,
   "stem": "What does the Neyman-Pearson lemma say for testing a simple $H_0:f_0$ against a simple $H_1:f_1$ at level $\\alpha$?",
   "correct": [
    "Reject for large $f_1/f_0$, with $k$ set so that the size is $\\alpha$ (randomising on ties).",
@@ -2269,11 +2339,12 @@
     "misconception": "the size constraint fixes $k$"
    }
   ],
-  "explanation": "Reject for large $f_1/f_0$; $k$ is chosen so the size equals $\\alpha$ and randomisation is used for discrete data. It is a most powerful test for simple versus simple."
+  "explanation": "Reject for large $f_1/f_0$; $k$ is chosen so the size equals $\\alpha$ and randomisation is used for discrete data. It is a most powerful test for simple versus simple.",
+  "section": 1
  },
  {
-  "id": "inf-15.2",
-  "lecture": 15,
+  "id": "inf-9.2",
+  "lecture": 9,
   "stem": "What does it mean for a level-$\\alpha$ test to be uniformly most powerful (UMP) for $H_0:\\theta\\in\\Theta_0$ against $H_1:\\theta\\in\\Theta_1$?",
   "correct": [
    "Its power at every $\\theta\\in\\Theta_1$ is at least that of every other level-$\\alpha$ test.",
@@ -2301,11 +2372,12 @@
     "misconception": "confuses with a constant power function"
    }
   ],
-  "explanation": "UMP means best simultaneously for all alternatives. A UMP test is a most powerful test for each simple alternative with the same critical region; unbiasedness is a weaker property."
+  "explanation": "UMP means best simultaneously for all alternatives. A UMP test is a most powerful test for each simple alternative with the same critical region; unbiasedness is a weaker property.",
+  "section": 1
  },
  {
-  "id": "inf-15.3",
-  "lecture": 15,
+  "id": "inf-9.3",
+  "lecture": 9,
   "stem": "Suppose the family has nondecreasing monotone likelihood ratio in $T(X)$, and consider $H_0:\\theta\\le\\theta_0$ against $H_1:\\theta>\\theta_0$. What is the UMP test of level $\\alpha$ (Karlin-Rubin)?",
   "correct": [
    "Reject for $T>c$, randomising at $T=c$ if needed, with size $\\alpha$ at $\\theta_0$.",
@@ -2333,11 +2405,12 @@
     "misconception": "calibrates the wrong error probability"
    }
   ],
-  "explanation": "MLR makes the power function nondecreasing in $\\theta$, so the size over $\\theta\\le\\theta_0$ is controlled at $\\theta_0$. The NP test for $\\theta_0$ against any $\\theta_1>\\theta_0$ has the same one-sided region."
+  "explanation": "MLR makes the power function nondecreasing in $\\theta$, so the size over $\\theta\\le\\theta_0$ is controlled at $\\theta_0$. The NP test for $\\theta_0$ against any $\\theta_1>\\theta_0$ has the same one-sided region.",
+  "section": 1
  },
  {
-  "id": "inf-15.4",
-  "lecture": 15,
+  "id": "inf-9.4",
+  "lecture": 9,
   "stem": "For $X\\sim N(\\theta,1)$, why is there no UMP test of $H_0:\\theta=\\theta_0$ against $H_1:\\theta\\ne\\theta_0$ at level $\\alpha$?",
   "correct": [
    "The best tests for each side of $\\theta_0$ reject in opposite directions.",
@@ -2365,11 +2438,12 @@
     "misconception": "discreteness is irrelevant"
    }
   ],
-  "explanation": "Each one-sided UMP test is more powerful than any two-sided test on its own side but has power below $\\alpha$ on the other side. Imposing unbiasedness leads to the UMPU two-sided test."
+  "explanation": "Each one-sided UMP test is more powerful than any two-sided test on its own side but has power below $\\alpha$ on the other side. Imposing unbiasedness leads to the UMPU two-sided test.",
+  "section": 1
  },
  {
-  "id": "inf-15.5",
-  "lecture": 15,
+  "id": "inf-9.5",
+  "lecture": 9,
   "stem": "A one-parameter exponential family has density $h(x)\\exp\\{\\eta(\\theta)T(x)-A(\\theta)\\}$. When does it have monotone likelihood ratio in $T$?",
   "correct": [
    "When $\\eta(\\theta)$ is nondecreasing in $\\theta$.",
@@ -2397,11 +2471,12 @@
     "misconception": "confuses completeness with MLR"
    }
   ],
-  "explanation": "The ratio $f_{\\theta_2}/f_{\\theta_1}=\\exp\\{(\\eta(\\theta_2)-\\eta(\\theta_1))T-\\dots\\}$ is increasing in $T$ iff $\\eta(\\theta_2)>\\eta(\\theta_1)$ for $\\theta_2>\\theta_1$. A decreasing $\\eta$ gives MLR in $-T$."
+  "explanation": "The ratio $f_{\\theta_2}/f_{\\theta_1}=\\exp\\{(\\eta(\\theta_2)-\\eta(\\theta_1))T-\\dots\\}$ is increasing in $T$ iff $\\eta(\\theta_2)>\\eta(\\theta_1)$ for $\\theta_2>\\theta_1$. A decreasing $\\eta$ gives MLR in $-T$.",
+  "section": 1
  },
  {
-  "id": "inf-16.1",
-  "lecture": 16,
+  "id": "inf-9.6",
+  "lecture": 9,
   "stem": "What is an unbiased level-$\\alpha$ test of $H_0:\\theta\\in\\Theta_0$ against $H_1:\\theta\\in\\Theta_1$?",
   "correct": [
    "A test whose power function is at most $\\alpha$ on $\\Theta_0$ and at least $\\alpha$ on $\\Theta_1$ everywhere.",
@@ -2429,11 +2504,12 @@
     "misconception": "confuses unbiased with trivial tests"
    }
   ],
-  "explanation": "Unbiasedness requires the chance of rejecting a false null to be at least the size. The trivial test $\\phi\\equiv\\alpha$ is unbiased, so a UMP test, which beats it, is automatically unbiased."
+  "explanation": "Unbiasedness requires the chance of rejecting a false null to be at least the size. The trivial test $\\phi\\equiv\\alpha$ is unbiased, so a UMP test, which beats it, is automatically unbiased.",
+  "section": 2
  },
  {
-  "id": "inf-16.2",
-  "lecture": 16,
+  "id": "inf-9.7",
+  "lecture": 9,
   "stem": "In a one-parameter exponential family, which description fits the UMP unbiased test of $H_0:\\theta=\\theta_0$ against $H_1:\\theta\\ne\\theta_0$?",
   "correct": [
    "Reject when $T<c_1$ or $T>c_2$, with size $\\alpha$ and zero power slope at $\\theta_0$ (unbiasedness).",
@@ -2461,11 +2537,12 @@
     "misconception": "no UMP test exists for two-sided alternatives"
    }
   ],
-  "explanation": "The power function is minimised at $\\theta_0$ for an unbiased test, so its derivative there is zero. This fixes the cut-offs, which are tail-symmetric only for symmetric null distributions of $T$."
+  "explanation": "The power function is minimised at $\\theta_0$ for an unbiased test, so its derivative there is zero. This fixes the cut-offs, which are tail-symmetric only for symmetric null distributions of $T$.",
+  "section": 2
  },
  {
-  "id": "inf-16.3",
-  "lecture": 16,
+  "id": "inf-9.8",
+  "lecture": 9,
   "stem": "Why is a UMP level-$\\alpha$ test, when it exists, automatically unbiased?",
   "correct": [
    "It beats the trivial test $\\phi\\equiv\\alpha$, so its power is at least $\\alpha$ everywhere on $\\Theta_1$.",
@@ -2493,11 +2570,12 @@
     "misconception": "invents an unnecessary condition"
    }
   ],
-  "explanation": "The randomised test $\\phi\\equiv\\alpha$ has level $\\alpha$ and power $\\alpha$ everywhere, so a UMP test has power $\\ge\\alpha$ on $\\Theta_1$. The converse fails: UMPU tests need not be UMP."
+  "explanation": "The randomised test $\\phi\\equiv\\alpha$ has level $\\alpha$ and power $\\alpha$ everywhere, so a UMP test has power $\\ge\\alpha$ on $\\Theta_1$. The converse fails: UMPU tests need not be UMP.",
+  "section": 2
  },
  {
-  "id": "inf-16.4",
-  "lecture": 16,
+  "id": "inf-9.9",
+  "lecture": 9,
   "stem": "Why condition on a sufficient statistic for the nuisance parameter when testing a hypothesis about the parameter of interest?",
   "correct": [
    "Given it, the null law is free of the nuisance parameter, so the size is exact.",
@@ -2525,11 +2603,12 @@
     "misconception": "overclaims optimality from conditioning"
    }
   ],
-  "explanation": "Conditioning gives a similar test: size $\\alpha$ for every value of the nuisance parameter. For exponential families, conditional tests based on the complementary statistic yield UMPU tests."
+  "explanation": "Conditioning gives a similar test: size $\\alpha$ for every value of the nuisance parameter. For exponential families, conditional tests based on the complementary statistic yield UMPU tests.",
+  "section": 2
  },
  {
-  "id": "inf-16.5",
-  "lecture": 16,
+  "id": "inf-9.10",
+  "lecture": 9,
   "stem": "In a $2\\times2$ table with row and column totals held fixed, what is the null distribution of one cell count when the two classifications are independent?",
   "correct": [
    "Hypergeometric, which is the basis of Fisher's exact test for the table.",
@@ -2557,11 +2636,12 @@
     "misconception": "confuses with waiting-time laws"
    }
   ],
-  "explanation": "Fixing the margins removes the nuisance parameters (the marginal probabilities), and the cell count becomes hypergeometric under independence. The exact test is conditional."
+  "explanation": "Fixing the margins removes the nuisance parameters (the marginal probabilities), and the cell count becomes hypergeometric under independence. The exact test is conditional.",
+  "section": 2
  },
  {
-  "id": "inf-17.1",
-  "lecture": 17,
+  "id": "inf-10.1",
+  "lecture": 10,
   "stem": "How is a confidence set obtained by inverting a family of tests?",
   "correct": [
    "Gather all $\\theta_0$ that the level-$\\alpha$ test of $H_0:\\theta=\\theta_0$ does not reject for the observed $x$.",
@@ -2589,11 +2669,12 @@
     "misconception": "uses an arbitrary threshold instead of a test"
    }
   ],
-  "explanation": "A test of level $\\alpha$ accepts the true $\\theta$ with probability at least $1-\\alpha$, so the acceptance set has coverage at least $1-\\alpha$. The set is random through $x$."
+  "explanation": "A test of level $\\alpha$ accepts the true $\\theta$ with probability at least $1-\\alpha$, so the acceptance set has coverage at least $1-\\alpha$. The set is random through $x$.",
+  "section": 1
  },
  {
-  "id": "inf-17.2",
-  "lecture": 17,
+  "id": "inf-10.2",
+  "lecture": 10,
   "stem": "What does inverting a UMP one-sided test of $H_0:\\theta\\le\\theta_0$ give?",
   "correct": [
    "A uniformly most accurate lower confidence bound at level $1-\\alpha$.",
@@ -2621,11 +2702,12 @@
     "misconception": "confuses accuracy with length"
    }
   ],
-  "explanation": "Optimality transfers by duality: a UMP test gives a confidence bound which, among all bounds of the same level, is least likely to include false values of $\\theta$."
+  "explanation": "Optimality transfers by duality: a UMP test gives a confidence bound which, among all bounds of the same level, is least likely to include false values of $\\theta$.",
+  "section": 1
  },
  {
-  "id": "inf-17.3",
-  "lecture": 17,
+  "id": "inf-10.3",
+  "lecture": 10,
   "stem": "How does an interval from inverting the likelihood ratio test differ from the Wald interval?",
   "correct": [
    "It can be asymmetric and is reparametrization invariant.",
@@ -2653,11 +2735,12 @@
     "misconception": "the LR interval is also approximate"
    }
   ],
-  "explanation": "The set $\\{\\theta:2\\{\\ell(\\hat\\theta)-\\ell(\\theta)\\}\\le\\chi^2_{1,1-\\alpha}\\}$ follows the likelihood and maps to the set for $g(\\theta)$ under reparametrization. The Wald interval depends on the scale used."
+  "explanation": "The set $\\{\\theta:2\\{\\ell(\\hat\\theta)-\\ell(\\theta)\\}\\le\\chi^2_{1,1-\\alpha}\\}$ follows the likelihood and maps to the set for $g(\\theta)$ under reparametrization. The Wald interval depends on the scale used.",
+  "section": 1
  },
  {
-  "id": "inf-17.4",
-  "lecture": 17,
+  "id": "inf-10.4",
+  "lecture": 10,
   "stem": "What does \"95% confidence\" for an interval computed from the data actually mean?",
   "correct": [
    "95% of intervals built this way over repeated samples cover $\\theta$.",
@@ -2685,11 +2768,12 @@
     "misconception": "treats the interval as a statement about a spread of parameter values"
    }
   ],
-  "explanation": "Confidence refers to the random interval before the data are seen. After observing it, $\\theta$ is fixed and either inside or not; the 95% describes the method."
+  "explanation": "Confidence refers to the random interval before the data are seen. After observing it, $\\theta$ is fixed and either inside or not; the 95% describes the method.",
+  "section": 1
  },
  {
-  "id": "inf-17.5",
-  "lecture": 17,
+  "id": "inf-10.5",
+  "lecture": 10,
   "stem": "What does it mean for a confidence set $C(X)$ to be unbiased at level $1-\\alpha$?",
   "correct": [
    "True values are covered more often than false values.",
@@ -2717,11 +2801,12 @@
     "misconception": "reverses the unbiasedness inequality"
    }
   ],
-  "explanation": "By duality, a set is unbiased iff the corresponding tests are unbiased. UMPU tests give uniformly most accurate unbiased confidence sets."
+  "explanation": "By duality, a set is unbiased iff the corresponding tests are unbiased. UMPU tests give uniformly most accurate unbiased confidence sets.",
+  "section": 1
  },
  {
-  "id": "inf-17.6",
-  "lecture": 17,
+  "id": "inf-10.6",
+  "lecture": 10,
   "stem": "Under regularity conditions with an interior true parameter, what is the limit law of $-2\\log\\Lambda_n$ when $H_0$ restricts $r$ of the $d$ free parameters?",
   "correct": [
    "A chi-square law whose degrees of freedom equal the difference in the number of free parameters, here $r$.",
@@ -2749,11 +2834,12 @@
     "misconception": "confuses the dimension of the model with the sample size"
    }
   ],
-  "explanation": "Wilks theorem gives $-2\\log\\Lambda_n\\to\\chi^2_r$ in distribution, with $r$ the number of free parameters in the full model minus the null model, for any regular family and an interior true value."
+  "explanation": "Wilks theorem gives $-2\\log\\Lambda_n\\to\\chi^2_r$ in distribution, with $r$ the number of free parameters in the full model minus the null model, for any regular family and an interior true value.",
+  "section": 1
  },
  {
-  "id": "inf-17.7",
-  "lecture": 17,
+  "id": "inf-10.7",
+  "lecture": 10,
   "stem": "Which situation can make the chi-square limit of $-2\\log\\Lambda_n$, with degrees of freedom equal to the difference in dimension, fail?",
   "correct": [
    "The true parameter lies on the boundary of the parameter space, for instance a variance component tested against zero.",
@@ -2781,11 +2867,12 @@
     "misconception": "confuses the form of the estimator with the regularity conditions"
    }
   ],
-  "explanation": "Wilks theorem needs the true value to be interior and the models nested and regular. A true value on the boundary, or a non-nested pair, gives a different limit, typically a mixture such as $\\tfrac12\\chi^2_0+\\tfrac12\\chi^2_1$."
+  "explanation": "Wilks theorem needs the true value to be interior and the models nested and regular. A true value on the boundary, or a non-nested pair, gives a different limit, typically a mixture such as $\\tfrac12\\chi^2_0+\\tfrac12\\chi^2_1$.",
+  "section": 1
  },
  {
-  "id": "inf-17.8",
-  "lecture": 17,
+  "id": "inf-10.8",
+  "lecture": 10,
   "stem": "How do the Wald and score tests relate to the likelihood ratio test in a regular model with an interior true parameter?",
   "correct": [
    "Under $H_0$ the three statistics differ by $o_P(1)$, so each has the same $\\chi^2$ limit.",
@@ -2813,11 +2900,12 @@
     "misconception": "believes equivalence fails for the degrees of freedom"
    }
   ],
-  "explanation": "The Wald statistic uses the unrestricted MLE and the score statistic the null fit only; all three share the $\\chi^2_r$ limit and differ by $o_P(1)$. Only the likelihood ratio test is reparametrization invariant."
+  "explanation": "The Wald statistic uses the unrestricted MLE and the score statistic the null fit only; all three share the $\\chi^2_r$ limit and differ by $o_P(1)$. Only the likelihood ratio test is reparametrization invariant.",
+  "section": 1
  },
  {
-  "id": "inf-17.9",
-  "lecture": 17,
+  "id": "inf-10.9",
+  "lecture": 10,
   "stem": "For a parameter vector $\\theta$ of dimension $d$, how is an approximate $1-\\alpha$ confidence set obtained by inverting the asymptotic likelihood ratio test?",
   "correct": [
    "Keep every $\\theta_0$ with $2\\{\\ell(\\hat\\theta)-\\ell(\\theta_0)\\}\\le\\chi^2_{d,1-\\alpha}$, the chi-square quantile on $d$ degrees of freedom.",
@@ -2845,11 +2933,12 @@
     "misconception": "treats the likelihood set as always equal to the symmetric Wald interval"
    }
   ],
-  "explanation": "The test of $\\theta=\\theta_0$ rejects when $-2\\log\\Lambda_n>\\chi^2_{d,1-\\alpha}$, so the accepted values form the set. Its coverage tends to $1-\\alpha$, and it follows the shape of the likelihood."
+  "explanation": "The test of $\\theta=\\theta_0$ rejects when $-2\\log\\Lambda_n>\\chi^2_{d,1-\\alpha}$, so the accepted values form the set. Its coverage tends to $1-\\alpha$, and it follows the shape of the likelihood.",
+  "section": 1
  },
  {
-  "id": "inf-18.1",
-  "lecture": 18,
+  "id": "inf-11.1",
+  "lecture": 11,
   "stem": "What is the plug-in principle behind the bootstrap?",
   "correct": [
    "Replace $F$ by the empirical cdf $\\hat F_n$ and evaluate the target under $\\hat F_n$.",
@@ -2877,11 +2966,12 @@
     "misconception": "confuses the bootstrap with the delta method"
    }
   ],
-  "explanation": "The nonparametric bootstrap approximates the sampling distribution of $\\hat\\theta(X_1,\\dots,X_n)$ under $F$ by that under $\\hat F_n$, which is simulated by drawing $n$ points with replacement."
+  "explanation": "The nonparametric bootstrap approximates the sampling distribution of $\\hat\\theta(X_1,\\dots,X_n)$ under $F$ by that under $\\hat F_n$, which is simulated by drawing $n$ points with replacement.",
+  "section": 1
  },
  {
-  "id": "inf-18.2",
-  "lecture": 18,
+  "id": "inf-11.2",
+  "lecture": 11,
   "stem": "How is a bootstrap standard error of an estimator $\\hat\\theta$ computed from $B$ resamples?",
   "correct": [
    "Standard deviation of the resampled estimates $\\hat\\theta^{*b}$.",
@@ -2909,11 +2999,12 @@
     "misconception": "rescales a quantity that is already a standard error"
    }
   ],
-  "explanation": "The bootstrap standard error is $\\{\\frac1{B-1}\\sum_b(\\hat\\theta^{*b}-\\bar\\theta^*)^2\\}^{1/2}$. $B$ controls only the simulation error; it does not shrink the statistical error."
+  "explanation": "The bootstrap standard error is $\\{\\frac1{B-1}\\sum_b(\\hat\\theta^{*b}-\\bar\\theta^*)^2\\}^{1/2}$. $B$ controls only the simulation error; it does not shrink the statistical error.",
+  "section": 1
  },
  {
-  "id": "inf-18.3",
-  "lecture": 18,
+  "id": "inf-11.3",
+  "lecture": 11,
   "stem": "What is the bootstrap estimate of the bias of $\\hat\\theta$?",
   "correct": [
    "The average of the bootstrap values $\\hat\\theta^{*b}$ minus the original estimate $\\hat\\theta$.",
@@ -2941,11 +3032,12 @@
     "misconception": "true for the sample mean only"
    }
   ],
-  "explanation": "The bias $E_F\\hat\\theta-\\theta$ is estimated by $E_{\\hat F}\\hat\\theta^*-\\hat\\theta$. The corrected estimate is $\\hat\\theta-(\\bar\\theta^*-\\hat\\theta)=2\\hat\\theta-\\bar\\theta^*$."
+  "explanation": "The bias $E_F\\hat\\theta-\\theta$ is estimated by $E_{\\hat F}\\hat\\theta^*-\\hat\\theta$. The corrected estimate is $\\hat\\theta-(\\bar\\theta^*-\\hat\\theta)=2\\hat\\theta-\\bar\\theta^*$.",
+  "section": 1
  },
  {
-  "id": "inf-18.4",
-  "lecture": 18,
+  "id": "inf-11.4",
+  "lecture": 11,
   "stem": "Why does the nonparametric bootstrap fail for the sample maximum of a $U(0,\\theta)$ sample?",
   "correct": [
    "The bootstrap law has an atom of mass about $0.63$ at the observed maximum.",
@@ -2973,11 +3065,12 @@
     "misconception": "overgeneralises; it works for smooth statistics"
    }
   ],
-  "explanation": "The probability that a resample contains the observed maximum is $1-(1-1/n)^n\\to1-e^{-1}$. The bootstrap law of $n(\\theta_{\\max}-\\max^*)$ is not consistent: the statistic is not smooth in $F$."
+  "explanation": "The probability that a resample contains the observed maximum is $1-(1-1/n)^n\\to1-e^{-1}$. The bootstrap law of $n(\\theta_{\\max}-\\max^*)$ is not consistent: the statistic is not smooth in $F$.",
+  "section": 1
  },
  {
-  "id": "inf-18.5",
-  "lecture": 18,
+  "id": "inf-11.5",
+  "lecture": 11,
   "stem": "For the sample mean with finite variance $\\sigma^2$, what does bootstrap consistency say?",
   "correct": [
    "Given the data, $\\sqrt n(\\bar X^*-\\bar X)$ has the same limit $N(0,\\sigma^2)$ as $\\sqrt n(\\bar X-\\mu)$.",
@@ -3005,6 +3098,7 @@
     "misconception": "no such inflation occurs"
    }
   ],
-  "explanation": "The bootstrap law of $\\bar X^*$ is centred at $\\bar X$, so the centred and scaled version mimics $\\sqrt n(\\bar X-\\mu)$. Consistency here follows from the CLT and needs only a finite variance."
+  "explanation": "The bootstrap law of $\\bar X^*$ is centred at $\\bar X$, so the centred and scaled version mimics $\\sqrt n(\\bar X-\\mu)$. Consistency here follows from the CLT and needs only a finite variance.",
+  "section": 1
  }
 ]

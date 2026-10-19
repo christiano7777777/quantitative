@@ -1,15 +1,14 @@
-// Lessons for Bayesian Statistics, following the HKU STAT4610 lecture notes and tutorials (lectures 1-10), with choosing priors
-// (lecture 5) drawn from the outline and past-paper topics, then the outline topics the notes have not reached yet (11-15).
-// One entry per lecture, in order. `lqId` names a generator in src/content/tests/bay/lq; "#0,1,2" keeps only those parts
-// (0-based), so a shared generator is split by lecture. The worked sample is that generator at `workedSeed`.
+// Lessons for Bayesian Statistics, following the HKU STAT4610 lecture notes and tutorials (lectures 1-6), then the outline topics the notes
+// have not reached yet (lectures 7-10). A lecture that merges two sections of the notes has one lesson part and one worked sample per section;
+// its quiz draws its long question from one of them.
 import type { Lesson } from '../../../lib/types'
 
 const lessons: Lesson[] = [
   {
-    // 1. Inference frameworks and probability
-    workedSeed: 'bay-1-worked',
-    lqId: 'bay-lq-a-bayes#0,1,2',
+    // 1. Inference frameworks, likelihood, prior, posterior and prediction
+    samples: [{"workedSeed":"bay-1-1-worked","lqId":"bay-lq-a-bayes#0,1,2"},{"workedSeed":"bay-1-2-worked","lqId":"bay-lq-k-normal"}],
     teach: [
+      "## Part 1: Inference frameworks and probability",
       "## Two frameworks",
       "Both start from a parameter vector $\\theta$, i.i.d. observed data $X_1,\\dots,X_n$ and unobserved future data, and both want to infer $\\theta$ and to predict. In the frequentist framework there is one fixed unknown true $\\theta_0$ that generated the data, and the data are random: estimates (MLE), intervals and tests are judged over repeated samples, and predictions plug in the estimate. In the Bayesian framework all quantities, parameters and data, are random variables with a joint distribution, and inference and prediction are conditioning on the observed data.",
       "## The Bayesian ingredients",
@@ -22,13 +21,7 @@ const lessons: Lesson[] = [
       "For $\\theta\\in\\{\\theta_1,\\dots,\\theta_m\\}$ with prior probabilities $\\pi_j$ and $k$ successes in $n$ trials: compute $p(y\\mid\\theta_j)=\\binom nk\\theta_j^k(1-\\theta_j)^{n-k}$, multiply by $\\pi_j$, add to get the evidence $p(y)$, divide to get $\\pi(\\theta_j\\mid y)$. The predictive probability of a success is $\\sum_j\\theta_j\\pi(\\theta_j\\mid y)$.",
       "## Typical mistakes",
       "Using the prior instead of the posterior in the predictive probability; forgetting to divide by the evidence; and reading the likelihood as a probability distribution of $\\theta$.",
-    ],
-  },
-  {
-    // 2. Likelihood, prior, posterior and prediction
-    workedSeed: 'bay-2-worked',
-    lqId: 'bay-lq-k-normal',
-    teach: [
+      "## Part 2: Likelihood, prior, posterior and prediction",
       "## Likelihood, MLE and prior",
       "For an i.i.d. sample $y=\\{y_1,\\dots,y_n\\}$ from $f(y\\mid\\theta)$ the likelihood is $L(\\theta\\mid y)=\\prod_if(y_i\\mid\\theta)$ and the MLE maximises $\\log L$. In the Bayesian paradigm the data are observed (fixed) and the parameters are random. The prior $\\pi(\\theta)$ is the distribution of $\\theta$ before the data, the posterior $\\pi(\\theta\\mid y)$ the distribution after.",
       "## Normal model with known variance",
@@ -40,13 +33,12 @@ const lessons: Lesson[] = [
       "## Non-conjugate priors",
       "A conjugate prior gives a posterior in the same family and a closed form. With a Laplace prior $\\pi(\\mu)=\\tfrac12e^{-|\\mu|}$ the exponent contains $|\\mu|$, completing the square is impossible, the posterior is not normal and $p(y)$ has no closed form. We then need Monte Carlo or posterior approximations.",
       "## Typical mistakes",
-      "Adding variances where precisions are needed; using $\\sigma^2$ instead of $\\sigma_n^2=\\sigma^2/n$ for the likelihood of the mean; and forgetting $\\sigma^2$ in the predictive variance.",
+      "Adding variances where precisions are needed; using $\\sigma^2$ instead of $\\sigma_n^2=\\sigma^2/n$ for the likelihood of the mean; and forgetting $\\sigma^2$ in the predictive variance."
     ],
   },
   {
-    // 3. Conjugate models
-    workedSeed: 'bay-3-worked',
-    lqId: 'bay-lq-l-conjugate',
+    // 2. Conjugate models
+    samples: [{"workedSeed":"bay-2-1-worked","lqId":"bay-lq-l-conjugate"}],
     teach: [
       "## Conjugacy",
       "If the posterior is in the same family as the prior, the prior is conjugate to the likelihood. Updating then only changes parameters, and the parameters can be read as pseudo-counts of prior data. Conjugate priors give intuition and closed forms, but they often do not exist.",
@@ -59,14 +51,14 @@ const lessons: Lesson[] = [
       "## Gamma with a Weibull likelihood",
       "Waiting times $T_i\\mid\\lambda\\sim\\mathrm{Weibull}(\\lambda,k)$ with density $\\lambda kt^{k-1}e^{-\\lambda t^k}$ ($k$ known) and prior $\\lambda\\sim\\mathrm{Gamma}(a,b)$ (shape, rate) have likelihood $\\propto\\lambda^ne^{-\\lambda\\sum T_i^k}$, so $\\lambda\\mid T\\sim\\mathrm{Gamma}(a+n,\\ b+\\sum T_i^k)$. For a $\\mathrm{Gamma}(\\alpha_n,\\beta_n)$ the mean is $\\alpha_n/\\beta_n$, the mode $(\\alpha_n-1)/\\beta_n$ (if $\\alpha_n>1$) and the variance $\\alpha_n/\\beta_n^2$. The same Gamma conjugacy holds for Poisson counts: $\\mathrm{Gamma}(a+\\sum y_i,\\ b+n)$.",
       "## Typical mistakes",
-      "Adding $T_i$ instead of $T_i^k$ to the rate; dividing the predictive probability by $n$ instead of $\\alpha_0+n$; and treating the second Gamma parameter as a scale.",
+      "Adding $T_i$ instead of $T_i^k$ to the rate; dividing the predictive probability by $n$ instead of $\\alpha_0+n$; and treating the second Gamma parameter as a scale."
     ],
   },
   {
-    // 4. Posterior summaries and intervals
-    workedSeed: 'bay-4-worked',
-    lqId: 'bay-lq-j-summary',
+    // 3. Posterior summaries, intervals and choosing priors
+    samples: [{"workedSeed":"bay-3-1-worked","lqId":"bay-lq-j-summary"},{"workedSeed":"bay-3-2-worked","lqId":"bay-lq-m-jeffreys"}],
     teach: [
+      "## Part 1: Posterior summaries and intervals",
       "## Point estimates",
       "The posterior contains all the information about $\\theta$. The posterior mode (MAP estimator) is $\\arg\\max\\{\\sum_i\\log f(y_i\\mid\\theta)+\\log\\pi(\\theta)\\}$: it differs from the MLE by including the prior. With a flat prior $\\pi\\propto1$ the MAP equals the MLE; with a Laplace prior it looks like LASSO, the prior acting as a regulariser. The posterior mean $E[\\theta\\mid y]$ is justified by decision theory (it minimises expected squared error); the median minimises absolute error. For a skewed posterior the three differ, with the mean pulled toward the long tail.",
       "For a $\\mathrm{Beta}(a,b)$ posterior",
@@ -77,13 +69,7 @@ const lessons: Lesson[] = [
       "For integer $a,b$, $P(\\theta>c\\mid y)=P(\\mathrm{Bin}(a+b-1,c)\\le a-1)$. A normal approximation gives mean $\\pm\\,1.96\\times$ sd.",
       "## Typical mistakes",
       "Using the mode formula when $a\\le1$ or $b\\le1$; reading a credible interval as a confidence interval or the reverse; and summing the binomial up to $a$ instead of $a-1$.",
-    ],
-  },
-  {
-    // 5. Choosing priors
-    workedSeed: 'bay-5-worked',
-    lqId: 'bay-lq-m-jeffreys',
-    teach: [
+      "## Part 2: Choosing priors",
       "## Kinds of prior",
       "An informative prior encodes real knowledge; a weakly informative prior rules out absurd values and leaves the data to speak; a noninformative (reference) prior tries to add as little as possible. The posterior is sensitive to both the prior and the likelihood, so a prior sensitivity analysis refits the model under several reasonable priors and compares the answers. A flat prior is not noninformative in other parametrisations, and an improper prior can give an improper posterior.",
       "## Jeffreys prior",
@@ -91,14 +77,14 @@ const lessons: Lesson[] = [
       "## Effective sample size and power priors",
       "The effective sample size of a $\\mathrm{Beta}(\\alpha,\\beta)$ is $\\alpha+\\beta$. To borrow strength from a historical datum $x$ successes in $m$ trials, start from an improper prior $\\pi_0(p)\\propto p^{-1}(1-p)^{-1}$ and raise the historical likelihood to a power $\\delta\\in(0,1)$: the power prior is $\\pi_0(p)\\{p^x(1-p)^{m-x}\\}^\\delta\\propto p^{\\delta x-1}(1-p)^{\\delta(m-x)-1}$, a $\\mathrm{Beta}(\\delta x,\\delta(m-x))$ with effective sample size $\\delta m$. The power $\\delta$ discounts the historical study ($\\delta=0$ ignores it, $\\delta=1$ pools it fully). After $y$ successes in $n$ new trials the posterior is $\\mathrm{Beta}(\\delta x+y,\\ \\delta(m-x)+n-y)$ with mean $(\\delta x+y)/(\\delta m+n)$ and effective sample size $\\delta m+n$.",
       "## Typical mistakes",
-      "Forgetting that the Poisson Jeffreys posterior has shape $\\sum y_i+\\tfrac12$ (not $\\sum y_i$); multiplying $\\delta$ by only one of $x$ and $m-x$; and adding $n$ without $\\delta m$ for the posterior effective sample size.",
+      "Forgetting that the Poisson Jeffreys posterior has shape $\\sum y_i+\\tfrac12$ (not $\\sum y_i$); multiplying $\\delta$ by only one of $x$ and $m-x$; and adding $n$ without $\\delta m$ for the posterior effective sample size."
     ],
   },
   {
-    // 6. Monte Carlo basics
-    workedSeed: 'bay-6-worked',
-    lqId: 'bay-lq-r-mc',
+    // 4. Monte Carlo basics and inverse transform sampling
+    samples: [{"workedSeed":"bay-4-1-worked","lqId":"bay-lq-r-mc"},{"workedSeed":"bay-4-2-worked","lqId":"bay-lq-n-inverse"}],
     teach: [
+      "## Part 1: Monte Carlo basics",
       "## Estimating by simulation",
       "To estimate $\\mu=E[h(X)]=\\int h(x)f(x)dx$ draw $X_1,\\dots,X_n$ i.i.d. from $f$ and average: $\\hat\\mu_n=\\frac1n\\sum h(X_i)$. By the (strong) law of large numbers $\\hat\\mu_n\\to\\mu$. It is unbiased, with $\\mathrm{Var}(\\hat\\mu_n)=\\mathrm{Var}[h(X)]/n$, so",
       "$$\\text{standard error}=\\frac{\\sigma}{\\sqrt n},\\qquad\\text{95\\% margin}=\\frac{1.96\\,\\sigma}{\\sqrt n},\\qquad n\\ge\\Big(\\frac{1.96\\,\\sigma}{\\varepsilon}\\Big)^2.$$",
@@ -109,13 +95,7 @@ const lessons: Lesson[] = [
       "A grid with $g$ points per axis needs $g^d$ points in $d$ dimensions. The variance $\\mathrm{Var}[h(X_1,\\dots,X_d)]/n$ of Monte Carlo has no $g^d$: the rate $n^{-1/2}$ is free of the dimension, although the numerator may grow with $d$ (often like $c^d$, still better than $g^d$).",
       "## Typical mistakes",
       "Forgetting the square root in the standard error; rounding the required $n$ down; and omitting the factor $4$ in the standard error of $\\hat\\pi$.",
-    ],
-  },
-  {
-    // 7. Inverse transform sampling
-    workedSeed: 'bay-7-worked',
-    lqId: 'bay-lq-n-inverse',
-    teach: [
+      "## Part 2: Inverse transform sampling",
       "## The method",
       "Computers produce $U\\sim U(0,1)$. To draw $X\\sim F$, use the quantile function $F^{-1}(u)=\\inf\\{x:F(x)\\ge u\\}$ and return $X=F^{-1}(U)$. Why it works: $P(F^{-1}(U)\\le x)=P(U\\le F(x))=F(x)$ because $P(U\\le u)=u$. Equivalently $F(X)\\sim U(0,1)$ for any continuous $X$.",
       "## Examples",
@@ -129,13 +109,12 @@ const lessons: Lesson[] = [
       "## Limits",
       "If the density is known only up to a constant, as for a posterior $\\pi(\\theta\\mid y)\\propto f(y\\mid\\theta)\\pi(\\theta)$, the cdf is also only known up to a constant and $F^{-1}(u)$ cannot be computed. That motivates importance sampling and MCMC.",
       "## Typical mistakes",
-      "Dropping the minus sign in $-\\ln(U)/\\lambda$; forgetting the power $1/k$ for the Weibull; and using degrees instead of radians for the Cauchy.",
+      "Dropping the minus sign in $-\\ln(U)/\\lambda$; forgetting the power $1/k$ for the Weibull; and using degrees instead of radians for the Cauchy."
     ],
   },
   {
-    // 8. Importance sampling
-    workedSeed: 'bay-8-worked',
-    lqId: 'bay-lq-o-is',
+    // 5. Importance sampling
+    samples: [{"workedSeed":"bay-5-1-worked","lqId":"bay-lq-o-is"}],
     teach: [
       "## Why importance sampling",
       "Standard Monte Carlo has variance $\\mathrm{Var}[h(X)]/n$, which is large when $h$ and $f$ overlap poorly (for example $P(X\\ge4)$ for $X\\sim N(0,1)$, where most draws give $h=0$), and it needs sampling from $f$, which is impossible when $f$ is known only up to a constant. Importance sampling draws from an easier proposal $g$ and reweights:",
@@ -151,14 +130,14 @@ const lessons: Lesson[] = [
       "## The recipe",
       "1. Compute $\\tilde w_i=\\tilde f(x_i)/g(x_i)$. 2. Compute $\\sum\\tilde w_i$, $\\sum\\tilde w_ix_i$ and $\\sum\\tilde w_i^2$. 3. Estimate $=\\sum\\tilde w_ix_i/\\sum\\tilde w_i$ and $\\mathrm{ESS}=(\\sum\\tilde w_i)^2/\\sum\\tilde w_i^2$.",
       "## Typical mistakes",
-      "Using $g/f$ instead of $f/g$; forgetting to divide by $\\sum w_i$; and using a proposal with lighter tails than the target.",
+      "Using $g/f$ instead of $f/g$; forgetting to divide by $\\sum w_i$; and using a proposal with lighter tails than the target."
     ],
   },
   {
-    // 9. Markov chains
-    workedSeed: 'bay-9-worked',
-    lqId: 'bay-lq-p-markov',
+    // 6. Markov chains and Metropolis-Hastings
+    samples: [{"workedSeed":"bay-6-1-worked","lqId":"bay-lq-p-markov"},{"workedSeed":"bay-6-2-worked","lqId":"bay-lq-e-mh"}],
     teach: [
+      "## Part 1: Markov chains and stationary distributions",
       "## Markov chains",
       "A Markov chain $(X_n)$ satisfies $P(X_n=x_n\\mid x_0,\\dots,x_{n-1})=p(x_n\\mid x_{n-1})$: the future depends on the past only through the present. On a finite state space the transition matrix has $P_{ij}=P(X_n=j\\mid X_{n-1}=i)$ and every row sums to one. The $n$-step transition matrix is $P^n$: for example $P(X_{n+1}=j\\mid X_{n-1}=i)=\\sum_kP_{ik}P_{kj}=(P^2)_{ij}$.",
       "## Regular chains and the stationary distribution",
@@ -169,13 +148,7 @@ const lessons: Lesson[] = [
       "$\\frac1T\\sum_{n\\le T}h(X_n)\\to E_\\pi h(X)$ for a regular chain, but the $X_n$ are correlated, so the ordinary law of large numbers does not apply and an ergodic theorem is needed. For continuous states the transition matrix becomes a kernel $K(x,y)$, stationarity is $\\pi(y)=\\int K(x,y)\\pi(x)dx$, and an AR(1) chain $Z_{n+1}=\\rho Z_n+\\varepsilon_n$ has stationary law $N(0,1/(1-\\rho^2))$.",
       "## Typical mistakes",
       "Using columns instead of rows as probability functions; multiplying the matrices in the wrong order; and forgetting the normalisation $\\sum\\pi_j=1$.",
-    ],
-  },
-  {
-    // 10. Metropolis-Hastings
-    workedSeed: 'bay-10-worked',
-    lqId: 'bay-lq-e-mh',
-    teach: [
+      "## Part 2: Metropolis-Hastings",
       "## Markov chain Monte Carlo",
       "MCMC builds a Markov chain whose stationary distribution is the target $\\pi(\\theta\\mid y)\\propto f(y\\mid\\theta)\\pi(\\theta)$, using only the unnormalised target. The path $\\theta_1,\\dots,\\theta_T$ gives approximate samples, and posterior expectations are approximated by $\\frac1T\\sum h(\\theta_n)$. Unlike importance sampling it is not sensitive to a proposal $g$ that matches the target, because the proposal is a conditional density $g(y\\mid x)$.",
       "## The algorithm",
@@ -185,13 +158,12 @@ const lessons: Lesson[] = [
       "## Proposal scale and finite state spaces",
       "A tiny step gives high acceptance but slow exploration; a huge step gives many rejections. On a finite state space with proposal probabilities $q_{ij}$, $P_{ij}=q_{ij}\\min\\{1,\\pi_j/\\pi_i\\}$ for $j\\ne i$ and $P_{ii}=1-\\sum_{j\\ne i}P_{ij}$. For Bayesian logistic regression, $\\tilde f(\\beta)=\\pi(\\beta)\\prod_i\\sigma(x_i^\\top\\beta)^{y_i}\\{1-\\sigma(x_i^\\top\\beta)\\}^{1-y_i}$, which a random-walk MH can sample even though the posterior has no closed form.",
       "## Typical mistakes",
-      "Forgetting the proposal ratio for a non-symmetric proposal; using $\\tilde f(x)/\\tilde f(y)$ instead of $\\tilde f(y)/\\tilde f(x)$; and forgetting that $P_{ii}$ includes all the rejected moves.",
+      "Forgetting the proposal ratio for a non-symmetric proposal; using $\\tilde f(x)/\\tilde f(y)$ instead of $\\tilde f(y)/\\tilde f(x)$; and forgetting that $P_{ii}$ includes all the rejected moves."
     ],
   },
   {
-    // 11. MCMC in practice
-    workedSeed: 'bay-11-worked',
-    lqId: 'bay-lq-f-gibbs',
+    // 7. MCMC in practice: Gibbs, diagnostics and HMC
+    samples: [{"workedSeed":"bay-7-1-worked","lqId":"bay-lq-f-gibbs"}],
     teach: [
       "## Gibbs sampling",
       "Update one coordinate at a time by drawing it from its full conditional distribution given the others. Each update is a Metropolis-Hastings step with acceptance probability $1$. For a bivariate normal with zero means, unit variances and correlation $\\rho$:",
@@ -205,13 +177,12 @@ const lessons: Lesson[] = [
       "$$\\hat R=\\sqrt{\\frac{(n-1)W/n+B/n}{W}},$$",
       "which is close to $1$ when the chains agree; values clearly above about $1.01$ to $1.1$ signal non-convergence. Hamiltonian Monte Carlo (HMC) uses the gradient of the log density to propose distant moves and mixes much faster in many problems.",
       "## Typical mistakes",
-      "Using the conditional variance $1$ instead of $1-\\rho^2$; using the ESS formula upside down; and dividing by $n$ instead of $\\sqrt{\\mathrm{ESS}}$ in the Monte Carlo standard error.",
+      "Using the conditional variance $1$ instead of $1-\\rho^2$; using the ESS formula upside down; and dividing by $n$ instead of $\\sqrt{\\mathrm{ESS}}$ in the Monte Carlo standard error."
     ],
   },
   {
-    // 12. Model evaluation and selection
-    workedSeed: 'bay-12-worked',
-    lqId: 'bay-lq-c-evidence',
+    // 8. Model evaluation and selection
+    samples: [{"workedSeed":"bay-8-1-worked","lqId":"bay-lq-c-evidence"}],
     teach: [
       "## Checking a model",
       "A posterior predictive check simulates replicated data from the fitted model and compares a chosen feature of the real data with the same feature in the replicates. If the real value is far in the tail of the replicated values, the model misses that feature.",
@@ -223,14 +194,14 @@ const lessons: Lesson[] = [
       "## WAIC",
       "From $S$ posterior draws $\\theta_s$ and observations $y_i$: the log pointwise predictive density is $\\mathrm{lppd}=\\sum_i\\ln\\big(\\tfrac1S\\sum_sp(y_i\\mid\\theta_s)\\big)$ (the log of the average, not the average of the logs). The penalty is $p_{\\mathrm{WAIC}}=\\sum_i\\mathrm{Var}_s\\{\\ln p(y_i\\mid\\theta_s)\\}$, the variance across draws of the log-likelihood. Then $\\mathrm{WAIC}=-2(\\mathrm{lppd}-p_{\\mathrm{WAIC}})$; smaller is better. It estimates out-of-sample predictive accuracy.",
       "## Typical mistakes",
-      "Inverting the Bayes factor; taking the log of each likelihood before averaging in lppd; and using a divisor of $S$ instead of $S-1$ when the question asks for the sample variance.",
+      "Inverting the Bayes factor; taking the log of each likelihood before averaging in lppd; and using a divisor of $S$ instead of $S-1$ when the question asks for the sample variance."
     ],
   },
   {
-    // 13. Laplace approximation
-    workedSeed: 'bay-13-worked',
-    lqId: 'bay-lq-g-approx#0,1,2',
+    // 9. Laplace approximation and variational Bayes
+    samples: [{"workedSeed":"bay-9-1-worked","lqId":"bay-lq-g-approx#0,1,2"},{"workedSeed":"bay-9-2-worked","lqId":"bay-lq-q-cavi"}],
     teach: [
+      "## Part 1: Laplace approximation",
       "## The idea",
       "Approximate the posterior by a normal distribution centred at its mode $\\hat\\theta$. A Taylor expansion of the log-posterior about the mode has no linear term (the first derivative is zero there), so",
       "$$\\log\\pi(\\theta\\mid y)\\approx\\log\\pi(\\hat\\theta\\mid y)-\\tfrac12(\\theta-\\hat\\theta)^2H,\\qquad H=-\\frac{d^2}{d\\theta^2}\\log\\pi(\\theta\\mid y)\\Big|_{\\hat\\theta}.$$",
@@ -243,13 +214,7 @@ const lessons: Lesson[] = [
       "The approximation is good when the posterior is unimodal, roughly symmetric and not near a boundary, and it improves as the sample size grows because the posterior becomes more concentrated and more normal. It is poor for skewed or multimodal posteriors and for parameters near a boundary. It also gives an estimate of the marginal likelihood from the height and curvature at the mode.",
       "## Typical mistakes",
       "Using the mean instead of the mode as the centre; forgetting to invert $H$ to get a variance; and using the second derivative without its minus sign.",
-    ],
-  },
-  {
-    // 14. Variational Bayes
-    workedSeed: 'bay-14-worked',
-    lqId: 'bay-lq-q-cavi',
-    teach: [
+      "## Part 2: Variational Bayes",
       "## The ELBO",
       "Choose an approximation $q(\\theta)$ from a simple family by optimisation. The evidence lower bound is",
       "$$\\mathrm{ELBO}(q)=E_q[\\log p(y,\\theta)]-E_q[\\log q(\\theta)]=E_q[\\log p(y\\mid\\theta)]+E_q[\\log\\pi(\\theta)]+H(q).$$",
@@ -261,13 +226,12 @@ const lessons: Lesson[] = [
       "## Versus MCMC",
       "Variational inference is usually much faster and scales to large data, but it is biased: the family may not contain the posterior, and minimising $KL(q\\|p)$ tends to underestimate posterior variance. MCMC is asymptotically exact but slower.",
       "## Typical mistakes",
-      "Dropping the entropy term; mixing up $KL(q\\|p)$ with $KL(p\\|q)$; and forgetting to normalise the responsibilities over the components.",
+      "Dropping the entropy term; mixing up $KL(q\\|p)$ with $KL(p\\|q)$; and forgetting to normalise the responsibilities over the components."
     ],
   },
   {
-    // 15. Nonparametric Bayes
-    workedSeed: 'bay-15-worked',
-    lqId: 'bay-lq-h-nonparam',
+    // 10. Nonparametric Bayes
+    samples: [{"workedSeed":"bay-10-1-worked","lqId":"bay-lq-h-nonparam"}],
     teach: [
       "## Dirichlet process",
       "A Dirichlet process $\\mathrm{DP}(\\alpha,G_0)$ is a prior on distributions: draws are discrete distributions centred on $G_0$, with concentration $\\alpha$ controlling how close to $G_0$ they are. Its predictive rule is the Chinese restaurant process (CRP): after $n$ customers are seated at tables of sizes $n_1,n_2,\\dots$,",
@@ -282,7 +246,7 @@ const lessons: Lesson[] = [
       "$$\\frac{k(x_*,0)\\,y}{k(0,0)+\\sigma_n^2}.$$",
       "Gaussian processes are used in machine learning for regression and for modelling unknown functions, with predictions and uncertainty at every input.",
       "## Typical mistakes",
-      "Using $n$ instead of $n+\\alpha$ in the denominator; indexing the stick weight with $j$ instead of $j-1$ factors of $\\alpha/(1+\\alpha)$; and forgetting to add the noise variance to $k(0,0)$.",
+      "Using $n$ instead of $n+\\alpha$ in the denominator; indexing the stick weight with $j$ instead of $j-1$ factors of $\\alpha/(1+\\alpha)$; and forgetting to add the noise variance to $k(0,0)$."
     ],
   },
 ]

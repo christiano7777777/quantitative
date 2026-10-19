@@ -29,7 +29,8 @@
     "misconception": "denies updating"
    }
   ],
-  "explanation": "The normalising constant $p(y)=\\int p(y\\mid\\theta)p(\\theta)\\,d\\theta$ is the marginal likelihood, also called the evidence."
+  "explanation": "The normalising constant $p(y)=\\int p(y\\mid\\theta)p(\\theta)\\,d\\theta$ is the marginal likelihood, also called the evidence.",
+  "section": 1
  },
  {
   "id": "bay-1.2",
@@ -61,7 +62,8 @@
     "misconception": "describes a prior mode, not a posterior"
    }
   ],
-  "explanation": "The denominator is the marginal likelihood of the data; it is the same for every $j$ and only normalises."
+  "explanation": "The denominator is the marginal likelihood of the data; it is the same for every $j$ and only normalises.",
+  "section": 1
  },
  {
   "id": "bay-1.3",
@@ -93,7 +95,8 @@
     "misconception": "misunderstands the role of the prior"
    }
   ],
-  "explanation": "For independent observations, $p(\\theta\\mid y_1,y_2)\\propto p(y_2\\mid\\theta)p(\\theta\\mid y_1)$; the order does not matter."
+  "explanation": "For independent observations, $p(\\theta\\mid y_1,y_2)\\propto p(y_2\\mid\\theta)p(\\theta\\mid y_1)$; the order does not matter.",
+  "section": 1
  },
  {
   "id": "bay-1.4",
@@ -125,7 +128,8 @@
     "misconception": "confuses the likelihood with the normalising constant"
    }
   ],
-  "explanation": "After the data are seen, $y$ is fixed and $p(y\\mid\\theta)$ is a function of $\\theta$. It need not integrate to one in $\\theta$, and multiplying it by the prior gives the unnormalised posterior."
+  "explanation": "After the data are seen, $y$ is fixed and $p(y\\mid\\theta)$ is a function of $\\theta$. It need not integrate to one in $\\theta$, and multiplying it by the prior gives the unnormalised posterior.",
+  "section": 1
  },
  {
   "id": "bay-1.5",
@@ -157,11 +161,12 @@
     "misconception": "reverses which quantity is held fixed"
    }
   ],
-  "explanation": "Frequentists regard the data as random and $\\theta_0$ as a fixed unknown; Bayesians condition on the observed data and describe their uncertainty about $\\theta$ with the posterior."
+  "explanation": "Frequentists regard the data as random and $\\theta_0$ as a fixed unknown; Bayesians condition on the observed data and describe their uncertainty about $\\theta$ with the posterior.",
+  "section": 1
  },
  {
-  "id": "bay-2.1",
-  "lecture": 2,
+  "id": "bay-1.6",
+  "lecture": 1,
   "stem": "What is the posterior predictive distribution of a new observation $\\tilde y$?",
   "correct": [
    "$p(\\tilde y\\mid y)=\\int p(\\tilde y\\mid\\theta)p(\\theta\\mid y)d\\theta$.",
@@ -189,11 +194,12 @@
     "misconception": "confuses with the likelihood"
    }
   ],
-  "explanation": "It is wider than the plug-in distribution, because it includes both sampling noise and parameter uncertainty."
+  "explanation": "It is wider than the plug-in distribution, because it includes both sampling noise and parameter uncertainty.",
+  "section": 2
  },
  {
-  "id": "bay-2.2",
-  "lecture": 2,
+  "id": "bay-1.7",
+  "lecture": 1,
   "stem": "For normal data with known variance $\\sigma^2$ and a normal prior $N(\\mu_0,\\tau^2)$ on the mean, how do the prior and the data combine?",
   "correct": [
    "Precisions add; the posterior mean is precision-weighted.",
@@ -221,11 +227,12 @@
     "misconception": "ignores the weights"
    }
   ],
-  "explanation": "Posterior variance $=(1/\\tau^2+n/\\sigma^2)^{-1}$, always below both $\\tau^2$ and $\\sigma^2/n$."
+  "explanation": "Posterior variance $=(1/\\tau^2+n/\\sigma^2)^{-1}$, always below both $\\tau^2$ and $\\sigma^2/n$.",
+  "section": 2
  },
  {
-  "id": "bay-2.3",
-  "lecture": 2,
+  "id": "bay-1.8",
+  "lecture": 1,
   "stem": "What happens to the influence of a conjugate prior as the sample size grows?",
   "correct": [
    "It fades as the likelihood dominates.",
@@ -253,11 +260,12 @@
     "misconception": "ignores the shrinking variance"
    }
   ],
-  "explanation": "For $\\mathrm{Beta}(\\alpha,\\beta)$ the weight of the prior mean is $(\\alpha+\\beta)/(\\alpha+\\beta+n)\\to0$."
+  "explanation": "For $\\mathrm{Beta}(\\alpha,\\beta)$ the weight of the prior mean is $(\\alpha+\\beta)/(\\alpha+\\beta+n)\\to0$.",
+  "section": 2
  },
  {
-  "id": "bay-2.4",
-  "lecture": 2,
+  "id": "bay-1.9",
+  "lecture": 1,
   "stem": "A $\\mathrm{Beta}(a,b)$ prior for a proportion can be read as $a+b$ prior observations. How does its influence on the posterior mean change as the sample size $n$ grows?",
   "correct": [
    "The weight on the prior mean, $(a+b)/(a+b+n)$, shrinks toward zero as $n$ grows, so the data dominate.",
@@ -285,11 +293,12 @@
     "misconception": "believes the prior switches off at a threshold"
    }
   ],
-  "explanation": "The posterior mean is $\\dfrac{a+b}{a+b+n}\\cdot\\dfrac{a}{a+b}+\\dfrac{n}{a+b+n}\\cdot\\dfrac kn$. The weight on the prior mean falls smoothly to zero as $n$ increases, but never switches off at a threshold."
+  "explanation": "The posterior mean is $\\dfrac{a+b}{a+b+n}\\cdot\\dfrac{a}{a+b}+\\dfrac{n}{a+b+n}\\cdot\\dfrac kn$. The weight on the prior mean falls smoothly to zero as $n$ increases, but never switches off at a threshold.",
+  "section": 2
  },
  {
-  "id": "bay-2.5",
-  "lecture": 2,
+  "id": "bay-1.10",
+  "lecture": 1,
   "stem": "In the normal model with known $\\sigma^2$, what is the variance of the posterior predictive distribution of a new observation?",
   "correct": [
    "The sampling variance $\\sigma^2$ plus the posterior variance $s_n^2$ of $\\mu$.",
@@ -317,11 +326,12 @@
     "misconception": "takes a maximum instead of a sum"
    }
   ],
-  "explanation": "$\\tilde y=\\mu+\\varepsilon$ with $\\mu\\mid y\\sim N(m_n,s_n^2)$ and $\\varepsilon\\sim N(0,\\sigma^2)$ independent, so $\\tilde y\\mid y\\sim N(m_n,\\sigma^2+s_n^2)$."
+  "explanation": "$\\tilde y=\\mu+\\varepsilon$ with $\\mu\\mid y\\sim N(m_n,s_n^2)$ and $\\varepsilon\\sim N(0,\\sigma^2)$ independent, so $\\tilde y\\mid y\\sim N(m_n,\\sigma^2+s_n^2)$.",
+  "section": 2
  },
  {
-  "id": "bay-3.1",
-  "lecture": 3,
+  "id": "bay-2.1",
+  "lecture": 2,
   "stem": "A binomial likelihood with $k$ successes in $n$ trials is combined with a $\\mathrm{Beta}(\\alpha,\\beta)$ prior. What is the posterior?",
   "correct": [
    "$\\mathrm{Beta}(\\alpha+k,\\ \\beta+n-k)$.",
@@ -349,11 +359,12 @@
     "misconception": "ignores conjugacy"
    }
   ],
-  "explanation": "The prior acts like $\\alpha+\\beta$ pseudo-observations, with $\\alpha$ successes among them."
+  "explanation": "The prior acts like $\\alpha+\\beta$ pseudo-observations, with $\\alpha$ successes among them.",
+  "section": 1
  },
  {
-  "id": "bay-3.2",
-  "lecture": 3,
+  "id": "bay-2.2",
+  "lecture": 2,
   "stem": "How is the posterior mean of a Beta-binomial model related to the prior mean and the sample proportion?",
   "correct": [
    "A weighted average, with weight $n/(\\alpha+\\beta+n)$ on the sample proportion.",
@@ -381,11 +392,12 @@
     "misconception": "confuses with a mode"
    }
   ],
-  "explanation": "Posterior mean $=\\dfrac{\\alpha+k}{\\alpha+\\beta+n}$; with a strong prior (large $\\alpha+\\beta$) it moves little, and as $n\\to\\infty$ it tends to $k/n$."
+  "explanation": "Posterior mean $=\\dfrac{\\alpha+k}{\\alpha+\\beta+n}$; with a strong prior (large $\\alpha+\\beta$) it moves little, and as $n\\to\\infty$ it tends to $k/n$.",
+  "section": 1
  },
  {
-  "id": "bay-3.3",
-  "lecture": 3,
+  "id": "bay-2.3",
+  "lecture": 2,
   "stem": "What does conjugacy of a prior mean?",
   "correct": [
    "The posterior is in the same family as the prior.",
@@ -413,11 +425,12 @@
     "misconception": "overgeneralises"
    }
   ],
-  "explanation": "Beta-binomial, normal-normal and gamma-Poisson are conjugate pairs; most realistic models are not conjugate and need simulation."
+  "explanation": "Beta-binomial, normal-normal and gamma-Poisson are conjugate pairs; most realistic models are not conjugate and need simulation.",
+  "section": 1
  },
  {
-  "id": "bay-3.4",
-  "lecture": 3,
+  "id": "bay-2.4",
+  "lecture": 2,
   "stem": "For Poisson counts $y_1,\\dots,y_n$ with rate $\\lambda$ and a $\\mathrm{Gamma}(a,b)$ prior (shape $a$, rate $b$), what is the posterior?",
   "correct": [
    "$\\mathrm{Gamma}(a+\\sum y_i,\\ b+n)$.",
@@ -445,11 +458,12 @@
     "misconception": "ignores the data"
    }
   ],
-  "explanation": "The posterior mean is $(a+\\sum y_i)/(b+n)$, a compromise between the prior mean $a/b$ and the sample mean $\\bar y$."
+  "explanation": "The posterior mean is $(a+\\sum y_i)/(b+n)$, a compromise between the prior mean $a/b$ and the sample mean $\\bar y$.",
+  "section": 1
  },
  {
-  "id": "bay-3.5",
-  "lecture": 3,
+  "id": "bay-2.5",
+  "lecture": 2,
   "stem": "In the Dirichlet-multinomial model, what is the posterior predictive probability that the next observation falls in category $j$?",
   "correct": [
    "$(\\alpha_j+n_j)/(\\sum_k\\alpha_k+n)$, the posterior mean of $\\theta_j$.",
@@ -477,11 +491,12 @@
     "misconception": "reports a parameter as a probability"
    }
   ],
-  "explanation": "Given the data, the next category is multinomial with probabilities $E[\\theta_j\\mid\\text{data}]=(\\alpha_j+n_j)/(\\alpha_0+n)$ where $\\alpha_0=\\sum_k\\alpha_k$."
+  "explanation": "Given the data, the next category is multinomial with probabilities $E[\\theta_j\\mid\\text{data}]=(\\alpha_j+n_j)/(\\alpha_0+n)$ where $\\alpha_0=\\sum_k\\alpha_k$.",
+  "section": 1
  },
  {
-  "id": "bay-4.1",
-  "lecture": 4,
+  "id": "bay-3.1",
+  "lecture": 3,
   "stem": "What is the MAP estimate?",
   "correct": [
    "The posterior mode.",
@@ -509,11 +524,12 @@
     "misconception": "gives an unrelated criterion"
    }
   ],
-  "explanation": "With a flat prior the MAP equals the MLE; the MAP is not invariant under reparametrisation, unlike the MLE."
+  "explanation": "With a flat prior the MAP equals the MLE; the MAP is not invariant under reparametrisation, unlike the MLE.",
+  "section": 1
  },
  {
-  "id": "bay-4.2",
-  "lecture": 4,
+  "id": "bay-3.2",
+  "lecture": 3,
   "stem": "Which loss function does the posterior mean minimise?",
   "correct": [
    "Squared error loss.",
@@ -541,11 +557,12 @@
     "misconception": "denies the property"
    }
   ],
-  "explanation": "The posterior median minimises absolute error, and the posterior mode is optimal for zero-one loss."
+  "explanation": "The posterior median minimises absolute error, and the posterior mode is optimal for zero-one loss.",
+  "section": 1
  },
  {
-  "id": "bay-4.3",
-  "lecture": 4,
+  "id": "bay-3.3",
+  "lecture": 3,
   "stem": "How does a 95% credible interval differ from a 95% confidence interval?",
   "correct": [
    "A credible interval holds $\\theta$ with posterior probability 0.95; a confidence interval concerns coverage.",
@@ -573,11 +590,12 @@
     "misconception": "makes a false claim"
    }
   ],
-  "explanation": "With a flat prior and a normal model the two intervals coincide numerically, but their interpretations differ."
+  "explanation": "With a flat prior and a normal model the two intervals coincide numerically, but their interpretations differ.",
+  "section": 1
  },
  {
-  "id": "bay-4.4",
-  "lecture": 4,
+  "id": "bay-3.4",
+  "lecture": 3,
   "stem": "What is a highest posterior density (HPD) interval?",
   "correct": [
    "The shortest interval with posterior probability $1-\\alpha$.",
@@ -605,11 +623,12 @@
     "misconception": "confuses with a confidence interval"
    }
   ],
-  "explanation": "For a skewed posterior the HPD interval is shorter than the equal-tailed one and not symmetric in probability."
+  "explanation": "For a skewed posterior the HPD interval is shorter than the equal-tailed one and not symmetric in probability.",
+  "section": 1
  },
  {
-  "id": "bay-4.5",
-  "lecture": 4,
+  "id": "bay-3.5",
+  "lecture": 3,
   "stem": "How do the posterior mean, posterior median and MAP estimate compare when the posterior is skewed?",
   "correct": [
    "They generally differ, because each summarises differently and the mean is pulled toward the long tail.",
@@ -637,11 +656,12 @@
     "misconception": "reverses the effect of skewness"
    }
   ],
-  "explanation": "For a right-skewed posterior the order is typically mode < median < mean, and the reverse for a left-skewed one. They agree exactly for a symmetric unimodal posterior."
+  "explanation": "For a right-skewed posterior the order is typically mode < median < mean, and the reverse for a left-skewed one. They agree exactly for a symmetric unimodal posterior.",
+  "section": 1
  },
  {
-  "id": "bay-5.1",
-  "lecture": 5,
+  "id": "bay-3.6",
+  "lecture": 3,
   "stem": "What is a weakly informative prior?",
   "correct": [
    "A prior that rules out absurd values only.",
@@ -669,11 +689,12 @@
     "misconception": "gives a wrong characterisation"
    }
   ],
-  "explanation": "A weakly informative prior helps with separation in logistic regression or sparse data, where flat priors give unstable estimates."
+  "explanation": "A weakly informative prior helps with separation in logistic regression or sparse data, where flat priors give unstable estimates.",
+  "section": 2
  },
  {
-  "id": "bay-5.2",
-  "lecture": 5,
+  "id": "bay-3.7",
+  "lecture": 3,
   "stem": "What is a drawback of an improper flat prior $p(\\theta)\\propto1$?",
   "correct": [
    "It is not a proper density and is not reparametrisation invariant.",
@@ -701,11 +722,12 @@
     "misconception": "makes a false claim"
    }
   ],
-  "explanation": "A flat prior on a variance is not flat on the standard deviation; Jeffreys priors are designed to be invariant."
+  "explanation": "A flat prior on a variance is not flat on the standard deviation; Jeffreys priors are designed to be invariant.",
+  "section": 2
  },
  {
-  "id": "bay-5.3",
-  "lecture": 5,
+  "id": "bay-3.8",
+  "lecture": 3,
   "stem": "What is the Jeffreys prior?",
   "correct": [
    "A prior proportional to $\\sqrt{I(\\theta)}$.",
@@ -733,11 +755,12 @@
     "misconception": "is false: it is often improper"
    }
   ],
-  "explanation": "For the binomial it is $\\mathrm{Beta}(\\tfrac12,\\tfrac12)$; for a normal mean with known variance it is flat."
+  "explanation": "For the binomial it is $\\mathrm{Beta}(\\tfrac12,\\tfrac12)$; for a normal mean with known variance it is flat.",
+  "section": 2
  },
  {
-  "id": "bay-5.4",
-  "lecture": 5,
+  "id": "bay-3.9",
+  "lecture": 3,
   "stem": "What is a prior sensitivity analysis?",
   "correct": [
    "Repeat the analysis under several reasonable priors.",
@@ -765,11 +788,12 @@
     "misconception": "is the opposite of a sensitivity analysis"
    }
   ],
-  "explanation": "If conclusions differ across plausible priors, the data are not informative enough, and this should be reported."
+  "explanation": "If conclusions differ across plausible priors, the data are not informative enough, and this should be reported.",
+  "section": 2
  },
  {
-  "id": "bay-5.5",
-  "lecture": 5,
+  "id": "bay-3.10",
+  "lecture": 3,
   "stem": "What does the effective sample size of a $\\mathrm{Beta}(\\alpha,\\beta)$ prior tell us?",
   "correct": [
    "It is $\\alpha+\\beta$: the prior carries about as much information as that many observations.",
@@ -797,11 +821,12 @@
     "misconception": "confuses it with the number of parameters"
    }
   ],
-  "explanation": "A $\\mathrm{Beta}(\\alpha,\\beta)$ prior acts like $\\alpha$ prior successes and $\\beta$ prior failures. For a power prior $\\mathrm{Beta}(\\delta x,\\delta(m-x))$ the effective sample size is $\\delta m$."
+  "explanation": "A $\\mathrm{Beta}(\\alpha,\\beta)$ prior acts like $\\alpha$ prior successes and $\\beta$ prior failures. For a power prior $\\mathrm{Beta}(\\delta x,\\delta(m-x))$ the effective sample size is $\\delta m$.",
+  "section": 2
  },
  {
-  "id": "bay-6.1",
-  "lecture": 6,
+  "id": "bay-4.1",
+  "lecture": 4,
   "stem": "How does the Monte Carlo estimate of $E[f(X)]$ work and how accurate is it?",
   "correct": [
    "Average $f$ over draws; error is $\\sigma_f/\\sqrt n$.",
@@ -829,11 +854,12 @@
     "misconception": "adds an unnecessary condition"
    }
   ],
-  "explanation": "Finite variance is enough: by the CLT $\\sqrt n(\\hat\\mu-\\mu)\\to N(0,\\sigma_f^2)$, which gives confidence intervals for the simulation error."
+  "explanation": "Finite variance is enough: by the CLT $\\sqrt n(\\hat\\mu-\\mu)\\to N(0,\\sigma_f^2)$, which gives confidence intervals for the simulation error.",
+  "section": 1
  },
  {
-  "id": "bay-6.2",
-  "lecture": 6,
+  "id": "bay-4.2",
+  "lecture": 4,
   "stem": "How many Monte Carlo draws are needed to estimate a mean within $\\varepsilon$ with 95% confidence?",
   "correct": [
    "About $n=(1.96\\,\\sigma/\\varepsilon)^2$.",
@@ -861,11 +887,12 @@
     "misconception": "uses the wrong power"
    }
   ],
-  "explanation": "$\\mathrm{SE}=\\sigma/\\sqrt n\\le\\varepsilon/1.96$ gives $n\\ge(1.96\\sigma/\\varepsilon)^2$."
+  "explanation": "$\\mathrm{SE}=\\sigma/\\sqrt n\\le\\varepsilon/1.96$ gives $n\\ge(1.96\\sigma/\\varepsilon)^2$.",
+  "section": 1
  },
  {
-  "id": "bay-6.3",
-  "lecture": 6,
+  "id": "bay-4.3",
+  "lecture": 4,
   "stem": "What is the role of the law of large numbers in Monte Carlo estimation?",
   "correct": [
    "The sample average of $f(X_i)$ converges to $E[f(X)]$.",
@@ -893,11 +920,12 @@
     "misconception": "confuses with convergence"
    }
   ],
-  "explanation": "The CLT gives the rate and the error distribution; the LAW tells us only that the estimator is consistent."
+  "explanation": "The CLT gives the rate and the error distribution; the LAW tells us only that the estimator is consistent.",
+  "section": 1
  },
  {
-  "id": "bay-6.4",
-  "lecture": 6,
+  "id": "bay-4.4",
+  "lecture": 4,
   "stem": "Why is simple Monte Carlo attractive for high-dimensional integrals compared with grid-based quadrature?",
   "correct": [
    "The $n^{-1/2}$ error ignores the dimension, unlike grids.",
@@ -925,11 +953,12 @@
     "misconception": "confuses with Gaussian quadrature"
    }
   ],
-  "explanation": "The variance $\\sigma_f^2$ may still grow with dimension, but the rate in $n$ does not deteriorate."
+  "explanation": "The variance $\\sigma_f^2$ may still grow with dimension, but the rate in $n$ does not deteriorate.",
+  "section": 1
  },
  {
-  "id": "bay-6.5",
-  "lecture": 6,
+  "id": "bay-4.5",
+  "lecture": 4,
   "stem": "Why does the standard error of a Monte Carlo estimate fall only like $1/\\sqrt n$?",
   "correct": [
    "Its variance is $\\mathrm{Var}[h(X)]/n$, so halving the error needs four times as many draws.",
@@ -957,11 +986,12 @@
     "misconception": "makes a vague universal claim"
    }
   ],
-  "explanation": "$\\mathrm{Var}(\\hat\\mu_n)=\\sigma^2/n$ so $\\mathrm{SE}=\\sigma/\\sqrt n$. The rate does not depend on the dimension of $X$, unlike a grid with $n^d$ points."
+  "explanation": "$\\mathrm{Var}(\\hat\\mu_n)=\\sigma^2/n$ so $\\mathrm{SE}=\\sigma/\\sqrt n$. The rate does not depend on the dimension of $X$, unlike a grid with $n^d$ points.",
+  "section": 1
  },
  {
-  "id": "bay-7.1",
-  "lecture": 7,
+  "id": "bay-4.6",
+  "lecture": 4,
   "stem": "How does inverse transform sampling generate a draw from a distribution with cdf $F$?",
   "correct": [
    "Draw $U\\sim\\mathrm{Uniform}(0,1)$ and return $F^{-1}(U)$.",
@@ -989,11 +1019,12 @@
     "misconception": "restricts the method"
    }
   ],
-  "explanation": "For the exponential with rate $\\lambda$, $F^{-1}(u)=-\\ln(1-u)/\\lambda$, and since $1-U$ is also uniform one may use $-\\ln(U)/\\lambda$."
+  "explanation": "For the exponential with rate $\\lambda$, $F^{-1}(u)=-\\ln(1-u)/\\lambda$, and since $1-U$ is also uniform one may use $-\\ln(U)/\\lambda$.",
+  "section": 2
  },
  {
-  "id": "bay-7.2",
-  "lecture": 7,
+  "id": "bay-4.7",
+  "lecture": 4,
   "stem": "Why does $X=F^{-1}(U)$ with $U\\sim U(0,1)$ have cdf $F$?",
   "correct": [
    "Because $P(F^{-1}(U)\\le x)=P(U\\le F(x))=F(x)$ for every $x$.",
@@ -1021,11 +1052,12 @@
     "misconception": "gives an irrelevant property"
    }
   ],
-  "explanation": "$P(F^{-1}(U)\\le x)=P(U\\le F(x))=F(x)$. Equivalently $F(X)\\sim U(0,1)$ for continuous $X$."
+  "explanation": "$P(F^{-1}(U)\\le x)=P(U\\le F(x))=F(x)$. Equivalently $F(X)\\sim U(0,1)$ for continuous $X$.",
+  "section": 2
  },
  {
-  "id": "bay-7.3",
-  "lecture": 7,
+  "id": "bay-4.8",
+  "lecture": 4,
   "stem": "For an exponential distribution with rate $\\lambda$, which formula turns a uniform draw $U$ into a draw?",
   "correct": [
    "$X=-\\ln(U)/\\lambda$, or equally $-\\ln(1-U)/\\lambda$.",
@@ -1053,11 +1085,12 @@
     "misconception": "squares the rate"
    }
   ],
-  "explanation": "Solve $u=1-e^{-\\lambda x}$ for $x$: $x=-\\ln(1-u)/\\lambda$. Since $1-U$ is also uniform, $-\\ln(U)/\\lambda$ works too. For rate $2$ and $u=0.5$ the draw is $\\ln2/2=0.3466$."
+  "explanation": "Solve $u=1-e^{-\\lambda x}$ for $x$: $x=-\\ln(1-u)/\\lambda$. Since $1-U$ is also uniform, $-\\ln(U)/\\lambda$ works too. For rate $2$ and $u=0.5$ the draw is $\\ln2/2=0.3466$.",
+  "section": 2
  },
  {
-  "id": "bay-7.4",
-  "lecture": 7,
+  "id": "bay-4.9",
+  "lecture": 4,
   "stem": "Why can inverse transform sampling not be used directly for a posterior known only up to a constant?",
   "correct": [
    "Without the normalising constant the cdf, and so its inverse, cannot be computed.",
@@ -1085,11 +1118,12 @@
     "misconception": "restricts the method to discrete cases"
    }
   ],
-  "explanation": "$F(x)\\propto\\int_{-\\infty}^x\\tilde f(t)dt$ is known only up to the unknown constant $\\int\\tilde f$, so $F^{-1}(u)$ cannot be computed; this motivates importance sampling and MCMC."
+  "explanation": "$F(x)\\propto\\int_{-\\infty}^x\\tilde f(t)dt$ is known only up to the unknown constant $\\int\\tilde f$, so $F^{-1}(u)$ cannot be computed; this motivates importance sampling and MCMC.",
+  "section": 2
  },
  {
-  "id": "bay-7.5",
-  "lecture": 7,
+  "id": "bay-4.10",
+  "lecture": 4,
   "stem": "In posterior predictive sampling for a conjugate model, what are the two stages of the algorithm?",
   "correct": [
    "Draw $\\theta_j$ from the posterior, then draw $\\tilde y_j$ from the model given $\\theta_j$.",
@@ -1117,11 +1151,12 @@
     "misconception": "reverses the order of the stages"
    }
   ],
-  "explanation": "Marginalising $\\theta$ is done by simulation: each retained $\\tilde y_j$ is a draw from $f(\\tilde y\\mid y)=\\int f(\\tilde y\\mid\\theta)\\pi(\\theta\\mid y)d\\theta$. For a Weibull model the second stage uses inverse transform sampling."
+  "explanation": "Marginalising $\\theta$ is done by simulation: each retained $\\tilde y_j$ is a draw from $f(\\tilde y\\mid y)=\\int f(\\tilde y\\mid\\theta)\\pi(\\theta\\mid y)d\\theta$. For a Weibull model the second stage uses inverse transform sampling.",
+  "section": 2
  },
  {
-  "id": "bay-8.1",
-  "lecture": 8,
+  "id": "bay-5.1",
+  "lecture": 5,
   "stem": "What is the importance sampling identity for $E_p[f(X)]$ with proposal density $q$?",
   "correct": [
    "$E_p[f(X)]=E_q[f(X)w(X)]$ with $w=p/q$.",
@@ -1149,11 +1184,12 @@
     "misconception": "restricts it wrongly"
    }
   ],
-  "explanation": "Importance sampling needs $q>0$ wherever $pf\\ne0$. For rare events, shifting $q$ towards the event reduces variance."
+  "explanation": "Importance sampling needs $q>0$ wherever $pf\\ne0$. For rare events, shifting $q$ towards the event reduces variance.",
+  "section": 1
  },
  {
-  "id": "bay-8.2",
-  "lecture": 8,
+  "id": "bay-5.2",
+  "lecture": 5,
   "stem": "Why should the proposal $q$ have heavier tails than the target $p$ in importance sampling?",
   "correct": [
    "If $p/q$ is unbounded in the tails, weights have infinite variance.",
@@ -1181,11 +1217,12 @@
     "misconception": "gives an unrelated condition"
    }
   ],
-  "explanation": "A normal proposal for a Cauchy target is safe in one direction only: a Cauchy proposal for a normal target is fine, but not the reverse."
+  "explanation": "A normal proposal for a Cauchy target is safe in one direction only: a Cauchy proposal for a normal target is fine, but not the reverse.",
+  "section": 1
  },
  {
-  "id": "bay-8.3",
-  "lecture": 8,
+  "id": "bay-5.3",
+  "lecture": 5,
   "stem": "What does the effective sample size $(\\sum w_i)^2/\\sum w_i^2$ of importance weights measure?",
   "correct": [
    "How many equal-weight draws match the precision.",
@@ -1213,11 +1250,12 @@
     "misconception": "confuses with an acceptance rate"
    }
   ],
-  "explanation": "ESS $=n/(1+\\mathrm{CV}^2)$ with $\\mathrm{CV}$ the coefficient of variation of the weights."
+  "explanation": "ESS $=n/(1+\\mathrm{CV}^2)$ with $\\mathrm{CV}$ the coefficient of variation of the weights.",
+  "section": 1
  },
  {
-  "id": "bay-8.4",
-  "lecture": 8,
+  "id": "bay-5.4",
+  "lecture": 5,
   "stem": "What is self-normalised importance sampling?",
   "correct": [
    "Use $\\sum f(x_i)w_i/\\sum w_i$, valid when $p$ is known up to a constant.",
@@ -1245,11 +1283,12 @@
     "misconception": "invents a restriction"
    }
   ],
-  "explanation": "Posterior distributions are known only up to the marginal likelihood, so the self-normalised form is the one used in Bayesian computation."
+  "explanation": "Posterior distributions are known only up to the marginal likelihood, so the self-normalised form is the one used in Bayesian computation.",
+  "section": 1
  },
  {
-  "id": "bay-8.5",
-  "lecture": 8,
+  "id": "bay-5.5",
+  "lecture": 5,
   "stem": "In importance sampling one proposal draw has a weight much larger than all the others. What is the likely consequence?",
   "correct": [
    "The effective sample size is small, so the estimate acts like only a few draws and has a high variance.",
@@ -1277,11 +1316,12 @@
     "misconception": "thinks the plain estimator avoids weight degeneracy"
    }
   ],
-  "explanation": "Weights with one huge value give $(\\sum w_i)^2/\\sum w_i^2$ close to $1$: the average is essentially one draw. This usually means the proposal has lighter tails than the target."
+  "explanation": "Weights with one huge value give $(\\sum w_i)^2/\\sum w_i^2$ close to $1$: the average is essentially one draw. This usually means the proposal has lighter tails than the target.",
+  "section": 1
  },
  {
-  "id": "bay-9.1",
-  "lecture": 9,
+  "id": "bay-6.1",
+  "lecture": 6,
   "stem": "What does detailed balance say, and why does it matter?",
   "correct": [
    "$\\pi(x)P(x,y)=\\pi(y)P(y,x)$, which makes $\\pi$ stationary.",
@@ -1309,11 +1349,12 @@
     "misconception": "restricts it wrongly"
    }
   ],
-  "explanation": "Detailed balance is sufficient but not necessary for stationarity. Irreducibility and aperiodicity then give convergence."
+  "explanation": "Detailed balance is sufficient but not necessary for stationarity. Irreducibility and aperiodicity then give convergence.",
+  "section": 1
  },
  {
-  "id": "bay-9.2",
-  "lecture": 9,
+  "id": "bay-6.2",
+  "lecture": 6,
   "stem": "What does the Markov chain in MCMC produce, and how does that differ from independent sampling?",
   "correct": [
    "Dependent draws from the target, so ESS is below $n$.",
@@ -1341,11 +1382,12 @@
     "misconception": "confuses the proposal with the target"
    }
   ],
-  "explanation": "Because of autocorrelation the standard error of an MCMC average is larger than for independent draws of the same number."
+  "explanation": "Because of autocorrelation the standard error of an MCMC average is larger than for independent draws of the same number.",
+  "section": 1
  },
  {
-  "id": "bay-9.3",
-  "lecture": 9,
+  "id": "bay-6.3",
+  "lecture": 6,
   "stem": "What does the transition matrix $P$ of a finite Markov chain contain?",
   "correct": [
    "$P_{ij}=P(X_n=j\\mid X_{n-1}=i)$, with every row summing to one.",
@@ -1373,11 +1415,12 @@
     "misconception": "describes hitting times"
    }
   ],
-  "explanation": "Row $i$ of $P$ is the conditional distribution of the next state given the current state $i$. The $n$-step matrix is $P^n$."
+  "explanation": "Row $i$ of $P$ is the conditional distribution of the next state given the current state $i$. The $n$-step matrix is $P^n$.",
+  "section": 1
  },
  {
-  "id": "bay-9.4",
-  "lecture": 9,
+  "id": "bay-6.4",
+  "lecture": 6,
   "stem": "What does it mean for $\\pi$ to be a stationary distribution of a Markov chain with transition matrix $P$?",
   "correct": [
    "$\\pi=\\pi P$: if $X_0\\sim\\pi$ then $X_n\\sim\\pi$ for every $n$.",
@@ -1405,11 +1448,12 @@
     "misconception": "confuses stationarity with the initial law"
    }
   ],
-  "explanation": "Stationarity: $\\pi_j=\\sum_i\\pi_iP_{ij}$. Detailed balance $\\pi_iP_{ij}=\\pi_jP_{ji}$ is sufficient for it."
+  "explanation": "Stationarity: $\\pi_j=\\sum_i\\pi_iP_{ij}$. Detailed balance $\\pi_iP_{ij}=\\pi_jP_{ji}$ is sufficient for it.",
+  "section": 1
  },
  {
-  "id": "bay-9.5",
-  "lecture": 9,
+  "id": "bay-6.5",
+  "lecture": 6,
   "stem": "Why can the ordinary law of large numbers not be used to justify averages over MCMC output?",
   "correct": [
    "Successive chain values are correlated, so an ergodic theorem for Markov chains is needed.",
@@ -1437,11 +1481,12 @@
     "misconception": "claims the marginal laws never settle"
    }
   ],
-  "explanation": "$(X_n,X_{n+1})$ are correlated, so the i.i.d. law of large numbers does not apply; ergodic theorems give $\\frac1T\\sum h(X_n)\\to E_\\pi h(X)$ for regular chains."
+  "explanation": "$(X_n,X_{n+1})$ are correlated, so the i.i.d. law of large numbers does not apply; ergodic theorems give $\\frac1T\\sum h(X_n)\\to E_\\pi h(X)$ for regular chains.",
+  "section": 1
  },
  {
-  "id": "bay-10.1",
-  "lecture": 10,
+  "id": "bay-6.6",
+  "lecture": 6,
   "stem": "What is the acceptance probability of the Metropolis-Hastings algorithm for a move from $x$ to $x'$?",
   "correct": [
    "$\\min\\{1,\\ \\pi(x')q(x\\mid x')/(\\pi(x)q(x'\\mid x))\\}$.",
@@ -1469,11 +1514,12 @@
     "misconception": "invents a bound"
    }
   ],
-  "explanation": "Only a ratio of target densities enters, so the target needs to be known only up to a constant."
+  "explanation": "Only a ratio of target densities enters, so the target needs to be known only up to a constant.",
+  "section": 2
  },
  {
-  "id": "bay-10.2",
-  "lecture": 10,
+  "id": "bay-6.7",
+  "lecture": 6,
   "stem": "What happens in a random-walk Metropolis sampler when the proposal step is very small?",
   "correct": [
    "Almost every move is accepted, but the chain crawls.",
@@ -1501,11 +1547,12 @@
     "misconception": "confuses with speed"
    }
   ],
-  "explanation": "Very large steps cause many rejections; an intermediate step balances the two (acceptance about 23% in high dimensions, 44% in one dimension)."
+  "explanation": "Very large steps cause many rejections; an intermediate step balances the two (acceptance about 23% in high dimensions, 44% in one dimension).",
+  "section": 2
  },
  {
-  "id": "bay-10.3",
-  "lecture": 10,
+  "id": "bay-6.8",
+  "lecture": 6,
   "stem": "Why can MH be used when the posterior density is known only up to a constant?",
   "correct": [
    "The acceptance ratio cancels the normalising constant.",
@@ -1533,11 +1580,12 @@
     "misconception": "restricts it wrongly"
    }
   ],
-  "explanation": "Posterior $\\propto$ likelihood $\\times$ prior is all that is needed, which is why MCMC revolutionised Bayesian statistics."
+  "explanation": "Posterior $\\propto$ likelihood $\\times$ prior is all that is needed, which is why MCMC revolutionised Bayesian statistics.",
+  "section": 2
  },
  {
-  "id": "bay-10.4",
-  "lecture": 10,
+  "id": "bay-6.9",
+  "lecture": 6,
   "stem": "In the Metropolis-Hastings algorithm, what happens when a proposed move is rejected?",
   "correct": [
    "The chain stays at the current value, which is repeated in the sequence.",
@@ -1565,11 +1613,12 @@
     "misconception": "changes the ratio after a rejection"
    }
   ],
-  "explanation": "Setting $X_{t+1}=x_t$ after a rejection is essential for detailed balance. Repeated values appear in the output, and a high rejection rate (a very large proposal scale) gives many repeats."
+  "explanation": "Setting $X_{t+1}=x_t$ after a rejection is essential for detailed balance. Repeated values appear in the output, and a high rejection rate (a very large proposal scale) gives many repeats.",
+  "section": 2
  },
  {
-  "id": "bay-10.5",
-  "lecture": 10,
+  "id": "bay-6.10",
+  "lecture": 6,
   "stem": "What does a random-walk proposal $g(y\\mid x)=N(y\\mid x,\\tau^2)$ imply for the acceptance ratio?",
   "correct": [
    "The proposal is symmetric, so $\\alpha=\\min\\{1,\\tilde f(y)/\\tilde f(x)\\}$.",
@@ -1597,11 +1646,12 @@
     "misconception": "keeps only the proposal ratio"
    }
   ],
-  "explanation": "$g(y\\mid x)=g(x\\mid y)$ for the normal random walk, so $\\alpha=\\min\\{1,\\tilde f(y)g(x\\mid y)/(\\tilde f(x)g(y\\mid x))\\}=\\min\\{1,\\tilde f(y)/\\tilde f(x)\\}$: moves to higher density are always accepted."
+  "explanation": "$g(y\\mid x)=g(x\\mid y)$ for the normal random walk, so $\\alpha=\\min\\{1,\\tilde f(y)g(x\\mid y)/(\\tilde f(x)g(y\\mid x))\\}=\\min\\{1,\\tilde f(y)/\\tilde f(x)\\}$: moves to higher density are always accepted.",
+  "section": 2
  },
  {
-  "id": "bay-11.1",
-  "lecture": 11,
+  "id": "bay-7.1",
+  "lecture": 7,
   "stem": "What is a Gibbs sampler?",
   "correct": [
    "A chain drawing each variable from its full conditional.",
@@ -1629,11 +1679,12 @@
     "misconception": "restricts it wrongly"
    }
   ],
-  "explanation": "Gibbs is convenient with conjugate conditionals; strong posterior correlations slow it down because it moves along coordinate axes."
+  "explanation": "Gibbs is convenient with conjugate conditionals; strong posterior correlations slow it down because it moves along coordinate axes.",
+  "section": 1
  },
  {
-  "id": "bay-11.2",
-  "lecture": 11,
+  "id": "bay-7.2",
+  "lecture": 7,
   "stem": "What is the purpose of burn-in?",
   "correct": [
    "To drop early draws that reflect the starting value.",
@@ -1661,11 +1712,12 @@
     "misconception": "confuses with a diagnostic"
    }
   ],
-  "explanation": "Running several chains from dispersed starts and checking that they agree helps decide how much to discard."
+  "explanation": "Running several chains from dispersed starts and checking that they agree helps decide how much to discard.",
+  "section": 1
  },
  {
-  "id": "bay-11.3",
-  "lecture": 11,
+  "id": "bay-7.3",
+  "lecture": 7,
   "stem": "How is the effective sample size (ESS) of an MCMC run defined?",
   "correct": [
    "$n/(1+2\\sum_{k\\ge1}\\rho_k)$.",
@@ -1693,11 +1745,12 @@
     "misconception": "ignores correlation"
    }
   ],
-  "explanation": "For an AR(1) chain with correlation $\\rho$, ESS $=n(1-\\rho)/(1+\\rho)$."
+  "explanation": "For an AR(1) chain with correlation $\\rho$, ESS $=n(1-\\rho)/(1+\\rho)$.",
+  "section": 1
  },
  {
-  "id": "bay-11.4",
-  "lecture": 11,
+  "id": "bay-7.4",
+  "lecture": 7,
   "stem": "What does the Gelman-Rubin statistic $\\hat R$ compare?",
   "correct": [
    "Between-chain against within-chain variability, near 1 at convergence.",
@@ -1725,11 +1778,12 @@
     "misconception": "reverses the interpretation"
    }
   ],
-  "explanation": "A common rule is $\\hat R<1.01$; $\\hat R$ well above 1 means the chains have not mixed."
+  "explanation": "A common rule is $\\hat R<1.01$; $\\hat R$ well above 1 means the chains have not mixed.",
+  "section": 1
  },
  {
-  "id": "bay-11.5",
-  "lecture": 11,
+  "id": "bay-7.5",
+  "lecture": 7,
   "stem": "What is the main idea of Hamiltonian Monte Carlo (HMC)?",
   "correct": [
    "It uses gradients to simulate dynamics and propose distant moves.",
@@ -1757,11 +1811,12 @@
     "misconception": "describes Gibbs"
    }
   ],
-  "explanation": "Stan's NUTS automatically tunes the trajectory length of HMC."
+  "explanation": "Stan's NUTS automatically tunes the trajectory length of HMC.",
+  "section": 1
  },
  {
-  "id": "bay-12.1",
-  "lecture": 12,
+  "id": "bay-8.1",
+  "lecture": 8,
   "stem": "What does a posterior predictive check assess?",
   "correct": [
    "Whether data simulated from the model resemble the observed data.",
@@ -1789,11 +1844,12 @@
     "misconception": "confuses with identifiability"
    }
   ],
-  "explanation": "A systematic discrepancy (for example too few extreme values in the replicated data) indicates model misfit."
+  "explanation": "A systematic discrepancy (for example too few extreme values in the replicated data) indicates model misfit.",
+  "section": 1
  },
  {
-  "id": "bay-12.2",
-  "lecture": 12,
+  "id": "bay-8.2",
+  "lecture": 8,
   "stem": "What is the Bayes factor $BF_{12}$ for comparing models $M_1$ and $M_2$?",
   "correct": [
    "The ratio of marginal likelihoods.",
@@ -1821,11 +1877,12 @@
     "misconception": "confuses with a posterior probability"
    }
   ],
-  "explanation": "Posterior odds $=BF_{12}\\times$ prior odds. Because the likelihood is averaged over the prior, the Bayes factor automatically penalises complexity."
+  "explanation": "Posterior odds $=BF_{12}\\times$ prior odds. Because the likelihood is averaged over the prior, the Bayes factor automatically penalises complexity.",
+  "section": 1
  },
  {
-  "id": "bay-12.3",
-  "lecture": 12,
+  "id": "bay-8.3",
+  "lecture": 8,
   "stem": "Why are Bayes factors sensitive to the prior on the parameters?",
   "correct": [
    "The marginal likelihood averages over the prior, so diffuse priors lower the evidence.",
@@ -1853,11 +1910,12 @@
     "misconception": "forgets that each model has its own prior"
    }
   ],
-  "explanation": "Improper priors leave the Bayes factor undefined up to an arbitrary constant, which is why proper priors are required for model comparison."
+  "explanation": "Improper priors leave the Bayes factor undefined up to an arbitrary constant, which is why proper priors are required for model comparison.",
+  "section": 1
  },
  {
-  "id": "bay-12.4",
-  "lecture": 12,
+  "id": "bay-8.4",
+  "lecture": 8,
   "stem": "What does the WAIC estimate?",
   "correct": [
    "Out-of-sample predictive accuracy.",
@@ -1885,11 +1943,12 @@
     "misconception": "confuses with a count"
    }
   ],
-  "explanation": "$p_{\\text{WAIC}}$ is the sum over observations of the posterior variance of the log-likelihood, a measure of flexibility."
+  "explanation": "$p_{\\text{WAIC}}$ is the sum over observations of the posterior variance of the log-likelihood, a measure of flexibility.",
+  "section": 1
  },
  {
-  "id": "bay-12.5",
-  "lecture": 12,
+  "id": "bay-8.5",
+  "lecture": 8,
   "stem": "A Bayes factor $BF_{12}=0.2$ is reported when comparing model $M_1$ with model $M_2$. What does it say?",
   "correct": [
    "The data are five times more likely under $M_2$ than $M_1$, with each model averaged over its prior.",
@@ -1917,11 +1976,12 @@
     "misconception": "confuses the Bayes factor with the prior odds"
    }
   ],
-  "explanation": "$BF_{12}=p(y\\mid M_1)/p(y\\mid M_2)=0.2$, so $BF_{21}=5$. Posterior odds equal the Bayes factor times the prior odds."
+  "explanation": "$BF_{12}=p(y\\mid M_1)/p(y\\mid M_2)=0.2$, so $BF_{21}=5$. Posterior odds equal the Bayes factor times the prior odds.",
+  "section": 1
  },
  {
-  "id": "bay-13.1",
-  "lecture": 13,
+  "id": "bay-9.1",
+  "lecture": 9,
   "stem": "What is the Laplace approximation to a posterior?",
   "correct": [
    "A normal at the mode with covariance from the inverse negative Hessian.",
@@ -1949,11 +2009,12 @@
     "misconception": "overstates"
    }
   ],
-  "explanation": "The approximation improves with more data (Bernstein-von Mises) and is poor for skewed, bounded or multimodal posteriors."
+  "explanation": "The approximation improves with more data (Bernstein-von Mises) and is poor for skewed, bounded or multimodal posteriors.",
+  "section": 1
  },
  {
-  "id": "bay-13.2",
-  "lecture": 13,
+  "id": "bay-9.2",
+  "lecture": 9,
   "stem": "When does the Laplace approximation work poorly?",
   "correct": [
    "When the posterior is skewed, multimodal or near a boundary.",
@@ -1981,11 +2042,12 @@
     "misconception": "restricts it wrongly"
    }
   ],
-  "explanation": "For a $\\mathrm{Beta}(2,20)$ posterior near 0, the Gaussian puts mass below zero."
+  "explanation": "For a $\\mathrm{Beta}(2,20)$ posterior near 0, the Gaussian puts mass below zero.",
+  "section": 1
  },
  {
-  "id": "bay-13.3",
-  "lecture": 13,
+  "id": "bay-9.3",
+  "lecture": 9,
   "stem": "How can the Laplace approximation be used to estimate the marginal likelihood?",
   "correct": [
    "Evaluate the integrand at the mode, times the Gaussian integral.",
@@ -2013,11 +2075,12 @@
     "misconception": "ignores the likelihood"
    }
   ],
-  "explanation": "This leads to the BIC as a rougher approximation, keeping only the leading terms."
+  "explanation": "This leads to the BIC as a rougher approximation, keeping only the leading terms.",
+  "section": 1
  },
  {
-  "id": "bay-13.4",
-  "lecture": 13,
+  "id": "bay-9.4",
+  "lecture": 9,
   "stem": "How is the Laplace approximation related to the sample size?",
   "correct": [
    "As $n$ grows the posterior turns normal with variance of order $1/n$.",
@@ -2045,11 +2108,12 @@
     "misconception": "invents a condition"
    }
   ],
-  "explanation": "Regularity includes a parameter in the interior of the space and a nonsingular information matrix."
+  "explanation": "Regularity includes a parameter in the interior of the space and a nonsingular information matrix.",
+  "section": 1
  },
  {
-  "id": "bay-13.5",
-  "lecture": 13,
+  "id": "bay-9.5",
+  "lecture": 9,
   "stem": "The Laplace approximation of a posterior is centred at the mode $\\hat\\theta$. Where does its variance come from?",
   "correct": [
    "It comes from the curvature of the log-posterior at the mode: the inverse of minus its second derivative.",
@@ -2077,11 +2141,12 @@
     "misconception": "forgets to negate and invert the curvature"
    }
   ],
-  "explanation": "A Taylor expansion of $\\log p(\\theta\\mid y)$ about the mode has no linear term, and the quadratic term gives a normal with variance $\\{-(\\log p)''(\\hat\\theta)\\}^{-1}$."
+  "explanation": "A Taylor expansion of $\\log p(\\theta\\mid y)$ about the mode has no linear term, and the quadratic term gives a normal with variance $\\{-(\\log p)''(\\hat\\theta)\\}^{-1}$.",
+  "section": 1
  },
  {
-  "id": "bay-14.1",
-  "lecture": 14,
+  "id": "bay-9.6",
+  "lecture": 9,
   "stem": "What is the evidence lower bound (ELBO) in variational Bayes?",
   "correct": [
    "$E_q[\\log p(y,\\theta)]-E_q[\\log q(\\theta)]$, a bound on $\\log p(y)$.",
@@ -2109,11 +2174,12 @@
     "misconception": "ignores the dependence"
    }
   ],
-  "explanation": "$\\log p(y)=\\mathrm{ELBO}(q)+\\mathrm{KL}(q\\|p(\\cdot\\mid y))$, so the gap is exactly the KL divergence."
+  "explanation": "$\\log p(y)=\\mathrm{ELBO}(q)+\\mathrm{KL}(q\\|p(\\cdot\\mid y))$, so the gap is exactly the KL divergence.",
+  "section": 2
  },
  {
-  "id": "bay-14.2",
-  "lecture": 14,
+  "id": "bay-9.7",
+  "lecture": 9,
   "stem": "What assumption does mean-field variational inference make?",
   "correct": [
    "The approximation factorises across parameters.",
@@ -2141,11 +2207,12 @@
     "misconception": "is a different assumption"
    }
   ],
-  "explanation": "With correlated posterior parameters the factorisation loses the correlation and typically underestimates the posterior variances."
+  "explanation": "With correlated posterior parameters the factorisation loses the correlation and typically underestimates the posterior variances.",
+  "section": 2
  },
  {
-  "id": "bay-14.3",
-  "lecture": 14,
+  "id": "bay-9.8",
+  "lecture": 9,
   "stem": "Which statement compares variational inference with MCMC correctly?",
   "correct": [
    "VI is faster but biased; MCMC is exact but slower.",
@@ -2173,11 +2240,12 @@
     "misconception": "reverses the requirement"
    }
   ],
-  "explanation": "Mean-field VI often gives good posterior means but too narrow intervals; use MCMC when calibrated uncertainty matters."
+  "explanation": "Mean-field VI often gives good posterior means but too narrow intervals; use MCMC when calibrated uncertainty matters.",
+  "section": 2
  },
  {
-  "id": "bay-14.4",
-  "lecture": 14,
+  "id": "bay-9.9",
+  "lecture": 9,
   "stem": "Which divergence does variational inference minimise?",
   "correct": [
    "$\\mathrm{KL}(q\\|p)$, from approximation to posterior.",
@@ -2205,11 +2273,12 @@
     "misconception": "denies the criterion"
    }
   ],
-  "explanation": "$\\mathrm{KL}(q\\|p)$ penalises $q$ for placing mass where $p$ is small, so $q$ locks onto one mode and is too narrow."
+  "explanation": "$\\mathrm{KL}(q\\|p)$ penalises $q$ for placing mass where $p$ is small, so $q$ locks onto one mode and is too narrow.",
+  "section": 2
  },
  {
-  "id": "bay-14.5",
-  "lecture": 14,
+  "id": "bay-9.10",
+  "lecture": 9,
   "stem": "Why is the ELBO useful for choosing the variational approximation $q$ to a posterior?",
   "correct": [
    "Maximising it over $q$ minimises $KL(q\\|p)$, and it needs the posterior only up to a constant.",
@@ -2237,11 +2306,12 @@
     "misconception": "drops the prior and entropy terms"
    }
   ],
-  "explanation": "$\\log p(y)=\\mathrm{ELBO}(q)+KL(q\\|p)$, so maximising the ELBO minimises the divergence. The ELBO uses only the joint $p(y,\\theta)$, not the normalised posterior."
+  "explanation": "$\\log p(y)=\\mathrm{ELBO}(q)+KL(q\\|p)$, so maximising the ELBO minimises the divergence. The ELBO uses only the joint $p(y,\\theta)$, not the normalised posterior.",
+  "section": 2
  },
  {
-  "id": "bay-15.1",
-  "lecture": 15,
+  "id": "bay-10.1",
+  "lecture": 10,
   "stem": "What does the Chinese restaurant process describe?",
   "correct": [
    "A rule: join a table in proportion to its size, or start a new one.",
@@ -2269,11 +2339,12 @@
     "misconception": "confuses with a sampler"
    }
   ],
-  "explanation": "P(new table) $=\\alpha/(n+\\alpha)$; the number of occupied tables grows like $\\alpha\\ln n$."
+  "explanation": "P(new table) $=\\alpha/(n+\\alpha)$; the number of occupied tables grows like $\\alpha\\ln n$.",
+  "section": 1
  },
  {
-  "id": "bay-15.2",
-  "lecture": 15,
+  "id": "bay-10.2",
+  "lecture": 10,
   "stem": "What is a Dirichlet process $\\mathrm{DP}(\\alpha,G_0)$?",
   "correct": [
    "A distribution over discrete measures, with base $G_0$ and concentration $\\alpha$.",
@@ -2301,11 +2372,12 @@
     "misconception": "confuses with a mixture model"
    }
   ],
-  "explanation": "Larger $\\alpha$ spreads mass over more atoms; as $\\alpha\\to\\infty$ draws look like $G_0$. For density estimation one convolves it with a kernel."
+  "explanation": "Larger $\\alpha$ spreads mass over more atoms; as $\\alpha\\to\\infty$ draws look like $G_0$. For density estimation one convolves it with a kernel.",
+  "section": 1
  },
  {
-  "id": "bay-15.3",
-  "lecture": 15,
+  "id": "bay-10.3",
+  "lecture": 10,
   "stem": "In the stick-breaking construction of the Dirichlet process, how are the weights built?",
   "correct": [
    "Break a unit stick: $\\beta_k\\sim\\mathrm{Beta}(1,\\alpha)$.",
@@ -2333,11 +2405,12 @@
     "misconception": "reverses the order"
    }
   ],
-  "explanation": "$E[\\beta_k]=1/(1+\\alpha)$, so a small $\\alpha$ puts most mass on the first few atoms."
+  "explanation": "$E[\\beta_k]=1/(1+\\alpha)$, so a small $\\alpha$ puts most mass on the first few atoms.",
+  "section": 1
  },
  {
-  "id": "bay-15.4",
-  "lecture": 15,
+  "id": "bay-10.4",
+  "lecture": 10,
   "stem": "What is a Gaussian process prior for a function $f$?",
   "correct": [
    "A distribution over functions with multivariate normal finite sets.",
@@ -2365,11 +2438,12 @@
     "misconception": "misdescribes"
    }
   ],
-  "explanation": "The posterior given Gaussian noisy observations is again a GP, in closed form, with cost cubic in the number of observations."
+  "explanation": "The posterior given Gaussian noisy observations is again a GP, in closed form, with cost cubic in the number of observations.",
+  "section": 1
  },
  {
-  "id": "bay-15.5",
-  "lecture": 15,
+  "id": "bay-10.5",
+  "lecture": 10,
   "stem": "How does Gaussian process regression produce a prediction at a new input?",
   "correct": [
    "A kernel-weighted mix of training outputs; variance shrinks near data.",
@@ -2397,6 +2471,7 @@
     "misconception": "reverses the effect"
    }
   ],
-  "explanation": "Far from the data the posterior mean returns to the prior mean and the variance to the prior variance."
+  "explanation": "Far from the data the posterior mean returns to the prior mean and the variance to the prior variance.",
+  "section": 1
  }
 ]

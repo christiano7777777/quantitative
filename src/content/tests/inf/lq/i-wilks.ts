@@ -41,27 +41,27 @@ export function build({ n, lam0, T, n2, T2 }: Params): LQInstance {
     parts: [
       {
         prompt: 'The maximum likelihood estimate is ' + tex('\\hat\\lambda=T/n=' + dec(hat)) + '. To test ' + tex('H_0:\\lambda=' + dec(lam0)) + ', find the likelihood ratio statistic ' + tex('-2\\log\\Lambda=2\\{T\\log(\\hat\\lambda/\\lambda_0)-T+n\\lambda_0\\}') + '.',
-        answer: lr, tolerance: tol3, lecture: 17,
+        answer: lr, tolerance: tol3, lecture: 10,
         explanation: tex('2\\{' + T + '\\log(' + dec(hat) + '/' + dec(lam0) + ')-' + T + '+' + n + '\\cdot' + dec(lam0) + '\\}=' + dec(lr)) + '. By Wilks theorem this is compared with ' + tex('\\chi^2_1') + ' (one free parameter under the full model, none under ' + tex('H_0') + '), so ' + (lr > CRIT ? tex('H_0') + ' is rejected at the 5% level.' : tex('H_0') + ' is not rejected at the 5% level.'),
       },
       {
         prompt: 'Find the Wald statistic ' + tex('n(\\hat\\lambda-\\lambda_0)^2/\\hat\\lambda') + ', which uses the Fisher information ' + tex('n/\\lambda') + ' evaluated at ' + tex('\\hat\\lambda') + '.',
-        answer: wald, tolerance: tol3, lecture: 14,
+        answer: wald, tolerance: tol3, lecture: 8,
         explanation: tex('' + n + '(' + dec(hat) + '-' + dec(lam0) + ')^2/' + dec(hat) + '=' + dec(wald)) + '.',
       },
       {
         prompt: 'Find the score statistic ' + tex('n(\\hat\\lambda-\\lambda_0)^2/\\lambda_0') + ', which uses the information at the null value ' + tex('\\lambda_0') + '.',
-        answer: score, tolerance: tol3, lecture: 14,
+        answer: score, tolerance: tol3, lecture: 8,
         explanation: 'The score at ' + tex('\\lambda_0') + ' is ' + tex('n(\\hat\\lambda-\\lambda_0)/\\lambda_0') + ' and the information is ' + tex('n/\\lambda_0') + ', so the statistic is ' + tex('' + n + '(' + dec(hat) + '-' + dec(lam0) + ')^2/' + dec(lam0) + '=' + dec(score)) + '. All three statistics are asymptotically ' + tex('\\chi^2_1') + ' under ' + tex('H_0') + ' and close to each other here.',
       },
       {
         prompt: 'Inverting the test gives the 95% confidence set ' + tex('\\{\\lambda:\\ -2\\log\\Lambda(\\lambda)\\le3.8415\\}') + '. Find its upper endpoint, the root above ' + tex('\\hat\\lambda') + ' of ' + tex('2\\{T\\log(\\hat\\lambda/\\lambda)-T+n\\lambda\\}=3.8415') + ' (2 decimal places; solve by trial and error or Newton steps).',
-        answer: up, tolerance: { abs: 0.005 }, lecture: 17,
+        answer: up, tolerance: { abs: 0.005 }, lecture: 10,
         explanation: 'The function ' + tex('2\\{' + T + '\\log(' + dec(hat) + '/\\lambda)-' + T + '+' + n + '\\lambda\\}') + ' increases for ' + tex('\\lambda>\\hat\\lambda') + ' and reaches 3.8415 at ' + tex('\\lambda\\approx' + up.toFixed(3)) + '. The interval is not symmetric about ' + tex('\\hat\\lambda') + '; the Wald interval ' + tex('\\hat\\lambda\\pm1.96\\sqrt{\\hat\\lambda/n}') + ' has upper end ' + tex(dec(hat + 1.96 * Math.sqrt(hat / n))) + '.',
       },
       {
         prompt: 'A second independent Poisson sample of size ' + tex(n2) + ' has total ' + tex(T2) + ' (mean ' + tex(dec(hat2)) + '). To test equal means in the two samples, find ' + tex('-2\\log\\Lambda=2\\{T\\log(\\hat\\lambda_1/\\hat\\lambda_0)+T_2\\log(\\hat\\lambda_2/\\hat\\lambda_0)\\}') + ', where ' + tex('\\hat\\lambda_0=(T+T_2)/(n+n_2)=' + dec(pooled)) + ' is the pooled mean. (Under ' + tex('H_0') + ' it is approximately ' + tex('\\chi^2_1') + ': two free parameters minus one.)',
-        answer: lr2, tolerance: tol3, lecture: 17,
+        answer: lr2, tolerance: tol3, lecture: 10,
         explanation: tex('2\\{' + T + '\\log(' + dec(hat) + '/' + dec(pooled) + ')+' + T2 + '\\log(' + dec(hat2) + '/' + dec(pooled) + ')\\}=' + dec(lr2)) + '. The degrees of freedom are ' + tex('2-1=1') + ', so compare with 3.8415.',
       },
     ],

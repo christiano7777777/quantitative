@@ -28,27 +28,27 @@ export function build({ x }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the plug-in variance ' + tex('\\hat\\sigma^2') + ' (divisor ' + tex('n') + ').',
-        answer: plug, tolerance: tol4, lecture: 18,
+        answer: plug, tolerance: tol4, lecture: 11,
         explanation: tex('\\bar x=' + dec(xbar)) + ' and ' + tex('\\sum(x_i-\\bar x)^2=' + dec(ss)) + ', so ' + tex('\\hat\\sigma^2=' + dec(ss) + '/' + n) + ' = ' + dec(plug) + '.',
       },
       {
         prompt: 'Find the exact bootstrap standard error of the resample mean, ' + tex('\\hat\\sigma/\\sqrt n=\\sqrt{\\sum(x_i-\\bar x)^2}\\big/n') + '.',
-        answer: se, tolerance: tol4, lecture: 18,
+        answer: se, tolerance: tol4, lecture: 11,
         explanation: 'A resample mean is the average of ' + tex(n) + ' independent draws from the data, each with variance ' + tex('\\hat\\sigma^2') + ', so its variance is ' + tex('\\hat\\sigma^2/n=' + dec(plug / n)) + ' and the standard error is ' + dec(se) + '.',
       },
       {
         prompt: 'The bootstrap expectation of the resample plug-in variance is ' + tex('(1-1/n)\\hat\\sigma^2') + '. Find the bootstrap bias estimate ' + tex('E^*[\\hat\\sigma^{*2}]-\\hat\\sigma^2') + '.',
-        answer: bias, tolerance: tol4, lecture: 18,
+        answer: bias, tolerance: tol4, lecture: 11,
         explanation: tex('(1-1/' + n + ')' + dec(plug) + '-' + dec(plug) + '=-' + dec(plug) + '/' + n) + ' = ' + dec(bias) + '. The plug-in variance is biased downwards.',
       },
       {
         prompt: 'Find the bias-corrected estimate ' + tex('\\hat\\sigma^2-\\widehat{\\text{bias}}') + '.',
-        answer: corrected, tolerance: tol4, lecture: 18,
+        answer: corrected, tolerance: tol4, lecture: 11,
         explanation: tex(dec(plug) + '-(' + dec(bias) + ')') + ' = ' + dec(corrected) + '.',
       },
       {
         prompt: 'How many different resamples are there if only which values appear, and how often, is recorded (the order of drawing is ignored)? It is ' + tex('\\binom{2n-1}{n}') + '. Give a whole number.',
-        answer: distinct, tolerance: tolInt, lecture: 18,
+        answer: distinct, tolerance: tolInt, lecture: 11,
         explanation: tex('\\binom{' + (2 * n - 1) + '}{' + n + '}') + ' = ' + distinct + ', far fewer than the ' + tex(n + '^{' + n + '}=' + n ** n) + ' equally likely ordered draws, and not equally likely themselves.',
       },
     ],

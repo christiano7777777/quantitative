@@ -31,27 +31,27 @@ export function build(P: Params): LQInstance {
     parts: [
       {
         prompt: 'Part A. With the Jeffreys prior the posterior is ' + tex('\\mathrm{Gamma}(\\sum y_i+\\tfrac12,\\ n)') + ' (shape, rate). Find its mean.',
-        answer: poiMean, tolerance: tol4, lecture: 5,
+        answer: poiMean, tolerance: tol4, lecture: 3,
         explanation: tex('\\sum y_i=' + sy + ',\\ n=' + ys.length) + ', so the mean is ' + tex('(' + sy + '+0.5)/' + ys.length) + ' = ' + dec(poiMean) + '.',
       },
       {
         prompt: 'Part B. The power prior is a Beta distribution. Find its first parameter ' + tex('\\alpha_0=\\delta x') + '.',
-        answer: a0, tolerance: tol4, lecture: 5,
+        answer: a0, tolerance: tol4, lecture: 3,
         explanation: tex('\\pi_0(p)\\,p^{\\delta x}(1-p)^{\\delta(m-x)}\\propto p^{\\delta x-1}(1-p)^{\\delta(m-x)-1}') + ', a ' + tex('\\mathrm{Beta}(\\delta x,\\ \\delta(m-x))') + '; so ' + tex('\\alpha_0=' + dec(delta) + '\\times' + x) + ' = ' + dec(a0) + ' (and ' + tex('\\beta_0=' + dec(delta * (m - x))) + ').',
       },
       {
         prompt: 'Part B. Find the effective sample size of the power prior, ' + tex('\\alpha_0+\\beta_0=\\delta m') + '. It shows how much weight the historical study gets.',
-        answer: ess, tolerance: tol4, lecture: 5,
+        answer: ess, tolerance: tol4, lecture: 3,
         explanation: tex(dec(delta) + '\\times' + m) + ' = ' + dec(ess) + '. With ' + tex('\\delta=1') + ' the historical study counts fully, with ' + tex('\\delta=0') + ' not at all.',
       },
       {
         prompt: 'Part B. Find the posterior mean of ' + tex('p') + ' after the new data, ' + tex('(\\alpha_0+y)/(\\delta m+n)') + '.',
-        answer: postMean, tolerance: tol4, lecture: 5,
+        answer: postMean, tolerance: tol4, lecture: 3,
         explanation: 'The posterior is ' + tex('\\mathrm{Beta}(\\alpha_0+y,\\ \\beta_0+n-y)=\\mathrm{Beta}(' + dec(a0 + y) + ',' + dec(delta * (m - x) + n - y) + ')') + ', with mean ' + tex(dec(a0 + y) + '/' + dec(postEss)) + ' = ' + dec(postMean) + '.',
       },
       {
         prompt: 'Part B. Find the effective sample size of the posterior, ' + tex('\\delta m+n') + '.',
-        answer: postEss, tolerance: tol4, lecture: 5,
+        answer: postEss, tolerance: tol4, lecture: 3,
         explanation: tex(dec(ess) + '+' + n) + ' = ' + dec(postEss) + ': the prior effective sample size plus the new number of trials.',
       },
     ],

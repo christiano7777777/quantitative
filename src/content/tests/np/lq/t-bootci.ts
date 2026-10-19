@@ -29,27 +29,27 @@ export function build({ theta, reps }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the bootstrap standard error: the sample standard deviation of the ' + tex(B) + ' replicates (divisor ' + tex('B-1') + ').',
-        answer: se, tolerance: tol4, lecture: 14,
+        answer: se, tolerance: tol4, lecture: 7,
         explanation: 'The replicate mean is ' + dec(mean) + ', the sum of squared deviations is ' + dec(se * se * (B - 1)) + ', so ' + tex('\\widehat{\\mathrm{SE}}=\\sqrt{' + dec(se * se * (B - 1)) + '/' + (B - 1) + '}') + ' = ' + dec(se) + '.',
       },
       {
         prompt: 'Find the bootstrap bias estimate ' + tex('\\frac1B\\sum_b\\hat\\theta^*_b-\\hat\\theta') + '.',
-        answer: bias, tolerance: tol4, lecture: 14,
+        answer: bias, tolerance: tol4, lecture: 7,
         explanation: tex(dec(mean) + '-' + dec(theta)) + ' = ' + dec(bias) + '. A positive value means ' + tex('\\hat\\theta') + ' tends to overestimate.',
       },
       {
         prompt: 'Find the lower end of the normal-based 90% interval ' + tex('\\hat\\theta\\pm1.645\\,\\widehat{\\mathrm{SE}}') + '.',
-        answer: lowN, tolerance: tol4, lecture: 14,
+        answer: lowN, tolerance: tol4, lecture: 7,
         explanation: tex(dec(theta) + '-1.645\\times' + dec(se)) + ' = ' + dec(lowN) + '.',
       },
       {
         prompt: 'Find the upper end of the 90% percentile interval, the 95th percentile of the replicates (the ' + tex('(B+1)\\times0.95=19') + '-th smallest value).',
-        answer: pctUpper, tolerance: tol4, lecture: 14,
+        answer: pctUpper, tolerance: tol4, lecture: 7,
         explanation: 'With ' + tex('B=19') + ' the 95th percentile is the largest replicate, ' + dec(pctUpper) + ' (and the 5th percentile is the smallest, ' + dec(sorted[0]) + ').',
       },
       {
         prompt: 'The basic (residual) interval is ' + tex('(2\\hat\\theta-\\hat\\theta^*_{0.95},\\ 2\\hat\\theta-\\hat\\theta^*_{0.05})') + '. Find its lower end.',
-        answer: basicLower, tolerance: tol4, lecture: 14,
+        answer: basicLower, tolerance: tol4, lecture: 7,
         explanation: tex('2\\times' + dec(theta) + '-' + dec(pctUpper)) + ' = ' + dec(basicLower) + '. It reflects the percentile interval about ' + tex('\\hat\\theta') + ', so it differs from it whenever the replicates are skewed.',
       },
     ],

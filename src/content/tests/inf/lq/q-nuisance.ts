@@ -33,27 +33,27 @@ export function build({ w, level }: Params): LQInstance {
     parts: [
       {
         prompt: 'Find the sum of the six entries, the normalising constant of the posterior. Give a whole number.',
-        answer: tot, tolerance: tolInt, lecture: 7,
+        answer: tot, tolerance: tolInt, lecture: 4,
         explanation: 'The posterior probability of each cell is its entry divided by the sum ' + tex(tot) + '.',
       },
       {
         prompt: 'Integrate out the nuisance parameter: find the marginal posterior probability ' + tex('P(\\theta_1=2\\mid x)') + '.',
-        answer: marg[1], tolerance: tol4, lecture: 7,
+        answer: marg[1], tolerance: tol4, lecture: 4,
         explanation: 'Add the row: ' + tex('(' + w[1][0] + '+' + w[1][1] + ')/' + tot) + ' = ' + dec(marg[1]) + '.',
       },
       {
         prompt: 'What is the smallest number of values of ' + tex('\\theta_1') + ' whose marginal posterior probabilities add to at least ' + tex(dec(level)) + '? (Take the most probable values first.) Give a whole number.',
-        answer: k, tolerance: tolInt, lecture: 7,
+        answer: k, tolerance: tolInt, lecture: 4,
         explanation: 'The marginal posterior probabilities are ' + marg.map((m, i) => tex('\\theta_1=' + (i + 1) + ':' + dec(m))).join(', ') + '. In decreasing order they are ' + sorted.map(dec).join(', ') + ', and the first ' + k + ' add to ' + dec(sorted.slice(0, k).reduce((a, b) => a + b, 0)) + '.',
       },
       {
         prompt: 'A future observation ' + tex('Y') + ' is Bernoulli with ' + tex('P(Y=1\\mid\\theta)=\\theta_1/4') + '. Find the posterior predictive probability ' + tex('P(Y=1\\mid x)=E[\\theta_1/4\\mid x]') + '.',
-        answer: pred, tolerance: tol4, lecture: 7,
+        answer: pred, tolerance: tol4, lecture: 4,
         explanation: 'Average ' + tex('\\theta_1/4') + ' over the marginal posterior: ' + tex(marg.map((m, i) => dec(m) + '\\times' + (i + 1) + '/4').join('+')) + ' = ' + dec(pred) + '.',
       },
       {
         prompt: 'Find the posterior mean of ' + tex('\\theta_1') + '.',
-        answer: meanTheta, tolerance: tol4, lecture: 7,
+        answer: meanTheta, tolerance: tol4, lecture: 4,
         explanation: tex(marg.map((m, i) => (i + 1) + '\\times' + dec(m)).join('+')) + ' = ' + dec(meanTheta) + '.',
       },
     ],
