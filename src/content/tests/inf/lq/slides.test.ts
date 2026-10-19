@@ -21,6 +21,7 @@ import * as Q from './q-nuisance'
 import * as R from './r-expfam'
 import * as S from './s-natural'
 import * as T from './t-likelihood'
+import * as U from './u-decision'
 
 const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => `${prefix}${i}`)
 const close = (got: number, want: number, tol = 1e-9, what = '') => expect(Math.abs(got - want), `${what}: got ${got}, want ${want}`).toBeLessThan(tol)
@@ -204,3 +205,31 @@ describe('generator T against independent computation', () => {
 })
 
 void Fr
+
+describe('generator U (the single question of lecture 1) against independent computation', () => {
+  it('rule count, exact risks, the dominated rule and the minimax value, and the promises it makes (300 seeds)', () => {
+    const t = (x: number) => F(Math.round(x * 100), 100)
+    for (const s of seeds('U', 300)) {
+      const P0 = U.sample(makeRng(s))
+      const ans = U.build(P0).parts.map((p) => p.answer)
+      const { k, loss, p, rules } = P0
+      let count = 0
+      for (let a = 0; a < k; a++) for (let b = 0; b < k; b++) count++
+      expect(ans[0]).toBe(count)
+      const R = (th: 0 | 1, d: [number, number]) => F(loss[th][d[0]]).mul(F(1).sub(t(p[th]))).add(F(loss[th][d[1]]).mul(t(p[th])))
+      close(ans[1], R(0, rules[0]).num, 1e-12, `${s} R1`)
+      close(ans[2], R(1, rules[0]).num, 1e-12, `${s} R2`)
+      const risks = rules.map((d) => [R(0, d), R(1, d)])
+      const dom = (a: Fr[], b: Fr[]) => a[0].cmp(b[0]) <= 0 && a[1].cmp(b[1]) <= 0 && (a[0].cmp(b[0]) < 0 || a[1].cmp(b[1]) < 0)
+      const dominated = risks.map((r, i) => risks.some((q, j) => j !== i && dom(q, r)) ? i : -1).filter((i) => i >= 0)
+      expect(dominated, `${s} exactly one dominated rule`).toHaveLength(1)
+      expect(ans[3]).toBe(dominated[0] + 1)
+      const maxes = risks.map((r) => (r[0].cmp(r[1]) >= 0 ? r[0] : r[1]))
+      let best = maxes[0]
+      for (const m of maxes) if (m.cmp(best) < 0) best = m
+      expect(maxes.filter((m) => m.cmp(best) === 0), `${s} unique minimax`).toHaveLength(1)
+      expect(maxes[dominated[0]].cmp(best), `${s} dominated rule is not the minimax one`).toBeGreaterThan(0)
+      close(ans[4], best.num, 1e-12, `${s} minimax value`)
+    }
+  })
+})

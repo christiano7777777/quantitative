@@ -4,36 +4,28 @@
 // LQ: twenty-two generators in lq/, each tested against an independent computation (lq/lq.test.ts and lq/slides.test.ts).
 import type { MCQuestion, TestBank } from '../../../lib/types'
 import mcJson from './mc.json'
-import lessons from '../../lessons/np'
-import { buildExamSlots } from '../../../lib/lq-composite'
-import { genA } from './lq/a-signed'
-import { genB } from './lq/b-ranksum'
-import { genC } from './lq/c-ks'
-import { genD } from './lq/d-rankcorr'
-import { genE } from './lq/e-permutation'
-import { genF } from './lq/f-jackknife'
-import { genG } from './lq/g-kde'
-import { genH } from './lq/h-regression'
-import { genI } from './lq/i-orderstat'
-import { genJ } from './lq/j-functional'
-import { genK } from './lq/k-ranking'
-import { genL } from './lq/l-intro'
-import { genM } from './lq/m-sign'
-import { genN } from './lq/n-cicdf'
-import { genO } from './lq/o-hl'
-import { genP } from './lq/p-scale'
-import { genQ } from './lq/q-kw'
-import { genR } from './lq/r-mult'
-import { genS } from './lq/s-block'
-import { genT } from './lq/t-bootci'
-import { genU } from './lq/u-pivotal'
-import { genV } from './lq/v-bootreg'
+import { genW } from './lq/w-signci'
+import { genLec2 } from './lq/lec2'
+import { genLec3 } from './lq/lec3'
+import { genLec4 } from './lq/lec4'
+import { genLec5 } from './lq/lec5'
+import { genLec6 } from './lq/lec6'
+import { genLec7 } from './lq/lec7'
+import { genLec8 } from './lq/lec8'
+import { genLec9 } from './lq/lec9'
+import { genLec10 } from './lq/lec10'
+import { genLec11 } from './lq/lec11'
+import { genLec12 } from './lq/lec12'
 
 const bank: TestBank = {
   mc: mcJson as MCQuestion[],
-  lq: [genA, genB, genC, genD, genE, genF, genG, genH, genI, genJ, genK, genL, genM, genN, genO, genP, genQ, genR, genS, genT, genU, genV],
+  lq: [genW, genLec2, genLec3, genLec4, genLec5, genLec6, genLec7, genLec8, genLec9, genLec10, genLec11, genLec12],
 }
-// Final test: three long questions, one per slot; each slot covers its own range of lectures and offers three composite
-// questions (first two parts of one section of every lecture in the range), so every attempt asks something from every lecture.
-bank.examSlots = buildExamSlots(bank, lessons, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+// Final test: 20 MC (per-lecture quota, so every lecture is asked) and three long questions, one per slot. Each long question is the
+// single-story question of one lecture, drawn from the lectures of its slot; different slots cover different lectures.
+bank.lqSlots = [
+  ['np-lq-w-signci', 'np-lq-lec2', 'np-lq-lec3', 'np-lq-lec4'],
+  ['np-lq-lec5', 'np-lq-lec6', 'np-lq-lec7', 'np-lq-lec8'],
+  ['np-lq-lec9', 'np-lq-lec10', 'np-lq-lec11', 'np-lq-lec12'],
+]
 export default bank

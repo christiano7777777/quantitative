@@ -31,6 +31,16 @@ import * as O from './o-is'
 import * as P from './p-markov'
 import * as Q from './q-cavi'
 import * as R from './r-mc'
+import * as S from './s-normalpost'
+import * as Lec2 from './lec2'
+import * as Lec3 from './lec3'
+import * as Lec4 from './lec4'
+import * as Lec5 from './lec5'
+import * as Lec6 from './lec6'
+import * as Lec7 from './lec7'
+import * as Lec8 from './lec8'
+import * as Lec9 from './lec9'
+import * as Lec10 from './lec10'
 
 const seeds = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => `${prefix}${i}`)
 const answers = (inst: LQInstance) => inst.parts.map((p) => p.answer)
@@ -59,6 +69,16 @@ const gens: [string, LQGenerator, number][] = [
   ['P', { id: 'P', generate: (r) => P.build(P.sample(r)) }, 5],
   ['Q', { id: 'Q', generate: (r) => Q.build(Q.sample(r)) }, 5],
   ['R', { id: 'R', generate: (r) => R.build(R.sample(r)) }, 5],
+  ['S', { id: 'S', generate: (r) => S.build(S.sample(r)) }, 6],
+  ['Lec2', { id: 'Lec2', generate: (r) => Lec2.build(Lec2.sample(r)) }, 6],
+  ['Lec3', { id: 'Lec3', generate: (r) => Lec3.build(Lec3.sample(r)) }, 6],
+  ['Lec4', { id: 'Lec4', generate: (r) => Lec4.build(Lec4.sample(r)) }, 6],
+  ['Lec5', { id: 'Lec5', generate: (r) => Lec5.build(Lec5.sample(r)) }, 5],
+  ['Lec6', { id: 'Lec6', generate: (r) => Lec6.build(Lec6.sample(r)) }, 5],
+  ['Lec7', { id: 'Lec7', generate: (r) => Lec7.build(Lec7.sample(r)) }, 6],
+  ['Lec8', { id: 'Lec8', generate: (r) => Lec8.build(Lec8.sample(r)) }, 6],
+  ['Lec9', { id: 'Lec9', generate: (r) => Lec9.build(Lec9.sample(r)) }, 5],
+  ['Lec10', { id: 'Lec10', generate: (r) => Lec10.build(Lec10.sample(r)) }, 5],
 ]
 
 describe.each(gens)('generator %s: generic rules', (name, gen, nParts) => {

@@ -6,32 +6,26 @@
 // LQ: eighteen generators in lq/, each tested against an independent computation (lq/lq.test.ts, lq/lecture.test.ts, lq/slides.test.ts).
 import type { MCQuestion, TestBank } from '../../../lib/types'
 import mcJson from './mc.json'
-import lessons from '../../lessons/bay'
-import { buildExamSlots } from '../../../lib/lq-composite'
-import { genA } from './lq/a-bayes'
-import { genB } from './lq/b-posterior'
-import { genC } from './lq/c-evidence'
-import { genD } from './lq/d-montecarlo'
-import { genE } from './lq/e-mh'
-import { genF } from './lq/f-gibbs'
-import { genG } from './lq/g-approx'
-import { genH } from './lq/h-nonparam'
-import { genI } from './lq/i-prior'
-import { genJ } from './lq/j-summary'
-import { genK } from './lq/k-normal'
-import { genL } from './lq/l-conjugate'
-import { genM } from './lq/m-jeffreys'
-import { genN } from './lq/n-inverse'
-import { genO } from './lq/o-is'
-import { genP } from './lq/p-markov'
-import { genQ } from './lq/q-cavi'
-import { genR } from './lq/r-mc'
+import { genS } from './lq/s-normalpost'
+import { genLec2 } from './lq/lec2'
+import { genLec3 } from './lq/lec3'
+import { genLec4 } from './lq/lec4'
+import { genLec5 } from './lq/lec5'
+import { genLec6 } from './lq/lec6'
+import { genLec7 } from './lq/lec7'
+import { genLec8 } from './lq/lec8'
+import { genLec9 } from './lq/lec9'
+import { genLec10 } from './lq/lec10'
 
 const bank: TestBank = {
   mc: mcJson as MCQuestion[],
-  lq: [genA, genB, genC, genD, genE, genF, genG, genH, genI, genJ, genK, genL, genM, genN, genO, genP, genQ, genR],
+  lq: [genS, genLec2, genLec3, genLec4, genLec5, genLec6, genLec7, genLec8, genLec9, genLec10],
 }
-// Final test: three long questions, one per slot; each slot covers its own range of lectures and offers three composite
-// questions (first two parts of one section of every lecture in the range), so every attempt asks something from every lecture.
-bank.examSlots = buildExamSlots(bank, lessons, [[1, 2, 3, 4], [5, 6, 7], [8, 9, 10]])
+// Final test: 20 MC (per-lecture quota, so every lecture is asked) and three long questions, one per slot. Each long question is the
+// single-story question of one lecture, drawn from the lectures of its slot; different slots cover different lectures.
+bank.lqSlots = [
+  ['bay-lq-s-normalpost', 'bay-lq-lec2', 'bay-lq-lec3', 'bay-lq-lec4'],
+  ['bay-lq-lec5', 'bay-lq-lec6', 'bay-lq-lec7'],
+  ['bay-lq-lec8', 'bay-lq-lec9', 'bay-lq-lec10'],
+]
 export default bank

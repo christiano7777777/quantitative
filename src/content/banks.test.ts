@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { topics } from '../data'
 import { testConfig } from '../config/test.config'
 import { banks } from '../lib/content'
+import { lessons } from '../lib/lessons'
 import { makeRng } from '../lib/rng'
 import { findGenerator, renderPaper, selectPaper } from '../lib/test-builder'
 
@@ -108,6 +109,17 @@ describe.each(Object.entries(banks))('bank %s: long-question blueprint', (_topic
 })
 
 describe.each(Object.entries(banks))('bank %s: final test blueprint', (topicId, bank) => {
+  it('every final test attempt asks every lecture through the MC alone', () => {
+    // the MC quota (selectPaper) is what guarantees lecture coverage once LQs are single-story,
+    // so this must hold with or without examSlots and must not look at LQ parts
+    const lectures = topics.find((t) => t.id === topicId)!.lectures.length
+    for (let i = 0; i < 10; i++) {
+      const paper = renderPaper(bank, selectPaper(bank, `mc-cover${i}`))
+      const asked = new Set(paper.mc.map((q) => q.lecture))
+      expect([...asked].sort((a, b) => a - b)).toEqual(Array.from({ length: lectures }, (_, k) => k + 1))
+    }
+  })
+
   it('if examSlots is present: one slot per LQ, composite questions that cover every lecture', () => {
     if (!bank.examSlots) return
     expect(bank.examSlots).toHaveLength(testConfig.lqCount)
@@ -136,5 +148,35 @@ describe.each(Object.entries(banks))('bank %s: final test blueprint', (topicId, 
       const asked = new Set(paper.lq.flatMap((q) => q.parts.map((p) => p.lecture)))
       expect([...asked].sort((a, b) => a - b)).toEqual(Array.from({ length: lectures }, (_, k) => k + 1))
     }
+  })
+
+  it('if there is no examSlots but lessons: lqSlots hold single-story questions whose lectures partition the topic', () => {
+    // migrated topics draw one lecture's single-story generator per slot; the old LQ-coverage
+    // assertion above cannot apply, so the slots themselves must guarantee full, disjoint coverage
+    if (bank.examSlots) return
+    if (!lessons[topicId]) return
+    const lectures = topics.find((t) => t.id === topicId)!.lectures.length
+    expect(bank.lqSlots, 'a topic with lessons must blueprint its final-test LQs with lqSlots once examSlots are gone').toBeDefined()
+    const seen = new Set<number>()
+    for (const slot of bank.lqSlots!) {
+      const slotLectures = new Set<number>()
+      for (const id of slot) {
+        const g = findGenerator(bank, id)
+        expect(g, id).toBeDefined()
+        for (let s = 0; s < 5; s++) {
+          const inst = g!.generate(makeRng(`story-check-${s}`))
+          const tags = [...new Set(inst.parts.map((p) => p.lecture))]
+          expect(tags.length, `${id}: a single-story question must tag exactly one lecture, got ${tags.join(', ')}`).toBe(1)
+          expect(tags[0], id).toBeGreaterThanOrEqual(1)
+          expect(tags[0], id).toBeLessThanOrEqual(lectures)
+          slotLectures.add(tags[0])
+        }
+      }
+      for (const l of slotLectures) {
+        expect(seen.has(l), `lecture ${l} can be drawn by two lqSlots`).toBe(false)
+        seen.add(l)
+      }
+    }
+    expect([...seen].sort((a, b) => a - b)).toEqual(Array.from({ length: lectures }, (_, k) => k + 1))
   })
 })

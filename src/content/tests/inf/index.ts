@@ -5,34 +5,27 @@
 // LQ: twenty generators in lq/, each tested against an independent computation (lq/lq.test.ts, lq/lecture.test.ts, lq/slides.test.ts).
 import type { MCQuestion, TestBank } from '../../../lib/types'
 import mcJson from './mc.json'
-import lessons from '../../lessons/inf'
-import { buildExamSlots } from '../../../lib/lq-composite'
-import { genA } from './lq/a-poisson'
-import { genB } from './lq/b-exponential'
-import { genC } from './lq/c-risk'
-import { genD } from './lq/d-bayes-minimax'
-import { genE } from './lq/e-gamma-poisson'
-import { genF } from './lq/f-ump'
-import { genG } from './lq/g-conditional'
-import { genH } from './lq/h-confidence-bootstrap'
-import { genI } from './lq/i-wilks'
-import { genJ } from './lq/j-sufficiency'
-import { genK } from './lq/k-information'
-import { genL } from './lq/l-bootstrap'
-import { genM } from './lq/m-decision'
-import { genN } from './lq/n-bayes'
-import { genO } from './lq/o-riskset'
-import { genP } from './lq/p-bayestest'
-import { genQ } from './lq/q-nuisance'
-import { genR } from './lq/r-expfam'
-import { genS } from './lq/s-natural'
-import { genT } from './lq/t-likelihood'
+import { genU } from './lq/u-decision'
+import { genV } from './lq/v-bayesrisk'
+import { genLec3 } from './lq/lec3'
+import { genLec4 } from './lq/lec4'
+import { genLec5 } from './lq/lec5'
+import { genLec6 } from './lq/lec6'
+import { genLec7 } from './lq/lec7'
+import { genLec8 } from './lq/lec8'
+import { genLec9 } from './lq/lec9'
+import { genLec10 } from './lq/lec10'
+import { genLec11 } from './lq/lec11'
 
 const bank: TestBank = {
   mc: mcJson as MCQuestion[],
-  lq: [genA, genB, genC, genD, genE, genF, genG, genH, genI, genJ, genK, genL, genM, genN, genO, genP, genQ, genR, genS, genT],
+  lq: [genU, genV, genLec3, genLec4, genLec5, genLec6, genLec7, genLec8, genLec9, genLec10, genLec11],
 }
-// Final test: three long questions, one per slot; each slot covers its own range of lectures and offers three composite
-// questions (first two parts of one section of every lecture in the range), so every attempt asks something from every lecture.
-bank.examSlots = buildExamSlots(bank, lessons, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11]])
+// Final test: 20 MC (per-lecture quota, so every lecture is asked) and three long questions, one per slot. Each long question is the
+// single-story question of one lecture, drawn from the lectures of its slot; different slots cover different lectures.
+bank.lqSlots = [
+  ['inf-lq-u-decision', 'inf-lq-v-bayesrisk', 'inf-lq-lec3', 'inf-lq-lec4'],
+  ['inf-lq-lec5', 'inf-lq-lec6', 'inf-lq-lec7', 'inf-lq-lec8'],
+  ['inf-lq-lec9', 'inf-lq-lec10', 'inf-lq-lec11'],
+]
 export default bank
