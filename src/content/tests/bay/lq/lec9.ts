@@ -21,9 +21,10 @@ export function build({ A, B }: Params): LQInstance {
   for (let i = 2; i <= A - 1; i++) f *= i
   const exact = f / B ** A
   const ratio = approx / exact
+  const bTerm = B === 1 ? '' : String(B)
 
   return {
-    intro: 'An unnormalised posterior density is ' + tex('g(\\theta)=\\theta^{' + (A - 1) + '}e^{-' + B + '\\theta}') + ' for ' + tex('\\theta>0') + ' (a Gamma shape ' + tex(A) + ', rate ' + tex(B) + ' posterior without its constant). Its normalising integral ' + tex('Z=\\int_0^\\infty g(\\theta)d\\theta') + ' is the marginal likelihood. The Laplace approximation replaces ' + tex('\\ln g') + ' near its mode by a quadratic. Give answers to 4 decimal places unless told otherwise.',
+    intro: 'An unnormalised posterior density is ' + tex('g(\\theta)=\\theta^{' + (A - 1) + '}e^{-' + bTerm + '\\theta}') + ' for ' + tex('\\theta>0') + ' (a Gamma shape ' + tex(A) + ', rate ' + tex(B) + ' posterior without its constant). Its normalising integral ' + tex('Z=\\int_0^\\infty g(\\theta)d\\theta') + ' is the marginal likelihood. The Laplace approximation replaces ' + tex('\\ln g') + ' near its mode by a quadratic. Keep full precision in intermediate steps. Give answers to 4 decimal places unless told otherwise.',
     parts: [
       {
         prompt: 'Find the mode ' + tex('\\hat\\theta') + ' of ' + tex('g') + ', where ' + tex('(\\ln g)\'=(' + (A - 1) + ')/\\theta-' + B + '=0') + '.',
@@ -48,7 +49,7 @@ export function build({ A, B }: Params): LQInstance {
       {
         prompt: 'The exact integral is ' + tex('\\Gamma(A)/B^A=(A-1)!/B^A') + '. Find the ratio (Laplace approximation) / (exact integral).',
         answer: ratio, tolerance: tol4, lecture: 9,
-        explanation: tex('Z=' + (A - 1) + '!/' + B + '^{' + A + '}=' + dec(exact)) + ', so the ratio is ' + tex(dec(approx) + '/' + dec(exact)) + ' = ' + dec(ratio) + '. It is close to ' + tex(1) + ' (the error is Stirling\'s) and improves as the shape grows. Variational Bayes would instead choose the best factorised ' + tex('q') + ' by maximising the ELBO, and tends to underestimate posterior variances.',
+        explanation: tex('Z=' + (A - 1) + '!/' + B + '^{' + A + '}=' + dec(exact)) + ', so the ratio is ' + tex(dec(approx) + '/' + dec(exact)) + ' = ' + dec(ratio) + '. The ratio depends only on ' + tex('A') + ', not on ' + tex('B') + ': it is Stirling\'s approximation of ' + tex('(A-1)!') + ' divided by ' + tex('(A-1)!') + ', so it is close to ' + tex(1) + ' and improves as the shape grows. Variational Bayes would instead choose the best factorised ' + tex('q') + ' by maximising the ELBO, and tends to underestimate posterior variances.',
       },
     ],
   }

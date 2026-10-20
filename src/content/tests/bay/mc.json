@@ -4,8 +4,8 @@
   "lecture": 1,
   "stem": "How does Bayes' theorem combine the ingredients of a Bayesian analysis for a parameter $\\theta$ and data $y$?",
   "correct": [
-   "The posterior is proportional to likelihood times prior.",
-   "Priors are updated by the data through the likelihood."
+   "The posterior is proportional to the likelihood times the prior.",
+   "The posterior is the likelihood times the prior, divided by the marginal likelihood."
   ],
   "distractors": [
    {
@@ -29,7 +29,7 @@
     "misconception": "denies updating"
    }
   ],
-  "explanation": "The normalising constant $p(y)=\\int p(y\\mid\\theta)p(\\theta)\\,d\\theta$ is the marginal likelihood, also called the evidence.",
+  "explanation": "The normalising constant $p(y)=\\int p(y\\mid\\theta)\\pi(\\theta)\\,d\\theta$ is the marginal likelihood, also called the evidence.",
   "section": 1
  },
  {
@@ -37,8 +37,8 @@
   "lecture": 1,
   "stem": "With a discrete parameter taking values $\\theta_1,\\dots,\\theta_m$, how is the posterior probability of $\\theta_j$ computed?",
   "correct": [
-   "Prior times likelihood, over the sum across values.",
-   "Normalised product."
+   "Multiply the prior of $\\theta_j$ by its likelihood and divide by the sum of these products over all values.",
+   "$\\pi(\\theta_j)p(y\\mid\\theta_j)$ divided by $\\sum_k\\pi(\\theta_k)p(y\\mid\\theta_k)$."
   ],
   "distractors": [
    {
@@ -70,13 +70,13 @@
   "lecture": 1,
   "stem": "What does sequential updating mean in Bayesian inference?",
   "correct": [
-   "Today's posterior is tomorrow's prior.",
-   "One piece at a time ends at the same posterior."
+   "The posterior after one batch of data serves as the prior for the next batch.",
+   "Updating one batch at a time gives the same posterior as using all the data at once."
   ],
   "distractors": [
    {
-    "text": "The prior must be changed after each observation.",
-    "misconception": "misunderstands updating"
+    "text": "The analyst must re-elicit a fresh prior from scratch after each observation.",
+    "misconception": "confuses updating with re-elicitation"
    },
    {
     "text": "Each batch must be analysed independently and the results averaged.",
@@ -88,14 +88,14 @@
    },
    {
     "text": "The final posterior depends on the order in which data arrive.",
-    "misconception": "is false for exchangeable data"
+    "misconception": "is false for data that are conditionally independent given $\\theta$"
    },
    {
     "text": "The prior is discarded after the first update.",
     "misconception": "misunderstands the role of the prior"
    }
   ],
-  "explanation": "For independent observations, $p(\\theta\\mid y_1,y_2)\\propto p(y_2\\mid\\theta)p(\\theta\\mid y_1)$; the order does not matter.",
+  "explanation": "For batches that are conditionally independent given $\\theta$, $\\pi(\\theta\\mid y_1,y_2)\\propto p(y_2\\mid\\theta)\\pi(\\theta\\mid y_1)$; the order does not matter.",
   "section": 1
  },
  {
@@ -161,7 +161,7 @@
     "misconception": "reverses which quantity is held fixed"
    }
   ],
-  "explanation": "Frequentists regard the data as random and $\\theta_0$ as a fixed unknown; Bayesians condition on the observed data and describe their uncertainty about $\\theta$ with the posterior.",
+  "explanation": "Frequentists regard the data as random and $\\theta$ as a fixed unknown; Bayesians condition on the observed data and describe their uncertainty about $\\theta$ with the posterior.",
   "section": 1
  },
  {
@@ -169,8 +169,8 @@
   "lecture": 1,
   "stem": "What is the posterior predictive distribution of a new observation $\\tilde y$?",
   "correct": [
-   "$p(\\tilde y\\mid y)=\\int p(\\tilde y\\mid\\theta)p(\\theta\\mid y)d\\theta$.",
-   "Future data averaged over the posterior."
+   "$p(\\tilde y\\mid y)=\\int p(\\tilde y\\mid\\theta)\\pi(\\theta\\mid y)d\\theta$.",
+   "The model for a new observation, averaged over the posterior of $\\theta$."
   ],
   "distractors": [
    {
@@ -186,7 +186,7 @@
     "misconception": "confuses the parameter with future data"
    },
    {
-    "text": "The prior predictive distribution $\\int p(\\tilde y\\mid\\theta)p(\\theta)d\\theta$.",
+    "text": "The prior predictive distribution $\\int p(\\tilde y\\mid\\theta)\\pi(\\theta)d\\theta$.",
     "misconception": "uses the prior instead of the posterior"
    },
    {
@@ -200,14 +200,14 @@
  {
   "id": "bay-1.7",
   "lecture": 1,
-  "stem": "For normal data with known variance $\\sigma^2$ and a normal prior $N(\\mu_0,\\tau^2)$ on the mean, how do the prior and the data combine?",
+  "stem": "For normal data with known variance $\\sigma^2$ and a normal prior $N(\\mu_0,\\sigma_0^2)$ on the mean, how do the prior and the data combine?",
   "correct": [
-   "Precisions add; the posterior mean is precision-weighted.",
-   "Normal posterior."
+   "Precisions add, and the posterior mean weights $\\mu_0$ and $\\bar y$ by their precisions.",
+   "The posterior is normal with precision $1/\\sigma_0^2+n/\\sigma^2$ and a precision-weighted mean."
   ],
   "distractors": [
    {
-    "text": "The posterior variance is $\\tau^2+\\sigma^2/n$.",
+    "text": "The posterior variance is $\\sigma_0^2+\\sigma^2/n$.",
     "misconception": "adds variances instead of precisions"
    },
    {
@@ -227,41 +227,41 @@
     "misconception": "ignores the weights"
    }
   ],
-  "explanation": "Posterior variance $=(1/\\tau^2+n/\\sigma^2)^{-1}$, always below both $\\tau^2$ and $\\sigma^2/n$.",
+  "explanation": "Posterior variance $s_n^2=(1/\\sigma_0^2+n/\\sigma^2)^{-1}$, always below both $\\sigma_0^2$ and $\\sigma^2/n$.",
   "section": 2
  },
  {
   "id": "bay-1.8",
   "lecture": 1,
-  "stem": "What happens to the influence of a conjugate prior as the sample size grows?",
+  "stem": "For a discrete parameter with prior probabilities $\\pi(\\theta_j)$, what is the marginal likelihood (evidence) $p(y)$?",
   "correct": [
-   "It fades as the likelihood dominates.",
-   "Pseudo-observations become negligible."
+   "The prior-weighted average of the likelihood, $\\sum_j\\pi(\\theta_j)p(y\\mid\\theta_j)$.",
+   "The probability of the observed data averaged over the prior, which normalises the posterior."
   ],
   "distractors": [
    {
-    "text": "It grows, since a prior accumulates over time.",
-    "misconception": "reverses the effect"
+    "text": "The largest likelihood $\\max_jp(y\\mid\\theta_j)$ over the parameter values.",
+    "misconception": "confuses averaging with maximising"
    },
    {
-    "text": "It stays constant, because the prior is fixed.",
-    "misconception": "ignores the washing out"
+    "text": "The sum of the likelihoods $\\sum_jp(y\\mid\\theta_j)$ without the prior weights.",
+    "misconception": "drops the prior weights"
    },
    {
-    "text": "The posterior becomes identical to the prior.",
+    "text": "The posterior probability of the most probable parameter value.",
+    "misconception": "confuses the evidence with a posterior probability"
+   },
+   {
+    "text": "The prior probability of the parameter value that generated the data.",
     "misconception": "ignores the data"
    },
    {
-    "text": "It disappears only for flat priors.",
-    "misconception": "restricts the effect wrongly"
-   },
-   {
-    "text": "The posterior variance stays at the prior variance.",
-    "misconception": "ignores the shrinking variance"
+    "text": "A quantity that changes with $\\theta_j$, so it is recomputed for each value.",
+    "misconception": "thinks the evidence depends on $\\theta$"
    }
   ],
-  "explanation": "For $\\mathrm{Beta}(\\alpha,\\beta)$ the weight of the prior mean is $(\\alpha+\\beta)/(\\alpha+\\beta+n)\\to0$.",
-  "section": 2
+  "explanation": "In the test example with prevalence $0.05$ and accuracy $0.9$, the evidence of a positive test is $0.9\\times0.05+0.1\\times0.95=0.14$; dividing $0.045$ by it gives the posterior $0.32$.",
+  "section": 1
  },
  {
   "id": "bay-1.9",
@@ -401,7 +401,7 @@
   "stem": "What does conjugacy of a prior mean?",
   "correct": [
    "The posterior is in the same family as the prior.",
-   "Updating only changes the parameters."
+   "Updating the prior with data only changes the parameters of the family."
   ],
   "distractors": [
    {
@@ -425,32 +425,32 @@
     "misconception": "overgeneralises"
    }
   ],
-  "explanation": "Beta-binomial, normal-normal and gamma-Poisson are conjugate pairs; most realistic models are not conjugate and need simulation.",
+  "explanation": "Beta-binomial, normal-normal and Gamma-Poisson are conjugate pairs; most realistic models are not conjugate and need simulation.",
   "section": 1
  },
  {
   "id": "bay-2.4",
   "lecture": 2,
-  "stem": "For Poisson counts $y_1,\\dots,y_n$ with rate $\\lambda$ and a $\\mathrm{Gamma}(a,b)$ prior (shape $a$, rate $b$), what is the posterior?",
+  "stem": "For Poisson counts $x_1,\\dots,x_n$ with rate $\\lambda$ and a $\\mathrm{Gamma}(a,b)$ prior (shape $a$, rate $b$), what is the posterior?",
   "correct": [
-   "$\\mathrm{Gamma}(a+\\sum y_i,\\ b+n)$.",
-   "Shape gains the total count."
+   "$\\mathrm{Gamma}(a+\\sum x_i,\\ b+n)$.",
+   "The shape adds the total count and the rate adds the number of observations."
   ],
   "distractors": [
    {
-    "text": "$\\mathrm{Gamma}(a+n,\\ b+\\sum y_i)$.",
+    "text": "$\\mathrm{Gamma}(a+n,\\ b+\\sum x_i)$.",
     "misconception": "swaps the two updates"
    },
    {
-    "text": "$\\mathrm{Poisson}(\\sum y_i)$.",
+    "text": "$\\mathrm{Poisson}(\\sum x_i)$.",
     "misconception": "confuses the posterior with a data model"
    },
    {
-    "text": "$\\mathrm{Gamma}(a\\sum y_i,\\ bn)$.",
+    "text": "$\\mathrm{Gamma}(a\\sum x_i,\\ bn)$.",
     "misconception": "multiplies instead of adding"
    },
    {
-    "text": "$\\mathrm{Normal}(\\bar y,\\bar y/n)$ for every prior.",
+    "text": "$\\mathrm{Normal}(\\bar x,\\bar x/n)$ for every prior.",
     "misconception": "ignores the prior"
    },
    {
@@ -458,7 +458,7 @@
     "misconception": "ignores the data"
    }
   ],
-  "explanation": "The posterior mean is $(a+\\sum y_i)/(b+n)$, a compromise between the prior mean $a/b$ and the sample mean $\\bar y$.",
+  "explanation": "The posterior mean is $(a+\\sum x_i)/(b+n)$, a compromise between the prior mean $a/b$ and the sample mean $\\bar x$.",
   "section": 1
  },
  {
@@ -550,7 +550,7 @@
    },
    {
     "text": "Only the log loss.",
-    "misconception": "gives a wrong claim"
+    "misconception": "names a loss the mean does not minimise in general"
    },
    {
     "text": "It minimises no loss function.",
@@ -596,10 +596,10 @@
  {
   "id": "bay-3.4",
   "lecture": 3,
-  "stem": "What is a highest posterior density (HPD) interval?",
+  "stem": "What is a 95% highest posterior density (HPD) region?",
   "correct": [
-   "The shortest interval with posterior probability $1-\\alpha$.",
-   "Every point inside has higher density than any outside."
+   "The shortest region with posterior probability 0.95 (an interval when the posterior is unimodal).",
+   "Every point inside has higher posterior density than any point outside."
   ],
   "distractors": [
    {
@@ -623,7 +623,7 @@
     "misconception": "confuses with a confidence interval"
    }
   ],
-  "explanation": "For a skewed posterior the HPD interval is shorter than the equal-tailed one and not symmetric in probability.",
+  "explanation": "For a skewed posterior the HPD interval is shorter than the equal-tailed one and has unequal tail probabilities; for a multimodal posterior it can be a union of intervals.",
   "section": 1
  },
  {
@@ -755,7 +755,7 @@
     "misconception": "is false: it is often improper"
    }
   ],
-  "explanation": "For the binomial it is $\\mathrm{Beta}(\\tfrac12,\\tfrac12)$; for a normal mean with known variance it is flat.",
+  "explanation": "For the binomial it is $\\mathrm{Beta}(\\tfrac12,\\tfrac12)$; for a Poisson rate it is $\\lambda^{-1/2}$; for a normal mean with known variance it is flat.",
   "section": 2
  },
  {
@@ -821,7 +821,7 @@
     "misconception": "confuses it with the number of parameters"
    }
   ],
-  "explanation": "A $\\mathrm{Beta}(\\alpha,\\beta)$ prior acts like $\\alpha$ prior successes and $\\beta$ prior failures. For a power prior $\\mathrm{Beta}(\\delta x,\\delta(m-x))$ the effective sample size is $\\delta m$.",
+  "explanation": "A $\\mathrm{Beta}(\\alpha,\\beta)$ prior acts like $\\alpha$ prior successes and $\\beta$ prior failures. For a power prior $\\mathrm{Beta}(\\delta x,\\delta(m-x))$, built with the improper initial prior $p^{-1}(1-p)^{-1}$, the effective sample size is $\\delta m$.",
   "section": 2
  },
  {
@@ -830,7 +830,7 @@
   "stem": "How does the Monte Carlo estimate of $E[f(X)]$ work and how accurate is it?",
   "correct": [
    "Average $f$ over draws; error is $\\sigma_f/\\sqrt n$.",
-   "A hundred times more draws, ten times the precision."
+   "A hundred times more draws cut the standard error tenfold."
   ],
   "distractors": [
    {
@@ -838,7 +838,7 @@
     "misconception": "gives the wrong rate"
    },
    {
-    "text": "The error grows with the dimension of $X$.",
+    "text": "The error rate in $n$ gets worse as the dimension of $X$ grows.",
     "misconception": "confuses with grid methods"
    },
    {
@@ -920,7 +920,7 @@
     "misconception": "confuses with convergence"
    }
   ],
-  "explanation": "The CLT gives the rate and the error distribution; the LAW tells us only that the estimator is consistent.",
+  "explanation": "The CLT gives the rate and the error distribution; the law of large numbers tells us only that the estimator is consistent.",
   "section": 1
  },
  {
@@ -1160,7 +1160,7 @@
   "stem": "What is the importance sampling identity for $E_p[f(X)]$ with proposal density $q$?",
   "correct": [
    "$E_p[f(X)]=E_q[f(X)w(X)]$ with $w=p/q$.",
-   "Reweight draws from $q$."
+   "Draws from $q$ are reweighted by $p/q$ so that they stand in for draws from $p$."
   ],
   "distractors": [
    {
@@ -1192,7 +1192,7 @@
   "lecture": 5,
   "stem": "Why should the proposal $q$ have heavier tails than the target $p$ in importance sampling?",
   "correct": [
-   "If $p/q$ is unbounded in the tails, weights have infinite variance.",
+   "If $p/q$ is unbounded in the tails, the weights can have infinite variance.",
    "Light tails miss regions where weights explode."
   ],
   "distractors": [
@@ -1217,7 +1217,7 @@
     "misconception": "gives an unrelated condition"
    }
   ],
-  "explanation": "A normal proposal for a Cauchy target is safe in one direction only: a Cauchy proposal for a normal target is fine, but not the reverse.",
+  "explanation": "Tail matching works in one direction only: a Cauchy proposal for a normal target is fine, but a normal proposal for a Cauchy target gives weights with infinite variance.",
   "section": 1
  },
  {
@@ -1225,8 +1225,8 @@
   "lecture": 5,
   "stem": "What does the effective sample size $(\\sum w_i)^2/\\sum w_i^2$ of importance weights measure?",
   "correct": [
-   "How many equal-weight draws match the precision.",
-   "It is $n$ for equal weights."
+   "The number of equally weighted draws that would give the same precision.",
+   "It equals $n$ when all weights are equal and falls as they become unequal."
   ],
   "distractors": [
    {
@@ -1250,7 +1250,7 @@
     "misconception": "confuses with an acceptance rate"
    }
   ],
-  "explanation": "ESS $=n/(1+\\mathrm{CV}^2)$ with $\\mathrm{CV}$ the coefficient of variation of the weights.",
+  "explanation": "ESS $=n/(1+\\mathrm{CV}^2)$ with $\\mathrm{CV}$ the coefficient of variation of the weights (divisor $n$).",
   "section": 1
  },
  {
@@ -1325,7 +1325,7 @@
   "stem": "What does detailed balance say, and why does it matter?",
   "correct": [
    "$\\pi(x)P(x,y)=\\pi(y)P(y,x)$, which makes $\\pi$ stationary.",
-   "Balanced flow under $\\pi$."
+   "The probability flow from $x$ to $y$ equals the flow from $y$ to $x$ under $\\pi$."
   ],
   "distractors": [
    {
@@ -1349,7 +1349,7 @@
     "misconception": "restricts it wrongly"
    }
   ],
-  "explanation": "Detailed balance is sufficient but not necessary for stationarity. Irreducibility and aperiodicity then give convergence.",
+  "explanation": "Detailed balance is sufficient but not necessary for stationarity. Regularity then gives convergence to $\\pi$ from any start.",
   "section": 1
  },
  {
@@ -1370,7 +1370,7 @@
     "misconception": "ignores convergence"
    },
    {
-    "text": "Draws whose averages are biased for every length.",
+    "text": "Draws whose averages do not converge to the target expectation however long the chain runs.",
     "misconception": "overlooks consistency"
    },
    {
@@ -1470,7 +1470,7 @@
    },
    {
     "text": "Because the average is biased in every finite sample.",
-    "misconception": "claims a universal finite-sample bias"
+    "misconception": "gives bias as the reason, instead of dependence"
    },
    {
     "text": "Because the chain never converges to anything.",
@@ -1487,18 +1487,18 @@
  {
   "id": "bay-6.6",
   "lecture": 6,
-  "stem": "What is the acceptance probability of the Metropolis-Hastings algorithm for a move from $x$ to $x'$?",
+  "stem": "What is the acceptance probability of the Metropolis-Hastings algorithm for a move from $x$ to a proposed $y$, with target $\\tilde f$ and proposal $g$?",
   "correct": [
-   "$\\min\\{1,\\ \\pi(x')q(x\\mid x')/(\\pi(x)q(x'\\mid x))\\}$.",
-   "Hastings ratio, capped at one."
+   "$\\min\\{1,\\ \\tilde f(y)g(x\\mid y)/(\\tilde f(x)g(y\\mid x))\\}$.",
+   "The Hastings ratio of target and proposal densities, capped at one."
   ],
   "distractors": [
    {
-    "text": "$\\pi(x')/\\pi(x)$ without capping at one.",
+    "text": "$\\tilde f(y)/\\tilde f(x)$ without capping at one.",
     "misconception": "can exceed one"
    },
    {
-    "text": "$\\min\\{1,\\pi(x)/\\pi(x')\\}$.",
+    "text": "$\\min\\{1,\\tilde f(x)/\\tilde f(y)\\}$.",
     "misconception": "inverts the ratio"
    },
    {
@@ -1506,7 +1506,7 @@
     "misconception": "ignores the target"
    },
    {
-    "text": "$q(x'\\mid x)$ alone.",
+    "text": "$g(y\\mid x)$ alone.",
     "misconception": "ignores the target"
    },
    {
@@ -1523,7 +1523,7 @@
   "stem": "What happens in a random-walk Metropolis sampler when the proposal step is very small?",
   "correct": [
    "Almost every move is accepted, but the chain crawls.",
-   "Slow mixing."
+   "The chain mixes slowly because each accepted move is tiny."
   ],
   "distractors": [
    {
@@ -1693,7 +1693,7 @@
   "distractors": [
    {
     "text": "To increase the number of effective draws.",
-    "misconception": "confuses with thinning"
+    "misconception": "thinks discarding draws adds information"
    },
    {
     "text": "To make the draws independent.",
@@ -1745,7 +1745,7 @@
     "misconception": "ignores correlation"
    }
   ],
-  "explanation": "For an AR(1) chain with correlation $\\rho$, ESS $=n(1-\\rho)/(1+\\rho)$.",
+  "explanation": "Here $\\rho_k$ is the lag-$k$ autocorrelation. For an AR(1) chain with lag-1 autocorrelation $\\phi$, ESS $=n(1-\\phi)/(1+\\phi)$; for the Gibbs sampler of lecture 7, $\\phi=\\rho^2$.",
   "section": 1
  },
  {
@@ -1754,7 +1754,7 @@
   "stem": "What does the Gelman-Rubin statistic $\\hat R$ compare?",
   "correct": [
    "Between-chain against within-chain variability, near 1 at convergence.",
-   "Variance across chains versus within."
+   "It compares the variance across chains with the variance within them."
   ],
   "distractors": [
    {
@@ -1918,8 +1918,8 @@
   "lecture": 8,
   "stem": "What does the WAIC estimate?",
   "correct": [
-   "Out-of-sample predictive accuracy.",
-   "A cross-validation proxy."
+   "The model's expected out-of-sample predictive accuracy.",
+   "It approximates leave-one-out cross-validation."
   ],
   "distractors": [
    {
@@ -1943,7 +1943,7 @@
     "misconception": "confuses with a count"
    }
   ],
-  "explanation": "$p_{\\text{WAIC}}$ is the sum over observations of the posterior variance of the log-likelihood, a measure of flexibility.",
+  "explanation": "$\\mathrm{WAIC}=-2(\\mathrm{lppd}-p_{\\mathrm{WAIC}})$, where $p_{\\mathrm{WAIC}}$ is the sum over observations of the posterior variance of the log-likelihood, a measure of flexibility.",
   "section": 1
  },
  {
@@ -2018,7 +2018,7 @@
   "stem": "When does the Laplace approximation work poorly?",
   "correct": [
    "When the posterior is skewed, multimodal or near a boundary.",
-   "With a variance near zero."
+   "When the mode lies close to the edge of the parameter space."
   ],
   "distractors": [
    {
@@ -2084,7 +2084,7 @@
   "stem": "How is the Laplace approximation related to the sample size?",
   "correct": [
    "As $n$ grows the posterior turns normal with variance of order $1/n$.",
-   "Bernstein-von Mises."
+   "The posterior becomes approximately normal as the sample size grows (Bernstein-von Mises)."
   ],
   "distractors": [
    {
@@ -2149,7 +2149,7 @@
   "lecture": 9,
   "stem": "What is the evidence lower bound (ELBO) in variational Bayes?",
   "correct": [
-   "$E_q[\\log p(y,\\theta)]-E_q[\\log q(\\theta)]$, a bound on $\\log p(y)$.",
+   "$E_q[\\log p(y,\\theta)]-E_q[\\log q(\\theta)]$, a lower bound on $\\log p(y)$.",
    "Expected log joint plus entropy of $q$."
   ],
   "distractors": [
@@ -2183,7 +2183,7 @@
   "stem": "What assumption does mean-field variational inference make?",
   "correct": [
    "The approximation factorises across parameters.",
-   "Factorised posterior."
+   "The approximating density $q$ is a product of independent factors, one per parameter block."
   ],
   "distractors": [
    {
@@ -2215,7 +2215,7 @@
   "lecture": 9,
   "stem": "Which statement compares variational inference with MCMC correctly?",
   "correct": [
-   "VI is faster but biased; MCMC is exact but slower.",
+   "VI is faster but biased; MCMC is asymptotically exact but slower.",
    "VI optimises; MCMC samples."
   ],
   "distractors": [
@@ -2249,7 +2249,7 @@
   "stem": "Which divergence does variational inference minimise?",
   "correct": [
    "$\\mathrm{KL}(q\\|p)$, from approximation to posterior.",
-   "The reverse KL."
+   "The reverse Kullback-Leibler divergence, with $q$ in the first argument."
   ],
   "distractors": [
    {
@@ -2331,8 +2331,8 @@
     "misconception": "confuses processes"
    },
    {
-    "text": "A Markov chain on the integers.",
-    "misconception": "confuses with a different process"
+    "text": "A Markov chain on the integers that moves up or down by one at each step.",
+    "misconception": "confuses with a random walk"
    },
    {
     "text": "A method of generating normal draws.",
@@ -2345,10 +2345,10 @@
  {
   "id": "bay-10.2",
   "lecture": 10,
-  "stem": "What is a Dirichlet process $\\mathrm{DP}(\\alpha,G_0)$?",
+  "stem": "What is a Dirichlet process $\\mathrm{DP}(\\alpha,H)$?",
   "correct": [
-   "A distribution over discrete measures, with base $G_0$ and concentration $\\alpha$.",
-   "A random discrete distribution."
+   "A distribution over discrete measures, with base $H$ and concentration $\\alpha$.",
+   "A random distribution that is discrete with probability one."
   ],
   "distractors": [
    {
@@ -2372,7 +2372,7 @@
     "misconception": "confuses with a mixture model"
    }
   ],
-  "explanation": "Larger $\\alpha$ spreads mass over more atoms; as $\\alpha\\to\\infty$ draws look like $G_0$. For density estimation one convolves it with a kernel.",
+  "explanation": "Larger $\\alpha$ spreads mass over more atoms; as $\\alpha\\to\\infty$ draws look like $H$. For density estimation one convolves it with a kernel.",
   "section": 1
  },
  {
@@ -2380,7 +2380,7 @@
   "lecture": 10,
   "stem": "In the stick-breaking construction of the Dirichlet process, how are the weights built?",
   "correct": [
-   "Break a unit stick: $\\beta_k\\sim\\mathrm{Beta}(1,\\alpha)$.",
+   "Break a unit stick: $v_k\\sim\\mathrm{Beta}(1,\\alpha)$.",
    "Weights are fractions of the remaining stick."
   ],
   "distractors": [
@@ -2393,7 +2393,7 @@
     "misconception": "gives an invalid weight distribution"
    },
    {
-    "text": "Weights are $\\beta_k\\sim\\mathrm{Beta}(\\alpha,1)$ times the previous weight.",
+    "text": "Weights are $v_k\\sim\\mathrm{Beta}(\\alpha,1)$ times the previous weight.",
     "misconception": "swaps the parameters"
    },
    {
@@ -2405,7 +2405,7 @@
     "misconception": "reverses the order"
    }
   ],
-  "explanation": "$E[\\beta_k]=1/(1+\\alpha)$, so a small $\\alpha$ puts most mass on the first few atoms.",
+  "explanation": "$w_k=v_k\\prod_{j<k}(1-v_j)$ and $E[v_k]=1/(1+\\alpha)$, so a small $\\alpha$ puts most mass on the first few atoms.",
   "section": 1
  },
  {

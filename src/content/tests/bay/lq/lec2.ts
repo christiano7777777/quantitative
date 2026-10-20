@@ -22,7 +22,7 @@ export function build({ a, b, x }: Params): LQInstance {
   const predVar = A / B + A / (B * B)
 
   return {
-    intro: 'The number of emails received per day is modelled as Poisson(' + tex('\\lambda') + ') with prior ' + tex('\\lambda\\sim\\mathrm{Gamma}(' + a + ',' + b + ')') + ' (shape ' + tex(a) + ', rate ' + tex(b) + ', density proportional to ' + tex('\\lambda^{' + (a - 1) + '}e^{-' + b + '\\lambda}') + '). Over ' + tex(n) + ' days the counts were ' + tex(x.join(',\\ ')) + '. Give answers to 4 decimal places unless told otherwise.',
+    intro: 'The number of emails received per day is modelled as Poisson(' + tex('\\lambda') + ') with prior ' + tex('\\lambda\\sim\\mathrm{Gamma}(' + a + ',' + b + ')') + ' (shape ' + tex(a) + ', rate ' + tex(b) + ', density proportional to ' + tex('\\lambda^{' + (a - 1) + '}e^{-' + (b === 1 ? '' : b) + '\\lambda}') + '). Over ' + tex(n) + ' days the counts were ' + tex(x.join(',\\ ')) + '. Give answers to 4 decimal places unless told otherwise.',
     parts: [
       {
         prompt: 'The posterior is ' + tex('\\mathrm{Gamma}(a+\\sum x_i,\\ b+n)') + '. Find its shape. Give a whole number.',
@@ -50,7 +50,7 @@ export function build({ a, b, x }: Params): LQInstance {
         explanation: tex('(' + B + '/' + (B + 1) + ')^{' + A + '}') + ' = ' + dec(p0) + '. It averages ' + tex('e^{-\\lambda}') + ' over the Gamma posterior.',
       },
       {
-        prompt: 'Find the variance of the predictive distribution of tomorrow\'s count, ' + tex('E[\\lambda\\mid x]+\\mathrm{Var}(\\lambda\\mid x)') + ' (the Poisson variance averaged over the posterior plus the variance of the posterior mean of the count).',
+        prompt: 'Find the variance of the predictive distribution of tomorrow\'s count, ' + tex('E[\\lambda\\mid x]+\\mathrm{Var}(\\lambda\\mid x)') + ' (the posterior mean of the Poisson variance ' + tex('\\lambda') + ' plus the posterior variance of the Poisson mean ' + tex('\\lambda') + ').',
         answer: predVar, tolerance: tol4, lecture: 2,
         explanation: tex(dec(mean) + '+' + dec(variance)) + ' = ' + dec(predVar) + '. It exceeds the predictive mean ' + tex(dec(mean)) + ': a Poisson count with an uncertain rate is over-dispersed.',
       },

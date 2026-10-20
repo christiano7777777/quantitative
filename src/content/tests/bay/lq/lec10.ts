@@ -35,7 +35,7 @@ export function build({ alpha, tables, v }: Params): LQInstance {
         explanation: tex(tables[0] + '/(' + alpha + '+' + n + ')') + ' = ' + dec(pJoin1) + '. Bigger tables attract more customers: the rich get richer.',
       },
       {
-        prompt: 'The expected number of tables after ' + tex(n) + ' customers is ' + tex('\\sum_{i=1}^n\\alpha/(\\alpha+i-1)') + '. Find it.',
+        prompt: 'Before any customer had arrived, what was the expected number of tables after ' + tex(n) + ' customers, ' + tex('\\sum_{i=1}^n\\alpha/(\\alpha+i-1)') + '? This is a prior expectation; it ignores the three tables now observed.',
         answer: ek, tolerance: tol4, lecture: 10,
         explanation: 'The ' + tex('i') + 'th customer starts a new table with probability ' + tex('\\alpha/(\\alpha+i-1)') + '; adding for ' + tex('i=1,\\dots,' + n) + ' gives ' + dec(ek) + '. It grows like ' + tex('\\alpha\\ln n') + ': the number of clusters is not fixed in advance.',
       },
