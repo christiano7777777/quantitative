@@ -10,7 +10,8 @@ export interface Params { rho: number; y: number; m: [number, number]; s2: [numb
 export function sample(rng: Rng): Params {
   return {
     rho: rng.pick([0.5, 0.6, 0.8]), y: rng.pick([1, 1.5, 2, -1]),
-    m: [rng.pick([-0.3, -0.2, 0.1, 0.2]), rng.pick([0.3, 0.4, 0.5])], s2: [rng.pick([0.9, 1, 1.1]), rng.pick([0.95, 1.05, 1.2])],
+    // chain means at least 0.2 apart, so that B/(nW) > 1/n and R-hat exceeds 1
+    m: [rng.pick([-0.3, -0.2, 0, 0.1]), rng.pick([0.3, 0.4, 0.5])], s2: [rng.pick([0.9, 1, 1.1]), rng.pick([0.95, 1.05, 1.2])],
     q: rng.pick([1, 1.5, 2]), p: rng.pick([0.5, 1, 1.2]), eps: rng.pick([0.2, 0.4]),
   }
 }

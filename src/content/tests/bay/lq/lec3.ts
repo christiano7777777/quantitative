@@ -9,7 +9,10 @@ export interface Params { n: number; k: number }
 
 export function sample(rng: Rng): Params {
   const n = rng.int(12, 24)
-  return { n, k: rng.int(3, n - 3) }
+  let k = rng.int(3, n - 3)
+  // k = n/2 gives a symmetric posterior (mode = mean); redraw so that the skewness remark in part b holds
+  while (2 * k === n) k = rng.int(3, n - 3)
+  return { n, k }
 }
 
 export function build({ n, k }: Params): LQInstance {
@@ -32,7 +35,7 @@ export function build({ n, k }: Params): LQInstance {
       {
         prompt: 'Find the posterior mode (the MAP estimate), ' + tex('\\dfrac{A-1}{A+B-2}') + '.',
         answer: mode, tolerance: tol4, lecture: 3,
-        explanation: tex('(' + dec(A) + '-1)/(' + dec(A + B) + '-2)') + ' = ' + dec(mode) + '. The mode is the value of highest posterior density; it differs from the mean because the posterior is skewed.',
+        explanation: tex('(' + dec(A) + '-1)/(' + dec(A + B) + '-2)') + ' = ' + dec(mode) + '. The mode is the value of highest posterior density; it differs from the mean because the posterior is skewed (' + tex('k\\ne n/2') + ').',
       },
       {
         prompt: 'Find the posterior standard deviation ' + tex('\\sqrt{\\dfrac{AB}{(A+B)^2(A+B+1)}}') + '.',
