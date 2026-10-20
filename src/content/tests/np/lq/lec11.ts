@@ -14,11 +14,14 @@ export function sample(rng: Rng): Params {
     const x0 = rng.int(4, 9)
     const h = rng.pick([2, 3])
     const inWin = x.filter((v) => Math.abs(v - x0) <= h)
-    if (inWin.length >= 3 && inWin.length <= 5) return { x, y, x0, h }
+    // the farthest point in the window must lie strictly inside it, so that its tricube weight is not 0
+    if (inWin.length >= 3 && inWin.length <= 5 && Math.max(...inWin.map((v) => Math.abs(v - x0))) < h) return { x, y, x0, h }
   }
 }
 
 const phi = (u: number) => Math.exp(-0.5 * u * u)
+/** A signed term for an explanation: '+1.5000' or '-1.5000'. */
+const signed = (v: number) => (v < 0 ? '-' + dec(-v) : '+' + dec(v))
 
 export function build({ x, y, x0, h }: Params): LQInstance {
   const idx = x.map((v, i) => i).filter((i) => Math.abs(x[i] - x0) <= h)
@@ -50,7 +53,7 @@ export function build({ x, y, x0, h }: Params): LQInstance {
       {
         prompt: 'Now fit a straight line by ordinary least squares to the points in the window (a local linear fit with a box kernel) and evaluate it at ' + tex('x_0') + '. Find the fitted value.',
         answer: local, tolerance: tol4, lecture: 11,
-        explanation: 'In the window ' + tex('\\bar x=' + dec(mx) + ',\\ \\bar y=' + dec(my)) + ' and slope ' + dec(slope) + ', so the fit at ' + tex('x_0') + ' is ' + tex(dec(my) + '+' + dec(slope) + '\\times(' + x0 + '-' + dec(mx) + ')') + ' = ' + dec(local) + '. A local linear fit removes the boundary and slope bias of the local average.',
+        explanation: 'In the window ' + tex('\\bar x=' + dec(mx) + ',\\ \\bar y=' + dec(my)) + ' and slope ' + dec(slope) + ', so the fit at ' + tex('x_0') + ' is ' + tex(dec(my) + signed(slope) + '\\times(' + x0 + '-' + dec(mx) + ')') + ' = ' + dec(local) + '. A local linear fit removes the boundary and slope bias of the local average.',
       },
       {
         prompt: 'Nadaraya-Watson with a Gaussian kernel weights every point by ' + tex('w_i=e^{-(x_i-x_0)^2/(2h^2)}') + ': ' + tex('\\hat m(x_0)=\\sum w_iy_i/\\sum w_i') + '. Find it.',

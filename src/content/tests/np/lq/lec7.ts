@@ -29,7 +29,7 @@ export function build({ theta, reps }: Params): LQInstance {
     intro: 'A statistician estimates a population median by ' + tex('\\hat\\theta=' + theta) + ' from one sample. Resampling the sample with replacement ' + tex(B) + ' times and recomputing the median each time gives the bootstrap replicates ' + tex(reps.join(',\\ ')) + '. Use them to describe the uncertainty of ' + tex('\\hat\\theta') + '. Give answers to 4 decimal places unless told otherwise.',
     parts: [
       {
-        prompt: 'Find the bootstrap standard error: the sample standard deviation (divisor ' + tex(B - 1) + ') of the ' + tex(B) + ' replicates.',
+        prompt: 'Find the bootstrap standard error: the sample standard deviation (divisor ' + tex(B - 1) + ') of the ' + tex(B) + ' replicates. (The notes divide by ' + tex('B') + '; here use ' + tex('B-1') + '.)',
         answer: se, tolerance: tol4, lecture: 7,
         explanation: 'The replicates have mean ' + dec(mean) + '; the sum of squared deviations divided by ' + tex(B - 1) + ' gives variance ' + dec(se * se) + ', so ' + tex('\\widehat{\\mathrm{SE}}=' + dec(se)) + '.',
       },
@@ -49,7 +49,7 @@ export function build({ theta, reps }: Params): LQInstance {
         explanation: tex(theta + '+1.645\\times' + dec(se)) + ' = ' + dec(normalUp) + '.',
       },
       {
-        prompt: 'The percentile interval takes the 5th and 95th percentiles of the replicates. With ' + tex(B) + ' replicates these are the smallest and the largest (the ' + tex('(B+1)\\alpha=1') + 'st and ' + tex(B) + 'th ordered values). Find the lower end of the 90% percentile interval.',
+        prompt: 'The percentile interval takes the 5th and 95th percentiles of the replicates. With ' + tex(B) + ' replicates these are the smallest and the largest (the ' + tex('(B+1)\\times0.05=1') + 'st and ' + tex('(B+1)\\times0.95=' + B) + 'th ordered values). Find the lower end of the 90% percentile interval.',
         answer: percLow, tolerance: tol4, lecture: 7,
         explanation: 'The smallest replicate is ' + dec(percLow) + '.',
       },
