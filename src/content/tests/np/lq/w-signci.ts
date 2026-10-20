@@ -15,6 +15,7 @@ export function sample(rng: Rng): Params {
     const n = rng.int(11, 14)
     const x = Array.from({ length: n }, () => m0 + rng.int(-15, 15))
     const ties = x.filter((v) => v === m0).length
+    const others = x.filter((v) => v !== m0)
     const above = x.filter((v) => v > m0).length
     const nn = n - ties
     const x0 = m0 + rng.int(-8, 8)
@@ -23,7 +24,8 @@ export function sample(rng: Rng): Params {
     const limit = f + 1.96 * Math.sqrt((f * (1 - f)) / n)
     // 1 or 2 ties, a majority above m0 but not all, and a cdf point with 2 to n-2 observations at or below it whose
     // upper confidence limit is a sensible probability (below 1)
-    if (ties >= 1 && ties <= 2 && above > nn / 2 && above < nn && c >= 2 && c <= n - 2 && limit < 1) {
+    // no ties other than those at m0, so the order statistics are distinct apart from the value m0
+    if (ties >= 1 && ties <= 2 && new Set(others).size === others.length && above > nn / 2 && above < nn && c >= 2 && c <= n - 2 && limit < 1) {
       return { m0, x, r: rng.pick([2, 3]), x0 }
     }
   }
@@ -54,7 +56,7 @@ export function build({ m0, x, r, x0 }: Params): LQInstance {
   const up = f + 1.96 * se
 
   return {
-    intro: 'A courier firm claims that the median delivery time of its parcels is ' + tex(m0) + ' minutes. The delivery times (minutes) of ' + tex(n) + ' parcels, a random sample from a continuous distribution, are ' + tex(x.join(',\\ ')) + '. Test ' + tex('H_0:\\text{median}=' + m0) + ' with the sign test: drop observations equal to ' + tex(m0) + ', let ' + tex('n_0') + ' be the number left and ' + tex('B') + ' the number above ' + tex(m0) + '. Under ' + tex('H_0') + ', ' + tex('B\\sim\\mathrm{Bin}(n_0,\\tfrac12)') + '. Give answers to 4 decimal places unless told otherwise.',
+    intro: 'A courier firm claims that the median delivery time of its parcels is ' + tex(m0) + ' minutes. The delivery times (minutes) of ' + tex(n) + ' parcels, a random sample from a continuous distribution recorded to the nearest minute, are ' + tex(x.join(',\\ ')) + '. Test ' + tex('H_0:\\text{median}=' + m0) + ' with the sign test: drop observations equal to ' + tex(m0) + ', let ' + tex('n_0') + ' be the number left and ' + tex('B') + ' the number above ' + tex(m0) + '. Under ' + tex('H_0') + ', ' + tex('B\\sim\\mathrm{Bin}(n_0,\\tfrac12)') + '. Give answers to 4 decimal places unless told otherwise.',
     parts: [
       {
         prompt: 'How many observations remain after dropping those equal to ' + tex(m0) + '? (This is ' + tex('n_0') + '.) Give a whole number.',
@@ -77,7 +79,7 @@ export function build({ m0, x, r, x0 }: Params): LQInstance {
         explanation: 'Since ' + tex('B') + ' is above ' + tex(nn / 2) + ', the smaller tail is the upper one: ' + tex('2\\times' + dec(upper)) + ' = ' + dec(two) + (two === 1 ? ' (capped at 1)' : '') + '.',
       },
       {
-        prompt: 'Let ' + tex('X_{(1)}<\\dots<X_{(' + n + ')}') + ' be the ordered delivery times (all ' + tex(n) + ' of them). The number of observations below the true median is ' + tex('\\mathrm{Bin}(' + n + ',\\tfrac12)') + '. Find the exact coverage of the interval ' + tex('(X_{(' + r + ')},\\ X_{(' + (n + 1 - r) + ')})') + ' as a confidence interval for the median.',
+        prompt: 'Let ' + tex('X_{(1)}\\le\\dots\\le X_{(' + n + ')}') + ' be the ordered delivery times (all ' + tex(n) + ' of them). The number of observations below the true median is ' + tex('\\mathrm{Bin}(' + n + ',\\tfrac12)') + '. Find the exact coverage of the interval ' + tex('(X_{(' + r + ')},\\ X_{(' + (n + 1 - r) + ')})') + ' as a confidence interval for the median.',
         answer: cover, tolerance: tol4, lecture: 1,
         explanation: 'The interval misses the median only if at most ' + tex(r - 1) + ' observations lie below it or at least ' + tex(n - r + 1) + ' do; by symmetry the coverage is ' + tex('1-2P(\\mathrm{Bin}(' + n + ',\\tfrac12)\\le' + (r - 1) + ')') + ' = ' + dec(cover) + '.',
       },

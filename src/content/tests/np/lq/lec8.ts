@@ -1,12 +1,12 @@
-// np lecture 8 (bootstrap-t, regression, tests, failures): one story. A regression slope with its standard error and 19 studentised
-// bootstrap values: the bootstrap-t interval ends, a bootstrap-t p-value, and two facts about resamples (an observation missing,
-// the maximum present), the second showing why the bootstrap fails for the sample maximum.
+// np lecture 8 (bootstrap-t, BCa, regression, tests, failures), in the order of the HKU notes: one story. A regression slope with its
+// standard error and 19 studentised bootstrap values: the bootstrap-t interval ends, the BCa adjusted upper level, a bootstrap-t p-value,
+// and two facts about resamples (an observation missing, the maximum present), the second showing why the bootstrap fails for the maximum.
 // Lecture 8.
 import type { Rng } from '../../../../lib/rng'
 import type { LQGenerator, LQInstance } from '../../../../lib/types'
 import { dec, tex, tol4 } from '../../../shared/format'
 
-export interface Params { theta: number; se: number; n: number; tstar: number[] }
+export interface Params { theta: number; se: number; n: number; tstar: number[]; z0: number; a: number }
 
 export function sample(rng: Rng): Params {
   for (;;) {
@@ -15,11 +15,11 @@ export function sample(rng: Rng): Params {
     const tstar = rng.sample(Array.from({ length: 71 }, (_, i) => i - 35), 19).map((v) => v / 10)
     const tobs = theta / se
     const cnt = tstar.filter((t) => Math.abs(t) >= tobs).length
-    if (tobs >= 2 && cnt >= 1 && cnt <= 6) return { theta, se, n: rng.pick([8, 10, 12]), tstar }
+    if (tobs >= 2 && cnt >= 1 && cnt <= 6) return { theta, se, n: rng.pick([8, 10, 12]), tstar, z0: rng.pick([-0.2, -0.1, 0.1, 0.2]), a: rng.pick([0.02, 0.05, 0.08]) }
   }
 }
 
-export function build({ theta, se, n, tstar }: Params): LQInstance {
+export function build({ theta, se, n, tstar, z0, a }: Params): LQInstance {
   const B = tstar.length
   const sorted = [...tstar].sort((a, b) => a - b)
   const lower = theta - sorted[B - 1] * se
@@ -29,6 +29,7 @@ export function build({ theta, se, n, tstar }: Params): LQInstance {
   const pBoot = cnt / B
   const pMissing = (1 - 1 / n) ** n
   const pMax = 1 - pMissing
+  const zU = z0 + (z0 + 1.645) / (1 - a * (z0 + 1.645))
 
   return {
     intro: 'A regression of a response on a predictor with ' + tex('n=' + n) + ' observations gives the slope estimate ' + tex('\\hat\\beta=' + dec(theta)) + ' with estimated standard error ' + tex('\\widehat{\\mathrm{SE}}=' + dec(se)) + '. A paired bootstrap computes, for each of ' + tex(B) + ' resamples, the studentised value ' + tex('t^*=(\\hat\\beta^*-\\hat\\beta)/\\widehat{\\mathrm{SE}}^*') + ', giving ' + tex(tstar.map(dec).join(',\\ ')) + '. Give answers to 4 decimal places unless told otherwise.',
@@ -44,12 +45,17 @@ export function build({ theta, se, n, tstar }: Params): LQInstance {
         explanation: 'The smallest ' + tex('t^*') + ' is ' + dec(sorted[0]) + ', so ' + tex(dec(theta) + '-(' + dec(sorted[0]) + ')\\times' + dec(se)) + ' = ' + dec(upper) + '. The interval is not symmetric: the bootstrap-t adapts to the skewness of the studentised statistic.',
       },
       {
+        prompt: 'A BCa 90% interval for the slope uses the bias constant ' + tex('\\hat z_0=' + dec(z0)) + ' and the acceleration ' + tex('\\hat a=' + dec(a)) + '. Its upper end is the ' + tex('100\\alpha_U') + '-th percentile of the bootstrap slopes, with ' + tex('\\alpha_U=\\Phi(w)') + ' and ' + tex('w=z_0+\\dfrac{z_0+z_{0.05}}{1-a(z_0+z_{0.05})}') + ', where ' + tex('z_{0.05}=1.645') + ' is the upper 5% point of ' + tex('N(0,1)') + '. Find ' + tex('w') + '.',
+        answer: zU, tolerance: tol4, lecture: 8,
+        explanation: tex('z_0+z_{0.05}=' + dec(z0 + 1.645)) + ' and ' + tex('1-a(z_0+z_{0.05})=' + dec(1 - a * (z0 + 1.645))) + ', so ' + tex('w=' + dec(z0) + '+' + dec(z0 + 1.645) + '/' + dec(1 - a * (z0 + 1.645))) + ' = ' + dec(zU) + '. The normal table then gives ' + tex('\\alpha_U=\\Phi(w)') + '; with ' + tex('z_0=a=0') + ' it would be ' + tex('\\Phi(1.645)=0.95') + ', the percentile interval.',
+      },
+      {
         prompt: 'To test ' + tex('H_0:\\beta=0') + ' find the observed studentised value ' + tex('t_{\\text{obs}}=\\hat\\beta/\\widehat{\\mathrm{SE}}') + '.',
         answer: tobs, tolerance: tol4, lecture: 8,
         explanation: tex(dec(theta) + '/' + dec(se)) + ' = ' + dec(tobs) + '.',
       },
       {
-        prompt: 'The bootstrap p-value for the two-sided test is the fraction of the ' + tex(B) + ' values with ' + tex('|t^*|\\ge t_{\\text{obs}}') + '. Find it.',
+        prompt: 'The values ' + tex('t^*') + ' are centred at ' + tex('\\hat\\beta') + ', so they imitate the distribution of ' + tex('t') + ' under ' + tex('H_0') + '. The bootstrap p-value for the two-sided test is the fraction of the ' + tex(B) + ' values with ' + tex('|t^*|\\ge t_{\\text{obs}}') + '. Find it.',
         answer: pBoot, tolerance: tol4, lecture: 8,
         explanation: cnt + ' of the ' + B + ' values have absolute value at least ' + dec(tobs) + ', so ' + tex('p=' + cnt + '/' + B) + ' = ' + dec(pBoot) + '.',
       },
@@ -59,7 +65,7 @@ export function build({ theta, se, n, tstar }: Params): LQInstance {
         explanation: tex('(1-1/' + n + ')^{' + n + '}') + ' = ' + dec(pMissing) + ' (it tends to ' + tex('e^{-1}\\approx0.368') + ' as ' + tex('n') + ' grows).',
       },
       {
-        prompt: 'The sample maximum of ' + tex(n) + ' observations is estimated by the maximum of the bootstrap resample, which equals the sample maximum whenever that observation is selected at least once. Find that probability, ' + tex('1-(1-1/n)^n') + '. (For the maximum of a ' + tex('U(0,\\theta)') + ' sample it shows why the bootstrap fails: the bootstrap distribution puts mass ' + tex('\\approx0.632') + ' on one point, but the true distribution of the maximum is continuous.)',
+        prompt: 'For the sample maximum of ' + tex(n) + ' observations, the bootstrap replicate is the maximum of the resample, which equals the sample maximum whenever that observation is selected at least once. Find that probability, ' + tex('1-(1-1/n)^n') + '. (For the maximum of a ' + tex('U(0,\\theta)') + ' sample it shows why the bootstrap fails: the bootstrap distribution puts mass ' + tex('\\approx0.632') + ' on one point, but the true distribution of the maximum is continuous.)',
         answer: pMax, tolerance: tol4, lecture: 8,
         explanation: tex('1-' + dec(pMissing)) + ' = ' + dec(pMax) + '.',
       },

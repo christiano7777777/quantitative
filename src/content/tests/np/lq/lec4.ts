@@ -44,7 +44,7 @@ export function build({ g }: Params): LQInstance {
         explanation: 'The rank sums are ' + R.join(', ') + ' and ' + tex('n_k=3') + ': ' + tex('\\frac{12}{' + N * (N + 1) + '}\\times\\frac{' + R.map((r) => r * r).join('+') + '}{3}-' + 3 * (N + 1)) + ' = ' + dec(H) + '.',
       },
       {
-        prompt: 'Under ' + tex('H_0') + ', ' + tex('H') + ' is approximately ' + tex('\\chi^2_2') + '. For two degrees of freedom ' + tex('P(\\chi^2_2>h)=e^{-h/2}') + '. Find the approximate p-value.',
+        prompt: 'Under ' + tex('H_0') + ', ' + tex('H') + ' is approximately ' + tex('\\chi^2_2') + '. For two degrees of freedom ' + tex('P(\\chi^2_2>h)=e^{-h/2}') + '. Find the approximate p-value. (With only three plots per dose this approximation is rough; the exact permutation p-value is preferred.)',
         answer: p, tolerance: tol4, lecture: 4,
         explanation: tex('e^{-' + dec(H) + '/2}') + ' = ' + dec(p) + '.',
       },
@@ -59,7 +59,7 @@ export function build({ g }: Params): LQInstance {
         explanation: 'Count the pairs ' + tex('(A,B)') + ', ' + tex('(A,C)') + ', ' + tex('(B,C)') + ' with the second yield larger: ' + tex('J=' + J) + ' out of ' + tex(27) + ' pairs.',
       },
       {
-        prompt: 'Under ' + tex('H_0') + ', ' + tex('E[J]=\\dfrac{N^2-\\sum n_k^2}{4}') + ' and ' + tex('\\mathrm{Var}(J)=\\dfrac{N^2(2N+3)-\\sum n_k^2(2n_k+3)}{72}') + '. Find the standardised statistic ' + tex('z=(J-E[J])/\\sqrt{\\mathrm{Var}(J)}') + '.',
+        prompt: 'Under ' + tex('H_0') + ', ' + tex('E[J]=\\dfrac{N^2-\\sum n_k^2}{4}') + ' and ' + tex('\\mathrm{Var}(J)=\\dfrac{N^2(2N+3)-\\sum n_k^2(2n_k+3)}{72}') + '. Find the standardised statistic ' + tex('z=(J-E[J])/\\sqrt{\\mathrm{Var}(J)}') + ' (with groups this small the normal approximation is rough; the exact permutation p-value is preferred).',
         answer: z, tolerance: tol4, lecture: 4,
         explanation: tex('E[J]=(' + N * N + '-27)/4=' + dec(meanJ)) + ' and ' + tex('\\mathrm{Var}(J)=(' + N * N * (2 * N + 3) + '-' + 3 * 9 * 9 + ')/72=' + dec(varJ)) + ', so ' + tex('z=(' + J + '-' + dec(meanJ) + ')/' + dec(Math.sqrt(varJ))) + ' = ' + dec(z) + '.',
       },
