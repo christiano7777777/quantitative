@@ -17,7 +17,8 @@ let tmp = ''
 beforeAll(() => { tmp = mkdtempSync(join(tmpdir(), 'exam-validate-')) })
 afterAll(() => { rmSync(tmp, { recursive: true, force: true }) })
 
-const readJson = <T>(f: string) => JSON.parse(readFileSync(join(root, 'content', 'exams', f), 'utf8')) as T
+// mutation tests start from a fixed copy of the pipeline placeholder, so real exam content can change freely
+const readJson = <T>(f: string) => JSON.parse(readFileSync(join(root, 'src', 'exam', '__fixtures__', f), 'utf8')) as T
 let n = 0
 
 /** copies the schemas to a scratch directory, puts the given files in it and validates just those */

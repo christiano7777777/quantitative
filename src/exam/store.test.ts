@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import bay from '../../content/exams/bay.written.json'
+import bay from './__fixtures__/bay.written.json'
 import { createExamStore, loadSettings, saveSettings, scoreWritten, STATE_KEY, validateState } from './store'
 import type { WrittenExam, WrittenMarking } from './types'
 

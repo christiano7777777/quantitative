@@ -2,51 +2,222 @@
   "$schema": "./schema/coding.schema.json",
   "schemaVersion": 1,
   "topicId": "bay",
-  "placeholder": true,
-  "title": "PLACEHOLDER: Bayesian Statistics, coding exam",
-  "totalMarks": 10,
-  "instructions": "**PLACEHOLDER EXAM.** This file only proves that the pipeline works; replace it with real questions.\n\nWrite only the functions asked for. Every run is seeded, so your results are reproducible. The visible tests can be run as often as you like; the hidden tests run when you submit.",
+  "title": "Bayesian Statistics: coding exam",
+  "totalMarks": 50,
+  "instructions": "Write only the functions asked for; the constants in the read-only helper code are fixed by the question. Every run is seeded, so your results are reproducible. Visible tests can be run as often as you like; hidden tests run when you submit. Only `numpy` and `scipy` are available.",
   "questions": [
     {
       "id": "c1",
-      "title": "Metropolis-Hastings for a Bernoulli probability",
-      "text": "Binary data $Y_1,\\dots,Y_n$ are modelled as conditionally i.i.d. $Y_i\\mid p\\sim\\text{Bernoulli}(p)$, so\n$$f(y\\mid p)=p^{y}(1-p)^{1-y},\\qquad y\\in\\{0,1\\}.$$\nThe prior on $p$ is a normal distribution with mean $\\mu=0.5$ and standard deviation $\\sigma=0.2$ **truncated to $(0,1)$**, so that\n$$\\pi(p)\\propto \\exp\\!\\Big(-\\frac{(p-\\mu)^2}{2\\sigma^2}\\Big),\\qquad 0<p<1.$$\n\nWrite two functions.\n\n1. `log_posterior(p, Y)` returns the **unnormalised log posterior** of $p$ given the data array `Y`, and `-np.inf` when $p\\notin(0,1)$.\n2. `mh_posterior(Y, rng)` runs a **random-walk Metropolis-Hastings** chain for $p\\mid Y$ and returns **one numpy array**: the draws left after discarding the burn-in.\n\nThe constants `MU`, `SIGMA`, `STEP` (sd of the normal proposal), `P0` (starting value), `N_ITER` (iterations) and `BURN_IN` are already defined for you. The chain makes exactly `N_ITER` iterations, stores the state after every iteration (the current value if the proposal is rejected), and returns the last `N_ITER - BURN_IN` stored values. Use the generator `rng` for all randomness. Only the output of `mh_posterior` is tested, through its 5%, 50% and 95% quantiles.",
+      "title": "Gamma-Poisson: posterior, credible interval and predictive",
+      "text": "Counts $Y_1,\\dots,Y_n$ are conditionally i.i.d. given $\\lambda>0$ with $Y_i\\mid\\lambda\\sim\\text{Poisson}(\\lambda)$, $f(y\\mid\\lambda)=\\lambda^{y}e^{-\\lambda}/y!$. The prior is $\\lambda\\sim\\text{Gamma}(a_0,b_0)$ (shape $a_0$, **rate** $b_0$), with $a_0=$ `A0` $=2$ and $b_0=$ `B0` $=1$.\n\nWrite `poisson_gamma_summary(y)`, where `y` is a list or numpy array of non-negative integer counts (it may be **empty**, in which case the posterior is the prior). It returns **one list of five floats**\n$$[\\,a_n,\\ b_n,\\ L,\\ U,\\ p_0\\,]$$\nwhere $\\text{Gamma}(a_n,b_n)$ is the posterior of $\\lambda$, $[L,U]$ is the **equal-tailed** $95\\%$ posterior credible interval (the $2.5\\%$ and $97.5\\%$ posterior quantiles), and $p_0=\\P(\\tilde Y=0\\mid y)$ is the posterior predictive probability that a new count equals $0$.",
       "marks": 10,
-      "docs": "**Random-walk Metropolis-Hastings.** Target density $\\tilde\\pi(p)=f(y\\mid p)\\,\\pi(p)$, known up to a constant.\n\n```\np <- P0\nfor t = 1, ..., N_ITER:\n    p* <- p + STEP * Z,   Z ~ N(0, 1)\n    u  <- Uniform(0, 1)\n    if log(u) < log pi~(p*) - log pi~(p):\n        p <- p*              # accept\n    store p                  # also when the proposal was rejected\nreturn the stored values after the first BURN_IN\n```\n\nThe proposal is symmetric, so the Hastings ratio reduces to $\\tilde\\pi(p^*)/\\tilde\\pi(p)$. Work on the log scale to avoid underflow. A proposal outside $(0,1)$ has log posterior $-\\infty$ and is always rejected.\n\nFor data $y$ with $s=\\sum y_i$ the log likelihood is $s\\log p+(n-s)\\log(1-p)$.",
-      "difficultyNotes": "Placeholder. Tests whether the student can turn the model and the truncated prior into an unnormalised log posterior and write the MH loop from pseudocode.",
-      "helperCode": "import numpy as np\nfrom scipy import stats\n\n# Constants fixed by the question. Do not change them.\nMU = 0.5        # prior mean (before truncation)\nSIGMA = 0.2     # prior standard deviation (before truncation)\nSTEP = 0.1      # sd of the random-walk proposal\nP0 = 0.5        # starting value of the chain\nN_ITER = 20000  # number of MH iterations\nBURN_IN = 2000  # draws discarded from the start of the chain\n",
-      "skeleton": "def log_posterior(p, Y):\n    \"\"\"Unnormalised log posterior density of p given the 0/1 data Y.\n    Return -np.inf outside (0, 1).\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n\n\ndef mh_posterior(Y, rng):\n    \"\"\"Random-walk Metropolis-Hastings for p | Y.\n    Return one numpy array: the N_ITER - BURN_IN draws that remain after the burn-in is discarded.\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n",
+      "docs": "**Conjugate update.** Multiply the Poisson likelihood by the Gamma prior and read off the Gamma kernel $\\lambda^{a_n-1}e^{-b_n\\lambda}$.\n\n**Equal-tailed interval.** $L=F^{-1}(0.025)$, $U=F^{-1}(0.975)$ for the posterior cdf $F$. In scipy, `stats.gamma(a, scale=1/rate)` uses a **scale** parameter, not a rate.\n\n**Predictive probability.** $\\P(\\tilde Y=0\\mid y)=\\int_0^\\infty e^{-\\lambda}\\,\\pi(\\lambda\\mid y)\\,d\\lambda$; this integral has a closed form for a Gamma posterior.\n\nReturn a plain list of five floats, in the order stated.",
+      "difficultyNotes": "Tests the Gamma-Poisson update, the scale-versus-rate trap in scipy, and the predictive integral. Typical mistakes: passing the rate as scale, forgetting the empty-data case, using a normal approximation for the interval.",
+      "helperCode": "import numpy as np\nfrom scipy import stats\n\nA0 = 2.0\nB0 = 1.0\nLEVEL = 0.95\n",
+      "skeleton": "def poisson_gamma_summary(y):\n    \"\"\"Return [a_n, b_n, L, U, p0] for the Gamma(A0, B0)-Poisson model given counts y.\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n",
+      "functions": [
+        {
+          "name": "poisson_gamma_summary",
+          "main": true,
+          "description": "Returns [a_n, b_n, L, U, p0]. This is the tested function."
+        }
+      ],
+      "referenceSolution": "def poisson_gamma_summary(y):\n    y = np.asarray(y, dtype=float)\n    a_n = A0 + y.sum()\n    b_n = B0 + y.size\n    post = stats.gamma(a_n, scale=1.0 / b_n)\n    alpha = 1.0 - LEVEL\n    L = post.ppf(alpha / 2)\n    U = post.ppf(1 - alpha / 2)\n    p0 = (b_n / (b_n + 1.0)) ** a_n\n    return [float(a_n), float(b_n), float(L), float(U), float(p0)]\n",
+      "oracleSolution": "from scipy import special\nfrom scipy.optimize import brentq\n\n\ndef expected_value(y):\n    y = list(np.asarray(y, dtype=float).ravel())\n    a = A0 + sum(y)\n    b = B0 + len(y)\n    def q(p):\n        return brentq(lambda x: special.gammainc(a, b * x) - p, 1e-12, 1e4, xtol=1e-14, rtol=1e-14)\n    p0 = float(np.exp(a * (np.log(b) - np.log(b + 1.0))))\n    return [a, b, q(0.025), q(0.975), p0]\n",
+      "visibleTests": [
+        {
+          "id": "v1",
+          "description": "n = 6 counts",
+          "input": {
+            "y": [
+              3,
+              1,
+              4,
+              2,
+              0,
+              2
+            ]
+          },
+          "seed": 1,
+          "compare": {
+            "type": "numeric",
+            "abs": 1e-06
+          },
+          "expected": [
+            14.0,
+            7.0,
+            1.093418610900085,
+            3.175770845451269,
+            0.15421007284408028
+          ]
+        },
+        {
+          "id": "v2",
+          "description": "n = 3 counts",
+          "input": {
+            "y": [
+              7,
+              9,
+              5
+            ]
+          },
+          "seed": 2,
+          "compare": {
+            "type": "numeric",
+            "abs": 1e-06
+          },
+          "expected": [
+            23.0,
+            4.0,
+            3.645006759261171,
+            8.327066096781305,
+            0.005902958103587063
+          ]
+        }
+      ],
+      "hiddenTests": [
+        {
+          "id": "h1",
+          "description": "empty data: posterior equals prior",
+          "input": {
+            "y": []
+          },
+          "seed": 3,
+          "compare": {
+            "type": "numeric",
+            "abs": 1e-06
+          },
+          "expected": [
+            2.0,
+            1.0,
+            0.24220927854396623,
+            5.5716433909389,
+            0.25
+          ]
+        },
+        {
+          "id": "h2",
+          "description": "all zeros",
+          "input": {
+            "y": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "seed": 4,
+          "compare": {
+            "type": "numeric",
+            "abs": 1e-06
+          },
+          "expected": [
+            2.0,
+            9.0,
+            0.026912142060440555,
+            0.6190714878820999,
+            0.8099999999999999
+          ]
+        },
+        {
+          "id": "h3",
+          "description": "numpy array input, n = 12",
+          "input": {
+            "y": {
+              "$ndarray": [
+                12,
+                15,
+                9,
+                11,
+                14,
+                10,
+                13,
+                8,
+                16,
+                12,
+                11,
+                13
+              ]
+            }
+          },
+          "seed": 5,
+          "compare": {
+            "type": "numeric",
+            "abs": 1e-06
+          },
+          "expected": [
+            146.0,
+            13.0,
+            9.482966346989706,
+            13.124216016013905,
+            2.0000287001397615e-05
+          ]
+        },
+        {
+          "id": "h4",
+          "description": "single observation",
+          "input": {
+            "y": [
+              1
+            ]
+          },
+          "seed": 6,
+          "compare": {
+            "type": "numeric",
+            "abs": 1e-06
+          },
+          "expected": [
+            3.0,
+            2.0,
+            0.3093360614478007,
+            3.6123438338619795,
+            0.2962962962962962
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "title": "Metropolis-Hastings for a Poisson log-rate",
+      "text": "Counts $Y_1,\\dots,Y_n$ are conditionally i.i.d. given $\\theta\\in\\mathbb R$ with $Y_i\\mid\\theta\\sim\\text{Poisson}(e^{\\theta})$. The prior on the **log-rate** is $\\theta\\sim\\mathcal N(0,\\tau^2)$ with $\\tau=$ `TAU` $=1.5$. This prior is not conjugate.\n\nWrite two functions.\n\n1. `log_posterior(theta, y)` returns the **unnormalised log posterior** of $\\theta$ given the counts `y` (constants not involving $\\theta$ may be dropped).\n2. `mh_log_rate(y, rng)` runs a **random-walk Metropolis-Hastings** chain for $\\theta\\mid y$ with normal proposal $\\theta^*=\\theta+$ `STEP` $\\cdot Z$, $Z\\sim\\mathcal N(0,1)$, `STEP` $=0.6$, starting at `THETA0` $=0$. The chain makes exactly `N_ITER` $=20000$ iterations, stores the state after every iteration (the current value if the proposal is rejected), and returns **one numpy array**: the last `N_ITER - BURN_IN` $=18000$ stored values (`BURN_IN` $=2000$).\n\nUse `rng` for all randomness. Only `mh_log_rate` is tested, through the $5\\%$, $50\\%$ and $95\\%$ quantiles of its output.",
+      "marks": 15,
+      "docs": "**Random-walk Metropolis-Hastings** for an unnormalised target $\\tilde\\pi(\\theta)=p(y\\mid\\theta)\\pi(\\theta)$:\n\n```\ntheta <- THETA0\nfor t = 1, ..., N_ITER:\n    theta* <- theta + STEP * Z,        Z ~ N(0, 1)\n    u      <- Uniform(0, 1)\n    if log(u) < log pi~(theta*) - log pi~(theta):\n        theta <- theta*                # accept\n    store theta                        # also when rejected\nreturn stored values after the first BURN_IN\n```\n\nThe proposal is symmetric, so the Hastings ratio is $\\tilde\\pi(\\theta^*)/\\tilde\\pi(\\theta)$. Work on the log scale.\n\nWith $s=\\sum_i y_i$ and $n$ the number of observations, the Poisson log likelihood in $\\theta$ is $s\\theta-ne^{\\theta}$ plus a constant.",
+      "difficultyNotes": "Tests building a non-conjugate log posterior on the log-rate scale and coding the MH loop. Typical mistakes: using lambda instead of theta in the prior, forgetting the n*exp(theta) term, not storing rejected states, returning the burn-in.",
+      "helperCode": "import numpy as np\nfrom scipy import stats\n\nTAU = 1.5\nSTEP = 0.6\nTHETA0 = 0.0\nN_ITER = 20000\nBURN_IN = 2000\n",
+      "skeleton": "def log_posterior(theta, y):\n    \"\"\"Unnormalised log posterior of the log-rate theta given counts y.\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n\n\ndef mh_log_rate(y, rng):\n    \"\"\"Random-walk MH for theta | y. Return the N_ITER - BURN_IN draws after burn-in.\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n",
       "functions": [
         {
           "name": "log_posterior",
-          "description": "Unnormalised log posterior of p given Y (-inf outside (0, 1)). Helper: not tested directly."
+          "description": "Unnormalised log posterior of theta. Helper: not tested directly."
         },
         {
-          "name": "mh_posterior",
+          "name": "mh_log_rate",
           "main": true,
           "description": "Random-walk MH; returns one array of N_ITER - BURN_IN draws. This is the tested function."
         }
       ],
       "rngArg": "rng",
-      "timeLimitSeconds": 20,
-      "referenceSolution": "def log_posterior(p, Y):\n    if p <= 0 or p >= 1:\n        return -np.inf\n    Y = np.asarray(Y)\n    loglik = np.sum(Y * np.log(p) + (1 - Y) * np.log(1 - p))\n    logprior = -0.5 * ((p - MU) / SIGMA) ** 2\n    return loglik + logprior\n\n\ndef mh_posterior(Y, rng):\n    p = P0\n    lp = log_posterior(p, Y)\n    draws = np.empty(N_ITER)\n    for t in range(N_ITER):\n        prop = p + STEP * rng.standard_normal()\n        lp_prop = log_posterior(prop, Y)\n        if np.log(rng.uniform()) < lp_prop - lp:\n            p, lp = prop, lp_prop\n        draws[t] = p\n    return draws[BURN_IN:]\n",
-      "oracleSolution": "def expected_value(Y):\n    # independent of MCMC: normalise the posterior on a fine grid and read off the quantiles\n    Y = np.asarray(Y)\n    s, n = Y.sum(), len(Y)\n    p = np.linspace(1e-6, 1 - 1e-6, 400001)\n    logpost = s * np.log(p) + (n - s) * np.log1p(-p) - 0.5 * ((p - MU) / SIGMA) ** 2\n    w = np.exp(logpost - logpost.max())\n    cdf = np.cumsum(w)\n    cdf /= cdf[-1]\n    return [float(np.interp(q, cdf, p)) for q in (0.05, 0.5, 0.95)]\n",
+      "timeLimitSeconds": 30,
+      "referenceSolution": "def log_posterior(theta, y):\n    y = np.asarray(y, dtype=float)\n    return y.sum() * theta - y.size * np.exp(theta) - 0.5 * (theta / TAU) ** 2\n\n\ndef mh_log_rate(y, rng):\n    theta = THETA0\n    lp = log_posterior(theta, y)\n    draws = np.empty(N_ITER)\n    for t in range(N_ITER):\n        prop = theta + STEP * rng.standard_normal()\n        lp_prop = log_posterior(prop, y)\n        if np.log(rng.uniform()) < lp_prop - lp:\n            theta, lp = prop, lp_prop\n        draws[t] = theta\n    return draws[BURN_IN:]\n",
+      "oracleSolution": "def expected_value(y):\n    y = np.asarray(y, dtype=float)\n    s, n = y.sum(), y.size\n    th = np.linspace(-12.0, 8.0, 800001)\n    lp = s * th - n * np.exp(th) - 0.5 * (th / TAU) ** 2\n    w = np.exp(lp - lp.max())\n    cdf = np.cumsum(w)\n    cdf /= cdf[-1]\n    return [float(np.interp(q, cdf, th)) for q in (0.05, 0.5, 0.95)]\n",
       "visibleTests": [
         {
           "id": "v1",
-          "description": "n = 10, 7 successes",
+          "description": "n = 8, moderate counts",
           "input": {
-            "Y": [
-              1,
-              0,
-              1,
-              1,
-              0,
-              1,
-              0,
-              1,
-              1,
-              1
+            "y": [
+              3,
+              5,
+              2,
+              4,
+              6,
+              3,
+              4,
+              5
             ]
           },
           "seed": 11,
@@ -57,40 +228,25 @@
               0.5,
               0.95
             ],
-            "abs": 0.02,
+            "abs": 0.03,
             "length": 18000
           },
           "expected": [
-            0.421544,
-            0.620815,
-            0.805641
+            1.049281,
+            1.356756,
+            1.636078
           ]
         },
         {
           "id": "v2",
-          "description": "n = 20, 4 successes",
+          "description": "n = 5, small counts",
           "input": {
-            "Y": [
-              0,
-              0,
-              1,
-              0,
-              0,
+            "y": [
               0,
               1,
               0,
-              0,
-              0,
-              0,
-              1,
-              0,
-              0,
-              0,
-              0,
-              0,
-              1,
-              0,
-              0
+              2,
+              1
             ]
           },
           "seed": 12,
@@ -101,50 +257,32 @@
               0.5,
               0.95
             ],
-            "abs": 0.02,
+            "abs": 0.113,
             "length": 18000
           },
           "expected": [
-            0.135007,
-            0.267967,
-            0.426336
+            -1.157739,
+            -0.267845,
+            0.438505
           ]
         }
       ],
       "hiddenTests": [
         {
           "id": "h1",
-          "description": "n = 30, 22 successes",
+          "description": "n = 12, mostly zeros: rate near the boundary, skewed posterior",
           "input": {
-            "Y": [
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
+            "y": [
+              0,
               1,
               0,
               0,
+              2,
               0,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
               1,
               0,
               0,
-              0,
+              1,
               0,
               0
             ]
@@ -157,28 +295,21 @@
               0.5,
               0.95
             ],
-            "abs": 0.02,
+            "abs": 0.093,
             "length": 18000
           },
           "expected": [
-            0.55844,
-            0.692458,
-            0.81091
+            -1.635442,
+            -0.85974,
+            -0.231023
           ]
         },
         {
           "id": "h2",
-          "description": "n = 8, 1 success",
+          "description": "single large count",
           "input": {
-            "Y": [
-              0,
-              0,
-              0,
-              0,
-              1,
-              0,
-              0,
-              0
+            "y": [
+              9
             ]
           },
           "seed": 22,
@@ -189,33 +320,33 @@
               0.5,
               0.95
             ],
-            "abs": 0.02,
+            "abs": 0.069,
             "length": 18000
           },
           "expected": [
-            0.093169,
-            0.279807,
-            0.500396
+            1.424095,
+            2.050985,
+            2.575339
           ]
         },
         {
           "id": "h3",
-          "description": "n = 12, all successes: pushes the posterior towards the boundary",
+          "description": "numpy array input, n = 10, tighter posterior",
           "input": {
-            "Y": [
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1,
-              1
-            ]
+            "y": {
+              "$ndarray": [
+                5,
+                7,
+                4,
+                6,
+                8,
+                5,
+                6,
+                7,
+                4,
+                6
+              ]
+            }
           },
           "seed": 23,
           "compare": {
@@ -225,14 +356,326 @@
               0.5,
               0.95
             ],
-            "abs": 0.02,
+            "abs": 0.026,
             "length": 18000
           },
           "expected": [
-            0.688964,
-            0.888565,
-            0.989406
+            1.513463,
+            1.738643,
+            1.948233
           ]
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "title": "Gibbs sampler for a normal mean and variance",
+      "text": "Data $Y_1,\\dots,Y_n$ are conditionally i.i.d. given $(\\mu,\\sigma^2)$ with $Y_i\\mid\\mu,\\sigma^2\\sim\\mathcal N(\\mu,\\sigma^2)$. The priors are independent (semi-conjugate):\n$$\\mu\\sim\\mathcal N(m_0,s_0^2),\\qquad \\sigma^2\\sim\\text{Inv-Gamma}(a_0,b_0),\\quad \\pi(\\sigma^2)\\propto(\\sigma^2)^{-a_0-1}e^{-b_0/\\sigma^2},$$\nwith $m_0=$ `M0` $=0$, $s_0^2=$ `S0SQ` $=100$, $a_0=$ `A0` $=2$, $b_0=$ `B0` $=2$.\n\nWrite `gibbs_normal(y, rng)`, a **Gibbs sampler** that alternates between the two full conditionals. Start at $\\sigma^2=$ `SIGMA2_0` $=1$. In each of the `N_ITER` $=10000$ sweeps, **first** draw $\\mu$ from $p(\\mu\\mid\\sigma^2,y)$ and **then** draw $\\sigma^2$ from $p(\\sigma^2\\mid\\mu,y)$, and store the $\\mu$ draw. Return **one numpy array**: the stored $\\mu$ draws after discarding the first `BURN_IN` $=1000$, so its length is $9000$.\n\nYou must derive the two full conditionals yourself. Use `rng` for all randomness. The output is tested through its $5\\%$, $50\\%$ and $95\\%$ quantiles (the marginal posterior of $\\mu$).",
+      "marks": 15,
+      "docs": "**Gibbs sampling** for $(\\mu,\\sigma^2)$:\n\n```\nsigma2 <- SIGMA2_0\nfor t = 1, ..., N_ITER:\n    mu     ~ p(mu | sigma2, y)          # normal\n    sigma2 ~ p(sigma2 | mu, y)          # inverse gamma\n    store mu\nreturn stored mu values after the first BURN_IN\n```\n\nTo find a full conditional, write the joint density $p(y\\mid\\mu,\\sigma^2)\\pi(\\mu)\\pi(\\sigma^2)$ and keep only the factors that involve the block being updated.\n\n**Inverse gamma draws.** If $G\\sim\\text{Gamma}(\\text{shape}=a,\\ \\text{rate}=b)$ then $1/G\\sim\\text{Inv-Gamma}(a,b)$. With numpy: `1.0 / rng.gamma(a, 1.0 / b)` (numpy's second argument is the **scale** $1/b$).",
+      "difficultyNotes": "Tests deriving the two semi-conjugate full conditionals (precision-weighted normal for mu, inverse gamma with a_0 + n/2 and b_0 + SS/2 for sigma^2). Typical mistakes: using rate instead of scale in rng.gamma, using sum of squares about the sample mean instead of about the current mu, mixing variance and precision.",
+      "helperCode": "import numpy as np\nfrom scipy import stats\n\nM0 = 0.0\nS0SQ = 100.0\nA0 = 2.0\nB0 = 2.0\nSIGMA2_0 = 1.0\nN_ITER = 10000\nBURN_IN = 1000\n",
+      "skeleton": "def gibbs_normal(y, rng):\n    \"\"\"Gibbs sampler for (mu, sigma^2). Return the N_ITER - BURN_IN mu draws after burn-in.\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n",
+      "functions": [
+        {
+          "name": "gibbs_normal",
+          "main": true,
+          "description": "Gibbs sampler; returns one array of N_ITER - BURN_IN draws of mu. This is the tested function."
+        }
+      ],
+      "rngArg": "rng",
+      "timeLimitSeconds": 30,
+      "referenceSolution": "def gibbs_normal(y, rng):\n    y = np.asarray(y, dtype=float)\n    n = y.size\n    sy = y.sum()\n    sigma2 = SIGMA2_0\n    out = np.empty(N_ITER)\n    for t in range(N_ITER):\n        prec = 1.0 / S0SQ + n / sigma2\n        mean = (M0 / S0SQ + sy / sigma2) / prec\n        mu = mean + rng.standard_normal() / np.sqrt(prec)\n        ss = np.sum((y - mu) ** 2)\n        sigma2 = 1.0 / rng.gamma(A0 + n / 2.0, 1.0 / (B0 + ss / 2.0))\n        out[t] = mu\n    return out[BURN_IN:]\n",
+      "oracleSolution": "def expected_value(y):\n    y = np.asarray(y, dtype=float)\n    n = y.size\n    c, sd = y.mean(), y.std() + 1.0\n    mu = np.linspace(c - 40 * sd, c + 40 * sd, 800001)\n    ss = n * (y.mean() - mu) ** 2 + np.sum((y - y.mean()) ** 2)\n    lp = -0.5 * (mu - M0) ** 2 / S0SQ - (A0 + n / 2.0) * np.log(B0 + ss / 2.0)\n    w = np.exp(lp - lp.max())\n    cdf = np.cumsum(w)\n    cdf /= cdf[-1]\n    return [float(np.interp(q, cdf, mu)) for q in (0.05, 0.5, 0.95)]\n",
+      "visibleTests": [
+        {
+          "id": "v1",
+          "description": "n = 10 around 5",
+          "input": {
+            "y": [
+              4.8,
+              5.6,
+              3.9,
+              5.2,
+              6.1,
+              4.4,
+              5.0,
+              5.7,
+              4.6,
+              5.3
+            ]
+          },
+          "seed": 31,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.036,
+            "length": 9000
+          },
+          "expected": [
+            4.618737,
+            5.05658,
+            5.492815
+          ]
+        },
+        {
+          "id": "v2",
+          "description": "n = 6, larger spread",
+          "input": {
+            "y": [
+              -1.2,
+              2.5,
+              0.4,
+              3.1,
+              -0.6,
+              1.8
+            ]
+          },
+          "seed": 32,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.089,
+            "length": 9000
+          },
+          "expected": [
+            -0.091241,
+            0.995921,
+            2.080172
+          ]
+        }
+      ],
+      "hiddenTests": [
+        {
+          "id": "h1",
+          "description": "n = 3: heavy-tailed marginal for mu",
+          "input": {
+            "y": [
+              10.2,
+              11.5,
+              9.1
+            ]
+          },
+          "seed": 41,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.106,
+            "length": 9000
+          },
+          "expected": [
+            8.991379,
+            10.219724,
+            11.390066
+          ]
+        },
+        {
+          "id": "h2",
+          "description": "numpy array input, n = 20",
+          "input": {
+            "y": {
+              "$ndarray": [
+                2.1,
+                1.7,
+                2.6,
+                1.9,
+                2.3,
+                2.0,
+                1.5,
+                2.8,
+                2.2,
+                1.8,
+                2.4,
+                2.0,
+                1.6,
+                2.5,
+                2.1,
+                1.9,
+                2.7,
+                2.2,
+                1.8,
+                2.3
+              ]
+            }
+          },
+          "seed": 42,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.017,
+            "length": 9000
+          },
+          "expected": [
+            1.915992,
+            2.11962,
+            2.323167
+          ]
+        },
+        {
+          "id": "h3",
+          "description": "all observations equal",
+          "input": {
+            "y": [
+              3.0,
+              3.0,
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          "seed": 43,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.047,
+            "length": 9000
+          },
+          "expected": [
+            2.407553,
+            2.996527,
+            3.582553
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "title": "Self-normalised importance sampling with a Cauchy prior",
+      "text": "Data $Y_1,\\dots,Y_n$ are conditionally i.i.d. given $\\theta\\in\\mathbb R$ with $Y_i\\mid\\theta\\sim\\mathcal N(\\theta,1)$. The prior is standard **Cauchy**, $\\pi(\\theta)\\propto 1/(1+\\theta^2)$, so the posterior is known only up to a constant.\n\nWrite `is_posterior_mean(y, rng)`, which estimates the posterior mean $\\mathbb{E}[\\theta\\mid y]$ by **self-normalised importance sampling**. Use as proposal a Student-$t$ distribution with `DF` $=3$ degrees of freedom, location $\\bar y$ (the sample mean) and scale `SCALE_MULT` $/\\sqrt n$ with `SCALE_MULT` $=2$. Draw exactly `N_DRAWS` $=20000$ proposal values, generating them as $\\bar y+\\text{scale}\\cdot T$ with `T = rng.standard_t(DF, size=N_DRAWS)`. Return **one float**, the estimate.\n\nUse `rng` for all randomness.",
+      "marks": 10,
+      "docs": "**Self-normalised importance sampling** with unnormalised target $\\tilde p(\\theta)=p(y\\mid\\theta)\\pi(\\theta)$ and proposal $q$:\n\n```\ndraw theta_1, ..., theta_N ~ q\nlog w_i  <- log p~(theta_i) - log q(theta_i)\nw_i      <- exp(log w_i - max_j log w_j)       # avoids overflow\nestimate <- sum_i w_i * theta_i / sum_i w_i\n```\n\nUnknown normalising constants of $\\tilde p$ and $q$ cancel in the ratio, so you may drop them. The Student-$t$ log density with location $m$ and scale $c$ is `stats.t.logpdf(x, DF, loc=m, scale=c)`.\n\nThe normal log likelihood is $-\\frac12\\sum_i(y_i-\\theta)^2$ plus a constant. A heavier-tailed proposal ($t_3$) keeps the weights bounded where the Cauchy prior has heavy tails.",
+      "difficultyNotes": "Tests writing an unnormalised log posterior with a non-conjugate prior, computing log-weights against a t proposal, and self-normalising stably. Typical mistakes: forgetting the proposal density in the weights, overflow without subtracting the max, using scale sqrt(n) instead of 1/sqrt(n).",
+      "helperCode": "import numpy as np\nfrom scipy import stats\n\nDF = 3\nSCALE_MULT = 2.0\nN_DRAWS = 20000\n",
+      "skeleton": "def is_posterior_mean(y, rng):\n    \"\"\"Self-normalised importance sampling estimate of E[theta | y]. Return one float.\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n",
+      "functions": [
+        {
+          "name": "is_posterior_mean",
+          "main": true,
+          "description": "Returns the SNIS estimate of the posterior mean (one float). This is the tested function."
+        }
+      ],
+      "rngArg": "rng",
+      "timeLimitSeconds": 20,
+      "referenceSolution": "def is_posterior_mean(y, rng):\n    y = np.asarray(y, dtype=float)\n    n = y.size\n    ybar = y.mean()\n    scale = SCALE_MULT / np.sqrt(n)\n    theta = ybar + scale * rng.standard_t(DF, size=N_DRAWS)\n    loglik = -0.5 * np.sum((y[None, :] - theta[:, None]) ** 2, axis=1)\n    logprior = -np.log1p(theta ** 2)\n    logq = stats.t.logpdf(theta, DF, loc=ybar, scale=scale)\n    logw = loglik + logprior - logq\n    w = np.exp(logw - logw.max())\n    return float(np.sum(w * theta) / np.sum(w))\n",
+      "oracleSolution": "def expected_value(y):\n    y = np.asarray(y, dtype=float)\n    n = y.size\n    th = np.linspace(y.mean() - 30.0, y.mean() + 30.0, 600001)\n    lp = -0.5 * n * (th - y.mean()) ** 2 - np.log1p(th ** 2)\n    w = np.exp(lp - lp.max())\n    return float(np.sum(w * th) / np.sum(w))\n",
+      "visibleTests": [
+        {
+          "id": "v1",
+          "description": "n = 5 near 1",
+          "input": {
+            "y": [
+              0.8,
+              1.5,
+              0.3,
+              1.9,
+              1.0
+            ]
+          },
+          "seed": 51,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.018
+          },
+          "expected": 0.925118
+        },
+        {
+          "id": "v2",
+          "description": "n = 4, data far from the prior centre",
+          "input": {
+            "y": [
+              3.9,
+              4.6,
+              4.1,
+              5.0
+            ]
+          },
+          "seed": 52,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.02
+          },
+          "expected": 4.288231
+        }
+      ],
+      "hiddenTests": [
+        {
+          "id": "h1",
+          "description": "single observation: prior matters a lot",
+          "input": {
+            "y": [
+              2.0
+            ]
+          },
+          "seed": 61,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.039
+          },
+          "expected": 1.282195
+        },
+        {
+          "id": "h2",
+          "description": "prior-data conflict, n = 2",
+          "input": {
+            "y": [
+              7.5,
+              8.3
+            ]
+          },
+          "seed": 62,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.028
+          },
+          "expected": 7.772434
+        },
+        {
+          "id": "h3",
+          "description": "numpy array input, n = 12 around -0.5",
+          "input": {
+            "y": {
+              "$ndarray": [
+                -0.4,
+                -1.1,
+                0.2,
+                -0.7,
+                -0.3,
+                -0.9,
+                0.1,
+                -0.6,
+                -0.5,
+                -0.8,
+                0.0,
+                -1.0
+              ]
+            }
+          },
+          "seed": 63,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.011
+          },
+          "expected": -0.44584
         }
       ]
     }

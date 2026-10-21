@@ -4,7 +4,7 @@
 import { cleanup, configure, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import bay from '../../content/exams/bay.coding.json'
+import bay from './__fixtures__/bay.coding.json'
 import { App } from '../App'
 import { setRunnerFactory } from './coding/factory'
 import type { CaseResult, CodeRunner, RunRequest } from './coding/runner'
@@ -14,6 +14,13 @@ import type { CodingExam } from './types'
 
 // exam pages load their content with dynamic imports; give them time when the whole suite is running in parallel
 configure({ asyncUtilTimeout: 15_000 })
+
+// the pages load content through ./content; the tests use fixed fixtures so real exam content can change freely
+vi.mock('./content', async (orig) => ({
+  ...(await orig<typeof import('./content')>()),
+  loadWritten: async () => (await import('./__fixtures__/bay.written.json')).default,
+  loadCoding: async () => (await import('./__fixtures__/bay.coding.json')).default,
+}))
 
 vi.mock('./ui/CodeEditor', () => ({
   default: ({ value, onChange, label }: { value: string; onChange?(v: string): void; label: string }) =>

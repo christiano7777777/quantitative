@@ -8,6 +8,7 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 EXAMS = ROOT / 'content' / 'exams'
+FIXTURES = ROOT / 'src' / 'exam' / '__fixtures__'  # the worked examples are the pipeline placeholders, never the real exams
 
 
 def load(path):
@@ -24,8 +25,8 @@ def base_text():
     parts = {
         '{{WRITTEN_SCHEMA}}': block(load(EXAMS / 'schema' / 'written.schema.json')),
         '{{CODING_SCHEMA}}': block(load(EXAMS / 'schema' / 'coding.schema.json')),
-        '{{WRITTEN_EXAMPLE}}': block(load(EXAMS / 'bay.written.json')),
-        '{{CODING_EXAMPLE}}': block(load(EXAMS / 'bay.coding.json')),
+        '{{WRITTEN_EXAMPLE}}': block(load(FIXTURES / 'bay.written.json')),
+        '{{CODING_EXAMPLE}}': block(load(FIXTURES / 'bay.coding.json')),
     }
     for key, value in parts.items():
         assert key in text, key

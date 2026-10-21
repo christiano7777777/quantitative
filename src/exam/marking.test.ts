@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import bay from '../../content/exams/bay.written.json'
+import bay from './__fixtures__/bay.written.json'
 import { askAnthropic, buildMarkingPrompt, markWithApi, parseMarkingResult } from './marking'
 import type { WrittenExam } from './types'
 
