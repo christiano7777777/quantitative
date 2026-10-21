@@ -125,3 +125,8 @@ pre.code.tpl { white-space: pre-wrap; }
 ul.plain { list-style: none; padding-left: 0; } ul.plain li { margin: 4px 0; }
 .settings-form label { display: block; margin: 8px 0; } .settings-form input { margin-left: 8px; width: min(100%, 28em); font: inherit; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--fg); }
 .inline-confirm { font-size: .9rem; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.cm-host { margin: 10px 0; }
+ul.tests { list-style: none; padding-left: 0; margin: 4px 0; } ul.tests li { padding: 3px 0; }
+ul.tests li.pass b { color: var(--ok); } ul.tests li.fail b { color: var(--bad); }
+.testmsg { margin-left: 1.4em; color: var(--bad); font-family: var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }

@@ -1,7 +1,7 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { useApp } from '../context'
 import { examConfig } from '../exam/config'
-import { hasWritten, loadWritten } from '../exam/content'
+import { hasCoding, hasWritten, loadCoding, loadWritten } from '../exam/content'
 import { fmtMarks } from '../exam/grades'
 import { contentReady, examEnabled, needsCoding, needsWritten, topicWeights } from '../exam/phases'
 import { useLoaded } from '../exam/ui/useLoaded'
@@ -13,12 +13,15 @@ export function ExamHubPage() {
   const { graph, exams, passed } = useApp()
   const topic = graph.byId.get(id)
   const written = useLoaded(`w-${id}`, () => loadWritten(id))
+  const coding = useLoaded(`c-${id}`, () => loadCoding(id))
   if (!topic || !examEnabled(topic)) return <Navigate to={`/topic/${id}`} replace />
 
   const w = topicWeights(topic)
   const summary = exams.summary(id, topic.examWeights)
   const attempts = exams.writtenAttempts(id)
   const draft = exams.writtenDraft(id)
+  const codeAttempts = exams.codingAttempts(id)
+  const codeDraft = exams.codingDraft(id)
   const ready = contentReady(topic)
 
   return (
@@ -79,7 +82,39 @@ export function ExamHubPage() {
           )}
         </section>
       )}
-      <p className="small muted"><Link to={`/exam-preview/${id}/written`}>Preview this exam as a student sees it</Link></p>
+      {needsCoding(topic) && hasCoding(id) && (
+        <section className="card" aria-label="Coding exam">
+          <h2>Part 2: Coding exam</h2>
+          <p className="muted small">
+            {coding.state === 'ready' ? `${coding.value.totalMarks} marks, ${coding.value.questions.length} question${coding.value.questions.length === 1 ? '' : 's'}. ` : ''}
+            Python in your browser (numpy and scipy). Visible tests run any time; hidden tests run when you submit. Half the marks come from each.
+          </p>
+          <p>
+            {codeDraft
+              ? <><Link className="btn primary" to={`/topic/${id}/exam/coding`}>Resume your draft</Link> <span className="muted small">last saved {new Date(codeDraft.updatedAt).toLocaleString()}</span></>
+              : <Link className="btn primary" to={`/topic/${id}/exam/coding`}>{codeAttempts.length ? 'Start a new attempt' : 'Start the coding exam'}</Link>}
+          </p>
+          {codeAttempts.length > 0 && (
+            <table>
+              <thead><tr><th>#</th><th>Submitted</th><th>Marks</th><th>Grade</th><th /></tr></thead>
+              <tbody>
+                {codeAttempts.map((a, i) => (
+                  <tr key={a.id}>
+                    <td>{i + 1}{summary.coding?.attemptId === a.id && <span className="badge"> {examConfig.headline}</span>}</td>
+                    <td>{new Date(a.submittedAt).toLocaleString()}</td>
+                    <td>{fmtMarks(a.marks)}/{fmtMarks(a.max)}</td>
+                    <td>{a.grade}</td>
+                    <td><Link to={`/topic/${id}/exam/coding/${a.id}`}>review</Link></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </section>
+      )}
+      <p className="small muted">
+        Preview as a student sees it: {hasWritten(id) && <Link to={`/exam-preview/${id}/written`}>written</Link>}{hasWritten(id) && hasCoding(id) && ' · '}{hasCoding(id) && <Link to={`/exam-preview/${id}/coding`}>coding</Link>}
+      </p>
     </>
   )
 }

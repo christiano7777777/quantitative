@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useApp } from '../context'
-import { hasCoding, hasWritten, loadWritten, topicsWithExamFiles } from '../exam/content'
+import { hasCoding, hasWritten, loadCoding, loadWritten, topicsWithExamFiles } from '../exam/content'
+import { useRunner } from '../exam/coding/factory'
+import { scoreAttempt } from '../exam/coding/scoring'
+import { CodingResults, CodingTake } from '../exam/ui/CodingTake'
 import { enabledPhases, examEnabled } from '../exam/phases'
-import { toPercent } from '../exam/grades'
+import { fmtMarks, toPercent } from '../exam/grades'
 import { percentToGrade } from '../exam/config'
 import { scoreWritten } from '../exam/store'
-import type { WrittenMarking } from '../exam/types'
+import type { CodeQuestionResult, WrittenMarking } from '../exam/types'
 import { MarkingPanel, WrittenResults } from '../exam/ui/Marking'
 import { useLoaded } from '../exam/ui/useLoaded'
 import { WrittenTake } from '../exam/ui/WrittenTake'
@@ -75,6 +78,35 @@ export function WrittenPreviewPage() {
             <MarkingPanel exam={e} answers={answers} apiKey={settings.anthropicKey} model={settings.model} onMarking={(m) => setMarking(m)} />
           </>
         )}
+    </>
+  )
+}
+
+export function CodingPreviewPage() {
+  const { id = '' } = useParams()
+  const exam = useLoaded(`c-${id}`, () => loadCoding(id))
+  const runner = useRunner()
+  const [code, setCode] = useState<Record<string, string>>({})
+  const [results, setResults] = useState<CodeQuestionResult[] | null>(null)
+
+  if (exam.state === 'loading') return <p>Loading...</p>
+  if (exam.state !== 'ready') return <p>No coding exam file for “{id}”. <Link to="/exam-preview">Back</Link></p>
+  const e = exam.value
+  const full = Object.fromEntries(e.questions.map((q) => [q.id, code[q.id] ?? q.skeleton]))
+  return (
+    <>
+      <div className="preview-banner" role="note">
+        <b>Preview mode.</b> This is exactly what a student sees; code runs for real, nothing is saved. <Link to="/exam-preview">All previews</Link>{' '}
+        <button onClick={() => { setCode({}); setResults(null) }}>Reset</button>
+        {e.placeholder && <b className="tex-err"> This is a PLACEHOLDER exam.</b>}
+      </div>
+      {results
+        ? <>
+            <p><button onClick={() => setResults(null)}>← Back to the exam</button></p>
+            <section className="card grade-card"><h2>Result (not saved): {percentToGrade(scoreAttempt(e, results).percent)}</h2><p>{fmtMarks(scoreAttempt(e, results).marks)}/{e.totalMarks} marks</p></section>
+            <CodingResults exam={e} results={results} />
+          </>
+        : <CodingTake exam={e} code={full} preview runner={runner} onCode={(q, v) => setCode((c) => ({ ...c, [q]: v }))} onSubmit={setResults} />}
     </>
   )
 }

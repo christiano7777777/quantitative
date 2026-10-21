@@ -8,7 +8,8 @@ import { ResultPage } from './pages/Result'
 import { LecturePage } from './pages/Lecture'
 import { ExamHubPage } from './pages/ExamHub'
 import { WrittenAttemptPage, WrittenTakePage } from './pages/ExamWritten'
-import { ExamPreviewIndex, WrittenPreviewPage } from './pages/ExamPreview'
+import { CodingAttemptPage, CodingTakePage } from './pages/ExamCoding'
+import { CodingPreviewPage, ExamPreviewIndex, WrittenPreviewPage } from './pages/ExamPreview'
 import { SettingsPage } from './pages/Settings'
 import { validateState } from './exam/store'
 import { applySavedProgress, checkCredentials, loggedInUser, setLoggedInUser } from './lib/testLogin'
@@ -104,7 +105,10 @@ export function App() {
             <Route path="/topic/:id/exam" element={<ExamHubPage />} />
             <Route path="/topic/:id/exam/written" element={<WrittenTakePage />} />
             <Route path="/topic/:id/exam/written/:aid" element={<WrittenAttemptPage />} />
+            <Route path="/topic/:id/exam/coding" element={<CodingTakePage />} />
+            <Route path="/topic/:id/exam/coding/:aid" element={<CodingAttemptPage />} />
             <Route path="/exam-preview" element={<ExamPreviewIndex />} />
+            <Route path="/exam-preview/:id/coding" element={<CodingPreviewPage />} />
             <Route path="/exam-preview/:id/written" element={<WrittenPreviewPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="*" element={<p>Not found. <Link to="/">Back to the tree</Link></p>} />
