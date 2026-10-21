@@ -1,17 +1,34 @@
 # Task: write the real Big Exam questions for the "Quantitative" app
 
-You are writing exam content for a self-study app. The student is an undergraduate statistics / quantitative finance student at a Hong Kong university who is studying at a high standard. The app has a **Big Exam** for each topic: a **written part** (about 2 hours, typed in LaTeX, marked by AI against your marking scheme) and a **coding part** (Python in the browser, marked by automatic tests). Your job is to write both parts, as data files, for the topic(s) named at the end of this message.
+You are writing exam content for a self-study app. The student is an undergraduate statistics / quantitative finance student at a Hong Kong university who is studying at a high standard. The app has a **Big Exam** for each topic: a **written part** (about 2 hours, typed in LaTeX, marked by AI against your marking scheme) and a **coding part** (Python in the browser, marked by automatic tests). Your job is to write both parts, as data files, for the topic named in the ASSIGNMENT block below.
 
 You cannot run code. Everything you write will be checked by a validator that runs your reference solutions, so correctness matters more than volume. Work carefully and do the self-check at the end before you answer.
 
 ---
 
+## ASSIGNMENT (the only part the student fills in; the same prompt works for every topic)
+
+- **Topic id:** `<<<TOPIC ID, e.g. bay>>>`  (the lowercase id from the app's skill tree; it becomes the file-name prefix)
+- **Topic name and course:** `<<<e.g. Bayesian Statistics, HKU STAT4610>>>`
+- **Coding part:** `<<<YES, or NO if the topic has no meaningful coding part: then write the written file only>>>`
+- **Extra instructions (optional):** `<<<e.g. "make Q3 about Gibbs sampling", "paper should be a bit easier", or leave empty>>>`
+
+**Lecture outline for this topic** (paste the real syllabus: lecture titles with the main theorems and algorithms of each):
+
+```
+<<<PASTE THE LECTURE OUTLINE HERE>>>
+```
+
+If the topic id or the outline above still shows `<<<`, do not invent anything: ask the student to fill it in and stop.
+
+---
+
 ## 0. What you must produce
 
-For each topic `<id>` (a short lowercase id such as `bay`, `inf`, `np`):
+For the topic in the ASSIGNMENT block, with its id written `<id>` below:
 
 - `content/exams/<id>.written.json` (schema in section 2)
-- `content/exams/<id>.coding.json` (schema in section 3), **unless the topic is written-only** (the student will tell you; then produce only the written file)
+- `content/exams/<id>.coding.json` (schema in section 3), **unless the ASSIGNMENT says the coding part is NO** (then produce only the written file)
 
 **Output format (strict):** for every file write one heading line with the exact file name, then one fenced ```json block holding the complete file, and nothing else inside the block. The student saves each block as a file and runs `npm run validate-exams`. Do not add comments inside the JSON (JSON has none). Put any remarks outside the code blocks, after all files.
 
@@ -29,29 +46,7 @@ For each topic `<id>` (a short lowercase id such as `bay`, `inf`, `np`):
 
 Follow the topic's actual lecture syllabus, not a generic textbook. Every question must be answerable from material in the outline below; use the outline's own notation and terminology and the order in which ideas are introduced. Spread the questions over the whole syllabus, not just the first lectures. If a question needs a result that the outline does not cover, state that result in the question text.
 
-Paste the lecture outline for each topic here before you send this prompt:
-
-**Topic `bay` (Bayesian Statistics) lecture outline:**
-```
-<<<PASTE THE LECTURE OUTLINE FOR bay HERE>>>
-```
-
-**Topic `inf` (Statistical Inference) lecture outline:**
-```
-<<<PASTE THE LECTURE OUTLINE FOR inf HERE>>>
-```
-
-**Topic `np` (Nonparametric Statistics) lecture outline:**
-```
-<<<PASTE THE LECTURE OUTLINE FOR np HERE>>>
-```
-
-**Topic `<other id>` (phase 2 topics) lecture outline:**
-```
-<<<PASTE THE LECTURE OUTLINE HERE>>>
-```
-
-If a marker above still says PASTE, do not invent a syllabus: ask the student to paste it.
+The outline is in the ASSIGNMENT block at the top. If it is empty, too thin to cover a 2-hour paper, or obviously for a different topic, say so and ask for a better one instead of guessing.
 
 ### 1.2 Originality
 
@@ -176,7 +171,7 @@ This is the Bayesian placeholder: Metropolis-Hastings for a Bernoulli probabilit
 
 ## 4. Topic guidance
 
-Each topic needs, in the coding file, 3 or 4 questions that suit it, and in the written file questions that follow its syllabus. The lists below are the kinds of question that fit; choose and adapt them to the pasted outline, and drop any that the outline does not cover.
+Whatever the topic, the coding file needs 3 or 4 questions that suit it and the written file questions that follow its syllabus. Section 4.4 is the method that applies to **every** topic. Sections 4.1 to 4.3 are worked examples of what a good fit looks like in three statistics topics; use them as a model of the level and variety, not as a list to copy. If the topic in the ASSIGNMENT is one of those three, choose from its list and adapt it to the pasted outline, dropping anything the outline does not cover.
 
 ### 4.1 `bay`: Bayesian Statistics
 
@@ -193,14 +188,14 @@ Written question types: sufficiency and factorisation, completeness and UMVUE (R
 Coding question types: rank statistics (Wilcoxon rank-sum or signed-rank statistic, with ties handled by average ranks; Kendall's tau or Spearman's rho), permutation tests (the permutation distribution of a statistic: use a fixed number of seeded permutations, compare the p-value or summary of the returned array of permuted statistics), the bootstrap (percentile interval or standard error from a fixed number of resamples), kernel density estimation (evaluate a KDE with a given kernel and bandwidth at given points: deterministic, `numeric`), empirical CDF and the Kolmogorov-Smirnov statistic (deterministic), sign test counts. Use `exact` for rank and count statistics, `numeric` for KDE and KS values, `quantiles` or `summary` for permutation and bootstrap arrays.
 Written question types: exact null distribution of rank statistics (mean and variance proofs), distribution-free property of the sign and rank tests, Pitman efficiency or power comparisons, consistency of the empirical CDF (Glivenko-Cantelli statement and DKW use), bias and variance of a kernel density estimator, bandwidth choice trade-off, bootstrap validity and failure cases.
 
-### 4.4 Any other topic (phase 2): how to adapt
+### 4.4 The method for any topic (use this for every topic)
 
-When the topic is not one of the three above, build the paper from its pasted outline in this order:
+Build the paper from the pasted outline in this order:
 
 1. List the lectures and, for each, its 2 or 3 central results (the theorems the lecturer proves, the algorithms the lecturer states).
 2. **Written part:** make each question cover a block of 2 or 3 consecutive lectures, with parts that move from definition to derivation to proof to a short interpretation. Take the proofs from the central results, varied enough that the student must reason rather than recall. Cover the whole syllabus across 4 or 5 questions.
 3. **Coding part (only if the topic has a meaningful algorithm to implement):** pick the 3 or 4 central algorithms or estimators in the outline that have a clear pseudocode (an iterative method, an estimator, a test statistic, a simulation scheme, a pricing or risk routine). Give each a question in the format of section 3: fixed constants stated, model given, no data, one main function, deterministic output compared exactly or numerically when possible, seeded simulation compared through quantiles or summaries when not.
-4. If the topic has **no meaningful coding part** (for example a purely conceptual or institutional topic), say so at the top of your answer and produce the written file only. The student will then set 100% weight on the written part for that topic.
+4. If the topic has **no meaningful coding part** (for example a purely conceptual or institutional topic), say so at the top of your answer and produce the written file only. The student will then give the written part 100% weight for that topic.
 5. Follow every rule in sections 2 and 3 unchanged.
 
 ---
@@ -253,8 +248,6 @@ Go through the list and fix every problem silently. Then, at the very end of you
 
 ---
 
-## 7. Your assignment
+## 7. Now do it
 
-Topic id(s) to write: `<<<TOPIC IDS, e.g. bay>>>`
-Written-only topics (no coding file): `<<<NONE, or list ids>>>`
-Extra instructions from the student: `<<<OPTIONAL>>>`
+Write the files for the topic in the ASSIGNMENT block at the top, following sections 0 to 5.
