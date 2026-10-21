@@ -134,6 +134,31 @@ lecture, in the order of `topics.json`. Without that folder the topic goes strai
 - Each lecture needs at least 5 MC questions in `mc.json`.
 - When a topic's lectures are re-split or reordered, bump its entry in `lessonRevision` (`src/lib/lessons.ts`): lecture quiz progress saved for the old lectures is then ignored instead of being applied to different lectures. Also re-tag `lecture` in the MC bank and in the generator parts, and update any hard-coded career hour totals in the tests (hours are 3 per lecture).
 
+## Typed-answer topics (an exception to "no coding questions")
+
+The app's rule is theory and hand computation only, with no coding questions. **LaTeX & Research Writing (`latex`) is a
+documented exception**: writing LaTeX is the skill it teaches, so every question is a typed answer (code, a command or
+a file name), and there is no multiple choice. Other topics keep the rule.
+
+A typed topic's bank has `mc: []` and `blanks: BlankQuestion[]` (short questions, 1 mark each, used where MC would be),
+and its long-question parts are made with `typed()` from `src/content/shared/typed.ts` (`answer` is NaN; the part carries
+a `blank` and a `view`). Attempts store the short questions' ids in `PaperSpec.mcIds` and their answers in
+`Answers.blanks`. Lessons set `verbatim: true` and use `` `code` `` and ```` ``` ```` blocks (`src/lib/rich-text.ts`).
+
+- Each blank has a `mode` (`src/lib/blank-grader.ts`): `render` (KaTeX output compared; maths lectures only:
+  `RENDER_LECTURES` in `src/lib/blank-bank.ts`), `tokens` (TeX tokens; spaces between commands, `%` comments and braces
+  around a single-token argument ignored), `set` (as tokens, with option and package lists and float placement letters
+  in any order; give a `context` template when the box is only part of the command), or `exact` (plain text, for
+  commands and file names; one token, never LaTeX maths).
+- `key`, optional `accept` (other right answers) and `traps` (plausible wrong answers with a misconception, shown on the
+  results page). `src/content/banks.test.ts` checks with `checkBlankBank`: the key and every accept pass, every trap
+  fails as itself, at least 10 short questions per lecture, no answer visible in a prompt or template, and more.
+- A picture is drawn with KaTeX's HTML output only, so the TeX source never reaches the page before submission. A live
+  preview is allowed in lesson `practice` boxes, never in a quiz or test.
+- Each generator test checks over many seeds that keys, accepts and hand-written alternative answers pass and traps
+  fail, that the parameters vary, and the keys of three fixed parameter sets (`src/content/tests/latex/lq/checks.ts`).
+- In lecture 1 of a typed topic, leave out `section` on the short questions (the retake test expects strict unseen-first).
+
 ## Checking your work
 
 ```

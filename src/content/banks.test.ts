@@ -1,14 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import { topics } from '../data'
 import { testConfig } from '../config/test.config'
+import { checkBlankBank } from '../lib/blank-bank'
 import { banks } from '../lib/content'
 import { lessons } from '../lib/lessons'
 import { makeRng } from '../lib/rng'
 import { findGenerator, renderPaper, selectPaper } from '../lib/test-builder'
 
 // Structural rules every MC bank must obey (CONTRIBUTING.md). These cannot check that a "correct"
-// option is true or that a distractor is false; that needs a human reader.
-describe.each(Object.entries(banks))('bank %s: multiple choice', (topicId, bank) => {
+// option is true or that a distractor is false; that needs a human reader. A typed bank (one with `blanks`) has no MC and
+// obeys the rules in src/lib/blank-bank.ts instead (checked below).
+describe.each(Object.entries(banks).filter(([, b]) => !b.blanks))('bank %s: multiple choice', (topicId, bank) => {
   const lectures = topics.find((t) => t.id === topicId)!.lectures.length
 
   it('has unique question ids', () => {
@@ -94,6 +96,13 @@ describe.each(Object.entries(banks))('bank %s: multiple choice', (topicId, bank)
   })
 })
 
+describe.each(Object.entries(banks).filter(([, b]) => b.blanks))('bank %s: typed answers', (topicId, bank) => {
+  it('obeys every typed-bank rule (ids, lectures, modes, keys pass, traps fail, no leaks, generators)', () => {
+    const lectures = topics.find((t) => t.id === topicId)!.lectures.length
+    expect(checkBlankBank(topicId, bank, lectures)).toEqual([])
+  })
+})
+
 describe.each(Object.entries(banks))('bank %s: long-question blueprint', (_topicId, bank) => {
   it('if lqSlots is present: one slot per LQ, known generator ids, every generator in exactly one slot', () => {
     if (!bank.lqSlots) return
@@ -111,11 +120,11 @@ describe.each(Object.entries(banks))('bank %s: long-question blueprint', (_topic
 describe.each(Object.entries(banks))('bank %s: final test blueprint', (topicId, bank) => {
   it('every final test attempt asks every lecture through the MC alone', () => {
     // the MC quota (selectPaper) is what guarantees lecture coverage once LQs are single-story,
-    // so this must hold with or without examSlots and must not look at LQ parts
+    // so this must hold with or without examSlots and must not look at LQ parts (a typed bank: its short questions)
     const lectures = topics.find((t) => t.id === topicId)!.lectures.length
     for (let i = 0; i < 10; i++) {
       const paper = renderPaper(bank, selectPaper(bank, `mc-cover${i}`))
-      const asked = new Set(paper.mc.map((q) => q.lecture))
+      const asked = new Set((paper.blanks ?? paper.mc).map((q) => q.lecture))
       expect([...asked].sort((a, b) => a - b)).toEqual(Array.from({ length: lectures }, (_, k) => k + 1))
     }
   })

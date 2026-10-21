@@ -1,6 +1,9 @@
 import { useMemo } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { BlankPrompt } from '../components/BlankPrompt'
 import { Math } from '../components/Math'
+import { Rich } from '../components/Rich'
+import { TypedReview } from '../components/TypedReview'
 import { useApp } from '../context'
 import { banks } from '../lib/content'
 import { lectureRules, localGrader, topicRules } from '../lib/grader'
@@ -31,6 +34,7 @@ export function ResultPage() {
 
   if (!topic || !view) return <Navigate to={back} replace />
   const { paper, result: r } = view
+  const typedBank = paper.blanks !== undefined
 
   return (
     <>
@@ -38,7 +42,7 @@ export function ResultPage() {
       <h1>{topic.label}{lecture === null ? '' : `, lecture ${lecture} quiz`}: attempt {Number(n) + 1}</h1>
       <div className={`banner ${r.passed ? 'pass' : 'fail'}`} role="status">
         <b>{r.passed ? 'Passed' : 'Not passed'}</b>: {fmt(r.total)}/{r.max} (pass mark {r.passMark}).
-        MC {fmt(r.mcScore)}/{r.mcMax}, long questions {fmt(r.lqScore)}/{r.lqMax}.
+        {typedBank ? 'Short answers' : 'MC'} {fmt(r.mcScore)}/{r.mcMax}, long questions {fmt(r.lqScore)}/{r.lqMax}.
         {r.failedSectionMin.length > 0 && <> Below the section minimum: {r.failedSectionMin.join(', ')}.</>}
         {r.passed && lecture === null && <> Topics that depend on this one are now unlocked when their other prerequisites are passed.</>}
         {r.passed && lecture !== null && <> The next step is unlocked.</>}
@@ -48,7 +52,26 @@ export function ResultPage() {
         <Link className="btn primary" to={retake}>Retake with new questions</Link>
       </p>
 
-      <h2>Multiple choice</h2>
+      {typedBank && (
+        <>
+          <h2>Short answers</h2>
+          <ol className="questions">
+            {paper.blanks!.map((q, i) => {
+              const g = r.blanks![i]
+              return (
+                <li key={q.id} value={i + 1} className={g.correct ? 'right' : 'wrong'}>
+                  <span className="tag">Lecture {q.lecture}</span>
+                  <BlankPrompt prompt={q.prompt} view={q} macros={q.blank.macros} />
+                  <TypedReview given={g.given} blank={q.blank} correct={g.correct} marks={g.marks} max={g.max} trap={g.trap} />
+                  <p className="small"><Rich text={q.explanation} /></p>
+                </li>
+              )
+            })}
+          </ol>
+        </>
+      )}
+
+      {paper.mc.length > 0 && <h2>Multiple choice</h2>}
       <ol className="questions">
         {paper.mc.map((q, i) => {
           const g = r.mc[i]
@@ -77,10 +100,18 @@ export function ResultPage() {
       {paper.lq.map((q, qi) => (
         <section key={q.id} className="card">
           <h3>Long question{paper.lq.length > 1 ? ` ${qi + 1}` : ''}</h3>
-          <p><Math text={q.intro} /></p>
+          <p>{typedBank ? <Rich text={q.intro} /> : <Math text={q.intro} />}</p>
           <ol type="a">
             {q.parts.map((p, pi) => {
               const g = r.lq[qi][pi]
+              if (p.blank && p.view) return (
+                <li key={pi} className={g.correct ? 'right' : 'wrong'}>
+                  <span className="tag">Lecture {p.lecture}</span>
+                  <BlankPrompt prompt={p.prompt} view={p.view} macros={p.blank.macros} />
+                  <TypedReview given={g.given} blank={p.blank} correct={g.correct} marks={g.marks} max={g.max} trap={g.trap} />
+                  <p className="small"><Rich text={p.explanation} /></p>
+                </li>
+              )
               return (
                 <li key={pi} className={g.correct ? 'right' : 'wrong'}>
                   <p><Math text={p.prompt} /> <span className="tag">Lecture {p.lecture}</span></p>

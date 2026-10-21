@@ -1,5 +1,8 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { BlankPrompt } from '../components/BlankPrompt'
 import { Math } from '../components/Math'
+import { Practice } from '../components/Practice'
+import { Rich, RichParagraph } from '../components/Rich'
 import { lectureConfig, lecturePassMark, lectureTotal } from '../config/test.config'
 import { useApp } from '../context'
 import { banks } from '../lib/content'
@@ -25,6 +28,8 @@ export function LecturePage() {
   const attempts = store.attempts(key)
   const done = store.isPassed(key)
   const workedList = lesson.samples.map((s) => workedExample(bank, s))
+  const typedBank = bank.blanks !== undefined
+  const Text = lesson.verbatim ? Rich : Math
 
   return (
     <>
@@ -40,10 +45,20 @@ export function LecturePage() {
 
       <section className="card">
         <h2>Lesson</h2>
-        {lesson.teach.map((p, i) => p.startsWith('## ')
-          ? <h3 key={i}><Math text={p.slice(3)} /></h3>
-          : <p key={i}><Math text={p} /></p>)}
+        {lesson.verbatim
+          ? lesson.teach.map((p, i) => <RichParagraph key={i} text={p} />)
+          : lesson.teach.map((p, i) => p.startsWith('## ')
+            ? <h3 key={i}><Math text={p.slice(3)} /></h3>
+            : <p key={i}><Math text={p} /></p>)}
       </section>
+
+      {lesson.practice && lesson.practice.length > 0 && (
+        <section className="card">
+          <h2>Practice</h2>
+          <p className="muted small">Type the code for each formula. The preview shows what you typed; nothing here is marked or saved.</p>
+          {lesson.practice.map((item, i) => <Practice key={i} item={item} n={i + 1} />)}
+        </section>
+      )}
 
       {workedList.map((worked, wi) => (
       <section className="card" key={wi}>
@@ -53,9 +68,16 @@ export function LecturePage() {
             ? 'The quiz asks a question of one of these kinds, with different numbers. Work through each before you start.'
             : 'The quiz asks a question of this kind with different numbers. Work through it before you start.'}
         </p>
-        <p><Math text={worked.intro} /></p>
+        <p><Text text={worked.intro} /></p>
         <ol type="a">
-          {worked.parts.map((p, i) => (
+          {worked.parts.map((p, i) => p.blank && p.view ? (
+            <li key={i}>
+              <BlankPrompt prompt={p.prompt} view={p.view} macros={p.blank.macros} />
+              <p className="small"><b>Working:</b> <Rich text={p.explanation} /></p>
+              <p className="small"><b>Answer:</b></p>
+              <pre className="code">{p.blank.key}</pre>
+            </li>
+          ) : (
             <li key={i}>
               <p><Math text={p.prompt} /></p>
               <p className="small"><b>Working:</b> <Math text={p.explanation} /></p>
@@ -68,14 +90,21 @@ export function LecturePage() {
 
       <section className="card">
         <h2>Quiz</h2>
+        {typedBank ? (
+          <p className="muted small">
+            {lectureConfig.mcCount} short typed answers (1 mark each) + 1 long question ({lectureConfig.lqMarks} marks) in which you type
+            code, {lectureTotal()} marks; pass at {lecturePassMark()}/{lectureTotal()}. Closed book, unlimited retakes.
+          </p>
+        ) : (
         <p className="muted small">
           {lectureConfig.mcCount} multiple-choice questions (1 mark each, spread over the sections of this lecture) + 1 long question ({lectureConfig.lqMarks} marks, with parts from every section),
           {' '}{lectureTotal()} marks; pass at {lecturePassMark()}/{lectureTotal()}. Closed book, scientific calculator, unlimited retakes.
         </p>
+        )}
         <p><Link className="btn primary" to={`/topic/${id}/lecture/${n}/quiz`}>{attempts.length ? 'Retake the quiz' : 'Take the quiz'}</Link></p>
         {attempts.length > 0 && (
           <table>
-            <thead><tr><th>#</th><th>Date</th><th>MC</th><th>LQ</th><th>Total</th><th>Result</th><th /></tr></thead>
+            <thead><tr><th>#</th><th>Date</th><th>{typedBank ? 'Short' : 'MC'}</th><th>LQ</th><th>Total</th><th>Result</th><th /></tr></thead>
             <tbody>
               {attempts.map((a, i) => (
                 <tr key={a.date + i}>

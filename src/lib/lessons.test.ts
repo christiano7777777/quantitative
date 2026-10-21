@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { topics } from '../data'
 import { lectureConfig, lecturePassMark, lectureTotal } from '../config/test.config'
+import { gradeBlank } from './blank-grader'
 import { banks } from './content'
 import { lectureRules, localGrader } from './grader'
 import {
@@ -9,7 +10,8 @@ import {
 import { quizLqId } from './lq-composite'
 import { createLocalProgress } from './progress'
 import { makeRng } from './rng'
-import { findGenerator, renderPaper } from './test-builder'
+import { withoutCode } from './rich-text'
+import { findGenerator, renderPaper, shortPool } from './test-builder'
 import type { Answers, Paper } from './types'
 
 const balanced = (s: string) => (s.match(/(?<!\\)\$/g) ?? []).length % 2 === 0
@@ -43,7 +45,7 @@ describe.each(Object.keys(lessons))('lessons for %s', (id) => {
     expect(lesson.teach.length).toBeGreaterThanOrEqual(5)
     for (const p of lesson.teach) {
       expect(p.trim().length).toBeGreaterThan(0)
-      expect(balanced(p), p).toBe(true)
+      expect(balanced(lesson.verbatim ? withoutCode(p) : p), p).toBe(true) // code in a verbatim lesson may hold a lone $
       expect(/[\u0000-\u0008\u000b-\u001f]/.test(p), p).toBe(false)
     }
     expect(lesson.samples.length).toBeGreaterThanOrEqual(1)
@@ -62,7 +64,8 @@ describe.each(Object.keys(lessons))('lessons for %s', (id) => {
           // a kept part is the same part, with the same numbers, as in the full question
           expect(p).toEqual(all.parts[keep ? keep[i] : i])
           expect(p.lecture, `part ${i} of ${sample.lqId} is tagged lecture ${p.lecture}`).toBe(n)
-          expect(Number.isFinite(p.answer)).toBe(true)
+          if (p.blank) expect(gradeBlank(p.blank.key, p.blank).correct, `${sample.lqId} part ${i} key`).toBe(true)
+          else expect(Number.isFinite(p.answer)).toBe(true)
         })
       }
       const w = workedExample(bank, sample)
@@ -72,18 +75,19 @@ describe.each(Object.keys(lessons))('lessons for %s', (id) => {
   })
 
   it.each(ls.map((l, i) => [i + 1, l] as const))('lecture %i: the quiz covers every section of the lecture', (n, lesson) => {
-    const poolSections = new Set(bank.mc.filter((q) => q.lecture === n).map((q) => q.section ?? 0))
+    const pool = shortPool(bank) // MC, or the typed short questions of a typed bank
+    const poolSections = new Set(pool.filter((q) => q.lecture === n).map((q) => q.section ?? 0))
     for (let k = 0; k < 40; k++) {
       const spec = selectLecturePaper(bank, lesson, n, `seed-${n}-${k}`)
       expect(spec.mcIds.length).toBe(5)
       expect(new Set(spec.mcIds).size).toBe(5)
-      for (const mid of spec.mcIds) expect(bank.mc.find((q) => q.id === mid)!.lecture).toBe(n)
+      for (const mid of spec.mcIds) expect(pool.find((q) => q.id === mid)!.lecture).toBe(n)
       // the 5 MC are spread over the sections of the lecture
-      const sections = new Set(spec.mcIds.map((mid) => bank.mc.find((q) => q.id === mid)!.section ?? 0))
+      const sections = new Set(spec.mcIds.map((mid) => pool.find((q) => q.id === mid)!.section ?? 0))
       expect(sections.size, `lecture ${n} MC sections`).toBe(Math.min(5, poolSections.size))
       expect(spec.lqIds).toEqual([quizLqId(bank, lesson)])
       const paper = renderPaper(bank, spec)
-      expect(paper.mc.length).toBe(5)
+      expect((paper.blanks ?? paper.mc).length).toBe(5)
       expect(paper.lq.length).toBe(1)
       // one question with parts from every sample (section) of the lecture, all tagged with this lecture
       const q = paper.lq[0]
@@ -107,17 +111,20 @@ describe.each(Object.keys(lessons))('lessons for %s', (id) => {
   it('retakes prefer unseen MC questions when the lecture has enough of them', () => {
     const n = 1
     const first = selectLecturePaper(bank, ls[0], n, 'a')
-    const have = bank.mc.filter((q) => q.lecture === n).length
+    const have = shortPool(bank).filter((q) => q.lecture === n).length
     const second = selectLecturePaper(bank, ls[0], n, 'b', new Set(first.mcIds))
     const fresh = second.mcIds.filter((x) => !first.mcIds.includes(x)).length
     expect(fresh).toBe(Math.min(5, have - 5))
   })
 })
 
+// `mcRight` counts the MC questions answered right, or the typed short questions of a typed bank
 function answeredPaper(paper: Paper, mcRight: number, lqRight: number): Answers {
+  const right = (p: Paper['lq'][number]['parts'][number]) => (p.blank ? p.blank.key : String(p.answer))
   return {
     mc: paper.mc.map((q, i) => (i < mcRight ? q.options.findIndex((o) => o.correct) : q.options.findIndex((o) => !o.correct))),
-    lq: paper.lq.map((q) => q.parts.map((p, i) => (i < lqRight ? String(p.answer) : '9999999'))),
+    lq: paper.lq.map((q) => q.parts.map((p, i) => (i < lqRight ? right(p) : '9999999'))),
+    ...(paper.blanks ? { blanks: paper.blanks.map((q, i) => (i < mcRight ? q.blank.key : '9999999')) } : {}),
   }
 }
 
