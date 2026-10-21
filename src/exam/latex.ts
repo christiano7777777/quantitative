@@ -114,6 +114,14 @@ export function extractMacros(src: string, macros: Macros): string {
   return out + src.slice(last)
 }
 
+/** the macro table for a preamble such as `
+ewcommand{\E}{\mathbb{E}}` lines */
+export function macrosOf(preamble?: string): Macros {
+  const m: Macros = {}
+  if (preamble) extractMacros(preamble, m)
+  return m
+}
+
 // ---- one formula ----
 
 export function renderMath(tex: string, display: boolean, macros: Macros): { html: string } | { error: string } {

@@ -6,10 +6,15 @@ import { TopicPage } from './pages/Topic'
 import { TestPage } from './pages/Test'
 import { ResultPage } from './pages/Result'
 import { LecturePage } from './pages/Lecture'
+import { ExamHubPage } from './pages/ExamHub'
+import { WrittenAttemptPage, WrittenTakePage } from './pages/ExamWritten'
+import { ExamPreviewIndex, WrittenPreviewPage } from './pages/ExamPreview'
+import { SettingsPage } from './pages/Settings'
+import { validateState } from './exam/store'
 import { applySavedProgress, checkCredentials, loggedInUser, setLoggedInUser } from './lib/testLogin'
 
 function Header() {
-  const { store, dev, setDev, refresh } = useApp()
+  const { store, exams, dev, setDev, refresh } = useApp()
   const file = useRef<HTMLInputElement>(null)
   const [msg, setMsg] = useState('')
   const [user, setUser] = useState(loggedInUser)
@@ -28,7 +33,9 @@ function Header() {
   const logout = () => { setLoggedInUser(null); setUser(null); setMsg('Logged out.') }
 
   const download = () => {
-    const url = URL.createObjectURL(new Blob([store.exportJson()], { type: 'application/json' }))
+    // one file for everything: skill-tree progress as before, plus the Big Exam attempts under "exams" (never the API key)
+    const all = { ...JSON.parse(store.exportJson()), exams: exams.exportState() }
+    const url = URL.createObjectURL(new Blob([JSON.stringify(all, null, 1)], { type: 'application/json' }))
     const a = Object.assign(document.createElement('a'), { href: url, download: 'quantitative-progress.json' })
     a.click()
     URL.revokeObjectURL(url)
@@ -36,8 +43,12 @@ function Header() {
   const upload = async (f: File | undefined) => {
     if (!f) return
     try {
-      store.importJson(await f.text())
-      setMsg('Imported.')
+      const text = await f.text()
+      const exam = (JSON.parse(text) as { exams?: unknown }).exams
+      if (exam !== undefined) validateState(exam) // check before changing anything, so a bad file leaves both stores untouched
+      store.importJson(text)
+      if (exam !== undefined) exams.importState(exam)
+      setMsg(exam !== undefined ? 'Imported progress and exam attempts.' : 'Imported.')
       refresh()
     } catch (e) {
       setMsg(`Import failed: ${(e as Error).message}`)
@@ -50,6 +61,7 @@ function Header() {
       <Link to="/" className="brand">Quantitative</Link>
       <span className="grow" />
       {msg && <span className="muted small" role="status">{msg}</span>}
+      <Link to="/settings" className="muted small">Settings</Link>
       <button onClick={download}>Export progress</button>
       <button onClick={() => file.current?.click()}>Import progress</button>
       <input ref={file} type="file" accept="application/json" hidden onChange={(e) => upload(e.target.files?.[0])} />
@@ -89,6 +101,12 @@ export function App() {
             <Route path="/topic/:id/lecture/:lec" element={<LecturePage />} />
             <Route path="/topic/:id/lecture/:lec/quiz" element={<TestPage />} />
             <Route path="/topic/:id/lecture/:lec/attempt/:n" element={<ResultPage />} />
+            <Route path="/topic/:id/exam" element={<ExamHubPage />} />
+            <Route path="/topic/:id/exam/written" element={<WrittenTakePage />} />
+            <Route path="/topic/:id/exam/written/:aid" element={<WrittenAttemptPage />} />
+            <Route path="/exam-preview" element={<ExamPreviewIndex />} />
+            <Route path="/exam-preview/:id/written" element={<WrittenPreviewPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
             <Route path="*" element={<p>Not found. <Link to="/">Back to the tree</Link></p>} />
           </Routes>
         </main>

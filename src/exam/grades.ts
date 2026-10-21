@@ -3,6 +3,9 @@
 import { defaultWeights, examConfig, percentToGrade } from './config.ts'
 import type { CodingAttempt, Weights, WrittenAttempt } from './types.ts'
 
+/** marks for display: at most 2 decimals, no trailing zeros */
+export const fmtMarks = (x: number) => String(Number(x.toFixed(2)))
+
 export const toPercent = (marks: number, max: number) => (max > 0 ? (100 * marks) / max : 0)
 
 /** The topic's weights, or the default 70/30. Throws on negative or all-zero weights; scales them to sum to 1. */

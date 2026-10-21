@@ -2,10 +2,15 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from 're
 import { buildGraph, type Graph } from './lib/graph'
 import { createLocalProgress, type ProgressStore } from './lib/progress'
 import { topics } from './data'
+import { createExamStore, loadSettings, saveSettings, type ExamStore, type Settings } from './exam/store'
 
 interface Value {
   graph: Graph
   store: ProgressStore
+  /** Big Exam attempts and drafts (src/exam/store.ts) */
+  exams: ExamStore
+  settings: Settings
+  updateSettings(s: Settings): void
   passed: Set<string>
   dev: boolean
   setDev(on: boolean): void
@@ -27,11 +32,14 @@ function safeStorage(): Storage | null {
 export function AppProvider({ children }: { children: ReactNode }) {
   const graph = useMemo(() => buildGraph(topics), [])
   const store = useMemo(() => createLocalProgress(safeStorage()), [])
+  const exams = useMemo(() => createExamStore(safeStorage()), [])
+  const [settings, setSettings] = useState(() => loadSettings(safeStorage()))
   const [, setTick] = useState(0)
   const refresh = () => setTick((t) => t + 1)
   const value: Value = {
-    graph, store, passed: store.passedIds(), dev: store.devMode(), refresh,
+    graph, store, exams, settings, passed: store.passedIds(), dev: store.devMode(), refresh,
     setDev(on) { store.setDevMode(on); refresh() },
+    updateSettings(s) { saveSettings(safeStorage(), s); setSettings(s) },
   }
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }
