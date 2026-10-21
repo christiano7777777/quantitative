@@ -1,0 +1,109 @@
+{
+  "$schema": "./schema/written.schema.json",
+  "schemaVersion": 1,
+  "topicId": "inf",
+  "placeholder": true,
+  "title": "PLACEHOLDER: Statistical Inference, written exam",
+  "durationMinutes": 120,
+  "totalMarks": 20,
+  "instructions": "**PLACEHOLDER EXAM.** This file only proves that the pipeline works; replace it with real questions.\n\nAnswer in LaTeX. Write $...$ for inline maths and `\\begin{align} ... \\end{align}` for displayed derivations. Show every step: marks are given for the working, not only for the final answer.",
+  "preamble": "\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\Cov}{\\operatorname{Cov}}",
+  "questions": [
+    {
+      "id": "q1",
+      "title": "Exponential model (placeholder)",
+      "marks": 20,
+      "text": "Let $X_1,\\dots,X_n$ be i.i.d. exponential with mean $\\mu>0$, with density $f(x\\mid\\mu)=\\mu^{-1}e^{-x/\\mu}$ for $x>0$. Write $\\bar X=n^{-1}\\sum_i X_i$. Recall that $\\E[X_1]=\\mu$ and $\\Var(X_1)=\\mu^2$.",
+      "parts": [
+        {
+          "id": "a",
+          "type": "derivation",
+          "text": "Derive the maximum likelihood estimator of $\\mu$, and verify that it is a maximum.",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "Log-likelihood $\\ell(\\mu)=-n\\log\\mu-\\mu^{-1}\\sum_i x_i$",
+              "marks": 1
+            },
+            {
+              "step": "Score equation $-n/\\mu+\\mu^{-2}\\sum_i x_i=0$ and solution $\\hat\\mu=\\bar x$",
+              "marks": 1.5
+            },
+            {
+              "step": "Second derivative at $\\hat\\mu$ is $-n/\\bar x^2<0$, so it is a maximum",
+              "marks": 1.5
+            }
+          ],
+          "modelAnswer": "The log-likelihood is\n$$\\ell(\\mu)=\\sum_{i=1}^n\\log f(x_i\\mid\\mu)=-n\\log\\mu-\\frac1\\mu\\sum_{i=1}^n x_i .$$\nSetting the score to zero,\n$$\\ell'(\\mu)=-\\frac n\\mu+\\frac1{\\mu^2}\\sum_i x_i=0\\iff \\mu=\\bar x .$$\nThe second derivative is $\\ell''(\\mu)=\\dfrac n{\\mu^2}-\\dfrac{2\\sum_i x_i}{\\mu^3}$, and at $\\mu=\\bar x$ it equals $\\dfrac n{\\bar x^2}-\\dfrac{2n}{\\bar x^2}=-\\dfrac n{\\bar x^2}<0$. Hence $\\hat\\mu=\\bar X$ is the MLE."
+        },
+        {
+          "id": "b",
+          "type": "calculation",
+          "text": "Compute the Fisher information $I_n(\\mu)$ of the sample.",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "Uses $\\ell''(\\mu)=n/\\mu^2-2\\sum_i X_i/\\mu^3$",
+              "marks": 1
+            },
+            {
+              "step": "Takes expectations with $\\E[X_i]=\\mu$ to get $\\E[\\ell'']=-n/\\mu^2$",
+              "marks": 2
+            },
+            {
+              "step": "States $I_n(\\mu)=-\\E[\\ell''(\\mu)]=n/\\mu^2$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "From part (a), $\\ell''(\\mu)=n/\\mu^2-2\\sum_i X_i/\\mu^3$. Since $\\E[\\sum_i X_i]=n\\mu$,\n$$\\E[\\ell''(\\mu)]=\\frac n{\\mu^2}-\\frac{2n\\mu}{\\mu^3}=-\\frac n{\\mu^2},\\qquad\\text{so}\\qquad I_n(\\mu)=-\\E[\\ell''(\\mu)]=\\frac n{\\mu^2}.$$"
+        },
+        {
+          "id": "c",
+          "type": "proof",
+          "text": "Show that $\\bar X$ is unbiased for $\\mu$ and attains the Cramér-Rao lower bound. Conclude that it is the UMVUE of $\\mu$.",
+          "marks": 7,
+          "markingScheme": [
+            {
+              "step": "$\\E[\\bar X]=\\mu$ by linearity, so unbiased",
+              "marks": 1.5
+            },
+            {
+              "step": "$\\Var(\\bar X)=\\mu^2/n$ using independence",
+              "marks": 2
+            },
+            {
+              "step": "Cramér-Rao bound for unbiased estimators is $1/I_n(\\mu)=\\mu^2/n$",
+              "marks": 1.5
+            },
+            {
+              "step": "Variance equals the bound, so no unbiased estimator has smaller variance, hence UMVUE",
+              "marks": 2
+            }
+          ],
+          "modelAnswer": "By linearity $\\E[\\bar X]=n^{-1}\\sum_i\\E[X_i]=\\mu$, so $\\bar X$ is unbiased. By independence,\n$$\\Var(\\bar X)=\\frac1{n^2}\\sum_{i=1}^n\\Var(X_i)=\\frac{n\\mu^2}{n^2}=\\frac{\\mu^2}n .$$\nThe Cramér-Rao lower bound for any unbiased estimator of $\\mu$ is $1/I_n(\\mu)=\\mu^2/n$ by part (b). Since $\\Var(\\bar X)$ equals this bound, every unbiased estimator $T$ has $\\Var(T)\\ge\\mu^2/n=\\Var(\\bar X)$. Hence $\\bar X$ is the uniformly minimum variance unbiased estimator of $\\mu$. $\\blacksquare$"
+        },
+        {
+          "id": "d",
+          "type": "calculation",
+          "text": "With $n=50$ and $\\bar x=2.4$, give an approximate 95% confidence interval for $\\mu$ based on the asymptotic normality of the MLE, using the plug-in standard error and $z_{0.975}=1.96$.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "Asymptotic standard error $\\hat\\mu/\\sqrt n$ (plug-in of $I_n(\\hat\\mu)^{-1/2}$)",
+              "marks": 2
+            },
+            {
+              "step": "Standard error $=2.4/\\sqrt{50}\\approx0.3394$",
+              "marks": 1
+            },
+            {
+              "step": "Interval $2.4\\pm1.96\\times0.3394=(1.735,\\,3.065)$",
+              "marks": 2
+            }
+          ],
+          "modelAnswer": "The MLE is asymptotically $N(\\mu,\\,I_n(\\mu)^{-1})$, so the plug-in standard error is $\\hat\\mu/\\sqrt n=2.4/\\sqrt{50}\\approx0.3394$. The interval is\n$$2.4\\pm1.96\\times0.3394\\approx 2.4\\pm0.665=(1.735,\\;3.065).$$"
+        }
+      ]
+    }
+  ]
+}

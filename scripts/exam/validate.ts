@@ -47,7 +47,9 @@ function schemaIssues(where: string, validate: ReturnType<typeof compileSchemas>
 
 // ---- coding runtime ----
 
-const sig6 = (v: unknown): unknown => (typeof v === 'number' ? Number(v.toPrecision(6)) : Array.isArray(v) ? v.map(sig6) : v)
+/** Monte Carlo expectations are written with 6 significant digits (their tolerance is far wider); deterministic ones keep 12 so a tight tolerance still passes */
+const sig = (v: unknown, digits: number): unknown => (typeof v === 'number' ? Number(v.toPrecision(digits)) : Array.isArray(v) ? v.map((x) => sig(x, digits)) : v)
+const digitsFor = (t: CodingTest) => (isStochastic(t) ? 6 : 12)
 
 const caseOf = (t: CodingTest, expected: unknown = t.expected): RunRequest['cases'][number] => ({ id: t.id, input: t.input, seed: t.seed, compare: t.compare, expected })
 
@@ -86,14 +88,14 @@ async function checkCodingRuntime(q: CodingQuestion, backend: Backend, opts: Opt
     if (q.oracleSolution) {
       const res = await backend.output({ ...base, main: 'expected_value', rngArg: undefined, student: q.oracleSolution, cases: pending.map((t) => caseOf(t)) }, budget(pending.length))
       pending.forEach((t, i) => {
-        if (res[i].ok) { t.expected = sig6(res[i].output); filled++ } else out.push(error(at(t.id), `oracle failed while filling expected: ${res[i].message}`))
+        if (res[i].ok) { t.expected = sig(res[i].output, digitsFor(t)); filled++ } else out.push(error(at(t.id), `oracle failed while filling expected: ${res[i].message}`))
       })
     } else {
       const res = await backend.output({ ...base, student: q.referenceSolution, cases: pending.map((t) => caseOf(t)) }, budget(pending.length))
       const ok = pending.filter((_, i) => res[i].ok)
       const sums = ok.length ? await backend.summarise(ok.map((t) => res[pending.indexOf(t)].output), ok.map((t) => t.compare)) : []
       pending.forEach((t, i) => { if (!res[i].ok) out.push(error(at(t.id), `reference failed while filling expected: ${res[i].message}`)) })
-      ok.forEach((t, i) => { t.expected = sig6(sums[i]); filled++ })
+      ok.forEach((t, i) => { t.expected = sig(sums[i], digitsFor(t)); filled++ })
     }
     notes.push(`${q.id}: filled ${filled} expected value(s) from the ${q.oracleSolution ? 'oracle' : 'reference solution'}`)
   } else if (pending.length) {

@@ -1,0 +1,150 @@
+{
+  "$schema": "./schema/coding.schema.json",
+  "schemaVersion": 1,
+  "topicId": "inf",
+  "placeholder": true,
+  "title": "PLACEHOLDER: Statistical Inference, coding exam",
+  "totalMarks": 10,
+  "instructions": "**PLACEHOLDER EXAM.** This file only proves that the pipeline works; replace it with real questions.\n\nWrite only the functions asked for. Every run is seeded. The visible tests can be run as often as you like; the hidden tests run when you submit.",
+  "questions": [
+    {
+      "id": "c1",
+      "title": "Laplace maximum likelihood",
+      "marks": 10,
+      "text": "A sample $x_1,\\dots,x_n$ is modelled as i.i.d. Laplace with location $\\mu\\in\\mathbb R$ and scale $b>0$:\n$$f(x\\mid\\mu,b)=\\frac{1}{2b}\\exp\\!\\Big(-\\frac{|x-\\mu|}{b}\\Big).$$\nWrite `mle_laplace(x)`, which takes the data as a list or array and returns the list `[mu_hat, b_hat]` of maximum likelihood estimates. When $n$ is even, any $\\mu$ between the two middle observations maximises the likelihood; return the midpoint of the two middle observations.",
+      "docs": "**Maximum likelihood.** The log-likelihood is\n$$\\ell(\\mu,b)=-n\\log(2b)-\\frac1b\\sum_i|x_i-\\mu| .$$\nFor fixed $b$ it is maximised by the $\\mu$ that minimises $\\sum_i|x_i-\\mu|$, which is a sample median. Then maximise over $b$ by setting $\\partial\\ell/\\partial b=0$ with $\\mu=\\hat\\mu$.\n\n```\nmu_hat <- median of x           (midpoint of the two middle values if n is even)\nb_hat  <- mean of |x_i - mu_hat|\nreturn [mu_hat, b_hat]\n```",
+      "difficultyNotes": "Placeholder. Deterministic output, compared with a numeric tolerance. Tests whether the student can carry a likelihood argument through to an estimator.",
+      "helperCode": "import numpy as np\n",
+      "skeleton": "def mle_laplace(x):\n    \"\"\"Maximum likelihood estimates (mu_hat, b_hat) for i.i.d. Laplace data with density\n    f(x | mu, b) = exp(-|x - mu| / b) / (2 b). Return a list [mu_hat, b_hat].\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n",
+      "functions": [
+        {
+          "name": "mle_laplace",
+          "description": "returns [mu_hat, b_hat]; the tested function",
+          "main": true
+        }
+      ],
+      "timeLimitSeconds": 10,
+      "referenceSolution": "def mle_laplace(x):\n    x = np.asarray(x, dtype=float)\n    mu = float(np.median(x))\n    b = float(np.mean(np.abs(x - mu)))\n    return [mu, b]\n",
+      "oracleSolution": "def expected_value(x):\n    # independent of np.median: the location MLE minimises sum |x_i - m|, and the minimum is attained at a data point\n    x = [float(v) for v in x]\n    best = min(x, key=lambda m: (sum(abs(v - m) for v in x), m))\n    odd = len(x) % 2 == 1\n    if not odd:\n        # with an even n every value between the two middle points is a minimiser; take the midpoint, as the median does\n        s = sorted(x)\n        lo, hi = s[len(s) // 2 - 1], s[len(s) // 2]\n        best = (lo + hi) / 2\n    b = sum(abs(v - best) for v in x) / len(x)\n    return [best, b]\n",
+      "visibleTests": [
+        {
+          "id": "v1",
+          "description": "n = 5 (odd)",
+          "input": {
+            "x": [
+              1.2,
+              0.4,
+              2.9,
+              -0.3,
+              1.7
+            ]
+          },
+          "seed": 1,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.000001
+          },
+          "expected": [
+            1.2,
+            0.9
+          ]
+        },
+        {
+          "id": "v2",
+          "description": "n = 6 (even): midpoint of the two middle values",
+          "input": {
+            "x": [
+              3,
+              5.5,
+              4.1,
+              4.9,
+              8.2,
+              3.3
+            ]
+          },
+          "seed": 2,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.000001
+          },
+          "expected": [
+            4.5,
+            1.36666666667
+          ]
+        }
+      ],
+      "hiddenTests": [
+        {
+          "id": "h1",
+          "description": "n = 7 with a repeated value and an outlier",
+          "input": {
+            "x": [
+              -2.5,
+              -1,
+              0,
+              0.5,
+              0.5,
+              3,
+              9
+            ]
+          },
+          "seed": 3,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.000001
+          },
+          "expected": [
+            0.5,
+            2.28571428571
+          ]
+        },
+        {
+          "id": "h2",
+          "description": "n = 2",
+          "input": {
+            "x": [
+              10,
+              12
+            ]
+          },
+          "seed": 4,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.000001
+          },
+          "expected": [
+            11,
+            1
+          ]
+        },
+        {
+          "id": "h3",
+          "description": "numpy array input, n = 8",
+          "input": {
+            "x": {
+              "$ndarray": [
+                0.1,
+                0.2,
+                0.3,
+                0.4,
+                5,
+                6,
+                7,
+                8
+              ]
+            }
+          },
+          "seed": 5,
+          "compare": {
+            "type": "numeric",
+            "abs": 0.000001
+          },
+          "expected": [
+            2.7,
+            3.125
+          ]
+        }
+      ]
+    }
+  ]
+}

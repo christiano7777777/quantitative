@@ -149,3 +149,50 @@ describe('the real content directory', () => {
     expect(bad).toEqual([])
   }, 300_000)
 })
+
+describe.skipIf(!hasPython)('harness comparison types', () => {
+  type C = Parameters<typeof subprocessBackend.run>[0]['cases'][number]
+  const run = async (student: string, cases: C[], rngArg?: string) =>
+    (await subprocessBackend.run({ helper: 'import numpy as np', student, main: 'f', rngArg, cases }, 60_000)).map((r) => [r.passed, r.message] as const)
+  const c = (id: string, compare: C['compare'], expected: unknown, input: Record<string, unknown> = {}): C => ({ id, input, seed: 7, compare, expected })
+
+  it('exact: 1 equals 1.0, True does not equal 1, lists and dicts compare deeply, numpy output is normalised', async () => {
+    const r = await run('def f(kind):\n    return {"int": 1.0, "bool": True, "list": (1, 2.0), "np": np.array([1, 2]), "dict": {"a": [1]}}[kind]', [
+      c('a', { type: 'exact' }, 1, { kind: 'int' }), c('b', { type: 'exact' }, 1, { kind: 'bool' }), c('c', { type: 'exact' }, [1, 2], { kind: 'list' }),
+      c('d', { type: 'exact' }, [1, 2], { kind: 'np' }), c('e', { type: 'exact' }, { a: [1] }, { kind: 'dict' }), c('f', { type: 'exact' }, [1, 3], { kind: 'np' })])
+    expect(r.map((x) => x[0])).toEqual([true, false, true, true, true, false])
+  })
+
+  it('numeric: absolute and relative tolerance, shape mismatch, NaN', async () => {
+    const r = await run('def f(v):\n    return v', [
+      c('a', { type: 'numeric', abs: 0.01 }, 1.0, { v: 1.005 }), c('b', { type: 'numeric', abs: 0.001 }, 1.0, { v: 1.005 }),
+      c('c', { type: 'numeric', rel: 0.01 }, 1000, { v: 1009 }), c('d', { type: 'numeric', abs: 1 }, [1, 2], { v: [1, 2, 3] }),
+      c('e', { type: 'numeric', abs: 1 }, 1, { v: { $ndarray: [1] } }), c('f', { type: 'numeric', abs: 1e9 }, [1], { v: { $ndarray: [0] } })])
+    expect(r.map((x) => x[0])).toEqual([true, false, true, false, false, true]) // e: scalar expected vs a 1-element array is a shape mismatch
+    expect(r[3][1]).toMatch(/shape/)
+  })
+
+  it('quantiles and summary on seeded random output: a planted effect is found, a wrong centre fails, length and NaN are checked', async () => {
+    const code = 'def f(mu, n, rng):\n    return rng.normal(mu, 1.0, n)'
+    const q = { type: 'quantiles' as const, probs: [0.05, 0.5, 0.95], abs: 0.1 }
+    const exp = [-1.645, 0, 1.645]
+    const r = await run(code, [
+      c('null', q, exp, { mu: 0, n: 20000 }), // centred at the planted value: passes
+      c('shifted', q, exp, { mu: 0.5, n: 20000 }), // planted effect of +0.5 is detected as a failure
+      c('len', { ...q, length: 100 }, exp, { mu: 0, n: 50 }),
+      c('sum', { type: 'summary', stats: ['mean', 'sd'], abs: 0.05 }, [0, 1], { mu: 0, n: 20000 }),
+      c('sumbad', { type: 'summary', stats: ['mean', 'sd'], abs: 0.05 }, [0, 2], { mu: 0, n: 20000 }),
+    ], 'rng')
+    expect(r.map((x) => x[0])).toEqual([true, false, false, true, false])
+    expect(r[2][1]).toMatch(/expected 100 values, got 50/)
+    const nan = await run('def f():\n    return [1.0, float("nan")]', [c('n', { type: 'quantiles', probs: [0.5], abs: 1 }, [1])])
+    expect(nan[0][1]).toMatch(/NaN/)
+  })
+
+  it('is reproducible: the same seed gives the same draws, a different seed does not', async () => {
+    const code = 'def f(rng):\n    return float(rng.normal())'
+    const ask = (seed: number) => subprocessBackend.output({ helper: '', student: code, main: 'f', rngArg: 'rng', cases: [{ id: 'x', input: {}, seed, compare: { type: 'exact' }, expected: 0 }] }, 60_000).then((o) => o[0].output)
+    expect(await ask(5)).toBe(await ask(5))
+    expect(await ask(5)).not.toBe(await ask(6))
+  })
+})

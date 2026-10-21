@@ -168,3 +168,27 @@ npm test         # all unit tests, including the bank structure checks
 npm run build    # type-check and production build
 npm run dev      # try the test in the browser (turn on Dev mode in the header to unlock every topic)
 ```
+
+# Contributing a Big Exam
+
+The Big Exam is an extra graded exam per topic (written part typed in LaTeX and marked by AI, plus a Python coding part
+with automatic tests). It never changes skill-tree progress. Content is data, so a topic is added by dropping files in:
+
+```
+content/exams/<topicId>.written.json   schema: content/exams/schema/written.schema.json
+content/exams/<topicId>.coding.json    schema: content/exams/schema/coding.schema.json
+```
+
+- **Validate:** `npm run validate-exams` (add `-- --topic bay` for one topic, `-- --fill-expected` to compute expected
+  values marked `"$FROM_REFERENCE"`, `-- --pyodide` to run the checks in the browser's own Python runtime). It checks the
+  schema, that marks add up, that every formula renders, and **runs each reference solution against every visible and
+  hidden test** (and against other seeds for stochastic tests). It exits 1 on any error.
+- **Preview as a student:** open `#/exam-preview` in the app. It works for every topic that has files, whether or not its
+  phase is switched on.
+- **Rollout:** `examPhase` (1, 2 or null) on each topic in `src/data/topics.json`; the phases that are live are listed in
+  `content/exams/exams.config.json` (`enabledPhases`). Set `[1, 2]` to switch on the rest of the Quant Researcher track.
+  `python -I scripts/assign_exam_phases.py` recomputes `examPhase` from the careers data. A topic with no coding part gets
+  `"examWeights": { "written": 1, "coding": 0 }` in `topics.json`.
+- **Grade scale and weights:** `src/exam/config.ts`.
+- **Writing the real questions:** `PROMPT_FOR_CLAUDE_QUESTION_WRITER.md` is a self-contained prompt for a Claude chat; it is
+  built by `python -I scripts/build_writer_prompt.py` from the live schemas, so rebuild it after changing a schema.

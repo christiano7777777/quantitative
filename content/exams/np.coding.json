@@ -1,0 +1,151 @@
+{
+  "$schema": "./schema/coding.schema.json",
+  "schemaVersion": 1,
+  "topicId": "np",
+  "placeholder": true,
+  "title": "PLACEHOLDER: Nonparametric Statistics, coding exam",
+  "totalMarks": 10,
+  "instructions": "**PLACEHOLDER EXAM.** This file only proves that the pipeline works; replace it with real questions.\n\nWrite only the functions asked for. Every run is seeded. The visible tests can be run as often as you like; the hidden tests run when you submit.",
+  "questions": [
+    {
+      "id": "c1",
+      "title": "Wilcoxon rank-sum statistic with ties",
+      "marks": 10,
+      "text": "Two samples `x` and `y` (lists or arrays of numbers) are given. Write `rank_sum_statistic(x, y)` that pools the two samples, ranks the pooled values from smallest (rank 1) to largest, gives tied values the **average** of the ranks they occupy, and returns $W=\\sum_{i}R(x_i)$, the sum of the ranks of the observations that came from `x`, as one number.",
+      "docs": "**Ranks with ties.** If $k$ pooled values are equal and would occupy ranks $r+1,\\dots,r+k$ if they were distinct, each gets the average rank $r+(k+1)/2$.\n\n```\npooled <- x followed by y\nrank each value in pooled (ties: average rank)\nW <- sum of the ranks of the first len(x) entries\nreturn W\n```\n\nFor example, pooled values $(3, 1, 3, 2)$ have ranks $(3.5, 1, 3.5, 2)$.",
+      "difficultyNotes": "Placeholder. Deterministic output (an integer or half-integer), compared exactly.",
+      "helperCode": "import numpy as np\nfrom scipy import stats\n",
+      "skeleton": "def rank_sum_statistic(x, y):\n    \"\"\"Wilcoxon rank-sum statistic: the sum of the ranks of the x values in the pooled sample x + y.\n    Tied values get the average of the ranks they occupy. Return a single number.\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n",
+      "functions": [
+        {
+          "name": "rank_sum_statistic",
+          "description": "returns W as one number; the tested function",
+          "main": true
+        }
+      ],
+      "timeLimitSeconds": 10,
+      "referenceSolution": "def rank_sum_statistic(x, y):\n    pooled = np.concatenate([np.asarray(x, dtype=float), np.asarray(y, dtype=float)])\n    ranks = stats.rankdata(pooled)  # method=\"average\" is the default\n    return float(ranks[:len(x)].sum())\n",
+      "oracleSolution": "def expected_value(x, y):\n    # independent of rankdata: the rank of a value is 1 + (number of smaller observations) + half the number of other ties\n    pooled = [float(v) for v in list(x) + list(y)]\n    total = 0.0\n    for v in [float(v) for v in x]:\n        smaller = sum(1 for u in pooled if u < v)\n        equal_others = sum(1 for u in pooled if u == v) - 1\n        total += 1 + smaller + 0.5 * equal_others\n    return total\n",
+      "visibleTests": [
+        {
+          "id": "v1",
+          "description": "no ties",
+          "input": {
+            "x": [
+              1.1,
+              4.2,
+              3.3
+            ],
+            "y": [
+              2.5,
+              5,
+              0.7,
+              6.1
+            ]
+          },
+          "seed": 1,
+          "compare": {
+            "type": "exact"
+          },
+          "expected": 11
+        },
+        {
+          "id": "v2",
+          "description": "ties: average ranks",
+          "input": {
+            "x": [
+              3,
+              1,
+              3
+            ],
+            "y": [
+              2,
+              3,
+              5
+            ]
+          },
+          "seed": 2,
+          "compare": {
+            "type": "exact"
+          },
+          "expected": 9
+        }
+      ],
+      "hiddenTests": [
+        {
+          "id": "h1",
+          "description": "all values tied",
+          "input": {
+            "x": [
+              5,
+              5,
+              5
+            ],
+            "y": [
+              5,
+              5
+            ]
+          },
+          "seed": 3,
+          "compare": {
+            "type": "exact"
+          },
+          "expected": 9
+        },
+        {
+          "id": "h2",
+          "description": "one x value that is the largest",
+          "input": {
+            "x": [
+              10
+            ],
+            "y": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ]
+          },
+          "seed": 4,
+          "compare": {
+            "type": "exact"
+          },
+          "expected": 10
+        },
+        {
+          "id": "h3",
+          "description": "numpy arrays with several tie groups",
+          "input": {
+            "x": {
+              "$ndarray": [
+                2,
+                2,
+                8,
+                9,
+                9
+              ]
+            },
+            "y": {
+              "$ndarray": [
+                1,
+                2,
+                9,
+                10
+              ]
+            }
+          },
+          "seed": 5,
+          "compare": {
+            "type": "exact"
+          },
+          "expected": 25
+        }
+      ]
+    }
+  ]
+}
