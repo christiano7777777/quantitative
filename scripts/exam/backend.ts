@@ -37,6 +37,7 @@ function call(req: object, timeoutMs: number): Record<string, unknown> {
   const python = process.env.EXAM_PYTHON ?? process.env.PYTHON ?? (process.platform === 'win32' ? 'python' : 'python3')
   const r = spawnSync(python, ['-I', join(harnessDir, 'harness_cli.py')], {
     input: JSON.stringify(req), encoding: 'utf8', timeout: timeoutMs, maxBuffer: 256 * 1024 * 1024,
+    env: { ...process.env, PYTHONDONTWRITEBYTECODE: '1' },
   })
   if (r.error) {
     const timedOut = (r.error as NodeJS.ErrnoException).code === 'ETIMEDOUT'
