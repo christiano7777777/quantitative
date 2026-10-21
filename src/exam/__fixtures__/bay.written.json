@@ -1,0 +1,113 @@
+{
+  "$schema": "./schema/written.schema.json",
+  "schemaVersion": 1,
+  "topicId": "bay",
+  "placeholder": true,
+  "title": "PLACEHOLDER: Bayesian Statistics, written exam",
+  "durationMinutes": 120,
+  "totalMarks": 20,
+  "instructions": "**PLACEHOLDER EXAM.** This file only proves that the pipeline works; replace it with real questions.\n\nAnswer in LaTeX. Write $...$ for inline maths and `\\begin{align} ... \\end{align}` for displayed derivations. Show every step: marks are given for the working, not only for the final answer.",
+  "preamble": "\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}",
+  "questions": [
+    {
+      "id": "q1",
+      "title": "Beta-Bernoulli model (placeholder)",
+      "text": "Let $Y_1,\\dots,Y_n$ be conditionally independent given $\\theta$, with $Y_i\\mid\\theta\\sim\\text{Bernoulli}(\\theta)$, and let the prior be $\\theta\\sim\\text{Beta}(a,b)$ with $a,b>0$, so that\n$$\\pi(\\theta)=\\frac{\\theta^{a-1}(1-\\theta)^{b-1}}{B(a,b)},\\qquad 0<\\theta<1.$$\nWrite $s=\\sum_{i=1}^n y_i$ for the observed number of successes.",
+      "marks": 20,
+      "parts": [
+        {
+          "id": "a",
+          "type": "derivation",
+          "text": "Derive the posterior distribution of $\\theta$ given $y_1,\\dots,y_n$, and state its parameters.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "Writes the likelihood $p(y\\mid\\theta)=\\theta^{s}(1-\\theta)^{n-s}$",
+              "marks": 1
+            },
+            {
+              "step": "Writes the prior kernel $\\theta^{a-1}(1-\\theta)^{b-1}$ and drops constants not involving $\\theta$",
+              "marks": 1
+            },
+            {
+              "step": "Multiplies: $\\pi(\\theta\\mid y)\\propto\\theta^{s+a-1}(1-\\theta)^{n-s+b-1}$",
+              "marks": 1
+            },
+            {
+              "step": "Recognises the kernel of a Beta distribution and states $\\text{Beta}(a+s,\\,b+n-s)$",
+              "marks": 2
+            }
+          ],
+          "modelAnswer": "By Bayes' theorem the posterior is proportional to likelihood times prior. The likelihood is\n$$p(y\\mid\\theta)=\\prod_{i=1}^n\\theta^{y_i}(1-\\theta)^{1-y_i}=\\theta^{s}(1-\\theta)^{n-s}.$$\nHence, dropping every factor that does not depend on $\\theta$,\n\\begin{align}\n\\pi(\\theta\\mid y)&\\propto \\theta^{s}(1-\\theta)^{n-s}\\cdot\\theta^{a-1}(1-\\theta)^{b-1}\\\\\n&=\\theta^{a+s-1}(1-\\theta)^{b+n-s-1},\\qquad 0<\\theta<1.\n\\end{align}\nThis is the kernel of a Beta density, so $\\theta\\mid y\\sim\\text{Beta}(a+s,\\;b+n-s)$."
+        },
+        {
+          "id": "b",
+          "type": "proof",
+          "text": "Show that the posterior mean is a weighted average of the prior mean $a/(a+b)$ and the sample mean $\\bar y=s/n$, and give the weight on the prior mean.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "States the posterior mean $\\E[\\theta\\mid y]=\\dfrac{a+s}{a+b+n}$ (uses the mean of a Beta distribution)",
+              "marks": 2
+            },
+            {
+              "step": "Splits the numerator and rewrites $a=(a+b)\\cdot\\frac{a}{a+b}$ and $s=n\\bar y$",
+              "marks": 2
+            },
+            {
+              "step": "Identifies the weight $w=\\dfrac{a+b}{a+b+n}$ on the prior mean and $1-w$ on $\\bar y$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "The mean of $\\text{Beta}(\\alpha,\\beta)$ is $\\alpha/(\\alpha+\\beta)$, so\n$$\\E[\\theta\\mid y]=\\frac{a+s}{a+b+n}.$$\nWrite $a=(a+b)\\frac{a}{a+b}$ and $s=n\\bar y$. Then\n\\begin{align}\n\\E[\\theta\\mid y]&=\\frac{(a+b)}{a+b+n}\\cdot\\frac{a}{a+b}+\\frac{n}{a+b+n}\\cdot\\bar y\\\\\n&=w\\,\\frac{a}{a+b}+(1-w)\\,\\bar y,\\qquad w=\\frac{a+b}{a+b+n}\\in(0,1).\n\\end{align}\nSo the posterior mean is a convex combination of the prior mean and the sample mean; the weight on the prior mean is $w=(a+b)/(a+b+n)$, which tends to $0$ as $n\\to\\infty$. $\\blacksquare$"
+        },
+        {
+          "id": "c",
+          "type": "proof",
+          "text": "Prove that under squared error loss $L(\\theta,d)=(\\theta-d)^2$ the Bayes estimator (the minimiser of the posterior expected loss) is the posterior mean.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "Writes the posterior expected loss $\\E[(\\theta-d)^2\\mid y]$ as the function to minimise over $d$",
+              "marks": 1
+            },
+            {
+              "step": "Adds and subtracts $m=\\E[\\theta\\mid y]$ and expands the square",
+              "marks": 1
+            },
+            {
+              "step": "Shows the cross term has zero expectation, giving $\\Var(\\theta\\mid y)+(m-d)^2$",
+              "marks": 2
+            },
+            {
+              "step": "Concludes the minimum is at $d=m$ because $(m-d)^2\\ge 0$ with equality only at $d=m$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "Let $m=\\E[\\theta\\mid y]$. For any fixed $d$,\n\\begin{align}\n\\E[(\\theta-d)^2\\mid y]&=\\E[((\\theta-m)+(m-d))^2\\mid y]\\\\\n&=\\E[(\\theta-m)^2\\mid y]+2(m-d)\\,\\E[\\theta-m\\mid y]+(m-d)^2\\\\\n&=\\Var(\\theta\\mid y)+(m-d)^2,\n\\end{align}\nbecause $\\E[\\theta-m\\mid y]=0$. The first term does not depend on $d$ and the second is non-negative and zero only for $d=m$. Hence the posterior expected loss is minimised uniquely at $d=m$, the posterior mean. $\\blacksquare$"
+        },
+        {
+          "id": "d",
+          "type": "calculation",
+          "text": "Take $a=b=2$, $n=10$ and $s=7$. Give the posterior distribution, the Bayes estimate under squared error loss and the posterior variance.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "Posterior is $\\text{Beta}(9,5)$",
+              "marks": 2
+            },
+            {
+              "step": "Bayes estimate $9/14\\approx 0.643$",
+              "marks": 1.5
+            },
+            {
+              "step": "Posterior variance $\\dfrac{9\\cdot 5}{14^2\\cdot 15}=\\dfrac{3}{196}\\approx 0.0153$",
+              "marks": 1.5
+            }
+          ],
+          "modelAnswer": "From part (a) the posterior is $\\text{Beta}(a+s,\\,b+n-s)=\\text{Beta}(2+7,\\,2+3)=\\text{Beta}(9,5)$.\n\nThe Bayes estimate under squared error loss is the posterior mean, $9/(9+5)=9/14\\approx 0.643$.\n\nFor $\\text{Beta}(\\alpha,\\beta)$ the variance is $\\alpha\\beta/\\big((\\alpha+\\beta)^2(\\alpha+\\beta+1)\\big)$, so\n$$\\Var(\\theta\\mid y)=\\frac{9\\cdot 5}{14^2\\cdot 15}=\\frac{45}{2940}=\\frac{3}{196}\\approx 0.0153.$$"
+        }
+      ]
+    }
+  ]
+}

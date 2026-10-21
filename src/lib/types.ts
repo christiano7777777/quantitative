@@ -14,6 +14,10 @@ export interface Topic {
   prerequisites: string[]
   courses: string
   starred: boolean
+  /** Big Exam rollout: 1 = pilot, 2 = rest of the Quant Researcher track, null = no exam planned (src/exam/phases.ts) */
+  examPhase?: 1 | 2 | null
+  /** Big Exam weights when they differ from the default 70/30, e.g. { written: 1, coding: 0 } for a topic with no coding part */
+  examWeights?: { written: number; coding: number }
   summary: string
   outcomes: string[]
   note: string

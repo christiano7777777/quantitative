@@ -5,10 +5,12 @@ import { isUnlocked, statusOf } from '../lib/graph'
 import { hasTest } from '../lib/content'
 import { hasLessons, lectureKey, lectureUnlocked, lessonsDone } from '../lib/lessons'
 import { passMark, totalMarks, testConfig } from '../config/test.config'
+import { examEnabled, contentReady } from '../exam/phases'
+import { statusLabel } from '../exam/grades'
 
 export function TopicPage() {
   const { id = '' } = useParams()
-  const { graph, store, passed, dev } = useApp()
+  const { graph, store, exams, passed, dev } = useApp()
   const topic = graph.byId.get(id)
   if (!topic) return <p>Unknown topic. <Link to="/">Back to the tree</Link></p>
 
@@ -21,6 +23,9 @@ export function TopicPage() {
   const lessonsOn = hasLessons(id)
   const lecturesPassed = lessonsOn ? topic.lectures.filter((_, i) => store.isPassed(lectureKey(id, i + 1))).length : 0
   const lecturesOk = lessonsDone(store, id, dev)
+  const examOn = examEnabled(topic)
+  const examSummary = exams.summary(id, topic.examWeights)
+  const examLabel = statusLabel(examSummary, passed.has(id))
 
   return (
     <>
@@ -28,6 +33,7 @@ export function TopicPage() {
       <h1>
         {topic.label} <span className="badge">{domainLabels[topic.domain]}</span>{' '}
         <span className={`badge st-${status}`}>{status}</span>
+        {examLabel && <> <span className="badge st-passed" title={examSummary.total ? 'Big Exam grade' : 'Topic test passed; the Big Exam grade replaces this once both parts are done'}>{examLabel}</span></>}
       </h1>
       <p>{topic.summary}</p>
 
@@ -45,6 +51,20 @@ export function TopicPage() {
         <dt>Learning outcomes</dt>
         <dd><ul>{topic.outcomes.map((o) => <li key={o}>{o}</li>)}</ul></dd>
       </dl>
+
+      {examOn && (
+        <section className="card" aria-label="Big Exam">
+          <h2>Big Exam</h2>
+          <p className="muted small">
+            An extra, graded exam with a written part and a coding part. It does not affect your skill-tree progress; the topic test below stays the only
+            gate. {examSummary.total ? '' : passed.has(id) ? 'Until the big exam is complete this topic shows "Pass".' : ''}
+          </p>
+          {examSummary.total && <p>Grade: <b>{examSummary.total.grade}</b> ({examSummary.total.percent.toFixed(1)}%)</p>}
+          <p>{contentReady(topic)
+            ? <Link className="btn primary" to={`/topic/${id}/exam`}>Big Exam</Link>
+            : <><Link className="btn" to={`/topic/${id}/exam`}>Big Exam</Link> <span className="muted small">coming soon: exam files not added yet</span></>}</p>
+        </section>
+      )}
 
       <section className="card">
         <h2>Test</h2>

@@ -6,6 +6,7 @@
   "prerequisites": [],
   "courses": "HKU MATH1013 · CUHK MATH1010 · CityU MA1200/1201",
   "starred": false,
+  "examPhase": 2,
   "summary": "Single-variable calculus: limits, derivatives, integrals and series.",
   "outcomes": [
    "Differentiate and integrate standard functions",
@@ -81,6 +82,7 @@
   ],
   "courses": "HKU MATH2014 · CUHK MATH2010 · HKUST MATH2011 · CityU MA2001",
   "starred": false,
+  "examPhase": 2,
   "summary": "Calculus in several variables: partial derivatives, optimisation, multiple integrals and vector calculus.",
   "outcomes": [
    "Compute gradients and Jacobians",
@@ -149,6 +151,7 @@
   "prerequisites": [],
   "courses": "HKU MATH2101 · CUHK MATH1030 · HKUST MATH2121",
   "starred": false,
+  "examPhase": 2,
   "summary": "Vectors, matrices, systems of equations, determinants and eigenvalues.",
   "outcomes": [
    "Solve linear systems",
@@ -219,6 +222,7 @@
   ],
   "courses": "CUHK MATH2040A · HKU Linear Algebra II (syllabus not verified); plus SVD / PCA applications",
   "starred": false,
+  "examPhase": 2,
   "summary": "Inner product spaces, spectral theory, SVD and applications to PCA and data analysis.",
   "outcomes": [
    "Orthogonalise and project",
@@ -287,6 +291,7 @@
   "prerequisites": [],
   "courses": "HKU COMP2121 · HKUST COMP2711",
   "starred": false,
+  "examPhase": null,
   "summary": "Logic, sets, counting, graphs and recurrences.",
   "outcomes": [
    "Prove simple statements by induction and contradiction",
@@ -358,6 +363,7 @@
   ],
   "courses": "HKU MATH3405 · CityU MA3511",
   "starred": false,
+  "examPhase": null,
   "summary": "Ordinary differential equations: solution methods, linear systems and stability.",
   "outcomes": [
    "Solve first and second-order ODEs",
@@ -433,6 +439,7 @@
   ],
   "courses": "CityU MA4542",
   "starred": false,
+  "examPhase": 2,
   "summary": "Rigorous foundations of calculus: sequences, continuity, differentiation and integration.",
   "outcomes": [
    "Prove convergence and continuity statements",
@@ -504,6 +511,7 @@
   ],
   "courses": "CityU MS3601 · CUHK MATH3215",
   "starred": false,
+  "examPhase": 2,
   "summary": "Linear, convex and nonlinear optimisation with duality and optimality conditions.",
   "outcomes": [
    "Formulate and solve LPs",
@@ -576,6 +584,7 @@
   ],
   "courses": "CUHK MATH3230",
   "starred": false,
+  "examPhase": null,
   "summary": "Numerical linear algebra and root finding, with Python implementations.",
   "outcomes": [
    "Solve linear systems stably",
@@ -656,6 +665,7 @@
   ],
   "courses": "CUHK MATH3240 · CityU MA3514",
   "starred": false,
+  "examPhase": null,
   "summary": "Numerical differential equations, quadrature and PDE methods, with Python implementations.",
   "outcomes": [
    "Integrate ODEs numerically",
@@ -736,6 +746,7 @@
   ],
   "courses": "CUHK Information Theory (Institute of Network Coding; course code not found)",
   "starred": false,
+  "examPhase": 2,
   "summary": "Entropy, mutual information, source and channel coding.",
   "outcomes": [
    "Compute entropy and mutual information",
@@ -811,6 +822,7 @@
   ],
   "courses": "HKU SDST2601 · HKUST MATH2421 · CityU MA2510",
   "starred": false,
+  "examPhase": 2,
   "summary": "The foundations of probability: events, conditioning, discrete random variables and the classical distributions.",
   "outcomes": [
    "Count outcomes and compute probabilities of events",
@@ -892,6 +904,7 @@
   ],
   "courses": "HKU SDST2602 · CUHK STAT2006 · HKUST MATH3423 (first half)",
   "starred": false,
+  "examPhase": 2,
   "summary": "Probability and statistics II: sampling distributions, large-sample theory, estimation, confidence intervals and hypothesis tests.",
   "outcomes": [
    "Derive and compare estimators by method of moments and maximum likelihood",
@@ -968,6 +981,7 @@
   ],
   "courses": "HKU MATH3603 · HKUST MAFS5020",
   "starred": false,
+  "examPhase": 2,
   "summary": "Probability rebuilt on measure theory: sigma-algebras, expectation as an integral, convergence theorems, conditional expectation and martingales.",
   "outcomes": [
    "State probability in measure-theoretic language",
@@ -1043,6 +1057,7 @@
   ],
   "courses": "HKU STAT3602 / SDST3602 · HKUST MATH3423 (second half) · CityU MS2602",
   "starred": false,
+  "examPhase": 1,
   "summary": "Rigorous theory of estimation and testing: exponential families, UMVUE, information inequality, decision theory, UMP tests and the bootstrap.",
   "outcomes": [
    "Find UMVU estimators using completeness and the information inequality",
@@ -1119,6 +1134,7 @@
   ],
   "courses": "HKU ECON2280 · CUHK STAT3008 · CityU MS3252",
   "starred": false,
+  "examPhase": 2,
   "summary": "The linear model fitted by least squares, with inference, diagnostics and model selection.",
   "outcomes": [
    "Fit and interpret linear models",
@@ -1196,6 +1212,7 @@
   ],
   "courses": "HKUST MAFS5140",
   "starred": false,
+  "examPhase": 2,
   "summary": "Extensions of the linear model: GLMs, regularisation, mixed models and robust methods.",
   "outcomes": [
    "Fit logistic, Poisson and other GLMs",
@@ -1271,6 +1288,7 @@
   ],
   "courses": "HKU SDST3603 · CUHK STAT3007 · HKUST ISOM3540",
   "starred": false,
+  "examPhase": 2,
   "summary": "Random processes: Markov chains, Poisson processes, queues and branching.",
   "outcomes": [
    "Classify Markov chains and compute stationary distributions",
@@ -1347,6 +1365,7 @@
   ],
   "courses": "HKU SDST4601 · CityU EF4822",
   "starred": false,
+  "examPhase": 2,
   "summary": "Classical time-series modelling with ARMA/ARIMA models, estimation and forecasting.",
   "outcomes": [
    "Identify stationary and non-stationary series",
@@ -1418,6 +1437,7 @@
   ],
   "courses": "HKUST MAFS5130 · CUHK STAT6204",
   "starred": false,
+  "examPhase": 2,
   "summary": "Heteroskedastic, multivariate and state-space models for financial time series.",
   "outcomes": [
    "Fit GARCH-type models",
@@ -1489,6 +1509,7 @@
   ],
   "courses": "HKU STAT4610 · CUHK STAT4010",
   "starred": false,
+  "examPhase": 1,
   "summary": "Bayesian inference from conjugate models to MCMC, with hierarchical modelling and model checking.",
   "outcomes": [
    "Derive posteriors for standard models",
@@ -1560,6 +1581,7 @@
   ],
   "courses": "CUHK RMSC4001 · HKU STAT8309",
   "starred": false,
+  "examPhase": 2,
   "summary": "Simulation-based computation: random number generation, variance reduction, MCMC and bootstrap.",
   "outcomes": [
    "Generate samples from arbitrary distributions",
@@ -1646,6 +1668,7 @@
   ],
   "courses": "HKU STAT3620 (SDST3620)",
   "starred": false,
+  "examPhase": 1,
   "summary": "Distribution-free and modern nonparametric methods: order statistics, rank tests, permutation tests, functionals, jackknife and bootstrap, smoothing and ranking data.",
   "outcomes": [
    "Choose and run rank-based tests",
@@ -1727,6 +1750,7 @@
   ],
   "courses": "CUHK STAT5103",
   "starred": false,
+  "examPhase": 2,
   "summary": "Statistics when the number of variables rivals or exceeds the sample size: concentration, sparsity and random matrices.",
   "outcomes": [
    "Use concentration inequalities",
@@ -1798,6 +1822,7 @@
   ],
   "courses": "HKU SDST4613 · HKU ECON3284 · HKUST IEDA4000D",
   "starred": false,
+  "examPhase": 2,
   "summary": "Identifying causal effects from observational and experimental data.",
   "outcomes": [
    "Formulate causal questions with potential outcomes",
@@ -1869,6 +1894,7 @@
   ],
   "courses": "CityU DSC4110 (mostly industrial experimental design; no university course covers the A/B testing part)",
   "starred": false,
+  "examPhase": 2,
   "summary": "Designing experiments and running A/B tests that give trustworthy answers.",
   "outcomes": [
    "Design randomised experiments",
@@ -1945,6 +1971,7 @@
   ],
   "courses": "No standalone course; partly covered in HKU STAT8020 · HKUST MAFS5310",
   "starred": true,
+  "examPhase": 2,
   "summary": "How to turn an idea into a defensible quantitative result: hypotheses, backtests, validation and reproducibility.",
   "outcomes": [
    "Frame testable hypotheses",
@@ -2022,6 +2049,7 @@
   ],
   "courses": "CUHK CSCI3320 · HKUST COMP4211 · HKUST MAFS5340 · HKU COMP7409 · CUHK RMSC4002",
   "starred": false,
+  "examPhase": 2,
   "summary": "Core supervised and unsupervised learning, with emphasis on generalisation and honest evaluation.",
   "outcomes": [
    "Train and evaluate standard models",
@@ -2108,6 +2136,7 @@
   ],
   "courses": "HKU COMP3340 · CUHK STAT4012 · HKU DASC7606",
   "starred": false,
+  "examPhase": 2,
   "summary": "Neural networks from backpropagation to modern architectures and training practice.",
   "outcomes": [
    "Derive backprop",
@@ -2194,6 +2223,7 @@
   ],
   "courses": "HKU COMP3361 · HKUST COMP4221",
   "starred": false,
+  "examPhase": null,
   "summary": "Language modelling and text processing from n-grams to pretrained Transformers.",
   "outcomes": [
    "Build text pipelines",
@@ -2274,6 +2304,7 @@
   ],
   "courses": "CUHK STAT6209",
   "starred": false,
+  "examPhase": null,
   "summary": "Large language models: pretraining, scaling, alignment, prompting and retrieval.",
   "outcomes": [
    "Explain how LLMs are trained and aligned",
@@ -2361,6 +2392,7 @@
   ],
   "courses": "HKUST MAFS5370",
   "starred": false,
+  "examPhase": 2,
   "summary": "Sequential decision making from bandits and MDPs to deep reinforcement learning.",
   "outcomes": [
    "Solve MDPs by dynamic programming",
@@ -2447,6 +2479,7 @@
   ],
   "courses": "HKUST COMP4471",
   "starred": false,
+  "examPhase": null,
   "summary": "Image understanding with classical methods and deep networks.",
   "outcomes": [
    "Process and transform images",
@@ -2528,6 +2561,7 @@
   ],
   "courses": "CUHK CSCI4230",
   "starred": false,
+  "examPhase": 2,
   "summary": "Why learning works: PAC learning, complexity measures and generalisation bounds.",
   "outcomes": [
    "State and use PAC bounds",
@@ -2600,6 +2634,7 @@
   ],
   "courses": "No university course",
   "starred": true,
+  "examPhase": null,
   "summary": "Shipping, monitoring and maintaining models in production.",
   "outcomes": [
    "Package and deploy models",
@@ -2681,6 +2716,7 @@
   ],
   "courses": "HKU FINA3350 · CityU EF3520 · HKUST MAFS5010 · CUHK RMSC4005",
   "starred": false,
+  "examPhase": 2,
   "summary": "Ito calculus and its use in pricing: Brownian motion, SDEs, Girsanov and Black-Scholes.",
   "outcomes": [
    "Compute with Ito's formula",
@@ -2751,6 +2787,7 @@
   ],
   "courses": "HKU FINA2322 · HKUST FINA3203",
   "starred": false,
+  "examPhase": null,
   "summary": "Forwards, futures, options and no-arbitrage pricing in discrete time, up to Black-Scholes as a limit.",
   "outcomes": [
    "Price forwards and options by no-arbitrage",
@@ -2832,6 +2869,7 @@
   ],
   "courses": "CityU EF4820 · HKUST MAFS5030",
   "starred": false,
+  "examPhase": null,
   "summary": "Continuous-time derivative pricing beyond vanilla options: exotics, American options and hedging.",
   "outcomes": [
    "Price options under Black-Scholes",
@@ -2903,6 +2941,7 @@
   ],
   "courses": "No university course (local vol, Heston, SABR)",
   "starred": true,
+  "examPhase": null,
   "summary": "Modelling the implied volatility surface with local, stochastic and parametric models.",
   "outcomes": [
    "Read and arbitrage-check a smile",
@@ -2983,6 +3022,7 @@
   ],
   "courses": "HKU FINA3323 · HKUST FINA4303",
   "starred": false,
+  "examPhase": null,
   "summary": "Fixed income fundamentals: bonds, yields, duration and the term structure.",
   "outcomes": [
    "Price bonds and swaps",
@@ -3054,6 +3094,7 @@
   ],
   "courses": "CityU EF4821 · HKUST MAFS5040 · CUHK RMSC6001",
   "starred": false,
+  "examPhase": null,
   "summary": "Stochastic models for interest rates and the pricing of rate derivatives.",
   "outcomes": [
    "Use short-rate and HJM models",
@@ -3125,6 +3166,7 @@
   ],
   "courses": "HKU FINA3322 · CUHK RMSC6002 · HKUST MAFS5220",
   "starred": false,
+  "examPhase": null,
   "summary": "Credit risk measurement and pricing: default models, spreads and credit derivatives.",
   "outcomes": [
    "Compute default probabilities and expected loss",
@@ -3196,6 +3238,7 @@
   ],
   "courses": "HKU FINA4341 · CUHK RMSC5003",
   "starred": false,
+  "examPhase": null,
   "summary": "Measuring and managing market risk with VaR, expected shortfall and stress tests.",
   "outcomes": [
    "Calculate VaR and ES under several methods",
@@ -3271,6 +3314,7 @@
   ],
   "courses": "CUHK RMSC4006 · CUHK RMSC3001 (Basel)",
   "starred": false,
+  "examPhase": null,
   "summary": "Operational risk, regulatory capital and the Basel framework.",
   "outcomes": [
    "Compute regulatory capital",
@@ -3341,6 +3385,7 @@
   ],
   "courses": "CUHK RMSC4004 (course title only)",
   "starred": false,
+  "examPhase": null,
   "summary": "Risk theory: aggregate claims, ruin and premium principles.",
   "outcomes": [
    "Model claim frequency and severity",
@@ -3412,6 +3457,7 @@
   ],
   "courses": "HKU FINA4354 · HKUST MAFS5330",
   "starred": false,
+  "examPhase": null,
   "summary": "Pricing and risk of structured products built from vanillas and exotics.",
   "outcomes": [
    "Decompose a product into components",
@@ -3483,6 +3529,7 @@
   ],
   "courses": "HKU FINA2320 · CityU EF3320",
   "starred": false,
+  "examPhase": 2,
   "summary": "Mean-variance portfolio theory and the CAPM.",
   "outcomes": [
    "Build efficient portfolios",
@@ -3555,6 +3602,7 @@
   ],
   "courses": "HKUST MAFS5210 · CUHK RMSC6006",
   "starred": false,
+  "examPhase": 2,
   "summary": "Multi-factor models, APT and modern portfolio construction.",
   "outcomes": [
    "Estimate factor models",
@@ -3625,6 +3673,7 @@
   ],
   "courses": "HKUST FINA4103 · CityU EF4323",
   "starred": false,
+  "examPhase": null,
   "summary": "How markets actually work: order books, spreads and price formation.",
   "outcomes": [
    "Read order books and trade data",
@@ -3697,6 +3746,7 @@
   ],
   "courses": "HKUST MAFS5270",
   "starred": false,
+  "examPhase": 2,
   "summary": "Mathematical models of market microstructure, optimal execution and market making.",
   "outcomes": [
    "Solve optimal execution problems",
@@ -3770,6 +3820,7 @@
   ],
   "courses": "HKU FINA4359 · HKU STAT8020 · HKUST FINA4803",
   "starred": false,
+  "examPhase": 2,
   "summary": "Designing, testing and running systematic trading strategies.",
   "outcomes": [
    "Implement signal research and backtests",
@@ -3857,6 +3908,7 @@
   ],
   "courses": "CUHK FINA4370 (course title only)",
   "starred": false,
+  "examPhase": null,
   "summary": "Trading options and volatility: Greeks, vol surfaces, spreads and risk management.",
   "outcomes": [
    "Trade volatility views with options",
@@ -3934,6 +3986,7 @@
   ],
   "courses": "No university course",
   "starred": true,
+  "examPhase": null,
   "summary": "Quoting two-sided markets: spread setting, inventory, adverse selection and risk limits.",
   "outcomes": [
    "Set quotes from a fair value and edge",
@@ -4005,6 +4058,7 @@
   ],
   "courses": "No university course",
   "starred": true,
+  "examPhase": 2,
   "summary": "Interview-style probability and combinatorics puzzles solved with clean reasoning.",
   "outcomes": [
    "Set up problems quickly",
@@ -4075,6 +4129,7 @@
   ],
   "courses": "No university course",
   "starred": true,
+  "examPhase": null,
   "summary": "Making decisions under uncertainty by expected value and optimal bet sizing.",
   "outcomes": [
    "Evaluate bets by EV and variance",
@@ -4145,6 +4200,7 @@
   ],
   "courses": "HKU ECON2214 · CUHK ECON3160 · CityU EF4484",
   "starred": false,
+  "examPhase": null,
   "summary": "Strategic interaction: equilibria, auctions and information games.",
   "outcomes": [
    "Find Nash equilibria",
@@ -4213,6 +4269,7 @@
   "prerequisites": [],
   "courses": "No university course",
   "starred": true,
+  "examPhase": null,
   "summary": "Fast, accurate mental arithmetic.",
   "outcomes": [
    "Compute sums, products and fractions rapidly",
@@ -4281,6 +4338,7 @@
   "prerequisites": [],
   "courses": "No university course",
   "starred": true,
+  "examPhase": null,
   "summary": "Estimating unfamiliar quantities from anchors and structure.",
   "outcomes": [
    "Decompose estimation problems",
@@ -4349,6 +4407,7 @@
   "prerequisites": [],
   "courses": "No standalone university course",
   "starred": true,
+  "examPhase": null,
   "summary": "The command line, Git and everyday developer tooling.",
   "outcomes": [
    "Work fluently in a Linux shell",
@@ -4427,6 +4486,11 @@
   "prerequisites": [],
   "courses": "No university course (math typesetting, figures, BibTeX citations, paper structure)",
   "starred": true,
+  "examPhase": 2,
+  "examWeights": {
+   "written": 1,
+   "coding": 0
+  },
   "summary": "Typesetting mathematics and writing research papers in LaTeX.",
   "outcomes": [
    "Typeset equations and documents",
@@ -4505,6 +4569,7 @@
   "prerequisites": [],
   "courses": "HKU COMP1117 · HKUST MAFS5360",
   "starred": false,
+  "examPhase": 2,
   "summary": "Python programming from basics to numerical computing.",
   "outcomes": [
    "Write clear Python programs",
@@ -4589,6 +4654,7 @@
   "prerequisites": [],
   "courses": "HKU COMP2120",
   "starred": false,
+  "examPhase": null,
   "summary": "How computers execute programs: data representation, assembly, pipelines and memory.",
   "outcomes": [
    "Represent and manipulate data in binary",
@@ -4670,6 +4736,7 @@
   ],
   "courses": "HKU COMP2119 · CUHK CSCI2100",
   "starred": false,
+  "examPhase": null,
   "summary": "Core data structures and algorithm analysis.",
   "outcomes": [
    "Analyse running time",
@@ -4762,6 +4829,7 @@
   ],
   "courses": "CUHK CSCI3160 · CityU CS4335",
   "starred": false,
+  "examPhase": null,
   "summary": "Advanced algorithm design: dynamic programming, flows, NP-completeness and approximation.",
   "outcomes": [
    "Design DP and greedy algorithms",
@@ -4846,6 +4914,7 @@
   "prerequisites": [],
   "courses": "HKUST COMP2011",
   "starred": false,
+  "examPhase": null,
   "summary": "C++ fundamentals: types, memory and object-oriented programming.",
   "outcomes": [
    "Write correct C++ programs",
@@ -4933,6 +5002,11 @@
   ],
   "courses": "HKUST MAFS5240 · HKU FITE7406",
   "starred": false,
+  "examPhase": 2,
+  "examWeights": {
+   "written": 1,
+   "coding": 0
+  },
   "summary": "Modern C++ for performance-critical numerical and trading code.",
   "outcomes": [
    "Use modern C++ idioms",
@@ -5015,6 +5089,7 @@
   ],
   "courses": "HKU COMP3230 · CUHK CSCI3150",
   "starred": false,
+  "examPhase": null,
   "summary": "How operating systems manage processes, memory and storage.",
   "outcomes": [
    "Reason about scheduling and concurrency",
@@ -5090,6 +5165,7 @@
   ],
   "courses": "CUHK CSCI3170 · CityU CS3402",
   "starred": false,
+  "examPhase": null,
   "summary": "Relational databases, SQL and the basics of transactions and storage.",
   "outcomes": [
    "Design relational schemas",
@@ -5176,6 +5252,7 @@
   ],
   "courses": "HKU COMP3234",
   "starred": false,
+  "examPhase": null,
   "summary": "How data moves across networks: protocols, routing and transport.",
   "outcomes": [
    "Explain the layered model",
@@ -5252,6 +5329,7 @@
   ],
   "courses": "HKU COMP3297",
   "starred": false,
+  "examPhase": null,
   "summary": "Building maintainable software and designing scalable systems.",
   "outcomes": [
    "Apply software engineering practice",
@@ -5328,6 +5406,7 @@
   ],
   "courses": "HKU COMP3358 · CUHK CSCI4160 · HKU COMP7305",
   "starred": false,
+  "examPhase": null,
   "summary": "Building systems that run on many machines and survive failures.",
   "outcomes": [
    "Reason about consistency and failure",
@@ -5404,6 +5483,7 @@
   ],
   "courses": "No university course",
   "starred": true,
+  "examPhase": null,
   "summary": "Writing code that runs in microseconds: memory, cache, lock-free structures and measurement.",
   "outcomes": [
    "Profile and measure latency",

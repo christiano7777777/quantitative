@@ -1,0 +1,648 @@
+{
+  "$schema": "./schema/written.schema.json",
+  "schemaVersion": 1,
+  "topicId": "bay",
+  "title": "Bayesian Statistics: written exam",
+  "durationMinutes": 120,
+  "totalMarks": 100,
+  "instructions": "Answer **all five** questions (100 marks in total, about 120 minutes). Write your answers in LaTeX: use $...$ for inline maths and `\\begin{align} ... \\end{align}` for displayed derivations. Marks are given for the working, not only for the final answer. Unless told otherwise, give numerical answers to 3 decimal places (or as exact fractions). Standard facts about the Gamma, Beta, Dirichlet and normal distributions may be quoted; any other result must be proved or is stated in the question. The macros `\\E`, `\\Var` and `\\Prob` are available in your answers.",
+  "preamble": "\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\Prob}{\\mathbb{P}}",
+  "questions": [
+    {
+      "id": "q1",
+      "title": "Normal and Weibull-Gamma models, Jeffreys and power priors",
+      "text": "Lifetimes $Y_1,\\dots,Y_n$ are conditionally i.i.d. given $\\lambda>0$ with the Weibull density (shape $k>0$ known)\n$$f(y\\mid\\lambda)=k\\lambda\\,y^{k-1}e^{-\\lambda y^{k}},\\qquad y>0,$$\nso that $\\Prob(Y>y\\mid\\lambda)=e^{-\\lambda y^{k}}$. Part (a) is a separate warm-up on the normal model; parts (b)-(e) use this Weibull model. The prior is $\\lambda\\sim\\text{Gamma}(a,b)$ with shape $a$ and rate $b$, $\\pi(\\lambda)=\\dfrac{b^{a}}{\\Gamma(a)}\\lambda^{a-1}e^{-b\\lambda}$. Write $s=\\sum_{i=1}^{n}y_i^{k}$. For $\\text{Gamma}(\\alpha,\\beta)$ the mean is $\\alpha/\\beta$, the mode is $(\\alpha-1)/\\beta$ if $\\alpha>1$, the variance is $\\alpha/\\beta^{2}$, and $\\int_0^\\infty\\lambda^{\\alpha-1}e^{-\\beta\\lambda}\\,d\\lambda=\\Gamma(\\alpha)/\\beta^{\\alpha}$.",
+      "marks": 20,
+      "parts": [
+        {
+          "id": "a",
+          "type": "proof",
+          "text": "*(Warm-up, separate from the Weibull model.)* Let $X_1,\\dots,X_m\\mid\\theta\\overset{\\text{iid}}{\\sim}\\mathcal N(\\theta,\\sigma^2)$ with $\\sigma^2$ known, and prior $\\theta\\sim\\mathcal N(\\mu_0,\\sigma^2/\\kappa_0)$ with $\\kappa_0>0$. Show that $\\theta\\mid x\\sim\\mathcal N\\Big(\\dfrac{\\kappa_0\\mu_0+m\\bar x}{\\kappa_0+m},\\,\\dfrac{\\sigma^2}{\\kappa_0+m}\\Big)$, explain why $\\kappa_0$ is called the prior pseudo-count, and prove that the posterior predictive distribution of a new $\\tilde X$ (conditionally independent of $x$ given $\\theta$) has variance $\\sigma^2\\big(1+\\frac1{\\kappa_0+m}\\big)$.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "Writes the log posterior as $-\\frac{1}{2\\sigma^2}\\big[\\sum_i(x_i-\\theta)^2+\\kappa_0(\\theta-\\mu_0)^2\\big]+\\text{const}$",
+              "marks": 1
+            },
+            {
+              "step": "Collects terms in $\\theta$: coefficient of $\\theta^2$ is $-(\\kappa_0+m)/(2\\sigma^2)$, of $\\theta$ is $(\\kappa_0\\mu_0+m\\bar x)/\\sigma^2$; completes the square to obtain the stated normal",
+              "marks": 1.5
+            },
+            {
+              "step": "Explains pseudo-count: the posterior is what $m$ data points plus $\\kappa_0$ extra observations equal to $\\mu_0$ would give (precision $\\kappa_0/\\sigma^2$ is that of $\\kappa_0$ observations)",
+              "marks": 0.5
+            },
+            {
+              "step": "Law of total variance: $\\Var(\\tilde X\\mid x)=\\E[\\Var(\\tilde X\\mid\\theta)\\mid x]+\\Var(\\E[\\tilde X\\mid\\theta]\\mid x)$",
+              "marks": 1
+            },
+            {
+              "step": "$=\\sigma^2+\\sigma^2/(\\kappa_0+m)$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "Up to a constant in $\\theta$,\n\\begin{align}\n\\log\\pi(\\theta\\mid x)&=-\\frac{1}{2\\sigma^2}\\Big[\\sum_{i=1}^m(x_i-\\theta)^2+\\kappa_0(\\theta-\\mu_0)^2\\Big]\\\\\n&=-\\frac{1}{2\\sigma^2}\\Big[(\\kappa_0+m)\\theta^2-2(\\kappa_0\\mu_0+m\\bar x)\\theta\\Big]+\\text{const}\\\\\n&=-\\frac{\\kappa_0+m}{2\\sigma^2}\\Big(\\theta-\\frac{\\kappa_0\\mu_0+m\\bar x}{\\kappa_0+m}\\Big)^2+\\text{const}.\n\\end{align}\nSo $\\theta\\mid x\\sim\\mathcal N\\big(\\mu_m,\\sigma^2/(\\kappa_0+m)\\big)$ with $\\mu_m=\\frac{\\kappa_0\\mu_0+m\\bar x}{\\kappa_0+m}$. This is exactly the posterior we would get from a flat prior and $m+\\kappa_0$ observations, $\\kappa_0$ of which equal $\\mu_0$: the prior is worth $\\kappa_0$ pseudo-observations.\n\nFor the predictive, $\\E[\\tilde X\\mid\\theta]=\\theta$ and $\\Var(\\tilde X\\mid\\theta)=\\sigma^2$, so by the law of total variance\n$$\\Var(\\tilde X\\mid x)=\\E[\\sigma^2\\mid x]+\\Var(\\theta\\mid x)=\\sigma^2+\\frac{\\sigma^2}{\\kappa_0+m}=\\sigma^2\\Big(1+\\frac{1}{\\kappa_0+m}\\Big).\\ \\blacksquare$$"
+        },
+        {
+          "id": "b",
+          "type": "derivation",
+          "text": "Return to the Weibull model. Derive the posterior distribution of $\\lambda$ given $y_1,\\dots,y_n$, state its parameters and say in what sense the Gamma prior is conjugate.",
+          "marks": 3,
+          "markingScheme": [
+            {
+              "step": "Writes the likelihood $p(y\\mid\\lambda)=k^{n}\\prod_i y_i^{k-1}\\,\\lambda^{n}e^{-\\lambda s}$",
+              "marks": 1
+            },
+            {
+              "step": "Multiplies by the prior and drops factors not involving $\\lambda$: $\\pi(\\lambda\\mid y)\\propto\\lambda^{a+n-1}e^{-(b+s)\\lambda}$",
+              "marks": 1
+            },
+            {
+              "step": "States $\\text{Gamma}(a+n,\\,b+s)$ (both parameters) and that prior and posterior lie in the same family (conjugacy)",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "The likelihood is\n$$p(y\\mid\\lambda)=\\prod_{i=1}^{n}k\\lambda y_i^{k-1}e^{-\\lambda y_i^{k}}=k^{n}\\Big(\\prod_i y_i^{k-1}\\Big)\\lambda^{n}e^{-\\lambda s}.$$\nBy Bayes' theorem, dropping every factor that does not depend on $\\lambda$,\n\\begin{align}\n\\pi(\\lambda\\mid y)&\\propto \\lambda^{n}e^{-\\lambda s}\\cdot\\lambda^{a-1}e^{-b\\lambda}\\\\\n&=\\lambda^{a+n-1}e^{-(b+s)\\lambda},\\qquad\\lambda>0.\n\\end{align}\nThis is the kernel of a Gamma density, so $\\lambda\\mid y\\sim\\text{Gamma}(a+n,\\;b+s)$. Prior and posterior both belong to the Gamma family, so the Gamma prior is conjugate to the Weibull likelihood with known shape."
+        },
+        {
+          "id": "c",
+          "type": "calculation",
+          "text": "Take $k=2$, $a=2$, $b=1$, and suppose $n=5$ observations give $s=4$. Give the posterior distribution, the posterior mean, mode and standard deviation, and compute the posterior predictive survival probability $\\Prob(\\tilde Y>1\\mid y)$ for a new lifetime $\\tilde Y$ (conditionally independent of $y$ given $\\lambda$). Show that $\\E[e^{-t\\lambda}\\mid y]=\\big(\\beta/(\\beta+t)\\big)^{\\alpha}$ when $\\lambda\\mid y\\sim\\text{Gamma}(\\alpha,\\beta)$. You may use part (b).",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "Posterior is $\\text{Gamma}(7,5)$",
+              "marks": 0.5
+            },
+            {
+              "step": "Mean $7/5=1.4$ and mode $6/5=1.2$",
+              "marks": 1
+            },
+            {
+              "step": "Standard deviation $\\sqrt7/5\\approx0.529$",
+              "marks": 0.5
+            },
+            {
+              "step": "Writes $\\Prob(\\tilde Y>1\\mid y)=\\E[e^{-\\lambda}\\mid y]$ and proves the Gamma Laplace-transform formula by integrating the kernel",
+              "marks": 1.5
+            },
+            {
+              "step": "Evaluates $(5/6)^7\\approx0.279$",
+              "marks": 0.5
+            }
+          ],
+          "modelAnswer": "By part (b) the posterior is $\\text{Gamma}(2+5,\\,1+4)=\\text{Gamma}(7,5)$. Hence\n$$\\E[\\lambda\\mid y]=\\frac75=1.4,\\qquad\\text{mode}=\\frac{7-1}{5}=1.2,\\qquad \\text{sd}=\\frac{\\sqrt7}{5}\\approx0.529.$$\nFor a new lifetime, $\\Prob(\\tilde Y>t\\mid\\lambda)=e^{-\\lambda t^{k}}$, so\n$$\\Prob(\\tilde Y>1\\mid y)=\\int_0^\\infty e^{-\\lambda}\\,\\pi(\\lambda\\mid y)\\,d\\lambda.$$\nIf $\\lambda\\mid y\\sim\\text{Gamma}(\\alpha,\\beta)$ then\n$$\\E[e^{-t\\lambda}\\mid y]=\\frac{\\beta^{\\alpha}}{\\Gamma(\\alpha)}\\int_0^\\infty\\lambda^{\\alpha-1}e^{-(\\beta+t)\\lambda}\\,d\\lambda=\\frac{\\beta^{\\alpha}}{\\Gamma(\\alpha)}\\cdot\\frac{\\Gamma(\\alpha)}{(\\beta+t)^{\\alpha}}=\\Big(\\frac{\\beta}{\\beta+t}\\Big)^{\\alpha}.$$\nWith $\\alpha=7$, $\\beta=5$, $t=1$:\n$$\\Prob(\\tilde Y>1\\mid y)=\\Big(\\frac56\\Big)^{7}\\approx0.279.$$"
+        },
+        {
+          "id": "d",
+          "type": "proof",
+          "text": "(i) Find the Jeffreys prior for $\\lambda$ in the Weibull model (shape $k$ known) and the posterior it gives. (ii) Let $\\eta=h(\\lambda)$ with $h$ strictly monotone and continuously differentiable. Prove that the Jeffreys prior is invariant under this reparametrisation: the Jeffreys prior computed directly in the $\\eta$ parametrisation equals the density obtained by transforming $\\pi_J(\\lambda)$ to $\\eta$. You may assume the score has finite variance.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "(i) $\\partial^2\\log f/\\partial\\lambda^2=-1/\\lambda^2$, so $I(\\lambda)=1/\\lambda^2$",
+              "marks": 1
+            },
+            {
+              "step": "(i) $\\pi_J(\\lambda)\\propto\\lambda^{-1}$ (improper), posterior $\\text{Gamma}(n,s)$",
+              "marks": 0.5
+            },
+            {
+              "step": "(ii) Chain rule for the score: $\\dfrac{\\partial\\log f}{\\partial\\eta}=\\dfrac{\\partial\\log f}{\\partial\\lambda}\\dfrac{d\\lambda}{d\\eta}$",
+              "marks": 1
+            },
+            {
+              "step": "(ii) Deduces $I_\\eta(\\eta)=I_\\lambda(\\lambda)\\big(d\\lambda/d\\eta\\big)^2$ (squares the score, takes expectation, $d\\lambda/d\\eta$ is not random)",
+              "marks": 1.5
+            },
+            {
+              "step": "(ii) $\\pi_J(\\eta)\\propto\\sqrt{I_\\eta(\\eta)}=\\sqrt{I_\\lambda(\\lambda)}\\,|d\\lambda/d\\eta|$, which equals the change-of-variables density $\\pi_J(\\lambda)|d\\lambda/d\\eta|$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "**(i)** For one observation, $\\log f(y\\mid\\lambda)=\\log k+\\log\\lambda+(k-1)\\log y-\\lambda y^{k}$, so $\\partial^2\\log f/\\partial\\lambda^2=-1/\\lambda^2$ and $I(\\lambda)=1/\\lambda^{2}$. The Jeffreys prior is $\\pi_J(\\lambda)\\propto\\sqrt{I(\\lambda)}=\\lambda^{-1}$, $\\lambda>0$, which is improper (the limit $a,b\\to0$ of the Gamma prior). By part (b) with $a=b=0$ the posterior is $\\text{Gamma}(n,s)$, proper whenever $n\\ge1$.\n\n**(ii)** Write $\\lambda=h^{-1}(\\eta)$. The score in the $\\eta$ parametrisation is, by the chain rule,\n$$\\frac{\\partial}{\\partial\\eta}\\log f(y\\mid\\lambda(\\eta))=\\frac{\\partial\\log f}{\\partial\\lambda}\\cdot\\frac{d\\lambda}{d\\eta}.$$\nSquare it and take the expectation over $y$ for fixed $\\eta$; the factor $d\\lambda/d\\eta$ is not random, so\n$$I_\\eta(\\eta)=\\E\\Big[\\Big(\\frac{\\partial\\log f}{\\partial\\lambda}\\Big)^2\\Big]\\Big(\\frac{d\\lambda}{d\\eta}\\Big)^2=I_\\lambda(\\lambda)\\Big(\\frac{d\\lambda}{d\\eta}\\Big)^2.$$\nThe Jeffreys prior built directly in the $\\eta$ parametrisation is therefore\n$$\\pi_J(\\eta)\\propto\\sqrt{I_\\eta(\\eta)}=\\sqrt{I_\\lambda(\\lambda)}\\,\\Big|\\frac{d\\lambda}{d\\eta}\\Big|.$$\nOn the other hand, transforming the density $\\pi_J(\\lambda)\\propto\\sqrt{I_\\lambda(\\lambda)}$ to $\\eta$ by the change-of-variables formula gives\n$$\\pi(\\eta)=\\pi_J(\\lambda)\\Big|\\frac{d\\lambda}{d\\eta}\\Big|\\propto\\sqrt{I_\\lambda(\\lambda)}\\,\\Big|\\frac{d\\lambda}{d\\eta}\\Big|.$$\nThe two expressions coincide, so the Jeffreys prior is invariant under reparametrisation. $\\blacksquare$"
+        },
+        {
+          "id": "e",
+          "type": "calculation",
+          "text": "Historical data $x_1,\\dots,x_{n_0}$ from the same Weibull model (same $k$) have $s_0=\\sum_i x_i^{k}$. Starting from the improper prior $\\pi_0(\\lambda)\\propto\\lambda^{-1}$, construct the power prior with power parameter $\\gamma\\in(0,1)$, $\\pi(\\lambda\\mid x,\\gamma)\\propto p(x\\mid\\lambda)^{\\gamma}\\pi_0(\\lambda)$. Identify its distribution, and state its effective sample size when the ESS of $\\text{Gamma}(\\alpha,\\beta)$ is defined as $\\alpha$ (the number of pseudo-observations).",
+          "marks": 3,
+          "markingScheme": [
+            {
+              "step": "Kernel $\\lambda^{\\gamma n_0-1}e^{-\\gamma s_0\\lambda}$",
+              "marks": 1
+            },
+            {
+              "step": "Identifies $\\text{Gamma}(\\gamma n_0,\\gamma s_0)$",
+              "marks": 1
+            },
+            {
+              "step": "ESS $=\\gamma n_0$: the historical data count as a fraction $\\gamma$ of their size",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "The likelihood of the historical data is $p(x\\mid\\lambda)\\propto\\lambda^{n_0}e^{-\\lambda s_0}$, so\n$$\\pi(\\lambda\\mid x,\\gamma)\\propto\\big(\\lambda^{n_0}e^{-\\lambda s_0}\\big)^{\\gamma}\\lambda^{-1}=\\lambda^{\\gamma n_0-1}e^{-\\gamma s_0\\lambda}.$$\nThis is the kernel of $\\text{Gamma}(\\gamma n_0,\\;\\gamma s_0)$. Its effective sample size is $\\gamma n_0$: the power parameter $\\gamma$ discounts the historical sample, $\\gamma=0$ ignores it and $\\gamma=1$ counts it fully."
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "title": "Monte Carlo, inverse transform and importance sampling",
+      "text": "This question is about simulation-based estimation. Throughout, $U\\sim\\text{Unif}(0,1)$ and expectations are assumed to exist.",
+      "marks": 20,
+      "parts": [
+        {
+          "id": "a",
+          "type": "proof",
+          "text": "Let $F$ be a continuous, strictly increasing cdf on its support with quantile function $F^{-1}$, and let $U\\sim\\text{Unif}(0,1)$. Prove that $X=F^{-1}(U)$ has cdf $F$.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "Writes $\\Prob(X\\le x)=\\Prob(F^{-1}(U)\\le x)$",
+              "marks": 1
+            },
+            {
+              "step": "Uses that $F$ is strictly increasing: $F^{-1}(u)\\le x\\iff u\\le F(x)$",
+              "marks": 2
+            },
+            {
+              "step": "$\\Prob(U\\le F(x))=F(x)$ because $F(x)\\in[0,1]$ and $U$ is uniform",
+              "marks": 1
+            },
+            {
+              "step": "Concludes that $X$ has cdf $F$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "For any $x$ in the support,\n$$\\Prob(X\\le x)=\\Prob\\big(F^{-1}(U)\\le x\\big).$$\nSince $F$ is strictly increasing, $F^{-1}(u)\\le x$ holds if and only if $u\\le F(x)$ (apply $F$ to both sides, or $F^{-1}$ to both sides). Hence\n$$\\Prob(X\\le x)=\\Prob\\big(U\\le F(x)\\big)=F(x),$$\nbecause $F(x)\\in[0,1]$ and $\\Prob(U\\le c)=c$ for $c\\in[0,1]$. So $X$ has cdf $F$. $\\blacksquare$"
+        },
+        {
+          "id": "b",
+          "type": "derivation",
+          "text": "The Laplace distribution has density $f(x)=\\tfrac12e^{-|x|}$, $x\\in\\mathbb R$. Derive its cdf and quantile function, and give the draws produced by inverse transform sampling from $u=0.2$ and from $u=0.9$ (3 decimal places).",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "cdf $F(x)=\\tfrac12e^{x}$ for $x<0$ and $F(x)=1-\\tfrac12e^{-x}$ for $x\\ge0$",
+              "marks": 1.5
+            },
+            {
+              "step": "Quantile function $F^{-1}(u)=\\log(2u)$ for $u<\\tfrac12$ and $-\\log(2(1-u))$ for $u\\ge\\tfrac12$",
+              "marks": 1.5
+            },
+            {
+              "step": "$u=0.2\\mapsto\\log0.4\\approx-0.916$ and $u=0.9\\mapsto-\\log0.2\\approx1.609$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "For $x<0$: $F(x)=\\int_{-\\infty}^{x}\\tfrac12e^{t}\\,dt=\\tfrac12e^{x}$, and $F(0)=\\tfrac12$. For $x\\ge0$: $F(x)=\\tfrac12+\\int_0^x\\tfrac12e^{-t}\\,dt=1-\\tfrac12e^{-x}$.\n\nSolving $F(x)=u$: if $u<\\tfrac12$ then $\\tfrac12e^{x}=u$ gives $x=\\log(2u)$; if $u\\ge\\tfrac12$ then $1-\\tfrac12e^{-x}=u$ gives $x=-\\log(2(1-u))$.\n\nFor $u=0.2$: $x=\\log0.4\\approx-0.916$. For $u=0.9$: $x=-\\log0.2\\approx1.609$."
+        },
+        {
+          "id": "c",
+          "type": "proof",
+          "text": "Let $(U_1,V_1),\\dots,(U_N,V_N)$ be i.i.d. uniform on the unit square, $I_i=\\mathbf 1\\{U_i^2+V_i^2\\le1\\}$ and $\\hat\\pi=\\frac4N\\sum_{i=1}^NI_i$. Show that $\\hat\\pi$ is unbiased for $\\pi$ and that $\\Var(\\hat\\pi)=\\pi(4-\\pi)/N$. How large must $N$ be for the standard error of $\\hat\\pi$ to be at most $0.001$?",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "$\\E[I_i]=\\Prob(U^2+V^2\\le1)=\\pi/4$ (area of the quarter disc), so $\\E[\\hat\\pi]=\\pi$",
+              "marks": 1
+            },
+            {
+              "step": "$I_i$ is Bernoulli$(p)$ with $p=\\pi/4$, so $\\Var(I_i)=p(1-p)$ and by independence $\\Var(\\hat\\pi)=\\frac{16}{N}p(1-p)$",
+              "marks": 1.5
+            },
+            {
+              "step": "Simplifies to $\\pi(4-\\pi)/N$ and requires $\\pi(4-\\pi)/N\\le10^{-6}$, so $N\\ge2.70\\times10^{6}$ (about $2.697\\times 10^6$)",
+              "marks": 1.5
+            }
+          ],
+          "modelAnswer": "The pair $(U_i,V_i)$ is uniform on the unit square, which has area $1$, so $\\E[I_i]=\\Prob(U_i^2+V_i^2\\le1)=\\pi/4=:p$. Hence $\\E[\\hat\\pi]=\\frac4N\\cdot Np=\\pi$, so $\\hat\\pi$ is unbiased.\n\n$I_i\\sim\\text{Bernoulli}(p)$ with variance $p(1-p)$, and the $I_i$ are independent, so\n$$\\Var(\\hat\\pi)=\\frac{16}{N^{2}}\\cdot Np(1-p)=\\frac{16}{N}\\cdot\\frac\\pi4\\Big(1-\\frac\\pi4\\Big)=\\frac{\\pi(4-\\pi)}{N}.$$\nWe need $\\sqrt{\\pi(4-\\pi)/N}\\le0.001$, i.e. $N\\ge\\pi(4-\\pi)/10^{-6}\\approx2.697\\times10^{6}$, so about $2.7$ million points. $\\blacksquare$"
+        },
+        {
+          "id": "d",
+          "type": "proof",
+          "text": "Let $p$ be a target density, $q$ a proposal density with $q(x)>0$ whenever $p(x)g(x)\\ne0$, and $w(x)=p(x)/q(x)$. (i) Prove the importance sampling identity $\\E_q[w(X)g(X)]=\\E_p[g(X)]$. (ii) Suppose only $\\tilde p=cp$ is known (with $c>0$ unknown) and let $\\tilde w=\\tilde p/q$, $X_1,\\dots,X_N\\overset{\\text{iid}}{\\sim}q$. Show that $\\sum_i\\tilde w(X_i)g(X_i)\\big/\\sum_i\\tilde w(X_i)\\to\\E_p[g(X)]$ almost surely as $N\\to\\infty$, assuming $\\E_p|g|<\\infty$.",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "(i) $\\E_q[wg]=\\int\\frac{p(x)}{q(x)}g(x)q(x)\\,dx$, using the support condition",
+              "marks": 1
+            },
+            {
+              "step": "(i) $=\\int g(x)p(x)\\,dx=\\E_p[g]$",
+              "marks": 1
+            },
+            {
+              "step": "(ii) Strong law of large numbers: $\\frac1N\\sum\\tilde wg\\to\\E_q[\\tilde wg]=c\\,\\E_p[g]$ and $\\frac1N\\sum\\tilde w\\to\\E_q[\\tilde w]=c$",
+              "marks": 1.5
+            },
+            {
+              "step": "(ii) Ratio of the two limits (continuous mapping, $c>0$) is $\\E_p[g]$",
+              "marks": 0.5
+            }
+          ],
+          "modelAnswer": "(i) Using the support condition,\n$$\\E_q[w(X)g(X)]=\\int\\frac{p(x)}{q(x)}g(x)\\,q(x)\\,dx=\\int g(x)p(x)\\,dx=\\E_p[g(X)].$$\n(ii) Note $\\tilde w=cw$. By the identity in (i), $\\E_q[\\tilde wg]=c\\,\\E_p[g]$ (finite since $\\E_p|g|<\\infty$) and, taking $g\\equiv1$, $\\E_q[\\tilde w]=c$. By the strong law of large numbers,\n$$\\frac1N\\sum_i\\tilde w(X_i)g(X_i)\\to c\\,\\E_p[g],\\qquad\\frac1N\\sum_i\\tilde w(X_i)\\to c\\quad\\text{a.s.}$$\nSince $c>0$ the ratio of the two averages, which equals $\\sum_i\\tilde wg/\\sum_i\\tilde w$, converges almost surely to $c\\E_p[g]/c=\\E_p[g]$. $\\blacksquare$"
+        },
+        {
+          "id": "e",
+          "type": "calculation",
+          "text": "Four draws $x_1,\\dots,x_4$ from a proposal $q$ have unnormalised importance weights $(1,2,3,2)$ and values $g(x_i)=(0,1,2,3)$. Compute the self-normalised importance sampling estimate of $\\E_p[g]$ and the effective sample size $(\\sum_i\\tilde w_i)^2/\\sum_i\\tilde w_i^2$.",
+          "marks": 3,
+          "markingScheme": [
+            {
+              "step": "Estimate $=\\dfrac{0\\cdot1+1\\cdot2+2\\cdot3+3\\cdot2}{8}=\\dfrac{14}{8}=1.75$",
+              "marks": 1.5
+            },
+            {
+              "step": "ESS $=\\dfrac{8^2}{1+4+9+4}=\\dfrac{64}{18}=\\dfrac{32}{9}\\approx3.556$",
+              "marks": 1.5
+            }
+          ],
+          "modelAnswer": "$\\sum\\tilde w_i=1+2+3+2=8$ and $\\sum\\tilde w_ig_i=0+2+6+6=14$, so the estimate is $14/8=1.75$.\n\n$\\sum\\tilde w_i^2=1+4+9+4=18$, so ESS $=64/18=32/9\\approx3.556$, less than the nominal $4$ draws because the weights are unequal."
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "title": "Markov chains, Metropolis-Hastings and Gibbs sampling",
+      "text": "This question concerns the theory behind MCMC. All state spaces are finite unless stated otherwise.",
+      "marks": 20,
+      "parts": [
+        {
+          "id": "a",
+          "type": "proof",
+          "text": "A Markov chain on $\\{1,2,3\\}$ has transition matrix $P=\\begin{pmatrix}1/2&1/2&0\\\\1/4&1/2&1/4\\\\0&1/2&1/2\\end{pmatrix}$. (i) Compute the two-step probabilities $P^2(1,3)$ and $P^2(2,2)$, and show that the chain is regular. (ii) A distribution $\\pi$ satisfies detailed balance if $\\pi_iP_{ij}=\\pi_jP_{ji}$ for all $i,j$. Prove that detailed balance implies $\\pi P=\\pi$, and use it to find the stationary distribution of this chain.",
+          "marks": 6,
+          "markingScheme": [
+            {
+              "step": "(i) $P^2(1,3)=\\tfrac12\\cdot\\tfrac14=\\tfrac18$ (path $1\\to2\\to3$)",
+              "marks": 1
+            },
+            {
+              "step": "(i) $P^2(2,2)=\\tfrac14\\cdot\\tfrac12+\\tfrac12\\cdot\\tfrac12+\\tfrac14\\cdot\\tfrac12=\\tfrac12$",
+              "marks": 1
+            },
+            {
+              "step": "(i) Shows every entry of $P^2$ is positive, so $P$ is regular",
+              "marks": 1
+            },
+            {
+              "step": "(ii) Sums detailed balance over $i$ and uses $\\sum_iP_{ji}=1$ to get $(\\pi P)_j=\\pi_j$",
+              "marks": 2
+            },
+            {
+              "step": "(ii) Solves detailed balance: $\\pi_2=2\\pi_1$, $\\pi_3=\\pi_1$, giving $\\pi=(\\tfrac14,\\tfrac12,\\tfrac14)$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "**(i)** Conditioning on the intermediate state, $P^2(i,j)=\\sum_mP(i,m)P(m,j)$. Then\n$$P^2(1,3)=\\tfrac12\\cdot0+\\tfrac12\\cdot\\tfrac14+0\\cdot\\tfrac12=\\tfrac18,\\qquad P^2(2,2)=\\tfrac14\\cdot\\tfrac12+\\tfrac12\\cdot\\tfrac12+\\tfrac14\\cdot\\tfrac12=\\tfrac12.$$\nComputing all entries gives $P^2=\\begin{pmatrix}3/8&1/2&1/8\\\\1/4&1/2&1/4\\\\1/8&1/2&3/8\\end{pmatrix}$, all positive, so $P$ is regular.\n\n**(ii)** Summing $\\pi_iP_{ij}=\\pi_jP_{ji}$ over $i$,\n$$(\\pi P)_j=\\sum_i\\pi_iP_{ij}=\\sum_i\\pi_jP_{ji}=\\pi_j\\sum_iP_{ji}=\\pi_j,$$\nbecause the rows of $P$ sum to $1$. Hence $\\pi P=\\pi$. $\\blacksquare$\n\nFor this chain: $\\pi_1P_{12}=\\pi_2P_{21}$ gives $\\tfrac12\\pi_1=\\tfrac14\\pi_2$, so $\\pi_2=2\\pi_1$; $\\pi_2P_{23}=\\pi_3P_{32}$ gives $\\tfrac14\\pi_2=\\tfrac12\\pi_3$, so $\\pi_3=\\pi_1$. Normalising, $\\pi=(\\tfrac14,\\tfrac12,\\tfrac14)$. (Since the chain is regular, this is the unique stationary distribution.)"
+        },
+        {
+          "id": "b",
+          "type": "proof",
+          "text": "Let $\\pi$ be a distribution on a finite state space, $q(x,y)$ a proposal and $\\alpha(x,y)=\\min\\Big\\{1,\\dfrac{\\pi(y)q(y,x)}{\\pi(x)q(x,y)}\\Big\\}$ the Metropolis-Hastings acceptance probability. For $x\\ne y$ the chain moves from $x$ to $y$ with probability $K(x,y)=q(x,y)\\alpha(x,y)$. Prove that $\\pi(x)K(x,y)=\\pi(y)K(y,x)$, so that $\\pi$ is stationary.",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "Writes $\\pi(x)K(x,y)=\\pi(x)q(x,y)\\min\\{1,\\frac{\\pi(y)q(y,x)}{\\pi(x)q(x,y)}\\}$",
+              "marks": 1
+            },
+            {
+              "step": "Brings $\\pi(x)q(x,y)$ inside the minimum: $=\\min\\{\\pi(x)q(x,y),\\,\\pi(y)q(y,x)\\}$",
+              "marks": 1.5
+            },
+            {
+              "step": "This expression is symmetric in $x\\leftrightarrow y$, so it equals $\\pi(y)K(y,x)$",
+              "marks": 1
+            },
+            {
+              "step": "Concludes detailed balance holds and invokes part (a)(ii) for stationarity",
+              "marks": 0.5
+            }
+          ],
+          "modelAnswer": "Take $x\\ne y$ with $\\pi(x)q(x,y)>0$ (otherwise both sides below are $0$ by the same argument). Then\n\\begin{align}\n\\pi(x)K(x,y)&=\\pi(x)q(x,y)\\min\\Big\\{1,\\frac{\\pi(y)q(y,x)}{\\pi(x)q(x,y)}\\Big\\}\\\\\n&=\\min\\big\\{\\pi(x)q(x,y),\\;\\pi(y)q(y,x)\\big\\}.\n\\end{align}\nThe right-hand side is unchanged when $x$ and $y$ are swapped, so it also equals $\\pi(y)q(y,x)\\alpha(y,x)=\\pi(y)K(y,x)$. Hence the Metropolis-Hastings kernel satisfies detailed balance with respect to $\\pi$ (the rejection probability only affects the diagonal, where detailed balance is trivial), and by part (a)(ii) $\\pi$ is stationary. $\\blacksquare$"
+        },
+        {
+          "id": "c",
+          "type": "calculation",
+          "text": "The target is $\\tilde\\pi(x)\\propto x$ on $\\{1,2,3\\}$. The proposal moves to $x-1$ or $x+1$ with probability $\\tfrac12$ each; a proposal outside $\\{1,2,3\\}$ is rejected (the chain stays). Find the acceptance probabilities, write the full transition matrix of the Metropolis-Hastings chain, and verify detailed balance for the pair of states $(2,3)$.",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "Symmetric proposal, so $\\alpha(x,y)=\\min\\{1,\\tilde\\pi(y)/\\tilde\\pi(x)\\}$: $\\alpha(1,2)=1$, $\\alpha(2,1)=\\tfrac12$, $\\alpha(2,3)=1$, $\\alpha(3,2)=\\tfrac23$",
+              "marks": 1.5
+            },
+            {
+              "step": "Transition matrix with rows $(\\tfrac12,\\tfrac12,0)$, $(\\tfrac14,\\tfrac14,\\tfrac12)$, $(0,\\tfrac13,\\tfrac23)$",
+              "marks": 1.5
+            },
+            {
+              "step": "Detailed balance for $(2,3)$: $\\pi_2P_{23}=\\tfrac26\\cdot\\tfrac12=\\tfrac16=\\tfrac36\\cdot\\tfrac13=\\pi_3P_{32}$ with $\\pi=(\\tfrac16,\\tfrac26,\\tfrac36)$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "Because the proposal is symmetric, $\\alpha(x,y)=\\min\\{1,\\tilde\\pi(y)/\\tilde\\pi(x)\\}$: $\\alpha(1,2)=\\min\\{1,2\\}=1$, $\\alpha(2,1)=\\tfrac12$, $\\alpha(2,3)=\\min\\{1,\\tfrac32\\}=1$, $\\alpha(3,2)=\\tfrac23$.\n\nOff-diagonal entries are $\\tfrac12\\alpha$: $P_{12}=\\tfrac12$, $P_{21}=\\tfrac14$, $P_{23}=\\tfrac12$, $P_{32}=\\tfrac13$, and $P_{13}=P_{31}=0$. Diagonals make rows sum to $1$ (rejected proposals stay put): $P_{11}=\\tfrac12$, $P_{22}=\\tfrac14$, $P_{33}=\\tfrac23$. So\n$$P=\\begin{pmatrix}1/2&1/2&0\\\\1/4&1/4&1/2\\\\0&1/3&2/3\\end{pmatrix}.$$\nThe normalised target is $\\pi=(\\tfrac16,\\tfrac26,\\tfrac36)$. Then $\\pi_2P_{23}=\\tfrac13\\cdot\\tfrac12=\\tfrac16$ and $\\pi_3P_{32}=\\tfrac12\\cdot\\tfrac13=\\tfrac16$, so detailed balance holds."
+        },
+        {
+          "id": "d",
+          "type": "derivation",
+          "text": "A Gibbs sampler targets $(X,Y)$ bivariate normal with zero means, unit variances and correlation $\\rho\\in(-1,1)$, with density $p(x,y)\\propto\\exp\\Big\\{-\\dfrac{x^2-2\\rho xy+y^2}{2(1-\\rho^2)}\\Big\\}$. Derive the full conditional distribution of $X$ given $Y=y$.",
+          "marks": 3,
+          "markingScheme": [
+            {
+              "step": "Keeps only the terms involving $x$: $p(x\\mid y)\\propto\\exp\\{-(x^2-2\\rho xy)/(2(1-\\rho^2))\\}$",
+              "marks": 1
+            },
+            {
+              "step": "Completes the square: $x^2-2\\rho xy=(x-\\rho y)^2-\\rho^2y^2$ and drops the constant",
+              "marks": 1
+            },
+            {
+              "step": "Identifies $X\\mid Y=y\\sim\\mathcal N(\\rho y,\\,1-\\rho^2)$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "As a function of $x$, with $y$ fixed,\n$$p(x\\mid y)\\propto\\exp\\Big\\{-\\frac{x^2-2\\rho xy}{2(1-\\rho^2)}\\Big\\}=\\exp\\Big\\{-\\frac{(x-\\rho y)^2-\\rho^2y^2}{2(1-\\rho^2)}\\Big\\}\\propto\\exp\\Big\\{-\\frac{(x-\\rho y)^2}{2(1-\\rho^2)}\\Big\\},$$\nsince $\\rho^2y^2$ does not involve $x$. This is the kernel of $\\mathcal N(\\rho y,\\,1-\\rho^2)$, so $X\\mid Y=y\\sim\\mathcal N(\\rho y,1-\\rho^2)$ (and symmetrically for $Y\\mid X$)."
+        },
+        {
+          "id": "e",
+          "type": "proof",
+          "text": "The $x$-draws of this Gibbs sampler, once stationary, form an AR(1) sequence with autocorrelation $\\phi^{k}$ at lag $k$, where $\\phi=\\rho^{2}$. Show that the integrated autocorrelation time is $\\tau=1+2\\sum_{k\\ge1}\\phi^{k}=\\dfrac{1+\\phi}{1-\\phi}$, and compute the effective sample size $N/\\tau$ for $N=2000$ draws and $\\rho=0.8$.",
+          "marks": 3,
+          "markingScheme": [
+            {
+              "step": "Sums the geometric series $\\sum_{k\\ge1}\\phi^k=\\phi/(1-\\phi)$ for $|\\phi|<1$",
+              "marks": 1
+            },
+            {
+              "step": "Simplifies $\\tau=1+\\frac{2\\phi}{1-\\phi}=\\frac{1+\\phi}{1-\\phi}$",
+              "marks": 0.5
+            },
+            {
+              "step": "$\\phi=0.64$, $\\tau=1.64/0.36\\approx4.556$",
+              "marks": 0.5
+            },
+            {
+              "step": "ESS $=2000/\\tau\\approx439$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "Since $|\\phi|=\\rho^2<1$, $\\sum_{k\\ge1}\\phi^k=\\phi/(1-\\phi)$, so\n$$\\tau=1+\\frac{2\\phi}{1-\\phi}=\\frac{1-\\phi+2\\phi}{1-\\phi}=\\frac{1+\\phi}{1-\\phi}.\\ \\blacksquare$$\nFor $\\rho=0.8$, $\\phi=0.64$ and $\\tau=1.64/0.36\\approx4.556$. The effective sample size is $N/\\tau=2000\\times0.36/1.64\\approx439$."
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "title": "Model comparison, Laplace approximation and variational Bayes",
+      "text": "This question is about comparing models and approximating posteriors.",
+      "marks": 20,
+      "parts": [
+        {
+          "id": "a",
+          "type": "calculation",
+          "text": "Observe $y=7$ successes in $n=10$ trials. Model $M_0$: $y\\sim\\text{Bin}(10,\\tfrac12)$. Model $M_1$: $y\\mid\\theta\\sim\\text{Bin}(10,\\theta)$ with $\\theta\\sim\\text{Unif}(0,1)$. Compute both marginal likelihoods, the Bayes factor $B_{01}=p(y\\mid M_0)/p(y\\mid M_1)$, and the posterior probability of $M_0$ if the prior model probabilities are equal. (Use $B(8,4)=1/1320$.)",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "$p(y\\mid M_0)=\\binom{10}{7}2^{-10}=120/1024\\approx0.117$",
+              "marks": 1
+            },
+            {
+              "step": "$p(y\\mid M_1)=\\binom{10}{7}\\int_0^1\\theta^{7}(1-\\theta)^{3}d\\theta=120\\,B(8,4)$",
+              "marks": 1
+            },
+            {
+              "step": "$=120/1320=1/11\\approx0.0909$",
+              "marks": 1
+            },
+            {
+              "step": "$B_{01}=\\frac{120/1024}{1/11}=\\frac{165}{128}\\approx1.289$",
+              "marks": 1
+            },
+            {
+              "step": "$\\Prob(M_0\\mid y)=\\frac{B_{01}}{1+B_{01}}=\\frac{165}{293}\\approx0.563$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "Under $M_0$: $p(y\\mid M_0)=\\binom{10}{7}(1/2)^{10}=120/1024\\approx0.1172$.\n\nUnder $M_1$ we integrate out $\\theta$:\n$$p(y\\mid M_1)=\\binom{10}{7}\\int_0^1\\theta^{7}(1-\\theta)^{3}\\,d\\theta=120\\,B(8,4)=\\frac{120}{1320}=\\frac1{11}\\approx0.0909.$$\nThe Bayes factor is $B_{01}=\\dfrac{120/1024}{1/11}=\\dfrac{1320}{1024}=\\dfrac{165}{128}\\approx1.289$. With equal prior probabilities the posterior odds equal $B_{01}$, so\n$$\\Prob(M_0\\mid y)=\\frac{B_{01}}{1+B_{01}}=\\frac{165}{293}\\approx0.563.$$\nThe evidence slightly favours $M_0$: the diffuse prior in $M_1$ is penalised by the marginal likelihood."
+        },
+        {
+          "id": "b",
+          "type": "derivation",
+          "text": "Let the posterior of $\\theta$ be $\\text{Beta}(\\alpha,\\beta)$ with $\\alpha,\\beta>1$. Derive the Laplace approximation: find the mode $\\hat\\theta$ and the approximating variance $\\hat\\sigma^2=\\big(-\\ell''(\\hat\\theta)\\big)^{-1}$, where $\\ell$ is the log posterior density. Evaluate it for $\\text{Beta}(8,4)$ and compare the variance with the exact posterior variance.",
+          "marks": 6,
+          "markingScheme": [
+            {
+              "step": "Log density up to a constant: $\\ell(\\theta)=(\\alpha-1)\\log\\theta+(\\beta-1)\\log(1-\\theta)$",
+              "marks": 1
+            },
+            {
+              "step": "Sets $\\ell'=0$ and solves: $\\hat\\theta=\\dfrac{\\alpha-1}{\\alpha+\\beta-2}$",
+              "marks": 1.5
+            },
+            {
+              "step": "$\\ell''(\\theta)=-\\dfrac{\\alpha-1}{\\theta^2}-\\dfrac{\\beta-1}{(1-\\theta)^2}$, evaluated at $\\hat\\theta$ to give $-\\ell''(\\hat\\theta)=\\dfrac{(\\alpha+\\beta-2)^3}{(\\alpha-1)(\\beta-1)}$",
+              "marks": 1.5
+            },
+            {
+              "step": "$\\hat\\sigma^2=\\dfrac{(\\alpha-1)(\\beta-1)}{(\\alpha+\\beta-2)^3}$",
+              "marks": 1
+            },
+            {
+              "step": "$\\text{Beta}(8,4)$: $\\hat\\theta=0.7$, $\\hat\\sigma^2=21/1000=0.021$, versus exact variance $32/1872\\approx0.0171$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "Up to a constant, $\\ell(\\theta)=(\\alpha-1)\\log\\theta+(\\beta-1)\\log(1-\\theta)$ and\n$$\\ell'(\\theta)=\\frac{\\alpha-1}{\\theta}-\\frac{\\beta-1}{1-\\theta}=0\\ \\Longrightarrow\\ \\hat\\theta=\\frac{\\alpha-1}{\\alpha+\\beta-2}.$$\nThen $\\ell''(\\theta)=-\\dfrac{\\alpha-1}{\\theta^{2}}-\\dfrac{\\beta-1}{(1-\\theta)^{2}}$. At the mode, $1-\\hat\\theta=\\dfrac{\\beta-1}{\\alpha+\\beta-2}$, so\n$$-\\ell''(\\hat\\theta)=\\frac{(\\alpha+\\beta-2)^2}{\\alpha-1}+\\frac{(\\alpha+\\beta-2)^2}{\\beta-1}=\\frac{(\\alpha+\\beta-2)^3}{(\\alpha-1)(\\beta-1)}.$$\nHence $\\theta\\mid y\\approx\\mathcal N\\big(\\hat\\theta,\\hat\\sigma^2\\big)$ with $\\hat\\sigma^2=\\dfrac{(\\alpha-1)(\\beta-1)}{(\\alpha+\\beta-2)^3}$.\n\nFor $\\text{Beta}(8,4)$: $\\hat\\theta=7/10=0.7$ and $\\hat\\sigma^2=7\\cdot3/10^3=0.021$. The exact mean is $8/12\\approx0.667$ and the exact variance is $\\dfrac{8\\cdot4}{12^2\\cdot13}=\\dfrac{32}{1872}\\approx0.0171$. The approximation is centred at the mode rather than the mean and is a little too wide for this small sample; it improves as $\\alpha+\\beta$ grows."
+        },
+        {
+          "id": "c",
+          "type": "calculation",
+          "text": "For two observations and $S=3$ posterior draws $\\theta^{(s)}$ the values $p(y_i\\mid\\theta^{(s)})$ are\n\n| | $s=1$ | $s=2$ | $s=3$ |\n|---|---|---|---|\n| $y_1$ | 0.2 | 0.4 | 0.6 |\n| $y_2$ | 0.1 | 0.3 | 0.2 |\n\nCompute $\\text{lppd}=\\sum_i\\log\\big(\\frac1S\\sum_sp(y_i\\mid\\theta^{(s)})\\big)$, the penalty $p_{\\text{WAIC}}=\\sum_i\\operatorname{Var}_s\\big[\\log p(y_i\\mid\\theta^{(s)})\\big]$ (sample variance, divisor $S-1$) and $\\text{WAIC}=-2(\\text{lppd}-p_{\\text{WAIC}})$.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "$\\text{lppd}_1=\\log0.4\\approx-0.916$, $\\text{lppd}_2=\\log0.2\\approx-1.609$",
+              "marks": 1
+            },
+            {
+              "step": "$\\text{lppd}\\approx-2.526$",
+              "marks": 0.5
+            },
+            {
+              "step": "Variance of the three log values for each observation, $\\approx0.3086$ each",
+              "marks": 2
+            },
+            {
+              "step": "$p_{\\text{WAIC}}\\approx0.617$",
+              "marks": 0.5
+            },
+            {
+              "step": "$\\text{WAIC}=-2(-2.526-0.617)\\approx6.286$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "Observation 1 has mean density $0.4$, observation 2 has $0.2$, so $\\text{lppd}=\\log0.4+\\log0.2=-0.9163-1.6094=-2.5257$.\n\nObservation 1: the log values are $\\log0.2,\\log0.4,\\log0.6=-1.6094,-0.9163,-0.5108$ with mean $-1.0122$ and deviations $-0.5973,\\,0.0959,\\,0.5014$. Their sum of squares is $0.3567+0.0092+0.2514=0.6173$, so the sample variance is $0.3086$. Observation 2: $\\log0.1,\\log0.3,\\log0.2=-2.3026,-1.2040,-1.6094$ are $\\log 0.1+\\{\\log1,\\log3,\\log2\\}$, while observation 1 gives $\\log0.2+\\{\\log1,\\log2,\\log3\\}$: the same three numbers up to order and a common shift, so the sample variance is again $0.3086$.\n\nSo $p_{\\text{WAIC}}=0.6173$ and\n$$\\text{WAIC}=-2(-2.5257-0.6173)=6.286.$$"
+        },
+        {
+          "id": "d",
+          "type": "proof",
+          "text": "For a model $p(y,\\theta)$ and any density $q(\\theta)$ define $\\text{ELBO}(q)=\\E_q[\\log p(y,\\theta)]-\\E_q[\\log q(\\theta)]$. Prove that $\\log p(y)=\\text{ELBO}(q)+\\operatorname{KL}\\big(q\\,\\|\\,p(\\cdot\\mid y)\\big)$, and deduce that maximising the ELBO over a family of $q$ is the same as minimising the KL divergence to the posterior.",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "Writes $\\log p(y)=\\log p(y,\\theta)-\\log p(\\theta\\mid y)$ for any $\\theta$",
+              "marks": 1
+            },
+            {
+              "step": "Takes $\\E_q$ of both sides (the left side does not depend on $\\theta$)",
+              "marks": 1
+            },
+            {
+              "step": "Adds and subtracts $\\E_q[\\log q]$ to obtain $\\text{ELBO}(q)+\\operatorname{KL}(q\\|p(\\cdot\\mid y))$",
+              "marks": 1
+            },
+            {
+              "step": "$\\operatorname{KL}\\ge0$ so $\\text{ELBO}\\le\\log p(y)$; since $\\log p(y)$ is fixed, maximising ELBO minimises KL",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "By the product rule, $\\log p(y)=\\log p(y,\\theta)-\\log p(\\theta\\mid y)$ for every $\\theta$. Take the expectation under $q$; the left side does not depend on $\\theta$, so\n\\begin{align}\n\\log p(y)&=\\E_q[\\log p(y,\\theta)]-\\E_q[\\log p(\\theta\\mid y)]\\\\\n&=\\underbrace{\\E_q[\\log p(y,\\theta)]-\\E_q[\\log q(\\theta)]}_{\\text{ELBO}(q)}+\\underbrace{\\E_q[\\log q(\\theta)]-\\E_q[\\log p(\\theta\\mid y)]}_{\\operatorname{KL}(q\\,\\|\\,p(\\cdot\\mid y))}.\n\\end{align}\nSince $\\operatorname{KL}\\ge0$, $\\text{ELBO}(q)\\le\\log p(y)$. The left side $\\log p(y)$ does not depend on $q$, so a larger ELBO means a smaller KL divergence: maximising the ELBO over the variational family is equivalent to minimising $\\operatorname{KL}(q\\|p(\\cdot\\mid y))$. $\\blacksquare$"
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "title": "Nonparametric Bayes: CRP, stick-breaking, DP and GP",
+      "text": "This question is about nonparametric Bayesian models. Throughout, $\\alpha>0$ is the concentration parameter and $G_0$ the base measure.",
+      "marks": 20,
+      "parts": [
+        {
+          "id": "a",
+          "type": "calculation",
+          "text": "In a Chinese restaurant process with concentration $\\alpha=2$, customer $n+1$ joins an occupied table with probability proportional to its current size $n_k$ and opens a new table with probability proportional to $\\alpha$ (the normaliser is $n+\\alpha$). Find the probability that the first four customers sit as $\\{1,2\\},\\{3\\},\\{4\\}$, and the probability that customer 5 then opens a new table.",
+          "marks": 3,
+          "markingScheme": [
+            {
+              "step": "Customer 1 opens a table (prob. $1$); customer 2 joins it with prob. $\\frac{1}{1+2}=\\frac13$",
+              "marks": 1
+            },
+            {
+              "step": "Customer 3 opens a new table with prob. $\\frac{2}{2+2}=\\frac12$; customer 4 with prob. $\\frac{2}{3+2}=\\frac25$; product $=\\frac1{15}$",
+              "marks": 1.5
+            },
+            {
+              "step": "Customer 5 opens a new table with prob. $\\frac{2}{4+2}=\\frac13$",
+              "marks": 0.5
+            }
+          ],
+          "modelAnswer": "Customer 1 sits at a new table with probability $1$. Customer 2 joins it with probability $\\frac{1}{1+2}=\\frac13$. Customer 3 starts a new table with probability $\\frac{2}{2+2}=\\frac12$. Customer 4 starts another new table with probability $\\frac{2}{3+2}=\\frac25$. The probability of this seating is\n$$1\\cdot\\frac13\\cdot\\frac12\\cdot\\frac25=\\frac1{15}.$$\nCustomer 5 opens a new table with probability $\\frac{2}{4+2}=\\frac13$ (regardless of the table sizes)."
+        },
+        {
+          "id": "b",
+          "type": "proof",
+          "text": "Let $K_n$ be the number of occupied tables after $n$ customers in a Chinese restaurant process with concentration $\\alpha$. Prove that $\\E[K_n]=\\sum_{i=1}^n\\dfrac{\\alpha}{\\alpha+i-1}$ and evaluate it for $\\alpha=2$, $n=4$.",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "Defines $Z_i=\\mathbf 1\\{\\text{customer } i\\text{ opens a new table}\\}$ so $K_n=\\sum_iZ_i$",
+              "marks": 0.5
+            },
+            {
+              "step": "Shows $\\Prob(Z_i=1)=\\frac{\\alpha}{\\alpha+i-1}$ (the $i$th customer sees $i-1$ people already seated)",
+              "marks": 1
+            },
+            {
+              "step": "Linearity of expectation gives the formula",
+              "marks": 1
+            },
+            {
+              "step": "$\\alpha=2,n=4$: $1+\\frac23+\\frac12+\\frac25=\\frac{77}{30}\\approx2.567$",
+              "marks": 1.5
+            }
+          ],
+          "modelAnswer": "Let $Z_i=1$ if customer $i$ opens a new table and $0$ otherwise, so $K_n=\\sum_{i=1}^nZ_i$. When customer $i$ arrives, $i-1$ customers are seated, so the probability of a new table is $\\Prob(Z_i=1)=\\alpha/(\\alpha+i-1)$, whatever the seating so far. By linearity of expectation,\n$$\\E[K_n]=\\sum_{i=1}^n\\frac{\\alpha}{\\alpha+i-1}.\\ \\blacksquare$$\nFor $\\alpha=2$, $n=4$: $\\E[K_4]=\\frac22+\\frac23+\\frac24+\\frac25=1+\\frac23+\\frac12+\\frac25=\\frac{77}{30}\\approx2.567$."
+        },
+        {
+          "id": "c",
+          "type": "proof",
+          "text": "In the stick-breaking construction, $V_k\\overset{\\text{iid}}{\\sim}\\text{Beta}(1,\\alpha)$ and $\\pi_k=V_k\\prod_{j<k}(1-V_j)$. Prove that $\\E[\\pi_k]=\\dfrac1{1+\\alpha}\\Big(\\dfrac{\\alpha}{1+\\alpha}\\Big)^{k-1}$, evaluate $\\E[\\pi_1],\\E[\\pi_2],\\E[\\pi_3]$ for $\\alpha=2$, and prove that $\\sum_{k\\ge1}\\pi_k=1$ almost surely.",
+          "marks": 5,
+          "markingScheme": [
+            {
+              "step": "Independence of the $V_j$ gives $\\E[\\pi_k]=\\E[V_k]\\prod_{j<k}\\E[1-V_j]$",
+              "marks": 1
+            },
+            {
+              "step": "$\\E[V]=\\frac1{1+\\alpha}$, $\\E[1-V]=\\frac{\\alpha}{1+\\alpha}$, giving the stated formula",
+              "marks": 1
+            },
+            {
+              "step": "$\\alpha=2$: $\\frac13,\\frac29,\\frac4{27}$",
+              "marks": 1
+            },
+            {
+              "step": "$\\sum_{k\\le K}\\pi_k=1-\\prod_{j\\le K}(1-V_j)$ (telescoping / induction)",
+              "marks": 1
+            },
+            {
+              "step": "The product is non-increasing with expectation $(\\frac{\\alpha}{1+\\alpha})^K\\to0$, so it tends to $0$ a.s. and the weights sum to $1$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "Since $V_1,V_2,\\dots$ are independent,\n$$\\E[\\pi_k]=\\E[V_k]\\prod_{j<k}\\E[1-V_j].$$\nFor $V\\sim\\text{Beta}(1,\\alpha)$, $\\E[V]=\\frac{1}{1+\\alpha}$ and $\\E[1-V]=\\frac{\\alpha}{1+\\alpha}$, so $\\E[\\pi_k]=\\frac1{1+\\alpha}\\big(\\frac\\alpha{1+\\alpha}\\big)^{k-1}$. For $\\alpha=2$: $\\E[\\pi_1]=\\frac13$, $\\E[\\pi_2]=\\frac13\\cdot\\frac23=\\frac29$, $\\E[\\pi_3]=\\frac13\\cdot\\frac49=\\frac4{27}$.\n\nFor the total mass, show by induction that $\\sum_{k\\le K}\\pi_k=1-\\prod_{j\\le K}(1-V_j)$: true for $K=1$; and $1-\\prod_{j\\le K}(1-V_j)+V_{K+1}\\prod_{j\\le K}(1-V_j)=1-\\prod_{j\\le K+1}(1-V_j)$. The product $\\prod_{j\\le K}(1-V_j)$ is non-negative and non-increasing in $K$, so it converges almost surely, and its expectation is $\\big(\\frac\\alpha{1+\\alpha}\\big)^K\\to0$. A non-negative limit with expectation $0$ is $0$ almost surely (Fatou / monotone convergence), hence $\\sum_{k\\ge1}\\pi_k=1$ a.s. $\\blacksquare$"
+        },
+        {
+          "id": "d",
+          "type": "calculation",
+          "text": "A function $f$ has a Gaussian process prior $f\\sim\\mathcal{GP}(0,k)$ with $k(x,x')=\\exp\\{-(x-x')^2/2\\}$. We observe $y=f(0)+\\varepsilon$ with $\\varepsilon\\sim\\mathcal N(0,0.25)$ independent of $f$, and the single observation is $y=1.2$. Derive the posterior mean and variance of $f(1)$ (3 decimal places).",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "$(y,f(1))$ is jointly Gaussian with zero mean, $\\operatorname{Var}(y)=1.25$, $\\operatorname{Cov}(y,f(1))=e^{-1/2}\\approx0.6065$, $\\operatorname{Var}f(1)=1$",
+              "marks": 1
+            },
+            {
+              "step": "Uses the Gaussian conditioning formulas $\\E[f(1)\\mid y]=\\frac{\\operatorname{Cov}}{\\operatorname{Var}(y)}y$, $\\operatorname{Var}(f(1)\\mid y)=1-\\frac{\\operatorname{Cov}^2}{\\operatorname{Var}(y)}$",
+              "marks": 1
+            },
+            {
+              "step": "Posterior mean $0.6065\\times1.2/1.25\\approx0.582$",
+              "marks": 1
+            },
+            {
+              "step": "Posterior variance $1-0.6065^2/1.25\\approx0.706$",
+              "marks": 1
+            }
+          ],
+          "modelAnswer": "The vector $(y,f(1))$ is jointly Gaussian with zero mean and covariance\n$$\\begin{pmatrix}k(0,0)+0.25&k(0,1)\\\\k(0,1)&k(1,1)\\end{pmatrix}=\\begin{pmatrix}1.25&e^{-1/2}\\\\e^{-1/2}&1\\end{pmatrix},\\qquad e^{-1/2}\\approx0.6065.$$\nConditioning a bivariate Gaussian,\n$$\\E[f(1)\\mid y]=\\frac{e^{-1/2}}{1.25}\\,y=\\frac{0.6065}{1.25}\\times1.2\\approx0.582,$$\n$$\\Var(f(1)\\mid y)=1-\\frac{e^{-1}}{1.25}=1-\\frac{0.3679}{1.25}\\approx0.706.$$\nThe observation pulls the prediction at $x=1$ towards $y$, and reduces its variance from $1$ to $0.706$."
+        },
+        {
+          "id": "e",
+          "type": "proof",
+          "text": "A random measure $G\\sim\\text{DP}(\\alpha,G_0)$ is defined by requiring that, for every finite measurable partition $A_1,\\dots,A_m$ of the space, $(G(A_1),\\dots,G(A_m))\\sim\\text{Dirichlet}(\\alpha G_0(A_1),\\dots,\\alpha G_0(A_m))$. For a set $A$ with $p=G_0(A)\\in(0,1)$, prove that $\\E[G(A)]=p$ and $\\Var[G(A)]=\\dfrac{p(1-p)}{\\alpha+1}$.",
+          "marks": 4,
+          "markingScheme": [
+            {
+              "step": "Applies the definition to the partition $\\{A,A^c\\}$: $(G(A),G(A^c))\\sim\\text{Dirichlet}(\\alpha p,\\alpha(1-p))$",
+              "marks": 0.5
+            },
+            {
+              "step": "Marginal of a two-component Dirichlet: $G(A)\\sim\\text{Beta}(\\alpha p,\\alpha(1-p))$",
+              "marks": 1
+            },
+            {
+              "step": "Mean $\\frac{\\alpha p}{\\alpha p+\\alpha(1-p)}=p$",
+              "marks": 1
+            },
+            {
+              "step": "Variance $\\frac{\\alpha p\\cdot\\alpha(1-p)}{\\alpha^2(\\alpha+1)}=\\frac{p(1-p)}{\\alpha+1}$",
+              "marks": 1.5
+            }
+          ],
+          "modelAnswer": "Apply the definition to the partition $\\{A,A^c\\}$: $(G(A),G(A^c))\\sim\\text{Dirichlet}(\\alpha p,\\alpha(1-p))$, so the marginal is $G(A)\\sim\\text{Beta}(\\alpha p,\\alpha(1-p))$. For $\\text{Beta}(u,v)$ the mean is $u/(u+v)$ and the variance is $uv/((u+v)^2(u+v+1))$. Here $u+v=\\alpha$, so\n$$\\E[G(A)]=\\frac{\\alpha p}{\\alpha}=p,\\qquad\\Var[G(A)]=\\frac{\\alpha p\\cdot\\alpha(1-p)}{\\alpha^2(\\alpha+1)}=\\frac{p(1-p)}{\\alpha+1}.\\ \\blacksquare$$\nSo $G_0$ is the prior mean of $G$, and $\\alpha$ controls how tightly $G$ concentrates around $G_0$."
+        }
+      ]
+    }
+  ]
+}

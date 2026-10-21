@@ -1,0 +1,88 @@
+{
+  "$schema": "./schema/written.schema.json",
+  "schemaVersion": 1,
+  "topicId": "np",
+  "placeholder": true,
+  "title": "PLACEHOLDER: Nonparametric Statistics, written exam",
+  "durationMinutes": 120,
+  "totalMarks": 20,
+  "instructions": "**PLACEHOLDER EXAM.** This file only proves that the pipeline works; replace it with real questions.\n\nAnswer in LaTeX. Write $...$ for inline maths and `\\begin{align} ... \\end{align}` for displayed derivations. Show every step: marks are given for the working, not only for the final answer.",
+  "preamble": "\\newcommand{\\E}{\\mathbb{E}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\Cov}{\\operatorname{Cov}}",
+  "questions": [
+    {
+      "id": "q1",
+      "title": "Wilcoxon rank-sum statistic under the null (placeholder)",
+      "marks": 20,
+      "text": "Let $X_1,\\dots,X_m$ and $Y_1,\\dots,Y_n$ be independent samples from the same continuous distribution (the null hypothesis), and put $N=m+n$. Let $R_1,\\dots,R_m$ be the ranks of the $X_i$ in the pooled sample, so that the Wilcoxon rank-sum statistic is $W=\\sum_{i=1}^m R_i$. Under the null, $(R_1,\\dots,R_m)$ is a simple random sample drawn without replacement from $\\{1,\\dots,N\\}$.",
+      "parts": [
+        {
+          "id": "a",
+          "type": "proof",
+          "text": "Show that $\\E[W]=m(N+1)/2$.",
+          "marks": 6,
+          "markingScheme": [
+            {
+              "step": "Each $R_i$ is uniform on $\\{1,\\dots,N\\}$ by exchangeability under the null",
+              "marks": 2
+            },
+            {
+              "step": "$\\E[R_i]=\\frac1N\\sum_{k=1}^N k=\\frac{N+1}2$",
+              "marks": 2
+            },
+            {
+              "step": "Linearity: $\\E[W]=m\\,\\E[R_1]=m(N+1)/2$",
+              "marks": 2
+            }
+          ],
+          "modelAnswer": "Under the null the pooled observations are exchangeable and, being continuous, have no ties, so each $R_i$ is uniformly distributed on $\\{1,\\dots,N\\}$. Hence\n$$\\E[R_i]=\\frac1N\\sum_{k=1}^N k=\\frac{N+1}2 ,$$\nand by linearity $\\E[W]=\\sum_{i=1}^m\\E[R_i]=\\dfrac{m(N+1)}2$. $\\blacksquare$"
+        },
+        {
+          "id": "b",
+          "type": "proof",
+          "text": "Show that $\\Var(W)=mn(N+1)/12$.",
+          "marks": 8,
+          "markingScheme": [
+            {
+              "step": "$\\Var(R_1)=\\frac{N^2-1}{12}$ from the variance of the discrete uniform distribution on $\\{1,\\dots,N\\}$",
+              "marks": 2
+            },
+            {
+              "step": "Uses $\\sum_{k=1}^N R_k=N(N+1)/2$ (all ranks) being constant, so its variance is $0$, to find $\\Cov(R_i,R_j)=-\\frac{N+1}{12}$",
+              "marks": 3
+            },
+            {
+              "step": "Writes $\\Var(W)=m\\Var(R_1)+m(m-1)\\Cov(R_1,R_2)$",
+              "marks": 1.5
+            },
+            {
+              "step": "Simplifies to $mn(N+1)/12$ using $N-m=n$",
+              "marks": 1.5
+            }
+          ],
+          "modelAnswer": "For the discrete uniform distribution on $\\{1,\\dots,N\\}$, $\\Var(R_1)=(N^2-1)/12$. By symmetry all pairs have the same covariance $c$. Summing over all $N$ ranks gives a constant, so\n$$0=\\Var\\Big(\\sum_{k=1}^N R_k\\Big)=N\\cdot\\frac{N^2-1}{12}+N(N-1)\\,c\\quad\\Longrightarrow\\quad c=-\\frac{N+1}{12}.$$\nTherefore\n\\begin{align}\n\\Var(W)&=m\\,\\frac{N^2-1}{12}+m(m-1)\\Big(-\\frac{N+1}{12}\\Big)=\\frac{m(N+1)}{12}\\big[(N-1)-(m-1)\\big]\\\\\n&=\\frac{m(N+1)(N-m)}{12}=\\frac{mn(N+1)}{12}. \\qquad\\blacksquare\n\\end{align}"
+        },
+        {
+          "id": "c",
+          "type": "calculation",
+          "text": "With $m=5$, $n=6$ and an observed $W=40$, compute $\\E[W]$, $\\Var(W)$ and the standardised statistic $z=(W-\\E[W])/\\sqrt{\\Var(W)}$ (no continuity correction).",
+          "marks": 6,
+          "markingScheme": [
+            {
+              "step": "$\\E[W]=5\\cdot12/2=30$",
+              "marks": 2
+            },
+            {
+              "step": "$\\Var(W)=5\\cdot6\\cdot12/12=30$",
+              "marks": 2
+            },
+            {
+              "step": "$z=10/\\sqrt{30}\\approx1.826$",
+              "marks": 2
+            }
+          ],
+          "modelAnswer": "Here $N=11$. Then $\\E[W]=5\\cdot12/2=30$ and $\\Var(W)=5\\cdot6\\cdot12/12=30$, so\n$$z=\\frac{40-30}{\\sqrt{30}}=\\frac{10}{5.477}\\approx1.826 .$$"
+        }
+      ]
+    }
+  ]
+}

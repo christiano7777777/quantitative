@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://quantitative.local/schema/coding.schema.json",
+  "title": "Big Exam: coding part (content/exams/<topic-id>.coding.json)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "topicId", "title", "totalMarks", "instructions", "questions"],
+  "definitions": {
+    "compare": {
+      "description": "how a test case compares the main function's output with `expected`",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": { "type": { "const": "exact" } }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "const": "numeric" },
+            "abs": { "type": "number", "minimum": 0 },
+            "rel": { "type": "number", "minimum": 0 }
+          },
+          "anyOf": [{ "required": ["abs"] }, { "required": ["rel"] }]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "probs"],
+          "properties": {
+            "type": { "const": "quantiles" },
+            "probs": { "type": "array", "minItems": 1, "items": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1 } },
+            "abs": { "type": "number", "minimum": 0 },
+            "rel": { "type": "number", "minimum": 0 },
+            "length": { "type": "integer", "minimum": 1, "description": "required length of the output array" }
+          },
+          "anyOf": [{ "required": ["abs"] }, { "required": ["rel"] }]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "stats"],
+          "properties": {
+            "type": { "const": "summary" },
+            "stats": { "type": "array", "minItems": 1, "items": { "enum": ["mean", "sd", "var", "median", "min", "max"] } },
+            "abs": { "type": "number", "minimum": 0 },
+            "rel": { "type": "number", "minimum": 0 },
+            "length": { "type": "integer", "minimum": 1 }
+          },
+          "anyOf": [{ "required": ["abs"] }, { "required": ["rel"] }]
+        }
+      ]
+    },
+    "test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "input", "seed", "compare", "expected"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[vh][0-9]+$", "description": "v1, v2 for visible tests; h1, h2 for hidden tests" },
+        "description": { "type": "string" },
+        "input": { "type": "object", "description": "keyword arguments of the main function; {\"$ndarray\": [...]} becomes a numpy array" },
+        "seed": { "type": "integer", "minimum": 0, "description": "seeds random, numpy.random and the rng argument for this test" },
+        "compare": { "$ref": "#/definitions/compare" },
+        "expected": { "description": "exact/numeric: the value. quantiles: one value per prob. summary: one value per stat. The string \"$FROM_REFERENCE\" asks validate-exams --fill-expected to compute it." }
+      }
+    }
+  },
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "topicId": { "type": "string", "pattern": "^[a-z0-9]+$" },
+    "placeholder": { "type": "boolean" },
+    "title": { "type": "string", "minLength": 1 },
+    "totalMarks": { "type": "number", "exclusiveMinimum": 0, "description": "must equal the sum of the question marks" },
+    "instructions": { "type": "string", "minLength": 1 },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "text", "marks", "docs", "helperCode", "skeleton", "functions", "referenceSolution", "visibleTests", "hiddenTests"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^c[0-9]+$" },
+          "slot": { "type": "integer", "minimum": 1, "description": "paper position. Questions with the same slot are alternatives of equal marks and syllabus coverage; a paper uses the FIRST question of each slot. Use slot on every question or on none." },
+          "title": { "type": "string", "minLength": 1 },
+          "text": { "type": "string", "minLength": 1, "description": "the task, Markdown + LaTeX; states every fixed constant (iterations, prior, model)" },
+          "marks": { "type": "number", "exclusiveMinimum": 0 },
+          "docs": { "type": "string", "minLength": 1, "description": "notes shown beside the editor, e.g. algorithm pseudocode; Markdown + LaTeX, fenced code allowed" },
+          "difficultyNotes": { "type": "string", "description": "author-only note on what the question tests; shown in preview mode only" },
+          "helperCode": { "type": "string", "description": "Python run before the student's code (imports, helper functions); shown read-only" },
+          "skeleton": { "type": "string", "minLength": 1, "description": "Python the student starts from, with the function stubs" },
+          "functions": {
+            "type": "array",
+            "minItems": 1,
+            "description": "the function(s) the student writes. Exactly one has main: true; only its output is tested.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["name", "description"],
+              "properties": {
+                "name": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$" },
+                "main": { "type": "boolean" },
+                "description": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "rngArg": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$", "description": "if set, the harness passes a numpy Generator seeded with the test seed under this keyword" },
+          "timeLimitSeconds": { "type": "number", "exclusiveMinimum": 0, "maximum": 120 },
+          "referenceSolution": { "type": "string", "minLength": 1, "description": "complete working code for every function in `functions`" },
+          "oracleSolution": { "type": "string", "description": "optional independent check: Python defining expected_value(**input) that returns the expected value some other way (e.g. numerical integration instead of MCMC)" },
+          "visibleTests": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/test" } },
+          "hiddenTests": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/test" } }
+        }
+      }
+    }
+  }
+}
