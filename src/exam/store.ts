@@ -17,7 +17,7 @@ interface State {
 
 export interface Settings { anthropicKey: string; model: string }
 
-export const DEFAULT_MODEL = 'claude-opus-5-5'
+export const DEFAULT_MODEL = 'claude-sonnet-5-5'
 export const STATE_KEY = 'quantitative.exams.v1'
 export const SETTINGS_KEY = 'quantitative.settings.v1'
 

@@ -133,7 +133,8 @@ export async function askAnthropic(prompt: string, { apiKey, model, fetchImpl = 
         'anthropic-version': '2023-06-01',
         'anthropic-dangerous-direct-browser-access': 'true',
       },
-      body: JSON.stringify({ model, max_tokens: 8000, messages: [{ role: 'user', content: prompt }] }),
+      // output_config.effort is GA (no beta header); medium is a good balance of marking quality and cost
+      body: JSON.stringify({ model, max_tokens: 8000, output_config: { effort: 'medium' }, messages: [{ role: 'user', content: prompt }] }),
     })
   } catch (e) {
     throw new Error(`Could not reach the Anthropic API (${(e as Error).message}). Check your connection, or use the copy-and-paste route.`)

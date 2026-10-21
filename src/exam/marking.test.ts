@@ -110,7 +110,7 @@ describe('askAnthropic / markWithApi', () => {
     expect(h['x-api-key']).toBe('sk-test')
     expect(h['anthropic-version']).toBe('2023-06-01')
     expect(h['anthropic-dangerous-direct-browser-access']).toBe('true')
-    expect(JSON.parse(init.body as string)).toMatchObject({ model: 'm1', messages: [{ role: 'user', content: 'PROMPT' }] })
+    expect(JSON.parse(init.body as string)).toMatchObject({ model: 'm1', output_config: { effort: 'medium' }, messages: [{ role: 'user', content: 'PROMPT' }] })
   })
 
   it('returns a validated marking from a good reply, and parse errors from a bad one', async () => {
