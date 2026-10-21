@@ -24,6 +24,7 @@
         "required": ["id", "title", "text", "marks", "parts"],
         "properties": {
           "id": { "type": "string", "pattern": "^q[0-9]+$" },
+          "slot": { "type": "integer", "minimum": 1, "description": "paper position. Questions with the same slot are alternatives of equal marks and syllabus coverage; a paper uses the FIRST question of each slot. Use slot on every question or on none." },
           "title": { "type": "string", "minLength": 1 },
           "text": { "type": "string", "minLength": 1, "description": "shared setup of the question, Markdown + LaTeX" },
           "marks": { "type": "number", "exclusiveMinimum": 0, "description": "must equal the sum of the part marks" },

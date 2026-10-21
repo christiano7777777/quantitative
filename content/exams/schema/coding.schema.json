@@ -85,6 +85,7 @@
         "required": ["id", "title", "text", "marks", "docs", "helperCode", "skeleton", "functions", "referenceSolution", "visibleTests", "hiddenTests"],
         "properties": {
           "id": { "type": "string", "pattern": "^c[0-9]+$" },
+          "slot": { "type": "integer", "minimum": 1, "description": "paper position. Questions with the same slot are alternatives of equal marks and syllabus coverage; a paper uses the FIRST question of each slot. Use slot on every question or on none." },
           "title": { "type": "string", "minLength": 1 },
           "text": { "type": "string", "minLength": 1, "description": "the task, Markdown + LaTeX; states every fixed constant (iterations, prior, model)" },
           "marks": { "type": "number", "exclusiveMinimum": 0 },

@@ -47,7 +47,7 @@ describe('written files', () => {
     const e = good(); e.questions[0].parts[3].marks = 4; e.totalMarks = 25
     const msg = errors(await run({ 'bay.written.json': e }, 0, false), 'bay.written.json').join('\n')
     expect(msg).toMatch(/part marks add up to 19, but the question says 20/)
-    expect(msg).toMatch(/question marks add up to 20, but totalMarks is 25/)
+    expect(msg).toMatch(/adds up to 20, but totalMarks is 25/)
   })
 
   it('rejects a formula that KaTeX cannot render, naming it', async () => {

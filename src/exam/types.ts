@@ -15,6 +15,7 @@ export interface WrittenPart {
 
 export interface WrittenQuestion {
   id: string
+  slot?: number // paper position: questions sharing a slot are alternatives (see pool.ts)
   title: string
   text: string // Markdown + LaTeX; the shared setup of the question
   marks: number
@@ -60,6 +61,7 @@ export interface FunctionSpec { name: string; main?: boolean; description: strin
 
 export interface CodingQuestion {
   id: string
+  slot?: number // paper position: questions sharing a slot are alternatives (see pool.ts)
   title: string
   text: string
   marks: number

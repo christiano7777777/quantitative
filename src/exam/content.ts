@@ -1,6 +1,7 @@
 // Loads exam files from content/exams/. Dropping <topic-id>.written.json / <topic-id>.coding.json in that folder is all it
 // takes: nothing in the UI names a topic. Files load on demand, so they are not in the main bundle.
 
+import { selectPaper } from './pool'
 import type { CodingExam, WrittenExam } from './types'
 
 const written = import.meta.glob<WrittenExam>('/content/exams/*.written.json', { import: 'default' })
@@ -18,5 +19,12 @@ export const hasCoding = (topicId: string) => codingFiles.has(topicId)
 /** every topic that has at least one exam file, for the preview index */
 export const topicsWithExamFiles = () => [...new Set([...writtenFiles.keys(), ...codingFiles.keys()])].sort()
 
-export const loadWritten = async (topicId: string): Promise<WrittenExam | null> => (await writtenFiles.get(topicId)?.() as WrittenExam | undefined) ?? null
-export const loadCoding = async (topicId: string): Promise<CodingExam | null> => (await codingFiles.get(topicId)?.() as CodingExam | undefined) ?? null
+/** the paper a student sits: the first question of every slot (a file may hold alternatives; see pool.ts) */
+export const loadWritten = async (topicId: string): Promise<WrittenExam | null> => {
+  const e = (await writtenFiles.get(topicId)?.()) as WrittenExam | undefined
+  return e ? selectPaper(e) : null
+}
+export const loadCoding = async (topicId: string): Promise<CodingExam | null> => {
+  const e = (await codingFiles.get(topicId)?.()) as CodingExam | undefined
+  return e ? selectPaper(e) : null
+}

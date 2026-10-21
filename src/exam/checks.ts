@@ -3,6 +3,7 @@
 
 import { examConfig } from './config.ts'
 import { mathErrors } from './latex.ts'
+import { paperOf, slotsOf, type Poolable } from './pool.ts'
 import { FROM_REFERENCE } from './types.ts'
 import type { CodingExam, CodingTest, WrittenExam } from './types.ts'
 
@@ -19,6 +20,18 @@ function dupes(ids: string[]): string[] {
   const seen = new Set<string>(), out = new Set<string>()
   for (const id of ids) (seen.has(id) ? out : seen).add(id)
   return [...out]
+}
+
+/** slots: all questions or none carry one, numbered 1..k without gaps, and alternatives of a slot have equal marks */
+function checkPool(out: Issue[], at: (...p: string[]) => string, questions: Poolable[]) {
+  const withSlot = questions.filter((q) => q.slot !== undefined).length
+  if (withSlot !== 0 && withSlot !== questions.length) { out.push(err(at(), 'either every question has a "slot" or none does')); return }
+  if (withSlot === 0) return
+  const slots = [...new Set(questions.map((q) => q.slot!))].sort((a, b) => a - b)
+  if (slots.some((v, i) => v !== i + 1)) out.push(err(at(), `slots must be numbered 1 to ${slots.length} without gaps (found ${slots.join(', ')})`))
+  for (const alts of slotsOf(questions))
+    if (alts.some((q) => !close(q.marks, alts[0].marks)))
+      out.push(err(at(), `slot ${alts[0].slot}: alternatives must have equal marks (${alts.map((q) => `${q.id}=${q.marks}`).join(', ')}), so every paper has the same total`))
 }
 
 function checkMath(out: Issue[], where: string, text: string, preamble = '') {
@@ -58,8 +71,9 @@ export function checkWritten(exam: WrittenExam, fileTopic: string): Issue[] {
       checkMath(out, pa('modelAnswer'), p.modelAnswer, exam.preamble)
     }
   }
-  const total = sum(exam.questions.map((q) => q.marks))
-  if (!close(total, exam.totalMarks)) out.push(err(at(), `question marks add up to ${total}, but totalMarks is ${exam.totalMarks}`))
+  checkPool(out, at, exam.questions)
+  const total = sum(paperOf(exam.questions).map((q) => q.marks))
+  if (!close(total, exam.totalMarks)) out.push(err(at(), `the paper (the first question of each slot) adds up to ${total}, but totalMarks is ${exam.totalMarks}`))
   if (proofs === 0) out.push(warn(at(), 'no part has type "proof"; the written exam should include proofs'))
   return out
 }
@@ -92,8 +106,9 @@ export function checkCodingStatic(exam: CodingExam, fileTopic: string): Issue[] 
   if (exam.placeholder) out.push(warn(at(), 'placeholder file: replace it with real questions before real use'))
   for (const d of dupes(exam.questions.map((q) => q.id))) out.push(err(at(), `duplicate question id ${d}`))
   checkMath(out, at('instructions'), exam.instructions)
-  const total = sum(exam.questions.map((q) => q.marks))
-  if (!close(total, exam.totalMarks)) out.push(err(at(), `question marks add up to ${total}, but totalMarks is ${exam.totalMarks}`))
+  checkPool(out, at, exam.questions)
+  const total = sum(paperOf(exam.questions).map((q) => q.marks))
+  if (!close(total, exam.totalMarks)) out.push(err(at(), `the paper (the first question of each slot) adds up to ${total}, but totalMarks is ${exam.totalMarks}`))
 
   for (const q of exam.questions) {
     const qa = (...p: string[]) => at(q.id, ...p)
