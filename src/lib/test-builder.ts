@@ -1,6 +1,9 @@
 import { testConfig } from '../config/test.config'
 import { makeRng } from './rng'
-import type { LQGenerator, Paper, PaperMC, PaperSpec, TestBank } from './types'
+import type { LQGenerator, Paper, PaperBlank, PaperMC, PaperSpec, TestBank } from './types'
+
+/** The short questions of a bank: typed blanks if it has them, otherwise its MC. Their ids go in PaperSpec.mcIds. */
+export const shortPool = (bank: Pick<TestBank, 'mc' | 'blanks'>): { id: string; lecture: number; section?: number }[] => bank.blanks ?? bank.mc
 
 /**
  * Choose which questions an attempt contains.
@@ -12,10 +15,11 @@ import type { LQGenerator, Paper, PaperMC, PaperSpec, TestBank } from './types'
  */
 export function selectPaper(bank: TestBank, seed: string, seenMcIds: ReadonlySet<string> = new Set()): PaperSpec {
   const rng = makeRng(seed).fork('select')
-  const want = Math.min(testConfig.mcCount, bank.mc.length)
+  const pool = shortPool(bank)
+  const want = Math.min(testConfig.mcCount, pool.length)
 
-  const byLecture = new Map<number, typeof bank.mc>()
-  for (const q of bank.mc) byLecture.set(q.lecture, [...(byLecture.get(q.lecture) ?? []), q])
+  const byLecture = new Map<number, typeof pool>()
+  for (const q of pool) byLecture.set(q.lecture, [...(byLecture.get(q.lecture) ?? []), q])
 
   const unseenFirst = <T extends { id: string }>(xs: T[]) => {
     const sh = rng.shuffle(xs)
@@ -29,7 +33,7 @@ export function selectPaper(bank: TestBank, seed: string, seenMcIds: ReadonlySet
     const quota = base + (i < extra ? 1 : 0)
     for (const q of pickStratified(byLecture.get(lec)!, quota, seenMcIds, rng)) chosen.push(q.id)
   })
-  for (const q of unseenFirst(bank.mc.filter((q) => !chosen.includes(q.id)))) {
+  for (const q of unseenFirst(pool.filter((q) => !chosen.includes(q.id)))) {
     if (chosen.length >= want) break
     chosen.push(q.id)
   }
@@ -103,7 +107,8 @@ export function pickStratified<T extends { id: string; section?: number }>(
 /** Deterministic: the same spec always rebuilds the same paper (options, order, LQ numbers). */
 export function renderPaper(bank: TestBank, spec: PaperSpec): Paper {
   const root = makeRng(spec.seed)
-  const mc: PaperMC[] = spec.mcIds.map((id) => {
+  // a typed bank keeps its short question ids in mcIds; they have nothing to shuffle
+  const mc: PaperMC[] = bank.blanks ? [] : spec.mcIds.map((id) => {
     const q = bank.mc.find((x) => x.id === id)
     if (!q) throw new Error(`unknown MC question ${id}`)
     const r = root.fork(`mc/${id}`)
@@ -119,7 +124,15 @@ export function renderPaper(bank: TestBank, spec: PaperSpec): Paper {
     const inst = g.generate(root.fork(`lq/${id}`))
     return { id, intro: inst.intro, parts: inst.parts }
   })
-  return { spec, mc, lq }
+  return bank.blanks ? { spec, mc, lq, blanks: renderBlanks(bank, spec) } : { spec, mc, lq }
+}
+
+function renderBlanks(bank: TestBank, spec: PaperSpec): PaperBlank[] {
+  return spec.mcIds.map((id) => {
+    const q = bank.blanks!.find((x) => x.id === id)
+    if (!q) throw new Error(`unknown short question ${id}`)
+    return { id, lecture: q.lecture, prompt: q.prompt, kind: q.kind, template: q.template, picture: q.picture, broken: q.broken, blank: q.blank, explanation: q.explanation }
+  })
 }
 
 export function newSeed(): string {

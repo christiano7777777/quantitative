@@ -2,7 +2,7 @@ import { lectureConfig } from '../config/test.config'
 import type { ProgressStore } from './progress'
 import { makeRng } from './rng'
 import { quizLqId } from './lq-composite'
-import { findGenerator, pickStratified } from './test-builder'
+import { findGenerator, pickStratified, shortPool } from './test-builder'
 import type { Lesson, LessonSample, LQInstance, PaperSpec, TestBank } from './types'
 
 // Every folder src/content/lessons/<topicId>/index.ts with a default-exported Lesson[] (one entry per lecture, in
@@ -43,14 +43,14 @@ export function lessonsDone(store: ProgressStore, topicId: string, dev: boolean)
 }
 
 /**
- * The quiz: 5 MC spread over the sections of the lecture (unseen first on retakes) and one long question with parts from
+ * The quiz: 5 MC (or typed short questions) spread over the sections of the lecture (unseen first on retakes) and one long question with parts from
  * every section of the lecture (see quizLqId).
  */
 export function selectLecturePaper(
   bank: TestBank, lesson: Lesson, lecture: number, seed: string, seenMcIds: ReadonlySet<string> = new Set(),
 ): PaperSpec {
   const rng = makeRng(seed).fork('select')
-  const picked = pickStratified(bank.mc.filter((q) => q.lecture === lecture), lectureConfig.mcCount, seenMcIds, rng)
+  const picked = pickStratified(shortPool(bank).filter((q) => q.lecture === lecture), lectureConfig.mcCount, seenMcIds, rng)
   return { seed, mcIds: rng.shuffle(picked.map((q) => q.id)), lqIds: [quizLqId(bank, lesson)] }
 }
 

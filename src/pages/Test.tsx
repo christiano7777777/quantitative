@@ -1,6 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
+import { BlankInput } from '../components/BlankInput'
+import { BlankPrompt } from '../components/BlankPrompt'
 import { Math } from '../components/Math'
+import { Rich } from '../components/Rich'
 import { useApp } from '../context'
 import { banks } from '../lib/content'
 import { lectureRules, localGrader, topicRules } from '../lib/grader'
@@ -32,15 +35,19 @@ export function TestPage() {
 
   const [mc, setMc] = useState<(number | null)[]>(() => paper?.mc.map(() => null) ?? [])
   const [lq, setLq] = useState<string[][]>(() => paper?.lq.map((q) => q.parts.map(() => '')) ?? [])
+  const [bl, setBl] = useState<string[]>(() => paper?.blanks?.map(() => '') ?? [])
 
   const allowed = lecture === null ? lessonsDone(store, id, dev) : lectureUnlocked(store, id, lecture, dev)
   if (!topic || !bank || !paper || !isUnlocked(graph, id, passed, dev) || !allowed) return <Navigate to={`/topic/${id}`} replace />
 
+  const typedBank = paper.blanks !== undefined
   const unanswered =
-    mc.filter((x) => x === null).length + lq.flat().filter((s) => s.trim() === '').length
+    mc.filter((x) => x === null).length + lq.flat().filter((s) => s.trim() === '').length + bl.filter((s) => s.trim() === '').length
+  const setPart = (qi: number, pi: number, v: string) =>
+    setLq((a) => a.map((row, r) => (r === qi ? row.map((x, c) => (c === pi ? v : x)) : row)))
 
   const submit = () => {
-    const answers = { mc, lq }
+    const answers = typedBank ? { mc, lq, blanks: bl } : { mc, lq }
     const result = localGrader.grade(paper, answers, rules)
     store.record(key, paper.spec, answers, result)
     refresh()
@@ -52,11 +59,32 @@ export function TestPage() {
     <>
       <p><Link to={back}>← {lecture === null ? topic.label : `Lecture ${lecture}`}</Link></p>
       <h1>{topic.label}: {lecture === null ? 'test' : `lecture ${lecture} quiz`}</h1>
-      <p className="muted small">
-        Closed book. A scientific calculator is allowed (no programming or graphing). Type numbers as decimals or fractions (0.5 or 1/2); no percent signs.
-        Nothing is saved until you submit.
-      </p>
+      {typedBank ? (
+        <p className="muted small">
+          Closed book. Type code as you would write it in a .tex file (or the command where one is asked for); each answer is
+          checked automatically, and the results page shows how. Nothing is saved until you submit.
+        </p>
+      ) : (
+        <p className="muted small">
+          Closed book. A scientific calculator is allowed (no programming or graphing). Type numbers as decimals or fractions (0.5 or 1/2); no percent signs.
+          Nothing is saved until you submit.
+        </p>
+      )}
 
+      {typedBank ? (
+        <>
+          <h2>Part A: short answers <span className="muted small">({rules.mcMarks} mark each)</span></h2>
+          <ol className="questions">
+            {paper.blanks!.map((q, i) => (
+              <li key={q.id} value={i + 1}>
+                <BlankPrompt prompt={q.prompt} view={q} macros={q.blank.macros}
+                  input={<BlankInput label={`Short answer ${i + 1}`} value={bl[i]} onChange={(v) => setBl((a) => a.map((x, j) => (j === i ? v : x)))} />} />
+              </li>
+            ))}
+          </ol>
+        </>
+      ) : (
+      <>
       <h2>Part A: multiple choice <span className="muted small">({rules.mcMarks} mark each)</span></h2>
       <ol className="questions">
         {paper.mc.map((q, i) => (
@@ -72,20 +100,29 @@ export function TestPage() {
           </li>
         ))}
       </ol>
+      </>
+      )}
 
       <h2>Part B: long questions</h2>
       {paper.lq.map((q, qi) => (
         <section key={q.id} className="card">
           <h3>Long question{paper.lq.length > 1 ? ` ${qi + 1}` : ''} <span className="muted small">({rules.lqMarks} marks, {fmt(rules.lqMarks / q.parts.length)} per part)</span></h3>
-          <p><Math text={q.intro} /></p>
+          <p>{typedBank ? <Rich text={q.intro} /> : <Math text={q.intro} />}</p>
           <ol type="a">
             {q.parts.map((p, pi) => (
               <li key={pi}>
-                <p><Math text={p.prompt} /></p>
-                <input className="num" type="text" inputMode="text" autoComplete="off" spellCheck={false}
-                  aria-label={`Long question ${qi + 1} part ${pi + 1} answer`}
-                  value={lq[qi][pi]}
-                  onChange={(e) => setLq((a) => a.map((row, r) => (r === qi ? row.map((v, c) => (c === pi ? e.target.value : v)) : row)))} />
+                {p.blank && p.view ? (
+                  <BlankPrompt prompt={p.prompt} view={p.view} macros={p.blank.macros}
+                    input={<BlankInput label={`Long question ${qi + 1} part ${pi + 1} answer`} value={lq[qi][pi]} onChange={(v) => setPart(qi, pi, v)} />} />
+                ) : (
+                  <>
+                    <p><Math text={p.prompt} /></p>
+                    <input className="num" type="text" inputMode="text" autoComplete="off" spellCheck={false}
+                      aria-label={`Long question ${qi + 1} part ${pi + 1} answer`}
+                      value={lq[qi][pi]}
+                      onChange={(e) => setPart(qi, pi, e.target.value)} />
+                  </>
+                )}
               </li>
             ))}
           </ol>
