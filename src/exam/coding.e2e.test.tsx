@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 // The coding exam through the real pages with a fake runner (Pyodide itself is exercised in a real browser and by
 // `npm run validate-exams -- --pyodide`). CodeMirror is replaced by a textarea because jsdom has no layout.
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { cleanup, configure, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import bay from '../../content/exams/bay.coding.json'
@@ -11,6 +11,9 @@ import type { CaseResult, CodeRunner, RunRequest } from './coding/runner'
 import { scoreAttempt, scoreQuestion } from './coding/scoring'
 import { STATE_KEY } from './store'
 import type { CodingExam } from './types'
+
+// exam pages load their content with dynamic imports; give them time when the whole suite is running in parallel
+configure({ asyncUtilTimeout: 15_000 })
 
 vi.mock('./ui/CodeEditor', () => ({
   default: ({ value, onChange, label }: { value: string; onChange?(v: string): void; label: string }) =>

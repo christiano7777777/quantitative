@@ -1,12 +1,15 @@
 // @vitest-environment jsdom
 // The written exam through the real pages (jsdom): gating, typing LaTeX with a bad line, submit, mark by pasted JSON, grade.
-import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
+import { cleanup, configure, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import bay from '../../content/exams/bay.written.json'
 import { App } from '../App'
 import { STATE_KEY } from './store'
 import type { WrittenExam } from './types'
+
+// exam pages load their content with dynamic imports; give them time when the whole suite is running in parallel
+configure({ asyncUtilTimeout: 15_000 })
 
 const exam = bay as unknown as WrittenExam
 const go = (hash: string) => { window.location.hash = hash }

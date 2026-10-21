@@ -4,11 +4,12 @@ import { careers, domainLabels, domainOrder, topics } from '../data'
 import { useApp } from '../context'
 import { careerProgress, careerSummary, layout, statusOf } from '../lib/graph'
 import { hasTest } from '../lib/content'
+import { examEnabled } from '../exam/phases'
 
 const W = 190, H = 30, GX = 52, GY = 10, PX = 20, PY = 36
 
 export function Tree() {
-  const { graph, passed, dev } = useApp()
+  const { graph, passed, dev, exams } = useApp()
   const nav = useNavigate()
   const [careerId, setCareerId] = useState('')
   const pos = useMemo(() => layout(graph, domainOrder), [graph])
@@ -109,15 +110,17 @@ export function Tree() {
               const cls = ['node', st, t.starred ? 'star' : '', required.has(t.id) ? 'req' : bonus.has(t.id) ? 'bonus' : '',
                 career && !inCareer(t.id) ? 'dim' : ''].join(' ')
               const go = () => nav(`/topic/${t.id}`)
+              // Big Exam grade, once both parts are done; the node keeps its plain tick otherwise
+              const grade = examEnabled(t) ? exams.summary(t.id, t.examWeights).total?.grade : undefined
               return (
                 <g key={t.id} className={cls} transform={`translate(${x},${y})`} tabIndex={0} role="link"
-                  aria-label={`${t.label}, ${st}${hasTest(t.id) ? '' : ', test coming soon'}`}
+                  aria-label={`${t.label}, ${st}${hasTest(t.id) ? '' : ', test coming soon'}${grade ? `, big exam grade ${grade}` : ''}`}
                   onClick={go} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go() } }}>
                   <rect className="box" width={W} height={H} rx={5} />
                   <rect width={5} height={H} rx={2} fill={`var(--d-${t.domain})`} />
                   <text x={13} y={H / 2 + 4}>{t.label}</text>
                   <text x={W - 8} y={H / 2 + 4} textAnchor="end" className="mark">
-                    {st === 'passed' ? '✓' : st === 'locked' ? '🔒' : hasTest(t.id) ? '' : '·'}
+                    {grade ?? (st === 'passed' ? '✓' : st === 'locked' ? '🔒' : hasTest(t.id) ? '' : '·')}
                   </text>
                 </g>
               )
