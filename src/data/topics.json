@@ -4487,6 +4487,10 @@
   "courses": "No university course (math typesetting, figures, BibTeX citations, paper structure)",
   "starred": true,
   "examPhase": 2,
+  "examWeights": {
+   "written": 1,
+   "coding": 0
+  },
   "summary": "Typesetting mathematics and writing research papers in LaTeX.",
   "outcomes": [
    "Typeset equations and documents",
@@ -4999,6 +5003,10 @@
   "courses": "HKUST MAFS5240 · HKU FITE7406",
   "starred": false,
   "examPhase": 2,
+  "examWeights": {
+   "written": 1,
+   "coding": 0
+  },
   "summary": "Modern C++ for performance-critical numerical and trading code.",
   "outcomes": [
    "Use modern C++ idioms",

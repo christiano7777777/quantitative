@@ -18,7 +18,8 @@ def block(obj):
     return json.dumps(obj, indent=2, ensure_ascii=False)
 
 
-def main():
+def base_text():
+    """The template with the live schemas and the worked examples filled in (still has the generic ASSIGNMENT block)."""
     text = (ROOT / 'scripts' / 'writer_prompt_template.md').read_text(encoding='utf-8')
     parts = {
         '{{WRITTEN_SCHEMA}}': block(load(EXAMS / 'schema' / 'written.schema.json')),
@@ -29,6 +30,11 @@ def main():
     for key, value in parts.items():
         assert key in text, key
         text = text.replace(key, value)
+    return text
+
+
+def main():
+    text = base_text()
     out = ROOT / 'PROMPT_FOR_CLAUDE_QUESTION_WRITER.md'
     out.write_text(text, encoding='utf-8')
     print(f'wrote {out.name}: {len(text):,} characters')

@@ -2,13 +2,17 @@
 
 Phase 1 is the hand-picked pilot list below. Phase 2 is every other topic on the Quant Researcher (`qr`) track, using the
 same definition the skill tree uses to highlight a career: the required topics, all their prerequisites, and the bonus
-topics (see careerClosure and inCareer in src/lib/graph.ts and src/pages/Tree.tsx). All other topics get null.
+topics (see careerClosure and inCareer in src/lib/graph.ts and src/pages/Tree.tsx). All other topics get null. Phase 1/2 topics listed in exam_topic_hints.WRITTEN_ONLY (no coding part)
+also get examWeights {written: 1, coding: 0}.
 The script keeps the file's line endings and key order, and is safe to re-run.
 """
 import json
 import pathlib
+import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))  # python -I does not add the script folder
+from exam_topic_hints import WRITTEN_ONLY  # noqa: E402
 TOPICS = ROOT / 'src' / 'data' / 'topics.json'
 CAREERS = ROOT / 'src' / 'data' / 'careers.json'
 TRACK = 'qr'
@@ -40,10 +44,13 @@ def main() -> None:
         phase = 1 if t['id'] in PHASE1 else 2 if t['id'] in track else None
         new = {}
         for k, v in t.items():
-            if k != 'examPhase':
+            if k not in ('examPhase', 'examWeights'):
                 new[k] = v
             if k == 'starred':
                 new['examPhase'] = phase
+                # a topic with no coding part is examined in writing only (100% written)
+                if phase is not None and t['id'] in WRITTEN_ONLY:
+                    new['examWeights'] = {'written': 1, 'coding': 0}
         if 'starred' not in t:
             new['examPhase'] = phase
         out.append(new)

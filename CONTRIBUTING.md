@@ -190,5 +190,8 @@ content/exams/<topicId>.coding.json    schema: content/exams/schema/coding.schem
   `python -I scripts/assign_exam_phases.py` recomputes `examPhase` from the careers data. A topic with no coding part gets
   `"examWeights": { "written": 1, "coding": 0 }` in `topics.json`.
 - **Grade scale and weights:** `src/exam/config.ts`.
-- **Writing the real questions:** `PROMPT_FOR_CLAUDE_QUESTION_WRITER.md` is a self-contained prompt for a Claude chat; it is
-  built by `python -I scripts/build_writer_prompt.py` from the live schemas, so rebuild it after changing a schema.
+- **Writing the real questions:** every topic has its own tailored prompt for a Claude chat at
+  `topic-folders/<Label> (<id>)/BIG EXAM PROMPT <Label> (<id>).md` (topic id, courses, lecture outline from `topics.json` and
+  topic-specific guidance already filled in; written-only topics get a written-only prompt). Rebuild them with
+  `python -I scripts/build_topic_exam_prompts.py [ids]`, after editing `scripts/exam_topic_hints.py` or a schema; re-running
+  `tools/export_topic_folders.py` rebuilds them too. `PROMPT_FOR_CLAUDE_QUESTION_WRITER.md` is the generic master version.
