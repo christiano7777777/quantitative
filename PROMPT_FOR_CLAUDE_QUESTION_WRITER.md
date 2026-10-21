@@ -40,6 +40,21 @@ For the topic in the ASSIGNMENT block, with its id written `<id>` below:
 
 ---
 
+## 0.5 Question pool: write alternatives, with different questions
+
+The app keeps a pool of questions per topic so that retakes can use different questions. For now it sits **one fixed paper**: the first question of every slot. So write **two different questions for every paper position**:
+
+- Give every question a `"slot"` number (1, 2, 3, ...): questions with the same slot are alternatives for the same position in the paper. Use `slot` on **every** question of the file.
+- **Order in the file:** first the primary question of every slot (slot 1, slot 2, ... in order), then the alternates (slot 1, slot 2, ... again). The first question of each slot is the paper; the app uses it today. Ids run in file order: `q1`, `q2`, ... (written) and `c1`, `c2`, ... (coding).
+- **Alternatives must be genuinely different questions**, not renumbered copies or the same question with other numbers: a different model, setting or data; different results to derive or prove; a different algorithm or estimator for coding. They cover the **same block of lectures** at **the same difficulty** and carry **exactly the same marks** (the validator rejects unequal marks in one slot, so every paper has the same total).
+- Written: 4 or 5 slots, so 8 to 10 questions. Coding: 3 or 4 slots, so 6 to 8 questions.
+- `totalMarks` is the sum over the **primary** questions only (one per slot).
+- Every question, primary or alternate, needs its full marking scheme and model answer (written) or reference solution, oracle and tests (coding). All of them are validated.
+- **If the student attaches an existing exam file for this topic:** keep its questions exactly as they are as the primaries (give them slots 1..k in their order) and write only the alternates. Do not rewrite or renumber the existing questions.
+- **If you run out of output space:** stop at the end of a complete question, say clearly where you stopped, and wait. When the student says "continue", carry on from exactly that point so the pieces join into one valid JSON file. Never leave a question half written.
+
+---
+
 ## 1. Sources you must follow
 
 ### 1.1 The topic's lecture syllabus
@@ -58,7 +73,7 @@ Write new questions in the style of university past papers. Do not reproduce que
 
 ### 2.1 Style rules
 
-- **Past-paper style, about 2 hours.** A good paper has 4 or 5 questions worth about 100 marks in total (set `totalMarks` to the exact sum and `durationMinutes` to about 120). A student who knows the material should need most of the 2 hours.
+- **Past-paper style, about 2 hours.** A good paper (the primary question of each slot, section 0.5) has 4 or 5 questions worth about 100 marks in total (set `totalMarks` to the exact sum of the primary questions and `durationMinutes` to about 120). A student who knows the material should need most of the 2 hours.
 - **Multi-part questions.** Each question has a shared setup (`text`) and 3 to 5 lettered parts (`a`, `b`, `c`, ...), each with its own marks. Parts should build on each other, with later parts allowed to use earlier results (say so in the text).
 - **Include proofs.** At least one proof or derivation in every question, and across the paper at least a quarter of the marks on parts with `"type": "proof"`. Typical proofs: unbiasedness, sufficiency, a distributional result, an inequality, a property of an estimator or test, a convergence statement. Mix them with calculations and short explanations (`"type": "explanation"`: "state the assumption and say when it fails").
 - **Difficulty mix per question:** one or two routine parts (recall a definition, apply a formula), one or two standard parts (a derivation from the lectures), one harder part (a proof or a twist not seen in the lectures but solvable from them).
@@ -160,6 +175,11 @@ Question text, parts, marking-scheme steps and model answers are **Markdown with
           "id": {
             "type": "string",
             "pattern": "^q[0-9]+$"
+          },
+          "slot": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "paper position. Questions with the same slot are alternatives of equal marks and syllabus coverage; a paper uses the FIRST question of each slot. Use slot on every question or on none."
           },
           "title": {
             "type": "string",
@@ -676,6 +696,11 @@ The student writes one or two Python functions in a browser editor, running on P
             "type": "string",
             "pattern": "^c[0-9]+$"
           },
+          "slot": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "paper position. Questions with the same slot are alternatives of equal marks and syllabus coverage; a paper uses the FIRST question of each slot. Use slot on every question or on none."
+          },
           "title": {
             "type": "string",
             "minLength": 1
@@ -1066,7 +1091,8 @@ Go through the list and fix every problem silently. Then, at the very end of you
 **Marks**
 - [ ] For every part: the marking-scheme steps add up to the part's marks.
 - [ ] For every question: the part marks add up to the question's marks.
-- [ ] `totalMarks` equals the sum of the question marks (written and coding separately).
+- [ ] `totalMarks` equals the sum of the primary question of each slot (written and coding separately); alternatives in a slot have identical marks.
+- [ ] Every question has a `slot`, numbered 1..k with no gaps; primaries come first in the file, then the alternates; alternatives are genuinely different questions.
 - [ ] All marks are multiples of 0.5.
 
 **Written format**

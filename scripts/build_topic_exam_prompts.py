@@ -59,7 +59,7 @@ def guidance(t: dict, coding: bool) -> str:
         written = 'the central theorems, derivations and computations of each lecture in the outline'
     code = (f'''### 4.2 Coding part for {t['label']}
 
-Write 3 or 4 questions in the format of section 3. Kinds of question that suit this topic (choose and adapt to the outline; drop anything the outline does not cover): {coding_ideas}
+Write 3 or 4 slots of coding questions, two different questions per slot (section 0.5), in the format of section 3. Kinds of question that suit this topic (choose and adapt to the outline; drop anything the outline does not cover): {coding_ideas}
 
 Every question needs a fixed, stated setup, no data in the text, one tested function, and tests as described in section 3. Prefer deterministic comparison (`exact`, `numeric`) whenever the quantity is deterministic; use `quantiles` / `summary` only for seeded random output.''' if coding else f'''### 4.2 No coding part for {t['label']}
 
@@ -68,7 +68,7 @@ Write the written file only. If the outline has short procedures a student shoul
 
 ### 4.1 Written part for {t['label']}
 
-Cover all {len(t['lectures'])} lectures across 4 or 5 questions (each question spans 2 or 3 consecutive lectures; no lecture left untested). Typical content that fits this topic: {written}.
+Cover all {len(t['lectures'])} lectures across the 4 or 5 slots of the paper (each slot spans 2 or 3 consecutive lectures; no lecture left untested); each slot gets two different questions (section 0.5). Typical content that fits this topic: {written}.
 
 Method, in this order:
 1. List each lecture's 2 or 3 central results (the theorems proved, the algorithms stated, the formulas used).
