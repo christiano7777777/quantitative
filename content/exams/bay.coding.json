@@ -1,0 +1,240 @@
+{
+  "$schema": "./schema/coding.schema.json",
+  "schemaVersion": 1,
+  "topicId": "bay",
+  "placeholder": true,
+  "title": "PLACEHOLDER: Bayesian Statistics, coding exam",
+  "totalMarks": 10,
+  "instructions": "**PLACEHOLDER EXAM.** This file only proves that the pipeline works; replace it with real questions.\n\nWrite only the functions asked for. Every run is seeded, so your results are reproducible. The visible tests can be run as often as you like; the hidden tests run when you submit.",
+  "questions": [
+    {
+      "id": "c1",
+      "title": "Metropolis-Hastings for a Bernoulli probability",
+      "text": "Binary data $Y_1,\\dots,Y_n$ are modelled as conditionally i.i.d. $Y_i\\mid p\\sim\\text{Bernoulli}(p)$, so\n$$f(y\\mid p)=p^{y}(1-p)^{1-y},\\qquad y\\in\\{0,1\\}.$$\nThe prior on $p$ is a normal distribution with mean $\\mu=0.5$ and standard deviation $\\sigma=0.2$ **truncated to $(0,1)$**, so that\n$$\\pi(p)\\propto \\exp\\!\\Big(-\\frac{(p-\\mu)^2}{2\\sigma^2}\\Big),\\qquad 0<p<1.$$\n\nWrite two functions.\n\n1. `log_posterior(p, Y)` returns the **unnormalised log posterior** of $p$ given the data array `Y`, and `-np.inf` when $p\\notin(0,1)$.\n2. `mh_posterior(Y, rng)` runs a **random-walk Metropolis-Hastings** chain for $p\\mid Y$ and returns **one numpy array**: the draws left after discarding the burn-in.\n\nThe constants `MU`, `SIGMA`, `STEP` (sd of the normal proposal), `P0` (starting value), `N_ITER` (iterations) and `BURN_IN` are already defined for you. The chain makes exactly `N_ITER` iterations, stores the state after every iteration (the current value if the proposal is rejected), and returns the last `N_ITER - BURN_IN` stored values. Use the generator `rng` for all randomness. Only the output of `mh_posterior` is tested, through its 5%, 50% and 95% quantiles.",
+      "marks": 10,
+      "docs": "**Random-walk Metropolis-Hastings.** Target density $\\tilde\\pi(p)=f(y\\mid p)\\,\\pi(p)$, known up to a constant.\n\n```\np <- P0\nfor t = 1, ..., N_ITER:\n    p* <- p + STEP * Z,   Z ~ N(0, 1)\n    u  <- Uniform(0, 1)\n    if log(u) < log pi~(p*) - log pi~(p):\n        p <- p*              # accept\n    store p                  # also when the proposal was rejected\nreturn the stored values after the first BURN_IN\n```\n\nThe proposal is symmetric, so the Hastings ratio reduces to $\\tilde\\pi(p^*)/\\tilde\\pi(p)$. Work on the log scale to avoid underflow. A proposal outside $(0,1)$ has log posterior $-\\infty$ and is always rejected.\n\nFor data $y$ with $s=\\sum y_i$ the log likelihood is $s\\log p+(n-s)\\log(1-p)$.",
+      "difficultyNotes": "Placeholder. Tests whether the student can turn the model and the truncated prior into an unnormalised log posterior and write the MH loop from pseudocode.",
+      "helperCode": "import numpy as np\nfrom scipy import stats\n\n# Constants fixed by the question. Do not change them.\nMU = 0.5        # prior mean (before truncation)\nSIGMA = 0.2     # prior standard deviation (before truncation)\nSTEP = 0.1      # sd of the random-walk proposal\nP0 = 0.5        # starting value of the chain\nN_ITER = 20000  # number of MH iterations\nBURN_IN = 2000  # draws discarded from the start of the chain\n",
+      "skeleton": "def log_posterior(p, Y):\n    \"\"\"Unnormalised log posterior density of p given the 0/1 data Y.\n    Return -np.inf outside (0, 1).\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n\n\ndef mh_posterior(Y, rng):\n    \"\"\"Random-walk Metropolis-Hastings for p | Y.\n    Return one numpy array: the N_ITER - BURN_IN draws that remain after the burn-in is discarded.\"\"\"\n    # YOUR CODE HERE\n    raise NotImplementedError\n",
+      "functions": [
+        {
+          "name": "log_posterior",
+          "description": "Unnormalised log posterior of p given Y (-inf outside (0, 1)). Helper: not tested directly."
+        },
+        {
+          "name": "mh_posterior",
+          "main": true,
+          "description": "Random-walk MH; returns one array of N_ITER - BURN_IN draws. This is the tested function."
+        }
+      ],
+      "rngArg": "rng",
+      "timeLimitSeconds": 20,
+      "referenceSolution": "def log_posterior(p, Y):\n    if p <= 0 or p >= 1:\n        return -np.inf\n    Y = np.asarray(Y)\n    loglik = np.sum(Y * np.log(p) + (1 - Y) * np.log(1 - p))\n    logprior = -0.5 * ((p - MU) / SIGMA) ** 2\n    return loglik + logprior\n\n\ndef mh_posterior(Y, rng):\n    p = P0\n    lp = log_posterior(p, Y)\n    draws = np.empty(N_ITER)\n    for t in range(N_ITER):\n        prop = p + STEP * rng.standard_normal()\n        lp_prop = log_posterior(prop, Y)\n        if np.log(rng.uniform()) < lp_prop - lp:\n            p, lp = prop, lp_prop\n        draws[t] = p\n    return draws[BURN_IN:]\n",
+      "oracleSolution": "def expected_value(Y):\n    # independent of MCMC: normalise the posterior on a fine grid and read off the quantiles\n    Y = np.asarray(Y)\n    s, n = Y.sum(), len(Y)\n    p = np.linspace(1e-6, 1 - 1e-6, 400001)\n    logpost = s * np.log(p) + (n - s) * np.log1p(-p) - 0.5 * ((p - MU) / SIGMA) ** 2\n    w = np.exp(logpost - logpost.max())\n    cdf = np.cumsum(w)\n    cdf /= cdf[-1]\n    return [float(np.interp(q, cdf, p)) for q in (0.05, 0.5, 0.95)]\n",
+      "visibleTests": [
+        {
+          "id": "v1",
+          "description": "n = 10, 7 successes",
+          "input": {
+            "Y": [
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          },
+          "seed": 11,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.02,
+            "length": 18000
+          },
+          "expected": [
+            0.421544,
+            0.620815,
+            0.805641
+          ]
+        },
+        {
+          "id": "v2",
+          "description": "n = 20, 4 successes",
+          "input": {
+            "Y": [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          "seed": 12,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.02,
+            "length": 18000
+          },
+          "expected": [
+            0.135007,
+            0.267967,
+            0.426336
+          ]
+        }
+      ],
+      "hiddenTests": [
+        {
+          "id": "h1",
+          "description": "n = 30, 22 successes",
+          "input": {
+            "Y": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "seed": 21,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.02,
+            "length": 18000
+          },
+          "expected": [
+            0.55844,
+            0.692458,
+            0.81091
+          ]
+        },
+        {
+          "id": "h2",
+          "description": "n = 8, 1 success",
+          "input": {
+            "Y": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ]
+          },
+          "seed": 22,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.02,
+            "length": 18000
+          },
+          "expected": [
+            0.093169,
+            0.279807,
+            0.500396
+          ]
+        },
+        {
+          "id": "h3",
+          "description": "n = 12, all successes: pushes the posterior towards the boundary",
+          "input": {
+            "Y": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "seed": 23,
+          "compare": {
+            "type": "quantiles",
+            "probs": [
+              0.05,
+              0.5,
+              0.95
+            ],
+            "abs": 0.02,
+            "length": 18000
+          },
+          "expected": [
+            0.688964,
+            0.888565,
+            0.989406
+          ]
+        }
+      ]
+    }
+  ]
+}
