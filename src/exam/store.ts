@@ -15,7 +15,7 @@ interface State {
   drafts: { written: Record<string, WrittenDraft>; coding: Record<string, CodingDraft> }
 }
 
-export interface Settings { anthropicKey: string; model: string }
+export interface Settings { anthropicKey: string; model: string; githubToken: string; gistId: string }
 
 export const DEFAULT_MODEL = 'claude-sonnet-5-5'
 export const STATE_KEY = 'quantitative.exams.v1'
@@ -144,14 +144,15 @@ export function createExamStore(storage: Pick<Storage, 'getItem' | 'setItem'> | 
 
 export type ExamStore = ReturnType<typeof createExamStore>
 
-// ---- settings: the API key lives apart from progress, so exporting progress never exports the key ----
+// ---- settings: the API key and GitHub token live apart from progress, so exporting progress never exports the key ----
 
 export function loadSettings(storage: Pick<Storage, 'getItem'> | null): Settings {
+  const text = (v: unknown) => (typeof v === 'string' ? v : '')
   try {
     const x = JSON.parse(storage?.getItem(SETTINGS_KEY) ?? '{}') as Partial<Settings>
-    return { anthropicKey: typeof x.anthropicKey === 'string' ? x.anthropicKey : '', model: typeof x.model === 'string' && x.model ? x.model : DEFAULT_MODEL }
+    return { anthropicKey: text(x.anthropicKey), model: text(x.model) || DEFAULT_MODEL, githubToken: text(x.githubToken), gistId: text(x.gistId) }
   } catch {
-    return { anthropicKey: '', model: DEFAULT_MODEL }
+    return { anthropicKey: '', model: DEFAULT_MODEL, githubToken: '', gistId: '' }
   }
 }
 
