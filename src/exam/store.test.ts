@@ -89,11 +89,11 @@ describe('persistence and transfer', () => {
 describe('settings', () => {
   it('are stored apart from progress and default sensibly', () => {
     const mem = memory()
-    expect(loadSettings(mem)).toEqual({ anthropicKey: '', model: 'claude-sonnet-5-5' })
-    saveSettings(mem, { anthropicKey: 'sk-x', model: 'm' })
-    expect(loadSettings(mem)).toEqual({ anthropicKey: 'sk-x', model: 'm' })
+    expect(loadSettings(mem)).toEqual({ anthropicKey: '', model: 'claude-sonnet-5-5', githubToken: '', gistId: '' })
+    saveSettings(mem, { anthropicKey: 'sk-x', model: 'm', githubToken: 'ghp_x', gistId: 'g1' })
+    expect(loadSettings(mem)).toEqual({ anthropicKey: 'sk-x', model: 'm', githubToken: 'ghp_x', gistId: 'g1' })
     const s = createExamStore(mem)
     expect(JSON.stringify(s.exportState())).not.toContain('sk-x')
-    expect(loadSettings({ getItem: () => '{broken' })).toEqual({ anthropicKey: '', model: 'claude-sonnet-5-5' })
+    expect(loadSettings({ getItem: () => '{broken' })).toEqual({ anthropicKey: '', model: 'claude-sonnet-5-5', githubToken: '', gistId: '' })
   })
 })

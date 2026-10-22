@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HashRouter, Link, Route, Routes } from 'react-router-dom'
 import { AppProvider, useApp } from './context'
 import { Tree } from './pages/Tree'
@@ -12,10 +12,11 @@ import { CodingAttemptPage, CodingTakePage } from './pages/ExamCoding'
 import { CodingPreviewPage, ExamPreviewIndex, WrittenPreviewPage } from './pages/ExamPreview'
 import { SettingsPage } from './pages/Settings'
 import { validateState } from './exam/store'
+import { syncWithGist } from './lib/sync'
 import { applySavedProgress, checkCredentials, loggedInUser, setLoggedInUser } from './lib/testLogin'
 
 function Header() {
-  const { store, exams, dev, setDev, refresh } = useApp()
+  const { store, exams, dev, setDev, refresh, settings, updateSettings } = useApp()
   const file = useRef<HTMLInputElement>(null)
   const [msg, setMsg] = useState('')
   const [user, setUser] = useState(loggedInUser)
@@ -32,6 +33,34 @@ function Header() {
     } else setMsg('Wrong username or password.')
   }
   const logout = () => { setLoggedInUser(null); setUser(null); setMsg('Logged out.') }
+
+  const [syncing, setSyncing] = useState(false)
+  // pull, merge with this browser, push back. Both stores are checked before either is changed.
+  const sync = async () => {
+    if (!settings.githubToken) { setMsg('Add a GitHub token in Settings first.'); return }
+    setSyncing(true)
+    try {
+      const local = { ...JSON.parse(store.exportJson()), exams: exams.exportState() }
+      const r = await syncWithGist(settings.githubToken, settings.gistId, local)
+      validateState(r.merged.exams)
+      store.importJson(JSON.stringify(r.merged))
+      exams.importState(r.merged.exams)
+      if (r.gistId !== settings.gistId) updateSettings({ ...settings, gistId: r.gistId })
+      setMsg(r.created ? 'Created a private gist and uploaded your progress.' : 'Synced with GitHub.')
+      refresh()
+    } catch (e) {
+      setMsg(`Sync failed: ${(e as Error).message}`)
+    }
+    setSyncing(false)
+  }
+  const autoSynced = useRef(false)
+  useEffect(() => {
+    if (autoSynced.current || !settings.githubToken) return
+    autoSynced.current = true
+    void sync()
+    // once per page load
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const download = () => {
     // one file for everything: skill-tree progress as before, plus the Big Exam attempts under "exams" (never the API key)
@@ -63,6 +92,7 @@ function Header() {
       <span className="grow" />
       {msg && <span className="muted small" role="status">{msg}</span>}
       <Link to="/settings" className="muted small">Settings</Link>
+      {settings.githubToken && <button onClick={sync} disabled={syncing} title="Merge this browser's progress with your private GitHub gist">{syncing ? 'Syncing...' : 'Sync'}</button>}
       <button onClick={download}>Export progress</button>
       <button onClick={() => file.current?.click()}>Import progress</button>
       <input ref={file} type="file" accept="application/json" hidden onChange={(e) => upload(e.target.files?.[0])} />
